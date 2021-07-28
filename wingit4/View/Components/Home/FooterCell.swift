@@ -54,6 +54,8 @@ struct FooterCell: View {
             }.padding(.trailing, 15).padding(.leading, 15)
            
             RecButton().padding(.trailing, 15).padding(.leading, 15)
+            
+            Divider()
           
         }.sheet(isPresented: $showComments, content: {
             CommentView(post: self.footerCellViewModel.post)

@@ -29,7 +29,6 @@ struct CommentView: View {
                        CommentRow(comment: comment).padding(.bottom, 10)
                    }
                 }
-               
             }
             CommentInput(post: post, postId: postId)
         }.onTapGesture { dismissKeyboard() }

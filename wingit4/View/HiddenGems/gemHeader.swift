@@ -133,12 +133,14 @@ struct gemHeader: View {
                 Button(action: {showComments.toggle()},
                        label: {
                         Image(systemName: "message").foregroundColor(.gray).padding(.leading, 15).accentColor(.red)
-                })
+                       }).padding(.top, 5)
                 if !commentViewModel.comments.isEmpty {
                     Text("\(commentViewModel.comments.count)").foregroundColor(.gray).font(.caption)
                 }
+                
                 Spacer()
             }
+            Divider()
            
         }
         .onAppear {

@@ -21,11 +21,17 @@ struct Post: Encodable, Decodable {
     var likeCount: Int
 }
 
-//struct DonePost: Encodable, Decodable {
-//    var caption: String
-//    var doneMediaUrl: String
-//    var ownerId: String
-//    var postId: String
-//    var username: String
-//    var avatar: String
-//}
+struct DonePost: Encodable, Decodable {
+    var caption: String
+    var doneMediaUrl: String
+    var ownerId: String
+    var postId: String
+    var username: String
+    var avatar: String
+    var donedate: Double
+    var askcaption: String
+    var mediaUrl: String
+    var asklocation: String
+    var askdate: Double
+}
+

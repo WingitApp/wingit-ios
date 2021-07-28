@@ -55,6 +55,26 @@ class UserApi {
         
     }
     
+//    func updateImage(field : String){
+//        guard let userId = Auth.auth().currentUser?.uid else {
+//            return
+//        }
+//        alertView(msg: "Update \(field)") { (txt) in
+//            if txt != ""{
+//                Ref.FIRESTORE_DOCUMENT_USERID(userId: userId).updateData([
+//               
+//                    "profileImageURL": txt
+//                    
+//                ]) { (err) in
+//                    
+//                    if err != nil{return}
+//                    
+//                }
+//            }
+//        }
+//    }
+
+    
     func updateDetails(field : String){
         
         alertView(msg: "Update \(field)") { (txt) in
@@ -131,21 +151,21 @@ class UserApi {
         }
     }
     
-//    func loadDonePosts(userId: String, onSuccess: @escaping(_ doneposts: [DonePost]) -> Void) {
-//        Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("donePosts").order(by: "date", descending: true).getDocuments { (snapshot, error) in
-//            
-//            guard let snap = snapshot else {
-//                print("Error fetching data")
-//                return
-//            }
-//            var doneposts = [DonePost]()
-//            for document in snap.documents {
-//                let dict = document.data()
-//                guard let decoderPost = try? DonePost.init(fromDictionary: dict) else {return}
-//
-//                doneposts.append(decoderPost)
-//            }
-//            onSuccess(doneposts)
-//        }
-//    }
+    func loadDonePosts(userId: String, onSuccess: @escaping(_ doneposts: [DonePost]) -> Void) {
+        Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("donePosts").getDocuments { (snapshot, error) in
+            
+            guard let snap = snapshot else {
+                print("Error fetching data")
+                return
+            }
+            var doneposts = [DonePost]()
+            for document in snap.documents {
+                let dict = document.data()
+                guard let decoderPost = try? DonePost.init(fromDictionary: dict) else {return}
+
+                doneposts.append(decoderPost)
+            }
+            onSuccess(doneposts)
+        }
+    }
 }

@@ -21,17 +21,18 @@ struct ProfileView: View {
        var body: some View {
          
         NavigationView {
-           ScrollView {
-           
-               VStack(alignment: .leading, spacing: 15) {
-                        Picker(selection: $selection, label: Text("Grid or Table")) {
-                           ForEach(Selection.allCases) { selection in
-                               selection.image.tag(selection)
+            VStack(alignment: .leading, spacing: 15){
+                Picker(selection: $selection, label: Text("Grid or Table")) {
+                   ForEach(Selection.allCases) { selection in
+                       selection.image.tag(selection)
 
-                           }
-                        }.pickerStyle(SegmentedPickerStyle()).padding(.leading, 20).padding(.trailing, 20)
-                  
+                   }
+                }.pickerStyle(SegmentedPickerStyle()).padding(.leading, 20).padding(.trailing, 20).background(Color.clear)
+           ScrollView {
+               VStack(alignment: .leading, spacing: 15) {
+            
                 ProfileHeader(user: self.session.userSession, postCount: profileViewModel.posts.count, gemPostCount: profileViewModel.gemposts.count, followingCount: $profileViewModel.followingCountState, followersCount: $profileViewModel.followersCountState)
+            
                Divider()
                 if !profileViewModel.isLoading {
                     if selection == .globe {
@@ -52,8 +53,10 @@ struct ProfileView: View {
                         }
                     }
                 }
-                }.padding(.top, 10)
-                }.navigationBarTitle(Text("Profile"), displayMode: .inline).navigationBarItems(leading:
+                }.padding(.top, 5)
+                }
+        }.padding(.top, 10)
+         .navigationBarTitle(Text("Profile"), displayMode: .inline).navigationBarItems(leading:
                     Button(action: {}) {
                         NavigationLink(destination: UsersView()) {
                             Image(systemName: "person.badge.plus").imageScale(Image.Scale.large).foregroundColor(.gray)

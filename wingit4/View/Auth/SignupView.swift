@@ -70,7 +70,6 @@ struct SignUpTextField: View {
                     self.signupViewModel.showImagePicker = true
             }
                 Text("Tap on the image to add a picture :)").font(.caption2).foregroundColor(.gray).multilineTextAlignment(.center)
-                Text("Picture is mandatory atm. Hope you can understand! Thank you!").font(.caption2).foregroundColor(.gray).multilineTextAlignment(.center)
             }.padding(.bottom, 40)
             UsernameTextField(username: $signupViewModel.username)
             BioTextField(bio: $signupViewModel.bio)

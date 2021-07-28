@@ -50,4 +50,5 @@ class CameraViewModel: ObservableObject {
           }
 
     }
+    
 }

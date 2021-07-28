@@ -105,34 +105,34 @@ class StorageService {
     
     }
     
-//    static func savePostDonePhoto(userId: String, caption: String, postId: String, imageData: Data, metadata: StorageMetadata, storagePostRef: StorageReference, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-//               
-//        storagePostRef.putData(imageData, metadata: metadata) { (storageMetadata, error) in
-//              if error != nil {
-//                  onError(error!.localizedDescription)
-//                  return
-//              }
-//            storagePostRef.downloadURL { (url, error) in
-//                if let metaImageUrl = url?.absoluteString {
-//                    let firestorePostRef = Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("donePosts").document(postId)
-//                    let post = DonePost.init(caption: caption, doneMediaUrl: metaImageUrl, ownerId: userId, postId: postId, username: Auth.auth().currentUser!.displayName!, avatar: Auth.auth().currentUser!.photoURL!.absoluteString)
-//                
-//                    guard let dict = try? post.toDictionary() else {return}
-//                    
-//                    firestorePostRef.setData(dict) { (error) in
-//                        if error != nil {
-//                          onError(error!.localizedDescription)
-//                          return
-//                        }
-//                        Ref.FIRESTORE_COLLECTION_ALL_DONE.document(postId).setData(dict)
-//                        onSuccess()
-//                    }
-//                    
-//                }
-//            }
-//        }
-//    
-//    }
+    static func savePostDonePhoto(userId: String, caption: String, postId: String, askcaption: String, mediaUrl: String, asklocation: String, askdate: Double, imageData: Data, metadata: StorageMetadata, storagePostRef: StorageReference, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+               
+        storagePostRef.putData(imageData, metadata: metadata) { (storageMetadata, error) in
+              if error != nil {
+                  onError(error!.localizedDescription)
+                  return
+              }
+            storagePostRef.downloadURL { (url, error) in
+                if let metaImageUrl = url?.absoluteString {
+                    let firestorePostRef = Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("donePosts").document(postId)
+                    let post = DonePost.init(caption: caption, doneMediaUrl: metaImageUrl, ownerId: userId, postId: postId, username: Auth.auth().currentUser!.displayName!, avatar: Auth.auth().currentUser!.photoURL!.absoluteString, donedate: Date().timeIntervalSince1970, askcaption: askcaption, mediaUrl: mediaUrl, asklocation: asklocation, askdate: askdate)
+                
+                    guard let dict = try? post.toDictionary() else {return}
+                    
+                    firestorePostRef.setData(dict) { (error) in
+                        if error != nil {
+                          onError(error!.localizedDescription)
+                          return
+                        }
+                        Ref.FIRESTORE_COLLECTION_ALL_DONE.document(postId).setData(dict)
+                        onSuccess()
+                    }
+                    
+                }
+            }
+        }
+    
+    }
 
     
     static func saveAvatar(userId: String, username: String, bio: String, email: String, imageData: Data, metadata: StorageMetadata, storageAvatarRef: StorageReference, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {

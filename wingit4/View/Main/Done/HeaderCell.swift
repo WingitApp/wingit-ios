@@ -15,7 +15,7 @@ struct HeaderCell: View {
   
     @State var reportScreen: Bool = false
     @State var ImageScreen: Bool = false
-    @State var DoneScreen: Bool = false
+    @State var done: Bool = false
     
     
     init(post: Post) {
@@ -44,7 +44,8 @@ struct HeaderCell: View {
                     Spacer()
         
                 if headerCellViewModel.post.ownerId == headerCellViewModel.uid {
-                    Button(action: {DoneScreen.toggle()}, label: {
+                    Button(action: {done.toggle()},
+                           label: {
                         Image(systemName: "checkmark.circle")
                     })
                    
@@ -126,9 +127,9 @@ struct HeaderCell: View {
          .sheet(isPresented: $reportScreen, content: {
             ReportInput(post: self.headerCellViewModel.post, postId: self.headerCellViewModel.post.postId)
         })
-//        .sheet(isPresented: $DoneScreen, content: {
-//            DoneView(donepost: headerCellViewModel.postId)
-//        })
+        .sheet(isPresented: $done, content: {
+            DoneToggle(post: self.headerCellViewModel.post)
+        })
     
     }
     

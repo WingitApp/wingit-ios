@@ -20,7 +20,6 @@ struct RecButton: View {
             }.font(.caption)
         })
         
-        Spacer()
     }
         func sendMessage (){
              let sms: String = "sms:Add #&body=https://apps.apple.com/us/app/winging/id1572569005"

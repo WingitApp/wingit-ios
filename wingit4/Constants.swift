@@ -19,8 +19,8 @@ let TEXT_NEED_AN_ACCOUNT = "Don't have an account?"
 let TEXT_SIGN_UP = "Sign up"
 let TEXT_SIGN_IN = "Sign in"
 let TEXT_EMAIL = "Email"
-let TEXT_USERNAME = "Username"
-let TEXT_BIO = "Quote you live by"
+let TEXT_USERNAME = "Name"
+let TEXT_BIO = "Username"
 let TEXT_PASSWORD = "Password"
 let TEXT_SIGNIN_HEADLINE = "WingIt"
 let TEXT_SIGNIN_SUBHEADLINE = "Ask for recommendations and stay connected with your friends!"
@@ -106,8 +106,8 @@ class Ref {
     
         static var FIRESTORE_COLLECTION_ALL_GEMS = FIRESTORE_ROOT.collection("all_gems")
     
-    static var FIRESTORE_COLLECTION_ALL_DONE = FIRESTORE_ROOT.collection("all_done")
-
+        static var FIRESTORE_COLLECTION_ALL_DONE = FIRESTORE_ROOT.collection("all_done")
+        
        static var FIRESTORE_COLLECTION_COMMENTS = FIRESTORE_ROOT.collection("comments")
        static func FIRESTORE_COMMENTS_DOCUMENT_POSTID(postId: String) -> DocumentReference {
               return FIRESTORE_COLLECTION_COMMENTS.document(postId)

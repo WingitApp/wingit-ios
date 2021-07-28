@@ -98,10 +98,11 @@
 		3B97807D26813BC1009CE037 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 3B97807C26813BC1009CE037 /* FirebaseMessaging */; };
 		3BC09AB5267D18CD00BBF7D8 /* RecButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC09AB4267D18CD00BBF7D8 /* RecButton.swift */; };
 		3BD604E226A7D210004FFEEC /* GemHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604E126A7D210004FFEEC /* GemHeaderViewModel.swift */; };
-		3BD604E426A9E1EB004FFEEC /* DoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604E326A9E1EB004FFEEC /* DoneView.swift */; };
-		3BD604E726A9E6B6004FFEEC /* DoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604E626A9E6B6004FFEEC /* DoneViewModel.swift */; };
 		3BD604ED26AA0E4B004FFEEC /* AsksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604EC26AA0E4B004FFEEC /* AsksView.swift */; };
 		3BD604EF26AA1CDE004FFEEC /* DoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604EE26AA1CDE004FFEEC /* DoneCell.swift */; };
+		3BD604F326B08CA8004FFEEC /* DoneToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604F226B08CA8004FFEEC /* DoneToggle.swift */; };
+		3BD604F526B0A332004FFEEC /* DoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604F426B0A332004FFEEC /* DoneViewModel.swift */; };
+		3BD604F726B0A9DD004FFEEC /* DoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604F626B0A9DD004FFEEC /* DoneView.swift */; };
 		3BD866EE269FD32E00A49872 /* FollowerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD866ED269FD32E00A49872 /* FollowerViewModel.swift */; };
 		3BD866F0269FE49000A49872 /* FollowApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD866EF269FE49000A49872 /* FollowApi.swift */; };
 		3BD866F2269FFD7300A49872 /* FollowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD866F1269FFD7300A49872 /* FollowerView.swift */; };
@@ -198,10 +199,11 @@
 		3B97807E268158B6009CE037 /* wingit4.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wingit4.entitlements; sourceTree = "<group>"; };
 		3BC09AB4267D18CD00BBF7D8 /* RecButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecButton.swift; sourceTree = "<group>"; };
 		3BD604E126A7D210004FFEEC /* GemHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GemHeaderViewModel.swift; sourceTree = "<group>"; };
-		3BD604E326A9E1EB004FFEEC /* DoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneView.swift; sourceTree = "<group>"; };
-		3BD604E626A9E6B6004FFEEC /* DoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneViewModel.swift; sourceTree = "<group>"; };
 		3BD604EC26AA0E4B004FFEEC /* AsksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsksView.swift; sourceTree = "<group>"; };
 		3BD604EE26AA1CDE004FFEEC /* DoneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneCell.swift; sourceTree = "<group>"; };
+		3BD604F226B08CA8004FFEEC /* DoneToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneToggle.swift; sourceTree = "<group>"; };
+		3BD604F426B0A332004FFEEC /* DoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneViewModel.swift; sourceTree = "<group>"; };
+		3BD604F626B0A9DD004FFEEC /* DoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneView.swift; sourceTree = "<group>"; };
 		3BD866ED269FD32E00A49872 /* FollowerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerViewModel.swift; sourceTree = "<group>"; };
 		3BD866EF269FE49000A49872 /* FollowApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowApi.swift; sourceTree = "<group>"; };
 		3BD866F1269FFD7300A49872 /* FollowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerView.swift; sourceTree = "<group>"; };
@@ -481,8 +483,9 @@
 			children = (
 				3B7AF0782671B9BF003BCCF3 /* ProfileView.swift */,
 				3B7AF05D26719CC2003BCCF3 /* HeaderCell.swift */,
-				3BD604E326A9E1EB004FFEEC /* DoneView.swift */,
-				3BD604E626A9E6B6004FFEEC /* DoneViewModel.swift */,
+				3BD604F226B08CA8004FFEEC /* DoneToggle.swift */,
+				3BD604F626B0A9DD004FFEEC /* DoneView.swift */,
+				3BD604F426B0A332004FFEEC /* DoneViewModel.swift */,
 				3BD604EE26AA1CDE004FFEEC /* DoneCell.swift */,
 				3BD604EC26AA0E4B004FFEEC /* AsksView.swift */,
 			);
@@ -602,12 +605,12 @@
 				3B7AF09C2671E1DA003BCCF3 /* Selection.swift in Sources */,
 				3B7AF04126718A4D003BCCF3 /* SignupViewModel.swift in Sources */,
 				3B75E3D526715CAC002F3108 /* SignupText.swift in Sources */,
+				3BD604F726B0A9DD004FFEEC /* DoneView.swift in Sources */,
 				3BC09AB5267D18CD00BBF7D8 /* RecButton.swift in Sources */,
 				3B75E3BE267153BA002F3108 /* AppDelegate.swift in Sources */,
 				3BD866F726A60E0300A49872 /* gemCommentInput.swift in Sources */,
 				3B7AF04326718AF1003BCCF3 /* AuthService.swift in Sources */,
 				3B7AF05E26719CC2003BCCF3 /* HeaderCell.swift in Sources */,
-				3BD604E726A9E6B6004FFEEC /* DoneViewModel.swift in Sources */,
 				3B7AF0B12672AB2F003BCCF3 /* CommentViewModel.swift in Sources */,
 				3B7AF08B2671CB68003BCCF3 /* UserApi.swift in Sources */,
 				3B7AF05226719610003BCCF3 /* SigninViewModel.swift in Sources */,
@@ -620,7 +623,6 @@
 				3B7AF0892671CB35003BCCF3 /* Api.swift in Sources */,
 				3B7AF0A22671E416003BCCF3 /* EditProfileButton.swift in Sources */,
 				3B7AF0AF2672A053003BCCF3 /* Comment.swift in Sources */,
-				3BD604E426A9E1EB004FFEEC /* DoneView.swift in Sources */,
 				3B7AF0A72672870F003BCCF3 /* HomeViewModel.swift in Sources */,
 				3BD604ED26AA0E4B004FFEEC /* AsksView.swift in Sources */,
 				3B94FFD52676868200B4CC22 /* BioTextField.swift in Sources */,
@@ -646,6 +648,7 @@
 				3B7AF0832671BC28003BCCF3 /* ChatView.swift in Sources */,
 				3B7AF054267197BA003BCCF3 /* InitialView.swift in Sources */,
 				3B7AF07D2671BB2E003BCCF3 /* UserProfileView.swift in Sources */,
+				3BD604F326B08CA8004FFEEC /* DoneToggle.swift in Sources */,
 				3B7AF0952671D5FA003BCCF3 /* PostApi.swift in Sources */,
 				3B5BDB4B268E9F9A0034B18C /* gemPostModel.swift in Sources */,
 				3B7AF0712671A1FC003BCCF3 /* CommentInput.swift in Sources */,
@@ -674,6 +677,7 @@
 				3B7AF06026719CF7003BCCF3 /* FooterCell.swift in Sources */,
 				3B75E3DD26716074002F3108 /* Constants.swift in Sources */,
 				3BD866F2269FFD7300A49872 /* FollowerView.swift in Sources */,
+				3BD604F526B0A332004FFEEC /* DoneViewModel.swift in Sources */,
 				3B5BDB5E268FA1980034B18C /* ReportApi.swift in Sources */,
 				3B7AF0AD26729FCC003BCCF3 /* CommentApi.swift in Sources */,
 				3B7AF05A26719AB2003BCCF3 /* HomeView.swift in Sources */,

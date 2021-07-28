@@ -15,10 +15,12 @@ struct ProfileHeader: View {
     var gemPostCount: Int
     @Binding var followingCount: Int
     @Binding var followersCount: Int
+    @State var done: Bool = false
+    
     var body: some View {
         
-        
             if user != nil {
+                VStack{
                 HStack {
                     VStack{
                 URLImage(URL(string: user!.profileImageUrl)!,
@@ -30,9 +32,8 @@ struct ProfileHeader: View {
                 }).frame(width: 100, height: 100).padding(.leading, 20)
                      //   EditProfileButton().padding(.leading, 20)
                 }
-                    VStack{
-                        ProfileInformation(user: user)
-                    }
+                ProfileInformation(user: user)
+                    
                 
                 }
                 
@@ -66,10 +67,19 @@ struct ProfileHeader: View {
                                     Text("Following").font(.caption2).foregroundColor(.gray)
                                 }.padding(.leading, 5)
                             })
-                    
+                        Spacer(minLength: 10)
+                        Button(action: {done.toggle()},
+                               label: {
+                                Image(systemName: "checkmark.circle")
+                            })
                 }
                 }
             }
+            }
+                .sheet(isPresented: $done, content: {
+                DoneView()
+            })
+
         }
     }
 }
