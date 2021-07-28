@@ -29,6 +29,18 @@ struct DoneToggle: View {
            self.clean()
         }
     }
+    func justDone() {
+       // cameraViewModel.uploadPost
+        doneViewModel.justDone(completed: {
+           print("done")
+           self.clean()
+        }) { (errorMessage) in
+            print("Error: \(errorMessage)")
+           self.doneViewModel.showAlert = true
+           self.doneViewModel.errorString = errorMessage
+           self.clean()
+        }
+    }
     
     func clean() {
       self.doneViewModel.caption = ""
@@ -58,15 +70,26 @@ struct DoneToggle: View {
                         .padding()
                }.padding()
                 Spacer()
+                HStack{
+                Button(action: justDone) {
+                       Text("Just Done")
+                           .fontWeight(.bold)
+                           .foregroundColor(Color.white)
+                           .padding(.vertical)
+                           .frame(width: 150, height: 50)
+                           .background(Color(.systemTeal))
+                           .cornerRadius(8)
+                }.padding(.vertical).padding(.horizontal)
                 Button(action: shareDone) {
                        Text("Submit")
                            .fontWeight(.bold)
                            .foregroundColor(Color.white)
                            .padding(.vertical)
-                           .frame(maxWidth: .infinity)
+                           .frame(width: 150, height: 50)
                            .background(Color(.systemTeal))
                            .cornerRadius(8)
                 }.padding(.vertical).padding(.horizontal)
+            }
                 .alert(isPresented: $doneViewModel.showAlert) {
                     Alert(title: Text("Error"), message: Text(self.doneViewModel.errorString), dismissButton: .default(Text("OK")))
                 }

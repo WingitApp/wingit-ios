@@ -68,10 +68,15 @@ struct ProfileHeader: View {
                                 }.padding(.leading, 5)
                             })
                         Spacer(minLength: 10)
-                        Button(action: {done.toggle()},
-                               label: {
+                        NavigationLink(
+                            destination: DoneView(),
+                            label: {
                                 Image(systemName: "checkmark.circle")
                             })
+//                        Button(action: {done.toggle()},
+//                               label: {
+//                                Image(systemName: "checkmark.circle")
+//                            })
                 }
                 }
             }

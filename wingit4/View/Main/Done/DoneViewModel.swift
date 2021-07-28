@@ -48,4 +48,9 @@ class DoneViewModel: ObservableObject {
                 errorString = "Please fill in all fields"
           }
     }
+    func justDone(completed: @escaping() -> Void,  onError: @escaping(_ errorMessage: String) -> Void) {
+        
+            Api.Post.uploadDone(caption: caption, imageData: imageData, postId: post.postId, askcaption: post.caption, mediaUrl: post.mediaUrl, asklocation: "", askdate: post.date, onSuccess: completed, onError: onError)
+        
+    }
 }
