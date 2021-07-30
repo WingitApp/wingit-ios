@@ -43,11 +43,9 @@ struct SignUpTextField: View {
     @ObservedObject var signupViewModel = SignupViewModel()
     func signUp() {
         signupViewModel.signup(username: signupViewModel.username, bio: signupViewModel.bio, email: signupViewModel.email, password: signupViewModel.password, imageData: signupViewModel.imageData, completed: { (user) in
-            print(user.email)
             self.clean()
             // Switch to the Main App
         }) { (errorMessage) in
-            print("Error: \(errorMessage)")
             self.signupViewModel.showAlert = true
             self.signupViewModel.errorString = errorMessage
             self.clean()
@@ -66,7 +64,6 @@ struct SignUpTextField: View {
             signupViewModel.image.resizable().aspectRatio(contentMode: .fill).frame(width: 80, height: 80)
                 .clipShape(Circle())
                 .onTapGesture {
-                    print("Tapped")
                     self.signupViewModel.showImagePicker = true
             }
                 Text("Tap on the image to add a picture :)").font(.caption2).foregroundColor(.gray).multilineTextAlignment(.center)

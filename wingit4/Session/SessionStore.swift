@@ -21,7 +21,7 @@ class SessionStore: ObservableObject {
     func listenAuthenticationState() {
         handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
             if let user = user {
-                print(user.email)
+            //    print(user.email)
                 let firestoreUserId = Ref.FIRESTORE_DOCUMENT_USERID(userId: user.uid)
                   firestoreUserId.getDocument { (document, error) in
                       if let dict = document?.data() {
@@ -38,7 +38,7 @@ class SessionStore: ObservableObject {
              //   self.Agreed = true
                 
             } else {
-                print("isLoogedIn is false")
+             //   print("isLoogedIn is false")
                 self.isLoggedIn = false
                 self.userSession = nil
 

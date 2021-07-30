@@ -10,14 +10,14 @@ import FirebaseAuth
 
 class UserApi {
     func searchUsers(text: String, onSuccess: @escaping(_ users: [User]) -> Void) {
-        print(text.lowercased().removingWhitespaces())
+       // print(text.lowercased().removingWhitespaces())
         
         Ref.FIRESTORE_COLLECTION_USERS.whereField("keywords", arrayContains: text.lowercased().removingWhitespaces()).getDocuments { (snapshot, error) in
             guard let snap = snapshot else {
-                print("Error fetching data")
+             //   print("Error fetching data")
                 return
             }
-            print(snap.documents)
+          //  print(snap.documents)
             var users = [User]()
             for document in snap.documents {
                 let dict = document.data()
@@ -36,7 +36,7 @@ class UserApi {
     func loadUser(userId: String, onSuccess: @escaping(_ user: User) -> Void) {
         Ref.FIRESTORE_DOCUMENT_USERID(userId: userId).getDocument { (snapshot, error) in
           guard let snap = snapshot else {
-              print("Error fetching data")
+            //   print("Error fetching data")
               return
           }
          
@@ -124,7 +124,7 @@ class UserApi {
         Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("userPosts").order(by: "date", descending: true).getDocuments { (snapshot, error) in
             
             guard let snap = snapshot else {
-                print("Error fetching data")
+              //  print("Error fetching data")
                 return
             }
             var posts = [Post]()
@@ -142,7 +142,7 @@ class UserApi {
         Ref.FIRESTORE_GEM_POSTS_DOCUMENT_USERID(userId: userId).collection("gemPosts").order(by: "date", descending: true).getDocuments { (snapshot, error) in
             
             guard let snap = snapshot else {
-                print("Error fetching data")
+             //   print("Error fetching data")
                 return
             }
             var gemposts = [gemPost]()
@@ -160,7 +160,7 @@ class UserApi {
         Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("donePosts").order(by: "donedate", descending: true).getDocuments { (snapshot, error) in
             
             guard let snap = snapshot else {
-                print("Error fetching data")
+             //   print("Error fetching data")
                 return
             }
             var doneposts = [DonePost]()

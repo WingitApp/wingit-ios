@@ -54,7 +54,7 @@ class PostApi {
       //  let storagePostRef = Ref.STORAGE_POST_ID
         firestoreMyPostRef.delete { (err) in
             if err != nil{
-               print(err!.localizedDescription)
+            //   print(err!.localizedDescription)
                 return
             }
             let storagePostRef = Ref.STORAGE_POST_ID(postId: postId)
@@ -101,7 +101,7 @@ class PostApi {
             let firestoreMyPostRef = Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("userPosts").document(postId)
             firestoreMyPostRef.delete { (err) in
                 if err != nil{
-                   print(err!.localizedDescription)
+               //    print(err!.localizedDescription)
                     return
                 }
             Ref.FIRESTORE_TIMELINE_DOCUMENT_USERID(userId: userId).collection("timelinePosts").document(postId).delete()
@@ -119,7 +119,7 @@ class PostApi {
       //  let storagePostRef = Ref.STORAGE_POST_ID
         firestoreMyPostRef.delete { (err) in
             if err != nil{
-               print(err!.localizedDescription)
+                //print(err!.localizedDescription)
                 return
             }
             let storagePostRef = Ref.STORAGE_POST_ID(postId: postId)
@@ -138,7 +138,7 @@ class PostApi {
         
         firestoreMyTimeline.delete() { (err) in
             if err != nil{
-               print(err!.localizedDescription)
+           //    print(err!.localizedDescription)
                 return
             }
         }
@@ -161,7 +161,7 @@ class PostApi {
     func loadPost(postId: String, onSuccess: @escaping(_ post: Post) -> Void) {
         Ref.FIRESTORE_COLLECTION_ALL_ASKS.document(postId).getDocument { (snapshot, error) in
           guard let snap = snapshot else {
-              print("Error fetching data")
+           //   print("Error fetching data")
               return
           }
          
@@ -176,7 +176,7 @@ class PostApi {
     func loadPosts(onSuccess: @escaping(_ posts: [Post]) -> Void) {
         Ref.FIRESTORE_COLLECTION_ALL_ASKS.order(by: "date", descending: true).getDocuments { (snapshot, error) in
             guard let snap = snapshot else {
-                print("Error fetching data")
+             //   print("Error fetching data")
                 return
             }
             var posts = [Post]()
@@ -204,7 +204,7 @@ class PostApi {
                   switch documentChange.type {
                   case .added:
                     var posts = [Post]()
-                      print("type: added")
+                   //   print("type: added")
                       let dict = documentChange.document.data()
                       guard let decoderPost = try? Post.init(fromDictionary: dict) else {return}
                       newPost(decoderPost)
@@ -213,7 +213,7 @@ class PostApi {
                   case .modified:
                       print("type: modified")
                   case .removed:
-                      print("type: removed")
+                    //    print("type: removed")
                       let dict = documentChange.document.data()
                        guard let decoderPost = try? Post.init(fromDictionary: dict) else {return}
                        deletePost(decoderPost)

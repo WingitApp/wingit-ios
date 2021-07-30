@@ -18,10 +18,10 @@ struct CameraView: View {
     func sharePost() {
        // cameraViewModel.uploadPost
         cameraViewModel.sharePost(completed: {
-           print("done")
+         //  print("done")
            self.clean()
         }) { (errorMessage) in
-            print("Error: \(errorMessage)")
+            //   print("Error: \(errorMessage)")
            self.cameraViewModel.showAlert = true
            self.cameraViewModel.errorString = errorMessage
            self.clean()
@@ -31,10 +31,10 @@ struct CameraView: View {
     func shareGem() {
        // cameraViewModel.uploadPost
         cameraViewModel.shareGem(completed: {
-           print("done")
+        //   print("done")
            self.clean()
         }) { (errorMessage) in
-            print("Error: \(errorMessage)")
+       //     print("Error: \(errorMessage)")
            self.cameraViewModel.showAlert = true
            self.cameraViewModel.errorString = errorMessage
            self.clean()
@@ -54,7 +54,6 @@ struct CameraView: View {
                 HStack(alignment: .top) {
                   
                     cameraViewModel.image.resizable().scaledToFill().frame(width: 60, height: 60).clipped().foregroundColor(.gray).onTapGesture {
-                            print("Tapped")
                             self.cameraViewModel.showImagePicker = true
                     }
                       

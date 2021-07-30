@@ -16,7 +16,7 @@ class FollowApi {
     func getFollowers(userId: String, onSuccess: @escaping(_ users: [User]) -> Void){
         Ref.FIRESTORE_COLLECTION_FOLLOWERS(userId: userId).getDocuments{ (snapshot, error) in
             guard let snap = snapshot else {
-                print("Error fetching data")
+           //     print("Error fetching data")
                 return
             }
             var users = [User]()
@@ -37,7 +37,7 @@ class FollowApi {
     func getFollowing(userId: String, onSuccess: @escaping(_ users: [User]) -> Void){
         Ref.FIRESTORE_COLLECTION_FOLLOWING(userId: userId).getDocuments{ (snapshot, error) in
             guard let snap = snapshot else {
-                print("Error fetching data")
+              //  print("Error fetching data")
                 return
             }
             var users = [User]()

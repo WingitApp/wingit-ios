@@ -30,7 +30,7 @@ class CommentInputViewModel: ObservableObject {
             }
             onSuccess()
         }) { (errorMessage) in
-            print(errorMessage)
+            return
         }
     }
     
@@ -49,7 +49,7 @@ class CommentInputViewModel: ObservableObject {
             }
             onSuccess()
         }) { (errorMessage) in
-            print(errorMessage)
+            return
         }
     }
 }

@@ -15,10 +15,10 @@ struct SigninView: View {
       func signIn() {
         
         signinViewModel.signin(email: signinViewModel.email, password: signinViewModel.password, completed: { (user) in
-            print("login: \(user.email)")
+         
             self.clean()
         }) { (errorMessage) in
-            print("Error: \(errorMessage)")
+           
             self.signinViewModel.showAlert = true
             self.signinViewModel.errorString = errorMessage
             self.clean()
@@ -48,7 +48,7 @@ struct SigninView: View {
                  SignupText()
                 }
             }.onTapGesture { dismissKeyboard() }
-        }.accentColor(Color.black)
+        }
    
        
     }

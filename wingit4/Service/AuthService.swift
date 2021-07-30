@@ -16,7 +16,7 @@ class AuthService {
     static func signInUser(email: String, password: String, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
                Auth.auth().signIn(withEmail: email, password: password) { (authData, error) in
                    if error != nil {
-                        print(error!.localizedDescription)
+                    //    print(error!.localizedDescription)
                         onError(error!.localizedDescription)
                         return
                     }
@@ -37,7 +37,7 @@ class AuthService {
          //Firebase.createAccount(username: username, email: email, password: password, imageData: imageData)
                 Auth.auth().createUser(withEmail: email, password: password) { (authData, error) in
                     if error != nil {
-                        print(error!.localizedDescription)
+                        //    print(error!.localizedDescription)
                         onError(error!.localizedDescription)
                         return
                     }

@@ -20,10 +20,10 @@ struct DoneToggle: View {
     func shareDone() {
        // cameraViewModel.uploadPost
         doneViewModel.shareDone(completed: {
-           print("done")
+          // print("done")
            self.clean()
         }) { (errorMessage) in
-            print("Error: \(errorMessage)")
+            //  print("Error: \(errorMessage)")
            self.doneViewModel.showAlert = true
            self.doneViewModel.errorString = errorMessage
            self.clean()
@@ -32,10 +32,10 @@ struct DoneToggle: View {
     func justDone() {
        // cameraViewModel.uploadPost
         doneViewModel.justDone(completed: {
-           print("done")
+        //   print("done")
            self.clean()
         }) { (errorMessage) in
-            print("Error: \(errorMessage)")
+         //   print("Error: \(errorMessage)")
            self.doneViewModel.showAlert = true
            self.doneViewModel.errorString = errorMessage
            self.clean()
@@ -55,7 +55,7 @@ struct DoneToggle: View {
                 HStack(alignment: .top) {
                   
                     doneViewModel.image.resizable().scaledToFill().frame(width: 60, height: 60).clipped().foregroundColor(.gray).onTapGesture {
-                            print("Tapped")
+                          //  print("Tapped")
                             self.doneViewModel.showImagePicker = true
                     }
                       

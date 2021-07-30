@@ -25,7 +25,7 @@ class ReportInputViewModel: ObservableObject {
         Api.Report.sendReport(text: text, username: username, ownerId: currentUserId, postId: post.postId, onSuccess: {
             onSuccess()
         }) { (errorMessage) in
-            print(errorMessage)
+           // print(errorMessage)
         }
     }
     
@@ -36,7 +36,7 @@ class ReportInputViewModel: ObservableObject {
         Api.Report.sendGemReport(text: text, username: username, ownerId: currentUserId, postId: post.postId, onSuccess: {
             onSuccess()
         }) { (errorMessage) in
-            print(errorMessage)
+           // print(errorMessage)
         }
     }
     

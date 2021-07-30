@@ -28,7 +28,7 @@ struct ProfileInformation: View {
                 
                 Button(action: {Api.User.updateDetails(field: "Name")}) {
 
-                    Text(user!.username).foregroundColor(.black).bold()
+                    Text(user!.username).bold().foregroundColor(Color("bw"))
                 }
                               
                              
@@ -44,7 +44,7 @@ struct ProfileInformation: View {
                         .aspectRatio(contentMode: .fill)
                         .clipShape(Circle())
                 }).frame(width: 100, height: 100)
-                Text(user!.username).foregroundColor(.black).bold()
+                Text(user!.username).bold()
                 Text(user!.bio).font(.caption).foregroundColor(.gray)
             }
             

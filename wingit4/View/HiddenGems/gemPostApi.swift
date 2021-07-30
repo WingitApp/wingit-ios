@@ -34,7 +34,7 @@ class gemPostApi {
      
         firestoreMyPostRef.delete { (err) in
             if err != nil{
-               print(err!.localizedDescription)
+            //   print(err!.localizedDescription)
                 return
             }
             let storagePostRef = Ref.STORAGE_GEM_POST_ID(postId: postId)
@@ -50,7 +50,7 @@ class gemPostApi {
         
         firestoreMyTimeline.delete() { (err) in
             if err != nil{
-               print(err!.localizedDescription)
+           //    print(err!.localizedDescription)
                 return
             }
         }
@@ -59,7 +59,7 @@ class gemPostApi {
     func loadPost(postId: String, onSuccess: @escaping(_ gempost: gemPost) -> Void) {
         Ref.FIRESTORE_COLLECTION_ALL_GEMS.document(postId).getDocument { (snapshot, error) in
           guard let snap = snapshot else {
-              print("Error fetching data")
+           //  print("Error fetching data")
               return
           }
               let dict = snap.data()
@@ -72,7 +72,7 @@ class gemPostApi {
     func loadPosts(onSuccess: @escaping(_ gemposts: [gemPost]) -> Void) {
         Ref.FIRESTORE_COLLECTION_ALL_GEMS.order(by: "date", descending: true).getDocuments { (snapshot, error) in
             guard let snap = snapshot else {
-                print("Error fetching data")
+             //   print("Error fetching data")
                 return
             }
             var gemposts = [gemPost]()
@@ -101,7 +101,7 @@ class gemPostApi {
                   switch documentChange.type {
                   case .added:
                     var gemposts = [gemPost]()
-                      print("type: added")
+                  //    print("type: added")
                       let dict = documentChange.document.data()
                       guard let decodergemPost = try? gemPost.init(fromDictionary: dict) else {return}
                       newPost(decodergemPost)
@@ -110,7 +110,7 @@ class gemPostApi {
                   case .modified:
                       print("type: modified")
                   case .removed:
-                      print("type: removed")
+               //       print("type: removed")
                       let dict = documentChange.document.data()
                        guard let decodergemPost = try? gemPost.init(fromDictionary: dict) else {return}
                        deletePost(decodergemPost)

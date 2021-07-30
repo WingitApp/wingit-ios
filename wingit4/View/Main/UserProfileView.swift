@@ -126,7 +126,7 @@ struct FollowButton: View {
     var body: some View {
         Button(action: follow) {
      
-            Text((self.isFollowing) ? "Unfollow" : "Follow").foregroundColor(.black).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal))
+            Text((self.isFollowing) ? "Unfollow" : "Follow").foregroundColor(Color("bw")).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal))
    
         }
     }
@@ -137,7 +137,7 @@ struct MessageButton: View {
     var body: some View {
         Button(action: {}) {
                 NavigationLink(destination: ChatView(recipientId: user.uid, recipientAvatarUrl: user.profileImageUrl, recipientUsername: user.username)) {
-                    Text("Message").foregroundColor(.black).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal))
+                    Text("Message").foregroundColor(Color("bw")).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal))
                
             }
             

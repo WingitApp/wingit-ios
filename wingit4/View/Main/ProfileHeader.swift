@@ -45,19 +45,19 @@ struct ProfileHeader: View {
                     }
                     HStack{
                     VStack {
-                        Text("\(postCount)").font(.headline).foregroundColor(.black)
+                        Text("\(postCount)").font(.headline)
                         Text("Asks").font(.subheadline).foregroundColor(.gray)
                     }.padding(10)
                     NavigationLink(
                         destination: DoneView(user: user!),
                         label: {
                             VStack{
-                            Text("\(doneCount)").font(.headline).foregroundColor(.black)
+                            Text("\(doneCount)").font(.headline).foregroundColor(Color("bw"))
                             Text("Done").font(.subheadline).foregroundColor(.gray)
                             }.padding(10)
                         })
                     VStack {
-                        Text("\(gemPostCount)").font(.headline).foregroundColor(.black)
+                        Text("\(gemPostCount)").font(.headline)
                         Text("Recs").font(.subheadline).foregroundColor(.gray)
                     }.padding(10)
                     }
