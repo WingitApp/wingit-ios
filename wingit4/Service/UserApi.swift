@@ -62,16 +62,21 @@ class UserApi {
 //        alertView(msg: "Update \(field)") { (txt) in
 //            if txt != ""{
 //                Ref.FIRESTORE_DOCUMENT_USERID(userId: userId).updateData([
-//               
+//
 //                    "profileImageURL": txt
-//                    
+//
 //                ]) { (err) in
-//                    
+//
 //                    if err != nil{return}
-//                    
+//
 //                }
+////                let storageAvatarUserId = Ref.STORAGE_AVATAR_USERID(userId: userId)
+////                let metadata = StorageMetadata()
+////                metadata.contentType = "image/jpg"
+////
 //            }
 //        }
+//
 //    }
 
     
@@ -152,7 +157,7 @@ class UserApi {
     }
     
     func loadDonePosts(userId: String, onSuccess: @escaping(_ doneposts: [DonePost]) -> Void) {
-        Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("donePosts").getDocuments { (snapshot, error) in
+        Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("donePosts").order(by: "donedate", descending: true).getDocuments { (snapshot, error) in
             
             guard let snap = snapshot else {
                 print("Error fetching data")

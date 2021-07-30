@@ -10,6 +10,7 @@ import FirebaseAuth
 
 struct DoneView: View {
     @ObservedObject var doneViewModel = DoneViewModel()
+    var user: User
 
     var body: some View {
         ScrollView{
@@ -21,8 +22,9 @@ struct DoneView: View {
                     }
                 }
             }
-        }.onAppear {
-            self.doneViewModel.loadDonePosts(userId: Auth.auth().currentUser!.uid)
+        }
+        .onAppear {
+            self.doneViewModel.loadDonePosts(userId: user.uid)
         }
     }
 }

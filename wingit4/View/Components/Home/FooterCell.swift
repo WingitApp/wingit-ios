@@ -57,7 +57,8 @@ struct FooterCell: View {
             
             Divider()
           
-        }.sheet(isPresented: $showComments, content: {
+        }
+        .sheet(isPresented: $showComments, content: {
             CommentView(post: self.footerCellViewModel.post)
         })
         .onAppear {

@@ -24,7 +24,7 @@ struct MainView: View {
                     Image(systemName: "magnifyingglass")
                 }).tag(1)
                 CameraView().tabItem({
-                    Image(systemName: "square.and.pencil")
+                    Image(systemName: IMAGE_PHOTO)
                 }).tag(2)
                 NotificationView().tabItem({
                     Image(systemName: "bell")

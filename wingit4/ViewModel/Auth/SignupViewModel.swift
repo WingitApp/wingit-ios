@@ -41,26 +41,4 @@ class SignupViewModel: ObservableObject {
         }
     }
     
-    func disagree(){
-        showAlert = true
-        errorString = "Please agree in order to proceed."
-    }
-    
-    func agree(userId: String){
-        Ref.FIRESTORE_DOCUMENT_AGREED(userId: userId).setData(["Agreed": userId])
-    }
-    
-//    func checkAgreed(){
-//        handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
-//            if let user = user {
-//                Ref.FIRESTORE_DOCUMENT_AGREED(userId: user.uid).getDocument { (document, error) in
-//           if let doc = document, doc.exists {
-//               self.Agreed = true
-//           }
-//       }
-//       self.Agreed = true
-//    }
-//    })
-// }
-    
 }

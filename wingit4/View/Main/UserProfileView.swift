@@ -23,19 +23,17 @@ struct UserProfileView: View {
 //    }
 
     var body: some View {
+        VStack(alignment: .leading, spacing: 15){
+            Picker(selection: $selection, label: Text("Grid or Table")) {
+                       ForEach(Selection.allCases) { selection in
+                           selection.image.tag(selection)
+
+                       }
+            }.pickerStyle(SegmentedPickerStyle()).padding(.leading, 20).padding(.trailing, 20)
             
                 ScrollView {
-                   VStack(alignment: .leading, spacing: 15) {
-                    
-                      Picker(selection: $selection, label: Text("Grid or Table")) {
-                                 ForEach(Selection.allCases) { selection in
-                                     selection.image.tag(selection)
-
-                                 }
-                      }.pickerStyle(SegmentedPickerStyle()).padding(.leading, 20).padding(.trailing, 20)
-                    
-                    
-                    UserProfileHeader(user: user, postCount: profileViewModel.posts.count, gemPostCount: profileViewModel.gemposts.count, followingCount: $profileViewModel.followingCountState, followersCount: $profileViewModel.followersCountState)
+                   VStack {
+                    ProfileHeader(user: user, postCount: profileViewModel.posts.count, gemPostCount: profileViewModel.gemposts.count, doneCount: profileViewModel.doneposts.count, followingCount: $profileViewModel.followingCountState, followersCount: $profileViewModel.followersCountState)
 
                     HStack(spacing: 15) {
                 if profileViewModel.userBlocked == false {
@@ -69,9 +67,10 @@ struct UserProfileView: View {
                       
                     }
                        
-                }.padding(.top, 10)
+                }
                                  
-                }.navigationBarTitle(Text(self.user.username), displayMode: .automatic)
+                }
+               }.padding(.top, 10) .navigationBarTitle(Text(self.user.username), displayMode: .automatic)
                  .onAppear {
                     self.profileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.user.uid)
                  }
@@ -100,29 +99,9 @@ struct FollowButton: View {
         self._following_Count = followingCount
         self._followers_Count = followersCount
         self._isFollowing = isFollowing
-    //    updateFollowCount()
-       // checkFollowState()
-        
- 
-       
 
-//        self.followersCount = followViewModel.followersCount
-//        self.followingCount =  followViewModel.followingCount
     }
     
-//    func checkFollowState() {
-//        followViewModel.checkFollow(userId: self.user.uid)
-//    }
-    
-    
-//    func updateFollowCount() {
-//        followViewModel.updateFollowCount(userId: user.uid, followingCount_onSuccess: { (following_Count) in
-//            self.following_Count = following_Count
-//        }) { (followers_Count) in
-//            self.followers_Count = followers_Count
-//        }
-//    }
-//
 
     func follow() {
         if !self.isFollowing {
@@ -147,9 +126,7 @@ struct FollowButton: View {
     var body: some View {
         Button(action: follow) {
      
-            Text((self.isFollowing) ? "Unfollow" : "Follow").foregroundColor(Color(.darkGray)).font(.caption)
-            
-            Image(systemName: (self.isFollowing) ? "person.badge.minus" : "person.fill.badge.plus").foregroundColor(Color(.gray))
+            Text((self.isFollowing) ? "Unfollow" : "Follow").foregroundColor(.black).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal))
    
         }
     }
@@ -160,7 +137,7 @@ struct MessageButton: View {
     var body: some View {
         Button(action: {}) {
                 NavigationLink(destination: ChatView(recipientId: user.uid, recipientAvatarUrl: user.profileImageUrl, recipientUsername: user.username)) {
-                    Image(systemName: "message").foregroundColor(Color(.systemTeal))
+                    Text("Message").foregroundColor(.black).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal))
                
             }
             

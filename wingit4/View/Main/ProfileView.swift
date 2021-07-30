@@ -29,9 +29,9 @@ struct ProfileView: View {
                    }
                 }.pickerStyle(SegmentedPickerStyle()).padding(.leading, 20).padding(.trailing, 20).background(Color.clear)
            ScrollView {
-               VStack(alignment: .leading, spacing: 15) {
+               VStack {
             
-                ProfileHeader(user: self.session.userSession, postCount: profileViewModel.posts.count, gemPostCount: profileViewModel.gemposts.count, followingCount: $profileViewModel.followingCountState, followersCount: $profileViewModel.followersCountState)
+                ProfileHeader(user: self.session.userSession, postCount: profileViewModel.posts.count, gemPostCount: profileViewModel.gemposts.count, doneCount: profileViewModel.doneposts.count, followingCount: $profileViewModel.followingCountState, followersCount: $profileViewModel.followersCountState)
             
                Divider()
                 if !profileViewModel.isLoading {

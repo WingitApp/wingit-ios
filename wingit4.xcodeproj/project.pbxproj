@@ -75,7 +75,7 @@
 		3B7AF09C2671E1DA003BCCF3 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AF09B2671E1DA003BCCF3 /* Selection.swift */; };
 		3B7AF09E2671E3BA003BCCF3 /* GridPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AF09D2671E3BA003BCCF3 /* GridPosts.swift */; };
 		3B7AF0A02671E404003BCCF3 /* ProfileInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AF09F2671E404003BCCF3 /* ProfileInformation.swift */; };
-		3B7AF0A22671E416003BCCF3 /* EditProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AF0A12671E416003BCCF3 /* EditProfileButton.swift */; };
+		3B7AF0A22671E416003BCCF3 /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AF0A12671E416003BCCF3 /* EditProfile.swift */; };
 		3B7AF0A52671EA03003BCCF3 /* PostPopularViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AF0A42671EA03003BCCF3 /* PostPopularViewModel.swift */; };
 		3B7AF0A72672870F003BCCF3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AF0A62672870F003BCCF3 /* HomeViewModel.swift */; };
 		3B7AF0A926728E74003BCCF3 /* FooterCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AF0A826728E74003BCCF3 /* FooterCellViewModel.swift */; };
@@ -176,7 +176,7 @@
 		3B7AF09B2671E1DA003BCCF3 /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		3B7AF09D2671E3BA003BCCF3 /* GridPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPosts.swift; sourceTree = "<group>"; };
 		3B7AF09F2671E404003BCCF3 /* ProfileInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInformation.swift; sourceTree = "<group>"; };
-		3B7AF0A12671E416003BCCF3 /* EditProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileButton.swift; sourceTree = "<group>"; };
+		3B7AF0A12671E416003BCCF3 /* EditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfile.swift; sourceTree = "<group>"; };
 		3B7AF0A42671EA03003BCCF3 /* PostPopularViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPopularViewModel.swift; sourceTree = "<group>"; };
 		3B7AF0A62672870F003BCCF3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		3B7AF0A826728E74003BCCF3 /* FooterCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterCellViewModel.swift; sourceTree = "<group>"; };
@@ -320,6 +320,7 @@
 				3B7AF05926719AB2003BCCF3 /* HomeView.swift */,
 				3B7AF0A62672870F003BCCF3 /* HomeViewModel.swift */,
 				3B928C3A269EA383007A34B8 /* ImageView.swift */,
+				3B7AF05D26719CC2003BCCF3 /* HeaderCell.swift */,
 				3B5BDB4E268F81D90034B18C /* HeaderCellViewModel.swift */,
 				3B7AF05F26719CF7003BCCF3 /* FooterCell.swift */,
 				3B7AF0A826728E74003BCCF3 /* FooterCellViewModel.swift */,
@@ -446,6 +447,7 @@
 				3B7AF0822671BC28003BCCF3 /* ChatView.swift */,
 				3B7AF07A2671B9FB003BCCF3 /* ProfileHeader.swift */,
 				3B7AF07C2671BB2E003BCCF3 /* UserProfileView.swift */,
+				3B7AF0782671B9BF003BCCF3 /* ProfileView.swift */,
 				3BD604E526A9E37C004FFEEC /* Done */,
 				3BD866EA269FA30200A49872 /* FollowView */,
 			);
@@ -466,7 +468,7 @@
 			children = (
 				3B7AF09F2671E404003BCCF3 /* ProfileInformation.swift */,
 				3B7AF09D2671E3BA003BCCF3 /* GridPosts.swift */,
-				3B7AF0A12671E416003BCCF3 /* EditProfileButton.swift */,
+				3B7AF0A12671E416003BCCF3 /* EditProfile.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -481,8 +483,6 @@
 		3BD604E526A9E37C004FFEEC /* Done */ = {
 			isa = PBXGroup;
 			children = (
-				3B7AF0782671B9BF003BCCF3 /* ProfileView.swift */,
-				3B7AF05D26719CC2003BCCF3 /* HeaderCell.swift */,
 				3BD604F226B08CA8004FFEEC /* DoneToggle.swift */,
 				3BD604F626B0A9DD004FFEEC /* DoneView.swift */,
 				3BD604F426B0A332004FFEEC /* DoneViewModel.swift */,
@@ -621,7 +621,7 @@
 				3B75E3F426716E41002F3108 /* ImagePicker.swift in Sources */,
 				3B75E3D726715CCE002F3108 /* PasswordTextField.swift in Sources */,
 				3B7AF0892671CB35003BCCF3 /* Api.swift in Sources */,
-				3B7AF0A22671E416003BCCF3 /* EditProfileButton.swift in Sources */,
+				3B7AF0A22671E416003BCCF3 /* EditProfile.swift in Sources */,
 				3B7AF0AF2672A053003BCCF3 /* Comment.swift in Sources */,
 				3B7AF0A72672870F003BCCF3 /* HomeViewModel.swift in Sources */,
 				3BD604ED26AA0E4B004FFEEC /* AsksView.swift in Sources */,

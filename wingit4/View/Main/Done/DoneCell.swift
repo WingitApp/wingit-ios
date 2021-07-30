@@ -42,16 +42,47 @@ struct DoneCell: View {
                         // Text("location").font(.caption)
                     }
                     
-                    
                     Spacer()
-                    
+                    if doneViewModel.donepost.ownerId == doneViewModel.uid {
+                    Menu(content: {
+
+                        Button(action: {Api.Post.deletePost(userId: doneViewModel.donepost.ownerId, postId: doneViewModel.donepost.postId)}) {
+
+                            Text("Delete")
+                        }
+
+//                        Button(action: {}) {
+//
+//                            Text("Undo Done")
+//                        }
+
+                    }, label: {
+
+                        Image(systemName: "ellipsis")
+                
+                    })
+                }
                     
                 }.padding(.trailing, 15).padding(.leading, 15)
                 
                 HStack{
                     VStack(alignment: .leading, spacing: 10){
                         Text(doneViewModel.donepost.askcaption).font(.subheadline).padding(.bottom, 2).fixedSize(horizontal: false, vertical: true)
+                        HStack{
                         Text(timeAgoSinceDate(Date(timeIntervalSince1970: doneViewModel.donepost.askdate), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
+//                            NavigationLink(
+//                                destination: CommentView(postId: self.doneViewModel.donepost.postId),
+//                          label: {
+//                              Image(systemName: "message").foregroundColor(.gray).padding(.leading, 15)
+//                          })
+                            Button(action: {showComments.toggle()},
+                                   label: {
+                                    Image(systemName: "message").foregroundColor(.gray).padding(.leading, 15).accentColor(.red)
+                            })
+                            if !commentViewModel.comments.isEmpty {
+                                Text("\(commentViewModel.comments.count)").foregroundColor(.gray).font(.caption)
+                            }
+                        }
                     }.padding(.horizontal)
                     Spacer(minLength: 0)
                     
@@ -71,22 +102,19 @@ struct DoneCell: View {
                         
                     }
                 }
-                HStack{
-                    NavigationLink(
-                        destination: CommentView(postId: self.doneViewModel.donepost.postId),
-                  label: {
-                      Image(systemName: "message").foregroundColor(.gray).padding(.leading, 15)
-                  })
-                    if !commentViewModel.comments.isEmpty {
-                        Text("\(commentViewModel.comments.count)").foregroundColor(.gray).font(.caption)
-                    }
-                }
+             
                 
             }
          
         DoneCellView(donepost: self.doneViewModel.donepost)
         Divider()
         }
+        .sheet(isPresented: $ImageScreen, content: {
+            doneImageView(donepost: doneViewModel.donepost)
+        })
+        .sheet(isPresented: $showComments, content: {
+            CommentView(postId: doneViewModel.donepost.postId)
+        })
         .onAppear {
             self.commentViewModel.postId = doneViewModel.post == nil ? doneViewModel.donepost.postId : doneViewModel.donepost.postId
             self.commentViewModel.loadComments()
@@ -137,7 +165,8 @@ struct DoneCellView: View {
                 }
             }
             
-            
-        }
+        } .sheet(isPresented: $ImageScreen, content: {
+            doneMediaView(donepost: doneViewModel.donepost)
+        })
     }
 }

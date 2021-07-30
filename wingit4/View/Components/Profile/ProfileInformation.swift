@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import URLImage
 
 struct ProfileInformation: View {
     var user: User?
@@ -14,26 +15,40 @@ struct ProfileInformation: View {
     
     var body: some View {
         
-        VStack(alignment: .leading, spacing: 4) {
+        VStack{
             if user != nil && self.user!.uid == uid{
+                
+                URLImage(URL(string: user!.profileImageUrl)!,
+                content: {
+                    $0.image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(Circle())
+                }).frame(width: 100, height: 100)
                 
                 Button(action: {Api.User.updateDetails(field: "Name")}) {
 
-              Text("Hi, I'm \(user!.username)").font(.system(size: 30, weight: .medium, design: .default)).foregroundColor(.black)
-                                               .fixedSize(horizontal: false, vertical: true)
+                    Text(user!.username).foregroundColor(.black).bold()
                 }
                               
                              
               Button(action: {Api.User.updateDetails(field: "bio")}) {
                   
-                  Text(user!.bio).foregroundColor(.secondary)
+                Text("@\(user!.bio)").font(.caption).foregroundColor(.gray)
                     }
             } else {
-                Text("Hi, I'm \(user!.username)").font(.system(size: 30, weight: .medium, design: .default)).foregroundColor(.black)
-                Text(user!.bio).foregroundColor(.secondary)
+                URLImage(URL(string: user!.profileImageUrl)!,
+                content: {
+                    $0.image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(Circle())
+                }).frame(width: 100, height: 100)
+                Text(user!.username).foregroundColor(.black).bold()
+                Text(user!.bio).font(.caption).foregroundColor(.gray)
             }
             
-        }.padding(.leading, 20)
+        }
     }
 }
 

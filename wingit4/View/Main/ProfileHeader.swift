@@ -13,6 +13,7 @@ struct ProfileHeader: View {
     var user: User?
     var postCount: Int
     var gemPostCount: Int
+    var doneCount: Int
     @Binding var followingCount: Int
     @Binding var followersCount: Int
     @State var done: Bool = false
@@ -20,138 +21,124 @@ struct ProfileHeader: View {
     var body: some View {
         
             if user != nil {
-                VStack{
-                HStack {
-                    VStack{
-                URLImage(URL(string: user!.profileImageUrl)!,
-                content: {
-                    $0.image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .clipShape(Circle())
-                }).frame(width: 100, height: 100).padding(.leading, 20)
-                     //   EditProfileButton().padding(.leading, 20)
-                }
-                ProfileInformation(user: user)
-                    
-                
-                }
-                
-                VStack(alignment: .leading){
-//                    Text("quote").foregroundColor(.secondary).font(.body)
-//                        .padding(.leading, 20).padding(.bottom, 10)
-                    VStack(alignment: .leading){
-                    HStack {
-                        Text("\(postCount)").font(.caption).foregroundColor(.gray)
-                        Text("Asks").font(.caption2).foregroundColor(.gray)
-                        Text("|").padding(.horizontal).foregroundColor(.gray)
-                        Text("\(gemPostCount)").font(.caption).foregroundColor(.gray)
-                        Text("Recommendations").font(.caption2).foregroundColor(.gray)
-                    }.padding(.leading, 20).padding(.bottom, 5)
-                        
-                
+                VStack(alignment:.center){
+              
+               
+                 ProfileInformation(user: user)
+                HStack{
+                    NavigationLink(
+                        destination: FollowerView(user: user!),
+                        label: {
+                            HStack {
+                                Text("\(followersCount)").font(.caption).foregroundColor(.gray)
+                                Text("Followers").font(.caption2).foregroundColor(.gray)
+                            }.padding(.top, 5).padding(.trailing, 15)
+                        })
+                    NavigationLink(
+                        destination: FollowingView(user: user!),
+                        label: {
+                            HStack {
+                                Text("\(followingCount)").font(.caption).foregroundColor(.gray)
+                                Text("Following").font(.caption2).foregroundColor(.gray)
+                            }.padding(.top, 5).padding(.leading, 15)
+                        })
+                    }
                     HStack{
-                        NavigationLink(
-                            destination: FollowerView(user: user!),
-                            label: {
-                                HStack {
-                                    Text("\(followersCount)").font(.caption).foregroundColor(.gray)
-                                    Text("Followers").font(.caption2).foregroundColor(.gray)
-                                }.padding(.leading, 20)
-                            })
-                        NavigationLink(
-                            destination: FollowingView(user: user!),
-                            label: {
-                                HStack {
-                                    Text("\(followingCount)").font(.caption).foregroundColor(.gray)
-                                    Text("Following").font(.caption2).foregroundColor(.gray)
-                                }.padding(.leading, 5)
-                            })
-                        Spacer(minLength: 10)
-                        NavigationLink(
-                            destination: DoneView(),
-                            label: {
-                                Image(systemName: "checkmark.circle")
-                            })
-//                        Button(action: {done.toggle()},
-//                               label: {
-//                                Image(systemName: "checkmark.circle")
-//                            })
-                }
-                }
-            }
+                    VStack {
+                        Text("\(postCount)").font(.headline).foregroundColor(.black)
+                        Text("Asks").font(.subheadline).foregroundColor(.gray)
+                    }.padding(10)
+                    NavigationLink(
+                        destination: DoneView(user: user!),
+                        label: {
+                            VStack{
+                            Text("\(doneCount)").font(.headline).foregroundColor(.black)
+                            Text("Done").font(.subheadline).foregroundColor(.gray)
+                            }.padding(10)
+                        })
+                    VStack {
+                        Text("\(gemPostCount)").font(.headline).foregroundColor(.black)
+                        Text("Recs").font(.subheadline).foregroundColor(.gray)
+                    }.padding(10)
+                    }
+            
             }
                 .sheet(isPresented: $done, content: {
-                DoneView()
+                    DoneView(user: user!)
             })
 
         }
     }
 }
 
-struct UserProfileHeader: View {
-   
-    var user: User?
-    var postCount: Int
-    var gemPostCount: Int
-    @Binding var followingCount: Int
-    @Binding var followersCount: Int
-    var body: some View {
-        
-        
-            if user != nil {
-                HStack {
-                URLImage(URL(string: user!.profileImageUrl)!,
-                content: {
-                    $0.image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .clipShape(Circle())
-                }).frame(width: 100, height: 100).padding(.leading, 20)
-                
-                    VStack{
-                        ProfileInformation(user: user)
-                    }
-                
-                }
-                
-                VStack(alignment: .leading){
-//                    Text("quote").foregroundColor(.secondary).font(.body)
-//                        .padding(.leading, 20).padding(.bottom, 10)
-                    VStack(alignment: .leading){
-                        HStack {
-                            Text("\(postCount)").font(.caption).foregroundColor(.gray)
-                            Text("Asks").font(.caption2).foregroundColor(.gray)
-                            Text("|").padding(.horizontal).foregroundColor(.gray)
-                            Text("\(gemPostCount)").font(.caption).foregroundColor(.gray)
-                            Text("Recommendations").font(.caption2).foregroundColor(.gray)
-                        }.padding(.leading, 20).padding(.bottom, 5)
-                    
-                    HStack{
-                    
-                        NavigationLink(
-                            destination: FollowerView(user: user!),
-                            label: {
-                                HStack {
-                                    Text("\(followersCount)").font(.caption).foregroundColor(.gray)
-                                    Text("Followers").font(.caption2).foregroundColor(.gray)
-                                }.padding(.leading, 20)
-                            })
-
-                        NavigationLink(
-                            destination: FollowingView(user: user!),
-                            label: {
-                                HStack {
-                                    Text("\(followingCount)").font(.caption).foregroundColor(.gray)
-                                    Text("Following").font(.caption2).foregroundColor(.gray)
-                                }.padding(.leading, 5)
-                            })
-                }
-                }
-            }
-        }
-    }
-}
+//struct UserProfileHeader: View {
+//   
+//    var user: User?
+//    var postCount: Int
+//    var gemPostCount: Int
+//    @Binding var followingCount: Int
+//    @Binding var followersCount: Int
+//    var body: some View {
+//        
+//        
+//        if user != nil {
+//            VStack(alignment:.center){
+//          
+//            URLImage(URL(string: user!.profileImageUrl)!,
+//            content: {
+//                $0.image
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fill)
+//                    .clipShape(Circle())
+//            }).frame(width: 100, height: 100)
+//             ProfileInformation(user: user)
+//            HStack{
+//                NavigationLink(
+//                    destination: FollowerView(user: user!),
+//                    label: {
+//                        HStack {
+//                            Text("\(followersCount)").font(.caption).foregroundColor(.gray)
+//                            Text("Followers").font(.caption2).foregroundColor(.gray)
+//                        }.padding(.top, 5).padding(.trailing, 15)
+//                    })
+//                NavigationLink(
+//                    destination: FollowingView(user: user!),
+//                    label: {
+//                        HStack {
+//                            Text("\(followingCount)").font(.caption).foregroundColor(.gray)
+//                            Text("Following").font(.caption2).foregroundColor(.gray)
+//                        }.padding(.top, 5).padding(.leading, 15)
+//                    })
+//                }
+//                HStack{
+//                VStack {
+//                    Text("\(postCount)").font(.headline).foregroundColor(.black)
+//                    Text("Asks").font(.subheadline).foregroundColor(.gray)
+//                }.padding(10)
+//                NavigationLink(
+//                    destination: DoneView(),
+//                    label: {
+//                        VStack{
+//                        Text("\(doneCount)").font(.headline).foregroundColor(.black)
+//                        Text("Done").font(.subheadline).foregroundColor(.gray)
+//                        }.padding(10)
+//                    })
+//                VStack {
+//                    Text("\(gemPostCount)").font(.headline).foregroundColor(.black)
+//                    Text("Recs").font(.subheadline).foregroundColor(.gray)
+//                }.padding(10)
+//                }
+//        
+//        }
+//            .sheet(isPresented: $done, content: {
+//            DoneView()
+//        })
+//
+//    }
+//
+//        }
+//    }
+//}
 
 //struct FollowingCount: View {
 //

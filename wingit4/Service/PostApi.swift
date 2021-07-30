@@ -109,21 +109,26 @@ class PostApi {
             
         }
     }
-//    func deleteDonePost(userId: String, postId: String) {
-//        guard let userId = Auth.auth().currentUser?.uid else {
-//            return
-//        }
-//        let firestoreMyPostRef = Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("donePosts").document(postId)
-//      //  let storagePostRef = Ref.STORAGE_POST_ID
-//        firestoreMyPostRef.delete { (err) in
-//            if err != nil{
-//               print(err!.localizedDescription)
-//                return
-//            }
-//            let storagePostRef = Ref.STORAGE_POST_ID(postId: postId)
-//            storagePostRef.delete()
-//        }
-//    }
+
+    
+    func deleteDonePost(userId: String, postId: String) {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            return
+        }
+        let firestoreMyPostRef = Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("donePosts").document(postId)
+      //  let storagePostRef = Ref.STORAGE_POST_ID
+        firestoreMyPostRef.delete { (err) in
+            if err != nil{
+               print(err!.localizedDescription)
+                return
+            }
+            let storagePostRef = Ref.STORAGE_POST_ID(postId: postId)
+            storagePostRef.delete()
+            Ref.FIRESTORE_COLLECTION_ALL_DONE.document(postId).delete()
+        }
+    }
+    
+    
     
     func hidePost(userId: String, postId: String) {
         guard let userId = Auth.auth().currentUser?.uid else {
