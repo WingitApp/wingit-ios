@@ -10,16 +10,15 @@ import URLImage
 import FirebaseAuth
 
 struct HeaderCell: View {
-    
     @ObservedObject var headerCellViewModel = HeaderCellViewModel()
   
     @State var reportScreen: Bool = false
     @State var ImageScreen: Bool = false
     @State var done: Bool = false
     
-    
     init(post: Post) {
         self.headerCellViewModel.post = post
+        self.headerCellViewModel.userToPost(postOwnerId: post.ownerId)
     }
     
     
@@ -27,19 +26,23 @@ struct HeaderCell: View {
         VStack {
            
             HStack {
-                
-                URLImage(URL(string: headerCellViewModel.post.avatar)!,
-                         content: {
-                            $0.image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .clipShape(Circle())
-                         }).frame(width: 35, height: 35)
-                
-                VStack(alignment: .leading) {
-                    Text(headerCellViewModel.post.username).font(.subheadline).bold()
-                    // Text("location").font(.caption)
+                NavigationLink(destination:
+                  self.headerCellViewModel.user != nil ? AnyView(UserProfileView(user: self.headerCellViewModel.user)) : AnyView(HomeView())
+                ) {
+                    URLImage(URL(string: headerCellViewModel.post.avatar)!,
+                             content: {
+                                $0.image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipShape(Circle())
+                             }).frame(width: 35, height: 35)
+                    
+                    VStack(alignment: .leading) {
+                        Text(headerCellViewModel.post.username).font(.subheadline).bold()
+                        // Text("location").font(.caption)
+                    }
                 }
+                
                 
                     Spacer()
         
@@ -130,6 +133,7 @@ struct HeaderCell: View {
         .sheet(isPresented: $done, content: {
             DoneToggle(post: self.headerCellViewModel.post)
         })
+
     
     }
     
