@@ -5,9 +5,8 @@
 //  Created by YaeRim Amy Chun on 6/9/21.
 //
 
+import Amplitude
 import SwiftUI
-
-
 
 struct SignupView: View {
 
@@ -42,7 +41,10 @@ struct EULA: View {
 struct SignUpTextField: View {
     @ObservedObject var signupViewModel = SignupViewModel()
     func signUp() {
+        logToAmplitude(event: .signupAttempt)
         signupViewModel.signup(username: signupViewModel.username, bio: signupViewModel.bio, email: signupViewModel.email, password: signupViewModel.password, imageData: signupViewModel.imageData, completed: { (user) in
+            setUserPropertiesOnAccountCreation(userID: user.uid, username: user.username, email: user.email, signupMethod: "email")
+            logToAmplitude(event: .userSignup, properties: [.method: "email", .platform: "ios"])
             self.clean()
             // Switch to the Main App
         }) { (errorMessage) in
@@ -78,10 +80,12 @@ struct SignUpTextField: View {
             SignupButton(action: signUp, label: TEXT_SIGN_UP).alert(isPresented: $signupViewModel.showAlert) {
                 Alert(title: Text("Error"), message: Text(self.signupViewModel.errorString), dismissButton: .default(Text("OK")))
             }
-        }.onTapGesture { dismissKeyboard() }
+        }
+        .onTapGesture { dismissKeyboard() }
+        .onAppear{ logToAmplitude(event: .signupScreen) }
         .sheet(isPresented: $signupViewModel.showImagePicker) {
           // ImagePickerController()
            ImagePicker(showImagePicker: self.$signupViewModel.showImagePicker, pickedImage: self.$signupViewModel.image, imageData: self.$signupViewModel.imageData)
-       }
+        }
     }
 }

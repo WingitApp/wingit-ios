@@ -5,7 +5,7 @@
 //  Created by YaeRim Amy Chun on 6/9/21.
 //
 
-
+import Amplitude
 import SwiftUI
 
 struct SigninView: View {
@@ -13,9 +13,10 @@ struct SigninView: View {
      @ObservedObject var signinViewModel = SigninViewModel()
       
       func signIn() {
-        
+        logToAmplitude(event: .loginAttempt)
         signinViewModel.signin(email: signinViewModel.email, password: signinViewModel.password, completed: { (user) in
-         
+            Amplitude.instance().setUserId(user.uid)
+            logToAmplitude(event: .userLogin, properties: [.method: "email", .platform: "ios"])
             self.clean()
         }) { (errorMessage) in
            
@@ -47,7 +48,12 @@ struct SigninView: View {
                 NavigationLink(destination: SignupView()) {
                  SignupText()
                 }
-            }.onTapGesture { dismissKeyboard() }
+            }.onTapGesture {
+                dismissKeyboard()
+                
+            }
+        }.onAppear{
+            logToAmplitude(event: .loginScreen)
         }
    
        

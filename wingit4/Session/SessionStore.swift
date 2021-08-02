@@ -50,7 +50,7 @@ class SessionStore: ObservableObject {
     func logout() {
         do {
             try Auth.auth().signOut()
-            
+            logToAmplitude(event: .userLogout, userId: self.userSession?.uid)
         } catch  {
             
         }

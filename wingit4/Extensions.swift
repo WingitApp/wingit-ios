@@ -21,6 +21,15 @@ extension View {
     }
 }
 
+extension Date {
+    static func iso8601ShortDateString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: date)
+    }
+}
+
 func timeAgoSinceDate(_ date:Date, currentDate:Date, numericDates:Bool) -> String {
     let calendar = Calendar.current
     let now = currentDate
