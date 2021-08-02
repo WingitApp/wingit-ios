@@ -31,7 +31,7 @@ class SignupViewModel: ObservableObject {
     
  
     func signup(username: String, bio: String, email: String, password: String, imageData: Data, completed: @escaping(_ user: User) -> Void,  onError: @escaping(_ errorMessage: String) -> Void) {
-        if !username.isEmpty && !bio.isEmpty && !email.isEmpty && !password.isEmpty && !imageData.isEmpty {
+        if !username.isEmpty && !bio.isEmpty && !email.isEmpty && !password.isEmpty {
            // showscreen.toggle()
             AuthService.signupUser(username: username, bio: bio, email: email, password: password, imageData: imageData, onSuccess: completed, onError: onError)
         }

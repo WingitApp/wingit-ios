@@ -177,12 +177,10 @@ class StorageService {
             }
     }
     
-    static func updateAvatar(userId: String, imageData: Data, metadata: StorageMetadata, storageAvatarRef: StorageReference, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-            guard let userId = Auth.auth().currentUser?.uid else {
-                return
-            }
+    static func updateAvatar(imageData: Data, metadata: StorageMetadata, storageAvatarRef: StorageReference, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+            guard let userId = Auth.auth().currentUser?.uid else {  return  }
 
-           storageAvatarRef.updateMetadata(metadata) { (storageMetadata, error) in
+        storageAvatarRef.updateMetadata(metadata) { (storageMetadata, error) in
                 if error != nil {
                     onError(error!.localizedDescription)
                     return
@@ -215,7 +213,6 @@ class StorageService {
                         }
                     }
                 }
-
             }
     }
 }

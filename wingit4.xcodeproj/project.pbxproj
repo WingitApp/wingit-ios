@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B0DFBDE26B78D86008CE0D1 /* UpdatePhotoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0DFBDD26B78D86008CE0D1 /* UpdatePhotoVM.swift */; };
 		3B5BDB41268E9F5C0034B18C /* gemHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BDB40268E9F5C0034B18C /* gemHeader.swift */; };
 		3B5BDB4B268E9F9A0034B18C /* gemPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BDB4A268E9F9A0034B18C /* gemPostModel.swift */; };
 		3B5BDB4D268EA11B0034B18C /* gemPostApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BDB4C268EA11B0034B18C /* gemPostApi.swift */; };
@@ -112,6 +113,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B0DFBDD26B78D86008CE0D1 /* UpdatePhotoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePhotoVM.swift; sourceTree = "<group>"; };
 		3B5BDB40268E9F5C0034B18C /* gemHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gemHeader.swift; sourceTree = "<group>"; };
 		3B5BDB4A268E9F9A0034B18C /* gemPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gemPostModel.swift; sourceTree = "<group>"; };
 		3B5BDB4C268EA11B0034B18C /* gemPostApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gemPostApi.swift; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 			isa = PBXGroup;
 			children = (
 				3B7AF09F2671E404003BCCF3 /* ProfileInformation.swift */,
+				3B0DFBDD26B78D86008CE0D1 /* UpdatePhotoVM.swift */,
 				3B7AF09D2671E3BA003BCCF3 /* GridPosts.swift */,
 				3B7AF0A12671E416003BCCF3 /* EditProfile.swift */,
 			);
@@ -692,6 +695,7 @@
 				3B928C3B269EA383007A34B8 /* ImageView.swift in Sources */,
 				3B7AF06D2671A01B003BCCF3 /* CommentRow.swift in Sources */,
 				3BD866F0269FE49000A49872 /* FollowApi.swift in Sources */,
+				3B0DFBDE26B78D86008CE0D1 /* UpdatePhotoVM.swift in Sources */,
 				3B75E3E32671657F002F3108 /* UsernameTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseStorage
 
 class UserApi {
     func searchUsers(text: String, onSuccess: @escaping(_ users: [User]) -> Void) {
@@ -78,6 +79,7 @@ class UserApi {
 //        }
 //
 //    }
+    
 
     
     func updateDetails(field : String){

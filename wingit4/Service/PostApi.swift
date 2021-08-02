@@ -44,7 +44,6 @@ class PostApi {
         StorageService.savePostPhoto(userId: userId, caption: caption, postId: postId, imageData: imageData, metadata: metadata, storagePostRef: storagePostRef, onSuccess: onSuccess, onError: onError)
         
     }
-   
         
     func deletePost(userId: String, postId: String) {
         guard let userId = Auth.auth().currentUser?.uid else {

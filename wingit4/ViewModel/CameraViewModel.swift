@@ -38,6 +38,7 @@ class CameraViewModel: ObservableObject {
           }
 
     }
+    
     func shareGem(completed: @escaping() -> Void,  onError: @escaping(_ errorMessage: String) -> Void) {
  
         if !caption.isEmpty && !imageData.isEmpty {
