@@ -18,8 +18,11 @@ struct gemHeader: View {
     @ObservedObject var commentViewModel = CommentViewModel()
     @State var showComments : Bool = false
     
+    var currentUser: User!
+    
     init(gempost: gemPost) {
         self.gemHeaderViewModel.gempost = gempost
+        self.gemHeaderViewModel.getUserFromPost(postOwnerId: gempost.ownerId)
     }
     
     
@@ -27,20 +30,23 @@ struct gemHeader: View {
         VStack {
            
             HStack {
-                URLImage(URL(string: gemHeaderViewModel.gempost.avatar)!,
-                               content: {
-                                   $0.image
-                                       .resizable()
-                                       .aspectRatio(contentMode: .fill)
-                                       .clipShape(Circle())
-                               }).frame(width: 35, height: 35)
-    
-                    VStack(alignment: .leading) {
-                        Text(gemHeaderViewModel.gempost.username).font(.subheadline).bold()
-                       // Text("location").font(.caption)
-                    }
-                       
-                    
+                NavigationLink(destination:
+                  self.gemHeaderViewModel.user != nil ? AnyView(UserProfileView(user: self.gemHeaderViewModel.user)) : AnyView(HomeView())
+                ) {
+                    URLImage(URL(string: gemHeaderViewModel.gempost.avatar)!,
+                                   content: {
+                                       $0.image
+                                           .resizable()
+                                           .aspectRatio(contentMode: .fill)
+                                           .clipShape(Circle())
+                                   }).frame(width: 35, height: 35)
+        
+                        VStack(alignment: .leading) {
+                            Text(gemHeaderViewModel.gempost.username).font(.subheadline).bold()
+                           // Text("location").font(.caption)
+                        }
+                }
+                
                     Spacer()
                 
                 if gemHeaderViewModel.gempost.ownerId == uid {

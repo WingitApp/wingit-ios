@@ -11,14 +11,14 @@ import FirebaseAuth
 
 struct HeaderCell: View {
     @ObservedObject var headerCellViewModel = HeaderCellViewModel()
-  
+
     @State var reportScreen: Bool = false
     @State var ImageScreen: Bool = false
     @State var done: Bool = false
     
     init(post: Post) {
         self.headerCellViewModel.post = post
-        self.headerCellViewModel.userToPost(postOwnerId: post.ownerId)
+        self.headerCellViewModel.getUserFromPost(postOwnerId: post.ownerId)
     }
     
     

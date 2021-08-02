@@ -22,7 +22,7 @@ class HeaderCellViewModel : ObservableObject {
     let uid = Auth.auth().currentUser!.uid
     var postId: String?
 
-    func userToPost(postOwnerId: String){
+    func getUserFromPost(postOwnerId: String){
         Api.User.loadUser(userId: postOwnerId) { (user) in
             self.user = user
         }

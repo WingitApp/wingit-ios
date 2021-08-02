@@ -15,7 +15,6 @@ struct SigninView: View {
       func signIn() {
         
         signinViewModel.signin(email: signinViewModel.email, password: signinViewModel.password, completed: { (user) in
-         
             self.clean()
         }) { (errorMessage) in
            
