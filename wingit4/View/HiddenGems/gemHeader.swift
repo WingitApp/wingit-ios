@@ -17,12 +17,15 @@ struct gemHeader: View {
     @ObservedObject var gemHeaderViewModel = GemHeaderViewModel()
     @ObservedObject var commentViewModel = CommentViewModel()
     @State var showComments : Bool = false
+    var isProfileView: Bool = false
     
-    var currentUser: User!
-    
-    init(gempost: gemPost) {
+    init(gempost: gemPost, isProfileView: Bool) {
         self.gemHeaderViewModel.gempost = gempost
-        self.gemHeaderViewModel.getUserFromPost(postOwnerId: gempost.ownerId)
+        if !isProfileView {
+            self.gemHeaderViewModel.getUserFromPost(postOwnerId: gempost.ownerId)
+        } else {
+            self.isProfileView = true
+        }
     }
     
     
@@ -40,13 +43,12 @@ struct gemHeader: View {
                                            .aspectRatio(contentMode: .fill)
                                            .clipShape(Circle())
                                    }).frame(width: 35, height: 35)
-        
-                        VStack(alignment: .leading) {
-                            Text(gemHeaderViewModel.gempost.username).font(.subheadline).bold()
-                           // Text("location").font(.caption)
-                        }
+
+                }.disabled(self.gemHeaderViewModel.user == nil && self.isProfileView)
+                VStack(alignment: .leading) {
+                    Text(gemHeaderViewModel.gempost.username).font(.subheadline).bold()
+                   // Text("location").font(.caption)
                 }
-                
                     Spacer()
                 
                 if gemHeaderViewModel.gempost.ownerId == uid {

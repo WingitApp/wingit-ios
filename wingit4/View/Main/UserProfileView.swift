@@ -49,7 +49,7 @@ struct UserProfileView: View {
                                     ForEach(self.profileViewModel.gemposts, id: \.postId) { gempost in
                                         VStack {
                                             
-                                            gemHeader(gempost: gempost)
+                                            gemHeader(gempost: gempost, isProfileView: true)
                                            
                                         }
                                     }
@@ -57,7 +57,10 @@ struct UserProfileView: View {
                                    
                                     ForEach(self.profileViewModel.posts, id: \.postId) { post in
                                         VStack {
-                                            HeaderCell(post: post)
+                                            HeaderCell(
+                                                post: post,
+                                                isProfileView: true
+                                            )
                                             FooterCell(post: post)
                                         }
                                    }

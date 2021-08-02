@@ -15,10 +15,15 @@ struct HeaderCell: View {
     @State var reportScreen: Bool = false
     @State var ImageScreen: Bool = false
     @State var done: Bool = false
+    @State var isProfileView: Bool = false
     
-    init(post: Post) {
+    init(post: Post, isProfileView: Bool) {
         self.headerCellViewModel.post = post
-        self.headerCellViewModel.getUserFromPost(postOwnerId: post.ownerId)
+        if !isProfileView {
+            self.headerCellViewModel.getUserFromPost(postOwnerId: post.ownerId)
+        } else {
+            self.isProfileView = true
+        }
     }
     
     
@@ -26,9 +31,7 @@ struct HeaderCell: View {
         VStack {
            
             HStack {
-                NavigationLink(destination:
-                  self.headerCellViewModel.user != nil ? AnyView(UserProfileView(user: self.headerCellViewModel.user)) : AnyView(HomeView())
-                ) {
+                NavigationLink(destination: self.headerCellViewModel.user != nil ? AnyView(UserProfileView(user: self.headerCellViewModel.user)) : AnyView(HomeView())) {
                     URLImage(URL(string: headerCellViewModel.post.avatar)!,
                              content: {
                                 $0.image
@@ -37,12 +40,12 @@ struct HeaderCell: View {
                                     .clipShape(Circle())
                              }).frame(width: 35, height: 35)
                     
-                    VStack(alignment: .leading) {
-                        Text(headerCellViewModel.post.username).font(.subheadline).bold()
-                        // Text("location").font(.caption)
-                    }
-                }
+                }.disabled(self.headerCellViewModel.user == nil && self.isProfileView)
                 
+                VStack(alignment: .leading) {
+                    Text(headerCellViewModel.post.username).font(.subheadline).bold()
+                    // Text("location").font(.caption)
+                }
                 
                     Spacer()
         
