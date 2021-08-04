@@ -14,13 +14,24 @@ import SwiftUI
 
 class UpdatePhotoVM: ObservableObject {
 
-    @Published var image: Image = Image(systemName: IMAGE_USER_PLACEHOLDER)
+    @Published var image: Image = Image(systemName: IMAGE_PHOTO)
     var imageData: Data = Data(count: 0)
     var errorString = ""
 
     @Published var showAlert: Bool = false
     @Published var showImagePicker: Bool = false
-
+    
+    
+    func addPhoto(imageData: Data, completed: @escaping(_ user: User) -> Void,  onError: @escaping(_ errorMessage: String) -> Void) {
+        if imageData.count != 0 {
+           // showscreen.toggle()
+            Api.User.updateImage(imageData: imageData, onSuccess: completed, onError: onError)
+        }
+        else {
+            showAlert = true
+            errorString = "Please fill in all fields"
+        }
+    }
 
 //    func updatePhoto(completed: @escaping() -> Void, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void){
 //        if imageData.count == 0 {

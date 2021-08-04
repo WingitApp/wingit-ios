@@ -62,16 +62,27 @@ struct ProfilePicToggle: View {
     let uid = Auth.auth().currentUser?.uid
     @ObservedObject var updatePhotoVM = UpdatePhotoVM()
     
-    func updateAvatar() {
-        updatePhotoVM.updatePhoto(completed: {self.clean()}) {
-            return
-        } onError: { (errorMessage) in
+    func addAvatar() {
+        updatePhotoVM.addPhoto(imageData: updatePhotoVM.imageData, completed: { (user) in
+            self.clean()
+            // Switch to the Main App
+        }) { (errorMessage) in
             self.updatePhotoVM.showAlert = true
             self.updatePhotoVM.errorString = errorMessage
             self.clean()
         }
     }
     
+//    func updateAvatar() {
+//        updatePhotoVM.updatePhoto(completed: {self.clean()}) {
+//            return
+//        } onError: { (errorMessage) in
+//            self.updatePhotoVM.showAlert = true
+//            self.updatePhotoVM.errorString = errorMessage
+//            self.clean()
+//        }
+//    }
+////
     func clean() {
         self.updatePhotoVM.image = Image(systemName: IMAGE_USER_PLACEHOLDER)
         self.updatePhotoVM.imageData = Data()
@@ -81,14 +92,13 @@ struct ProfilePicToggle: View {
         
         VStack{
            Text("Change your photo")
-            
                     updatePhotoVM.image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .clipShape(Circle())
                         .frame(width: 100, height: 100)
                         .onTapGesture {self.updatePhotoVM.showImagePicker = true}
-            Button(action: {updateAvatar()},
+            Button(action: { },
                    label: {
                 Text("Done")
                     .fontWeight(.bold)

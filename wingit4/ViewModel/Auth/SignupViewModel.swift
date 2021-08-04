@@ -22,7 +22,6 @@ class SignupViewModel: ObservableObject {
      var errorString = ""
      //var handle: AuthStateDidChangeListenerHandle?
     
-     @Published var Agreed = false
      @Published var showImagePicker: Bool = false
      @Published var showAlert: Bool = false
      @Published var showscreen: Bool = false
