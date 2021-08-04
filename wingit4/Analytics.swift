@@ -22,6 +22,7 @@ enum AmplitudeEvent: String {
     case viewComments = "View Comments"
     case viewHomeScreen = "View Home Screen"
     case viewDiscoverScreen = "View Discover Screen"
+    case viewComposePostScreen = "View Compose Post Screen"
     case viewNotifications = "View Notifications"
     case viewOwnProfile = "View Own Profile"
     case userLogout = "User Logout"
@@ -39,6 +40,7 @@ enum AmplitudeEvent: String {
     // Recs
     case commentOnRec = "Comment On Rec"
     case postRec = "Post Rec"
+    case postRecError = "Post Rec Error"
     case viewOthersRecs = "View Others Recs"
     case viewOwnRecs = "View Own Recs"
     case viewPublicRecsFeed = "View Public Recs Feed"

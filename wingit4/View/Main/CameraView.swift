@@ -82,7 +82,7 @@ struct CameraView: View {
                 }
                 
                 Button(action: shareGem) {
-
+                    
                     Text("Post Rec")
                 }
 
