@@ -22,7 +22,7 @@ class UpdatePhotoVM: ObservableObject {
     @Published var showImagePicker: Bool = false
     
     
-    func addPhoto(imageData: Data, completed: @escaping(_ user: User) -> Void,  onError: @escaping(_ errorMessage: String) -> Void) {
+    func updatePhoto(imageData: Data, completed: @escaping(_ user: User) -> Void,  onError: @escaping(_ errorMessage: String) -> Void) {
         if imageData.count != 0 {
            // showscreen.toggle()
             Api.User.updateImage(imageData: imageData, onSuccess: completed, onError: onError)
