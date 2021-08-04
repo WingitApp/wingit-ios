@@ -98,7 +98,7 @@ struct ProfilePicToggle: View {
                         .clipShape(Circle())
                         .frame(width: 100, height: 100)
                         .onTapGesture {self.updatePhotoVM.showImagePicker = true}
-            Button(action: { },
+            Button(action: {addAvatar()},
                    label: {
                 Text("Done")
                     .fontWeight(.bold)
