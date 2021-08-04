@@ -29,7 +29,7 @@ struct SearchView: View {
 //                                  } else {
                                       ForEach(self.postPopularViewModel.gemposts, id: \.postId) { gempost in
                                           VStack {
-                                            gemHeader(gempost: gempost)
+                                            gemHeader(gempost: gempost, isProfileView: false)
                                           }
                                       }       
                             }

@@ -17,9 +17,15 @@ struct gemHeader: View {
     @ObservedObject var gemHeaderViewModel = GemHeaderViewModel()
     @ObservedObject var commentViewModel = CommentViewModel()
     @State var showComments : Bool = false
+    var isProfileView: Bool = false
     
-    init(gempost: gemPost) {
+    init(gempost: gemPost, isProfileView: Bool) {
         self.gemHeaderViewModel.gempost = gempost
+        if !isProfileView {
+            self.gemHeaderViewModel.getUserFromPost(postOwnerId: gempost.ownerId)
+        } else {
+            self.isProfileView = true
+        }
     }
     
     
@@ -27,20 +33,22 @@ struct gemHeader: View {
         VStack {
            
             HStack {
-                URLImage(URL(string: gemHeaderViewModel.gempost.avatar)!,
-                               content: {
-                                   $0.image
-                                       .resizable()
-                                       .aspectRatio(contentMode: .fill)
-                                       .clipShape(Circle())
-                               }).frame(width: 35, height: 35)
-    
-                    VStack(alignment: .leading) {
-                        Text(gemHeaderViewModel.gempost.username).font(.subheadline).bold()
-                       // Text("location").font(.caption)
-                    }
-                       
-                    
+                NavigationLink(destination:
+                  self.gemHeaderViewModel.user != nil ? AnyView(UserProfileView(user: self.gemHeaderViewModel.user)) : AnyView(HomeView())
+                ) {
+                    URLImage(URL(string: gemHeaderViewModel.gempost.avatar)!,
+                                   content: {
+                                       $0.image
+                                           .resizable()
+                                           .aspectRatio(contentMode: .fill)
+                                           .clipShape(Circle())
+                                   }).frame(width: 35, height: 35)
+
+                }.disabled(self.gemHeaderViewModel.user == nil && self.isProfileView)
+                VStack(alignment: .leading) {
+                    Text(gemHeaderViewModel.gempost.username).font(.subheadline).bold()
+                   // Text("location").font(.caption)
+                }
                     Spacer()
                 
                 if gemHeaderViewModel.gempost.ownerId == uid {

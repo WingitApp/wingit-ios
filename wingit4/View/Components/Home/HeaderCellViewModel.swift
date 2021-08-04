@@ -15,21 +15,18 @@ class HeaderCellViewModel : ObservableObject {
     // Properties For Image Viewer...
     @Published var selectedImage: String = ""
     @Published var showImageViewer = false
-    
+    @Published var user: User!
+
     var post: Post!
   //  var donepost: DonePost!
-    var user: User?
     let uid = Auth.auth().currentUser!.uid
     var postId: String?
-    
-//    func userToPost(postOwnerId: String){
-//        Ref.FIRESTORE_DOCUMENT_USERID(userId: postOwnerId).getDocument { (document, error) inr
-//            if let dict = document?.data(), dict. {
-//                guard let decoderUser = try? User.init(fromDictionary: dict) else {return}
-//              self.userSession = decoderUser
-//            }
-//        }
-//    }
+
+    func getUserFromPost(postOwnerId: String){
+        Api.User.loadUser(userId: postOwnerId) { (user) in
+            self.user = user
+        }
+    }
     
     func blockUser(){
         Api.User.blockUser(userId: uid, postOwnerId: post.ownerId)
