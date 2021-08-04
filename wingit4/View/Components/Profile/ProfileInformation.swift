@@ -63,7 +63,7 @@ struct ProfilePicToggle: View {
     @ObservedObject var updatePhotoVM = UpdatePhotoVM()
     
     func addAvatar() {
-        updatePhotoVM.addPhoto(imageData: updatePhotoVM.imageData, completed: { (user) in
+        updatePhotoVM.updatePhoto(imageData: updatePhotoVM.imageData, completed: { (user) in
             self.clean()
             // Switch to the Main App
         }) { (errorMessage) in
