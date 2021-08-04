@@ -27,7 +27,15 @@ struct ProfileView: View {
                        selection.image.tag(selection)
 
                    }
-                }.pickerStyle(SegmentedPickerStyle()).padding(.leading, 20).padding(.trailing, 20).background(Color.clear)
+                }
+                .pickerStyle(SegmentedPickerStyle()).padding(.leading, 20).padding(.trailing, 20).background(Color.clear)
+                .onChange(of: selection) { selection in
+                    if selection == .globe {
+                        logToAmplitude(event: .viewOwnRecs)
+                    } else {
+                        logToAmplitude(event: .viewOwnAsks)
+                    }
+                }
            ScrollView {
                VStack {
             

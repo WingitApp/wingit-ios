@@ -42,6 +42,7 @@ struct FollowerView: View {
             }
         }.navigationBarTitle(Text("Followers"), displayMode: .inline)
         .onAppear {
+            logToAmplitude(event: .viewFollowersList)
             self.followerViewModel.loadFollowers(userId: self.user.uid)
         }
     }
@@ -80,6 +81,7 @@ struct FollowingView: View {
             }
         }.navigationBarTitle(Text("Following"), displayMode: .inline)
         .onAppear {
+            logToAmplitude(event: .viewFollowingList)
             self.followerViewModel.loadFollowing(userId: self.user.uid)
         }
     }

@@ -130,7 +130,11 @@ struct gemHeader: View {
 //                    label: {
 //                        Image(systemName: "message").foregroundColor(.gray).padding(.leading, 15)
 //                    })
-                Button(action: {showComments.toggle()},
+                Button(
+                    action: {
+                        logToAmplitude(event: .viewComments)
+                        showComments.toggle()
+                    },
                        label: {
                         Image(systemName: "message").foregroundColor(.gray).padding(.leading, 15).accentColor(.red)
                        }).padding(.top, 5)

@@ -53,7 +53,7 @@ struct SigninView: View {
                 
             }
         }.onAppear{
-            logToAmplitude(event: .loginScreen)
+            logToAmplitude(event: .viewLoginScreen)
         }
    
        

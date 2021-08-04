@@ -29,8 +29,15 @@ struct UserProfileView: View {
                            selection.image.tag(selection)
 
                        }
-            }.pickerStyle(SegmentedPickerStyle()).padding(.leading, 20).padding(.trailing, 20)
-            
+            }
+            .pickerStyle(SegmentedPickerStyle()).padding(.leading, 20).padding(.trailing, 20)
+            .onChange(of: selection) { selection in
+                if selection == .globe {
+                    logToAmplitude(event: .viewOthersRecs)
+                } else {
+                    logToAmplitude(event: .viewOthersAsks)
+                }
+            }
                 ScrollView {
                    VStack {
                     ProfileHeader(user: user, postCount: profileViewModel.posts.count, gemPostCount: profileViewModel.gemposts.count, doneCount: profileViewModel.doneposts.count, followingCount: $profileViewModel.followingCountState, followersCount: $profileViewModel.followersCountState)
@@ -54,7 +61,6 @@ struct UserProfileView: View {
                                         }
                                     }
                                  } else {
-                                   
                                     ForEach(self.profileViewModel.posts, id: \.postId) { post in
                                         VStack {
                                           HeaderCell(post: post)
@@ -72,6 +78,7 @@ struct UserProfileView: View {
                 }
                }.padding(.top, 10) .navigationBarTitle(Text(self.user.username), displayMode: .automatic)
                  .onAppear {
+                    logToAmplitude(event: .viewOtherProfile)
                     self.profileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.user.uid)
                  }
       
@@ -135,7 +142,9 @@ struct FollowButton: View {
 struct MessageButton: View {
     var user: User
     var body: some View {
-        Button(action: {}) {
+        Button(action: {
+            logToAmplitude(event: .tapMessageButton)
+        }) {
                 NavigationLink(destination: ChatView(recipientId: user.uid, recipientAvatarUrl: user.profileImageUrl, recipientUsername: user.username)) {
                     Text("Message").foregroundColor(Color("bw")).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal))
                

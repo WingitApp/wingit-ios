@@ -25,8 +25,9 @@ class CommentInputViewModel: ObservableObject {
                 let activityId = Ref.FIRESTORE_COLLECTION_ACTIVITY.document(self.post.ownerId).collection("feedItems").document().documentID
                 let activityObject = Activity(activityId: activityId, type: "comment", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: self.post.postId, mediaUrl: self.post.mediaUrl, comment: text, gemComment: text, date: Date().timeIntervalSince1970)
                 guard let activityDict = try? activityObject.toDictionary() else { return }
-
+                
                 Ref.FIRESTORE_COLLECTION_ACTIVITY.document(self.post.ownerId).collection("feedItems").document(activityId).setData(activityDict)
+                logToAmplitude(event: .commentOnRec)
             }
             onSuccess()
         }) { (errorMessage) in
@@ -44,8 +45,9 @@ class CommentInputViewModel: ObservableObject {
                 let activityId = Ref.FIRESTORE_COLLECTION_ACTIVITY.document(self.gempost.ownerId).collection("feedItems").document().documentID
                 let activityObject = Activity(activityId: activityId, type: "gemComment", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: self.gempost.postId, mediaUrl: self.gempost.mediaUrl, comment: text, gemComment: text, date: Date().timeIntervalSince1970)
                 guard let activityDict = try? activityObject.toDictionary() else { return }
-
+                
                 Ref.FIRESTORE_COLLECTION_ACTIVITY.document(self.gempost.ownerId).collection("feedItems").document(activityId).setData(activityDict)
+                logToAmplitude(event: .commentOnAsk)
             }
             onSuccess()
         }) { (errorMessage) in

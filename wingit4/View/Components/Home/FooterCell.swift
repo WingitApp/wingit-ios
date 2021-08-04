@@ -28,6 +28,7 @@ struct FooterCell: View {
                     if self.footerCellViewModel.isLiked {
                         self.footerCellViewModel.unlike()
                     } else {
+                        logToAmplitude(event: .upvote)
                         self.footerCellViewModel.like()
                     }
                 }
@@ -42,7 +43,10 @@ struct FooterCell: View {
 //                        label: {
 //                            Image(systemName: "message").foregroundColor(.gray).padding(.leading, 15)
 //                        })
-                    Button(action: {showComments.toggle()},
+                    Button(action: {
+                            logToAmplitude(event: .viewComments)
+                            showComments.toggle()
+                    },
                            label: {
                             Image(systemName: "message").foregroundColor(.gray).padding(.leading, 15).accentColor(.red)
                     })

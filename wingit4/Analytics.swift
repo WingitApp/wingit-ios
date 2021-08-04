@@ -9,18 +9,61 @@ import Amplitude
 import Foundation
 
 enum AmplitudeEvent: String {
-    case appStart = "App Start"
+    // Onboarding
+    case viewLoginScreen = "View Login Screen"
     case loginAttempt = "Login Attempt"
-    case loginScreen = "Login Screen"
-    case signupAttempt = "Signup Attempt"
-    case signupScreen = "Signup Screen"
     case userLogin = "User Login"
-    case userLogout = "User Logout"
+    
+    case viewSignupScreen = "View Signup Screen"
+    case signupAttempt = "Signup Attempt"
     case userSignup = "User Signup"
+    
+    // Navigation
+    case viewComments = "View Comments"
+    case viewHomeScreen = "View Home Screen"
+    case viewDiscoverScreen = "View Discover Screen"
+    case viewNotifications = "View Notifications"
+    case viewOwnProfile = "View Own Profile"
+    case userLogout = "User Logout"
+    
+    // Asks
+    case commentOnAsk = "Comment On Ask"
+    case postAsk = "Post Ask"
+    case markAskAsFulfilled = "Mark Ask As Fulfilled"
+    case tapReferButton = "Tap Refer Button"
+    case viewOwnAsks = "View Own Asks"
+    case viewOthersAsks = "View Others Asks"
+    case viewFulfilledAsks = "View Fulfilled Asks"
+    case viewPublicAsksFeed = "View Public Asks Feed"
+    
+    // Recs
+    case commentOnRec = "Comment On Rec"
+    case postRec = "Post Rec"
+    case viewOthersRecs = "View Others Recs"
+    case viewOwnRecs = "View Own Recs"
+    case viewPublicRecsFeed = "View Public Recs Feed"
+    
+    // Communication
+    case tapMessageButton = "Tap Message Button"
+    case viewMessages = "View Messages"
+    
+    // Social
+    case follow = "Follow"
+    case unfollow = "Unfollow"
+    case upvote = "Upvote"
+    case searchForFriends = "Search For Friends"
+    case viewFollowersList = "View Followers List"
+    case viewFollowingList = "View Following List"
+    case viewOtherProfile = "View Other Profile"
+    
+    // Miscellaneous
+    case appStart = "App Start"
 }
 
 enum AmplitudeUserProperty: String {
     case email = "Email"
+    case followers = "Followers"
+    case following = "Following"
     case signupDate = "Signup date"
     case signupMethod = "Signup method"
     case signupPlatform = "Signup platform"
@@ -28,8 +71,11 @@ enum AmplitudeUserProperty: String {
 }
 
 enum AmplitudeProperty: String {
+    case hasPhoto = "has photo"
     case method = "method"
     case platform = "platform"
+    case tab = "tab"
+    case postType = "post type"
 }
 
 func logToAmplitude(event: AmplitudeEvent) {
@@ -52,6 +98,14 @@ func logToAmplitude(event: AmplitudeEvent, properties: [AmplitudeProperty: Any])
         Dictionary(uniqueKeysWithValues: properties.map { (key, value) in (key.rawValue, value) }))
 }
 
+func addToUserProperty(property: AmplitudeUserProperty, value: Any) {
+    AMPIdentify().add(property.rawValue, value: value as? NSObject)
+}
+
+func setUserProperty(property: AmplitudeUserProperty, value: Any) {
+    AMPIdentify().set(property.rawValue, value: value as? NSObject)
+}
+
 func setUserPropertiesOnAccountCreation(userID: String, username: String, email: String, signupMethod: String) {
     let amplitude = Amplitude.instance()
     amplitude.setUserId(userID)
@@ -59,7 +113,10 @@ func setUserPropertiesOnAccountCreation(userID: String, username: String, email:
             .setOnce(AmplitudeUserProperty.signupDate.rawValue, value: NSString(string: Date.iso8601ShortDateString(date: Date())))
             .setOnce(AmplitudeUserProperty.username.rawValue, value: NSString(string: username))
             .setOnce(AmplitudeUserProperty.email.rawValue, value: NSString(string: email))
-            .setOnce(AmplitudeUserProperty.signupMethod.rawValue, value: NSString(string: signupMethod)) else { return }
+            .setOnce(AmplitudeUserProperty.username.rawValue, value: NSString(string: username))
+            .setOnce(AmplitudeUserProperty.signupMethod.rawValue, value: NSString(string: signupMethod))
+            .set(AmplitudeUserProperty.followers.rawValue, value: NSNumber(value: 0))
+            .set(AmplitudeUserProperty.following.rawValue, value: NSNumber(value: 0)) else { return }
     amplitude.identify(identify)
 }
 

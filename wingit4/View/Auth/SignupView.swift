@@ -82,7 +82,7 @@ struct SignUpTextField: View {
             }
         }
         .onTapGesture { dismissKeyboard() }
-        .onAppear{ logToAmplitude(event: .signupScreen) }
+        .onAppear{ logToAmplitude(event: .viewSignupScreen) }
         .sheet(isPresented: $signupViewModel.showImagePicker) {
           // ImagePickerController()
            ImagePicker(showImagePicker: self.$signupViewModel.showImagePicker, pickedImage: self.$signupViewModel.image, imageData: self.$signupViewModel.imageData)
