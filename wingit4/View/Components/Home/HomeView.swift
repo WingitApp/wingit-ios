@@ -42,7 +42,10 @@ struct HomeView: View {
                     ForEach(self.homeViewModel.posts, id: \.postId) { post in
                           
                         VStack {
-                              HeaderCell(post: post)
+                            HeaderCell(
+                                post: post,
+                                isProfileView: false
+                            )
                               FooterCell(post: post)
                           }.padding(.top, 10)
                       }
@@ -50,7 +53,7 @@ struct HomeView: View {
                     ForEach(self.homeViewModel.gemposts, id: \.postId) { gempost in
                         
                         VStack {
-                            gemHeader(gempost: gempost)
+                            gemHeader(gempost: gempost, isProfileView: false)
                           }.padding(.top, 10)
                       }
                 }

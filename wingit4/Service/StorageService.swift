@@ -141,6 +141,7 @@ class StorageService {
                     onError(error!.localizedDescription)
                     return
                 }
+            guard let userId = Auth.auth().currentUser?.uid else { return }
                 
                 storageAvatarRef.downloadURL { (url, error) in
                     if let metaImageUrl = url?.absoluteString {
@@ -157,7 +158,7 @@ class StorageService {
                                                     
                         let firestoreUserId = Ref.FIRESTORE_DOCUMENT_USERID(userId: userId)
 //                        let userInfor = ["username": self.username, "email": self.email, "profileImageUrl": metaImageUrl]
-                        let user = User.init(uid: userId, email: email, profileImageUrl: metaImageUrl, username: username, bio: bio, keywords: username.splitStringToArray())
+                        let user = User.init(uid: userId, email: email, profileImageUrl: metaImageUrl, username: username, bio: bio, keywords: username.splitStringToArray()) 
 
                         guard let dict = try? user.toDictionary() else {return}
 //
@@ -178,17 +179,14 @@ class StorageService {
     }
     
     static func updateAvatar(userId: String, imageData: Data, metadata: StorageMetadata, storageAvatarRef: StorageReference, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-            guard let userId = Auth.auth().currentUser?.uid else {
-                return
-            }
-
-           storageAvatarRef.updateMetadata(metadata) { (storageMetadata, error) in
+        
+           storageAvatarRef.putData(imageData, metadata: metadata) { (storageMetadata, error) in
                 if error != nil {
                     onError(error!.localizedDescription)
                     return
                 }
-
-                storageAvatarRef.downloadURL { (url, error) in
+                
+            storageAvatarRef.downloadURL { (url, error) in
                     if let metaImageUrl = url?.absoluteString {
                         if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
                             changeRequest.photoURL = url
@@ -201,21 +199,18 @@ class StorageService {
                         }
 
                         let firestoreUserId = Ref.FIRESTORE_DOCUMENT_USERID(userId: userId)
-//                        let userInfor = ["username": self.username, "email": self.email, "profileImageUrl": metaImageUrl]
-
-//
-//                        guard let decoderUser = try? User.init(fromDictionary: dict) else {return}
-//                        print(decoderUser.username)
-
-                        firestoreUserId.updateData(["profileImageUrl" : metaImageUrl]) { (error) in
-                            if error != nil {
-                                onError(error!.localizedDescription)
-                                return
-                            }
+                        firestoreUserId.updateData(["profileImageUrl" : metaImageUrl]){
+                            (error) in
+                                if error != nil {
+                                    onError(error!.localizedDescription)
+                                    return
+                                }
                         }
+                                                    
                     }
                 }
-
+                
             }
     }
+
 }

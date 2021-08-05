@@ -10,16 +10,20 @@ import URLImage
 import FirebaseAuth
 
 struct HeaderCell: View {
-    
     @ObservedObject var headerCellViewModel = HeaderCellViewModel()
-  
+
     @State var reportScreen: Bool = false
     @State var ImageScreen: Bool = false
     @State var done: Bool = false
+    @State var isProfileView: Bool = false
     
-    
-    init(post: Post) {
+    init(post: Post, isProfileView: Bool) {
         self.headerCellViewModel.post = post
+        if !isProfileView {
+            self.headerCellViewModel.getUserFromPost(postOwnerId: post.ownerId)
+        } else {
+            self.isProfileView = true
+        }
     }
     
     
@@ -27,14 +31,16 @@ struct HeaderCell: View {
         VStack {
            
             HStack {
-                
-                URLImage(URL(string: headerCellViewModel.post.avatar)!,
-                         content: {
-                            $0.image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .clipShape(Circle())
-                         }).frame(width: 35, height: 35)
+                NavigationLink(destination: self.headerCellViewModel.user != nil ? AnyView(UserProfileView(user: self.headerCellViewModel.user)) : AnyView(HomeView())) {
+                    URLImage(URL(string: headerCellViewModel.post.avatar)!,
+                             content: {
+                                $0.image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipShape(Circle())
+                             }).frame(width: 35, height: 35)
+                    
+                }.disabled(self.headerCellViewModel.user == nil && self.isProfileView)
                 
                 VStack(alignment: .leading) {
                     Text(headerCellViewModel.post.username).font(.subheadline).bold()
@@ -130,6 +136,7 @@ struct HeaderCell: View {
         .sheet(isPresented: $done, content: {
             DoneToggle(post: self.headerCellViewModel.post)
         })
+
     
     }
     

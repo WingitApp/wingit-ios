@@ -15,6 +15,8 @@ class HomeViewModel: ObservableObject {
     @Published var posts: [Post] = []
     @Published var gemposts: [gemPost] = []
     @Published var isLoading = false
+    
+    var user: User!
    
     var listener: ListenerRegistration!
 //    init() {

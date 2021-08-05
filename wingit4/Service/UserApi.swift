@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseStorage
 
 class UserApi {
     func searchUsers(text: String, onSuccess: @escaping(_ users: [User]) -> Void) {
@@ -55,6 +56,14 @@ class UserApi {
         
     }
     
+    func updateImage(imageData: Data, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let storageAvatarUserId = Ref.STORAGE_AVATAR_USERID(userId: userId)
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpg"
+        StorageService.updateAvatar(userId: userId, imageData: imageData, metadata: metadata, storageAvatarRef: storageAvatarUserId, onSuccess: onSuccess, onError: onError)
+    }
+    
 //    func updateImage(field : String){
 //        guard let userId = Auth.auth().currentUser?.uid else {
 //            return
@@ -78,6 +87,7 @@ class UserApi {
 //        }
 //
 //    }
+    
 
     
     func updateDetails(field : String){
