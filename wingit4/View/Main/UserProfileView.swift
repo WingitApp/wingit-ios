@@ -35,7 +35,7 @@ struct UserProfileView: View {
                 if selection == .globe {
                     logToAmplitude(event: .viewOthersRecs)
                 } else {
-                    logToAmplitude(event: .viewOthersAsks)
+                    logToAmplitude(event: .viewOthersRequests)
                 }
             }
                 ScrollView {

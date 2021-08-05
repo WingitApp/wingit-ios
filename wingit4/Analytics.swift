@@ -27,15 +27,15 @@ enum AmplitudeEvent: String {
     case viewOwnProfile = "View Own Profile"
     case userLogout = "User Logout"
     
-    // Asks
-    case commentOnAsk = "Comment On Ask"
-    case postAsk = "Post Ask"
-    case markAskAsFulfilled = "Mark Ask As Fulfilled"
+    // Requests
+    case commentOnRequest = "Comment On Request"
+    case postRequest = "Post Request"
+    case markRequestFulfilled = "Mark Request Fulfilled"
     case tapReferButton = "Tap Refer Button"
-    case viewOwnAsks = "View Own Asks"
-    case viewOthersAsks = "View Others Asks"
-    case viewFulfilledAsks = "View Fulfilled Asks"
-    case viewPublicAsksFeed = "View Public Asks Feed"
+    case viewOwnRequests = "View Own Requests"
+    case viewOthersRequests = "View Others Requests"
+    case viewFulfilledRequests = "View Fulfilled Requests"
+    case viewHomeRequestsFeed = "View Home Requests Feed"
     
     // Recs
     case commentOnRec = "Comment On Rec"
@@ -43,7 +43,7 @@ enum AmplitudeEvent: String {
     case postRecError = "Post Rec Error"
     case viewOthersRecs = "View Others Recs"
     case viewOwnRecs = "View Own Recs"
-    case viewPublicRecsFeed = "View Public Recs Feed"
+    case viewHomeRecsFeed = "View Home Recs Feed"
     
     // Communication
     case tapMessageButton = "Tap Message Button"
@@ -73,11 +73,9 @@ enum AmplitudeUserProperty: String {
 }
 
 enum AmplitudeProperty: String {
-    case hasPhoto = "has photo"
+    case attachedPhoto = "attached photo"
     case method = "method"
     case platform = "platform"
-    case tab = "tab"
-    case postType = "post type"
 }
 
 func logToAmplitude(event: AmplitudeEvent) {

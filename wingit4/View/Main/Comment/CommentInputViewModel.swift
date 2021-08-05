@@ -47,7 +47,7 @@ class CommentInputViewModel: ObservableObject {
                 guard let activityDict = try? activityObject.toDictionary() else { return }
                 
                 Ref.FIRESTORE_COLLECTION_ACTIVITY.document(self.gempost.ownerId).collection("feedItems").document(activityId).setData(activityDict)
-                logToAmplitude(event: .commentOnAsk)
+                logToAmplitude(event: .commentOnRequest)
             }
             onSuccess()
         }) { (errorMessage) in

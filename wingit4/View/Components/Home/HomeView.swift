@@ -25,7 +25,15 @@ struct HomeView: View {
                    selection.image.tag(selection)
 
                }
-            }.pickerStyle(SegmentedPickerStyle()).padding(.leading, 20).padding(.trailing, 20)
+            }
+            .pickerStyle(SegmentedPickerStyle()).padding(.leading, 20).padding(.trailing, 20)
+            .onChange(of: selection) { selection in
+                if selection == .globe {
+                    logToAmplitude(event: .viewHomeRecsFeed)
+                } else {
+                    logToAmplitude(event: .viewHomeRequestsFeed)
+                }
+            }
            ScrollView {
            
                

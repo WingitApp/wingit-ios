@@ -33,7 +33,7 @@ struct ProfileView: View {
                     if selection == .globe {
                         logToAmplitude(event: .viewOwnRecs)
                     } else {
-                        logToAmplitude(event: .viewOwnAsks)
+                        logToAmplitude(event: .viewOwnRequests)
                     }
                 }
            ScrollView {

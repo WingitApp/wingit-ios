@@ -24,7 +24,7 @@ struct DoneView: View {
             }
         }
         .onAppear {
-            logToAmplitude(event: .viewFulfilledAsks)
+            logToAmplitude(event: .viewFulfilledRequests)
             self.doneViewModel.loadDonePosts(userId: user.uid)
         }
     }
