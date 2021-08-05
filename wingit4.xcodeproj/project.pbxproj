@@ -112,6 +112,7 @@
 		3BF143E626819E480093488D /* NotificationsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF143E526819E480093488D /* NotificationsApi.swift */; };
 		6531838126B232640006D9E2 /* Amplitude in Frameworks */ = {isa = PBXBuildFile; productRef = 6531838026B232640006D9E2 /* Amplitude */; };
 		6531838326B238AA0006D9E2 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6531838226B238AA0006D9E2 /* Analytics.swift */; };
+		654DA41926BC7BD3002864B8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654DA41826BC7BD2002864B8 /* MainViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -215,6 +216,7 @@
 		3BD866F626A60E0300A49872 /* gemCommentInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gemCommentInput.swift; sourceTree = "<group>"; };
 		3BF143E526819E480093488D /* NotificationsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsApi.swift; sourceTree = "<group>"; };
 		6531838226B238AA0006D9E2 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
+		654DA41826BC7BD2002864B8 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -382,6 +384,7 @@
 		3B7AF06526719EB7003BCCF3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				654DA41826BC7BD2002864B8 /* MainViewModel.swift */,
 				3B7AF02D2671816A003BCCF3 /* User.swift */,
 				3B7AF0962671D98E003BCCF3 /* Post.swift */,
 				3B7AF0B62672C21E003BCCF3 /* Chat.swift */,
@@ -659,6 +662,7 @@
 				3B7AF0832671BC28003BCCF3 /* ChatView.swift in Sources */,
 				3B7AF054267197BA003BCCF3 /* InitialView.swift in Sources */,
 				3B7AF07D2671BB2E003BCCF3 /* UserProfileView.swift in Sources */,
+				654DA41926BC7BD3002864B8 /* MainViewModel.swift in Sources */,
 				3BD604F326B08CA8004FFEEC /* DoneToggle.swift in Sources */,
 				3B7AF0952671D5FA003BCCF3 /* PostApi.swift in Sources */,
 				3B5BDB4B268E9F9A0034B18C /* gemPostModel.swift in Sources */,
