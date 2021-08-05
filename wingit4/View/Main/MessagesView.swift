@@ -50,6 +50,7 @@ struct MessagesView: View {
                        self.messageViewModel.listener.remove()
                    }
                }
+               .onAppear{logToAmplitude(event: .viewMessages)}
     }
 }
 

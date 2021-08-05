@@ -33,6 +33,9 @@ class FollowViewModel: ObservableObject {
     
     
     func follow(userId: String, followingCount_onSuccess: @escaping(_ followingCount: Int) -> Void, followersCount_onSuccess: @escaping(_ followersCount: Int) -> Void ) {
+        logToAmplitude(event: .follow)
+        addToUserProperty(property: .following, value: 1)
+        
         Ref.FIRESTORE_COLLECTION_FOLLOWING_USERID(userId: userId).setData([:]) { (error) in
             if error == nil {
                 self.updateFollowCount(userId: userId, followingCount_onSuccess: followingCount_onSuccess, followersCount_onSuccess: followersCount_onSuccess)
@@ -54,6 +57,9 @@ class FollowViewModel: ObservableObject {
     }
     
     func unfollow(userId: String, followingCount_onSuccess: @escaping(_ followingCount: Int) -> Void, followersCount_onSuccess: @escaping(_ followersCount: Int) -> Void ) {
+        logToAmplitude(event: .unfollow)
+        addToUserProperty(property: .following, value: -1)
+        
         Ref.FIRESTORE_COLLECTION_FOLLOWING_USERID(userId: userId).getDocument { (document, error) in
             if let doc = document, doc.exists {
                 doc.reference.delete()

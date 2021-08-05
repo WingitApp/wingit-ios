@@ -44,7 +44,11 @@ struct UsersView: View {
                    
                    
                     } 
-                } .navigationBarTitle(Text("Search"), displayMode: .inline)
+                }
+                .navigationBarTitle(Text("Search"), displayMode: .inline)
+                .onAppear{
+                    logToAmplitude(event: .searchForFriends)
+                }
     }
 }
 

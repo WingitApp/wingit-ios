@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 import FirebaseAuth
+import Amplitude
 
 class FollowerViewModel : ObservableObject {
     
@@ -19,6 +20,7 @@ class FollowerViewModel : ObservableObject {
         Api.Follow.getFollowers(userId: userId) { (users) in
             self.isLoading = false
             self.users = users
+            setUserProperty(property: .followers, value: users.count)
         }
     }
     
@@ -27,6 +29,7 @@ class FollowerViewModel : ObservableObject {
         Api.Follow.getFollowing(userId: userId) { (users) in
             self.isLoading = false
             self.users = users
+            setUserProperty(property: .following, value: users.count)
         }
     }
 }
