@@ -11,6 +11,7 @@ struct RecButton: View {
     var body: some View {
         
         Button(action: {
+            logToAmplitude(event: .tapReferButton)
             sendMessage()
         }, label: {
             HStack{
