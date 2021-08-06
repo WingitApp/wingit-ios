@@ -283,9 +283,9 @@
 				3B97807E268158B6009CE037 /* wingit4.entitlements */,
 				6531838226B238AA0006D9E2 /* Analytics.swift */,
 				3B75E3BD267153BA002F3108 /* AppDelegate.swift */,
-				3B75E3BF267153BA002F3108 /* SceneDelegate.swift */,
 				3B75E3DC26716074002F3108 /* Constants.swift */,
 				3B7AF02F26718263003BCCF3 /* Extensions.swift */,
+				3B75E3BF267153BA002F3108 /* SceneDelegate.swift */,
 				3B7AF09B2671E1DA003BCCF3 /* Selection.swift */,
 				3B7AF06326719E94003BCCF3 /* View */,
 				3B7AF06726719EDD003BCCF3 /* Session */,
@@ -369,14 +369,15 @@
 			isa = PBXGroup;
 			children = (
 				3B7AF09A2671DD20003BCCF3 /* Auth */,
-				3B7AF0862671CA69003BCCF3 /* UsersViewModel.swift */,
+				3B7AF0C02673EE2D003BCCF3 /* ActivityViewModel.swift */,
 				3B7AF0922671D474003BCCF3 /* CameraViewModel.swift */,
+				3B7AF0B22672C04A003BCCF3 /* ChatViewModel.swift */,
+				3B7AF0BC2672D2DD003BCCF3 /* FollowViewModel.swift */,
+				654DA41826BC7BD2002864B8 /* MainViewModel.swift */,
+				3B7AF0BA2672CACE003BCCF3 /* MessageViewModel.swift */,
 				3B7AF0A42671EA03003BCCF3 /* PostPopularViewModel.swift */,
 				3B7AF0982671DD14003BCCF3 /* ProfileViewModel.swift */,
-				3B7AF0B22672C04A003BCCF3 /* ChatViewModel.swift */,
-				3B7AF0BA2672CACE003BCCF3 /* MessageViewModel.swift */,
-				3B7AF0BC2672D2DD003BCCF3 /* FollowViewModel.swift */,
-				3B7AF0C02673EE2D003BCCF3 /* ActivityViewModel.swift */,
+				3B7AF0862671CA69003BCCF3 /* UsersViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -384,12 +385,11 @@
 		3B7AF06526719EB7003BCCF3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				654DA41826BC7BD2002864B8 /* MainViewModel.swift */,
-				3B7AF02D2671816A003BCCF3 /* User.swift */,
-				3B7AF0962671D98E003BCCF3 /* Post.swift */,
+				3B7AF0BE2673EAFB003BCCF3 /* Activity.swift */,
 				3B7AF0B62672C21E003BCCF3 /* Chat.swift */,
 				3B7AF0B82672C29D003BCCF3 /* InboxMessage.swift */,
-				3B7AF0BE2673EAFB003BCCF3 /* Activity.swift */,
+				3B7AF0962671D98E003BCCF3 /* Post.swift */,
+				3B7AF02D2671816A003BCCF3 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -397,15 +397,15 @@
 		3B7AF06626719EC2003BCCF3 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				3B7AF04226718AF1003BCCF3 /* AuthService.swift */,
-				3B7AF04F26718D42003BCCF3 /* StorageService.swift */,
-				3B7AF0882671CB35003BCCF3 /* Api.swift */,
-				3B7AF08A2671CB68003BCCF3 /* UserApi.swift */,
-				3B7AF0942671D5FA003BCCF3 /* PostApi.swift */,
-				3B7AF0B42672C15A003BCCF3 /* ChatApi.swift */,
 				3B7AF0C22673EE9F003BCCF3 /* ActivityApi.swift */,
-				3BF143E526819E480093488D /* NotificationsApi.swift */,
+				3B7AF0882671CB35003BCCF3 /* Api.swift */,
+				3B7AF04226718AF1003BCCF3 /* AuthService.swift */,
+				3B7AF0B42672C15A003BCCF3 /* ChatApi.swift */,
 				3B5BDB50268F82790034B18C /* fetchUser.swift */,
+				3BF143E526819E480093488D /* NotificationsApi.swift */,
+				3B7AF0942671D5FA003BCCF3 /* PostApi.swift */,
+				3B7AF04F26718D42003BCCF3 /* StorageService.swift */,
+				3B7AF08A2671CB68003BCCF3 /* UserApi.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -449,15 +449,15 @@
 			children = (
 				3BD866F326A0916800A49872 /* Comment */,
 				3B5BDB56268F92760034B18C /* Report */,
-				3B7AF0762671B962003BCCF3 /* NotificationView.swift */,
 				3B7AF0742671A9C2003BCCF3 /* CameraView.swift */,
-				3B7AF0722671A639003BCCF3 /* SearchView.swift */,
-				3B7AF07E2671BBA8003BCCF3 /* UsersView.swift */,
-				3B7AF0802671BBD4003BCCF3 /* MessagesView.swift */,
 				3B7AF0822671BC28003BCCF3 /* ChatView.swift */,
+				3B7AF0802671BBD4003BCCF3 /* MessagesView.swift */,
+				3B7AF0762671B962003BCCF3 /* NotificationView.swift */,
 				3B7AF07A2671B9FB003BCCF3 /* ProfileHeader.swift */,
-				3B7AF07C2671BB2E003BCCF3 /* UserProfileView.swift */,
 				3B7AF0782671B9BF003BCCF3 /* ProfileView.swift */,
+				3B7AF0722671A639003BCCF3 /* SearchView.swift */,
+				3B7AF07C2671BB2E003BCCF3 /* UserProfileView.swift */,
+				3B7AF07E2671BBA8003BCCF3 /* UsersView.swift */,
 				3BD604E526A9E37C004FFEEC /* Done */,
 				3BD866EA269FA30200A49872 /* FollowView */,
 			);
@@ -467,8 +467,8 @@
 		3B7AF09A2671DD20003BCCF3 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				3B7AF04026718A4D003BCCF3 /* SignupViewModel.swift */,
 				3B7AF05126719610003BCCF3 /* SigninViewModel.swift */,
+				3B7AF04026718A4D003BCCF3 /* SignupViewModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -494,11 +494,11 @@
 		3BD604E526A9E37C004FFEEC /* Done */ = {
 			isa = PBXGroup;
 			children = (
+				3BD604EC26AA0E4B004FFEEC /* AsksView.swift */,
+				3BD604EE26AA1CDE004FFEEC /* DoneCell.swift */,
 				3BD604F226B08CA8004FFEEC /* DoneToggle.swift */,
 				3BD604F626B0A9DD004FFEEC /* DoneView.swift */,
 				3BD604F426B0A332004FFEEC /* DoneViewModel.swift */,
-				3BD604EE26AA1CDE004FFEEC /* DoneCell.swift */,
-				3BD604EC26AA0E4B004FFEEC /* AsksView.swift */,
 			);
 			path = Done;
 			sourceTree = "<group>";
@@ -506,9 +506,9 @@
 		3BD866EA269FA30200A49872 /* FollowView */ = {
 			isa = PBXGroup;
 			children = (
+				3BD866EF269FE49000A49872 /* FollowApi.swift */,
 				3BD866ED269FD32E00A49872 /* FollowerViewModel.swift */,
 				3BD866F1269FFD7300A49872 /* FollowerView.swift */,
-				3BD866EF269FE49000A49872 /* FollowApi.swift */,
 			);
 			path = FollowView;
 			sourceTree = "<group>";
