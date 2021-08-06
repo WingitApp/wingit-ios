@@ -150,6 +150,12 @@ class Ref {
     
         static var FIRESTORE_COLLECTION_ACTIVITY = FIRESTORE_ROOT.collection("activity")
 
-        
     
+    
+}
+
+
+struct Keys {
+    // Add API KEY Here
+    static let AMPLITUDE_API_KEY = ""
 }
