@@ -4,6 +4,10 @@
 <dict>
 	<key>AmplitudeKey</key>
 	<string>$(AMPLITUDE_API_KEY)</string>
+	<key>FirebaseDynamicLinksCustomDomains</key>
+	<array>
+		<string>https://wingitapp.co</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -29,6 +33,12 @@
 			<array>
 				<string>com.googleusercontent.apps.165533978443-ee00ts0vuca6evdh4n91pjdth8ah3h6o</string>
 			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Bundle ID</string>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
