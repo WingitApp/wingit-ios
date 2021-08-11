@@ -19,6 +19,12 @@ struct FooterCell: View {
         self.footerCellViewModel.checkPostIsLiked()
     }
     
+    func sharePost(){
+        footerCellViewModel.shareButtonTapped { post in
+            self.footerCellViewModel.post = post
+        }
+    }
+    
     var body: some View {
        
         VStack(alignment: .leading, spacing: 8) {
@@ -51,6 +57,10 @@ struct FooterCell: View {
                 }
                 }
                 Spacer()
+                Button(action: {},
+                       label: {
+                    Image(systemName: "arrowshape.turn.up.right")
+                })
             }.padding(.trailing, 15).padding(.leading, 15)
            
             RecButton().padding(.trailing, 15).padding(.leading, 15)

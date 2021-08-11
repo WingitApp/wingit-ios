@@ -94,6 +94,7 @@
 		3B7AF0C12673EE2E003BCCF3 /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AF0C02673EE2D003BCCF3 /* ActivityViewModel.swift */; };
 		3B7AF0C32673EEA0003BCCF3 /* ActivityApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AF0C22673EE9F003BCCF3 /* ActivityApi.swift */; };
 		3B928C3B269EA383007A34B8 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B928C3A269EA383007A34B8 /* ImageView.swift */; };
+		3B94C37426C311ED00BCCFBA /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = 3B94C37326C311ED00BCCFBA /* FirebaseDynamicLinks */; };
 		3B94FFD52676868200B4CC22 /* BioTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B94FFD42676868200B4CC22 /* BioTextField.swift */; };
 		3B9774252694FE0000F1EF14 /* alertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9774242694FE0000F1EF14 /* alertView.swift */; };
 		3B97807D26813BC1009CE037 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 3B97807C26813BC1009CE037 /* FirebaseMessaging */; };
@@ -222,6 +223,7 @@
 				3B7AF04E26718C2E003BCCF3 /* FirebaseDatabase in Frameworks */,
 				3B7AF04626718C2E003BCCF3 /* FirebaseAnalytics in Frameworks */,
 				3B97807D26813BC1009CE037 /* FirebaseMessaging in Frameworks */,
+				3B94C37426C311ED00BCCFBA /* FirebaseDynamicLinks in Frameworks */,
 				3B7AF04C26718C2E003BCCF3 /* FirebaseFirestore in Frameworks */,
 				3B7AF04A26718C2E003BCCF3 /* FirebaseAuth in Frameworks */,
 				3B7AF0912671D3A3003BCCF3 /* URLImage in Frameworks */,
@@ -545,6 +547,7 @@
 				3B7AF04D26718C2E003BCCF3 /* FirebaseDatabase */,
 				3B7AF0902671D3A3003BCCF3 /* URLImage */,
 				3B97807C26813BC1009CE037 /* FirebaseMessaging */,
+				3B94C37326C311ED00BCCFBA /* FirebaseDynamicLinks */,
 			);
 			productName = wingit4;
 			productReference = 3B75E3BA267153BA002F3108 /* wingit4.app */;
@@ -948,6 +951,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3B7AF08F2671D3A3003BCCF3 /* XCRemoteSwiftPackageReference "url-image" */;
 			productName = URLImage;
+		};
+		3B94C37326C311ED00BCCFBA /* FirebaseDynamicLinks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3B7AF04426718C2E003BCCF3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDynamicLinks;
 		};
 		3B97807C26813BC1009CE037 /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
