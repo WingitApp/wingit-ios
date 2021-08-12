@@ -142,6 +142,22 @@ class Ref {
                   return FIRESTORE_COLLECTION_FOLLOWERS.document(userId).collection("userFollowers")
         }
     
+        static var FIRESTORE_COLLECTION_CONNECTION_REQUESTS = FIRESTORE_ROOT.collection("connectionRequests")
+        static func FIRESTORE_COLLECTION_CONNECTION_USER_SENT_REQUESTS(userId: String) -> CollectionReference {
+            return FIRESTORE_COLLECTION_CONNECTION_REQUESTS.document(userId).collection("userSentRequests")
+        }
+        static func FIRESTORE_COLLECTION_CONNECTION_USER_RECEIVED_REQUESTS(userId: String) -> CollectionReference {
+            return FIRESTORE_COLLECTION_CONNECTION_REQUESTS.document(userId).collection("userReceivedRequests")
+        }
+    
+        static var FIRESTORE_COLLECTION_CONNECTIONS = FIRESTORE_ROOT.collection("connections")
+        static func FIRESTORE_COLLECTION_CONNECTION_TO_USERID(userId: String) -> DocumentReference {
+            return FIRESTORE_COLLECTION_CONNECTIONS.document(Auth.auth().currentUser!.uid).collection("userConnections").document(userId)
+        }
+        static func FIRESTORE_COLLECTION_USER_CONNECTIONS(userId: String) -> CollectionReference {
+               return FIRESTORE_COLLECTION_CONNECTIONS.document(userId).collection("userConnections")
+        }
+    
         static var FIRESTORE_COLLECTION_ACTIVITY = FIRESTORE_ROOT.collection("activity")
 
     
