@@ -12,16 +12,20 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        // Enable sending automatic session events
-        Amplitude.instance().trackingSessionEvents = true
-        // Initialize SDK
-        Amplitude.instance().initializeApiKey(Keys.AMPLITUDE_API_KEY)
-        Amplitude.instance().setUserId(Auth.auth().currentUser?.uid)
-        logToAmplitude(event: .appStart)
+        
+        // Amplitude analytics
+        if let amplitudeKey = Bundle.main.object(forInfoDictionaryKey: "AmplitudeKey") as? String {
+            let amplitude = Amplitude.instance()
+            amplitude.trackingSessionEvents = true
+            amplitude.initializeApiKey(amplitudeKey)
+            if let accountId = Auth.auth().currentUser?.uid {
+                amplitude.setUserId(accountId)
+            }
+            logToAmplitude(event: .appStart)
+        }
         return true
     }
 
@@ -38,6 +42,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
 }

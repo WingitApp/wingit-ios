@@ -153,9 +153,3 @@ class Ref {
     
     
 }
-
-
-struct Keys {
-    // Add API KEY Here
-    static let AMPLITUDE_API_KEY = ""
-}
