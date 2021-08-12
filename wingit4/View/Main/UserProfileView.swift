@@ -142,6 +142,42 @@ struct FollowButton: View {
     }
 }
 
+struct ConnectButton: View {
+
+    @ObservedObject var connectViewModel = ConnectViewModel()
+
+    var user: User
+    @Binding var connections_Count: Int
+    @Binding var isConnected: Bool
+    @Binding var requestPending: Bool
+
+    init(user: User, isConnected: Binding<Bool>, requestPending: Binding<Bool>, connectionsCount: Binding<Int>, followersCount: Binding<Int>) {
+        self.user = user
+        self._connections_Count = connectionsCount
+        self._isConnected = isConnected
+        self._isConnected = requestPending
+
+    }
+    
+    func buttonTapped() {
+        if !self.isConnected && !self.requestPending {
+            connectViewModel.sendConnectRequest(userId: user.uid) {
+            self.requestPending = true
+            } else if self.isConnected {
+            connectViewModel.disconnect(userId: user.uid,  connectionsCount_onSuccess: { (connectionsCount) in
+                             self.connections_Count = connectionsCount
+             })
+            self.isConnected = false
+        }
+    }
+    
+    var body: some View {
+        Button(action: buttonTapped) {
+            Text((self.isConnected) ? "Disconnect" : "Connect").foregroundColor(Color("bw")).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal))
+        }
+    }
+}
+
 struct MessageButton: View {
     var user: User
     var body: some View {
