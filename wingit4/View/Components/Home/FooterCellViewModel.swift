@@ -61,39 +61,7 @@ class FooterCellViewModel: ObservableObject {
             }
          }
     }
-    
-    func shareButtonTapped(onSuccess: @escaping(_ post: Post) -> Void){
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = "www.wingit.co"
-        components.path = "/terms-of-use"
-        let itemIDQueryItem = URLQueryItem(name: "postId", value: post.postId)
-        components.queryItems = [itemIDQueryItem]
+
         
-        guard let linkParameter = components.url else { return }
-        print("I am sharing \(linkParameter.absoluteString)")
-        
-        let domain = "https://www.wingit.co"
-        guard let linkBuilder =
-                DynamicLinkComponents.init(link: linkParameter, domainURIPrefix: domain) else {
-            return
-        }
-        // 1
-        if let myBundleId = Bundle.main.bundleIdentifier {
-          linkBuilder.iOSParameters = DynamicLinkIOSParameters(bundleID: myBundleId)
-        }
-        // 2
-        linkBuilder.iOSParameters?.appStoreID = "1572569005"
-        // 3
-        linkBuilder.socialMetaTagParameters = DynamicLinkMetaTagParameters()
-        linkBuilder.socialMetaTagParameters?.title = "From Wingit"
-        linkBuilder.socialMetaTagParameters?.descriptionText = post.caption
-        linkBuilder.socialMetaTagParameters?.imageURL = post.mediaUrl
-
-        guard let longURL = linkBuilder.url else { return }
-        print("The long dynamic link is \(longURL.absoluteString)")
-
-    }
-
 }
 
