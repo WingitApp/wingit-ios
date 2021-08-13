@@ -17,6 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         return true
     }
+    
+//    func application(_ application: UIApplication, continue userActivity: NSUserActivity,
+//                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+//      let handled = DynamicLinks.dynamicLinks()
+//        .handleUniversalLink(userActivity.webpageURL!) { dynamiclink, error in
+//          // ...
+//        }
+//
+//      return handled
+//    }
+
 
     // MARK: UISceneSession Lifecycle
  
