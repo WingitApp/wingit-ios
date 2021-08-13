@@ -142,19 +142,26 @@ class Ref {
                   return FIRESTORE_COLLECTION_FOLLOWERS.document(userId).collection("userFollowers")
         }
     
-        static var FIRESTORE_COLLECTION_CONNECTION_REQUESTS = FIRESTORE_ROOT.collection("connectionRequests")
-        static func FIRESTORE_COLLECTION_CONNECTION_USER_SENT_REQUESTS(userId: String) -> CollectionReference {
-            return FIRESTORE_COLLECTION_CONNECTION_REQUESTS.document(userId).collection("userSentRequests")
+        static var FIRESTORE_COLLECTION_CONNECT_REQUESTS = FIRESTORE_ROOT.collection("connectRequests")
+        static func FIRESTORE_COLLECTION_CONNECT_REQUESTS_SENT_BY(userId: String) -> CollectionReference {
+            return FIRESTORE_COLLECTION_CONNECT_REQUESTS.document(userId).collection("userSentRequests")
         }
-        static func FIRESTORE_COLLECTION_CONNECTION_USER_RECEIVED_REQUESTS(userId: String) -> CollectionReference {
-            return FIRESTORE_COLLECTION_CONNECTION_REQUESTS.document(userId).collection("userReceivedRequests")
+        static func FIRESTORE_COLLECTION_CONNECT_REQUESTS_INBOX_FOR_USER(userId: String) -> CollectionReference {
+            return FIRESTORE_COLLECTION_CONNECT_REQUESTS.document(userId).collection("userReceivedRequests")
+        }
+        static func FIRESTORE_DOC_CONNECT_REQUEST_SENT(sentByUserId: String, receivedByUserId: String) -> DocumentReference {
+            return FIRESTORE_COLLECTION_CONNECT_REQUESTS.document(sentByUserId).collection("userSentRequests").document(receivedByUserId)
+        }
+    
+        static func FIRESTORE_DOC_CONNECT_REQUEST_RECEIVED(receivedByUserId: String, sentFromUserId: String) -> DocumentReference {
+            return FIRESTORE_COLLECTION_CONNECT_REQUESTS.document(receivedByUserId).collection("userReceivedRequests").document(sentFromUserId)
         }
     
         static var FIRESTORE_COLLECTION_CONNECTIONS = FIRESTORE_ROOT.collection("connections")
-        static func FIRESTORE_COLLECTION_CONNECTION_TO_USERID(userId: String) -> DocumentReference {
+        static func FIRESTORE_DOC_CONNECTION_TO_USER(userId: String) -> DocumentReference {
             return FIRESTORE_COLLECTION_CONNECTIONS.document(Auth.auth().currentUser!.uid).collection("userConnections").document(userId)
         }
-        static func FIRESTORE_COLLECTION_USER_CONNECTIONS(userId: String) -> CollectionReference {
+        static func FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: String) -> CollectionReference {
                return FIRESTORE_COLLECTION_CONNECTIONS.document(userId).collection("userConnections")
         }
     

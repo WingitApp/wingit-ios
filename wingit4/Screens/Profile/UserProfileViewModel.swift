@@ -16,21 +16,21 @@ class UserProfileViewModel: ObservableObject {
     
     @Published var isLoading = false
     @Published var userBlocked = false
-    @Published var followersCountState = 0
-    @Published var followingCountState = 0
+    @Published var connectionsCountState = 0
     @Published var showImagePicker: Bool = false
 
     var splitted: [[Post]] = []
     
-    @Published var isFollowing = false
+    @Published var isConnected = false
+    @Published var hasPendingRequest = false
     
     
-    func checkFollow(userId: String) {
-        Ref.FIRESTORE_COLLECTION_FOLLOWERS_USERID(userId: userId).getDocument { (document, error) in
+    func updateIsConnected(userId: String) {
+        Ref.FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: Auth.auth().currentUser!.uid).document(userId).getDocument { (document, error) in
             if let doc = document, doc.exists {
-                self.isFollowing = true
+                self.isConnected = true
             } else {
-                self.isFollowing = false
+                self.isConnected = false
             }
         }
     }
@@ -47,8 +47,8 @@ class UserProfileViewModel: ObservableObject {
 
 
         }
-        checkFollow(userId: userId)
-        updateFollowCount(userId: userId)
+        updateIsConnected(userId: userId)
+        updateConnectionsCount(userId: userId)
         self.loadDonePosts(userId: userId)
       }
     }
@@ -63,19 +63,13 @@ class UserProfileViewModel: ObservableObject {
     }
  
     
-    func updateFollowCount(userId: String) {
-        Ref.FIRESTORE_COLLECTION_FOLLOWING(userId: userId).getDocuments { (snapshot, error) in
+    func updateConnectionsCount(userId: String) {
+        Ref.FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
             
             if let doc = snapshot?.documents {
-                self.followingCountState = doc.count
+                self.connectionsCountState = doc.count
             }
         }
-        
-        Ref.FIRESTORE_COLLECTION_FOLLOWERS(userId: userId).getDocuments { (snapshot, error) in
-             if let doc = snapshot?.documents {
-                self.followersCountState = doc.count
-             }
-         }
     }
     
     func checkUserBlocked(userId: String, postOwnerId: String?){

@@ -12,11 +12,9 @@ import Firebase
 
 
 class ConnectionsApi {
-    
     func getConnections(userId: String, onSuccess: @escaping(_ users: [User]) -> Void) {
-        Ref.FIRESTORE_COLLECTION_CONNECTIONS(userId: userId).getDocuments{ (snapshot, error) in
+        Ref.FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments{ (snapshot, error) in
             guard let snap = snapshot else {
-           //     print("Error fetching data")
                 return
             }
             var users = [User]()

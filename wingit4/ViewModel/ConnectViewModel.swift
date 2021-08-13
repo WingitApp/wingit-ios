@@ -12,31 +12,40 @@ import FirebaseAuth
 class ConnectViewModel: ObservableObject {
     
     func sendConnectRequest(userId: String) {
+        let currentUserId = Auth.auth().currentUser!.uid
         
-        Ref.FIRESTORE_COLLECTION_CONNECTION_REQUEST_USERID(userId: userId).setData([:]) { (error) in
+        Ref.FIRESTORE_DOC_CONNECT_REQUEST_SENT(sentByUserId: currentUserId, receivedByUserId: userId).setData([:]) { (error) in
             if error == nil {
                 
             }
         }
         
-        Ref.FIRESTORE_COLLECTION_FOLLOWERS_USERID(userId: userId).setData([:]) { (error) in
+        Ref.FIRESTORE_DOC_CONNECT_REQUEST_RECEIVED(receivedByUserId: userId, sentFromUserId: currentUserId).setData([:]) { (error) in
             if error == nil {
-                self.updateFollowCount(userId: userId, followingCount_onSuccess: followingCount_onSuccess, followersCount_onSuccess: followersCount_onSuccess)
+                
             }
         }
         
-       let activityId = Ref.FIRESTORE_COLLECTION_ACTIVITY.document(userId).collection("feedItems").document().documentID
-        let activityObject = Activity(activityId: activityId, type: "follow", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: "", mediaUrl: "", comment: "", gemComment: "", date: Date().timeIntervalSince1970)
-       guard let activityDict = try? activityObject.toDictionary() else { return }
-
-       Ref.FIRESTORE_COLLECTION_ACTIVITY.document(userId).collection("feedItems").document(activityId).setData(activityDict)
+//       let activityId = Ref.FIRESTORE_COLLECTION_ACTIVITY.document(userId).collection("feedItems").document().documentID
+//        let activityObject = Activity(activityId: activityId, type: "follow", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: "", mediaUrl: "", comment: "", gemComment: "", date: Date().timeIntervalSince1970)
+//       guard let activityDict = try? activityObject.toDictionary() else { return }
+//
+//       Ref.FIRESTORE_COLLECTION_ACTIVITY.document(userId).collection("feedItems").document(activityId).setData(activityDict)
         
     }
     
     
     func disconnect(userId: String, connectionsCount_onSuccess: @escaping(_ connectionsCount: Int) -> Void) {
+        let currentUserId = Auth.auth().currentUser!.uid
         
-        Ref.FIRESTORE_COLLECTION_CONNECTIONS_USERID(userId: userId).getDocument { (document, error) in
+        Ref.FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: currentUserId).document(userId).getDocument { (document, error) in
+            if let doc = document, doc.exists {
+                doc.reference.delete()
+                self.updateConnectionsCount(userId: userId, connectionsCount_onSuccess: connectionsCount_onSuccess)
+            }
+        }
+        
+        Ref.FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).document(currentUserId).getDocument { (document, error) in
             if let doc = document, doc.exists {
                 doc.reference.delete()
                 self.updateConnectionsCount(userId: userId, connectionsCount_onSuccess: connectionsCount_onSuccess)
@@ -45,7 +54,7 @@ class ConnectViewModel: ObservableObject {
     }
     
     func updateConnectionsCount(userId: String, connectionsCount_onSuccess: @escaping(_ connectionsCount: Int) -> Void ) {
-        Ref.FIRESTORE_COLLECTION_CONNECTIONS(userId: userId).getDocuments { (snapshot, error) in
+        Ref.FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
             
             if let doc = snapshot?.documents {
                 connectionsCount_onSuccess(doc.count)
