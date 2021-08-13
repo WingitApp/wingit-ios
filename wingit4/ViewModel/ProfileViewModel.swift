@@ -16,23 +16,23 @@ class ProfileViewModel: ObservableObject {
     
     @Published var isLoading = false
     @Published var userBlocked = true
-    @Published var followersCountState = 0
-    @Published var followingCountState = 0
+    @Published var connectionsCountState = 0
     @Published var showImagePicker: Bool = false
    // var user: User!
 
     var splitted: [[Post]] = []
     var gemsplit: [[gemPost]] = []
     
-    @Published var isFollowing = false
+    @Published var isConnected = false
+    @Published var hasPendingRequest = false
     
     
-    func checkFollow(userId: String) {
-        Ref.FIRESTORE_COLLECTION_FOLLOWERS_USERID(userId: userId).getDocument { (document, error) in
+    func updateIsConnected(userId: String) {
+        Ref.FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: Auth.auth().currentUser!.uid).document(userId).getDocument { (document, error) in
             if let doc = document, doc.exists {
-                self.isFollowing = true
+                self.isConnected = true
             } else {
-                self.isFollowing = false
+                self.isConnected = false
             }
         }
     }
@@ -44,8 +44,8 @@ class ProfileViewModel: ObservableObject {
             self.posts = posts
             self.splitted = self.posts.splited(into: 3)
         }
-        checkFollow(userId: userId)
-        updateFollowCount(userId: userId)
+        updateIsConnected(userId: userId)
+        updateConnectionsCount(userId: userId)
         self.loadGemPosts(userId: userId)
         self.loadDonePosts(userId: userId)
     }
@@ -68,19 +68,13 @@ class ProfileViewModel: ObservableObject {
     }
  
     
-    func updateFollowCount(userId: String) {
-        Ref.FIRESTORE_COLLECTION_FOLLOWING(userId: userId).getDocuments { (snapshot, error) in
+    func updateConnectionsCount(userId: String) {
+        Ref.FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
             
             if let doc = snapshot?.documents {
-                self.followingCountState = doc.count
+                self.connectionsCountState = doc.count
             }
         }
-        
-        Ref.FIRESTORE_COLLECTION_FOLLOWERS(userId: userId).getDocuments { (snapshot, error) in
-             if let doc = snapshot?.documents {
-                self.followersCountState = doc.count
-             }
-         }
     }
     
     func checkUserBlocked(userId: String, postOwnerId: String){

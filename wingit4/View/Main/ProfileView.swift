@@ -39,7 +39,7 @@ struct ProfileView: View {
            ScrollView {
                VStack {
             
-                ProfileHeader(user: self.session.userSession, postCount: profileViewModel.posts.count, gemPostCount: profileViewModel.gemposts.count, doneCount: profileViewModel.doneposts.count, followingCount: $profileViewModel.followingCountState, followersCount: $profileViewModel.followersCountState)
+                ProfileHeader(user: self.session.userSession, postCount: profileViewModel.posts.count, gemPostCount: profileViewModel.gemposts.count, doneCount: profileViewModel.doneposts.count, connectionsCount: $profileViewModel.connectionsCountState)
             
                Divider()
                 if !profileViewModel.isLoading {

@@ -40,11 +40,11 @@ struct UserProfileView: View {
             }
                 ScrollView {
                    VStack {
-                    ProfileHeader(user: user, postCount: profileViewModel.posts.count, gemPostCount: profileViewModel.gemposts.count, doneCount: profileViewModel.doneposts.count, followingCount: $profileViewModel.followingCountState, followersCount: $profileViewModel.followersCountState)
+                    ProfileHeader(user: user, postCount: profileViewModel.posts.count, gemPostCount: profileViewModel.gemposts.count, doneCount: profileViewModel.doneposts.count, connectionsCount: $profileViewModel.connectionsCountState)
 
                     HStack(spacing: 15) {
-                if profileViewModel.userBlocked == false {
-                    FollowButton(user: user, isFollowing: $profileViewModel.isFollowing, followingCount: $profileViewModel.followingCountState, followersCount: $profileViewModel.followersCountState)
+                if !profileViewModel.userBlocked {
+                    ConnectButton(user: user, isConnected: $profileViewModel.isConnected, hasPendingRequest: $profileViewModel.hasPendingRequest, connectionsCount: $profileViewModel.connectionsCountState)
                     MessageButton(user: user)
                     }
                     }.padding(.leading, 20).padding(.trailing, 20)
@@ -149,22 +149,22 @@ struct ConnectButton: View {
     var user: User
     @Binding var connections_Count: Int
     @Binding var isConnected: Bool
-    @Binding var requestPending: Bool
+    @Binding var hasPendingRequest: Bool
 
-    init(user: User, isConnected: Binding<Bool>, requestPending: Binding<Bool>, connectionsCount: Binding<Int>, followersCount: Binding<Int>) {
+    init(user: User, isConnected: Binding<Bool>, hasPendingRequest: Binding<Bool>, connectionsCount: Binding<Int>) {
         self.user = user
         self._connections_Count = connectionsCount
         self._isConnected = isConnected
-        self._isConnected = requestPending
+        self._hasPendingRequest = hasPendingRequest
 
     }
     
     func buttonTapped() {
-        if !self.isConnected && !self.requestPending {
-            connectViewModel.sendConnectRequest(userId: user.uid) {
-            self.requestPending = true
+        if !self.isConnected && !self.hasPendingRequest {
+                connectViewModel.sendConnectRequest(userId: user.uid)
+                self.hasPendingRequest = true
             } else if self.isConnected {
-            connectViewModel.disconnect(userId: user.uid,  connectionsCount_onSuccess: { (connectionsCount) in
+                connectViewModel.disconnect(userId: user.uid,  connectionsCount_onSuccess: { (connectionsCount) in
                              self.connections_Count = connectionsCount
              })
             self.isConnected = false
@@ -173,7 +173,7 @@ struct ConnectButton: View {
     
     var body: some View {
         Button(action: buttonTapped) {
-            Text((self.isConnected) ? "Disconnect" : "Connect").foregroundColor(Color("bw")).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal))
+            Text((self.isConnected) ? "Disconnect" : (self.hasPendingRequest) ? "Pending" : "Connect").foregroundColor(Color("bw")).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal))
         }
     }
 }
