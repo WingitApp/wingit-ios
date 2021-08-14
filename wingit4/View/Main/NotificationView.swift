@@ -21,7 +21,7 @@ struct NotificationView: View {
                           HStack {
                             if activity.type == "comment" {
                                 ZStack {
-                                    CommentActivityRow(activity: activity)
+                                    CommentActivityRow(activity: activity, activityViewModel: self.activityViewModel)
                                     NavigationLink(destination: CommentView(postId: activity.postId)) {
                                         EmptyView()
                                     }
@@ -29,7 +29,7 @@ struct NotificationView: View {
                                 
                             } else if activity.type == "gemComment" {
                                 ZStack {
-                                    CommentActivityRow(activity: activity)
+                                    CommentActivityRow(activity: activity, activityViewModel: self.activityViewModel)
                                     NavigationLink(destination: gemCommentView(postId: activity.postId)) {
                                         EmptyView()
                                     }
@@ -75,6 +75,7 @@ struct NotificationView: View {
 
 struct CommentActivityRow: View {
     var activity: Activity
+    var activityViewModel: ActivityViewModel
     var body: some View {
         HStack {
             URLImage(URL(string: activity.userAvatar)!,
@@ -88,6 +89,9 @@ struct CommentActivityRow: View {
             VStack(alignment: .leading, spacing: 5) {
                 Text(activity.username).font(.subheadline).bold()
                 Text(activity.typeDescription).font(.subheadline)
+                if (activity.type == "connectRequest") {
+                    RespondToConnectRequestRow(activityViewModel: self.activityViewModel)
+                }
             }
             Spacer()
             Text(timeAgoSinceDate(Date(timeIntervalSince1970: activity.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
@@ -95,4 +99,17 @@ struct CommentActivityRow: View {
     }
 }
 
-
+struct RespondToConnectRequestRow: View {
+    @ObservedObject var activityViewModel: ActivityViewModel
+    var body: some View {
+        Button(action: activityViewModel.acceptConnectRequest) {
+            HStack {
+                Spacer()
+                Text("Ignore")
+                Spacer()
+                Text("Accept").fontWeight(.bold).foregroundColor(Color.white)
+            }
+            
+        }.modifier(AcceptConnectRequestButtonModifier())
+    }
+}

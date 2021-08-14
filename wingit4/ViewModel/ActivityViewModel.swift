@@ -39,5 +39,29 @@ class ActivityViewModel: ObservableObject {
             self.listener = listener
         }
     }
+    
+    func acceptConnectRequest() {
+        self.activityArray = []
+        
+        Api.Activity.loadActivities(onSuccess: { (activityArray) in
+            if self.activityArray.isEmpty {
+                self.activityArray = activityArray
+            }
+        }, newActivity: { (activity) in
+            if !self.activityArray.isEmpty {
+                self.activityArray.insert(activity, at: 0)
+            }
+        }, deleteActivity: { (activity) in
+            if !self.activityArray.isEmpty {
+                for (index, a) in self.activityArray.enumerated() {
+                    if a.activityId == activity.activityId {
+                        self.activityArray.remove(at: index)
+                    }
+                }
+            }
+        }) { (listener) in
+            self.listener = listener
+        }
+    }
 }
 
