@@ -21,3 +21,8 @@ struct SigninButtonModifier: ViewModifier {
     }
 }
 
+struct AcceptConnectRequestButtonModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content.padding().background(Color(.systemTeal)).cornerRadius(5).shadow(radius: 10, x: 0, y: 10).padding()
+    }
+}

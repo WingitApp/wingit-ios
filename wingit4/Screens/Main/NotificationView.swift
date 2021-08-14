@@ -22,14 +22,22 @@ struct NotificationView: View {
                           HStack {
                             if activity.type == "comment" {
                                 ZStack {
-                                    NotificationEntry(activity: activity)
-                                  //todo
-//                                    NavigationLink(destination: CommentView(postId: activity.postId)) {
-//                                        EmptyView()
-//                                    }
+                                    CommentActivityRow(activity: activity, activityViewModel: self.activityViewModel)
+                                    NavigationLink(destination: CommentView(postId: activity.postId)) {
+                                        EmptyView()
+                                    }
                                 }
                                 
-                            } 
+                            } else if activity.type == "gemComment" {
+                                ZStack {
+                                    CommentActivityRow(activity: activity, activityViewModel: self.activityViewModel)
+                                    NotificationEntry(activity: activity)
+                                    // todo
+                                    // NavigationLink(destination: gemCommentView(postId: activity.postId)) {
+                                    //     EmptyView()
+                                    // }
+                                }
+                            }
                             else {
                                 URLImage(URL(string: activity.userAvatar)!,
                                                              content: {
@@ -65,4 +73,43 @@ struct NotificationView: View {
     }
 }
 
+struct CommentActivityRow: View {
+    var activity: Activity
+    var activityViewModel: ActivityViewModel
+    var body: some View {
+        HStack {
+            URLImage(URL(string: activity.userAvatar)!,
+                                         content: {
+                                             $0.image
+                                                 .resizable()
+                                                 .aspectRatio(contentMode: .fill)
+                                                 .clipShape(Circle())
+                                         }).frame(width: 50, height: 50)
+            
+            VStack(alignment: .leading, spacing: 5) {
+                Text(activity.username).font(.subheadline).bold()
+                Text(activity.typeDescription).font(.subheadline)
+                if (activity.type == "connectRequest") {
+                    RespondToConnectRequestRow(activityViewModel: self.activityViewModel)
+                }
+            }
+            Spacer()
+            Text(timeAgoSinceDate(Date(timeIntervalSince1970: activity.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
+        }
+    }
+}
 
+struct RespondToConnectRequestRow: View {
+    @ObservedObject var activityViewModel: ActivityViewModel
+    var body: some View {
+        Button(action: activityViewModel.acceptConnectRequest) {
+            HStack {
+                Spacer()
+                Text("Ignore")
+                Spacer()
+                Text("Accept").fontWeight(.bold).foregroundColor(Color.white)
+            }
+            
+        }.modifier(AcceptConnectRequestButtonModifier())
+    }
+}

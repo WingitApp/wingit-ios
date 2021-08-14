@@ -26,11 +26,11 @@ class ConnectViewModel: ObservableObject {
             }
         }
         
-//       let activityId = Ref.FIRESTORE_COLLECTION_ACTIVITY.document(userId).collection("feedItems").document().documentID
-//        let activityObject = Activity(activityId: activityId, type: "follow", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: "", mediaUrl: "", comment: "", gemComment: "", date: Date().timeIntervalSince1970)
-//       guard let activityDict = try? activityObject.toDictionary() else { return }
-//
-//       Ref.FIRESTORE_COLLECTION_ACTIVITY.document(userId).collection("feedItems").document(activityId).setData(activityDict)
+       let activityId = Ref.FIRESTORE_COLLECTION_ACTIVITY.document(userId).collection("feedItems").document().documentID
+        let activityObject = Activity(activityId: activityId, type: "connectRequest", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: "", mediaUrl: "", comment: "", gemComment: "", date: Date().timeIntervalSince1970)
+       guard let activityDict = try? activityObject.toDictionary() else { return }
+
+       Ref.FIRESTORE_COLLECTION_ACTIVITY.document(userId).collection("feedItems").document(activityId).setData(activityDict)
         
     }
     
