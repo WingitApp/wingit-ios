@@ -5,6 +5,7 @@
 //  Created by YaeRim Amy Chun on 6/9/21.
 //
 
+import Foundation
 import SwiftUI
 import URLImage
 import Firebase
@@ -95,7 +96,7 @@ struct FooterCell: View {
         
         var components = URLComponents()
         components.scheme = "https"
-        components.host = "www.wingit.co"
+        components.host = "www.ask.wingit.co"
         components.path = "/post"
         
         let itemIDQueryItem = URLQueryItem(name: "postId", value: footerCellViewModel.post.postId)
@@ -104,7 +105,7 @@ struct FooterCell: View {
         guard let linkParameter = components.url else { return }
         print("I am sharing \(linkParameter.absoluteString)")
         
-        let domain = "https://request.wingit.co"
+        let domain = "https://ask.wingit.co"
         guard let linkBuilder =
                 DynamicLinkComponents.init(link: linkParameter, domainURIPrefix: domain) else {
             return
@@ -124,29 +125,28 @@ struct FooterCell: View {
 //          https://pbs.twimg.com/profile_images/\
 //          1381909139345969153/tkgxJB3i_400x400.jpg
 //          """)!
-        
-
-        // TODO 6
+//
+//        // TODO 6
         guard let longURL = linkBuilder.url else { return }
         print("The long dynamic link is \(longURL.absoluteString)")
-   //     shareItem(with: longURL)
-
-        // TODO 7
-        linkBuilder.shorten { url, warnings, error in
-          if let error = error {
-            print("Oh no! Got an error! \(error)")
-            return
-          }
-          if let warnings = warnings {
-            for warning in warnings {
-              print("Warning: \(warning)")
-            }
-          }
-          guard let url = url else { return }
-          print("I have a short url to share! \(url.absoluteString)")
-
-          shareItem(with: url)
-        }
+        shareItem(with: longURL)
+//
+//        // TODO 7
+//        linkBuilder.shorten { url, warnings, error in
+//          if let error = error {
+//            print("Oh no! Got an error! \(error)")
+//            return
+//          }
+//          if let warnings = warnings {
+//            for warning in warnings {
+//              print("FDL Warning: \(warning)")
+//            }
+//          }
+//          guard let url = url else { return }
+//          print("I have a short url to share! \(url.absoluteString)")
+//
+//          shareItem(with: url)
+//        }
     }
 
     // Share dynamic link
