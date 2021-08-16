@@ -25,7 +25,6 @@ HomeView: View {
 //        ZStack{
 //            FollowingCount(followingCount: $profileViewModel.followingCountState)
         NavigationView {
-            ScrollViewReader { proxy in
             VStack(alignment: .leading, spacing: 15) {
             Picker(selection: $selection, label: Text("Grid or Table")) {
                ForEach(Selection.allCases) { selection in
@@ -98,7 +97,7 @@ HomeView: View {
 //                break
 //              }
 //            }
-        }
+        
        }
 
     }
