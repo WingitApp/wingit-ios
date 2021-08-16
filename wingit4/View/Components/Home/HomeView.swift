@@ -16,8 +16,8 @@ HomeView: View {
     @ObservedObject var headerCellViewModel = HeaderCellViewModel()
     @State var selection: Selection = .friends
     
-    @Environment(\.deepLink) var deepLink
-    var posts: [Post] = Bundle.main.decode("post.json")
+   // @Environment(\.deepLink) var deepLink
+   // var posts: [Post] = Bundle.main.decode("post.json")
     @State var cellSelected: Int?
 
     
@@ -80,24 +80,24 @@ HomeView: View {
 
                 }
              }
-            .onChange(of: deepLink) { deepLink in
-              guard let deepLink = deepLink else { return }
-
-              switch deepLink {
-              case .details(let postID):
-                // 2
-                if let index = posts.firstIndex(where: {
-                  $0.postId == postID
-                }) {
-                  // 3
-                  proxy.scrollTo(index, anchor: .bottom)
-                  // 4
-                  cellSelected = index
-                }
-              case .home:
-                break
-              }
-            }
+//            .onChange(of: deepLink) { deepLink in
+//              guard let deepLink = deepLink else { return }
+//
+//              switch deepLink {
+//              case .details(let postID):
+//                // 2
+//                if let index = posts.firstIndex(where: {
+//                  $0.postId == postID
+//                }) {
+//                  // 3
+//                  proxy.scrollTo(index, anchor: .bottom)
+//                  // 4
+//                  cellSelected = index
+//                }
+//              case .home:
+//                break
+//              }
+//            }
         }
        }
 
