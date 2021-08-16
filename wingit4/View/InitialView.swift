@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import Firebase
 
 struct InitialView: View {
     
@@ -26,6 +27,7 @@ struct InitialView: View {
             }
 
         }.onAppear(perform: listen)
+       
       //  .environment(\.colorScheme, .dark)
     }
 }
