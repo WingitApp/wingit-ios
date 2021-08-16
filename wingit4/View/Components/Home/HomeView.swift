@@ -8,17 +8,24 @@
 import SwiftUI
 import FirebaseAuth
 
-struct HomeView: View {
+struct
+HomeView: View {
     
     @ObservedObject var homeViewModel = HomeViewModel()
     //@ObservedObject var profileViewModel = ProfileViewModel()
     @ObservedObject var headerCellViewModel = HeaderCellViewModel()
     @State var selection: Selection = .friends
     
+    @Environment(\.deepLink) var deepLink
+    var posts: [Post] = Bundle.main.decode("post.json")
+    @State var cellSelected: Int?
+
+    
     var body: some View {
 //        ZStack{
 //            FollowingCount(followingCount: $profileViewModel.followingCountState)
         NavigationView {
+            ScrollViewReader { proxy in
             VStack(alignment: .leading, spacing: 15) {
             Picker(selection: $selection, label: Text("Grid or Table")) {
                ForEach(Selection.allCases) { selection in
@@ -26,7 +33,8 @@ struct HomeView: View {
 
                }
             }.pickerStyle(SegmentedPickerStyle()).padding(.leading, 20).padding(.trailing, 20)
-           ScrollView {
+
+            ScrollView {
            
                
             if !homeViewModel.isLoading {
@@ -72,6 +80,25 @@ struct HomeView: View {
 
                 }
              }
+            .onChange(of: deepLink) { deepLink in
+              guard let deepLink = deepLink else { return }
+
+              switch deepLink {
+              case .details(let postID):
+                // 2
+                if let index = posts.firstIndex(where: {
+                  $0.postId == postID
+                }) {
+                  // 3
+                  proxy.scrollTo(index, anchor: .bottom)
+                  // 4
+                  cellSelected = index
+                }
+              case .home:
+                break
+              }
+            }
+        }
        }
 
     }
