@@ -29,10 +29,15 @@ let LINK_TERMS_OF_SERVICE = Link("Terms of Service", destination: URL(string: "h
 let LINK_PRIVACY_POLICY = Link("Privacy Policy", destination: URL(string: "https://www.wingitapp.co/policy")!)
 let TEXT_SIGNUP_PASSWORD_REQUIRED = "At least 8 characters required"
 
-
 let IMAGE_LOGO = "logo"
 let IMAGE_USER_PLACEHOLDER = "user-placeholder"
 let IMAGE_PHOTO = "camera.viewfinder"
+
+//DeepLinks
+let APPSTOREID = "1572569005"
+let LOGO_URL = """
+                  https://firebasestorage.googleapis.com/v0/b/wingitapp-1fe28.appspot.com/o/Frame%203.png?alt=media&token=a4d069bd-3163-42d9-8981-c1cf046eacf3
+                  """
 
 class Ref {
     // Storage

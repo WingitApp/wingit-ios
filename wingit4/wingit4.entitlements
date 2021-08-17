@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:wingask.page.link</string>
+		<string>applinks:ask.wingitapp.co</string>
 	</array>
 </dict>
 </plist>

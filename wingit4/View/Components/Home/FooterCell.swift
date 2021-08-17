@@ -105,7 +105,7 @@ struct FooterCell: View {
         guard let linkParameter = components.url else { return }
         print("I am sharing \(linkParameter.absoluteString)")
 //
-        let domain = "https://wingask.page.link"
+        let domain = "https://ask.wingitapp.co"
         guard let linkBuilder =
                 DynamicLinkComponents.init(link: linkParameter, domainURIPrefix: domain) else {
             return
@@ -115,17 +115,14 @@ struct FooterCell: View {
           linkBuilder.iOSParameters = DynamicLinkIOSParameters(bundleID: myBundleId)
         }
         // 2
-        linkBuilder.iOSParameters?.appStoreID = "1572569005"
+        linkBuilder.iOSParameters?.appStoreID = APPSTOREID
         // 3
         linkBuilder.socialMetaTagParameters =  DynamicLinkSocialMetaTagParameters()
         linkBuilder.socialMetaTagParameters?.title = "\(footerCellViewModel.post.username) requested on Wingit"
         linkBuilder.socialMetaTagParameters?.descriptionText = footerCellViewModel.post.caption
-////image of profile pic? or post? (still thinking...)
-////        linkBuilder.socialMetaTagParameters?.imageURL = URL(string: """
-////          https://pbs.twimg.com/profile_images/\
-////          1381909139345969153/tkgxJB3i_400x400.jpg
-////          """)!
-////
+       // image of profile pic? or post? (still thinking...)
+                linkBuilder.socialMetaTagParameters?.imageURL = URL(string: LOGO_URL)!
+
 //        // TODO 6
         guard let longURL = linkBuilder.url else { return }
         print("The long dynamic link is \(longURL.absoluteString)")
