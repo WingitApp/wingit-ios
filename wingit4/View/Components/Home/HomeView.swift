@@ -41,11 +41,7 @@ HomeView: View {
                     ForEach(self.homeViewModel.posts, id: \.postId) { post in
                           
                         VStack {
-                            HeaderCell(
-                                post: post,
-                                isProfileView: false
-                            )
-                              FooterCell(post: post)
+                            CardView()
                           }.padding(.top, 10)
                       }
                 } else {
