@@ -10,12 +10,17 @@ import SwiftUI
 struct CardView: View {
     @ObservedObject var headerCellViewModel = HeaderCellViewModel()
     
+    init(post: Post) {
+        self.headerCellViewModel.post = post
+    }
+    
     var body: some View {
         VStack{
             HeaderCell(post: headerCellViewModel.post)
             TextCell(post: headerCellViewModel.post)
             FooterCell(post: headerCellViewModel.post)
-        }
+        }.background(Color(.white)).cornerRadius(20)
+
     }
 }
 
