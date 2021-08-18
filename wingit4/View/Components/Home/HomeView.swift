@@ -25,33 +25,21 @@ HomeView: View {
 //        ZStack{
 //            FollowingCount(followingCount: $profileViewModel.followingCountState)
         NavigationView {
+            ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)){
             VStack(alignment: .leading, spacing: 15) {
-            Picker(selection: $selection, label: Text("Grid or Table")) {
-               ForEach(Selection.allCases) { selection in
-                   selection.image.tag(selection)
-
-               }
-            }.pickerStyle(SegmentedPickerStyle()).padding(.leading, 20).padding(.trailing, 20)
-
+        
             ScrollView {
            
                
             if !homeViewModel.isLoading {
-                if selection == .friends {
+               
                     ForEach(self.homeViewModel.posts, id: \.postId) { post in
                           
                         VStack {
-                            CardView()
-                          }.padding(.top, 10)
+                            CardView(post: post)
+                          }
                       }
-                } else {
-                    ForEach(self.homeViewModel.gemposts, id: \.postId) { gempost in
-                        
-                        VStack {
-                            gemHeader(gempost: gempost, isProfileView: false)
-                          }.padding(.top, 10)
-                      }
-                }
+               
             }
            }
            }.padding(.top, 10)
@@ -78,27 +66,10 @@ HomeView: View {
 
                 }
              }
-//            .onChange(of: deepLink) { deepLink in
-//              guard let deepLink = deepLink else { return }
-//
-//              switch deepLink {
-//              case .details(let postID):
-//                // 2
-//                if let index = posts.firstIndex(where: {
-//                  $0.postId == postID
-//                }) {
-//                  // 3
-//                  proxy.scrollTo(index, anchor: .bottom)
-//                  // 4
-//                  cellSelected = index
-//                }
-//              case .home:
-//                break
-//              }
-//            }
+        } .background(Color.black.opacity(0.03)
+                        .ignoresSafeArea(.all, edges: .all))
         
-       }
-
+        }
     }
 }
 

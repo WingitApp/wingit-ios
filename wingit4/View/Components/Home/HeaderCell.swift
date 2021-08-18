@@ -102,7 +102,7 @@ struct HeaderCell: View {
                
                 }.padding(.trailing, 15).padding(.leading, 15)
           
-        }
+        }.padding(.top, 10)
 //        .background(Color(.white)).cornerRadius(5).shadow(color: COLOR_LIGHT_GRAY, radius: 5, x: 0, y: 0)
          .sheet(isPresented: $reportScreen, content: {
             ReportInput(post: self.headerCellViewModel.post, postId: self.headerCellViewModel.post.postId)

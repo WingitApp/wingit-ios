@@ -71,12 +71,9 @@ struct FooterCell: View {
                     Image(systemName: "arrowshape.turn.up.right")
                 })
             }.padding(.trailing, 15).padding(.leading, 15)
-           
-            RecButton().padding(.trailing, 15).padding(.leading, 15)
             
-            Divider()
           
-        }
+        }.padding(.bottom, 10).padding(.top, 5)
         .sheet(isPresented: $showComments, content: {
             CommentView(post: self.footerCellViewModel.post)
         })
