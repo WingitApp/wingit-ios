@@ -158,8 +158,8 @@ class Ref {
         }
     
         static var FIRESTORE_COLLECTION_CONNECTIONS = FIRESTORE_ROOT.collection("connections")
-        static func FIRESTORE_DOC_CONNECTION_TO_USER(userId: String) -> DocumentReference {
-            return FIRESTORE_COLLECTION_CONNECTIONS.document(Auth.auth().currentUser!.uid).collection("userConnections").document(userId)
+        static func FIRESTORE_DOC_CONNECTION_BETWEEN_USERS(user1Id: String, user2Id: String) -> DocumentReference {
+            return FIRESTORE_COLLECTION_CONNECTIONS.document(user1Id).collection("userConnections").document(user2Id)
         }
         static func FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: String) -> CollectionReference {
                return FIRESTORE_COLLECTION_CONNECTIONS.document(userId).collection("userConnections")

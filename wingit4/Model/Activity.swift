@@ -31,6 +31,8 @@ struct Activity: Encodable, Decodable {
             output = "liked your post"
         case "connectRequest":
             output = "wants to connect"
+        case "connectRequestAccepted":
+            output = "accepted your connect request"
         default:
             output = ""
         }

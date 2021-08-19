@@ -37,8 +37,12 @@ struct NotificationView: View {
                                     //     EmptyView()
                                     // }
                                 }
-                            }
-                            else {
+                            } else if activity.type == "connectRequest" {
+                                ZStack {
+                                    CommentActivityRow(activity: activity, activityViewModel: self.activityViewModel)
+                                    RespondToConnectRequestRow(activity: activity, activityViewModel: self.activityViewModel)
+                                }
+                            } else {
                                 URLImage(URL(string: activity.userAvatar)!,
                                                              content: {
                                                                  $0.image
@@ -89,9 +93,6 @@ struct CommentActivityRow: View {
             VStack(alignment: .leading, spacing: 5) {
                 Text(activity.username).font(.subheadline).bold()
                 Text(activity.typeDescription).font(.subheadline)
-                if (activity.type == "connectRequest") {
-                    RespondToConnectRequestRow(activityViewModel: self.activityViewModel)
-                }
             }
             Spacer()
             Text(timeAgoSinceDate(Date(timeIntervalSince1970: activity.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
@@ -100,16 +101,18 @@ struct CommentActivityRow: View {
 }
 
 struct RespondToConnectRequestRow: View {
+    var activity: Activity
     @ObservedObject var activityViewModel: ActivityViewModel
     var body: some View {
-        Button(action: activityViewModel.acceptConnectRequest) {
-            HStack {
-                Spacer()
-                Text("Ignore")
-                Spacer()
-                Text("Accept").fontWeight(.bold).foregroundColor(Color.white)
+        HStack {
+                Button(action: { activityViewModel.ignoreConnectRequest(fromUserId: activity.userId) }) {
+                    Spacer()
+                    Text("Ignore").fontWeight(.bold).foregroundColor(Color.gray)
+                }
+                Button(action: { activityViewModel.acceptConnectRequest(fromUserId: activity.userId) }) {
+                    Spacer()
+                    Text("Accept").fontWeight(.bold).foregroundColor(Color.white)
+                }.modifier(AcceptConnectRequestButtonModifier())
             }
-            
-        }.modifier(AcceptConnectRequestButtonModifier())
     }
 }
