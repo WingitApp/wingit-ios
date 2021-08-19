@@ -22,27 +22,27 @@ struct MainView: View {
             NavigationTab(
                 tag: 0,
                 icon: "house.fill",
-                view: AnyView(HomeView())
+                screen: AnyView(HomeView())
             )
             NavigationTab(
                 tag: 1,
                 icon: "magnifyingglass",
-                view: AnyView(SearchView())
+                screen: AnyView(SearchView())
             )
             NavigationTab(
                 tag: 2,
                 icon: IMAGE_PHOTO,
-                view: AnyView(CameraView())
+                screen: AnyView(CameraView())
             )
             NavigationTab(
                 tag: 3,
                 icon: "bell",
-                view: AnyView(NotificationView())
+                screen: AnyView(NotificationView())
             )
             NavigationTab(
                 tag: 4,
                 icon: "person.fill",
-                view: AnyView(ProfileView())
+                screen: AnyView(ProfileView())
             )
          }.accentColor(Color(.systemTeal))
     }

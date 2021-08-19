@@ -10,6 +10,8 @@ import FirebaseAuth
 import Firebase
 import FirebaseStorage
 import SwiftUI
+import Amplitude
+
 
 class SigninViewModel: ObservableObject {
     
@@ -21,13 +23,41 @@ class SigninViewModel: ObservableObject {
     @Published var showAlert: Bool = false
     
     
-    func signin(email: String, password: String, completed: @escaping(_ user: User) -> Void,  onError: @escaping(_ errorMessage: String) -> Void) {
-        if !email.isEmpty && !password.isEmpty {
-            AuthService.signInUser(email: email, password: password, onSuccess: completed, onError: onError)
+    func signin() -> Void {
+        logToAmplitude(event: .loginAttempt)
+        
+        if self.isFormComplete() {
+            AuthService.signInUser(
+                email: email,
+                password: password,
+                onSuccess: { (user) in
+                    Amplitude.instance().setUserId(user.uid)
+                    logToAmplitude(
+                        event: .userLogin,
+                        properties: [.method: "email", .platform: "ios"]
+                    )
+                    self.resetFields()
+                },
+                onError: { (errorMessage) in
+                    self.showAlert = true
+                    self.errorString = errorMessage
+                    self.resetFields()
+                }
+            )
         } else {
             showAlert = true
             errorString = "Please fill in all fields"
         }
        
+    }
+    
+    
+    func isFormComplete() -> Bool {
+        return !email.isEmpty && !password.isEmpty
+    }
+    
+    func resetFields() {
+        self.email = ""
+        self.password = ""
     }
 }

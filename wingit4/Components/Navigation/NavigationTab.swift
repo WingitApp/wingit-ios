@@ -10,10 +10,10 @@ import SwiftUI
 struct NavigationTab: View {
     var tag: Int
     var icon: String
-    var view: AnyView
+    var screen: AnyView
     
     var body: some View {
-        view
+        screen
             .tabItem({Image(systemName: icon)})
             .tag(tag)
     }
