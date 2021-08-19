@@ -41,5 +41,8 @@ struct ConnectionsView: View {
            
             }
         }.navigationBarTitle(Text("Connections"), displayMode: .inline)
+        .onAppear {
+            self.connectionsViewModel.loadConnections(userId: self.user.uid)
+        }
     }
 }
