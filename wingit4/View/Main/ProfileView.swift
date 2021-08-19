@@ -56,6 +56,8 @@ struct ProfileView: View {
                 }.padding(.top, 5)
                 }
         }.padding(.top, 10)
+        .background(Color.black.opacity(0.03)
+        .ignoresSafeArea(.all, edges: .all))
          .navigationBarTitle(Text("Profile"), displayMode: .inline).navigationBarItems(leading:
                     Button(action: {}) {
                         NavigationLink(destination: UsersView()) {
