@@ -30,21 +30,20 @@ class HeaderCellViewModel : ObservableObject {
     
     func blockUser(){
         Api.User.blockUser(userId: uid, postOwnerId: post.ownerId)
-        Ref.FIRESTORE_COLLECTION_FOLLOWING_USERID(userId: post.ownerId).getDocument { (document, error) in
+        Ref.FIRESTORE_DOC_CONNECTION_BETWEEN_USERS(user1Id: uid, user2Id: post.ownerId).getDocument { (document, error) in
             if let doc = document, doc.exists {
                 doc.reference.delete()
-              
             }
         }
         
-        Ref.FIRESTORE_COLLECTION_FOLLOWERS_USERID(userId: post.ownerId).getDocument { (document, error) in
+        Ref.FIRESTORE_DOC_CONNECTION_BETWEEN_USERS(user1Id: post.ownerId, user2Id: uid).getDocument { (document, error) in
               if let doc = document, doc.exists {
                   doc.reference.delete()
                  
               }
           }
         
-        Ref.FIRESTORE_COLLECTION_ACTIVITY.document(post.ownerId).collection("feedItems").whereField("type", isEqualTo: "follow").whereField("userId", isEqualTo: Auth.auth().currentUser!.uid).getDocuments { (snapshot, error) in
+        Ref.FIRESTORE_COLLECTION_ACTIVITY.document(post.ownerId).collection("feedItems").whereField("type", isEqualTo: "connectRequestAccepted").whereField("userId", isEqualTo: Auth.auth().currentUser!.uid).getDocuments { (snapshot, error) in
                if let doc = snapshot?.documents {
                    if let data = doc.first, data.exists {
                        data.reference.delete()
@@ -52,34 +51,4 @@ class HeaderCellViewModel : ObservableObject {
                }
            }
     }
-    
-//    func blockUserdone(){
-//        Api.User.blockUser(userId: uid, postOwnerId: donepost.ownerId)
-//        Ref.FIRESTORE_COLLECTION_FOLLOWING_USERID(userId: donepost.ownerId).getDocument { (document, error) in
-//            if let doc = document, doc.exists {
-//                doc.reference.delete()
-//              
-//            }
-//        }
-//        
-//        Ref.FIRESTORE_COLLECTION_FOLLOWERS_USERID(userId: donepost.ownerId).getDocument { (document, error) in
-//              if let doc = document, doc.exists {
-//                  doc.reference.delete()
-//                 
-//              }
-//          }
-//        
-//        Ref.FIRESTORE_COLLECTION_ACTIVITY.document(donepost.ownerId).collection("feedItems").whereField("type", isEqualTo: "follow").whereField("userId", isEqualTo: Auth.auth().currentUser!.uid).getDocuments { (snapshot, error) in
-//               if let doc = snapshot?.documents {
-//                   if let data = doc.first, data.exists {
-//                       data.reference.delete()
-//                   }
-//               }
-//           }
-//    }
-
-    
-    
-
 }
-

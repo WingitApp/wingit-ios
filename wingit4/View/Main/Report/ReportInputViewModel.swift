@@ -14,9 +14,6 @@ class ReportInputViewModel: ObservableObject {
     var post: Post!
     var gempost: gemPost!
    // var donepost: DonePost!
-    @Published var followersCountState = 0
-    @Published var followingCountState = 0
-    @Published var isFollowing = false
     
     func addReports(text: String, onSuccess: @escaping() -> Void) {
         guard let currentUserId = Auth.auth().currentUser?.uid else { return }

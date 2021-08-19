@@ -28,8 +28,6 @@ struct Activity: Encodable, Decodable {
             output = "replied: \(comment)"
         case "gemComment":
             output = "commented: \(gemComment)"
-        case "follow":
-            output = "is following you"
         case "like":
             output = "liked your post"
         case "connectRequest":

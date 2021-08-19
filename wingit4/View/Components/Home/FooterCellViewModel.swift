@@ -30,7 +30,7 @@ class FooterCellViewModel: ObservableObject {
                                                                              "likeCount":  post.likeCount])
         Ref.FIRESTORE_TIMELINE_DOCUMENT_USERID(userId: post.ownerId).collection("timelinePosts").document(post.postId).updateData(["likes.\(uid)" : true,
                                                                                                                                    "likeCount":  post.likeCount])
-        // find followers and update posts in their timeline using Cloud Function
+        // find connections and update posts in their timeline using Cloud Function
         if Auth.auth().currentUser!.uid != post.ownerId {
             let activityId = Ref.FIRESTORE_COLLECTION_ACTIVITY.document(post.ownerId).collection("feedItems").document().documentID
             let activityObject = Activity(activityId: activityId, type: "like", username: Auth.auth().currentUser!.displayName!, userId: uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: post.postId, mediaUrl: post.mediaUrl, comment: "", gemComment: "", date: Date().timeIntervalSince1970)

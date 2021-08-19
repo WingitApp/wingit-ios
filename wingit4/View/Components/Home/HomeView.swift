@@ -16,8 +16,6 @@ struct HomeView: View {
     @State var selection: Selection = .friends
     
     var body: some View {
-//        ZStack{
-//            FollowingCount(followingCount: $profileViewModel.followingCountState)
         NavigationView {
             VStack(alignment: .leading, spacing: 15) {
             Picker(selection: $selection, label: Text("Grid or Table")) {
@@ -63,7 +61,6 @@ struct HomeView: View {
            .navigationBarTitle(Text("WingIt!"), displayMode: .inline).onAppear {
                  self.homeViewModel.loadTimeline()
                  self.homeViewModel.loadGemTimeline()
-               //  self.profileViewModel.updateFollowCount(userId: Auth.auth().currentUser!.uid)
            }.navigationBarItems(leading:
                                     Button(action: {}) {
                                         

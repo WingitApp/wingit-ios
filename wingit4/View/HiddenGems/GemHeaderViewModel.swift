@@ -28,21 +28,20 @@ class GemHeaderViewModel : ObservableObject {
     
     func blockUser(){
         Api.User.blockUser(userId: uid, postOwnerId: gempost.ownerId)
-        Ref.FIRESTORE_COLLECTION_FOLLOWING_USERID(userId: gempost.ownerId).getDocument { (document, error) in
+        Ref.FIRESTORE_DOC_CONNECTION_BETWEEN_USERS(user1Id: uid, user2Id: gempost.ownerId).getDocument { (document, error) in
             if let doc = document, doc.exists {
                 doc.reference.delete()
-              
             }
         }
         
-        Ref.FIRESTORE_COLLECTION_FOLLOWERS_USERID(userId: gempost.ownerId).getDocument { (document, error) in
+        Ref.FIRESTORE_DOC_CONNECTION_BETWEEN_USERS(user1Id: gempost.ownerId, user2Id: uid).getDocument { (document, error) in
               if let doc = document, doc.exists {
                   doc.reference.delete()
                  
               }
           }
         
-        Ref.FIRESTORE_COLLECTION_ACTIVITY.document(gempost.ownerId).collection("feedItems").whereField("type", isEqualTo: "follow").whereField("userId", isEqualTo: Auth.auth().currentUser!.uid).getDocuments { (snapshot, error) in
+        Ref.FIRESTORE_COLLECTION_ACTIVITY.document(gempost.ownerId).collection("feedItems").whereField("type", isEqualTo: "connectRequestAccepted").whereField("userId", isEqualTo: Auth.auth().currentUser!.uid).getDocuments { (snapshot, error) in
                if let doc = snapshot?.documents {
                    if let data = doc.first, data.exists {
                        data.reference.delete()

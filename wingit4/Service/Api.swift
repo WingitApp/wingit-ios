@@ -15,6 +15,5 @@ class Api {
     static var Activity = ActivityApi()
     static var gemPost = gemPostApi()
     static var Report = ReportApi()
-    static var Follow = FollowApi()
     static var Connections = ConnectionsApi()
 }

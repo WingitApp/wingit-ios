@@ -50,12 +50,8 @@ enum AmplitudeEvent: String {
     case viewMessages = "View Messages"
     
     // Social
-    case follow = "Follow"
-    case unfollow = "Unfollow"
     case upvote = "Upvote"
     case searchForFriends = "Search For Friends"
-    case viewFollowersList = "View Followers List"
-    case viewFollowingList = "View Following List"
     case viewOtherProfile = "View Other Profile"
     
     // Miscellaneous
@@ -64,8 +60,6 @@ enum AmplitudeEvent: String {
 
 enum AmplitudeUserProperty: String {
     case email = "Email"
-    case followers = "Followers"
-    case following = "Following"
     case signupDate = "Signup date"
     case signupMethod = "Signup method"
     case signupPlatform = "Signup platform"
@@ -114,9 +108,6 @@ func setUserPropertiesOnAccountCreation(userID: String, username: String, email:
             .setOnce(AmplitudeUserProperty.username.rawValue, value: NSString(string: username))
             .setOnce(AmplitudeUserProperty.email.rawValue, value: NSString(string: email))
             .setOnce(AmplitudeUserProperty.username.rawValue, value: NSString(string: username))
-            .setOnce(AmplitudeUserProperty.signupMethod.rawValue, value: NSString(string: signupMethod))
-            .set(AmplitudeUserProperty.followers.rawValue, value: NSNumber(value: 0))
-            .set(AmplitudeUserProperty.following.rawValue, value: NSNumber(value: 0)) else { return }
+            .setOnce(AmplitudeUserProperty.signupMethod.rawValue, value: NSString(string: signupMethod)) else { return }
     amplitude.identify(identify)
 }
-

@@ -132,22 +132,6 @@ class Ref {
            return FIRESTORE_COLLECTION_INBOX_MESSAGES.document(senderId).collection("inboxMessages").document(recipientId)
         }
     
-        static var FIRESTORE_COLLECTION_FOLLOWING = FIRESTORE_ROOT.collection("following")
-        static func FIRESTORE_COLLECTION_FOLLOWING_USERID(userId: String) -> DocumentReference {
-            return FIRESTORE_COLLECTION_FOLLOWING.document(Auth.auth().currentUser!.uid).collection("userFollowing").document(userId)
-        }
-        static func FIRESTORE_COLLECTION_FOLLOWING(userId: String) -> CollectionReference {
-               return FIRESTORE_COLLECTION_FOLLOWING.document(userId).collection("userFollowing")
-        }
-    
-        static var FIRESTORE_COLLECTION_FOLLOWERS = FIRESTORE_ROOT.collection("followers")
-        static func FIRESTORE_COLLECTION_FOLLOWERS_USERID(userId: String) -> DocumentReference {
-            return FIRESTORE_COLLECTION_FOLLOWERS.document(userId).collection("userFollowers").document(Auth.auth().currentUser!.uid)
-        }
-        static func FIRESTORE_COLLECTION_FOLLOWERS(userId: String) -> CollectionReference {
-                  return FIRESTORE_COLLECTION_FOLLOWERS.document(userId).collection("userFollowers")
-        }
-    
         static var FIRESTORE_COLLECTION_CONNECT_REQUESTS = FIRESTORE_ROOT.collection("connectRequests")
         static func FIRESTORE_COLLECTION_CONNECT_REQUESTS_SENT_BY(userId: String) -> CollectionReference {
             return FIRESTORE_COLLECTION_CONNECT_REQUESTS.document(userId).collection("userSentRequests")

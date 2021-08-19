@@ -89,7 +89,6 @@
 		3B7AF0B72672C21F003BCCF3 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AF0B62672C21E003BCCF3 /* Chat.swift */; };
 		3B7AF0B92672C29D003BCCF3 /* InboxMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AF0B82672C29D003BCCF3 /* InboxMessage.swift */; };
 		3B7AF0BB2672CACE003BCCF3 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AF0BA2672CACE003BCCF3 /* MessageViewModel.swift */; };
-		3B7AF0BD2672D2DE003BCCF3 /* FollowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AF0BC2672D2DD003BCCF3 /* FollowViewModel.swift */; };
 		3B7AF0BF2673EAFB003BCCF3 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AF0BE2673EAFB003BCCF3 /* Activity.swift */; };
 		3B7AF0C12673EE2E003BCCF3 /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AF0C02673EE2D003BCCF3 /* ActivityViewModel.swift */; };
 		3B7AF0C32673EEA0003BCCF3 /* ActivityApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AF0C22673EE9F003BCCF3 /* ActivityApi.swift */; };
@@ -104,9 +103,6 @@
 		3BD604F326B08CA8004FFEEC /* DoneToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604F226B08CA8004FFEEC /* DoneToggle.swift */; };
 		3BD604F526B0A332004FFEEC /* DoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604F426B0A332004FFEEC /* DoneViewModel.swift */; };
 		3BD604F726B0A9DD004FFEEC /* DoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604F626B0A9DD004FFEEC /* DoneView.swift */; };
-		3BD866EE269FD32E00A49872 /* FollowerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD866ED269FD32E00A49872 /* FollowerViewModel.swift */; };
-		3BD866F0269FE49000A49872 /* FollowApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD866EF269FE49000A49872 /* FollowApi.swift */; };
-		3BD866F2269FFD7300A49872 /* FollowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD866F1269FFD7300A49872 /* FollowerView.swift */; };
 		3BD866F526A60DC500A49872 /* gemCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD866F426A60DC500A49872 /* gemCommentView.swift */; };
 		3BD866F726A60E0300A49872 /* gemCommentInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD866F626A60E0300A49872 /* gemCommentInput.swift */; };
 		3BF143E626819E480093488D /* NotificationsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF143E526819E480093488D /* NotificationsApi.swift */; };
@@ -197,7 +193,6 @@
 		3B7AF0B62672C21E003BCCF3 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		3B7AF0B82672C29D003BCCF3 /* InboxMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxMessage.swift; sourceTree = "<group>"; };
 		3B7AF0BA2672CACE003BCCF3 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
-		3B7AF0BC2672D2DD003BCCF3 /* FollowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowViewModel.swift; sourceTree = "<group>"; };
 		3B7AF0BE2673EAFB003BCCF3 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		3B7AF0C02673EE2D003BCCF3 /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
 		3B7AF0C22673EE9F003BCCF3 /* ActivityApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityApi.swift; sourceTree = "<group>"; };
@@ -212,9 +207,6 @@
 		3BD604F226B08CA8004FFEEC /* DoneToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneToggle.swift; sourceTree = "<group>"; };
 		3BD604F426B0A332004FFEEC /* DoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneViewModel.swift; sourceTree = "<group>"; };
 		3BD604F626B0A9DD004FFEEC /* DoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneView.swift; sourceTree = "<group>"; };
-		3BD866ED269FD32E00A49872 /* FollowerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerViewModel.swift; sourceTree = "<group>"; };
-		3BD866EF269FE49000A49872 /* FollowApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowApi.swift; sourceTree = "<group>"; };
-		3BD866F1269FFD7300A49872 /* FollowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerView.swift; sourceTree = "<group>"; };
 		3BD866F426A60DC500A49872 /* gemCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gemCommentView.swift; sourceTree = "<group>"; };
 		3BD866F626A60E0300A49872 /* gemCommentInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gemCommentInput.swift; sourceTree = "<group>"; };
 		3BF143E526819E480093488D /* NotificationsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsApi.swift; sourceTree = "<group>"; };
@@ -381,7 +373,6 @@
 				3B7AF0C02673EE2D003BCCF3 /* ActivityViewModel.swift */,
 				3B7AF0922671D474003BCCF3 /* CameraViewModel.swift */,
 				3B7AF0B22672C04A003BCCF3 /* ChatViewModel.swift */,
-				3B7AF0BC2672D2DD003BCCF3 /* FollowViewModel.swift */,
 				654DA41826BC7BD2002864B8 /* MainViewModel.swift */,
 				3B7AF0BA2672CACE003BCCF3 /* MessageViewModel.swift */,
 				3B7AF0A42671EA03003BCCF3 /* PostPopularViewModel.swift */,
@@ -468,7 +459,7 @@
 				3B7AF07C2671BB2E003BCCF3 /* UserProfileView.swift */,
 				3B7AF07E2671BBA8003BCCF3 /* UsersView.swift */,
 				3BD604E526A9E37C004FFEEC /* Done */,
-				3BD866EA269FA30200A49872 /* FollowView */,
+				3BD866EA269FA30200A49872 /* Connections */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -512,17 +503,14 @@
 			path = Done;
 			sourceTree = "<group>";
 		};
-		3BD866EA269FA30200A49872 /* FollowView */ = {
+		3BD866EA269FA30200A49872 /* Connections */ = {
 			isa = PBXGroup;
 			children = (
-				3BD866EF269FE49000A49872 /* FollowApi.swift */,
 				6568193B26C2EDA400B27DC4 /* ConnectionsApi.swift */,
-				3BD866ED269FD32E00A49872 /* FollowerViewModel.swift */,
 				6568193D26C2EDD400B27DC4 /* ConnectionsViewModel.swift */,
-				3BD866F1269FFD7300A49872 /* FollowerView.swift */,
 				6568193F26C2EDEE00B27DC4 /* ConnectionsView.swift */,
 			);
-			path = FollowView;
+			path = Connections;
 			sourceTree = "<group>";
 		};
 		3BD866F326A0916800A49872 /* Comment */ = {
@@ -705,7 +693,6 @@
 				3BD604E226A7D210004FFEEC /* GemHeaderViewModel.swift in Sources */,
 				3B7AF0972671D98E003BCCF3 /* Post.swift in Sources */,
 				3B7AF0BB2672CACE003BCCF3 /* MessageViewModel.swift in Sources */,
-				3B7AF0BD2672D2DE003BCCF3 /* FollowViewModel.swift in Sources */,
 				3B7AF0A926728E74003BCCF3 /* FooterCellViewModel.swift in Sources */,
 				3B7AF0B52672C15A003BCCF3 /* ChatApi.swift in Sources */,
 				3B7AF0BF2673EAFB003BCCF3 /* Activity.swift in Sources */,
@@ -715,7 +702,6 @@
 				3B7AF07B2671B9FB003BCCF3 /* ProfileHeader.swift in Sources */,
 				3B7AF06026719CF7003BCCF3 /* FooterCell.swift in Sources */,
 				3B75E3DD26716074002F3108 /* Constants.swift in Sources */,
-				3BD866F2269FFD7300A49872 /* FollowerView.swift in Sources */,
 				3BD604F526B0A332004FFEEC /* DoneViewModel.swift in Sources */,
 				3B5BDB5E268FA1980034B18C /* ReportApi.swift in Sources */,
 				3B7AF0AD26729FCC003BCCF3 /* CommentApi.swift in Sources */,
@@ -727,10 +713,8 @@
 				3B5BDB4D268EA11B0034B18C /* gemPostApi.swift in Sources */,
 				3B7AF09E2671E3BA003BCCF3 /* GridPosts.swift in Sources */,
 				3B7AF0C32673EEA0003BCCF3 /* ActivityApi.swift in Sources */,
-				3BD866EE269FD32E00A49872 /* FollowerViewModel.swift in Sources */,
 				3B928C3B269EA383007A34B8 /* ImageView.swift in Sources */,
 				3B7AF06D2671A01B003BCCF3 /* CommentRow.swift in Sources */,
-				3BD866F0269FE49000A49872 /* FollowApi.swift in Sources */,
 				3B0DFBDE26B78D86008CE0D1 /* UpdatePhotoVM.swift in Sources */,
 				3B75E3E32671657F002F3108 /* UsernameTextField.swift in Sources */,
 			);
