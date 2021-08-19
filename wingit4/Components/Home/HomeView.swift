@@ -22,8 +22,6 @@ HomeView: View {
 
     
     var body: some View {
-//        ZStack{
-//            FollowingCount(followingCount: $profileViewModel.followingCountState)
         NavigationView {
             ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)){
             VStack(alignment: .leading, spacing: 15) {
@@ -45,7 +43,11 @@ HomeView: View {
            }.padding(.top, 10)
            .navigationBarTitle(Text("WingIt!"), displayMode: .inline).onAppear {
                  self.homeViewModel.loadTimeline()
+<<<<<<< HEAD:wingit4/Components/Home/HomeView.swift
                //  self.profileViewModel.updateFollowCount(userId: Auth.auth().currentUser!.uid)
+=======
+                 self.homeViewModel.loadGemTimeline()
+>>>>>>> 7b899fb (Remove all follow code):wingit4/View/Components/Home/HomeView.swift
            }.navigationBarItems(leading:
                                     Button(action: {}) {
                                         

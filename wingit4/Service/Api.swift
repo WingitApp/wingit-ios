@@ -14,6 +14,5 @@ class Api {
     static var Chat = ChatApi()
     static var Activity = ActivityApi()
     static var Report = ReportApi()
-    static var Follow = FollowApi()
     static var Connections = ConnectionsApi()
 }
