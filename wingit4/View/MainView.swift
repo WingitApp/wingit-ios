@@ -11,6 +11,7 @@ import SwiftUI
 struct MainView: View {
     @EnvironmentObject var session: SessionStore
     @ObservedObject var model: MainViewModel = MainViewModel()
+    @StateObject var connectionsViewModel = ConnectionsViewModel()
 
     func logout() {
         session.logout()
@@ -33,7 +34,9 @@ struct MainView: View {
             ProfileView().tabItem({
                     Image(systemName: "person.fill")
                 }).tag(4)
-         }.accentColor(Color(.systemTeal))
+         }
+        .accentColor(Color(.systemTeal))
+        .environmentObject(connectionsViewModel)
     }
 
 //    var body: some View {

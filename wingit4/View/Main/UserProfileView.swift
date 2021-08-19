@@ -15,12 +15,6 @@ struct UserProfileView: View {
 
     @ObservedObject var profileViewModel = ProfileViewModel()
     @State var selection: Selection = .globe
-    
-//    func usertoPost(){
-//        if self.user.uid == self.profileViewModel.post.ownerId {
-//            let user = Post
-//        }
-//    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 15){
@@ -144,7 +138,7 @@ struct FollowButton: View {
 
 struct ConnectButton: View {
 
-    @ObservedObject var connectViewModel = ConnectViewModel()
+    @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
 
     var user: User
     @Binding var connections_Count: Int
@@ -161,10 +155,10 @@ struct ConnectButton: View {
     
     func buttonTapped() {
         if !self.isConnected && !self.hasPendingRequest {
-                connectViewModel.sendConnectRequest(userId: user.uid)
+                connectionsViewModel.sendConnectRequest(userId: user.uid)
                 self.hasPendingRequest = true
             } else if self.isConnected {
-                connectViewModel.disconnect(userId: user.uid,  connectionsCount_onSuccess: { (connectionsCount) in
+                connectionsViewModel.disconnect(userId: user.uid,  connectionsCount_onSuccess: { (connectionsCount) in
                              self.connections_Count = connectionsCount
              })
             self.isConnected = false
