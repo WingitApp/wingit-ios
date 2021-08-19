@@ -19,13 +19,16 @@ struct TextCell: View {
     }
     var body: some View {
         
-        HStack{
+        VStack{
             VStack(alignment: .leading, spacing: 10){
                 Text(headerCellViewModel.post.caption).font(.subheadline).padding(.bottom, 2).multilineTextAlignment(.leading).fixedSize(horizontal: false, vertical: true)
                 Text(timeAgoSinceDate(Date(timeIntervalSince1970: headerCellViewModel.post.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
             }.padding(.horizontal).padding(.bottom, 2)
+            
             Spacer(minLength: 0)
+            
             if headerCellViewModel.post.mediaUrl != "" {
+               
                 Button(action: {
                     withAnimation(.easeInOut){
                         ImageScreen.toggle()
@@ -36,9 +39,9 @@ struct TextCell: View {
                               $0.image
                                   .resizable()
                                   .aspectRatio(contentMode: .fill)
-                          }).frame(width: 200, height: 250).cornerRadius(3).clipped()
+                          }) .frame(width: UIScreen.main.bounds.width - 60, height: 250).cornerRadius(15)
                 })
-            
+        
             }
         }.sheet(isPresented: $ImageScreen, content: {
             ImageView(headerCellViewModel: headerCellViewModel)

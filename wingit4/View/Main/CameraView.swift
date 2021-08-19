@@ -73,24 +73,15 @@ struct CameraView: View {
             }.sheet(isPresented: $cameraViewModel.showImagePicker) {
                // ImagePickerController()
                 ImagePicker(showImagePicker: self.$cameraViewModel.showImagePicker, pickedImage: self.$cameraViewModel.image, imageData: self.$cameraViewModel.imageData)
-            }.navigationBarTitle(Text("Ask for recs or recommend!"), displayMode: .inline)
-             .navigationBarItems(trailing: Menu(content: {
-                
+            }
+             .navigationBarItems(trailing:
+                                    
                 Button(action: sharePost) {
 
-                    Text("Ask!")
+                    Text("Wingit!")
                 }
-                
-                Button(action: shareGem) {
-                    
-                    Text("Post Rec")
-                }
-
-            }, label: {
-
-                Text("Post").foregroundColor(.gray)
-        
-            }).alert(isPresented: $cameraViewModel.showAlert) {
+           
+             .alert(isPresented: $cameraViewModel.showAlert) {
                 Alert(title: Text("Error"), message: Text(self.cameraViewModel.errorString), dismissButton: .default(Text("OK")))
             }
             ).foregroundColor(.gray)

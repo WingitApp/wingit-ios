@@ -123,29 +123,6 @@ extension Decodable {
     }
 }
 
-//// MARK: - JSON decode from bundle
-//extension Bundle {
-//  func decode(_ file: String) -> [Post] {
-//    guard let url = self.url(forResource: file, withExtension: nil) else {
-//      fatalError("Failed to locate \(file) in bundle.")
-//    }
-//
-//    guard let data = try? Data(contentsOf: url) else {
-//      fatalError("Failed to load \(file) from bundle.")
-//    }
-//
-//    let decoder = JSONDecoder()
-//
-//    guard let loaded = try? decoder.decode([Post].self, from: data) else {
-//      fatalError("Failed to decode \(file) from bundle.")
-//    }
-//
-//    return loaded
-//  }
-//}
-
-
-
 extension Color {
     
     static let instagram: [Color] = [
@@ -161,6 +138,21 @@ extension Color {
         Color(red: 255 / 255, green: 220 / 255, blue: 128 / 255),
         Color(red: 64 / 255, green: 93 / 255, blue: 230 / 255)
     ]
+}
+
+// bottom only corners....
+
+struct RoundedShape : Shape {
+    
+    // for resuable.....
+    var corners : UIRectCorner
+    
+    func path(in rect: CGRect) -> Path {
+        
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: 45, height: 45))
+        
+        return Path(path.cgPath)
+    }
 }
 
 

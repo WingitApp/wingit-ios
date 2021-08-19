@@ -15,34 +15,21 @@ struct ProfileView: View {
     @ObservedObject var profileViewModel = ProfileViewModel()
 
     @State var postCountState = 0
-    @State var selection: Selection = .globe
 
     
        var body: some View {
          
         NavigationView {
             VStack(alignment: .leading, spacing: 15){
-                Picker(selection: $selection, label: Text("Grid or Table")) {
-                   ForEach(Selection.allCases) { selection in
-                       selection.image.tag(selection)
-
-                   }
-                }
-                .pickerStyle(SegmentedPickerStyle()).padding(.leading, 20).padding(.trailing, 20).background(Color.clear)
-                .onChange(of: selection) { selection in
-                    if selection == .globe {
-                        logToAmplitude(event: .viewOwnRecs)
-                    } else {
-                        logToAmplitude(event: .viewOwnRequests)
-                    }
-                }
            ScrollView {
                VStack {
-            
-                ProfileHeader(user: self.session.userSession, postCount: profileViewModel.posts.count, gemPostCount: profileViewModel.gemposts.count, doneCount: profileViewModel.doneposts.count, followingCount: $profileViewModel.followingCountState, followersCount: $profileViewModel.followersCountState)
+                ProfileInformation(user: self.session.userSession)
+                Connections(user: self.session.userSession, followingCount: $profileViewModel.followingCountState, followersCount: $profileViewModel.followersCountState)
+                ProfileHeader(user: self.session.userSession, postCount: profileViewModel.posts.count, gemPostCount: profileViewModel.gemposts.count, doneCount: profileViewModel.doneposts.count)
             
                Divider()
                 if !profileViewModel.isLoading {
+<<<<<<< HEAD
                     if selection == .globe {
                         ForEach(self.profileViewModel.gemposts, id: \.postId) { gempost in
                             VStack {
@@ -57,9 +44,14 @@ struct ProfileView: View {
                             VStack {
                                 HeaderCell(post: post, isProfileView: true)
                                 FooterCell(post: post)
+=======
+                        ForEach(self.profileViewModel.posts, id: \.postId) { post in
+                            VStack {
+                                CardView(post: post)
+>>>>>>> d7a8e17 (Profile Components change)
                             }
                         }
-                    }
+                    
                 }
                 }.padding(.top, 5)
                 }
