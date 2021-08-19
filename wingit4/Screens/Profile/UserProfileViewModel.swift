@@ -24,13 +24,22 @@ class UserProfileViewModel: ObservableObject {
     @Published var isConnected = false
     @Published var hasPendingRequest = false
     
-    
     func updateIsConnected(userId: String) {
         Ref.FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: Auth.auth().currentUser!.uid).document(userId).getDocument { (document, error) in
             if let doc = document, doc.exists {
                 self.isConnected = true
             } else {
                 self.isConnected = false
+            }
+        }
+    }
+    
+    func updateHasPendingRequest(userId: String) {
+        Ref.FIRESTORE_DOC_CONNECT_REQUEST_SENT(sentByUserId: Auth.auth().currentUser!.uid, receivedByUserId: userId).getDocument { (document, error) in
+            if let doc = document, doc.exists {
+                self.hasPendingRequest = true
+            } else {
+                self.hasPendingRequest = false
             }
         }
     }
@@ -48,6 +57,7 @@ class UserProfileViewModel: ObservableObject {
 
         }
         updateIsConnected(userId: userId)
+        updateHasPendingRequest(userId: userId)
         updateConnectionsCount(userId: userId)
         self.loadDonePosts(userId: userId)
       }
@@ -87,6 +97,4 @@ class UserProfileViewModel: ObservableObject {
         }
     }
 }
-        
 }
-        
