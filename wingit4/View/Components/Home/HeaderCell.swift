@@ -21,8 +21,6 @@ struct HeaderCell: View {
         self.headerCellViewModel.post = post
         if !isProfileView {
             self.headerCellViewModel.getUserFromPost(postOwnerId: post.ownerId)
-        } else {
-            self.isProfileView = true
         }
     }
     

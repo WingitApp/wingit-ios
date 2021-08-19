@@ -12,7 +12,7 @@ import FirebaseAuth
 struct ProfileView: View {
     
     @EnvironmentObject var session: SessionStore
-    @ObservedObject var profileViewModel = ProfileViewModel()
+    @StateObject var profileViewModel = ProfileViewModel()
 
     @State var postCountState = 0
     @State var selection: Selection = .globe
@@ -80,6 +80,6 @@ struct ProfileView: View {
                 } ).onAppear {
                     self.profileViewModel.loadUserPosts(userId: Auth.auth().currentUser!.uid)
             }
-        }
+        }.environmentObject(profileViewModel)
       }
 }

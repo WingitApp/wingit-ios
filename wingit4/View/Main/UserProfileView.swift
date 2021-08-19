@@ -13,16 +13,15 @@ struct UserProfileView: View {
    
     var user: User
 
-    @ObservedObject var profileViewModel = ProfileViewModel()
+    @StateObject var profileViewModel = ProfileViewModel()
     @State var selection: Selection = .globe
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 15){
+        VStack(alignment: .leading, spacing: 15) {
             Picker(selection: $selection, label: Text("Grid or Table")) {
-                       ForEach(Selection.allCases) { selection in
-                           selection.image.tag(selection)
-
-                       }
+               ForEach(Selection.allCases) { selection in
+                   selection.image.tag(selection)
+               }
             }
             .pickerStyle(SegmentedPickerStyle()).padding(.leading, 20).padding(.trailing, 20)
             .onChange(of: selection) { selection in
@@ -32,54 +31,53 @@ struct UserProfileView: View {
                     logToAmplitude(event: .viewOthersRequests)
                 }
             }
-                ScrollView {
-                   VStack {
-                    ProfileHeader(user: user, postCount: profileViewModel.posts.count, gemPostCount: profileViewModel.gemposts.count, doneCount: profileViewModel.doneposts.count, connectionsCount: $profileViewModel.connectionsCountState)
+            ScrollView {
+               VStack {
+                ProfileHeader(user: user, postCount: profileViewModel.posts.count, gemPostCount: profileViewModel.gemposts.count, doneCount: profileViewModel.doneposts.count, connectionsCount: $profileViewModel.connectionsCountState)
 
-                    HStack(spacing: 15) {
-                if !profileViewModel.userBlocked {
-                    ConnectButton(user: user, isConnected: $profileViewModel.isConnected, hasPendingRequest: $profileViewModel.hasPendingRequest, connectionsCount: $profileViewModel.connectionsCountState)
-                    MessageButton(user: user)
-                    }
-                    }.padding(.leading, 20).padding(.trailing, 20)
-                    
-                    Divider()
-                    
-                    if !profileViewModel.isLoading {
-                                  if selection == .globe {
-                                    ForEach(self.profileViewModel.gemposts, id: \.postId) { gempost in
-                                        VStack {
-                                            
-                                            gemHeader(gempost: gempost, isProfileView: true)
-                                           
-                                        }
+                HStack(spacing: 15) {
+            if !profileViewModel.userBlocked {
+                ConnectButton(user: user)
+                MessageButton(user: user)
+                }
+                }.padding(.leading, 20).padding(.trailing, 20)
+                
+                Divider()
+                
+                if !profileViewModel.isLoading {
+                              if selection == .globe {
+                                ForEach(self.profileViewModel.gemposts, id: \.postId) { gempost in
+                                    VStack {
+                                        
+                                        gemHeader(gempost: gempost, isProfileView: true)
+                                       
                                     }
-                                 } else {
-                                    ForEach(self.profileViewModel.posts, id: \.postId) { post in
-                                        VStack {
-                                            HeaderCell(
-                                                post: post,
-                                                isProfileView: true
-                                            )
-                                            FooterCell(post: post)
-                                        }
-                                   }
+                                }
+                             } else {
+                                ForEach(self.profileViewModel.posts, id: \.postId) { post in
+                                    VStack {
+                                        HeaderCell(
+                                            post: post,
+                                            isProfileView: true
+                                        )
+                                        FooterCell(post: post)
+                                    }
+                               }
 
-                                     
-                                  }
-                      
-                    }
-                       
-                }
                                  
+                              }
+                  
                 }
+                   
+            }
+                             
+            }
                }.padding(.top, 10) .navigationBarTitle(Text(self.user.username), displayMode: .automatic)
                  .onAppear {
                     logToAmplitude(event: .viewOtherProfile)
                     self.profileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.user.uid)
                  }
-      
-        
+                .environmentObject(profileViewModel)
     }
 }
 
@@ -139,35 +137,28 @@ struct FollowButton: View {
 struct ConnectButton: View {
 
     @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
-
+    @EnvironmentObject var profileViewModel: ProfileViewModel
     var user: User
-    @Binding var connections_Count: Int
-    @Binding var isConnected: Bool
-    @Binding var hasPendingRequest: Bool
 
-    init(user: User, isConnected: Binding<Bool>, hasPendingRequest: Binding<Bool>, connectionsCount: Binding<Int>) {
+    init(user: User) {
         self.user = user
-        self._connections_Count = connectionsCount
-        self._isConnected = isConnected
-        self._hasPendingRequest = hasPendingRequest
-
     }
     
     func buttonTapped() {
-        if !self.isConnected && !self.hasPendingRequest {
+        if !profileViewModel.isConnected && !profileViewModel.hasPendingRequest {
                 connectionsViewModel.sendConnectRequest(userId: user.uid)
-                self.hasPendingRequest = true
-            } else if self.isConnected {
+                profileViewModel.hasPendingRequest = true
+            } else if profileViewModel.isConnected {
                 connectionsViewModel.disconnect(userId: user.uid,  connectionsCount_onSuccess: { (connectionsCount) in
-                             self.connections_Count = connectionsCount
+                             connectionsViewModel.connectionsCount = connectionsCount
              })
-            self.isConnected = false
+            profileViewModel.isConnected = false
         }
     }
     
     var body: some View {
         Button(action: buttonTapped) {
-            Text((self.isConnected) ? "Disconnect" : (self.hasPendingRequest) ? "Pending" : "Connect").foregroundColor(Color("bw")).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal)).lineLimit(1)
+            Text((profileViewModel.isConnected) ? "Disconnect" : (profileViewModel.hasPendingRequest) ? "Pending" : "Connect").foregroundColor(Color("bw")).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal)).lineLimit(1)
         }
     }
 }
