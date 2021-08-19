@@ -22,11 +22,13 @@ class ConnectionsViewModel : ObservableObject {
             self.isLoading = false
             self.users = users
             self.connectionsCount = users.count
+            setUserProperty(property: .connections, value: users.count)
         }
     }
     
     func sendConnectRequest(userId: String) {
         let currentUserId = Auth.auth().currentUser!.uid
+        logToAmplitude(event: .sendConnectRequest, properties: [.toUser : userId])
         
         Ref.FIRESTORE_DOC_CONNECT_REQUEST_SENT(sentByUserId: currentUserId, receivedByUserId: userId).setData([:]) { (error) in
             if error == nil {
@@ -60,6 +62,7 @@ class ConnectionsViewModel : ObservableObject {
         
         Ref.FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).document(currentUserId).getDocument { (document, error) in
             if let doc = document, doc.exists {
+                addToUserProperty(property: .connections, value: -1)
                 doc.reference.delete()
                 self.updateConnectionsCount(userId: userId, connectionsCount_onSuccess: connectionsCount_onSuccess)
             }
@@ -76,6 +79,7 @@ class ConnectionsViewModel : ObservableObject {
     }
     
     func acceptConnectRequest(fromUserId: String) {
+        logToAmplitude(event: .acceptConnectRequest, properties: [.fromUser: fromUserId])
         deleteConnectRequest(fromUserId: fromUserId)
         Ref.FIRESTORE_COLLECTION_ACTIVITY.document(Auth.auth().currentUser!.uid).collection("feedItems").whereField("type", isEqualTo: "connectRequest").whereField("userId", isEqualTo: fromUserId).getDocuments { (snapshot, error) in
                if let doc = snapshot?.documents {
@@ -95,6 +99,7 @@ class ConnectionsViewModel : ObservableObject {
             if error == nil {
                 Ref.FIRESTORE_DOC_CONNECTION_BETWEEN_USERS(user1Id: userId, user2Id: Auth.auth().currentUser!.uid).setData([:]) { (error) in
                     if error == nil {
+                        addToUserProperty(property: .connections, value: 1)
                         self.sendConnectRequestAcknowledgement(userId: userId)
                     }
                 }
@@ -127,6 +132,7 @@ class ConnectionsViewModel : ObservableObject {
     }
     
     func ignoreConnectRequest(fromUserId: String) {
+        logToAmplitude(event: .ignoreConnectRequest, properties: [.fromUser: fromUserId])
         deleteConnectRequest(fromUserId: fromUserId)
         
         // Delete the request from notification's feed
