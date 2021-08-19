@@ -11,9 +11,6 @@
 		3B39775026C9B19F00880808 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B39774F26C9B19F00880808 /* GoogleService-Info.plist */; };
 		3B4FB9F726CD88D000C33177 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4FB9F626CD88D000C33177 /* TextCell.swift */; };
 		3B4FB9FB26CD8A4A00C33177 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4FB9FA26CD8A4A00C33177 /* CardView.swift */; };
-		3B5BDB41268E9F5C0034B18C /* gemHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BDB40268E9F5C0034B18C /* gemHeader.swift */; };
-		3B5BDB4B268E9F9A0034B18C /* gemPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BDB4A268E9F9A0034B18C /* gemPostModel.swift */; };
-		3B5BDB4D268EA11B0034B18C /* gemPostApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BDB4C268EA11B0034B18C /* gemPostApi.swift */; };
 		3B5BDB4F268F81D90034B18C /* HeaderCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BDB4E268F81D90034B18C /* HeaderCellViewModel.swift */; };
 		3B5BDB51268F82790034B18C /* fetchUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BDB50268F82790034B18C /* fetchUser.swift */; };
 		3B5BDB58268F94E00034B18C /* ReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BDB57268F94E00034B18C /* ReportModel.swift */; };
@@ -101,8 +98,6 @@
 		3B97807D26813BC1009CE037 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 3B97807C26813BC1009CE037 /* FirebaseMessaging */; };
 		3BA1CBB926CDD59A004B641B /* Connections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA1CBB826CDD599004B641B /* Connections.swift */; };
 		3BD12F1526C9CA1500E26A87 /* AppDel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD12F1426C9CA1500E26A87 /* AppDel.swift */; };
-		3BD604E226A7D210004FFEEC /* GemHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604E126A7D210004FFEEC /* GemHeaderViewModel.swift */; };
-		3BD604ED26AA0E4B004FFEEC /* AsksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604EC26AA0E4B004FFEEC /* AsksView.swift */; };
 		3BD604EF26AA1CDE004FFEEC /* DoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604EE26AA1CDE004FFEEC /* DoneCell.swift */; };
 		3BD604F326B08CA8004FFEEC /* DoneToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604F226B08CA8004FFEEC /* DoneToggle.swift */; };
 		3BD604F526B0A332004FFEEC /* DoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604F426B0A332004FFEEC /* DoneViewModel.swift */; };
@@ -110,8 +105,6 @@
 		3BD866EE269FD32E00A49872 /* FollowerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD866ED269FD32E00A49872 /* FollowerViewModel.swift */; };
 		3BD866F0269FE49000A49872 /* FollowApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD866EF269FE49000A49872 /* FollowApi.swift */; };
 		3BD866F2269FFD7300A49872 /* FollowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD866F1269FFD7300A49872 /* FollowerView.swift */; };
-		3BD866F526A60DC500A49872 /* gemCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD866F426A60DC500A49872 /* gemCommentView.swift */; };
-		3BD866F726A60E0300A49872 /* gemCommentInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD866F626A60E0300A49872 /* gemCommentInput.swift */; };
 		3BF143E626819E480093488D /* NotificationsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF143E526819E480093488D /* NotificationsApi.swift */; };
 		6531838126B232640006D9E2 /* Amplitude in Frameworks */ = {isa = PBXBuildFile; productRef = 6531838026B232640006D9E2 /* Amplitude */; };
 		6531838326B238AA0006D9E2 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6531838226B238AA0006D9E2 /* Analytics.swift */; };
@@ -123,9 +116,6 @@
 		3B39774F26C9B19F00880808 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B4FB9F626CD88D000C33177 /* TextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
 		3B4FB9FA26CD8A4A00C33177 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		3B5BDB40268E9F5C0034B18C /* gemHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gemHeader.swift; sourceTree = "<group>"; };
-		3B5BDB4A268E9F9A0034B18C /* gemPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gemPostModel.swift; sourceTree = "<group>"; };
-		3B5BDB4C268EA11B0034B18C /* gemPostApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gemPostApi.swift; sourceTree = "<group>"; };
 		3B5BDB4E268F81D90034B18C /* HeaderCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCellViewModel.swift; sourceTree = "<group>"; };
 		3B5BDB50268F82790034B18C /* fetchUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fetchUser.swift; sourceTree = "<group>"; };
 		3B5BDB57268F94E00034B18C /* ReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportModel.swift; sourceTree = "<group>"; };
@@ -209,8 +199,6 @@
 		3BC155AB26D7195D0069AFD4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3BA1CBB826CDD599004B641B /* Connections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connections.swift; sourceTree = "<group>"; };
 		3BD12F1426C9CA1500E26A87 /* AppDel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDel.swift; sourceTree = "<group>"; };
-		3BD604E126A7D210004FFEEC /* GemHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GemHeaderViewModel.swift; sourceTree = "<group>"; };
-		3BD604EC26AA0E4B004FFEEC /* AsksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsksView.swift; sourceTree = "<group>"; };
 		3BD604EE26AA1CDE004FFEEC /* DoneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneCell.swift; sourceTree = "<group>"; };
 		3BD604F226B08CA8004FFEEC /* DoneToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneToggle.swift; sourceTree = "<group>"; };
 		3BD604F426B0A332004FFEEC /* DoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneViewModel.swift; sourceTree = "<group>"; };
@@ -218,8 +206,6 @@
 		3BD866ED269FD32E00A49872 /* FollowerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerViewModel.swift; sourceTree = "<group>"; };
 		3BD866EF269FE49000A49872 /* FollowApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowApi.swift; sourceTree = "<group>"; };
 		3BD866F1269FFD7300A49872 /* FollowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerView.swift; sourceTree = "<group>"; };
-		3BD866F426A60DC500A49872 /* gemCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gemCommentView.swift; sourceTree = "<group>"; };
-		3BD866F626A60E0300A49872 /* gemCommentInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gemCommentInput.swift; sourceTree = "<group>"; };
 		3BF143E526819E480093488D /* NotificationsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsApi.swift; sourceTree = "<group>"; };
 		6502C14226C4FF52007C04C9 /* SecretsDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsDebug.xcconfig; sourceTree = "<group>"; };
 		6502C14326C5024C007C04C9 /* SecretsRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsRelease.xcconfig; sourceTree = "<group>"; };
@@ -248,17 +234,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3B5BDB3F268E9F410034B18C /* HiddenGems */ = {
-			isa = PBXGroup;
-			children = (
-				3B5BDB40268E9F5C0034B18C /* gemHeader.swift */,
-				3BD604E126A7D210004FFEEC /* GemHeaderViewModel.swift */,
-				3B5BDB4A268E9F9A0034B18C /* gemPostModel.swift */,
-				3B5BDB4C268EA11B0034B18C /* gemPostApi.swift */,
-			);
-			path = HiddenGems;
-			sourceTree = "<group>";
-		};
 		3B5BDB56268F92760034B18C /* Report */ = {
 			isa = PBXGroup;
 			children = (
@@ -373,7 +348,6 @@
 				3B7AF05726719885003BCCF3 /* MainView.swift */,
 				3B7AF06A26719F19003BCCF3 /* Auth */,
 				3B7AF06B26719F24003BCCF3 /* Main */,
-				3B5BDB3F268E9F410034B18C /* HiddenGems */,
 				3B75E3D126715C3A002F3108 /* Components */,
 			);
 			path = View;
@@ -465,13 +439,9 @@
 				3B5BDB56268F92760034B18C /* Report */,
 				3B7AF0742671A9C2003BCCF3 /* CameraView.swift */,
 				3B7AF0822671BC28003BCCF3 /* ChatView.swift */,
-<<<<<<< HEAD
 				3B7AF0802671BBD4003BCCF3 /* MessagesView.swift */,
 				3B7AF0762671B962003BCCF3 /* NotificationView.swift */,
 				3B7AF07A2671B9FB003BCCF3 /* ProfileHeader.swift */,
-=======
-				3B7AF07C2671BB2E003BCCF3 /* UserProfileView.swift */,
->>>>>>> d7a8e17 (Profile Components change)
 				3B7AF0782671B9BF003BCCF3 /* ProfileView.swift */,
 				3B7AF0722671A639003BCCF3 /* SearchView.swift */,
 				3B7AF07C2671BB2E003BCCF3 /* UserProfileView.swift */,
@@ -536,8 +506,6 @@
 		3BD866F326A0916800A49872 /* Comment */ = {
 			isa = PBXGroup;
 			children = (
-				3BD866F426A60DC500A49872 /* gemCommentView.swift */,
-				3BD866F626A60E0300A49872 /* gemCommentInput.swift */,
 				3B7AF06E2671A03A003BCCF3 /* CommentView.swift */,
 				3B7AF06C2671A01B003BCCF3 /* CommentRow.swift */,
 				3B7AF0702671A1FC003BCCF3 /* CommentInput.swift */,
@@ -697,7 +665,6 @@
 				3B7AF04126718A4D003BCCF3 /* SignupViewModel.swift in Sources */,
 				3B75E3D526715CAC002F3108 /* SignupText.swift in Sources */,
 				3BD604F726B0A9DD004FFEEC /* DoneView.swift in Sources */,
-				3BD866F726A60E0300A49872 /* gemCommentInput.swift in Sources */,
 				3B7AF04326718AF1003BCCF3 /* AuthService.swift in Sources */,
 				3B7AF05E26719CC2003BCCF3 /* HeaderCell.swift in Sources */,
 				3B7AF0B12672AB2F003BCCF3 /* CommentViewModel.swift in Sources */,
@@ -714,7 +681,6 @@
 				3B7AF0A22671E416003BCCF3 /* EditProfile.swift in Sources */,
 				3B7AF0AF2672A053003BCCF3 /* Comment.swift in Sources */,
 				3B7AF0A72672870F003BCCF3 /* HomeViewModel.swift in Sources */,
-				3BD604ED26AA0E4B004FFEEC /* AsksView.swift in Sources */,
 				3B94FFD52676868200B4CC22 /* BioTextField.swift in Sources */,
 				3B5BDB51268F82790034B18C /* fetchUser.swift in Sources */,
 				3B5BDB58268F94E00034B18C /* ReportModel.swift in Sources */,
@@ -725,7 +691,6 @@
 				3B75E3E1267163FC002F3108 /* Signin+HeaderView.swift in Sources */,
 				3B7AF0772671B962003BCCF3 /* NotificationView.swift in Sources */,
 				3B75E3DB26715D26002F3108 /* Modifiers.swift in Sources */,
-				3B5BDB41268E9F5C0034B18C /* gemHeader.swift in Sources */,
 				3BF143E626819E480093488D /* NotificationsApi.swift in Sources */,
 				3B5BDB5C268F98E70034B18C /* ReportInputViewModel.swift in Sources */,
 				3B5BDB4F268F81D90034B18C /* HeaderCellViewModel.swift in Sources */,
@@ -742,7 +707,6 @@
 				654DA41926BC7BD3002864B8 /* MainViewModel.swift in Sources */,
 				3BD604F326B08CA8004FFEEC /* DoneToggle.swift in Sources */,
 				3B7AF0952671D5FA003BCCF3 /* PostApi.swift in Sources */,
-				3B5BDB4B268E9F9A0034B18C /* gemPostModel.swift in Sources */,
 				3B7AF0712671A1FC003BCCF3 /* CommentInput.swift in Sources */,
 				3B9774252694FE0000F1EF14 /* alertView.swift in Sources */,
 				3B7AF0AB26729F81003BCCF3 /* CommentInputViewModel.swift in Sources */,
@@ -754,7 +718,6 @@
 				3B75E3E526716787002F3108 /* SignupButton.swift in Sources */,
 				3B7AF03026718263003BCCF3 /* Extensions.swift in Sources */,
 				3B75E3C2267153BA002F3108 /* SigninView.swift in Sources */,
-				3BD604E226A7D210004FFEEC /* GemHeaderViewModel.swift in Sources */,
 				3B7AF0972671D98E003BCCF3 /* Post.swift in Sources */,
 				3B7AF0BB2672CACE003BCCF3 /* MessageViewModel.swift in Sources */,
 				3B7AF0BD2672D2DE003BCCF3 /* FollowViewModel.swift in Sources */,
@@ -762,7 +725,6 @@
 				3B7AF0A926728E74003BCCF3 /* FooterCellViewModel.swift in Sources */,
 				3B7AF0B52672C15A003BCCF3 /* ChatApi.swift in Sources */,
 				3B7AF0BF2673EAFB003BCCF3 /* Activity.swift in Sources */,
-				3BD866F526A60DC500A49872 /* gemCommentView.swift in Sources */,
 				3B7AF0792671B9BF003BCCF3 /* ProfileView.swift in Sources */,
 				3B7AF05826719885003BCCF3 /* MainView.swift in Sources */,
 				3B7AF07B2671B9FB003BCCF3 /* ProfileHeader.swift in Sources */,
@@ -779,7 +741,6 @@
 				3B7AF0B72672C21F003BCCF3 /* Chat.swift in Sources */,
 				3B7AF056267197EC003BCCF3 /* SessionStore.swift in Sources */,
 				3B7AF0852671C08F003BCCF3 /* SearchBar.swift in Sources */,
-				3B5BDB4D268EA11B0034B18C /* gemPostApi.swift in Sources */,
 				3B7AF09E2671E3BA003BCCF3 /* GridPosts.swift in Sources */,
 				3B7AF0C32673EEA0003BCCF3 /* ActivityApi.swift in Sources */,
 				3BD866EE269FD32E00A49872 /* FollowerViewModel.swift in Sources */,

@@ -13,7 +13,6 @@ import Firebase
 class HomeViewModel: ObservableObject {
     
     @Published var posts: [Post] = []
-    @Published var gemposts: [gemPost] = []
     @Published var isLoading = false
     
     var user: User!
@@ -43,34 +42,6 @@ class HomeViewModel: ObservableObject {
                 for (index, p) in self.posts.enumerated() {
                     if p.postId == post.postId {
                         self.posts.remove(at: index)
-
-                    }
-                }
-            }
-        }) { (listener) in
-            self.listener = listener
-        }
-    }
-    
-    func loadGemTimeline() {
-        self.gemposts = []
-        isLoading = true
-        
-        Api.gemPost.loadTimeline(onSuccess: { (gemposts) in
-            self.isLoading = false
-            if self.gemposts.isEmpty {
-                self.gemposts = gemposts
-            }
-        }, newPost: { (gempost) in
-            if !self.gemposts.isEmpty {
-                self.gemposts.insert(gempost, at: 0)
-
-            }
-        }, deletePost: { (gempost) in
-            if !self.gemposts.isEmpty {
-                for (index, p) in self.gemposts.enumerated() {
-                    if p.postId == gempost.postId {
-                        self.gemposts.remove(at: index)
 
                     }
                 }

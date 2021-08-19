@@ -148,25 +148,7 @@ class UserApi {
             onSuccess(posts)
         }
     }
-    
-    func loadGemPosts(userId: String, onSuccess: @escaping(_ gemposts: [gemPost]) -> Void) {
-        Ref.FIRESTORE_GEM_POSTS_DOCUMENT_USERID(userId: userId).collection("gemPosts").order(by: "date", descending: true).getDocuments { (snapshot, error) in
-            
-            guard let snap = snapshot else {
-             //   print("Error fetching data")
-                return
-            }
-            var gemposts = [gemPost]()
-            for document in snap.documents {
-                let dict = document.data()
-                guard let decoderPost = try? gemPost.init(fromDictionary: dict) else {return}
-
-                gemposts.append(decoderPost)
-            }
-            onSuccess(gemposts)
-        }
-    }
-    
+        
     func loadDonePosts(userId: String, onSuccess: @escaping(_ doneposts: [DonePost]) -> Void) {
         Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("donePosts").order(by: "donedate", descending: true).getDocuments { (snapshot, error) in
             

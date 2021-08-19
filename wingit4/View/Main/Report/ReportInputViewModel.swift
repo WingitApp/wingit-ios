@@ -12,7 +12,7 @@ import FirebaseAuth
 class ReportInputViewModel: ObservableObject {
     
     var post: Post!
-    var gempost: gemPost!
+
    // var donepost: DonePost!
     @Published var followersCountState = 0
     @Published var followingCountState = 0
@@ -23,17 +23,6 @@ class ReportInputViewModel: ObservableObject {
         guard let username = Auth.auth().currentUser?.displayName else { return }
 
         Api.Report.sendReport(text: text, username: username, ownerId: currentUserId, postId: post.postId, onSuccess: {
-            onSuccess()
-        }) { (errorMessage) in
-           // print(errorMessage)
-        }
-    }
-    
-    func addGemReports(text: String, onSuccess: @escaping() -> Void) {
-        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
-        guard let username = Auth.auth().currentUser?.displayName else { return }
-
-        Api.Report.sendGemReport(text: text, username: username, ownerId: currentUserId, postId: post.postId, onSuccess: {
             onSuccess()
         }) { (errorMessage) in
            // print(errorMessage)

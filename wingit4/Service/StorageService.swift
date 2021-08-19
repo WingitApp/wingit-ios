@@ -46,35 +46,6 @@ class StorageService {
         
     }
     
-    static func saveGemPhoto(userId: String, caption: String, postId: String, imageData: Data, metadata: StorageMetadata, storagePostRef: StorageReference, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-               
-        storagePostRef.putData(imageData, metadata: metadata) { (storageMetadata, error) in
-              if error != nil {
-                  onError(error!.localizedDescription)
-                  return
-              }
-            storagePostRef.downloadURL { (url, error) in
-                if let metaImageUrl = url?.absoluteString {
-                    let firestorePostRef = Ref.FIRESTORE_GEM_POSTS_DOCUMENT_USERID(userId: userId).collection("gemPosts").document(postId)
-                    let gempost = gemPost.init(caption: caption, ownerId: userId, postId: postId, username: Auth.auth().currentUser!.displayName!, avatar: Auth.auth().currentUser!.photoURL!.absoluteString, mediaUrl: metaImageUrl, date: Date().timeIntervalSince1970)
-                    guard let dict = try? gempost.toDictionary() else {return}
-                    
-                    firestorePostRef.setData(dict) { (error) in
-                        if error != nil {
-                          onError(error!.localizedDescription)
-                          return
-                        }
-                        Ref.FIRESTORE_TIMELINE_DOCUMENT_USERID(userId: userId).collection("timelineGemPosts").document(postId).setData(dict)
-                        Ref.FIRESTORE_COLLECTION_ALL_GEMS.document(postId).setData(dict)
-                        onSuccess()
-                    }
-                    
-                }
-            }
-        }
-    
-    }
-    
     
     static func savePostPhoto(userId: String, caption: String, postId: String, imageData: Data, metadata: StorageMetadata, storagePostRef: StorageReference, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
                

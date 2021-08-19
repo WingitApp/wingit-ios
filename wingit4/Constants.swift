@@ -55,12 +55,6 @@ class Ref {
              return STORAGE_POSTS.child(postId)
        }
     
-        // Storage - gemPosts
-        static var STORAGE_GEM_POSTS = STORAGE_ROOT.child("gemPosts")
-        static func STORAGE_GEM_POST_ID(postId: String) -> StorageReference {
-              return STORAGE_GEM_POSTS.child(postId)
-        }
-    
         // Storage - Chat
         static var STORAGE_CHAT = STORAGE_ROOT.child("chat")
         static func STORAGE_CHAT_ID(chatId: String) -> StorageReference {
@@ -88,12 +82,6 @@ class Ref {
         static func FIRESTORE_COLLECTION_BLOCKED_USERID(userId: String) -> DocumentReference {
             return FIRESTORE_COLLECTION_BLOCKED.document(userId)
         }
-        
-        // Firestore - gemPosts
-         static var FIRESTORE_COLLECTION_GEM_POSTS = FIRESTORE_ROOT.collection("gemPosts")
-         static func FIRESTORE_GEM_POSTS_DOCUMENT_USERID(userId: String) -> DocumentReference {
-             return FIRESTORE_COLLECTION_GEM_POSTS.document(userId)
-         }
        
        // Firestore - Posts
        static var FIRESTORE_COLLECTION_MY_POSTS = FIRESTORE_ROOT.collection("myPosts")
@@ -109,7 +97,6 @@ class Ref {
        
        static var FIRESTORE_COLLECTION_ALL_ASKS = FIRESTORE_ROOT.collection("all_posts")
     
-        static var FIRESTORE_COLLECTION_ALL_GEMS = FIRESTORE_ROOT.collection("all_gems")
     
         static var FIRESTORE_COLLECTION_ALL_DONE = FIRESTORE_ROOT.collection("all_done")
         

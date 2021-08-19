@@ -45,7 +45,6 @@ HomeView: View {
            }.padding(.top, 10)
            .navigationBarTitle(Text("WingIt!"), displayMode: .inline).onAppear {
                  self.homeViewModel.loadTimeline()
-                 self.homeViewModel.loadGemTimeline()
                //  self.profileViewModel.updateFollowCount(userId: Auth.auth().currentUser!.uid)
            }.navigationBarItems(leading:
                                     Button(action: {}) {

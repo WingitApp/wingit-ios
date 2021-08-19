@@ -67,64 +67,6 @@ struct ReportInput: View {
     }
 }
 
-struct GemReportInput: View {
-    
-    @EnvironmentObject var session: SessionStore
-    @Environment(\.presentationMode) var presentationmode
-    @ObservedObject var reportInputViewModel = ReportInputViewModel()
-    var userId = Auth.auth().currentUser?.uid
-    
-    @State var composedMessage: String = ""
-    
-    init(gempost: gemPost?, postId: String?) {
-        if gempost != nil {
-            reportInputViewModel.gempost = gempost
-        } else {
-            handleInputViewModel(postId: postId!)
-        }
-    }
-    
-    func handleInputViewModel(postId: String) {
-        Api.gemPost.loadPost(postId: postId) { (gempost) in
-            self.reportInputViewModel.gempost = gempost
-        }
-    }
-    
-    func reportAction() {
-        if !composedMessage.isEmpty {
-            reportInputViewModel.addGemReports(text: composedMessage) {
-                self.composedMessage = ""
-            }
-        }
-    }
-    
-    var body: some View {
-        
-        VStack(spacing: 0) {
-            HStack{
-                Button(action: {presentationmode.wrappedValue.dismiss()},
-                       label: { Text("Cancel")}).padding()
-                Spacer()
-                Text("Please write down what the issue was").foregroundColor(.gray)
-                Spacer()
-            }
-            TextEditor(text: $composedMessage)
-                .cornerRadius(15)
-                .padding()
-             Button(action: reportAction) {
-                    Text("Submit")
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.white)
-                        .padding(.vertical)
-                        .frame(maxWidth: .infinity)
-                        .background(Color(.systemTeal))
-                        .cornerRadius(8)
-             }.padding(.vertical).padding(.horizontal)
-
-        }
-    }
-}
-
 //struct DoneReportInput: View {
 //
 //    @EnvironmentObject var session: SessionStore

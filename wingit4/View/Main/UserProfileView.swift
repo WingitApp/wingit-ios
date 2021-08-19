@@ -24,7 +24,7 @@ struct UserProfileView: View {
                    VStack {
                     ProfileInformation(user: user)
                     Connections(user: user, followingCount: $profileViewModel.followingCountState, followersCount: $profileViewModel.followersCountState)
-                    ProfileHeader(user: user, postCount: profileViewModel.posts.count, gemPostCount: profileViewModel.gemposts.count, doneCount: profileViewModel.doneposts.count)
+                    ProfileHeader(user: user, postCount: profileViewModel.posts.count, doneCount: profileViewModel.doneposts.count)
 
                     HStack(spacing: 15) {
                 if profileViewModel.userBlocked == false {

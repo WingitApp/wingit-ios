@@ -13,7 +13,6 @@ struct CommentView: View {
     @ObservedObject var commentViewModel = CommentViewModel()
 
     var post: Post?
-    var gempost: gemPost?
     var postId: String?
     
     

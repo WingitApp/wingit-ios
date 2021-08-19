@@ -18,7 +18,6 @@ struct Activity: Encodable, Decodable {
     var postId: String
     var mediaUrl: String
     var comment: String
-    var gemComment: String
     var date: Double
     
     var typeDescription: String {
@@ -26,8 +25,6 @@ struct Activity: Encodable, Decodable {
         switch type {
         case "comment":
             output = "replied: \(comment)"
-        case "gemComment":
-            output = "commented: \(gemComment)"
         case "follow":
             output = "is following you"
         case "like":

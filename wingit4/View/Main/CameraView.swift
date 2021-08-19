@@ -27,20 +27,7 @@ struct CameraView: View {
            self.clean()
         }
     }
-    
-    func shareGem() {
-       // cameraViewModel.uploadPost
-        cameraViewModel.shareGem(completed: {
-        //   print("done")
-           self.clean()
-        }) { (errorMessage) in
-       //     print("Error: \(errorMessage)")
-           self.cameraViewModel.showAlert = true
-           self.cameraViewModel.errorString = errorMessage
-           self.clean()
-        }
-    }
-    
+        
     func clean() {
       self.cameraViewModel.caption = ""
         self.cameraViewModel.image = Image(systemName: IMAGE_PHOTO)

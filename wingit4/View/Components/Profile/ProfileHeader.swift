@@ -12,7 +12,6 @@ struct ProfileHeader: View {
  //   @EnvironmentObject var session: SessionStore
     var user: User?
     var postCount: Int
-    var gemPostCount: Int
     var doneCount: Int
     
     @State var done: Bool = false
@@ -34,10 +33,6 @@ struct ProfileHeader: View {
                             Text("Done").font(.subheadline).foregroundColor(.gray)
                             }.padding(10)
                         })
-                    VStack {
-                        Text("\(gemPostCount)").font(.headline)
-                        Text("Recs").font(.subheadline).foregroundColor(.gray)
-                    }.padding(10)
                     }
             
             }.background(Color.black.opacity(0.03)

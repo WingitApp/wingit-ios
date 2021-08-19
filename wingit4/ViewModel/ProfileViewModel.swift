@@ -11,7 +11,6 @@ import FirebaseAuth
 
 class ProfileViewModel: ObservableObject {
     @Published var posts: [Post] = []
-    @Published var gemposts: [gemPost] = []
     @Published var doneposts: [DonePost] = []
     
     @Published var isLoading = false
@@ -22,7 +21,6 @@ class ProfileViewModel: ObservableObject {
    // var user: User!
 
     var splitted: [[Post]] = []
-    var gemsplit: [[gemPost]] = []
     
     @Published var isFollowing = false
     
@@ -46,18 +44,9 @@ class ProfileViewModel: ObservableObject {
         }
         checkFollow(userId: userId)
         updateFollowCount(userId: userId)
-        self.loadGemPosts(userId: userId)
         self.loadDonePosts(userId: userId)
     }
     
-    func loadGemPosts(userId: String) {
-        isLoading = true
-        Api.User.loadGemPosts(userId: userId) { (gemposts) in
-            self.isLoading = false
-            self.gemposts = gemposts
-            self.gemsplit = self.gemposts.splited(into: 3)
-        }
-    }
     
     func loadDonePosts(userId: String) {
         isLoading = true
@@ -92,7 +81,6 @@ class ProfileViewModel: ObservableObject {
                     return
                 } else {
                 self.loadUserPosts(userId: postOwnerId)
-                self.loadGemPosts(userId: postOwnerId)
               //  self.loadDonePosts(userId: postOwnerId)
                 self.userBlocked = false
             }
