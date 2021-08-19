@@ -93,20 +93,25 @@ struct ConnectButton: View {
     
     func buttonTapped() {
         if !profileViewModel.isConnected && !profileViewModel.hasPendingRequest {
-                connectionsViewModel.sendConnectRequest(userId: user.uid)
-                profileViewModel.hasPendingRequest = true
-            } else if profileViewModel.isConnected {
-                connectionsViewModel.disconnect(userId: user.uid,  connectionsCount_onSuccess: { (connectionsCount) in
+            profileViewModel.hasPendingRequest = true
+            connectionsViewModel.sendConnectRequest(userId: user.uid)
+        } else if profileViewModel.isConnected {
+            profileViewModel.isConnected = false
+            connectionsViewModel.disconnect(userId: user.uid,  connectionsCount_onSuccess: {
+                (connectionsCount) in
                              connectionsViewModel.connectionsCount = connectionsCount
              })
-            profileViewModel.isConnected = false
         }
     }
     
     var body: some View {
         Button(action: buttonTapped) {
-            Text((profileViewModel.isConnected) ? "Disconnect" : (profileViewModel.hasPendingRequest) ? "Pending" : "Connect").foregroundColor(Color("bw")).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal)).lineLimit(1)
-        }
+            Text((profileViewModel.isConnected) ? "Disconnect" : (profileViewModel.hasPendingRequest) ? "Pending" : "Connect").foregroundColor(Color("bw")).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(buttonBorderColor).lineLimit(1)
+        }.disabled(profileViewModel.hasPendingRequest)
+    }
+    
+    var buttonBorderColor: Color {
+        return profileViewModel.hasPendingRequest ? .gray : Color(.systemTeal)
     }
 }
 
