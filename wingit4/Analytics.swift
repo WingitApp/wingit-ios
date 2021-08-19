@@ -50,8 +50,13 @@ enum AmplitudeEvent: String {
     case viewMessages = "View Messages"
     
     // Social
-    case upvote = "Upvote"
+    case acceptConnectRequest = "Accept Connect Request"
+    case disconnect = "Disconnect"
+    case ignoreConnectRequest = "Ignore Connect Request"
     case searchForFriends = "Search For Friends"
+    case sendConnectRequest = "Send Connect Request"
+    case upvote = "Upvote"
+    case viewConnectionsList = "View Connections List"
     case viewOtherProfile = "View Other Profile"
     
     // Miscellaneous
@@ -60,6 +65,7 @@ enum AmplitudeEvent: String {
 
 enum AmplitudeUserProperty: String {
     case email = "Email"
+    case connections = "Connections"
     case signupDate = "Signup date"
     case signupMethod = "Signup method"
     case signupPlatform = "Signup platform"
@@ -68,8 +74,10 @@ enum AmplitudeUserProperty: String {
 
 enum AmplitudeProperty: String {
     case attachedPhoto = "attached photo"
+    case fromUser = "from user"
     case method = "method"
     case platform = "platform"
+    case toUser = "to user"
 }
 
 func logToAmplitude(event: AmplitudeEvent) {
@@ -108,6 +116,8 @@ func setUserPropertiesOnAccountCreation(userID: String, username: String, email:
             .setOnce(AmplitudeUserProperty.username.rawValue, value: NSString(string: username))
             .setOnce(AmplitudeUserProperty.email.rawValue, value: NSString(string: email))
             .setOnce(AmplitudeUserProperty.username.rawValue, value: NSString(string: username))
-            .setOnce(AmplitudeUserProperty.signupMethod.rawValue, value: NSString(string: signupMethod)) else { return }
+            .setOnce(AmplitudeUserProperty.signupMethod.rawValue, value: NSString(string: signupMethod))
+            .set(AmplitudeUserProperty.connections.rawValue, value: NSNumber(value: 0)) else { return }
     amplitude.identify(identify)
 }
+
