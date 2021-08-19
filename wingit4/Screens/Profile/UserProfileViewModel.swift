@@ -61,7 +61,6 @@ class UserProfileViewModel: ObservableObject {
             self.doneposts = doneposts
         }
     }
- 
     
     func updateConnectionsCount(userId: String) {
         Ref.FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in

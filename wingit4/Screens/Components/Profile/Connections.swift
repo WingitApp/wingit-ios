@@ -10,25 +10,16 @@ import SwiftUI
 struct Connections: View {
     
     var user: User?
-    @Binding var followingCount: Int
-    @Binding var followersCount: Int
+    @Binding var connectionsCount: Int
     
     var body: some View {
         HStack{
             NavigationLink(
-                destination: FollowerView(user: user!),
+                destination: ConnectionsView(user: user!),
                 label: {
                     HStack {
-                        Text("\(followersCount)").font(.caption).foregroundColor(.gray)
-                        Text("Followers").font(.caption2).foregroundColor(.gray)
-                    }.padding(.top, 5).padding(.trailing, 15)
-                })
-            NavigationLink(
-                destination: FollowingView(user: user!),
-                label: {
-                    HStack {
-                        Text("\(followingCount)").font(.caption).foregroundColor(.gray)
-                        Text("Following").font(.caption2).foregroundColor(.gray)
+                        Text("\(connectionsCount)").font(.caption).foregroundColor(.gray)
+                        Text("Connections").font(.caption2).foregroundColor(.gray)
                     }.padding(.top, 5).padding(.leading, 15)
                 })
             }

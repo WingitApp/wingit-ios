@@ -139,7 +139,6 @@
 		654DA41926BC7BD3002864B8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654DA41826BC7BD2002864B8 /* MainViewModel.swift */; };
 		657F35D626DE1D8D0092A1B2 /* Comment_v2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F35D526DE1D8D0092A1B2 /* Comment_v2.swift */; };
 		657F35DB26DEA0C00092A1B2 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F35DA26DEA0C00092A1B2 /* Device.swift */; };
-		6502C14626C5B5A4007C04C9 /* ConnectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6502C14526C5B5A3007C04C9 /* ConnectViewModel.swift */; };
 		6568193C26C2EDA400B27DC4 /* ConnectionsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6568193B26C2EDA400B27DC4 /* ConnectionsApi.swift */; };
 		6568193E26C2EDD400B27DC4 /* ConnectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6568193D26C2EDD400B27DC4 /* ConnectionsViewModel.swift */; };
 		6568194026C2EDEE00B27DC4 /* ConnectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6568193F26C2EDEE00B27DC4 /* ConnectionsView.swift */; };
@@ -274,7 +273,6 @@
 		654DA41826BC7BD2002864B8 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		657F35D526DE1D8D0092A1B2 /* Comment_v2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment_v2.swift; sourceTree = "<group>"; };
 		657F35DA26DEA0C00092A1B2 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
-		6502C14526C5B5A3007C04C9 /* ConnectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewModel.swift; sourceTree = "<group>"; };
 		6568193B26C2EDA400B27DC4 /* ConnectionsApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionsApi.swift; sourceTree = "<group>"; };
 		6568193D26C2EDD400B27DC4 /* ConnectionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionsViewModel.swift; sourceTree = "<group>"; };
 		6568193F26C2EDEE00B27DC4 /* ConnectionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionsView.swift; sourceTree = "<group>"; };
@@ -504,7 +502,6 @@
 				3B7AF0922671D474003BCCF3 /* CameraViewModel.swift */,
 				3B7AF0B22672C04A003BCCF3 /* ChatViewModel.swift */,
 				3B7AF0BC2672D2DD003BCCF3 /* FollowViewModel.swift */,
-				6502C14526C5B5A3007C04C9 /* ConnectViewModel.swift */,
 				654DA41826BC7BD2002864B8 /* MainViewModel.swift */,
 				3B7AF0BA2672CACE003BCCF3 /* MessageViewModel.swift */,
 				3B7AF0A42671EA03003BCCF3 /* PostPopularViewModel.swift */,
@@ -848,7 +845,6 @@
 				6568193C26C2EDA400B27DC4 /* ConnectionsApi.swift in Sources */,
 				3B7AF0772671B962003BCCF3 /* NotificationView.swift in Sources */,
 				151A3C8E26D41B5400A39FAF /* AskCardViewModel.swift in Sources */,
-				6502C14626C5B5A4007C04C9 /* ConnectViewModel.swift in Sources */,
 				3B75E3DB26715D26002F3108 /* Modifiers.swift in Sources */,
 				3BF143E626819E480093488D /* NotificationsApi.swift in Sources */,
 				156E6AD526D8A0A700690E47 /* NotificationEntry.swift in Sources */,

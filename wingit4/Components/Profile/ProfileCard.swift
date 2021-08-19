@@ -17,8 +17,7 @@ struct ProfileCard: View {
             ProfileInformation(user: self.session.currentUser)
             Connections(
               user: self.session.currentUser,
-              followingCount: $profileViewModel.followingCountState,
-              followersCount: $profileViewModel.followersCountState
+              connectionsCount: $profileViewModel.connectionsCountState
             )
             ProfileHeader(
               user: self.session.currentUser,

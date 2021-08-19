@@ -19,37 +19,27 @@ struct UserProfileView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 15){
                 ScrollView {
-//                    LazyVStack(alignment: .center, spacing: 15, pinnedViews: [.sectionHeaders], content: {
-                    VStack{
-                        ProfileInformation(user: self.user)
-                        Connections(
-                          user: self.user,
-                          followingCount: $userProfileViewModel.followingCountState,
-                          followersCount: $userProfileViewModel.followersCountState
-                        )
-                        ProfileHeader(
-                          user: self.user,
-                          postCount: userProfileViewModel.posts.count,
-                          doneCount: userProfileViewModel.doneposts.count
-                        )
-                        HStack(spacing: 15) {
-                          if userProfileViewModel.userBlocked == false {
-                            FollowButton(
-                              user: user,
-                              isFollowing: $userProfileViewModel.isFollowing,
-                              followingCount: $userProfileViewModel.followingCountState,
-                              followersCount: $userProfileViewModel.followersCountState
-                            )
-                            MessageButton(user: user)
-                          }
-                        }.padding(.leading, 20).padding(.trailing, 20)
-                       
-                    }
-                    .padding(.bottom, 10)
-                    .background(Color(.white))
-                    .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
-                    .padding(.leading, -40).padding(.trailing, -40)
-                 
+                   VStack {
+                      ProfileInformation(user: user)
+                      Connections(
+                        user: user,
+                        connectionsCount: $userProfileViewModel.connectionsCountState
+                      )
+                      ProfileHeader(
+                        user: user,
+                        postCount: userProfileViewModel.posts.count,
+                        doneCount: userProfileViewModel.doneposts.count
+                      )
+                      HStack(spacing: 15) {
+                        if userProfileViewModel.userBlocked == false {
+                          ConnectButton(
+                            user: user,
+                            isConnected: $userProfileViewModel.isConnected, hasPendingRequest: $userProfileViewModel.hasPendingRequest,
+                            connectionsCount: $userProfileViewModel.connectionsCountState
+                          )
+                          MessageButton(user: user)
+                        }
+                      }.padding(.leading, 20).padding(.trailing, 20)
                     
                     if !self.userProfileViewModel.posts.isEmpty {
                         ForEach(self.userProfileViewModel.posts, id: \.postId) { post in
@@ -75,75 +65,37 @@ struct UserProfileView: View {
     }
 }
 
-//struct userProfileCard: View {
-//
-//    var user: User
-//
-//    @ObservedObject var userProfileViewModel = UserProfileViewModel()
-//
-//    var body: some View {
-//        VStack{
-//            ProfileInformation(user: self.user)
-//            Connections(
-//              user: self.user,
-//              followingCount: $userProfileViewModel.followingCountState,
-//              followersCount: $userProfileViewModel.followersCountState
-//            )
-//            ProfileHeader(
-//              user: self.user,
-//              postCount: userProfileViewModel.posts.count,
-//              doneCount: userProfileViewModel.doneposts.count
-//            )
-//        }
-//        .background(Color(.white))
-//        .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
-//    }
-//}
+struct ConnectButton: View {
 
-
-struct FollowButton: View {
-
-    @ObservedObject var followViewModel = FollowViewModel()
+    @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
 
     var user: User
-    @Binding var following_Count: Int
-    @Binding var followers_Count: Int
-    @Binding var isFollowing: Bool
+    @Binding var connections_Count: Int
+    @Binding var isConnected: Bool
+    @Binding var hasPendingRequest: Bool
 
-    init(user: User, isFollowing: Binding<Bool>, followingCount: Binding<Int>, followersCount: Binding<Int>) {
+    init(user: User, isConnected: Binding<Bool>, hasPendingRequest: Binding<Bool>, connectionsCount: Binding<Int>) {
         self.user = user
-        self._following_Count = followingCount
-        self._followers_Count = followersCount
-        self._isFollowing = isFollowing
-
+        self._connections_Count = connectionsCount
+        self._isConnected = isConnected
+        self._hasPendingRequest = hasPendingRequest
     }
     
-
-    func follow() {
-        if !self.isFollowing {
-            followViewModel.follow(userId: user.id,  followingCount_onSuccess: { (followingCount) in
-                       self.following_Count = followingCount
-       }) { (followersCount) in
-           self.followers_Count = followersCount
-            }
-            self.isFollowing = true
-
-        } else {
-            followViewModel.unfollow(userId: user.id,  followingCount_onSuccess: { (followingCount) in
-                             self.following_Count = followingCount
-             }) { (followersCount) in
-                 self.followers_Count = followersCount
-                  }
-            self.isFollowing = false
+    func buttonTapped() {
+        if !self.isConnected && !self.hasPendingRequest {
+                connectionsViewModel.sendConnectRequest(userId: user.uid)
+                self.hasPendingRequest = true
+            } else if self.isConnected {
+                connectionsViewModel.disconnect(userId: user.uid,  connectionsCount_onSuccess: { (connectionsCount) in
+                             self.connections_Count = connectionsCount
+             })
+            self.isConnected = false
         }
     }
     
-    
     var body: some View {
-        Button(action: follow) {
-     
-            Text((self.isFollowing) ? "Unfollow" : "Follow").foregroundColor(Color("bw")).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal))
-   
+        Button(action: buttonTapped) {
+            Text((self.isConnected) ? "Disconnect" : (self.hasPendingRequest) ? "Pending" : "Connect").foregroundColor(Color("bw")).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal)).lineLimit(1)
         }
     }
 }
@@ -161,4 +113,5 @@ struct MessageButton: View {
             
         }
     }
+}
 }

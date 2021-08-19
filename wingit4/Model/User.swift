@@ -26,7 +26,6 @@ struct User: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id
-        case createdTime
         case uid
         case bio
         case canonicalEmail
