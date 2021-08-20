@@ -72,12 +72,10 @@ class ChatApi {
             snapshot.documentChanges.forEach { (documentChange) in
                 switch documentChange.type {
                 case .added:
-                //    print("type: added")
                     let dict = documentChange.document.data()
                     guard let decoderChat = try? Chat.init(fromDictionary: dict) else {return}
                     newChatMessage(decoderChat)
                     chatArray.append(decoderChat)
-                    
                 case .modified:
                     print("type: modified")
                 case .removed:
@@ -110,16 +108,14 @@ class ChatApi {
             snapshot.documentChanges.forEach { (documentChange) in
                 switch documentChange.type {
                 case .added:
-                    print("type: added")
                     let dict = documentChange.document.data()
                     guard let decoderInboxMessage = try? InboxMessage.init(fromDictionary: dict) else {return}
                     newInboxMessage(decoderInboxMessage)
                     inboxMessages.append(decoderInboxMessage)
-                    
                 case .modified:
-                    print("type: modified")
+                    break
                 case .removed:
-                    print("type: removed")
+                    break
                 }
             }
             

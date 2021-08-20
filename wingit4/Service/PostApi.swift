@@ -203,7 +203,6 @@ class PostApi {
                   switch documentChange.type {
                   case .added:
                     var posts = [Post]()
-                   //   print("type: added")
                       let dict = documentChange.document.data()
                       guard let decoderPost = try? Post.init(fromDictionary: dict) else {return}
                       newPost(decoderPost)
@@ -212,7 +211,6 @@ class PostApi {
                   case .modified:
                       print("type: modified")
                   case .removed:
-                    //    print("type: removed")
                       let dict = documentChange.document.data()
                        guard let decoderPost = try? Post.init(fromDictionary: dict) else {return}
                        deletePost(decoderPost)

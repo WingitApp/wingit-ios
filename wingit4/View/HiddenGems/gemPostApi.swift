@@ -101,7 +101,6 @@ class gemPostApi {
                   switch documentChange.type {
                   case .added:
                     var gemposts = [gemPost]()
-                  //    print("type: added")
                       let dict = documentChange.document.data()
                       guard let decodergemPost = try? gemPost.init(fromDictionary: dict) else {return}
                       newPost(decodergemPost)
@@ -110,7 +109,6 @@ class gemPostApi {
                   case .modified:
                       print("type: modified")
                   case .removed:
-               //       print("type: removed")
                       let dict = documentChange.document.data()
                        guard let decodergemPost = try? gemPost.init(fromDictionary: dict) else {return}
                        deletePost(decodergemPost)

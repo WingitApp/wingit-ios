@@ -25,16 +25,14 @@ class ActivityApi {
                   switch documentChange.type {
                   case .added:
                     var activityArray = [Activity]()
-                 //     print("type: added")
                       let dict = documentChange.document.data()
                       guard let decoderActivity = try? Activity.init(fromDictionary: dict) else {return}
                       newActivity(decoderActivity)
                       activityArray.append(decoderActivity)
                       onSuccess(activityArray)
                   case .modified:
-                      print("type: modified")
+                    break
                   case .removed:
-                 //     print("type: removed")
                       let dict = documentChange.document.data()
                        guard let decoderActivity = try? Activity.init(fromDictionary: dict) else {return}
                        deleteActivity(decoderActivity)

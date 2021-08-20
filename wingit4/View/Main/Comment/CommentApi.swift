@@ -43,13 +43,10 @@ class CommentApi {
             snapshot.documentChanges.forEach { (documentChange) in
                 switch documentChange.type {
                 case .added:
-                  //  print("type: added")
                     let dict = documentChange.document.data()
                     guard let decoderComment = try? Comment.init(fromDictionary: dict) else {return}
                     newComment(decoderComment)
                     comments.append(decoderComment)
-//                    print("documentChanges")
-//                    print(decoderComment.comment)
                 case .modified:
                     print("type: modified")
                 case .removed:
