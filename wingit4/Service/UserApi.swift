@@ -36,15 +36,16 @@ class UserApi {
     
     func loadUser(userId: String, onSuccess: @escaping(_ user: User) -> Void) {
         Ref.FIRESTORE_DOCUMENT_USERID(userId: userId).getDocument { (snapshot, error) in
-          guard let snap = snapshot else {
-            //   print("Error fetching data")
-              return
-          }
-         
-              let dict = snap.data()
-              guard let decoderUser = try? User.init(fromDictionary: dict) else {return}
-              
-            onSuccess(decoderUser)
+        guard let snap = snapshot else {
+            return
+        }
+        guard let dict = snap.data() else {
+            return
+        }
+        guard let decoderUser = try? User.init(fromDictionary: dict) else {
+            return
+        }
+        onSuccess(decoderUser)
       }
     }
   
