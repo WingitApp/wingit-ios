@@ -5,25 +5,35 @@
 //  Created by YaeRim Amy Chun on 6/9/21.
 //
 
-import Amplitude
 import SwiftUI
 
 struct SignupView: View {
-
     @ObservedObject var signupViewModel = SignupViewModel()
  
     var body: some View {
         VStack {
-            
-            SignUpTextField()
+            UserAvatar(
+              image: signupViewModel.image,
+              height: 80,
+              width: 80,
+              onTapGesture: {
+                self.signupViewModel.isImagePickerShown = true
+              }
+            )
+            Text(TEXT_IMAGE_UPLOAD)
+              .modifier(Caption2Style())
+              .multilineTextAlignment(.center)
+              .padding(.bottom, 40)
+            SignUpForm()
             Divider()
-            Text(TEXT_SIGNUP_NOTE).font(.footnote).foregroundColor(.gray).padding().lineLimit(nil)
-         
-                Text("By signing up, you agree to the").font(.caption).foregroundColor(.gray)
+            Text(TEXT_SIGNUP_NOTE)
+              .modifier(FootNote())
+              .padding()
+              .lineLimit(nil)
+            Text("By signing up, you agree to the")
+              .modifier(CaptionStyle())
             EULA()
-       
         }
-        //.sheet(isPresented: $signupViewModel.showscreen, content: { EULA() })
         .navigationBarTitle("Register", displayMode: .inline)
     }
 }
@@ -31,61 +41,57 @@ struct SignupView: View {
 struct EULA: View {
     var body: some View {
         HStack{
-            LINK_TERMS_OF_SERVICE.font(.caption).foregroundColor(.blue)
-            Text("and").font(.caption).foregroundColor(.gray)
-            LINK_PRIVACY_POLICY.font(.caption).foregroundColor(.blue)
+            LINK_TERMS_OF_SERVICE.modifier(LinkStyle())
+            Text("and").modifier(CaptionStyle())
+            LINK_PRIVACY_POLICY.modifier(LinkStyle())
         }
     }
 }
 
-struct SignUpTextField: View {
+struct SignUpForm: View {
     @ObservedObject var signupViewModel = SignupViewModel()
-    func signUp() {
-        logToAmplitude(event: .signupAttempt)
-        signupViewModel.signup(username: signupViewModel.username, bio: signupViewModel.bio, email: signupViewModel.email, password: signupViewModel.password, imageData: signupViewModel.imageData, completed: { (user) in
-            setUserPropertiesOnAccountCreation(userID: user.uid, username: user.username, email: user.email, signupMethod: "email")
-            logToAmplitude(event: .userSignup, properties: [.method: "email", .platform: "ios"])
-            self.clean()
-            // Switch to the Main App
-        }) { (errorMessage) in
-            self.signupViewModel.showAlert = true
-            self.signupViewModel.errorString = errorMessage
-            self.clean()
-        }
-    }
     
-    func clean() {
-        self.signupViewModel.username = ""
-        self.signupViewModel.bio = ""
-        self.signupViewModel.email = ""
-        self.signupViewModel.password = ""
-    }
+  
     var body: some View {
         VStack{
-            VStack{
-            signupViewModel.image.resizable().aspectRatio(contentMode: .fill).frame(width: 80, height: 80)
-                .clipShape(Circle())
-                .onTapGesture {
-                    self.signupViewModel.showImagePicker = true
-            }
-                Text("Tap on the image to add a picture :)").font(.caption2).foregroundColor(.gray).multilineTextAlignment(.center)
-            }.padding(.bottom, 40)
-            UsernameTextField(username: $signupViewModel.username)
-            BioTextField(bio: $signupViewModel.bio)
-            EmailTextField(email: $signupViewModel.email)
+            UsernameTextField(
+              username: $signupViewModel.username
+            )
+            BioTextField(
+              bio: $signupViewModel.bio
+            )
+            EmailTextField(
+              email: $signupViewModel.email
+            )
             VStack(alignment: .leading) {
-                PasswordTextField(password: $signupViewModel.password)
-                Text(TEXT_SIGNUP_PASSWORD_REQUIRED).font(.footnote).foregroundColor(.gray).padding([.leading])
+                PasswordTextField(
+                  password: $signupViewModel.password
+                )
+                Text(TEXT_SIGNUP_PASSWORD_REQUIRED)
+                  .modifier(FootNote())
+                  .padding([.leading])
             }
-            SignupButton(action: signUp, label: TEXT_SIGN_UP).alert(isPresented: $signupViewModel.showAlert) {
-                Alert(title: Text("Error"), message: Text(self.signupViewModel.errorString), dismissButton: .default(Text("OK")))
+            SignupButton(
+              action: signupViewModel.signup,
+              label: TEXT_SIGN_UP
+            ).alert(
+              isPresented: $signupViewModel.isAlertShown
+            ) {
+                Alert(
+                  title: Text("Error"),
+                  message: Text(self.signupViewModel.errorString),
+                  dismissButton: .default(Text("OK"))
+                )
             }
         }
         .onTapGesture { dismissKeyboard() }
         .onAppear{ logToAmplitude(event: .viewSignupScreen) }
-        .sheet(isPresented: $signupViewModel.showImagePicker) {
-          // ImagePickerController()
-           ImagePicker(showImagePicker: self.$signupViewModel.showImagePicker, pickedImage: self.$signupViewModel.image, imageData: self.$signupViewModel.imageData)
+        .sheet(isPresented: $signupViewModel.isImagePickerShown) {
+           ImagePicker(
+            showImagePicker: self.$signupViewModel.isImagePickerShown,
+            pickedImage: self.$signupViewModel.image,
+            imageData: self.$signupViewModel.imageData
+           )
         }
     }
 }

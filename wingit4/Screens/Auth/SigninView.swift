@@ -25,9 +25,9 @@ struct SigninView: View {
                SigninButton(
                 action: signinViewModel.signin,
                 label: TEXT_SIGN_IN
-               ).alert(isPresented: $signinViewModel.showAlert) {
+               ).alert(isPresented: $signinViewModel.isAlertShown) {
                     Alert(
-                        title: Text("Error"),
+                        title: Text("Something went wrong..."),
                         message: Text(self.signinViewModel.errorString),
                         dismissButton: .default(Text("OK"))
                     )
