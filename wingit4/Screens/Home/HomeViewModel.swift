@@ -14,23 +14,29 @@ class HomeViewModel: ObservableObject {
     
     @Published var posts: [Post] = []
     @Published var isLoading = false
+    @Published var selection: Selection = .posts
+    @Published var isFetching: Bool = true
+
     
     var user: User!
    
     var listener: ListenerRegistration!
-//    init() {
-//        loadTimeline()
-//    }
-    
-    
+  
+  func onSelectionChange(selection: Selection) {
+    print("SELECTION: \(selection)")
+    self.selection = selection
+    print("SELF.SELECTION: \(self.selection)")
+
+  }
     func loadTimeline() {
         self.posts = []
         isLoading = true
         
-        Api.Post.loadTimeline(onSuccess: { (posts) in
-            self.isLoading = false
+        Api.Post.loadTimeline(
+          onSuccess: { (posts) in
             if self.posts.isEmpty {
                 self.posts = posts
+              self.isLoading = false
             }
         }, newPost: { (post) in
             if !self.posts.isEmpty {

@@ -9,19 +9,23 @@ import Foundation
 import SwiftUI
 
 enum Selection: Int, CaseIterable, Identifiable {
-    case friends
+    case posts
     case globe
+    case image
     
     var id: UUID {
         return UUID()
     }
     
-    var image: Text {
+    var label: Text {
         switch self {
-        case .friends:
+        case .posts:
+          return Text("Asks")
+        case .image:
             return Text("Asks")
         case .globe:
             return Text("Recommendations")
         }
+        
     }
 }
