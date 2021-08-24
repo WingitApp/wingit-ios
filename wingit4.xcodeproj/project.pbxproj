@@ -33,7 +33,6 @@
 		3B75E3E1267163FC002F3108 /* Signin+HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B75E3E0267163FC002F3108 /* Signin+HeaderView.swift */; };
 		3B75E3E32671657F002F3108 /* UsernameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B75E3E22671657F002F3108 /* UsernameTextField.swift */; };
 		3B75E3E526716787002F3108 /* SignupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B75E3E426716787002F3108 /* SignupButton.swift */; };
-		3B75E3E726716BD0002F3108 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B75E3E626716BD0002F3108 /* GoogleService-Info.plist */; };
 		3B75E3F426716E41002F3108 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B75E3F326716E41002F3108 /* ImagePicker.swift */; };
 		3B7AF02E2671816A003BCCF3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AF02D2671816A003BCCF3 /* User.swift */; };
 		3B7AF03026718263003BCCF3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7AF02F26718263003BCCF3 /* Extensions.swift */; };
@@ -217,6 +216,7 @@
 		3BF143E526819E480093488D /* NotificationsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsApi.swift; sourceTree = "<group>"; };
 		6502C14226C4FF52007C04C9 /* SecretsDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsDebug.xcconfig; sourceTree = "<group>"; };
 		6502C14326C5024C007C04C9 /* SecretsRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsRelease.xcconfig; sourceTree = "<group>"; };
+		6531022F26D4CB0B00EEF041 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6531838226B238AA0006D9E2 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		654DA41826BC7BD2002864B8 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -299,7 +299,7 @@
 				3B7AF06426719EA8003BCCF3 /* ViewModel */,
 				3B75E3C3267153BB002F3108 /* Assets.xcassets */,
 				3B75E3C8267153BB002F3108 /* LaunchScreen.storyboard */,
-				3B75E3E626716BD0002F3108 /* GoogleService-Info.plist */,
+				653BBDE926D485FA002F6A2E /* Firebase */,
 				3B75E3CB267153BB002F3108 /* Info.plist */,
 				3B75E3C5267153BB002F3108 /* Preview Content */,
 			);
@@ -541,6 +541,31 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
+		653BBDE926D485FA002F6A2E /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				653BBDEA26D48649002F6A2E /* Dev */,
+				653BBDEB26D4864F002F6A2E /* Prod */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		653BBDEA26D48649002F6A2E /* Dev */ = {
+			isa = PBXGroup;
+			children = (
+				3B75E3E626716BD0002F3108 /* GoogleService-Info.plist */,
+			);
+			path = Dev;
+			sourceTree = "<group>";
+		};
+		653BBDEB26D4864F002F6A2E /* Prod */ = {
+			isa = PBXGroup;
+			children = (
+				6531022F26D4CB0B00EEF041 /* GoogleService-Info.plist */,
+			);
+			path = Prod;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -550,6 +575,7 @@
 			buildPhases = (
 				3B75E3B6267153BA002F3108 /* Sources */,
 				3B75E3B7267153BA002F3108 /* Frameworks */,
+				653BBDED26D48956002F6A2E /* Setup Firebase Environment GoogleService-Info.plist */,
 				3B75E3B8267153BA002F3108 /* Resources */,
 			);
 			buildRules = (
@@ -613,7 +639,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B75E3E726716BD0002F3108 /* GoogleService-Info.plist in Resources */,
 				3B75E3CA267153BB002F3108 /* LaunchScreen.storyboard in Resources */,
 				3B75E3C7267153BB002F3108 /* Preview Assets.xcassets in Resources */,
 				3B75E3C4267153BB002F3108 /* Assets.xcassets in Resources */,
@@ -621,6 +646,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		653BBDED26D48956002F6A2E /* Setup Firebase Environment GoogleService-Info.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Setup Firebase Environment GoogleService-Info.plist";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Name of the resource we're selectively copying\nGOOGLESERVICE_INFO_PLIST=GoogleService-Info.plist\n\n# Get references to dev and prod versions of the GoogleService-Info.plist\n# NOTE: These should only live on the file system and should NOT be part of the target (since we'll be adding them to the target manually)\nGOOGLESERVICE_INFO_DEV=${PROJECT_DIR}/${TARGET_NAME}/Firebase/Dev/${GOOGLESERVICE_INFO_PLIST}\nGOOGLESERVICE_INFO_PROD=${PROJECT_DIR}/${TARGET_NAME}/Firebase/Prod/${GOOGLESERVICE_INFO_PLIST}\n\n# Make sure the dev version of GoogleService-Info.plist exists\necho \"Looking for ${GOOGLESERVICE_INFO_PLIST} in ${GOOGLESERVICE_INFO_DEV}\"\nif [ ! -f $GOOGLESERVICE_INFO_DEV ]\nthen\n    echo \"No Development GoogleService-Info.plist found. Please ensure it's in the proper directory.\"\n    exit 1\nfi\n\n# Make sure the prod version of GoogleService-Info.plist exists\necho \"Looking for ${GOOGLESERVICE_INFO_PLIST} in ${GOOGLESERVICE_INFO_PROD}\"\nif [ ! -f $GOOGLESERVICE_INFO_PROD ]\nthen\n    echo \"No Production GoogleService-Info.plist found. Please ensure it's in the proper directory.\"\n    exit 1\nfi\n\n# Get a reference to the destination location for the GoogleService-Info.plist\nPLIST_DESTINATION=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\necho \"Will copy ${GOOGLESERVICE_INFO_PLIST} to final destination: ${PLIST_DESTINATION}\"\n\n# Copy over the prod GoogleService-Info.plist for Release builds\nif [ \"${CONFIGURATION}\" == \"Release\" ]\nthen\n    echo \"Using ${GOOGLESERVICE_INFO_PROD}\"\n    cp \"${GOOGLESERVICE_INFO_PROD}\" \"${PLIST_DESTINATION}\"\nelse\n    echo \"Using ${GOOGLESERVICE_INFO_DEV}\"\n    cp \"${GOOGLESERVICE_INFO_DEV}\" \"${PLIST_DESTINATION}\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3B75E3B6267153BA002F3108 /* Sources */ = {

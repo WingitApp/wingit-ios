@@ -1,3 +1,4 @@
 wingit4.xcodeproj/
 Config/SecretsDebug.xcconfig
 Config/SecretsRelease.xcconfig
+Firebase/Prod/GoogleService-Info.plist
