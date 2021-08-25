@@ -18,7 +18,6 @@ struct UserAvatar: View {
     onTapGesture()
   }
   
-  
   var body: some View {
     image
       .resizable()

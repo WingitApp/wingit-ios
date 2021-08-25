@@ -37,6 +37,14 @@ struct BodyStyle: ViewModifier {
     content
   }
 }
+
+struct TimeStampStyle: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+    
+  }
+}
+
 struct TextStyle: ViewModifier {
   func body(content: Content) -> some View {
     content
@@ -66,3 +74,10 @@ struct Caption2Style: ViewModifier {
   }
 }
 
+struct UserNameStyle: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .font(.subheadline)
+//      .bold()
+  }
+}

@@ -9,9 +9,9 @@ import SwiftUI
 import URLImage
 
 struct ImageView: View {
-    
-    @ObservedObject var headerCellViewModel = HeaderCellViewModel()
-    @Environment(\.presentationMode) var presentationmode
+  var post: Post
+
+  @Environment(\.presentationMode) var presentationmode
     
     var body: some View {
         
@@ -23,7 +23,7 @@ struct ImageView: View {
             Color.black
                 .ignoresSafeArea()
             
-            URLImage(URL(string: headerCellViewModel.post.mediaUrl)!,
+            URLImage(URL(string: post.mediaUrl)!,
                   content: {
                       $0.image
                           .resizable()

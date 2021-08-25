@@ -25,8 +25,8 @@ struct HomeView: View {
           HomeFeed()
         }
         .padding(.top, 10)
-        .navigationBarTitle(Text("WingIt!"), displayMode: .inline)
         .onAppear( perform: onAppear )
+        .navigationBarTitle(Text("WingIt!"), displayMode: .inline)
         .navigationBarItems(leading:
                                     Button(action: {}) {
                                         
