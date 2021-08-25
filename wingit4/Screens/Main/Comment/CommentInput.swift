@@ -7,22 +7,16 @@
 
 import SwiftUI
 import URLImage
+
 struct CommentInput: View {
     @EnvironmentObject var session: SessionStore
+    @Binding var post: Post
     @ObservedObject var commentInputViewModel = CommentInputViewModel()
     
     @State var composedMessage: String = ""
     
-    init(post: Post?, postId: String?) {
-        if post != nil {
-            commentInputViewModel.post = post
-        } else {
-            handleInputViewModel(postId: postId!)
-        }
-    }
-    
-    func handleInputViewModel(postId: String) {
-        Api.Post.loadPost(postId: postId) { (post) in
+    func handleInputViewModel() {
+      Api.Post.loadPost(postId: post.postId) { (post) in
             self.commentInputViewModel.post = post
         }
     }

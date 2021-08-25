@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct AskCard: View {
-  var post: Post
+  
+  @State var post: Post
   var isProfileView: Bool
   
   @EnvironmentObject var homeViewModel: HomeViewModel
@@ -16,12 +17,11 @@ struct AskCard: View {
   @StateObject var ellipsisMenuViewModel = EllipsisMenuViewModel()
   @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
 
-  
   var body: some View {
     VStack{
-      HeaderCell(post: post)
-      BodyCell(post: post)
-      FooterCell(post: post)
+      HeaderCell(post: $post)
+      BodyCell(post: $post)
+      FooterCell(post: $post)
     }
     .environmentObject(askCardViewModel)
     .environmentObject(ellipsisMenuViewModel)
@@ -35,7 +35,7 @@ struct AskCard: View {
     .sheet(
       isPresented: $askCardViewModel.isImageModalOpen,
       content: {
-        ImageView(post: post)
+        ImageView(post: $post)
     })
     .sheet(
       isPresented: $ellipsisMenuViewModel.isReportModalOpen,

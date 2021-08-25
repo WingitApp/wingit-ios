@@ -9,8 +9,7 @@ import SwiftUI
 import URLImage
 
 struct ImageView: View {
-  var post: Post
-
+  @Binding var post: Post
   @Environment(\.presentationMode) var presentationmode
     
     var body: some View {

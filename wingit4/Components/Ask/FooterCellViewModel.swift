@@ -11,22 +11,22 @@ import Firebase
 import FirebaseAuth
 
 class FooterCellViewModel: ObservableObject {
+  @Published var isLoading = false
+  @Published var isLikedByUser = false
+  
+  let uid = Auth.auth().currentUser!.uid
     
-    var post: Post!
-    @Published var isLoading = false
-    @Published var isLiked = false
-    let uid = Auth.auth().currentUser!.uid
-    
-    func checkPostIsLiked() {
-        isLiked = (post.likes["\(uid)"] == true) ? true : false
+  func checkPostIsLiked(post: Post) {
+    if  post.likes["\(uid)"] != nil {
+      self.isLikedByUser.toggle()
     }
+  }
 
-    func like() {
-        post.likeCount += 1
-        isLiked = true
-        
-        Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: post.ownerId).collection("userPosts").document(post.postId).updateData(["likes.\(uid)" : true,
-                                                                                                                               "likeCount":  post.likeCount])
+  func like(post: Post) {
+        Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: post.ownerId)
+          .collection("userPosts")
+          .document(post.postId)
+          .updateData(["likes.\(uid)" : true, "likeCount":  post.likeCount])
         Ref.FIRESTORE_COLLECTION_ALL_ASKS.document(post.postId).updateData(["likes.\(uid)" : true,
                                                                              "likeCount":  post.likeCount])
         Ref.FIRESTORE_TIMELINE_DOCUMENT_USERID(userId: post.ownerId).collection("timelinePosts").document(post.postId).updateData(["likes.\(uid)" : true,
@@ -39,12 +39,11 @@ class FooterCellViewModel: ObservableObject {
 
             Ref.FIRESTORE_COLLECTION_ACTIVITY.document(post.ownerId).collection("feedItems").document(activityId).setData(activityDict)
         }
+    self.isLikedByUser.toggle()
+
     }
     
-    func unlike() {
-        post.likeCount -= 1
-        isLiked = false
-        
+  func unlike(post: Post) {
         Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: post.ownerId).collection("userPosts").document(post.postId).updateData(["likes.\(uid)" : false,
                                                                                                                                   "likeCount":  post.likeCount])
         Ref.FIRESTORE_COLLECTION_ALL_ASKS.document(post.postId).updateData(["likes.\(uid)" : false,
@@ -60,6 +59,9 @@ class FooterCellViewModel: ObservableObject {
                 }
             }
          }
+    
+    self.isLikedByUser.toggle()
+
     }
 
         

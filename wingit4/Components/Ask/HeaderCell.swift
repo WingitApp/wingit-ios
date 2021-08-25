@@ -11,17 +11,8 @@ import FirebaseAuth
 
 struct HeaderCell: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
-  @ObservedObject var headerCellViewModel = HeaderCellViewModel()
+  @Binding var post: Post
   
-  var post: Post
-
-    @State var reportScreen: Bool = false
-    @State var ImageScreen: Bool = false
-    @State var done: Bool = false
-    @State var isProfileView: Bool = false
-  
-  
-        
     var body: some View {
         VStack {
             HStack {
@@ -36,7 +27,7 @@ struct HeaderCell: View {
               }.disabled(self.askCardViewModel.isNavLinkDisabled)
               Text(post.username).modifier(UserNameStyle())
               Spacer()
-              AskDoneToggle() // rename later
+//              AskDoneToggle() // rename later
               EllipsisMenu()
             }.padding(.trailing, 15).padding(.leading, 15)
         }

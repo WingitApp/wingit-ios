@@ -81,3 +81,10 @@ struct UserNameStyle: ViewModifier {
 //      .bold()
   }
 }
+
+struct ActionIconStyle: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .padding(.trailing, 15).padding(.leading, 15)
+  }
+}

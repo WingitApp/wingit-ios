@@ -20,6 +20,7 @@ class AskCardViewModel: ObservableObject {
   @Published var isOwnPost: Bool = false
   @Published var isNavLinkDisabled: Bool = true
   @Published var isImageModalOpen: Bool = false
+  @Published var isCommentsModalOpen: Bool = false
   
   
   func initVM(post: Post, isProfileView: Bool) -> Void {
@@ -28,6 +29,7 @@ class AskCardViewModel: ObservableObject {
     self.isOwnPost = uid == post.ownerId
     self.getUserFromPost()
   }
+  
   
   func getUserFromPost(){
     let postOwnerId = self.post!.ownerId
@@ -76,6 +78,8 @@ class AskCardViewModel: ObservableObject {
         }
     }
   }
+  
+  
   
   
 }

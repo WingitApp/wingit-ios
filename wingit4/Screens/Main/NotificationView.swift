@@ -22,9 +22,10 @@ struct NotificationView: View {
                             if activity.type == "comment" {
                                 ZStack {
                                     CommentActivityRow(activity: activity)
-                                    NavigationLink(destination: CommentView(postId: activity.postId)) {
-                                        EmptyView()
-                                    }
+                                  //todo
+//                                    NavigationLink(destination: CommentView(postId: activity.postId)) {
+//                                        EmptyView()
+//                                    }
                                 }
                                 
                             } 

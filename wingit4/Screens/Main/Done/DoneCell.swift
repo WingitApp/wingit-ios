@@ -116,7 +116,7 @@ struct DoneCell: View {
             doneImageView(donepost: doneViewModel.donepost)
         })
         .sheet(isPresented: $showComments, content: {
-            CommentView(postId: doneViewModel.donepost.postId)
+//            CommentView(postId: doneViewModel.donepost.postId)
         })
         .onAppear {
             self.commentViewModel.postId = doneViewModel.post == nil ? doneViewModel.donepost.postId : doneViewModel.donepost.postId

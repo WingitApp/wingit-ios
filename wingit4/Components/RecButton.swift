@@ -17,7 +17,6 @@ struct RecButton: View {
             HStack{
                 Text("Refer someone you know")
                 Text("🙏🏻")
-              //  Text("💌")
             }.font(.caption)
         })
         

@@ -23,6 +23,10 @@ struct FooterCell: View {
         self.footerCellViewModel.post = post
         self.footerCellViewModel.checkPostIsLiked()
     }
+  @Binding var post: Post
+  @EnvironmentObject var askCardViewModel: AskCardViewModel
+  @StateObject var footerCellViewModel = FooterCellViewModel()
+  @ObservedObject var commentViewModel = CommentViewModel()
     
 //    func sharePost(){
 //        footerCellViewModel.shareButtonTapped { post in
@@ -31,7 +35,6 @@ struct FooterCell: View {
 //    }
     
     var body: some View {
-       
         VStack(alignment: .leading, spacing: 8) {
             
             HStack {
@@ -80,13 +83,18 @@ struct FooterCell: View {
         .onAppear {
             self.commentViewModel.postId = self.footerCellViewModel.post == nil ? self.footerCellViewModel.post.postId : self.footerCellViewModel.post?.postId
             self.commentViewModel.loadComments()
+          LikeButton(post: $post)
+            .modifier(ActionIconStyle())
+          RecButton()
+            .modifier(ActionIconStyle())
+          Divider()
         }
-        .onDisappear {
-            if self.commentViewModel.listener != nil {
-                self.commentViewModel.listener.remove()
-            }
-        }
-    
+        .environmentObject(footerCellViewModel)
+        .sheet(
+          isPresented: $askCardViewModel.isCommentsModalOpen,
+          content: { CommentView(post: $post) }
+        )
+
     }
     
     func createDLink(){

@@ -11,10 +11,9 @@ import URLImage
 struct CommentView: View {
     
     @ObservedObject var commentViewModel = CommentViewModel()
-
-    var post: Post?
     var postId: String?
     
+    @Binding var post: Post
     
     var body: some View {
         VStack {
@@ -29,11 +28,10 @@ struct CommentView: View {
                    }
                 }
             }
-            CommentInput(post: post, postId: postId)
+            CommentInput(post: $post)
         }.onTapGesture { dismissKeyboard() }
          .padding(.top, 15).navigationBarTitle(Text(""), displayMode: .inline)
             .onAppear {
-                self.commentViewModel.postId = self.post == nil ? self.postId : self.post?.postId
                 self.commentViewModel.loadComments()
             }.onDisappear {
                 if self.commentViewModel.listener != nil {
