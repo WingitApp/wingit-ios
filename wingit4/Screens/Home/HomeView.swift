@@ -21,45 +21,29 @@ struct HomeView: View {
     var body: some View {
       NavigationView {
         VStack(alignment: .leading, spacing: 15) {
-          FeedToggle()
+//          FeedToggle()
           HomeFeed()
         }
         .padding(.top, 10)
         .onAppear( perform: onAppear )
         .navigationBarTitle(Text("WingIt!"), displayMode: .inline)
         .navigationBarItems(leading:
-                                    Button(action: {}) {
-                                        
-                                        NavigationLink(destination: UsersView()) {
-                                            Image(systemName: "person.badge.plus").imageScale(Image.Scale.large).foregroundColor(.gray)
-                                        }
-                                    },
-                                trailing: Button(action: {}) {
-                          NavigationLink(destination: MessagesView()) {
-                              Image(systemName: "envelope").imageScale(Image.Scale.large).foregroundColor(.gray)
-                          }
-                      }
-            )
-           .onDisappear {
-                if self.homeViewModel.listener != nil {
-                    self.homeViewModel.listener.remove()
-
-                }
-             }
+          Button(action: {}) {
+            NavigationLink(destination: UsersView()) {
+              Image(systemName: "person.badge.plus")
+                .imageScale(Image.Scale.large)
+                .foregroundColor(.gray)
+            }
+          },trailing: Button(action: {}) {
+            NavigationLink(destination: MessagesView()) {
+              Image(systemName: "envelope").imageScale(Image.Scale.large).foregroundColor(.gray)
+            }
+          })
+        .onDisappear {
+          if self.homeViewModel.listener != nil {
+            self.homeViewModel.listener.remove()
+          }
+        }
       }.environmentObject(homeViewModel)
-
     }
 }
-
-//struct HomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeView()
-//    }
-//}
-
-
-
-
-
-
-
