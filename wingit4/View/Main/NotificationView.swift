@@ -27,14 +27,7 @@ struct NotificationView: View {
                                     }
                                 }
                                 
-                            } else if activity.type == "gemComment" {
-                                ZStack {
-                                    CommentActivityRow(activity: activity)
-                                    NavigationLink(destination: gemCommentView(postId: activity.postId)) {
-                                        EmptyView()
-                                    }
-                                }
-                            }
+                            } 
                             else {
                                 URLImage(URL(string: activity.userAvatar)!,
                                                              content: {

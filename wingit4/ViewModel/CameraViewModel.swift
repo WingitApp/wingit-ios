@@ -39,18 +39,5 @@ class CameraViewModel: ObservableObject {
           }
 
     }
-    
-    func shareGem(completed: @escaping() -> Void,  onError: @escaping(_ errorMessage: String) -> Void) {
- 
-        if !caption.isEmpty && !imageData.isEmpty {
-            logToAmplitude(event: .postRec)
-            Api.gemPost.uploadPost(caption: caption, imageData: imageData, onSuccess: completed, onError: onError)
-          } else {
-            logToAmplitude(event: .postRecError)
-            showAlert = true
-            errorString = "Please fill in all fields"
-          }
-
-    }
-    
+        
 }

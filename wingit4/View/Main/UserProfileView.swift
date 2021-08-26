@@ -8,39 +8,23 @@
 
 import SwiftUI
 import FirebaseAuth
+import URLImage
 
 struct UserProfileView: View {
    
     var user: User
 
     @ObservedObject var profileViewModel = ProfileViewModel()
-    @State var selection: Selection = .globe
     
-//    func usertoPost(){
-//        if self.user.uid == self.profileViewModel.post.ownerId {
-//            let user = Post
-//        }
-//    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 15){
-            Picker(selection: $selection, label: Text("Grid or Table")) {
-                       ForEach(Selection.allCases) { selection in
-                           selection.image.tag(selection)
-
-                       }
-            }
-            .pickerStyle(SegmentedPickerStyle()).padding(.leading, 20).padding(.trailing, 20)
-            .onChange(of: selection) { selection in
-                if selection == .globe {
-                    logToAmplitude(event: .viewOthersRecs)
-                } else {
-                    logToAmplitude(event: .viewOthersRequests)
-                }
-            }
+            
                 ScrollView {
                    VStack {
-                    ProfileHeader(user: user, postCount: profileViewModel.posts.count, gemPostCount: profileViewModel.gemposts.count, doneCount: profileViewModel.doneposts.count, followingCount: $profileViewModel.followingCountState, followersCount: $profileViewModel.followersCountState)
+                    ProfileInformation(user: user)
+                    Connections(user: user, followingCount: $profileViewModel.followingCountState, followersCount: $profileViewModel.followersCountState)
+                    ProfileHeader(user: user, postCount: profileViewModel.posts.count, doneCount: profileViewModel.doneposts.count)
 
                     HStack(spacing: 15) {
                 if profileViewModel.userBlocked == false {
@@ -52,34 +36,19 @@ struct UserProfileView: View {
                     Divider()
                     
                     if !profileViewModel.isLoading {
-                                  if selection == .globe {
-                                    ForEach(self.profileViewModel.gemposts, id: \.postId) { gempost in
-                                        VStack {
-                                            
-                                            gemHeader(gempost: gempost, isProfileView: true)
-                                           
-                                        }
-                                    }
-                                 } else {
                                     ForEach(self.profileViewModel.posts, id: \.postId) { post in
                                         VStack {
-                                            HeaderCell(
-                                                post: post,
-                                                isProfileView: true
-                                            )
-                                            FooterCell(post: post)
+                                            CardView(post: post)
                                         }
                                    }
-
-                                     
-                                  }
-                      
                     }
                        
                 }
                                  
                 }
-               }.padding(.top, 10) .navigationBarTitle(Text(self.user.username), displayMode: .automatic)
+               }.background(Color.black.opacity(0.03)
+                .ignoresSafeArea(.all, edges: .all))
+                .padding(.top, 10) .navigationBarTitle(Text(self.user.username), displayMode: .automatic)
                  .onAppear {
                     logToAmplitude(event: .viewOtherProfile)
                     self.profileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.user.uid)

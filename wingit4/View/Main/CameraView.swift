@@ -27,20 +27,7 @@ struct CameraView: View {
            self.clean()
         }
     }
-    
-    func shareGem() {
-       // cameraViewModel.uploadPost
-        cameraViewModel.shareGem(completed: {
-        //   print("done")
-           self.clean()
-        }) { (errorMessage) in
-       //     print("Error: \(errorMessage)")
-           self.cameraViewModel.showAlert = true
-           self.cameraViewModel.errorString = errorMessage
-           self.clean()
-        }
-    }
-    
+        
     func clean() {
       self.cameraViewModel.caption = ""
         self.cameraViewModel.image = Image(systemName: IMAGE_PHOTO)
@@ -73,24 +60,15 @@ struct CameraView: View {
             }.sheet(isPresented: $cameraViewModel.showImagePicker) {
                // ImagePickerController()
                 ImagePicker(showImagePicker: self.$cameraViewModel.showImagePicker, pickedImage: self.$cameraViewModel.image, imageData: self.$cameraViewModel.imageData)
-            }.navigationBarTitle(Text("Ask for recs or recommend!"), displayMode: .inline)
-             .navigationBarItems(trailing: Menu(content: {
-                
+            }
+             .navigationBarItems(trailing:
+                                    
                 Button(action: sharePost) {
 
-                    Text("Ask!")
+                    Text("Wingit!")
                 }
-                
-                Button(action: shareGem) {
-                    
-                    Text("Post Rec")
-                }
-
-            }, label: {
-
-                Text("Post").foregroundColor(.gray)
-        
-            }).alert(isPresented: $cameraViewModel.showAlert) {
+           
+             .alert(isPresented: $cameraViewModel.showAlert) {
                 Alert(title: Text("Error"), message: Text(self.cameraViewModel.errorString), dismissButton: .default(Text("OK")))
             }
             ).foregroundColor(.gray)

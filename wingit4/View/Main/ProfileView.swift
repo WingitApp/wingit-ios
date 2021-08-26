@@ -15,55 +15,32 @@ struct ProfileView: View {
     @ObservedObject var profileViewModel = ProfileViewModel()
 
     @State var postCountState = 0
-    @State var selection: Selection = .globe
 
     
        var body: some View {
          
         NavigationView {
             VStack(alignment: .leading, spacing: 15){
-                Picker(selection: $selection, label: Text("Grid or Table")) {
-                   ForEach(Selection.allCases) { selection in
-                       selection.image.tag(selection)
-
-                   }
-                }
-                .pickerStyle(SegmentedPickerStyle()).padding(.leading, 20).padding(.trailing, 20).background(Color.clear)
-                .onChange(of: selection) { selection in
-                    if selection == .globe {
-                        logToAmplitude(event: .viewOwnRecs)
-                    } else {
-                        logToAmplitude(event: .viewOwnRequests)
-                    }
-                }
            ScrollView {
                VStack {
-            
-                ProfileHeader(user: self.session.userSession, postCount: profileViewModel.posts.count, gemPostCount: profileViewModel.gemposts.count, doneCount: profileViewModel.doneposts.count, followingCount: $profileViewModel.followingCountState, followersCount: $profileViewModel.followersCountState)
+                ProfileInformation(user: self.session.userSession)
+                Connections(user: self.session.userSession, followingCount: $profileViewModel.followingCountState, followersCount: $profileViewModel.followersCountState)
+                ProfileHeader(user: self.session.userSession, postCount: profileViewModel.posts.count, doneCount: profileViewModel.doneposts.count)
             
                Divider()
                 if !profileViewModel.isLoading {
-                    if selection == .globe {
-                        ForEach(self.profileViewModel.gemposts, id: \.postId) { gempost in
-                            VStack {
-
-                               gemHeader(gempost: gempost, isProfileView: true)
-
-                            }
-                        }
-
-                    } else {
                         ForEach(self.profileViewModel.posts, id: \.postId) { post in
                             VStack {
-                                HeaderCell(post: post, isProfileView: true)
-                                FooterCell(post: post)
+                                CardView(post: post)
                             }
                         }
-                    }
+                    
                 }
                 }.padding(.top, 5)
                 }
         }.padding(.top, 10)
+        .background(Color.black.opacity(0.03)
+        .ignoresSafeArea(.all, edges: .all))
          .navigationBarTitle(Text("Profile"), displayMode: .inline).navigationBarItems(leading:
                     Button(action: {}) {
                         NavigationLink(destination: UsersView()) {

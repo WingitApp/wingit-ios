@@ -8,61 +8,43 @@
 import SwiftUI
 import FirebaseAuth
 
-struct HomeView: View {
+struct
+HomeView: View {
     
     @ObservedObject var homeViewModel = HomeViewModel()
     //@ObservedObject var profileViewModel = ProfileViewModel()
     @ObservedObject var headerCellViewModel = HeaderCellViewModel()
     @State var selection: Selection = .friends
     
+   // @Environment(\.deepLink) var deepLink
+   // var posts: [Post] = Bundle.main.decode("post.json")
+    @State var cellSelected: Int?
+
+    
     var body: some View {
 //        ZStack{
 //            FollowingCount(followingCount: $profileViewModel.followingCountState)
         NavigationView {
+            ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)){
             VStack(alignment: .leading, spacing: 15) {
-            Picker(selection: $selection, label: Text("Grid or Table")) {
-               ForEach(Selection.allCases) { selection in
-                   selection.image.tag(selection)
-
-               }
-            }
-            .pickerStyle(SegmentedPickerStyle()).padding(.leading, 20).padding(.trailing, 20)
-            .onChange(of: selection) { selection in
-                if selection == .globe {
-                    logToAmplitude(event: .viewHomeRecsFeed)
-                } else {
-                    logToAmplitude(event: .viewHomeRequestsFeed)
-                }
-            }
-           ScrollView {
+        
+            ScrollView {
            
                
             if !homeViewModel.isLoading {
-                if selection == .friends {
+               
                     ForEach(self.homeViewModel.posts, id: \.postId) { post in
                           
                         VStack {
-                            HeaderCell(
-                                post: post,
-                                isProfileView: false
-                            )
-                              FooterCell(post: post)
-                          }.padding(.top, 10)
+                            CardView(post: post)
+                          }
                       }
-                } else {
-                    ForEach(self.homeViewModel.gemposts, id: \.postId) { gempost in
-                        
-                        VStack {
-                            gemHeader(gempost: gempost, isProfileView: false)
-                          }.padding(.top, 10)
-                      }
-                }
+               
             }
            }
            }.padding(.top, 10)
            .navigationBarTitle(Text("WingIt!"), displayMode: .inline).onAppear {
                  self.homeViewModel.loadTimeline()
-                 self.homeViewModel.loadGemTimeline()
                //  self.profileViewModel.updateFollowCount(userId: Auth.auth().currentUser!.uid)
            }.navigationBarItems(leading:
                                     Button(action: {}) {
@@ -83,8 +65,10 @@ struct HomeView: View {
 
                 }
              }
-       }
-
+        } .background(Color.black.opacity(0.03)
+                        .ignoresSafeArea(.all, edges: .all))
+        
+        }
     }
 }
 

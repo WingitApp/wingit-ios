@@ -32,7 +32,7 @@ struct ProfileInformation: View {
                 
                 Button(action: {Api.User.updateDetails(field: "Name")}) {
 
-                    Text(user!.username).bold().foregroundColor(Color("bw"))
+                    Text(user!.username).font(.title).bold().foregroundColor(Color("bw"))
                 }
                              
               Button(action: {Api.User.updateDetails(field: "bio")}) {

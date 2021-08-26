@@ -13,7 +13,6 @@ class Api {
     static var Comment = CommentApi()
     static var Chat = ChatApi()
     static var Activity = ActivityApi()
-    static var gemPost = gemPostApi()
     static var Report = ReportApi()
     static var Follow = FollowApi()
 }

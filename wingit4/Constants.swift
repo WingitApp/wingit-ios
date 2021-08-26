@@ -29,10 +29,15 @@ let LINK_TERMS_OF_SERVICE = Link("Terms of Service", destination: URL(string: "h
 let LINK_PRIVACY_POLICY = Link("Privacy Policy", destination: URL(string: "https://www.wingitapp.co/policy")!)
 let TEXT_SIGNUP_PASSWORD_REQUIRED = "At least 8 characters required"
 
-
 let IMAGE_LOGO = "logo"
 let IMAGE_USER_PLACEHOLDER = "user-placeholder"
 let IMAGE_PHOTO = "camera.viewfinder"
+
+//DeepLinks
+let APPSTOREID = "1572569005"
+let LOGO_URL = """
+                  https://firebasestorage.googleapis.com/v0/b/wingitapp-1fe28.appspot.com/o/Frame%203.png?alt=media&token=a4d069bd-3163-42d9-8981-c1cf046eacf3
+                  """
 
 class Ref {
     // Storage
@@ -49,12 +54,6 @@ class Ref {
        static func STORAGE_POST_ID(postId: String) -> StorageReference {
              return STORAGE_POSTS.child(postId)
        }
-    
-        // Storage - gemPosts
-        static var STORAGE_GEM_POSTS = STORAGE_ROOT.child("gemPosts")
-        static func STORAGE_GEM_POST_ID(postId: String) -> StorageReference {
-              return STORAGE_GEM_POSTS.child(postId)
-        }
     
         // Storage - Chat
         static var STORAGE_CHAT = STORAGE_ROOT.child("chat")
@@ -83,12 +82,6 @@ class Ref {
         static func FIRESTORE_COLLECTION_BLOCKED_USERID(userId: String) -> DocumentReference {
             return FIRESTORE_COLLECTION_BLOCKED.document(userId)
         }
-        
-        // Firestore - gemPosts
-         static var FIRESTORE_COLLECTION_GEM_POSTS = FIRESTORE_ROOT.collection("gemPosts")
-         static func FIRESTORE_GEM_POSTS_DOCUMENT_USERID(userId: String) -> DocumentReference {
-             return FIRESTORE_COLLECTION_GEM_POSTS.document(userId)
-         }
        
        // Firestore - Posts
        static var FIRESTORE_COLLECTION_MY_POSTS = FIRESTORE_ROOT.collection("myPosts")
@@ -104,7 +97,6 @@ class Ref {
        
        static var FIRESTORE_COLLECTION_ALL_ASKS = FIRESTORE_ROOT.collection("all_posts")
     
-        static var FIRESTORE_COLLECTION_ALL_GEMS = FIRESTORE_ROOT.collection("all_gems")
     
         static var FIRESTORE_COLLECTION_ALL_DONE = FIRESTORE_ROOT.collection("all_done")
         

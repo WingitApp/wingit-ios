@@ -26,9 +26,6 @@ struct GridPosts: View {
                                     
                         }).frame(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.width / 3).clipped()
                         
-                        
-                        
-                        
                     }
                 }
                 

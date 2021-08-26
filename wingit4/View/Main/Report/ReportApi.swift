@@ -25,19 +25,6 @@ class ReportApi {
         }
         
     }
-    func sendGemReport(text: String, username: String, ownerId: String, postId: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-        let report = Report(comment: text, ownerId: ownerId, postId: postId, username: username)
-        guard let dict = try? report.toDictionary() else {return}
-        
-        Ref.FIRESTORE_REPORTS_DOCUMENT_POSTID(postId: postId).collection("reportedGemReports").addDocument(data: dict) { (error) in
-            if let error = error {
-                onError(error.localizedDescription)
-                return
-            }
-            onSuccess()
-        }
-        
-    }
     
 //    func sendDoneReport(text: String, username: String, ownerId: String, postId: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
 //        let report = Report(comment: text, ownerId: ownerId, postId: postId, username: username)

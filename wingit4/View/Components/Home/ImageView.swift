@@ -34,31 +34,6 @@ struct ImageView: View {
     }
 }
 
-struct gemImageView: View {
-    
-    var gempost: gemPost
-    @Environment(\.presentationMode) var presentationmode
-    
-    var body: some View {
-        
-        ZStack{
-            HStack{
-                Button(action: {presentationmode.wrappedValue.dismiss()},
-                       label: { Text("Cancel")}).padding()
-            }
-            Color.black
-                .ignoresSafeArea()
-            URLImage(URL(string: gempost.mediaUrl)!,
-                  content: {
-                      $0.image
-                          .resizable()
-                          .aspectRatio(contentMode: .fit)
-                  })
-        }
-
-    }
-}
-
 struct doneImageView: View {
     
     var donepost: DonePost

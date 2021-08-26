@@ -123,7 +123,6 @@ extension Decodable {
     }
 }
 
-
 extension Color {
     
     static let instagram: [Color] = [
@@ -139,6 +138,21 @@ extension Color {
         Color(red: 255 / 255, green: 220 / 255, blue: 128 / 255),
         Color(red: 64 / 255, green: 93 / 255, blue: 230 / 255)
     ]
+}
+
+// bottom only corners....
+
+struct RoundedShape : Shape {
+    
+    // for resuable.....
+    var corners : UIRectCorner
+    
+    func path(in rect: CGRect) -> Path {
+        
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: 45, height: 45))
+        
+        return Path(path.cgPath)
+    }
 }
 
 
