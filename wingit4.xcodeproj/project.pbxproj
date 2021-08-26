@@ -117,6 +117,8 @@
 		3B97807D26813BC1009CE037 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 3B97807C26813BC1009CE037 /* FirebaseMessaging */; };
 		3BC155AD26D721600069AFD4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BC155AC26D721600069AFD4 /* GoogleService-Info.plist */; };
 		3BD12F1526C9CA1500E26A87 /* AppDel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD12F1426C9CA1500E26A87 /* AppDel.swift */; };
+		3BC155AF26D8245C0069AFD4 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 3BC155AE26D8245C0069AFD4 /* FirebaseFirestoreSwift-Beta */; };
+		3BD604ED26AA0E4B004FFEEC /* AsksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604EC26AA0E4B004FFEEC /* AsksView.swift */; };
 		3BD604EF26AA1CDE004FFEEC /* DoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604EE26AA1CDE004FFEEC /* DoneCell.swift */; };
 		3BD604F326B08CA8004FFEEC /* DoneToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604F226B08CA8004FFEEC /* DoneToggle.swift */; };
 		3BD604F526B0A332004FFEEC /* DoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD604F426B0A332004FFEEC /* DoneViewModel.swift */; };
@@ -271,6 +273,7 @@
 				3B7AF04C26718C2E003BCCF3 /* FirebaseFirestore in Frameworks */,
 				3B7AF04A26718C2E003BCCF3 /* FirebaseAuth in Frameworks */,
 				3B7AF0912671D3A3003BCCF3 /* URLImage in Frameworks */,
+				3BC155AF26D8245C0069AFD4 /* FirebaseFirestoreSwift-Beta in Frameworks */,
 				6531838126B232640006D9E2 /* Amplitude in Frameworks */,
 				3B7AF04826718C2E003BCCF3 /* FirebaseStorage in Frameworks */,
 			);
@@ -690,6 +693,7 @@
 				3B97807C26813BC1009CE037 /* FirebaseMessaging */,
 				6531838026B232640006D9E2 /* Amplitude */,
 				3B94C37326C311ED00BCCFBA /* FirebaseDynamicLinks */,
+				3BC155AE26D8245C0069AFD4 /* FirebaseFirestoreSwift-Beta */,
 			);
 			productName = wingit4;
 			productReference = 3B75E3BA267153BA002F3108 /* wingit4.app */;
@@ -1145,6 +1149,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3B7AF04426718C2E003BCCF3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		3BC155AE26D8245C0069AFD4 /* FirebaseFirestoreSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3B7AF04426718C2E003BCCF3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreSwift-Beta";
 		};
 		6531838026B232640006D9E2 /* Amplitude */ = {
 			isa = XCSwiftPackageProductDependency;

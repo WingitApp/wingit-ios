@@ -5,10 +5,11 @@
 //  Created by Daniel Yee on 8/25/21.
 //
 
+import FirebaseFirestoreSwift
 import Foundation
 
 struct Ask: Identifiable, Codable {
-    var id: String?
+    @DocumentID var id: String?
     var bumpCount: Int
     var comments: [Comment]?
     var closedAt: Double
