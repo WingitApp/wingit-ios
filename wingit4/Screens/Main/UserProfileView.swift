@@ -35,12 +35,12 @@ struct UserProfileView: View {
                     
                     Divider()
                     
-                    if !profileViewModel.isLoading {
-                                    ForEach(self.profileViewModel.posts, id: \.postId) { post in
-                                        VStack {
-                                            CardView(post: post)
-                                        }
-                                   }
+                    if !self.profileViewModel.posts.isEmpty {
+                        ForEach(self.profileViewModel.posts, id: \.postId) { post in
+                            LazyVStack {
+                                AskCard(post: post, isProfileView: false)
+                            }
+                       }
                     }
                        
                 }
@@ -52,6 +52,7 @@ struct UserProfileView: View {
                  .onAppear {
                     logToAmplitude(event: .viewOtherProfile)
                     self.profileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.user.uid)
+
                  }
       
         
