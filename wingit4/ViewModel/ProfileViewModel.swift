@@ -36,15 +36,21 @@ class ProfileViewModel: ObservableObject {
     }
     
     func loadUserPosts(userId: String) {
-        isLoading = true
+      if !self.isLoading {
+        self.isLoading.toggle()
+
         Api.User.loadPosts(userId: userId) { (posts) in
-            self.isLoading = false
             self.posts = posts
             self.splitted = self.posts.splited(into: 3)
+            self.isLoading.toggle()
+
+
+
         }
         checkFollow(userId: userId)
         updateFollowCount(userId: userId)
         self.loadDonePosts(userId: userId)
+      }
     }
     
     

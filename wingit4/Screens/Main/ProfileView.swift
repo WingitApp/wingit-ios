@@ -7,14 +7,11 @@
 
 import SwiftUI
 import URLImage
-import FirebaseAuth
 
 struct ProfileView: View {
     
     @EnvironmentObject var session: SessionStore
-    @ObservedObject var profileViewModel = ProfileViewModel()
-
-    @State var postCountState = 0
+    @EnvironmentObject var profileViewModel: ProfileViewModel
 
     
        var body: some View {
@@ -24,18 +21,25 @@ struct ProfileView: View {
            ScrollView {
                VStack {
                 ProfileInformation(user: self.session.userSession)
-                Connections(user: self.session.userSession, followingCount: $profileViewModel.followingCountState, followersCount: $profileViewModel.followersCountState)
-                ProfileHeader(user: self.session.userSession, postCount: profileViewModel.posts.count, doneCount: profileViewModel.doneposts.count)
-            
+                Connections(
+                  user: self.session.userSession,
+                  followingCount: $profileViewModel.followingCountState,
+                  followersCount: $profileViewModel.followersCountState
+                )
+                ProfileHeader(
+                  user: self.session.userSession,
+                  postCount: profileViewModel.posts.count,
+                  doneCount: profileViewModel.doneposts.count
+                )
                Divider()
-                if !profileViewModel.isLoading {
-                        ForEach(self.profileViewModel.posts, id: \.postId) { post in
-                            VStack {
-                                CardView(post: post)
-                            }
-                        }
-                    
-                }
+//                if !self.profileViewModel.posts.isEmpty {
+                      ForEach(self.profileViewModel.posts, id: \.postId) { post in
+                        LazyVStack {
+                            AskCard(post: post, isProfileView: true)
+                          }
+                      }
+                  
+//                }
                 }.padding(.top, 5)
                 }
         }.padding(.top, 10)
@@ -54,9 +58,7 @@ struct ProfileView: View {
                        Label(title: { Text("Logout")},
                              icon: {Image(systemName: "arrow.right.circle.fill")}).imageScale(Image.Scale.large).foregroundColor(.gray)
                         
-                } ).onAppear {
-                    self.profileViewModel.loadUserPosts(userId: Auth.auth().currentUser!.uid)
-            }
+                } )
         }
       }
 }
