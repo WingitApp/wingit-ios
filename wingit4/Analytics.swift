@@ -78,45 +78,44 @@ enum AmplitudeProperty: String {
     case platform = "platform"
 }
 
-func logToAmplitude(event: AmplitudeEvent) {
-    Amplitude.instance().logEvent(event.rawValue)
-}
+  func logToAmplitude(event: AmplitudeEvent) {
+      Amplitude.instance().logEvent(event.rawValue)
+  }
 
-func logToAmplitude(event: AmplitudeEvent, userId: String?) {
-    let amplitude = Amplitude.instance()
-    if let userId = userId {
-        amplitude.setUserId(userId)
-        amplitude.logEvent(event.rawValue)
-    } else {
-        amplitude.logEvent(event.rawValue)
-        amplitude.setUserId(nil)
-    }
-}
+  func logToAmplitude(event: AmplitudeEvent, userId: String?) {
+      let amplitude = Amplitude.instance()
+      if let userId = userId {
+          amplitude.setUserId(userId)
+          amplitude.logEvent(event.rawValue)
+      } else {
+          amplitude.logEvent(event.rawValue)
+          amplitude.setUserId(nil)
+      }
+  }
 
-func logToAmplitude(event: AmplitudeEvent, properties: [AmplitudeProperty: Any]) {
-    Amplitude.instance().logEvent(event.rawValue, withEventProperties:
-        Dictionary(uniqueKeysWithValues: properties.map { (key, value) in (key.rawValue, value) }))
-}
+  func logToAmplitude(event: AmplitudeEvent, properties: [AmplitudeProperty: Any]) {
+      Amplitude.instance().logEvent(event.rawValue, withEventProperties:
+          Dictionary(uniqueKeysWithValues: properties.map { (key, value) in (key.rawValue, value) }))
+  }
 
-func addToUserProperty(property: AmplitudeUserProperty, value: Any) {
-    AMPIdentify().add(property.rawValue, value: value as? NSObject)
-}
+  func addToUserProperty(property: AmplitudeUserProperty, value: Any) {
+      AMPIdentify().add(property.rawValue, value: value as? NSObject)
+  }
 
-func setUserProperty(property: AmplitudeUserProperty, value: Any) {
-    AMPIdentify().set(property.rawValue, value: value as? NSObject)
-}
+  func setUserProperty(property: AmplitudeUserProperty, value: Any) {
+      AMPIdentify().set(property.rawValue, value: value as? NSObject)
+  }
 
-func setUserPropertiesOnAccountCreation(userID: String, username: String, email: String, signupMethod: String) {
-    let amplitude = Amplitude.instance()
-    amplitude.setUserId(userID)
-    guard let identify = AMPIdentify()
-            .setOnce(AmplitudeUserProperty.signupDate.rawValue, value: NSString(string: Date.iso8601ShortDateString(date: Date())))
-            .setOnce(AmplitudeUserProperty.username.rawValue, value: NSString(string: username))
-            .setOnce(AmplitudeUserProperty.email.rawValue, value: NSString(string: email))
-            .setOnce(AmplitudeUserProperty.username.rawValue, value: NSString(string: username))
-            .setOnce(AmplitudeUserProperty.signupMethod.rawValue, value: NSString(string: signupMethod))
-            .set(AmplitudeUserProperty.followers.rawValue, value: NSNumber(value: 0))
-            .set(AmplitudeUserProperty.following.rawValue, value: NSNumber(value: 0)) else { return }
-    amplitude.identify(identify)
-}
-
+  func setUserPropertiesOnAccountCreation(userID: String, username: String, email: String, signupMethod: String) {
+      let amplitude = Amplitude.instance()
+      amplitude.setUserId(userID)
+      guard let identify = AMPIdentify()
+              .setOnce(AmplitudeUserProperty.signupDate.rawValue, value: NSString(string: Date.iso8601ShortDateString(date: Date())))
+              .setOnce(AmplitudeUserProperty.username.rawValue, value: NSString(string: username))
+              .setOnce(AmplitudeUserProperty.email.rawValue, value: NSString(string: email))
+              .setOnce(AmplitudeUserProperty.username.rawValue, value: NSString(string: username))
+              .setOnce(AmplitudeUserProperty.signupMethod.rawValue, value: NSString(string: signupMethod))
+              .set(AmplitudeUserProperty.followers.rawValue, value: NSNumber(value: 0))
+              .set(AmplitudeUserProperty.following.rawValue, value: NSNumber(value: 0)) else { return }
+      amplitude.identify(identify)
+  }
