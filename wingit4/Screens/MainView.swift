@@ -24,11 +24,11 @@ struct MainView: View {
                 icon: "house.fill",
                 screen: AnyView(HomeView())
             )
-            NavigationTab(
-                tag: 1,
-                icon: "magnifyingglass",
-                screen: AnyView(SearchView())
-            )
+//            NavigationTab(
+//                tag: 1,
+//                icon: "magnifyingglass",
+//                screen: AnyView(SearchView())
+//            )
             NavigationTab(
                 tag: 2,
                 icon: IMAGE_PHOTO,

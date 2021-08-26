@@ -28,7 +28,7 @@ let TEXT_SIGNUP_NOTE = "An account will allow you to save and access photo infor
 let LINK_TERMS_OF_SERVICE = Link("Terms of Service", destination: URL(string: "https://www.wingitapp.co/terms-of-use")!)
 let LINK_PRIVACY_POLICY = Link("Privacy Policy", destination: URL(string: "https://www.wingitapp.co/policy")!)
 let TEXT_SIGNUP_PASSWORD_REQUIRED = "At least 8 characters required"
-
+let IMAGE_UPLOAD_TEXT = "Tap on the image to add a picture"
 let IMAGE_LOGO = "logo"
 let IMAGE_USER_PLACEHOLDER = "user-placeholder"
 let IMAGE_PHOTO = "camera.viewfinder"

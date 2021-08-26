@@ -25,7 +25,10 @@ struct HeaderCell: View {
                           .clipShape(Circle())
                    }).frame(width: 35, height: 35)
               }.disabled(self.askCardViewModel.isNavLinkDisabled)
-              Text(post.username).modifier(UserNameStyle())
+              VStack(alignment: .leading){
+                Text(post.username).modifier(UserNameStyle())
+                Timestamp(date: post.date)
+              }
               Spacer()
 //              AskDoneToggle() // rename later
               AskMenu()

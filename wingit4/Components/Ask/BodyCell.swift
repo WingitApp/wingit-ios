@@ -16,7 +16,6 @@ struct BodyCell: View {
       HStack{
           VStack(alignment: .leading, spacing: 10){
             Text(post.caption).modifier(BodyStyle())
-            Timestamp(date: post.date)
           }.padding(.horizontal).padding(.bottom, 2)
           Spacer(minLength: 0)
         
@@ -35,5 +34,7 @@ struct BodyCell: View {
               })
           }
       }
+      .padding(.top, 10)
+      .padding(.bottom, 10)
     }
 }

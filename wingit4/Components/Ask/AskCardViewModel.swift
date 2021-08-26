@@ -22,7 +22,9 @@ class AskCardViewModel: ObservableObject {
   
   // Modal, Menu, Screens
   @Published var isImageModalOpen: Bool = false
-  @Published var isCommentsModalOpen: Bool = false
+//  @Published var isCommentsModalOpen: Bool = false
+//  @Published var isShareSheetShowing = false
+
   
   // View Conditional
   @Published var isHidden: Bool = false

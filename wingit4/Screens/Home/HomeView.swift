@@ -15,7 +15,6 @@ struct HomeView: View {
   
   func onAppear() {
     self.homeViewModel.loadTimeline()
-    self.homeViewModel.loadGemTimeline()
   }
     
     var body: some View {

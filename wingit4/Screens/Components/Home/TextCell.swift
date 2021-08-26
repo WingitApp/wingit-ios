@@ -44,7 +44,7 @@ struct TextCell: View {
         
             }
         }.sheet(isPresented: $ImageScreen, content: {
-            ImageView(headerCellViewModel: headerCellViewModel)
+          ImageView(post: $headerCellViewModel.post)
         })
        
     }

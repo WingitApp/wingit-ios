@@ -20,7 +20,7 @@ struct SignupView: View {
                 self.signupViewModel.isImagePickerShown = true
               }
             )
-            Text(TEXT_IMAGE_UPLOAD)
+            Text(IMAGE_UPLOAD_TEXT)
               .modifier(Caption2Style())
               .multilineTextAlignment(.center)
               .padding(.bottom, 40)

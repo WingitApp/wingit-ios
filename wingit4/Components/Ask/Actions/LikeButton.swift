@@ -36,6 +36,7 @@ struct LikeButton: View {
             Text("\(post.likeCount)").modifier(CaptionStyle())
         }
       }
+      .modifier(ActionIconStyle())
       .transition(.asymmetric(insertion: .scale, removal: .opacity))
       .onAppear{
         self.footerCellViewModel.checkPostIsLiked(post: post)

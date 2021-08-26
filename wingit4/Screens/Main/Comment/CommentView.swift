@@ -32,7 +32,7 @@ struct CommentView: View {
         }.onTapGesture { dismissKeyboard() }
          .padding(.top, 15).navigationBarTitle(Text(""), displayMode: .inline)
             .onAppear {
-                self.commentViewModel.loadComments()
+              self.commentViewModel.loadComments(postId: post.postId)
             }.onDisappear {
                 if self.commentViewModel.listener != nil {
                     self.commentViewModel.listener.remove()
