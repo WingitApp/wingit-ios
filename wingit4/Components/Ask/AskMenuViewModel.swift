@@ -7,20 +7,13 @@
 
 import SwiftUI
 
-class EllipsisMenuViewModel: ObservableObject {
+class AskMenuViewModel: ObservableObject {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
-  @Published var isReportModalOpen: Bool = false
+  @Published var isReportModalOpen = false
   
   func onTapOpenReportScreen() {
-    isReportModalOpen.toggle()
-  }
-  
-  func onTapHidePost() {
-    let post = askCardViewModel.post!
-    Api.Post.hidePost(
-      userId: post.ownerId,
-      postId: post.postId
-    )
+    self.isReportModalOpen.toggle()
+
   }
   
   func onTapBlockUser() {

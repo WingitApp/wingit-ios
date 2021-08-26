@@ -17,7 +17,7 @@ struct LikeButton: View {
       post.likeCount -= 1
     } else {
       logToAmplitude(event: .upvote)
-      self.footerCellViewModel.unlike(post: post)
+      self.footerCellViewModel.like(post: post)
       post.likeCount += 1
     }
   }
@@ -36,8 +36,9 @@ struct LikeButton: View {
             Text("\(post.likeCount)").modifier(CaptionStyle())
         }
       }
+      .transition(.asymmetric(insertion: .scale, removal: .opacity))
       .onAppear{
-   
+        self.footerCellViewModel.checkPostIsLiked(post: post)
       }
     }
 }

@@ -12,15 +12,20 @@ import FirebaseAuth
 class AskCardViewModel: ObservableObject {
   let uid = Auth.auth().currentUser!.uid
   
+  // MetaData
   var post: Post?
   var isProfileView: Bool = false
-  
   @Published var postOwner: User!
   @Published var destination: AnyView = AnyView(HomeView())
   @Published var isOwnPost: Bool = false
   @Published var isNavLinkDisabled: Bool = true
+  
+  // Modal, Menu, Screens
   @Published var isImageModalOpen: Bool = false
   @Published var isCommentsModalOpen: Bool = false
+  
+  // View Conditional
+  @Published var isHidden: Bool = false
   
   
   func initVM(post: Post, isProfileView: Bool) -> Void {
@@ -29,6 +34,20 @@ class AskCardViewModel: ObservableObject {
     self.isOwnPost = uid == post.ownerId
     self.getUserFromPost()
   }
+  
+  func hidePost() {
+    
+    // hides card on view
+    withAnimation {
+      self.isHidden.toggle()
+    }
+    // hides post on BE
+//    Api.Post.hidePost(
+//      userId: post!.ownerId,
+//      postId: post!.postId
+//    )
+  }
+  
   
   
   func getUserFromPost(){

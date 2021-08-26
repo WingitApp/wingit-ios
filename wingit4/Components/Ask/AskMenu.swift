@@ -7,41 +7,43 @@
 
 import SwiftUI
 
-struct EllipsisMenu: View {
+struct AskMenu: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
-  @ObservedObject var ellipsisMenuViewModel = EllipsisMenuViewModel()
+  @EnvironmentObject var askMenuViewModel: AskMenuViewModel
 
 
     var body: some View {
-      if askCardViewModel.isOwnPost {
+      if !self.askCardViewModel.isOwnPost {
         Menu(content: {
           Button(
-            action: ellipsisMenuViewModel.onTapHidePost
+            action: self.askCardViewModel.hidePost
           ) {
               Text("Hide Post")
           }
           Button(
-            action: ellipsisMenuViewModel.onTapOpenReportScreen
+            action: self.askMenuViewModel.onTapOpenReportScreen
           ) {
               Text("Report")
           }
-          Button(
-            action: ellipsisMenuViewModel.onTapBlockUser
-          ) {
-              Text("Block")
-          }
+//          Button(
+//            action: self.askMenuViewModel.onTapBlockUser
+//          ) {
+//              Text("Block")
+//          }
         }, label: {
           Image(systemName: "ellipsis")
+            .rotationEffect(.degrees(-90))
         })
       } else {
         Menu(content: {
           Button(
-            action: askCardViewModel.removePost
+            action: self.askCardViewModel.removePost
           ) {
               Text("Delete")
           }
         }, label: {
           Image(systemName: "ellipsis")
+            .rotationEffect(.degrees(-90))
         })
       }
    }

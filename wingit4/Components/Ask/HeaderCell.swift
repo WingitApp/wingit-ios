@@ -28,7 +28,7 @@ struct HeaderCell: View {
               Text(post.username).modifier(UserNameStyle())
               Spacer()
 //              AskDoneToggle() // rename later
-              EllipsisMenu()
+              AskMenu()
             }.padding(.trailing, 15).padding(.leading, 15)
         }
         .padding(.top, 10)

@@ -21,6 +21,12 @@ class FooterCellViewModel: ObservableObject {
       self.isLikedByUser.toggle()
     }
   }
+  
+  func toggleLike() {
+    withAnimation {
+      self.isLikedByUser.toggle()
+    }
+  }
 
   func like(post: Post) {
         Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: post.ownerId)
@@ -39,8 +45,8 @@ class FooterCellViewModel: ObservableObject {
 
             Ref.FIRESTORE_COLLECTION_ACTIVITY.document(post.ownerId).collection("feedItems").document(activityId).setData(activityDict)
         }
-    self.isLikedByUser.toggle()
 
+      self.toggleLike()
     }
     
   func unlike(post: Post) {
@@ -59,9 +65,7 @@ class FooterCellViewModel: ObservableObject {
                 }
             }
          }
-    
-    self.isLikedByUser.toggle()
-
+      self.toggleLike()
     }
 
         
