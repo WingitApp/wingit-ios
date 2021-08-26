@@ -18,9 +18,9 @@ struct ShareButton: View {
           Image(systemName: "arrowshape.turn.up.right")
       })
       .foregroundColor(.gray)
+      .padding(.trailing, 15)
 //      Text("Share")
 //        .modifier(CaptionStyle())
-//        .padding(.trailing, 15)
     }
 
 }
