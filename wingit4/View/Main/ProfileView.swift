@@ -29,26 +29,9 @@ struct ProfileView: View {
             
                Divider()
                 if !profileViewModel.isLoading {
-<<<<<<< HEAD
-                    if selection == .globe {
-                        ForEach(self.profileViewModel.gemposts, id: \.postId) { gempost in
-                            VStack {
-
-                               gemHeader(gempost: gempost, isProfileView: true)
-
-                            }
-                        }
-
-                    } else {
-                        ForEach(self.profileViewModel.posts, id: \.postId) { post in
-                            VStack {
-                                HeaderCell(post: post, isProfileView: true)
-                                FooterCell(post: post)
-=======
                         ForEach(self.profileViewModel.posts, id: \.postId) { post in
                             VStack {
                                 CardView(post: post)
->>>>>>> d7a8e17 (Profile Components change)
                             }
                         }
                     
