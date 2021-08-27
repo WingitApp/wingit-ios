@@ -13,7 +13,6 @@ struct FooterCell: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
   @StateObject var footerCellViewModel = FooterCellViewModel()
   @StateObject var shareButtonViewModel = ShareButtonViewModel()
-  @StateObject var commentViewModel = CommentViewModel()
     
     var body: some View {
       VStack(alignment: .leading, spacing: 8) {
@@ -27,12 +26,6 @@ struct FooterCell: View {
         .padding(.bottom, 10)
         .frame(maxWidth: .infinity)
         .environmentObject(footerCellViewModel)
-        .environmentObject(commentViewModel)
-        .sheet(
-          isPresented: $commentViewModel.isCommentSheetShown,
-          content: { CommentView(post: $post) }
-        )
-
     }
 }
 

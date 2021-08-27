@@ -12,14 +12,13 @@ struct ProfileView: View {
     
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var profileViewModel: ProfileViewModel
-
     
        var body: some View {
          
         NavigationView {
-            VStack(alignment: .leading, spacing: 15){
-           ScrollView {
-            VStack{
+          VStack(alignment: .leading, spacing: 15){
+            ScrollView {
+              VStack {
                 ProfileInformation(user: self.session.userSession)
                 Connections(
                   user: self.session.userSession,

@@ -1,15 +1,16 @@
 //
-//  ProfileViewModel.swift
+//  UserProfileViewModel.swift
 //  wingit4
 //
-//  Created by YaeRim Amy Chun on 6/9/21.
+//  Created by Joshua Lee on 8/26/21.
 //
+
 
 import Foundation
 import SwiftUI
 import FirebaseAuth
 
-class ProfileViewModel: ObservableObject {
+class UserProfileViewModel: ObservableObject {
     @Published var posts: [Post] = []
     @Published var doneposts: [DonePost] = []
     
@@ -18,7 +19,6 @@ class ProfileViewModel: ObservableObject {
     @Published var followersCountState = 0
     @Published var followingCountState = 0
     @Published var showImagePicker: Bool = false
-   // var user: User!
 
     var splitted: [[Post]] = []
     
@@ -96,8 +96,3 @@ class ProfileViewModel: ObservableObject {
         
 }
         
-    
-
-        
-
-

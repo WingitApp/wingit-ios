@@ -7,9 +7,10 @@
 
 import SwiftUI
 import URLImage
+
 struct NotificationView: View {
     
-    @ObservedObject var activityViewModel = ActivityViewModel()
+  @EnvironmentObject var activityViewModel: ActivityViewModel
 
     
     var body: some View {
@@ -21,7 +22,7 @@ struct NotificationView: View {
                           HStack {
                             if activity.type == "comment" {
                                 ZStack {
-                                    CommentActivityRow(activity: activity)
+                                    NotificationEntry(activity: activity)
                                   //todo
 //                                    NavigationLink(destination: CommentView(postId: activity.postId)) {
 //                                        EmptyView()
@@ -52,40 +53,15 @@ struct NotificationView: View {
                 }
                   
            
-            }.navigationBarTitle(Text("Notifications"), displayMode: .automatic).onAppear {
-                  self.activityViewModel.loadActivities()
-             }
+            }.navigationBarTitle(Text("Notifications"), displayMode: .automatic)
             .onDisappear {
                  if self.activityViewModel.listener != nil {
                      self.activityViewModel.listener.remove()
-
                  }
               }
 
         }
       
-    }
-}
-
-struct CommentActivityRow: View {
-    var activity: Activity
-    var body: some View {
-        HStack {
-            URLImage(URL(string: activity.userAvatar)!,
-                                         content: {
-                                             $0.image
-                                                 .resizable()
-                                                 .aspectRatio(contentMode: .fill)
-                                                 .clipShape(Circle())
-                                         }).frame(width: 50, height: 50)
-            
-            VStack(alignment: .leading, spacing: 5) {
-                Text(activity.username).font(.subheadline).bold()
-                Text(activity.typeDescription).font(.subheadline)
-            }
-            Spacer()
-            Text(timeAgoSinceDate(Date(timeIntervalSince1970: activity.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
-        }
     }
 }
 

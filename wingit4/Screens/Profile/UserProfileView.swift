@@ -14,29 +14,39 @@ struct UserProfileView: View {
    
     var user: User
 
-    @ObservedObject var profileViewModel = ProfileViewModel()
+    @ObservedObject var userProfileViewModel = UserProfileViewModel()
     
 
     var body: some View {
         VStack(alignment: .leading, spacing: 15){
-            
                 ScrollView {
                    VStack {
-                    ProfileInformation(user: user)
-                    Connections(user: user, followingCount: $profileViewModel.followingCountState, followersCount: $profileViewModel.followersCountState)
-                    ProfileHeader(user: user, postCount: profileViewModel.posts.count, doneCount: profileViewModel.doneposts.count)
-
-                    HStack(spacing: 15) {
-                if profileViewModel.userBlocked == false {
-                    FollowButton(user: user, isFollowing: $profileViewModel.isFollowing, followingCount: $profileViewModel.followingCountState, followersCount: $profileViewModel.followersCountState)
-                    MessageButton(user: user)
-                    }
-                    }.padding(.leading, 20).padding(.trailing, 20)
+                      ProfileInformation(user: user)
+                      Connections(
+                        user: user,
+                        followingCount: $userProfileViewModel.followingCountState,
+                        followersCount: $userProfileViewModel.followersCountState
+                      )
+                      ProfileHeader(
+                        user: user,
+                        postCount: userProfileViewModel.posts.count,
+                        doneCount: userProfileViewModel.doneposts.count
+                      )
+                      HStack(spacing: 15) {
+                        if userProfileViewModel.userBlocked == false {
+                          FollowButton(
+                            user: user,
+                            isFollowing: $userProfileViewModel.isFollowing,
+                            followingCount: $userProfileViewModel.followingCountState,
+                            followersCount: $userProfileViewModel.followersCountState
+                          )
+                          MessageButton(user: user)
+                        }
+                      }.padding(.leading, 20).padding(.trailing, 20)
                     
                     Divider()
-                    
-                    if !self.profileViewModel.posts.isEmpty {
-                        ForEach(self.profileViewModel.posts, id: \.postId) { post in
+                    if !self.userProfileViewModel.posts.isEmpty {
+                        ForEach(self.userProfileViewModel.posts, id: \.postId) { post in
                             LazyVStack {
                                 AskCard(post: post, isProfileView: false)
                             }
@@ -52,7 +62,7 @@ struct UserProfileView: View {
                 .navigationBarTitle(Text(self.user.username), displayMode: .automatic)
                  .onAppear {
                     logToAmplitude(event: .viewOtherProfile)
-                    self.profileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.user.uid)
+                    self.userProfileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.user.uid)
 
                  }
       
