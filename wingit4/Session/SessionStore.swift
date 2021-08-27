@@ -15,7 +15,7 @@ class SessionStore: ObservableObject {
     
     @Published var isLoggedIn = false
  //   @Published var Agreed = false
-    var userSession: User?
+    var currentUser: User?
     var handle: AuthStateDidChangeListenerHandle?
     
     func listenAuthenticationState() {
@@ -26,7 +26,7 @@ class SessionStore: ObservableObject {
                   firestoreUserId.getDocument { (document, error) in
                       if let dict = document?.data() {
                           guard let decoderUser = try? User.init(fromDictionary: dict) else {return}
-                        self.userSession = decoderUser
+                        self.currentUser = decoderUser
                       }
                   }
 //                Ref.FIRESTORE_DOCUMENT_AGREED(userId: user.uid).getDocument { (document, error) in
@@ -40,7 +40,7 @@ class SessionStore: ObservableObject {
             } else {
              //   print("isLoogedIn is false")
                 self.isLoggedIn = false
-                self.userSession = nil
+                self.currentUser = nil
 
             }
         })
@@ -50,7 +50,7 @@ class SessionStore: ObservableObject {
     func logout() {
         do {
             try Auth.auth().signOut()
-            logToAmplitude(event: .userLogout, userId: self.userSession?.uid)
+            logToAmplitude(event: .userLogout, userId: self.currentUser?.uid)
         } catch  {
             
         }

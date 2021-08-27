@@ -31,7 +31,7 @@ struct CommentInput: View {
     
     var body: some View {
         HStack(spacing: 0) {
-            URLImage(URL(string: session.userSession!.profileImageUrl)!,
+            URLImage(URL(string: session.currentUser!.profileImageUrl)!,
                                                     content: {
                                                         $0.image
                                                             .resizable()

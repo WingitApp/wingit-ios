@@ -19,14 +19,14 @@ struct ProfileView: View {
           VStack(alignment: .leading, spacing: 15){
             ScrollView {
               VStack {
-                ProfileInformation(user: self.session.userSession)
+                ProfileInformation(user: self.session.currentUser)
                 Connections(
-                  user: self.session.userSession,
+                  user: self.session.currentUser,
                   followingCount: $profileViewModel.followingCountState,
                   followersCount: $profileViewModel.followersCountState
                 )
                 ProfileHeader(
-                  user: self.session.userSession,
+                  user: self.session.currentUser,
                   postCount: profileViewModel.posts.count,
                   doneCount: profileViewModel.doneposts.count
                 )
