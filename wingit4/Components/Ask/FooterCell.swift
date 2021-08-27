@@ -23,10 +23,8 @@ struct FooterCell: View {
             Spacer()
             ShareButton(post: $post)
           }
-          RecButton()
-            .modifier(ActionIconStyle())
-          Divider()
         }
+        .padding(.bottom, 10)
         .frame(maxWidth: .infinity)
         .environmentObject(footerCellViewModel)
         .environmentObject(commentViewModel)

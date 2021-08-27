@@ -19,8 +19,6 @@ struct ShareButton: View {
       })
       .foregroundColor(.gray)
       .padding(.trailing, 15)
-//      Text("Share")
-//        .modifier(CaptionStyle())
     }
 
 }

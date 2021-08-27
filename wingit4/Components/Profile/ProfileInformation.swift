@@ -26,9 +26,13 @@ struct ProfileInformation: View {
                             $0.image
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .clipShape(Circle())
-                        }).frame(width: 100, height: 100)
-                })
+                               
+                        }) .frame(
+                            height: 330
+                        )
+                           .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
+            
+                       }).padding(.leading, -15).padding(.trailing, -15)
                 
                 Button(action: {Api.User.updateDetails(field: "Name")}) {
 

@@ -24,6 +24,7 @@ struct AskCard: View {
         BodyCell(post: $post)
         FooterCell(post: $post)
       }
+      .background(Color(.white)).cornerRadius(20)
       .environmentObject(askCardViewModel)
       .environmentObject(askMenuViewModel)
       .environmentObject(askDoneToggleViewModel)

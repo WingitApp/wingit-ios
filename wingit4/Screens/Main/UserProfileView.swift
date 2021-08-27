@@ -44,11 +44,12 @@ struct UserProfileView: View {
                     }
                        
                 }
+                .padding(.top, 10)
                                  
                 }
                }.background(Color.black.opacity(0.03)
                 .ignoresSafeArea(.all, edges: .all))
-                .padding(.top, 10) .navigationBarTitle(Text(self.user.username), displayMode: .automatic)
+                .navigationBarTitle(Text(self.user.username), displayMode: .automatic)
                  .onAppear {
                     logToAmplitude(event: .viewOtherProfile)
                     self.profileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.user.uid)

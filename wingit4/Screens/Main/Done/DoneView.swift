@@ -22,7 +22,7 @@ struct DoneView: View {
                     }
                 }
             }
-        }
+        }.padding(.top, 10)
         .onAppear {
             logToAmplitude(event: .viewFulfilledRequests)
             self.doneViewModel.loadDonePosts(userId: user.uid)

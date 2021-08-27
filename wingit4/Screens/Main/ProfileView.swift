@@ -19,7 +19,7 @@ struct ProfileView: View {
         NavigationView {
             VStack(alignment: .leading, spacing: 15){
            ScrollView {
-               VStack {
+            VStack{
                 ProfileInformation(user: self.session.userSession)
                 Connections(
                   user: self.session.userSession,
@@ -31,7 +31,7 @@ struct ProfileView: View {
                   postCount: profileViewModel.posts.count,
                   doneCount: profileViewModel.doneposts.count
                 )
-               Divider()
+       
 //                if !self.profileViewModel.posts.isEmpty {
                       ForEach(self.profileViewModel.posts, id: \.postId) { post in
                         LazyVStack {
@@ -40,9 +40,9 @@ struct ProfileView: View {
                       }
                   
 //                }
-                }.padding(.top, 5)
                 }
-        }.padding(.top, 10)
+           }
+        }
         .background(Color.black.opacity(0.03)
         .ignoresSafeArea(.all, edges: .all))
          .navigationBarTitle(Text("Profile"), displayMode: .inline).navigationBarItems(leading:

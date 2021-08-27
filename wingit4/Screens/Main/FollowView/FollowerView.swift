@@ -10,6 +10,7 @@ import Firebase
 import URLImage
 
 struct FollowerView: View {
+    
     @ObservedObject var followerViewModel = FollowerViewModel()
     var user: User
    

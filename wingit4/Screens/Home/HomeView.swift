@@ -23,7 +23,8 @@ struct HomeView: View {
 //          FeedToggle()
           HomeFeed()
         }
-        .padding(.top, 10)
+        .background(Color.black.opacity(0.03)
+        .ignoresSafeArea(.all, edges: .all))
         .onAppear( perform: onAppear )
         .navigationBarTitle(Text("WingIt!"), displayMode: .inline)
         .navigationBarItems(leading:
