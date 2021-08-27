@@ -16,6 +16,8 @@ struct AskCard: View {
   @StateObject var askCardViewModel = AskCardViewModel()
   @StateObject var askMenuViewModel = AskMenuViewModel()
   @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
+  @StateObject var commentViewModel = CommentViewModel()
+
 
   var body: some View {
     if !self.askCardViewModel.isHidden {
@@ -27,6 +29,7 @@ struct AskCard: View {
       .environmentObject(askCardViewModel)
       .environmentObject(askMenuViewModel)
       .environmentObject(askDoneToggleViewModel)
+      .environmentObject(commentViewModel)
       // [START] Animates on Hide
       .opacity(!self.askCardViewModel.isHidden ? 1 : 0)
       .transition(.asymmetric(insertion: .scale, removal: .opacity))
@@ -47,9 +50,17 @@ struct AskCard: View {
         content: {
           ReportInput(post: post, postId: post.postId)
       })
-      .sheet(isPresented: $askDoneToggleViewModel.isMarkedAsDone, content: {
+      .sheet(
+        isPresented: $askDoneToggleViewModel.isMarkedAsDone,
+        content: {
           DoneToggle(post: post)
       })
+      .sheet(
+        isPresented: $commentViewModel.isCommentSheetShown,
+        content: {
+          CommentView(post: $post)
+        }
+      )
     }
   }
 }

@@ -15,7 +15,7 @@ class CommentViewModel: ObservableObject {
     
     @Published var comments: [Comment] = []
     @Published var isLoading = false
-    @Published var isCommentSheetShown: Bool = false
+    @Published var isCommentSheetShown = false
   
     var postId: String!
     var listener: ListenerRegistration!

@@ -23,11 +23,9 @@ class HomeViewModel: ObservableObject {
     var listener: ListenerRegistration!
   
   func onSelectionChange(selection: Selection) {
-    print("SELECTION: \(selection)")
     self.selection = selection
-    print("SELF.SELECTION: \(self.selection)")
-
   }
+  
     func loadTimeline() {
         self.posts = []
         isLoading = true
