@@ -309,13 +309,6 @@
 			path = Ask;
 			sourceTree = "<group>";
 		};
-		151A3C8C26D41B2E00A39FAF /* Ask */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Ask;
-			sourceTree = "<group>";
-		};
 		1524FCEB26D75B1D0000629C /* Actions */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,7 +450,6 @@
 		3B7AF06426719EA8003BCCF3 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				151A3C8C26D41B2E00A39FAF /* Ask */,
 				3B7AF0C02673EE2D003BCCF3 /* ActivityViewModel.swift */,
 				3B7AF0922671D474003BCCF3 /* CameraViewModel.swift */,
 				3B7AF0B22672C04A003BCCF3 /* ChatViewModel.swift */,
