@@ -5,6 +5,7 @@
 //  Created by Joshua Lee on 8/23/21.
 //
 
+import FirebaseAuth
 import SwiftUI
 
 class AskMenuViewModel: ObservableObject {
@@ -17,8 +18,8 @@ class AskMenuViewModel: ObservableObject {
   }
   
   func onTapBlockUser() {
+    guard let userId = Auth.auth().currentUser?.uid else { return }
     let postOwnerId = askCardViewModel.post!.ownerId
-    let userId = askCardViewModel.uid
     
     Api.User.blockUser(userId: userId, postOwnerId: postOwnerId)
     

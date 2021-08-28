@@ -25,7 +25,8 @@ class ProfileViewModel: ObservableObject {
     @Published var isFollowing = false
     
     
-    func checkFollow(userId: String) {
+    func checkFollow() {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
         Ref.FIRESTORE_COLLECTION_FOLLOWERS_USERID(userId: userId).getDocument { (document, error) in
             if let doc = document, doc.exists {
                 self.isFollowing = true
@@ -35,8 +36,9 @@ class ProfileViewModel: ObservableObject {
         }
     }
     
-    func loadUserPosts(userId: String) {
+    func loadUserPosts() {
       if !self.isLoading {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
         self.isLoading.toggle()
 
         Api.User.loadPosts(userId: userId) { (posts) in
@@ -47,14 +49,15 @@ class ProfileViewModel: ObservableObject {
 
 
         }
-        checkFollow(userId: userId)
-        updateFollowCount(userId: userId)
-        self.loadDonePosts(userId: userId)
+        checkFollow()
+        updateFollowCount()
+        self.loadDonePosts()
       }
     }
     
     
-    func loadDonePosts(userId: String) {
+    func loadDonePosts() {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
         isLoading = true
         Api.User.loadDonePosts(userId: userId) { (doneposts) in
             self.isLoading = false
@@ -63,7 +66,8 @@ class ProfileViewModel: ObservableObject {
     }
  
     
-    func updateFollowCount(userId: String) {
+    func updateFollowCount() {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
         Ref.FIRESTORE_COLLECTION_FOLLOWING(userId: userId).getDocuments { (snapshot, error) in
             
             if let doc = snapshot?.documents {
@@ -77,27 +81,4 @@ class ProfileViewModel: ObservableObject {
              }
          }
     }
-    
-    func checkUserBlocked(userId: String, postOwnerId: String){
-        Ref.FIRESTORE_COLLECTION_BLOCKED_USERID(userId: userId).collection("userBlocked").document(postOwnerId).getDocument { (document, error) in
-            if let doc = document, doc.exists {
-                return
-            }; Ref.FIRESTORE_COLLECTION_BLOCKED_USERID(userId: userId).collection("userBlockedBy").document(postOwnerId).getDocument { (document, error) in
-                if let doc = document, doc.exists {
-                    return
-                } else {
-                self.loadUserPosts(userId: postOwnerId)
-              //  self.loadDonePosts(userId: postOwnerId)
-                self.userBlocked = false
-            }
-        }
-    }
 }
-        
-}
-        
-    
-
-        
-
-

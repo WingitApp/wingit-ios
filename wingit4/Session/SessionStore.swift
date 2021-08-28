@@ -10,49 +10,35 @@ import Combine
 import Firebase
 import FirebaseAuth
 
-
 class SessionStore: ObservableObject {
-    
     @Published var isLoggedIn = false
- //   @Published var Agreed = false
     var currentUser: User?
     var handle: AuthStateDidChangeListenerHandle?
     
     func listenAuthenticationState() {
         handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
             if let user = user {
-            //    print(user.email)
                 let firestoreUserId = Ref.FIRESTORE_DOCUMENT_USERID(userId: user.uid)
                   firestoreUserId.getDocument { (document, error) in
                       if let dict = document?.data() {
-                          guard let decoderUser = try? User.init(fromDictionary: dict) else {return}
+                          guard let decoderUser = try? User.init(fromDictionary: dict) else { return }
                         self.currentUser = decoderUser
+                        self.isLoggedIn = true
                       }
                   }
-//                Ref.FIRESTORE_DOCUMENT_AGREED(userId: user.uid).getDocument { (document, error) in
-//                       if let doc = document, doc.exists {
-//                           self.Agreed = true
-//                       }
-//                   }
-                self.isLoggedIn = true
-             //   self.Agreed = true
-                
             } else {
-             //   print("isLoogedIn is false")
                 self.isLoggedIn = false
                 self.currentUser = nil
-
             }
         })
     }
-    
     
     func logout() {
         do {
             try Auth.auth().signOut()
             logToAmplitude(event: .userLogout, userId: self.currentUser?.uid)
         } catch  {
-            
+
         }
     }
     

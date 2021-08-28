@@ -45,8 +45,8 @@ struct MainView: View {
     .environmentObject(profileViewModel)
     .environmentObject(activityViewModel)
     .onAppear{
-      self.profileViewModel.loadUserPosts(userId: Auth.auth().currentUser!.uid)
-      self.activityViewModel.loadActivities()
+        self.profileViewModel.loadUserPosts()
+        self.activityViewModel.loadActivities()
     }
     .accentColor(Color(.systemTeal))
   }

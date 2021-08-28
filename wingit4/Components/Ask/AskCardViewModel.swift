@@ -10,7 +10,6 @@ import UIKit
 import FirebaseAuth
 
 class AskCardViewModel: ObservableObject {
-  let uid = Auth.auth().currentUser!.uid
   
   // MetaData
   var post: Post?
@@ -33,7 +32,7 @@ class AskCardViewModel: ObservableObject {
   func initVM(post: Post, isProfileView: Bool) -> Void {
     self.post = post
     self.isProfileView = isProfileView
-    self.isOwnPost = uid == post.ownerId
+    self.isOwnPost = Auth.auth().currentUser?.uid == post.ownerId
     self.getUserFromPost()
   }
   
@@ -62,6 +61,7 @@ class AskCardViewModel: ObservableObject {
   }
   
   func removePost() {
+    guard let uid = Auth.auth().currentUser?.uid else { return }
     let postOwnerId = self.post!.ownerId
     
     Api.Post.deletePost(
@@ -72,6 +72,7 @@ class AskCardViewModel: ObservableObject {
   
   
   func blockUser(){
+    guard let uid = Auth.auth().currentUser?.uid else { return }
     let postOwnerId = post!.ownerId
     Api.User.blockUser(userId: uid, postOwnerId: postOwnerId)
     
