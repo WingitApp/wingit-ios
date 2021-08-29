@@ -20,9 +20,9 @@ struct HeaderCell: View {
                 URLImage(URL(string: post.avatar)!,
                    content: {
                       $0.image
-                          .resizable()
-                          .aspectRatio(contentMode: .fill)
-                          .clipShape(Circle())
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(Circle())
                    }).frame(width: 35, height: 35)
               }.disabled(self.askCardViewModel.isNavLinkDisabled)
               VStack(alignment: .leading){

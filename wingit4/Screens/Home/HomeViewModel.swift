@@ -16,42 +16,46 @@ class HomeViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var selection: Selection = .posts
     @Published var isFetching: Bool = true
-
-    
-    var user: User!
-   
+    private var canLoadMorePages = true
+    private var next: Query? = Ref.FIRESTORE_TIMELINE_DOCUMENT_USERID(
+      userId: Auth.auth().currentUser!.uid)
+      .collection("timelinePosts")
+      .order(by: "date", descending: true)
+      .limit(to: 5)
+      
     var listener: ListenerRegistration!
   
-  func onSelectionChange(selection: Selection) {
-    self.selection = selection
-  }
+    func onSelectionChange(selection: Selection) {
+      self.selection = selection
+    }
+  
+    func loadMoreContent() {
+      print("NEXT CALLED")
+      self.loadTimeline()
+    }
+  
+    func loadMoreContentIfNeeded(currentItem item: Post?) {
+       guard let item = item else {
+         return
+       }
+   
+       let thresholdIndex = posts.index(posts.endIndex, offsetBy: -5)
+       if posts.firstIndex(where: { $0.postId == item.postId }) == thresholdIndex {
+        print("LAST THRESHOLD")
+         loadMoreContent()
+       }
+     }
   
     func loadTimeline() {
-        self.posts = []
         isLoading = true
         
         Api.Post.loadTimeline(
-          onSuccess: { (posts) in
-            if self.posts.isEmpty {
-                self.posts = posts
+          next: self.next!,
+          onSuccess: { (posts, next) in
+              self.posts = self.posts + posts
+              self.next = next
               self.isLoading = false
-            }
-        }, newPost: { (post) in
-            if !self.posts.isEmpty {
-                self.posts.insert(post, at: 0)
-
-            }
-        }, deletePost: { (post) in
-            if !self.posts.isEmpty {
-                for (index, p) in self.posts.enumerated() {
-                    if p.postId == post.postId {
-                        self.posts.remove(at: index)
-
-                    }
-                }
-            }
-        }) { (listener) in
-            self.listener = listener
-        }
+          }
+        )
     }
 }
