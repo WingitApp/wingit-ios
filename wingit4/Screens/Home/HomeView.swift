@@ -22,6 +22,8 @@ struct HomeView: View {
         VStack(alignment: .leading, spacing: 15) {
 //          FeedToggle()
           HomeFeed()
+            .padding(.leading, 10)
+            .padding(.trailing, 10)
         }
         .background(Color.black.opacity(0.03)
         .ignoresSafeArea(.all, edges: .all))

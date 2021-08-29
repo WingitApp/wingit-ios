@@ -12,14 +12,26 @@ struct HomeFeed: View {
 
   var body: some View {
     ScrollView {
+      
       LazyVStack {
         ForEach(self.homeViewModel.posts, id: \.postId) { post in
           AskCard(
             post: post,
             isProfileView: false
-          ).redacted(reason: homeViewModel.isLoading ? .placeholder : [])
+          )
+          .onAppear {
+            homeViewModel.loadMoreContentIfNeeded(currentItem: post)
+          }
+        }
+        if homeViewModel.isLoading {
+          HStack {
+            CircleLoader()
+          }
+          .padding(.top, 15)
+          .padding(.bottom, 15)
         }
       }
+      
     }
   }
 }
