@@ -127,6 +127,9 @@
 		3BE57FF326D88D8B005C242F /* ProfileSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE57FF226D88D8B005C242F /* ProfileSettings.swift */; };
 		3BE57FF526D89823005C242F /* ProfileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE57FF426D89823005C242F /* ProfileDetailView.swift */; };
 		3BE57FF726D89994005C242F /* ProfileNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE57FF626D89994005C242F /* ProfileNavigation.swift */; };
+		3BE57FF926D95A34005C242F /* ProfileCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE57FF826D95A34005C242F /* ProfileCard.swift */; };
+		3BE57FFB26D9A85E005C242F /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE57FFA26D9A85E005C242F /* ProfileInfo.swift */; };
+		3BE57FFF26DB5113005C242F /* BumpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE57FFE26DB5112005C242F /* BumpView.swift */; };
 		3BF143E626819E480093488D /* NotificationsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF143E526819E480093488D /* NotificationsApi.swift */; };
 		6509E4FA26D6C214009CB74D /* Ask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6509E4F926D6C214009CB74D /* Ask.swift */; };
 		6523D93426DC1F41007546F5 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6523D93326DC1F41007546F5 /* FirebaseFirestore */; };
@@ -251,6 +254,9 @@
 		3BE57FF226D88D8B005C242F /* ProfileSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettings.swift; sourceTree = "<group>"; };
 		3BE57FF426D89823005C242F /* ProfileDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailView.swift; sourceTree = "<group>"; };
 		3BE57FF626D89994005C242F /* ProfileNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNavigation.swift; sourceTree = "<group>"; };
+		3BE57FF826D95A34005C242F /* ProfileCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCard.swift; sourceTree = "<group>"; };
+		3BE57FFA26D9A85E005C242F /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
+		3BE57FFE26DB5112005C242F /* BumpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BumpView.swift; sourceTree = "<group>"; };
 		3BF143E526819E480093488D /* NotificationsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsApi.swift; sourceTree = "<group>"; };
 		6502C14226C4FF52007C04C9 /* SecretsDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsDebug.xcconfig; sourceTree = "<group>"; };
 		6502C14326C5024C007C04C9 /* SecretsRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsRelease.xcconfig; sourceTree = "<group>"; };
@@ -341,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				156E6AD426D8A0A700690E47 /* NotificationEntry.swift */,
+				3BE57FFE26DB5112005C242F /* BumpView.swift */,
 			);
 			path = NotificationActivity;
 			sourceTree = "<group>";
@@ -348,6 +355,7 @@
 		156E6ADF26D8A13400690E47 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				3BE57FF626D89994005C242F /* ProfileNavigation.swift */,
 				156E6AE026D8A13400690E47 /* ProfileView.swift */,
 				156E6AE126D8A13400690E47 /* UserProfileView.swift */,
 				156E6AE226D8A13400690E47 /* UserProfileViewModel.swift */,
@@ -576,15 +584,16 @@
 		3B7AF0A32671E435003BCCF3 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				3BE57FF626D89994005C242F /* ProfileNavigation.swift */,
-				3BE57FF426D89823005C242F /* ProfileDetailView.swift */,
 				1524FCD726D7545E0000629C /* Connections.swift */,
 				1524FCD826D7545F0000629C /* ProfileHeader.swift */,
 				3B7AF09F2671E404003BCCF3 /* ProfileInformation.swift */,
+				3BE57FFA26D9A85E005C242F /* ProfileInfo.swift */,
 				3B0DFBDD26B78D86008CE0D1 /* UpdatePhotoVM.swift */,
 				3B7AF09D2671E3BA003BCCF3 /* GridPosts.swift */,
 				3B7AF0A12671E416003BCCF3 /* EditProfile.swift */,
+				3BE57FF826D95A34005C242F /* ProfileCard.swift */,
 				3BE57FF226D88D8B005C242F /* ProfileSettings.swift */,
+				3BE57FF426D89823005C242F /* ProfileDetailView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -782,6 +791,7 @@
 				3BD604F726B0A9DD004FFEEC /* DoneView.swift in Sources */,
 				3BE57FF526D89823005C242F /* ProfileDetailView.swift in Sources */,
 				151A3C8326D1B0D200A39FAF /* UserAvatar.swift in Sources */,
+				3BE57FF926D95A34005C242F /* ProfileCard.swift in Sources */,
 				151A3C8526D1E03E00A39FAF /* FeedToggle.swift in Sources */,
 				3B7AF04326718AF1003BCCF3 /* AuthService.swift in Sources */,
 				3B7AF0B12672AB2F003BCCF3 /* CommentViewModel.swift in Sources */,
@@ -849,6 +859,7 @@
 				1524FCD926D7545F0000629C /* Connections.swift in Sources */,
 				3B7AF0932671D474003BCCF3 /* CameraViewModel.swift in Sources */,
 				3B75E3E526716787002F3108 /* SignupButton.swift in Sources */,
+				3BE57FFB26D9A85E005C242F /* ProfileInfo.swift in Sources */,
 				3B7AF03026718263003BCCF3 /* Extensions.swift in Sources */,
 				6509E4FA26D6C214009CB74D /* Ask.swift in Sources */,
 				3B75E3C2267153BA002F3108 /* SigninView.swift in Sources */,
@@ -870,6 +881,7 @@
 				3B5BDB5E268FA1980034B18C /* ReportApi.swift in Sources */,
 				3B7AF0AD26729FCC003BCCF3 /* CommentApi.swift in Sources */,
 				3B86E43E26C998E300F64416 /* ActivityIndicatorView.swift in Sources */,
+				3BE57FFF26DB5113005C242F /* BumpView.swift in Sources */,
 				3B7AF05A26719AB2003BCCF3 /* HomeView.swift in Sources */,
 				3B7AF0A52671EA03003BCCF3 /* PostPopularViewModel.swift in Sources */,
 				3B7AF0B72672C21F003BCCF3 /* Chat.swift in Sources */,

@@ -16,23 +16,23 @@ struct BodyCell: View {
       HStack{
           VStack(alignment: .leading, spacing: 10){
             Text(post.caption).modifier(BodyStyle())
+            if post != nil && post.mediaUrl != "" {
+                Button(action: {
+                    withAnimation(.easeInOut){
+                      askCardViewModel.isImageModalOpen.toggle()
+                    }
+                }, label: {
+                  URLImage(URL(string: post.mediaUrl)!,
+                    content: {
+                        $0.image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    }).frame(width: UIScreen.main.bounds.width - 60, height: 250)
+                      .cornerRadius(15)
+                })
+            }
           }.padding(.horizontal).padding(.bottom, 2)
           Spacer(minLength: 0)
-        
-          if post != nil && post.mediaUrl != "" {
-              Button(action: {
-                  withAnimation(.easeInOut){
-                    askCardViewModel.isImageModalOpen.toggle()
-                  }
-              }, label: {
-                URLImage(URL(string: post.mediaUrl)!,
-                  content: {
-                      $0.image
-                          .resizable()
-                          .aspectRatio(contentMode: .fill)
-                  }).frame(width: 200, height: 250).cornerRadius(3).clipped()
-              })
-          }
       }
       .padding(.top, 10)
       .padding(.bottom, 10)

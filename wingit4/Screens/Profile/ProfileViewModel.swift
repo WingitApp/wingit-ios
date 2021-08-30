@@ -12,13 +12,14 @@ import FirebaseAuth
 class ProfileViewModel: ObservableObject {
     @Published var posts: [Post] = []
     @Published var doneposts: [DonePost] = []
+    var user: User!
 
     @Published var isLoading = false
-    @Published var userBlocked = true
+    @Published var userBlocked = false
     @Published var followersCountState = 0
     @Published var followingCountState = 0
     @Published var showImagePicker: Bool = false
-   // var user: User!
+    @Published var offset: CGFloat = 0
 
     var splitted: [[Post]] = []
     

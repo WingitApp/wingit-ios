@@ -1,15 +1,15 @@
 //
-//  ProfileInformation.swift
+//  ProfileInfo.swift
 //  wingit4
 //
-//  Created by YaeRim Amy Chun on 6/9/21.
+//  Created by YaeRim Amy Chun on 8/27/21.
 //
 
 import SwiftUI
 import FirebaseAuth
 import URLImage
 
-struct ProfileInformation: View {
+struct ProfileInfo: View {
     
     var user: User?
     let uid = Auth.auth().currentUser?.uid
@@ -18,7 +18,7 @@ struct ProfileInformation: View {
     var body: some View {
         
         VStack{
-            if user != nil && self.user!.id == uid{
+            if user != nil && self.user!.uid == uid{
                 
                 Button(action: {updatePic.toggle()},
                        label: {
@@ -29,33 +29,21 @@ struct ProfileInformation: View {
                                 .aspectRatio(contentMode: .fill)
                                
                         })
-                           .frame(width: 450, height: 330)
+                           .frame(height: 330)
                            .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
             
                        }).padding(.leading, -15).padding(.trailing, -15)
                 
-                Button(action: {Api.User.updateDetails(field: "Name")}) {
-
-                    Text(user!.username).font(.title).bold().foregroundColor(Color("bw"))
-                }
-                             
-              Button(action: {Api.User.updateDetails(field: "bio")}) {
-                  
-                Text("@\(user!.bio)").font(.caption).foregroundColor(.gray)
-                    }
+               
             } else {
                 URLImage(URL(string: user!.profileImageUrl)!,
                 content: {
                     $0.image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        
-                       
-                }).frame(width: 430, height: 330)
-                  .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
-                  
-                Text(user!.username).bold()
-                Text("@\(user!.bio)").font(.caption).foregroundColor(.gray)
+                        .clipShape(Circle())
+                }).frame(width: 100, height: 100)
+                
             }
             
         }.sheet(isPresented: $updatePic, content: {
@@ -64,7 +52,7 @@ struct ProfileInformation: View {
     }
 }
 
-struct ProfilePicToggle: View {
+struct ProfilePictureToggle: View {
     var user: User?
     let uid = Auth.auth().currentUser?.uid
     @ObservedObject var updatePhotoVM = UpdatePhotoVM()

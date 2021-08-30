@@ -15,36 +15,42 @@ struct UserProfileView: View {
     var user: User
 
     @ObservedObject var userProfileViewModel = UserProfileViewModel()
-    
 
     var body: some View {
         VStack(alignment: .leading, spacing: 15){
                 ScrollView {
-                   VStack {
-                      ProfileInformation(user: user)
-                      Connections(
-                        user: user,
-                        followingCount: $userProfileViewModel.followingCountState,
-                        followersCount: $userProfileViewModel.followersCountState
-                      )
-                      ProfileHeader(
-                        user: user,
-                        postCount: userProfileViewModel.posts.count,
-                        doneCount: userProfileViewModel.doneposts.count
-                      )
-                      HStack(spacing: 15) {
-                        if userProfileViewModel.userBlocked == false {
-                          FollowButton(
-                            user: user,
-                            isFollowing: $userProfileViewModel.isFollowing,
-                            followingCount: $userProfileViewModel.followingCountState,
-                            followersCount: $userProfileViewModel.followersCountState
-                          )
-                          MessageButton(user: user)
-                        }
-                      }.padding(.leading, 20).padding(.trailing, 20)
+//                    LazyVStack(alignment: .center, spacing: 15, pinnedViews: [.sectionHeaders], content: {
+                    VStack{
+                        ProfileInformation(user: self.user)
+                        Connections(
+                          user: self.user,
+                          followingCount: $userProfileViewModel.followingCountState,
+                          followersCount: $userProfileViewModel.followersCountState
+                        )
+                        ProfileHeader(
+                          user: self.user,
+                          postCount: userProfileViewModel.posts.count,
+                          doneCount: userProfileViewModel.doneposts.count
+                        )
+                        HStack(spacing: 15) {
+                          if userProfileViewModel.userBlocked == false {
+                            FollowButton(
+                              user: user,
+                              isFollowing: $userProfileViewModel.isFollowing,
+                              followingCount: $userProfileViewModel.followingCountState,
+                              followersCount: $userProfileViewModel.followersCountState
+                            )
+                            MessageButton(user: user)
+                          }
+                        }.padding(.leading, 20).padding(.trailing, 20)
+                       
+                    }
+                    .padding(.bottom, 10)
+                    .background(Color(.white))
+                    .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
+                    .padding(.leading, -40).padding(.trailing, -40)
+                 
                     
-                    Divider()
                     if !self.userProfileViewModel.posts.isEmpty {
                         ForEach(self.userProfileViewModel.posts, id: \.postId) { post in
                             LazyVStack {
@@ -54,27 +60,46 @@ struct UserProfileView: View {
                     }
                        
                 }
-                .padding(.top, 10)
                                  
-                }
-               }.background(Color.black.opacity(0.03)
+//                )}
+               }
+                .background(Color.black.opacity(0.03)
                 .ignoresSafeArea(.all, edges: .all))
                 .navigationBarTitle(Text(self.user.username), displayMode: .automatic)
-                 .onAppear {
+                .onAppear {
                     logToAmplitude(event: .viewOtherProfile)
-                    self.userProfileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.user.id)
-
+                    self.userProfileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.user.id ?? self.user.uid)
                  }
       
         
     }
 }
 
-//struct UserProfileView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        UserProfileView()
+//struct userProfileCard: View {
+//
+//    var user: User
+//
+//    @ObservedObject var userProfileViewModel = UserProfileViewModel()
+//
+//    var body: some View {
+//        VStack{
+//            ProfileInformation(user: self.user)
+//            Connections(
+//              user: self.user,
+//              followingCount: $userProfileViewModel.followingCountState,
+//              followersCount: $userProfileViewModel.followersCountState
+//            )
+//            ProfileHeader(
+//              user: self.user,
+//              postCount: userProfileViewModel.posts.count,
+//              doneCount: userProfileViewModel.doneposts.count
+//            )
+//        }
+//        .background(Color(.white))
+//        .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
 //    }
 //}
+
 
 struct FollowButton: View {
 

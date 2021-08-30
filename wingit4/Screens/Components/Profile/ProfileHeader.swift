@@ -35,11 +35,9 @@ struct ProfileHeader: View {
                         })
                     }
             
-            }.background(Color.black.opacity(0.03)
-                            .ignoresSafeArea(.all, edges: .all))
-                .sheet(isPresented: $done, content: {
-                    DoneView(user: user!)
-            })
+            }
+            .sheet(isPresented: $done, content: {
+                DoneView(user: user!)   })
 
         }
     }

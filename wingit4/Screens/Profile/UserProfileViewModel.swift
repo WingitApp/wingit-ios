@@ -15,7 +15,7 @@ class UserProfileViewModel: ObservableObject {
     @Published var doneposts: [DonePost] = []
     
     @Published var isLoading = false
-    @Published var userBlocked = true
+    @Published var userBlocked = false
     @Published var followersCountState = 0
     @Published var followingCountState = 0
     @Published var showImagePicker: Bool = false
@@ -85,11 +85,11 @@ class UserProfileViewModel: ObservableObject {
                 return
             }; Ref.FIRESTORE_COLLECTION_BLOCKED_USERID(userId: userId).collection("userBlockedBy").document(postOwnerId).getDocument { (document, error) in
                 if let doc = document, doc.exists {
+                    self.userBlocked = true
                     return
                 } else {
                 self.loadUserPosts(userId: postOwnerId)
               //  self.loadDonePosts(userId: postOwnerId)
-                self.userBlocked = false
             }
         }
     }

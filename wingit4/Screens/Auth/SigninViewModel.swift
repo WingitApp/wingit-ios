@@ -82,4 +82,28 @@ class SigninViewModel: ObservableObject {
       email = ""
       password = ""
   }
+    
+//    func reset(){
+//
+//        if email != ""{
+//
+//            Auth.auth().sendPasswordReset(withEmail: self.email) { (err) in
+//
+//                if err != nil{
+//
+//                    self.error = err!.localizedDescription
+//                    self.alert.toggle()
+//                    return
+//                }
+//
+//                self.error = "RESET"
+//                self.alert.toggle()
+//            }
+//        }
+//        else{
+//
+//            self.error = "Email Id is empty"
+//            self.alert.toggle()
+//        }
+//    }
 }
