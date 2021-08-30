@@ -1,3 +1,5 @@
 Config/SecretsDebug.xcconfig
 Config/SecretsRelease.xcconfig
 Firebase/Prod/GoogleService-Info.plist
+wingit4.xcodeproj/xcuserdata/yrac.xcuserdatad/xcdebugger/
+wingit4.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
