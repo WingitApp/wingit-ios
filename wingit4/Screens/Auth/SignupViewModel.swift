@@ -14,6 +14,8 @@ import SwiftUI
 class SignupViewModel: ObservableObject {
     
   @Published var username: String = ""
+  @Published var firstName: String = ""
+  @Published var lastName: String = ""
   @Published var bio: String = ""
   @Published var email: String = ""
   @Published var password: String = ""
