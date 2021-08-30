@@ -6,9 +6,9 @@
 //
 //
 
+import FirebaseAuth
 import SwiftUI
 import UIKit
-import FirebaseAuth
 
 class HeaderCellViewModel : ObservableObject {
     

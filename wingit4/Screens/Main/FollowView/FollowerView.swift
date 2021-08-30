@@ -19,7 +19,7 @@ struct FollowerView: View {
             List {
                 if !followerViewModel.isLoading {
                     
-                    ForEach(self.followerViewModel.users, id: \.uid) { user in
+                    ForEach(self.followerViewModel.users, id: \.id) { user in
                             NavigationLink(destination: UserProfileView(user: user)) {
                                 HStack {
                                 URLImage(URL(string: user.profileImageUrl)!,
@@ -44,7 +44,7 @@ struct FollowerView: View {
         }.navigationBarTitle(Text("Followers"), displayMode: .inline)
         .onAppear {
             logToAmplitude(event: .viewFollowersList)
-            self.followerViewModel.loadFollowers(userId: self.user.uid)
+            self.followerViewModel.loadFollowers(userId: self.user.id)
         }
     }
 }
@@ -58,7 +58,7 @@ struct FollowingView: View {
             List {
                 if !followerViewModel.isLoading {
                     
-                    ForEach(self.followerViewModel.users, id: \.uid) { user in
+                    ForEach(self.followerViewModel.users, id: \.id) { user in
                             NavigationLink(destination: UserProfileView(user: user)) {
                                 HStack {
                                 URLImage(URL(string: user.profileImageUrl)!,
@@ -83,7 +83,7 @@ struct FollowingView: View {
         }.navigationBarTitle(Text("Following"), displayMode: .inline)
         .onAppear {
             logToAmplitude(event: .viewFollowingList)
-            self.followerViewModel.loadFollowing(userId: self.user.uid)
+            self.followerViewModel.loadFollowing(userId: self.user.id)
         }
     }
 }

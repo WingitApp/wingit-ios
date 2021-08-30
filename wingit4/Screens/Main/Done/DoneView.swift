@@ -25,7 +25,9 @@ struct DoneView: View {
         }.padding(.top, 10)
         .onAppear {
             logToAmplitude(event: .viewFulfilledRequests)
-            self.doneViewModel.loadDonePosts(userId: user.uid)
+            if let userId = user.id {
+                self.doneViewModel.loadDonePosts(userId: userId)
+            }
         }
     }
 }

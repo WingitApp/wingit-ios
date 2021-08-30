@@ -62,7 +62,7 @@ struct UserProfileView: View {
                 .navigationBarTitle(Text(self.user.username), displayMode: .automatic)
                  .onAppear {
                     logToAmplitude(event: .viewOtherProfile)
-                    self.userProfileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.user.uid)
+                    self.userProfileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.user.id)
 
                  }
       
@@ -96,7 +96,7 @@ struct FollowButton: View {
 
     func follow() {
         if !self.isFollowing {
-            followViewModel.follow(userId: user.uid,  followingCount_onSuccess: { (followingCount) in
+            followViewModel.follow(userId: user.id,  followingCount_onSuccess: { (followingCount) in
                        self.following_Count = followingCount
        }) { (followersCount) in
            self.followers_Count = followersCount
@@ -104,7 +104,7 @@ struct FollowButton: View {
             self.isFollowing = true
 
         } else {
-            followViewModel.unfollow(userId: user.uid,  followingCount_onSuccess: { (followingCount) in
+            followViewModel.unfollow(userId: user.id,  followingCount_onSuccess: { (followingCount) in
                              self.following_Count = followingCount
              }) { (followersCount) in
                  self.followers_Count = followersCount
@@ -129,7 +129,7 @@ struct MessageButton: View {
         Button(action: {
             logToAmplitude(event: .tapMessageButton)
         }) {
-                NavigationLink(destination: ChatView(recipientId: user.uid, recipientAvatarUrl: user.profileImageUrl, recipientUsername: user.username)) {
+                NavigationLink(destination: ChatView(recipientId: user.id!, recipientAvatarUrl: user.profileImageUrl, recipientUsername: user.username)) {
                     Text("Message").foregroundColor(Color("bw")).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal))
                
             }

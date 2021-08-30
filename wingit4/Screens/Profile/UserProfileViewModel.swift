@@ -78,7 +78,8 @@ class UserProfileViewModel: ObservableObject {
          }
     }
     
-    func checkUserBlocked(userId: String, postOwnerId: String){
+    func checkUserBlocked(userId: String, postOwnerId: String?){
+        guard let postOwnerId = postOwnerId else { return }
         Ref.FIRESTORE_COLLECTION_BLOCKED_USERID(userId: userId).collection("userBlocked").document(postOwnerId).getDocument { (document, error) in
             if let doc = document, doc.exists {
                 return

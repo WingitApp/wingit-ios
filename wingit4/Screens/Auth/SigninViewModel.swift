@@ -64,7 +64,7 @@ class SigninViewModel: ObservableObject {
   /// Sends Amplitude event on signin success
   /// - Parameter user: User object
   func ampSignInSuccessEvent(user: User) -> Void {
-    Amplitude.instance().setUserId(user.uid)
+    Amplitude.instance().setUserId(user.id)
     logToAmplitude(
         event: .userLogin,
         properties: [.method: "email", .platform: "ios"]

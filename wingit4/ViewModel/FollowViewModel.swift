@@ -32,7 +32,8 @@ class FollowViewModel: ObservableObject {
     }
     
     
-    func follow(userId: String, followingCount_onSuccess: @escaping(_ followingCount: Int) -> Void, followersCount_onSuccess: @escaping(_ followersCount: Int) -> Void ) {
+    func follow(userId: String?, followingCount_onSuccess: @escaping(_ followingCount: Int) -> Void, followersCount_onSuccess: @escaping(_ followersCount: Int) -> Void ) {
+        guard let userId = userId else { return }
         logToAmplitude(event: .follow)
         addToUserProperty(property: .following, value: 1)
         
@@ -56,7 +57,8 @@ class FollowViewModel: ObservableObject {
         
     }
     
-    func unfollow(userId: String, followingCount_onSuccess: @escaping(_ followingCount: Int) -> Void, followersCount_onSuccess: @escaping(_ followersCount: Int) -> Void ) {
+    func unfollow(userId: String?, followingCount_onSuccess: @escaping(_ followingCount: Int) -> Void, followersCount_onSuccess: @escaping(_ followersCount: Int) -> Void ) {
+        guard let userId = userId else { return }
         logToAmplitude(event: .unfollow)
         addToUserProperty(property: .following, value: -1)
         

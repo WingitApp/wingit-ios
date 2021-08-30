@@ -52,16 +52,7 @@ class SignupViewModel: ObservableObject {
   
   
   func onSignupSuccess(user: User) {
-    setUserPropertiesOnAccountCreation(
-      userID: user.uid,
-      username: user.username,
-      email: user.email,
-      signupMethod: "email"
-    )
-    logToAmplitude(
-      event: .userSignup,
-      properties: [.method: "email", .platform: "ios"]
-    )
+    ampSignupSuccessEvent(user: user)
     self.clean()
   }
   
@@ -82,14 +73,14 @@ class SignupViewModel: ObservableObject {
     password = ""
   }
   
-  /// Sends Amplitdue event on signin attempt
+  /// Sends Amplitude event on signup attempt
   func ampSignupAttemptEvent() -> Void {
     logToAmplitude(event: .signupAttempt)
   }
   
   func ampSignupSuccessEvent(user: User) -> Void {
     setUserPropertiesOnAccountCreation(
-      userID: user.uid,
+      userID: user.id!,
       username: user.username,
       email: user.email,
       signupMethod: "email"

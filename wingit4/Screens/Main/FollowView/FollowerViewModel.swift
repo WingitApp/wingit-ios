@@ -15,16 +15,19 @@ class FollowerViewModel : ObservableObject {
     @Published var users: [User] = []
     @Published var isLoading = false
     
-    func loadFollowers(userId: String) {
-        isLoading = true
-        Api.Follow.getFollowers(userId: userId) { (users) in
-            self.isLoading = false
-            self.users = users
-            setUserProperty(property: .followers, value: users.count)
+    func loadFollowers(userId: String?) {
+        if let userId = userId {
+            isLoading = true
+            Api.Follow.getFollowers(userId: userId) { (users) in
+                self.isLoading = false
+                self.users = users
+                setUserProperty(property: .followers, value: users.count)
+            }
         }
     }
     
-    func loadFollowing(userId: String) {
+    func loadFollowing(userId: String?) {
+        guard let userId = userId else { return }
         isLoading = true
         Api.Follow.getFollowing(userId: userId) { (users) in
             self.isLoading = false

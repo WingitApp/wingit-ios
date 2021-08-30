@@ -6,24 +6,33 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
-struct User: Encodable, Decodable {
+struct User: Codable {
+    @DocumentID var id: String?
     var uid: String
-    var email: String
-    var profileImageUrl: String
-    var username: String
     var bio: String
+    var canonicalEmail: String?
+    var connections: [User]?
+    var email: String
+    var firstName: String?
     var keywords: [String]
-//
-//    static func convertDictToUserStruct(dict: [String: Any]) -> User {
-//        let bio = dict["bio"] as! String
-//        let email = dict["email"] as! String
-//        let profileImageUrl = dict["profileImageUrl"] as! String
-//        let username = dict["username"] as! String
-//        let keywords = dict["keywords"] as! [String]
-//        let uid = dict["uid"] as! String
-//
-//        let user = User.init(uid: uid, email: email, profileImageUrl: profileImageUrl, username: username, bio: bio, keywords: keywords)
-//        return user
-//    }
+    var lastName: String?
+    var profileImageUrl: String
+    var tags: [String]?
+    var username: String
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case uid
+        case bio
+        case canonicalEmail
+        case email
+        case firstName
+        case keywords
+        case lastName
+        case profileImageUrl
+        case tags
+        case username
+    }
 }

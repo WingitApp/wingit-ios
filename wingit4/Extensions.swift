@@ -72,6 +72,25 @@ func timeAgoSinceDate(_ date:Date, currentDate:Date, numericDates:Bool) -> Strin
     } else { return "Just now" }
 }
 
+func printDecodingError(error: Error) {
+    switch error {
+        case DecodingError.typeMismatch(let type, let context):
+          print("type:  \(type)")
+          print("\(error.localizedDescription): \(context.debugDescription)")
+        case DecodingError.valueNotFound(let type, let context):
+          print("type: \(type)")
+          print("\(error.localizedDescription): \(context.debugDescription)")
+        case DecodingError.keyNotFound(let key, let context):
+          print("key: \(key)")
+          print("\(error.localizedDescription): \(context.debugDescription)")
+        case DecodingError.dataCorrupted(let key):
+          print("key: \(key)")
+          print("\(error.localizedDescription): \(key)")
+        default:
+          print("Error decoding document: \(error.localizedDescription)")
+        }
+}
+
 extension Array {
        func splited(into size:Int) -> [[Element]] {
          

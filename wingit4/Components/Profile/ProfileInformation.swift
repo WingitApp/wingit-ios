@@ -17,7 +17,7 @@ struct ProfileInformation: View {
     var body: some View {
         
         VStack{
-            if user != nil && self.user!.uid == uid{
+            if user != nil && self.user!.id == uid{
                 
                 Button(action: {updatePic.toggle()},
                        label: {

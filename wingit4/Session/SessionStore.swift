@@ -18,14 +18,10 @@ class SessionStore: ObservableObject {
     func listenAuthenticationState() {
         handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
             if let user = user {
-                let firestoreUserId = Ref.FIRESTORE_DOCUMENT_USERID(userId: user.uid)
-                  firestoreUserId.getDocument { (document, error) in
-                      if let dict = document?.data() {
-                          guard let decoderUser = try? User.init(fromDictionary: dict) else { return }
-                        self.currentUser = decoderUser
-                        self.isLoggedIn = true
-                      }
-                  }
+                Api.User.loadUser(userId: user.uid) { (decodedUser) in
+                  self.currentUser = decodedUser
+                  self.isLoggedIn = true
+                }
             } else {
                 self.isLoggedIn = false
                 self.currentUser = nil
@@ -36,7 +32,7 @@ class SessionStore: ObservableObject {
     func logout() {
         do {
             try Auth.auth().signOut()
-            logToAmplitude(event: .userLogout, userId: self.currentUser?.uid)
+            logToAmplitude(event: .userLogout, userId: self.currentUser?.id)
         } catch  {
 
         }

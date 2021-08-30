@@ -5,10 +5,10 @@
 //  Created by YaeRim Amy Chun on 6/9/21.
 //
 
+import FirebaseFirestoreSwift
 import Foundation
 import Firebase
 import FirebaseAuth
-import FirebaseStorage
 
 class UserApi {
     func searchUsers(text: String, onSuccess: @escaping(_ users: [User]) -> Void) {
@@ -24,7 +24,7 @@ class UserApi {
             for document in snap.documents {
                 let dict = document.data()
                 guard let decoderUser = try? User.init(fromDictionary: dict) else {return}
-                if decoderUser.uid != Auth.auth().currentUser!.uid {
+                if decoderUser.id != Auth.auth().currentUser!.uid {
                     users.append(decoderUser)
                 }
                 
@@ -33,24 +33,28 @@ class UserApi {
         }
     }
     
-   
-    
     func loadUser(userId: String, onSuccess: @escaping(_ user: User) -> Void) {
         Ref.FIRESTORE_DOCUMENT_USERID(userId: userId).getDocument { (snapshot, error) in
-        guard let snap = snapshot else {
-            return
-        }
-        guard let dict = snap.data() else {
-            return
-        }
-        guard let decoderUser = try? User.init(fromDictionary: dict) else {
-            return
-        }
-        onSuccess(decoderUser)
+            if let error = error {
+                print(error)
+            } else if let snapshot = snapshot {
+                let result = Result { try snapshot.data(as: User.self) }
+                    switch result {
+                        case .success(let user):
+                          if let user = user {
+                            onSuccess(user)
+                          }
+                          else {
+                            print("Document doesn't exist.")
+                          }
+                        case .failure(let error):
+                          // A User could not be initialized from the DocumentSnapshot.
+                            printDecodingError(error: error)
+                        }
+            }
       }
     }
   
-    
     func blockUser(userId: String, postOwnerId: String) {
         
         Ref.FIRESTORE_COLLECTION_BLOCKED_USERID(userId: userId).collection("userBlocked").document(postOwnerId).setData(["userBlocking": postOwnerId])
