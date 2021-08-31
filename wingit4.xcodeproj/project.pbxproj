@@ -138,6 +138,7 @@
 		6531838326B238AA0006D9E2 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6531838226B238AA0006D9E2 /* Analytics.swift */; };
 		654DA41926BC7BD3002864B8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654DA41826BC7BD2002864B8 /* MainViewModel.swift */; };
 		657F35D626DE1D8D0092A1B2 /* Comment_v2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F35D526DE1D8D0092A1B2 /* Comment_v2.swift */; };
+		657F35DB26DEA0C00092A1B2 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F35DA26DEA0C00092A1B2 /* Device.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -268,6 +269,7 @@
 		6531838226B238AA0006D9E2 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		654DA41826BC7BD2002864B8 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		657F35D526DE1D8D0092A1B2 /* Comment_v2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment_v2.swift; sourceTree = "<group>"; };
+		657F35DA26DEA0C00092A1B2 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -509,6 +511,7 @@
 				6523D93526DDEB78007546F5 /* ActivityEvent.swift */,
 				6509E4F926D6C214009CB74D /* Ask.swift */,
 				3B7AF0B62672C21E003BCCF3 /* Chat.swift */,
+				657F35DA26DEA0C00092A1B2 /* Device.swift */,
 				3B7AF0B82672C29D003BCCF3 /* InboxMessage.swift */,
 				3B7AF0962671D98E003BCCF3 /* Post.swift */,
 				3B7AF02D2671816A003BCCF3 /* User.swift */,
@@ -867,6 +870,7 @@
 				1524FCD926D7545F0000629C /* Connections.swift in Sources */,
 				657F35D626DE1D8D0092A1B2 /* Comment_v2.swift in Sources */,
 				3B7AF0932671D474003BCCF3 /* CameraViewModel.swift in Sources */,
+				657F35DB26DEA0C00092A1B2 /* Device.swift in Sources */,
 				3B75E3E526716787002F3108 /* SignupButton.swift in Sources */,
 				3BE57FFB26D9A85E005C242F /* ProfileInfo.swift in Sources */,
 				3BE5800126DD5560005C242F /* SignUpFirst.swift in Sources */,
