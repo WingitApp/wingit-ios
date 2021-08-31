@@ -129,7 +129,6 @@
 		3BE57FF726D89994005C242F /* ProfileNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE57FF626D89994005C242F /* ProfileNavigation.swift */; };
 		3BE57FF926D95A34005C242F /* ProfileCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE57FF826D95A34005C242F /* ProfileCard.swift */; };
 		3BE57FFB26D9A85E005C242F /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE57FFA26D9A85E005C242F /* ProfileInfo.swift */; };
-		3BE57FFF26DB5113005C242F /* BumpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE57FFE26DB5112005C242F /* BumpView.swift */; };
 		3BE5800126DD5560005C242F /* SignUpFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE5800026DD5560005C242F /* SignUpFirst.swift */; };
 		3BF143E626819E480093488D /* NotificationsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF143E526819E480093488D /* NotificationsApi.swift */; };
 		6509E4FA26D6C214009CB74D /* Ask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6509E4F926D6C214009CB74D /* Ask.swift */; };
@@ -257,7 +256,6 @@
 		3BE57FF626D89994005C242F /* ProfileNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNavigation.swift; sourceTree = "<group>"; };
 		3BE57FF826D95A34005C242F /* ProfileCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCard.swift; sourceTree = "<group>"; };
 		3BE57FFA26D9A85E005C242F /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
-		3BE57FFE26DB5112005C242F /* BumpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BumpView.swift; sourceTree = "<group>"; };
 		3BE5800026DD5560005C242F /* SignUpFirst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFirst.swift; sourceTree = "<group>"; };
 		3BF143E526819E480093488D /* NotificationsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsApi.swift; sourceTree = "<group>"; };
 		6502C14226C4FF52007C04C9 /* SecretsDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsDebug.xcconfig; sourceTree = "<group>"; };
@@ -349,7 +347,6 @@
 			isa = PBXGroup;
 			children = (
 				156E6AD426D8A0A700690E47 /* NotificationEntry.swift */,
-				3BE57FFE26DB5112005C242F /* BumpView.swift */,
 			);
 			path = NotificationActivity;
 			sourceTree = "<group>";
@@ -886,7 +883,6 @@
 				3B5BDB5E268FA1980034B18C /* ReportApi.swift in Sources */,
 				3B7AF0AD26729FCC003BCCF3 /* CommentApi.swift in Sources */,
 				3B86E43E26C998E300F64416 /* ActivityIndicatorView.swift in Sources */,
-				3BE57FFF26DB5113005C242F /* BumpView.swift in Sources */,
 				3B7AF05A26719AB2003BCCF3 /* HomeView.swift in Sources */,
 				3B7AF0A52671EA03003BCCF3 /* PostPopularViewModel.swift in Sources */,
 				3B7AF0B72672C21F003BCCF3 /* Chat.swift in Sources */,
