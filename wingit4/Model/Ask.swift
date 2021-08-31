@@ -10,6 +10,7 @@ import Foundation
 
 struct Ask: Identifiable, Codable {
     @DocumentID var id: String?
+    var bumpedBy: [User]?
     var bumpCount: Int
     var comments: [Comment]?
     var closedAt: Double
@@ -17,6 +18,8 @@ struct Ask: Identifiable, Codable {
     var createdBy: String
     var followers: [User]?
     var imageUrls: [String]
+    var latitude: Double?
+    var longitude: Double?
     var status: String
     var tags: [String]
     var title: String
