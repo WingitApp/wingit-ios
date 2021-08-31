@@ -18,6 +18,22 @@ struct Ask: Identifiable, Codable {
     var followers: [User]?
     var imageUrls: [String]
     var status: String
+    var tags: [String]
     var title: String
     var text: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case bumpCount
+        case comments
+        case closedAt
+        case createdAt
+        case createdBy
+        case followers
+        case imageUrls
+        case status
+        case tags
+        case title
+        case text
+    }
 }
