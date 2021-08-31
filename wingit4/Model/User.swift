@@ -14,6 +14,7 @@ struct User: Codable {
     var bio: String
     var canonicalEmail: String?
     var connections: [User]?
+    var createdAt: Double?
     var email: String
     var firstName: String?
     var keywords: [String]
