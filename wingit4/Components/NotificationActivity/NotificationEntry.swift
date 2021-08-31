@@ -26,7 +26,7 @@ struct NotificationEntry: View {
               Text(activity.typeDescription).font(.subheadline)
           }
           Spacer()
-          Timestamp(date: activity.date)
+          TimeAgoStamp(date: activity.date)
       }
   }
 }

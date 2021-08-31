@@ -5,13 +5,14 @@
 //  Created by Daniel Yee on 8/30/21.
 //
 
+import FirebaseFirestore
 import FirebaseFirestoreSwift
 import Foundation
 
 struct ActivityEvent: Codable, Identifiable {
     @DocumentID var id: String?
+    @ServerTimestamp var createdTime: Timestamp?
     var connectionId: String
-    var createdAt: Double
     var mediaUrl: String
     var text: String
     var type: EventType
@@ -19,6 +20,8 @@ struct ActivityEvent: Codable, Identifiable {
 }
 
 enum EventType: String, Codable {
+    case id
+    case createdTime
     case comment
     case connectRequest
     case connectRequestAccepted

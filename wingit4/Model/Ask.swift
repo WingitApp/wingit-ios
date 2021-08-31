@@ -5,16 +5,17 @@
 //  Created by Daniel Yee on 8/25/21.
 //
 
+import FirebaseFirestore
 import FirebaseFirestoreSwift
 import Foundation
 
 struct Ask: Identifiable, Codable {
     @DocumentID var id: String?
+    @ServerTimestamp var createdTime: Timestamp?
+    @ServerTimestamp var closedTime: Timestamp?
     var bumpedBy: [User]?
     var bumpCount: Int
     var comments: [Comment]?
-    var closedAt: Double
-    var createdAt: Double
     var createdBy: String
     var followers: [User]?
     var imageUrls: [String]
@@ -27,10 +28,10 @@ struct Ask: Identifiable, Codable {
     
     enum CodingKeys: String, CodingKey {
         case id
+        case createdTime
+        case closedTime
         case bumpCount
         case comments
-        case closedAt
-        case createdAt
         case createdBy
         case followers
         case imageUrls

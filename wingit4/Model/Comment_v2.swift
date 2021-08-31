@@ -5,14 +5,15 @@
 //  Created by Daniel Yee on 8/31/21.
 //
 
+import FirebaseFirestore
 import FirebaseFirestoreSwift
 import Foundation
 
 struct Comment_v2: Codable, Identifiable {
     @DocumentID var id: String? // = askId or recId
+    @ServerTimestamp var createdTime: Timestamp?
     var askId: String?
     var children: [Comment]?
-    var createdAt: Double?
     var createdByUser: User?
     var createdBy: String?
     var likedBy: [User]?
@@ -24,8 +25,8 @@ struct Comment_v2: Codable, Identifiable {
     
     enum CodingKeys: String, CodingKey {
         case id
+        case createdTime
         case askId
-        case createdAt
         case createdBy
         case likeCount
         case mediaUrls

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Timestamp: View {
+struct TimeAgoStamp: View {
   var date: TimeInterval
   
     var body: some View {

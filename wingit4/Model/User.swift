@@ -6,15 +6,16 @@
 //
 
 import Foundation
+import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 struct User: Codable {
     @DocumentID var id: String?
+    @ServerTimestamp var createdTime: Timestamp?
     var uid: String
     var bio: String
     var canonicalEmail: String?
     var connections: [User]?
-    var createdAt: Double?
     var email: String
     var firstName: String?
     var keywords: [String]
@@ -25,6 +26,7 @@ struct User: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id
+        case createdTime
         case uid
         case bio
         case canonicalEmail

@@ -27,7 +27,7 @@ struct HeaderCell: View {
               }.disabled(self.askCardViewModel.isNavLinkDisabled)
               VStack(alignment: .leading){
                 Text(post.username).modifier(UserNameStyle())
-                Timestamp(date: post.date)
+                TimeAgoStamp(date: post.date)
               }
               Spacer()
 //              AskDoneToggle() // rename later
