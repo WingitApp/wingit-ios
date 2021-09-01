@@ -16,15 +16,15 @@ struct Ask: Identifiable, Codable {
     var bumpedBy: [String]? // user ids
     var bumpCount: Int
     var comments: [String]?
-    var createdBy: String
+    var createdBy: String // user id
     var followers: [String]? // user ids
-    var imageUrls: [String]
+    var imageUrls: [String]?
     var likeCount: Int
     var likedBy: [String: Bool]?
     var status: AskStatus
     var tags: [String]
-    var title: String
     var text: String
+    var title: String
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -39,8 +39,8 @@ struct Ask: Identifiable, Codable {
         case likedBy
         case status
         case tags
-        case title
         case text
+        case title
     }
 }
 
