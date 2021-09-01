@@ -20,6 +20,7 @@ class CommentViewModel: ObservableObject {
     var postId: String!
     var listener: ListenerRegistration!
   
+  
     func toggleCommentScreen() {
       self.isCommentSheetShown.toggle()
     }

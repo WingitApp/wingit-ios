@@ -19,7 +19,7 @@ class HeaderCellViewModel : ObservableObject {
 
     var post: Post!
   //  var donepost: DonePost!
-  let uid = Auth.auth().currentUser != nil ? Auth.auth().currentUser?.uid : ""
+//  let uid = Auth.auth().currentUser != nil ? Auth.auth().currentUser?.uid : ""
     var postId: String?
 
     

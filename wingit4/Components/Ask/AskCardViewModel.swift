@@ -10,9 +10,9 @@ import UIKit
 import FirebaseAuth
 
 class AskCardViewModel: ObservableObject {
-  let uid = Auth.auth().currentUser!.uid
   
   // MetaData
+  var uid: String?
   var post: Post?
   var isProfileView: Bool = false
   @Published var postOwner: User!
@@ -30,11 +30,14 @@ class AskCardViewModel: ObservableObject {
   @Published var isHidden: Bool = false
   
   
+  
+  
   func initVM(post: Post, isProfileView: Bool) -> Void {
     self.post = post
     self.isProfileView = isProfileView
-    self.isOwnPost = uid == post.ownerId
+    self.isOwnPost = Auth.auth().currentUser!.uid == post.ownerId
     self.getUserFromPost()
+    self.uid = Auth.auth().currentUser!.uid
   }
   
   func hidePost() {
@@ -65,7 +68,7 @@ class AskCardViewModel: ObservableObject {
     let postOwnerId = self.post!.ownerId
     
     Api.Post.deletePost(
-      userId: uid,
+      userId: Auth.auth().currentUser!.uid,
       postId: postOwnerId
     )
   }
@@ -73,7 +76,10 @@ class AskCardViewModel: ObservableObject {
   
   func blockUser(){
     let postOwnerId = post!.ownerId
-    Api.User.blockUser(userId: uid, postOwnerId: postOwnerId)
+    Api.User.blockUser(
+      userId: Auth.auth().currentUser!.uid ,
+      postOwnerId: postOwnerId
+    )
     
     Ref.FIRESTORE_COLLECTION_FOLLOWING_USERID(
       userId: postOwnerId

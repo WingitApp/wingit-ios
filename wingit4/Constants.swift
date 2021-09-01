@@ -143,6 +143,6 @@ class Ref {
     
         static var FIRESTORE_COLLECTION_ACTIVITY = FIRESTORE_ROOT.collection("activity")
 
-    
-    
+        static var FIRESTORE_COLLECTION_DEVICES = FIRESTORE_ROOT.collection("devices")
+
 }
