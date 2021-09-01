@@ -21,7 +21,9 @@ struct Comment_v2: Codable, Identifiable {
     var mediaUrls: [String]?
     var parentId: String?
     var recId: String?
+    var referralId: String?
     var text: String
+    var type: CommentType?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -33,6 +35,11 @@ struct Comment_v2: Codable, Identifiable {
         case parentId
         case recId
         case text
+        case type
     }
+}
+
+enum CommentType: String, Codable {
+    case referral
 }
 
