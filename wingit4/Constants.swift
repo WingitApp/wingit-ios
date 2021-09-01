@@ -102,7 +102,30 @@ class Ref {
         return FS_COLLECTION_ASKS.whereField("bumpedBy", arrayContains: userId) as? CollectionReference
     }
     
-       static var FS_COLLECTION_TIMELINE = FS_ROOT.collection("timeline")
+    // Firestore - Referrals
+    static var FS_COLLECTION_REFERRALS = FS_ROOT.collection("referrals")
+    static func FS_COLLECTION_REFERRALS_RECEIVED_BY(userId: String) -> CollectionReference? {
+        return FS_COLLECTION_REFERRALS.whereField("receivedBy", isEqualTo: userId) as? CollectionReference
+    }
+    static func FS_COLLECTION_REFERRALS_SENT_BY(userId: String) -> CollectionReference? {
+        return FS_COLLECTION_REFERRALS.whereField("sentBy", isEqualTo: userId) as? CollectionReference
+    }
+    static func FS_COLLECTION_REFERRALS_FOR_ASK(askId: String) -> CollectionReference? {
+        return FS_COLLECTION_REFERRALS.whereField("askId", isEqualTo: askId) as? CollectionReference
+    }
+    
+    // Firestore - Comments
+    static var FS_COLLECTION_COMMENTS = FS_ROOT.collection("comments")
+    static func FS_COLLECTION_COMMENTS_FOR_ASK(askId: String) -> CollectionReference? {
+        return FS_COLLECTION_ASKS.whereField("askId", isEqualTo: askId) as? CollectionReference
+    }
+    
+    // Firestore - Timeline
+    static var FS_COLLECTION_TIMELINE = FS_ROOT.collection("timeline")
+    static func FS_COLLECTION_ASK_TIMELINE_FOR_USER(userId: String) -> CollectionReference? {
+        return FS_COLLECTION_TIMELINE.document(userId).collection("askTimeline")
+    }
+    
        static func FS_DOC_TIMELINE_FOR_USERID(userId: String) -> DocumentReference {
           return FS_COLLECTION_TIMELINE.document(userId)
        }
@@ -116,7 +139,6 @@ class Ref {
     
         static var FS_COLLECTION_ALL_DONE = FS_ROOT.collection("all_done")
         
-       static var FS_COLLECTION_COMMENTS = FS_ROOT.collection("comments")
        static func FS_DOC_COMMENTS_FOR_POSTID(postId: String) -> DocumentReference {
               return FS_COLLECTION_COMMENTS.document(postId)
         }
