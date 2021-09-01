@@ -567,6 +567,8 @@
 				3B75E3DC26716074002F3108 /* Constants.swift */,
 				3B7AF02F26718263003BCCF3 /* Extensions.swift */,
 				3B7AF09B2671E1DA003BCCF3 /* Selection.swift */,
+				3B7AF053267197BA003BCCF3 /* InitialView.swift */,
+				3B7AF05726719885003BCCF3 /* MainView.swift */,
 				3B75E3D126715C3A002F3108 /* Components */,
 				3B7AF06326719E94003BCCF3 /* Screens */,
 				3B7AF06726719EDD003BCCF3 /* Session */,
