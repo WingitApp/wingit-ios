@@ -115,6 +115,7 @@
 		3B96DD6626DF46A500015EED /* ReferButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6526DF46A500015EED /* ReferButton.swift */; };
 		3B96DD6826DF481C00015EED /* ReferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6726DF481C00015EED /* ReferViewModel.swift */; };
 		3B96DD6A26DF494800015EED /* ReferHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6926DF494800015EED /* ReferHeader.swift */; };
+		3B96DD6C26DF4AF600015EED /* ReferConnectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6B26DF4AF600015EED /* ReferConnectionsList.swift */; };
 		3B9774252694FE0000F1EF14 /* alertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9774242694FE0000F1EF14 /* alertView.swift */; };
 		3B97807D26813BC1009CE037 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 3B97807C26813BC1009CE037 /* FirebaseMessaging */; };
 		3BC155AD26D721600069AFD4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BC155AC26D721600069AFD4 /* GoogleService-Info.plist */; };
@@ -250,6 +251,7 @@
 		3B96DD6526DF46A500015EED /* ReferButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferButton.swift; sourceTree = "<group>"; };
 		3B96DD6726DF481C00015EED /* ReferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferViewModel.swift; sourceTree = "<group>"; };
 		3B96DD6926DF494800015EED /* ReferHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferHeader.swift; sourceTree = "<group>"; };
+		3B96DD6B26DF4AF600015EED /* ReferConnectionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferConnectionsList.swift; sourceTree = "<group>"; };
 		3B9774242694FE0000F1EF14 /* alertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertView.swift; sourceTree = "<group>"; };
 		3B97807E268158B6009CE037 /* wingit4.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wingit4.entitlements; sourceTree = "<group>"; };
 		3BC155AC26D721600069AFD4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -323,8 +325,9 @@
 			isa = PBXGroup;
 			children = (
 				1524FCEB26D75B1D0000629C /* Actions */,
-				151A3C8A26D32F4600A39FAF /* AskCard.swift */,
+				3B96DD6B26DF4AF600015EED /* ReferConnectionsList.swift */,
 				3B96DD6926DF494800015EED /* ReferHeader.swift */,
+				151A3C8A26D32F4600A39FAF /* AskCard.swift */,
 				151A3C8D26D41B5400A39FAF /* AskCardViewModel.swift */,
 				1524FCC726D753170000629C /* AskMenu.swift */,
 				1524FCC926D753240000629C /* AskMenuViewModel.swift */,
@@ -862,6 +865,7 @@
 				3B75E3DB26715D26002F3108 /* Modifiers.swift in Sources */,
 				3BF143E626819E480093488D /* NotificationsApi.swift in Sources */,
 				156E6AD526D8A0A700690E47 /* NotificationEntry.swift in Sources */,
+				3B96DD6C26DF4AF600015EED /* ReferConnectionsList.swift in Sources */,
 				151A3C9826D5B9F000A39FAF /* BodyCell.swift in Sources */,
 				3B5BDB5C268F98E70034B18C /* ReportInputViewModel.swift in Sources */,
 				1524FCD226D753320000629C /* HeaderCell.swift in Sources */,
