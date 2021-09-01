@@ -63,13 +63,16 @@ class UserProfileViewModel: ObservableObject {
       }
     }
     
-    
     func loadDonePosts(userId: String) {
         isLoading = true
         Api.User.loadDonePosts(userId: userId) { (doneposts) in
             self.isLoading = false
             self.doneposts = doneposts
         }
+    }
+    
+    func updateConnections(userId: String) {
+        
     }
     
     func updateConnectionsCount(userId: String) {

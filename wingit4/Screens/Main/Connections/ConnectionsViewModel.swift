@@ -12,14 +12,17 @@ import Amplitude
 
 class ConnectionsViewModel : ObservableObject {
     
-    @Published var isLoading = false
+    @Published var isLoading = true
     @Published var users: [User] = []
     @Published var connectionsCount = 0
     
-    func loadConnections(userId: String) {
-        isLoading = true
+    func loadConnections(userId: String?) {
+        guard let userId = userId else { return }
+        if !self.isLoading {
+            isLoading.toggle()
+        }
         Api.Connections.getConnections(userId: userId) { (users) in
-            self.isLoading = false
+            self.isLoading.toggle()
             self.users = users
             self.connectionsCount = users.count
         }

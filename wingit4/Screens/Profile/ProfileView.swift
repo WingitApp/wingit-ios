@@ -12,6 +12,7 @@ struct ProfileView: View {
     
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var profileViewModel: ProfileViewModel
+    @StateObject var connectionsViewModel = ConnectionsViewModel()
     
        var body: some View {
          
@@ -46,5 +47,6 @@ struct ProfileView: View {
                         
                 } )
         }
+        .environmentObject(connectionsViewModel)
       }
 }

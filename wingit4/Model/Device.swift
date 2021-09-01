@@ -16,7 +16,7 @@ struct Device: Codable {
     @ServerTimestamp var createdTime: Timestamp?
     var appVersion: String
     var model: String
-    var OSversion: String?
+    var OSVersion: String?
     var platform: Platform
     var pushNotificationsEnabled: Bool
     var pushNotificationToken: String
@@ -27,7 +27,7 @@ struct Device: Codable {
         case createdTime
         case appVersion
         case model
-        case OSversion
+        case OSVersion
         case platform
         case pushNotificationsEnabled
         case pushNotificationToken

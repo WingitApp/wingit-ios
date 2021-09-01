@@ -15,6 +15,7 @@ struct UserProfileView: View {
     var user: User
 
     @ObservedObject var userProfileViewModel = UserProfileViewModel()
+    @StateObject var connectionsViewModel = ConnectionsViewModel()
 
     var body: some View {
         VStack(alignment: .leading, spacing: 15){
@@ -56,7 +57,8 @@ struct UserProfileView: View {
                 .background(Color.black.opacity(0.03)
                 .ignoresSafeArea(.all, edges: .all))
                 .navigationBarTitle(Text(self.user.username), displayMode: .automatic)
-                .onAppear {
+                .environmentObject(connectionsViewModel)
+                 .onAppear {
                     logToAmplitude(event: .viewOtherProfile)
                     self.userProfileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.user.id ?? self.user.uid)
                  }

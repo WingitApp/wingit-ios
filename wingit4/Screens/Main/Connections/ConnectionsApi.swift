@@ -13,21 +13,19 @@ import Firebase
 
 class ConnectionsApi {
     func getConnections(userId: String, onSuccess: @escaping(_ users: [User]) -> Void) {
-        Ref.FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments{ (snapshot, error) in
+        Ref.FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
             guard let snap = snapshot else {
                 return
             }
             var users = [User]()
             for connection in snap.documents {
-          
                 let connectionId = connection.documentID
                 Ref.FIRESTORE_DOCUMENT_USERID(userId: connectionId).getDocument{ (document, error) in
-                    if let dict = document?.data() {
-                        guard let decoderUser = try? User.init(fromDictionary: dict) else {return}
-                        users.append(decoderUser)
-                        }
-                    onSuccess(users)
+                    if let decodedUser = try? document?.data(as: User.self) {
+                        users.append(decodedUser)
                     }
+                    onSuccess(users)
+                }
             }
         }
     }

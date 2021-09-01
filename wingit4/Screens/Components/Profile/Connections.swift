@@ -11,11 +11,12 @@ struct Connections: View {
     
     var user: User?
     @Binding var connectionsCount: Int
+    @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
     
     var body: some View {
         HStack{
             NavigationLink(
-                destination: ConnectionsView(user: user!),
+                destination: ConnectionsView(user: user!).environmentObject(connectionsViewModel),
                 label: {
                     HStack {
                         Text("\(connectionsCount)").font(.caption).foregroundColor(.gray)
