@@ -11,7 +11,18 @@ import FirebaseAuth
 import FirebaseStorage
 import Firebase
 
+
+// CONSTANTS
+
+let TIMELINE_PAGINATION_PAGE_SIZE = 10
+let TIMELINE_PAGINATION_QUERY = Ref.FIRESTORE_TIMELINE_DOCUMENT_USERID(
+  userId: Auth.auth().currentUser!.uid)
+  .collection("timelinePosts")
+  .order(by: "date", descending: true)
+  .limit(to: 5)
+
 class PostApi {
+  
     func uploadPost(caption: String, imageData: Data, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
         guard let userId = Auth.auth().currentUser?.uid else {
             return
@@ -205,7 +216,7 @@ class PostApi {
           let next = Ref.FIRESTORE_TIMELINE_DOCUMENT_USERID(userId: userId)
             .collection("timelinePosts")
             .order(by: "date", descending: true)
-            .limit(to: 10)
+            .limit(to: TIMELINE_PAGINATION_PAGE_SIZE)
             .start(afterDocument: lastSnapshot)
           
           var posts = [Post]()
@@ -214,20 +225,8 @@ class PostApi {
             let dict = documentChange.document.data()
             guard let decoderPost = try? Post.init(fromDictionary: dict) else {return}
             posts.append(decoderPost)
-//            switch documentChange.type {
-//              case .added:
-//                let dict = documentChange.document.data()
-//                guard let decoderPost = try? Post.init(fromDictionary: dict) else {return}
-//                posts.append(decoderPost)
-//              case .modified:
-//                print("type: modified")
-//              case .removed:
-//                print("type: removed")
-//            }
           }
-          
           onSuccess(posts, next)
-
         })
     }
     

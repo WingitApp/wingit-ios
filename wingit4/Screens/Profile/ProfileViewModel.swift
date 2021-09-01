@@ -39,13 +39,16 @@ class ProfileViewModel: ObservableObject {
       if !self.isLoading {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         self.isLoading.toggle()
-
+      }
+      
         Api.User.loadPosts(userId: userId) { (posts) in
             self.posts = posts
             self.splitted = self.posts.splited(into: 3)
-            self.isLoading.toggle()
-
-
+          DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            if self.isLoading {
+              self.isLoading.toggle()
+            }
+          }
 
         }
         updateIsConnected(userId: userId)
