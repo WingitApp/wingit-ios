@@ -97,6 +97,23 @@ class Ref {
            return FIRESTORE_COLLECTION_MY_POSTS.document(userId)
        }
     
+    // Firestore - Asks
+    static var FS_COLLECTION_ASKS = FIRESTORE_ROOT.collection("asks")
+    static func FS_COLLECTION_ASKS_FOR_USER(userId: String) -> CollectionReference? {
+        return FS_COLLECTION_ASKS.whereField("createdby", isEqualTo: userId) as? CollectionReference
+    }
+    static func FS_COLLECTION_OPEN_ASKS_FOR_USER(userId: String) -> CollectionReference? {
+        return FS_COLLECTION_ASKS_FOR_USER(userId: userId)?.whereField("status", isEqualTo: "open") as? CollectionReference
+    }
+    static func FS_COLLECTION_CLOSED_ASKS_FOR_USER(userId: String) -> CollectionReference? {
+        return FS_COLLECTION_ASKS_FOR_USER(userId: userId)?.whereField("status", isEqualTo: "closed") as? CollectionReference
+    }
+    static func FS_COLLECTION_ASKS_FOLLOWING(userId: String) -> CollectionReference? {
+        return FS_COLLECTION_ASKS.whereField("followers", arrayContains: userId) as? CollectionReference
+    }
+    static func FS_COLLECTION_ASKS_BUMPED(userId: String) -> CollectionReference? {
+        return FS_COLLECTION_ASKS.whereField("bumpedBy", arrayContains: userId) as? CollectionReference
+    }
     
        static var FIRESTORE_COLLECTION_TIMELINE = FIRESTORE_ROOT.collection("timeline")
        static func FIRESTORE_TIMELINE_DOCUMENT_USERID(userId: String) -> DocumentReference {
