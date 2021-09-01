@@ -44,6 +44,12 @@ let LOGO_URL = """
 class Ref {
     // Storage
        static var STORAGE_ROOT = Storage.storage().reference(forURL: "gs://wingitapp-1fe28.appspot.com")
+    
+        // Storage - Ask
+        static var STORAGE_ASKS = STORAGE_ROOT.child("asks")
+        static func STORAGE_ASK_ID(askId: String) -> StorageReference {
+              return STORAGE_POSTS.child(askId)
+        }
        
        // Storage - Avatar
        static var STORAGE_AVATAR = STORAGE_ROOT.child("avatar")
