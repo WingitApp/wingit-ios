@@ -506,6 +506,7 @@
 				3B7AF05926719AB2003BCCF3 /* HomeView.swift */,
 				3B7AF0A62672870F003BCCF3 /* HomeViewModel.swift */,
 				3B928C3A269EA383007A34B8 /* ImageView.swift */,
+				159EC7DB26E010D500DA3DC0 /* AskDetailView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -909,6 +910,7 @@
 				151A3C9626D567A800A39FAF /* AskDoneToggleViewModel.swift in Sources */,
 				3B7AF054267197BA003BCCF3 /* InitialView.swift in Sources */,
 				654DA41926BC7BD3002864B8 /* MainViewModel.swift in Sources */,
+				159EC7DC26E010D500DA3DC0 /* AskDetailView.swift in Sources */,
 				3BD604F326B08CA8004FFEEC /* DoneToggle.swift in Sources */,
 				65A9EF9D26DF0B2500E81CBF /* ConnectionsView.swift in Sources */,
 				156E6AE526D8A13400690E47 /* UserProfileView.swift in Sources */,
