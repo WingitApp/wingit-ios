@@ -13,14 +13,14 @@ struct Ask: Identifiable, Codable {
     @DocumentID var id: String?
     @ServerTimestamp var createdTime: Timestamp?
     @ServerTimestamp var closedTime: Timestamp?
-    var bumpedBy: [User]?
+    var bumpedBy: [String]? // user ids
     var bumpCount: Int
-    var comments: [Comment]?
+    var comments: [String]?
     var createdBy: String
-    var followers: [User]?
+    var followers: [String]? // user ids
     var imageUrls: [String]
-    var latitude: Double?
-    var longitude: Double?
+    var likeCount: Int
+    var likedBy: [String: Bool]?
     var status: AskStatus
     var tags: [String]
     var title: String
@@ -28,13 +28,15 @@ struct Ask: Identifiable, Codable {
     
     enum CodingKeys: String, CodingKey {
         case id
+        case bumpedBy
         case createdTime
         case closedTime
         case bumpCount
-        case comments
         case createdBy
         case followers
         case imageUrls
+        case likeCount
+        case likedBy
         case status
         case tags
         case title
