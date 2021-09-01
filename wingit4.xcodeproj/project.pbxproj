@@ -39,6 +39,7 @@
 		156E6AE726D8A13400690E47 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156E6AE326D8A13400690E47 /* ProfileViewModel.swift */; };
 		15DA39B426DC5C620080193E /* AskCardPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA39B326DC5C620080193E /* AskCardPlaceholder.swift */; };
 		3B0DFBDE26B78D86008CE0D1 /* UpdatePhotoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0DFBDD26B78D86008CE0D1 /* UpdatePhotoVM.swift */; };
+		3B3A880D26E0007A003E780F /* ReferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3A880C26E0007A003E780F /* ReferViewModel.swift */; };
 		3B5BDB51268F82790034B18C /* fetchUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BDB50268F82790034B18C /* fetchUser.swift */; };
 		3B5BDB58268F94E00034B18C /* ReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BDB57268F94E00034B18C /* ReportModel.swift */; };
 		3B5BDB5A268F98AC0034B18C /* ReportInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BDB59268F98AC0034B18C /* ReportInput.swift */; };
@@ -113,7 +114,6 @@
 		3B94C37426C311ED00BCCFBA /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = 3B94C37326C311ED00BCCFBA /* FirebaseDynamicLinks */; };
 		3B94FFD52676868200B4CC22 /* BioTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B94FFD42676868200B4CC22 /* BioTextField.swift */; };
 		3B96DD6626DF46A500015EED /* ReferButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6526DF46A500015EED /* ReferButton.swift */; };
-		3B96DD6826DF481C00015EED /* ReferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6726DF481C00015EED /* ReferViewModel.swift */; };
 		3B96DD6A26DF494800015EED /* ReferHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6926DF494800015EED /* ReferHeader.swift */; };
 		3B96DD6E26DF4C9E00015EED /* ReferCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6D26DF4C9E00015EED /* ReferCard.swift */; };
 		3B96DD7026DF5C6000015EED /* ReferConnectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6F26DF5C6000015EED /* ReferConnectionsList.swift */; };
@@ -180,6 +180,7 @@
 		156E6AE326D8A13400690E47 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		15DA39B326DC5C620080193E /* AskCardPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskCardPlaceholder.swift; sourceTree = "<group>"; };
 		3B0DFBDD26B78D86008CE0D1 /* UpdatePhotoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePhotoVM.swift; sourceTree = "<group>"; };
+		3B3A880C26E0007A003E780F /* ReferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferViewModel.swift; sourceTree = "<group>"; };
 		3B5BDB50268F82790034B18C /* fetchUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fetchUser.swift; sourceTree = "<group>"; };
 		3B5BDB57268F94E00034B18C /* ReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportModel.swift; sourceTree = "<group>"; };
 		3B5BDB59268F98AC0034B18C /* ReportInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportInput.swift; sourceTree = "<group>"; };
@@ -250,7 +251,6 @@
 		3B928C3A269EA383007A34B8 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		3B94FFD42676868200B4CC22 /* BioTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioTextField.swift; sourceTree = "<group>"; };
 		3B96DD6526DF46A500015EED /* ReferButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferButton.swift; sourceTree = "<group>"; };
-		3B96DD6726DF481C00015EED /* ReferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferViewModel.swift; sourceTree = "<group>"; };
 		3B96DD6926DF494800015EED /* ReferHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferHeader.swift; sourceTree = "<group>"; };
 		3B96DD6D26DF4C9E00015EED /* ReferCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferCard.swift; sourceTree = "<group>"; };
 		3B96DD6F26DF5C6000015EED /* ReferConnectionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferConnectionsList.swift; sourceTree = "<group>"; };
@@ -337,7 +337,6 @@
 				1524FCCB26D753310000629C /* FooterCellViewModel.swift */,
 				1524FCCE26D753320000629C /* HeaderCell.swift */,
 				1524FCCC26D753310000629C /* HeaderCellViewModel.swift */,
-				1524FCE626D759CE0000629C /* FooterCell.swift */,
 			);
 			path = Ask;
 			sourceTree = "<group>";
@@ -349,8 +348,6 @@
 				1524FCEE26D75B5D0000629C /* CommentButton.swift */,
 				1524FCF026D75F100000629C /* ShareButton.swift */,
 				1524FCF226D75F1E0000629C /* ShareButtonViewModel.swift */,
-				3B96DD6526DF46A500015EED /* ReferButton.swift */,
-				3B96DD6726DF481C00015EED /* ReferViewModel.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -367,9 +364,12 @@
 			isa = PBXGroup;
 			children = (
 				156E6AD426D8A0A700690E47 /* NotificationEntry.swift */,
+				3B96DD6526DF46A500015EED /* ReferButton.swift */,
 				3B96DD6F26DF5C6000015EED /* ReferConnectionsList.swift */,
 				3B96DD6926DF494800015EED /* ReferHeader.swift */,
 				3B96DD6D26DF4C9E00015EED /* ReferCard.swift */,
+				3B3A880C26E0007A003E780F /* ReferViewModel.swift */,
+				1524FCE626D759CE0000629C /* FooterCell.swift */,
 			);
 			path = NotificationActivity;
 			sourceTree = "<group>";
@@ -851,6 +851,7 @@
 				1524FCCF26D753320000629C /* FooterCellViewModel.swift in Sources */,
 				6523D93626DDEB79007546F5 /* ActivityEvent.swift in Sources */,
 				65A9EF9F26DF7C9A00E81CBF /* Referral.swift in Sources */,
+				3B3A880D26E0007A003E780F /* ReferViewModel.swift in Sources */,
 				3B94FFD52676868200B4CC22 /* BioTextField.swift in Sources */,
 				3B5BDB51268F82790034B18C /* fetchUser.swift in Sources */,
 				3B5BDB58268F94E00034B18C /* ReportModel.swift in Sources */,
@@ -860,7 +861,6 @@
 				3B7AF0872671CA69003BCCF3 /* UsersViewModel.swift in Sources */,
 				156E6AE626D8A13400690E47 /* UserProfileViewModel.swift in Sources */,
 				3BD12F1526C9CA1500E26A87 /* AppDel.swift in Sources */,
-				3B96DD6826DF481C00015EED /* ReferViewModel.swift in Sources */,
 				1524FCF826D812E70000629C /* CircleLoader.swift in Sources */,
 				3B75E3DF267163A1002F3108 /* SignupView.swift in Sources */,
 				3B75E3E1267163FC002F3108 /* Signin+HeaderView.swift in Sources */,

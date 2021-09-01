@@ -16,8 +16,3 @@ struct ReferCard: View {
     }
 }
 
-struct ReferCard_Previews: PreviewProvider {
-    static var previews: some View {
-        ReferCard()
-    }
-}

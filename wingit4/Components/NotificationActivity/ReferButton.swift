@@ -10,11 +10,11 @@ import SwiftUI
 struct ReferButton: View {
     
   //  @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
-    @EnvironmentObject var session: SessionStore
+//    @EnvironmentObject var session: SessionStore
 
     var body: some View {
         NavigationLink(
-            destination: ReferConnectionsList(user: self.session.currentUser!),
+            destination: ReferConnectionsList(),
             label: {
                 Image(systemName: "person.3")
                     .foregroundColor(.gray)
