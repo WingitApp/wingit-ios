@@ -10,7 +10,7 @@ import SwiftUI
 struct ReferCard: View {
     var body: some View {
         VStack{
-            Text("Hello, World!")
+            ReferHeader()
         }
      
     }

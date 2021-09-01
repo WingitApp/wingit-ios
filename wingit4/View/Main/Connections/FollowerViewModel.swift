@@ -35,5 +35,16 @@ class FollowerViewModel : ObservableObject {
             setUserProperty(property: .following, value: users.count)
         }
     }
+    
+    func loadConnections() {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        isLoading = true
+        Api.Follow.getConnections(userId: userId) { (users) in
+            print("USERS: \(users)")
+            self.isLoading = false
+            self.users = users
+        }
+    }
+
 }
 

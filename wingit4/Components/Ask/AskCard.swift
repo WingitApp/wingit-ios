@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct AskCard: View {
   
@@ -31,6 +32,7 @@ struct AskCard: View {
       .environmentObject(askMenuViewModel)
       .environmentObject(askDoneToggleViewModel)
       .environmentObject(commentViewModel)
+    
       // [START] Animates on Hide
       .opacity(!self.askCardViewModel.isHidden ? 1 : 0)
       .transition(.asymmetric(insertion: .scale, removal: .opacity))
@@ -60,8 +62,7 @@ struct AskCard: View {
         isPresented: $commentViewModel.isCommentSheetShown,
         content: {
           CommentView(post: $post)
-        }
-      )
+        })
     }
   }
 }

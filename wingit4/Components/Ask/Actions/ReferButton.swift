@@ -8,20 +8,28 @@
 import SwiftUI
 
 struct ReferButton: View {
-    @EnvironmentObject var referViewModel: ReferViewModel
     
-    func onTapReferIcon() {
-      self.referViewModel.toggleReferScreen()
-    }
-    
+   // @EnvironmentObject var referViewModel: ReferViewModel
+//
+//    func onTapReferIcon() {
+//      self.referViewModel.toggleReferScreen()
+//    }
+//    
     var body: some View {
-        Button(
-          action: onTapReferIcon,
-          label: {
-            Image(systemName: "person.3")
-        })
-        .foregroundColor(.gray)
-        .padding(.trailing, 10)
+        NavigationLink(
+            destination: ReferConnectionsList(),
+            label: {
+                Image(systemName: "person.3")
+                    .foregroundColor(.gray)
+                    .padding(.trailing, 10)
+            })
+//        Button(
+//          action: onTapReferIcon,
+//          label: {
+//            Image(systemName: "person.3")
+//        })
+//        .foregroundColor(.gray)
+//        .padding(.trailing, 10)
     }
 }
 
