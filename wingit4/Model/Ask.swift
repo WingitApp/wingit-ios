@@ -21,7 +21,7 @@ struct Ask: Identifiable, Codable {
     var imageUrls: [String]
     var latitude: Double?
     var longitude: Double?
-    var status: String
+    var status: AskStatus
     var tags: [String]
     var title: String
     var text: String
@@ -40,4 +40,9 @@ struct Ask: Identifiable, Codable {
         case title
         case text
     }
+}
+
+enum AskStatus: String, Codable {
+    case open
+    case closed
 }
