@@ -9,15 +9,12 @@ import SwiftUI
 
 struct ReferButton: View {
     
-   // @EnvironmentObject var referViewModel: ReferViewModel
-//
-//    func onTapReferIcon() {
-//      self.referViewModel.toggleReferScreen()
-//    }
-//    
+  //  @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
+    @EnvironmentObject var session: SessionStore
+
     var body: some View {
         NavigationLink(
-            destination: ReferConnectionsList(),
+            destination: ReferConnectionsList(user: self.session.currentUser!),
             label: {
                 Image(systemName: "person.3")
                     .foregroundColor(.gray)

@@ -115,9 +115,8 @@
 		3B96DD6626DF46A500015EED /* ReferButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6526DF46A500015EED /* ReferButton.swift */; };
 		3B96DD6826DF481C00015EED /* ReferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6726DF481C00015EED /* ReferViewModel.swift */; };
 		3B96DD6A26DF494800015EED /* ReferHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6926DF494800015EED /* ReferHeader.swift */; };
-		3B96DD6C26DF4AF600015EED /* ReferConnectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6B26DF4AF600015EED /* ReferConnectionsList.swift */; };
 		3B96DD6E26DF4C9E00015EED /* ReferCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6D26DF4C9E00015EED /* ReferCard.swift */; };
-		3B96DD7026DF5C6000015EED /* ReferConnections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6F26DF5C6000015EED /* ReferConnections.swift */; };
+		3B96DD7026DF5C6000015EED /* ReferConnectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6F26DF5C6000015EED /* ReferConnectionsList.swift */; };
 		3B9774252694FE0000F1EF14 /* alertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9774242694FE0000F1EF14 /* alertView.swift */; };
 		3B97807D26813BC1009CE037 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 3B97807C26813BC1009CE037 /* FirebaseMessaging */; };
 		3BC155AD26D721600069AFD4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BC155AC26D721600069AFD4 /* GoogleService-Info.plist */; };
@@ -253,9 +252,8 @@
 		3B96DD6526DF46A500015EED /* ReferButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferButton.swift; sourceTree = "<group>"; };
 		3B96DD6726DF481C00015EED /* ReferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferViewModel.swift; sourceTree = "<group>"; };
 		3B96DD6926DF494800015EED /* ReferHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferHeader.swift; sourceTree = "<group>"; };
-		3B96DD6B26DF4AF600015EED /* ReferConnectionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferConnectionsList.swift; sourceTree = "<group>"; };
 		3B96DD6D26DF4C9E00015EED /* ReferCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferCard.swift; sourceTree = "<group>"; };
-		3B96DD6F26DF5C6000015EED /* ReferConnections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferConnections.swift; sourceTree = "<group>"; };
+		3B96DD6F26DF5C6000015EED /* ReferConnectionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferConnectionsList.swift; sourceTree = "<group>"; };
 		3B9774242694FE0000F1EF14 /* alertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertView.swift; sourceTree = "<group>"; };
 		3B97807E268158B6009CE037 /* wingit4.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wingit4.entitlements; sourceTree = "<group>"; };
 		3BC155AC26D721600069AFD4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -369,8 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				156E6AD426D8A0A700690E47 /* NotificationEntry.swift */,
-				3B96DD6B26DF4AF600015EED /* ReferConnectionsList.swift */,
-				3B96DD6F26DF5C6000015EED /* ReferConnections.swift */,
+				3B96DD6F26DF5C6000015EED /* ReferConnectionsList.swift */,
 				3B96DD6926DF494800015EED /* ReferHeader.swift */,
 				3B96DD6D26DF4C9E00015EED /* ReferCard.swift */,
 			);
@@ -850,7 +847,7 @@
 				3B7AF0A22671E416003BCCF3 /* EditProfile.swift in Sources */,
 				3B7AF0AF2672A053003BCCF3 /* Comment.swift in Sources */,
 				3B7AF0A72672870F003BCCF3 /* HomeViewModel.swift in Sources */,
-				3B96DD7026DF5C6000015EED /* ReferConnections.swift in Sources */,
+				3B96DD7026DF5C6000015EED /* ReferConnectionsList.swift in Sources */,
 				1524FCCF26D753320000629C /* FooterCellViewModel.swift in Sources */,
 				6523D93626DDEB79007546F5 /* ActivityEvent.swift in Sources */,
 				65A9EF9F26DF7C9A00E81CBF /* Referral.swift in Sources */,
@@ -873,7 +870,6 @@
 				3B75E3DB26715D26002F3108 /* Modifiers.swift in Sources */,
 				3BF143E626819E480093488D /* NotificationsApi.swift in Sources */,
 				156E6AD526D8A0A700690E47 /* NotificationEntry.swift in Sources */,
-				3B96DD6C26DF4AF600015EED /* ReferConnectionsList.swift in Sources */,
 				151A3C9826D5B9F000A39FAF /* BodyCell.swift in Sources */,
 				3B5BDB5C268F98E70034B18C /* ReportInputViewModel.swift in Sources */,
 				1524FCD226D753320000629C /* HeaderCell.swift in Sources */,
