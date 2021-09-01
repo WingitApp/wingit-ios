@@ -69,36 +69,23 @@ class Ref {
               return STORAGE_CHAT.child(chatId)
         }
        
-       
-       // Firestore
-       static var FIRESTORE_ROOT = Firestore.firestore()
+       // Firestore - Database Root
+       static var FS_ROOT = Firestore.firestore()
        
        // Firestore - Users
-       static var FIRESTORE_COLLECTION_USERS = FIRESTORE_ROOT.collection("users")
-       static func FIRESTORE_DOCUMENT_USERID(userId: String) -> DocumentReference {
-           return FIRESTORE_COLLECTION_USERS.document(userId)
+       static var FS_COLLECTION_USERS = FS_ROOT.collection("users")
+       static func FS_DOC_USERID(userId: String) -> DocumentReference {
+           return FS_COLLECTION_USERS.document(userId)
        }
-    
-        //Agreed
-            static var FIRESTORE_COLLECTION_AGREED = FIRESTORE_ROOT.collection("Agreed")
-            static func FIRESTORE_DOCUMENT_AGREED(userId: String) -> DocumentReference {
-                return FIRESTORE_COLLECTION_AGREED.document(userId)
-            }
-    
+
         // Firestore - Block
-        static var FIRESTORE_COLLECTION_BLOCKED = FIRESTORE_ROOT.collection("Blocked")
-        static func FIRESTORE_COLLECTION_BLOCKED_USERID(userId: String) -> DocumentReference {
-            return FIRESTORE_COLLECTION_BLOCKED.document(userId)
+        static var FS_COLLECTION_BLOCKED = FS_ROOT.collection("Blocked")
+        static func FS_DOC_BLOCKED_USERID(userId: String) -> DocumentReference {
+            return FS_COLLECTION_BLOCKED.document(userId)
         }
-       
-       // Firestore - Posts
-       static var FIRESTORE_COLLECTION_MY_POSTS = FIRESTORE_ROOT.collection("myPosts")
-       static func FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: String) -> DocumentReference {
-           return FIRESTORE_COLLECTION_MY_POSTS.document(userId)
-       }
-    
+
     // Firestore - Asks
-    static var FS_COLLECTION_ASKS = FIRESTORE_ROOT.collection("asks")
+    static var FS_COLLECTION_ASKS = FS_ROOT.collection("asks")
     static func FS_COLLECTION_ASKS_FOR_USER(userId: String) -> CollectionReference? {
         return FS_COLLECTION_ASKS.whereField("createdby", isEqualTo: userId) as? CollectionReference
     }
@@ -115,65 +102,65 @@ class Ref {
         return FS_COLLECTION_ASKS.whereField("bumpedBy", arrayContains: userId) as? CollectionReference
     }
     
-       static var FIRESTORE_COLLECTION_TIMELINE = FIRESTORE_ROOT.collection("timeline")
-       static func FIRESTORE_TIMELINE_DOCUMENT_USERID(userId: String) -> DocumentReference {
-          return FIRESTORE_COLLECTION_TIMELINE.document(userId)
+       static var FS_COLLECTION_TIMELINE = FS_ROOT.collection("timeline")
+       static func FS_DOC_TIMELINE_FOR_USERID(userId: String) -> DocumentReference {
+          return FS_COLLECTION_TIMELINE.document(userId)
        }
        
-       static var FIRESTORE_COLLECTION_ALL_ASKS = FIRESTORE_ROOT.collection("all_posts")
-    
-    
-        static var FIRESTORE_COLLECTION_ALL_DONE = FIRESTORE_ROOT.collection("all_done")
-        
-       static var FIRESTORE_COLLECTION_COMMENTS = FIRESTORE_ROOT.collection("comments")
-       static func FIRESTORE_COMMENTS_DOCUMENT_POSTID(postId: String) -> DocumentReference {
-              return FIRESTORE_COLLECTION_COMMENTS.document(postId)
+        // Firestore - Posts
+        static var FS_COLLECTION_ALL_POSTS = FS_ROOT.collection("all_posts")
+        static var FS_COLLECTION_MY_POSTS = FS_ROOT.collection("myPosts")
+        static func FS_DOC_POSTS_FOR_USERID(userId: String) -> DocumentReference {
+            return FS_COLLECTION_MY_POSTS.document(userId)
         }
     
-        static var FIRESTORE_COLLECTION_REPORTS = FIRESTORE_ROOT.collection("reports")
-        static func FIRESTORE_REPORTS_DOCUMENT_POSTID(postId: String) -> DocumentReference {
-               return FIRESTORE_COLLECTION_REPORTS.document(postId)
+        static var FS_COLLECTION_ALL_DONE = FS_ROOT.collection("all_done")
+        
+       static var FS_COLLECTION_COMMENTS = FS_ROOT.collection("comments")
+       static func FS_DOC_COMMENTS_FOR_POSTID(postId: String) -> DocumentReference {
+              return FS_COLLECTION_COMMENTS.document(postId)
+        }
+    
+        static var FS_COLLECTION_REPORTS = FS_ROOT.collection("reports")
+        static func FS_DOC_REPORTS_FOR_POSTID(postId: String) -> DocumentReference {
+               return FS_COLLECTION_REPORTS.document(postId)
          }
     
-        static var FIRESTORE_COLLECTION_CHAT = FIRESTORE_ROOT.collection("chat")
-        static func FIRESTORE_COLLECTION_CHATROOM(senderId: String, recipientId: String) -> CollectionReference {
-            return FIRESTORE_COLLECTION_CHAT.document(senderId).collection("chatRoom").document(recipientId).collection("chatItems")
+        static var FS_COLLECTION_CHAT = FS_ROOT.collection("chat")
+        static func FS_COLLECTION_CHATROOM(senderId: String, recipientId: String) -> CollectionReference {
+            return FS_COLLECTION_CHAT.document(senderId).collection("chatRoom").document(recipientId).collection("chatItems")
         }
-        static var FIRESTORE_COLLECTION_INBOX_MESSAGES = FIRESTORE_ROOT.collection("messages")
-        static func FIRESTORE_COLLECTION_INBOX_MESSAGES(userId: String) -> CollectionReference {
-                  return FIRESTORE_COLLECTION_INBOX_MESSAGES.document(userId).collection("inboxMessages")
-        }
-    
-    
-        static func FIRESTORE_COLLECTION_INBOX_MESSAGES_DOCUMENT_USERID(senderId: String, recipientId: String) -> DocumentReference {
-           return FIRESTORE_COLLECTION_INBOX_MESSAGES.document(senderId).collection("inboxMessages").document(recipientId)
+        static var FS_COLLECTION_INBOX_MESSAGES = FS_ROOT.collection("messages")
+        static func FS_COLLECTION_INBOX_MESSAGES(userId: String) -> CollectionReference {
+                  return FS_COLLECTION_INBOX_MESSAGES.document(userId).collection("inboxMessages")
         }
     
-        static var FIRESTORE_COLLECTION_CONNECT_REQUESTS = FIRESTORE_ROOT.collection("connectRequests")
-        static func FIRESTORE_COLLECTION_CONNECT_REQUESTS_SENT_BY(userId: String) -> CollectionReference {
-            return FIRESTORE_COLLECTION_CONNECT_REQUESTS.document(userId).collection("userSentRequests")
-        }
-        static func FIRESTORE_COLLECTION_CONNECT_REQUESTS_INBOX_FOR_USER(userId: String) -> CollectionReference {
-            return FIRESTORE_COLLECTION_CONNECT_REQUESTS.document(userId).collection("userReceivedRequests")
-        }
-        static func FIRESTORE_DOC_CONNECT_REQUEST_SENT(sentByUserId: String, receivedByUserId: String) -> DocumentReference {
-            return FIRESTORE_COLLECTION_CONNECT_REQUESTS.document(sentByUserId).collection("userSentRequests").document(receivedByUserId)
+        static func FS_DOC_INBOX_DICTIONARY_BETWEEN(senderId: String, recipientId: String) -> DocumentReference {
+           return FS_COLLECTION_INBOX_MESSAGES.document(senderId).collection("inboxMessages").document(recipientId)
         }
     
-        static func FIRESTORE_DOC_CONNECT_REQUEST_RECEIVED(receivedByUserId: String, sentFromUserId: String) -> DocumentReference {
-            return FIRESTORE_COLLECTION_CONNECT_REQUESTS.document(receivedByUserId).collection("userReceivedRequests").document(sentFromUserId)
+        static var FS_COLLECTION_CONNECT_REQUESTS = FS_ROOT.collection("connectRequests")
+        static func FS_COLLECTION_CONNECT_REQUESTS_SENT_BY(userId: String) -> CollectionReference {
+            return FS_COLLECTION_CONNECT_REQUESTS.document(userId).collection("userSentRequests")
+        }
+        static func FS_COLLECTION_CONNECT_REQUESTS_INBOX_FOR_USER(userId: String) -> CollectionReference {
+            return FS_COLLECTION_CONNECT_REQUESTS.document(userId).collection("userReceivedRequests")
+        }
+        static func FS_DOC_CONNECT_REQUEST_SENT(sentByUserId: String, receivedByUserId: String) -> DocumentReference {
+            return FS_COLLECTION_CONNECT_REQUESTS.document(sentByUserId).collection("userSentRequests").document(receivedByUserId)
         }
     
-        static var FIRESTORE_COLLECTION_CONNECTIONS = FIRESTORE_ROOT.collection("connections")
-        static func FIRESTORE_DOC_CONNECTION_BETWEEN_USERS(user1Id: String, user2Id: String) -> DocumentReference {
-            return FIRESTORE_COLLECTION_CONNECTIONS.document(user1Id).collection("userConnections").document(user2Id)
-        }
-        static func FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: String) -> CollectionReference {
-               return FIRESTORE_COLLECTION_CONNECTIONS.document(userId).collection("userConnections")
+        static func FS_DOC_CONNECT_REQUEST_RECEIVED(receivedByUserId: String, sentFromUserId: String) -> DocumentReference {
+            return FS_COLLECTION_CONNECT_REQUESTS.document(receivedByUserId).collection("userReceivedRequests").document(sentFromUserId)
         }
     
-        static var FIRESTORE_COLLECTION_ACTIVITY = FIRESTORE_ROOT.collection("activity")
-
+        static var FS_COLLECTION_CONNECTIONS = FS_ROOT.collection("connections")
+        static func FS_DOC_CONNECTION_BETWEEN_USERS(user1Id: String, user2Id: String) -> DocumentReference {
+            return FS_COLLECTION_CONNECTIONS.document(user1Id).collection("userConnections").document(user2Id)
+        }
+        static func FS_COLLECTION_CONNECTIONS_FOR_USER(userId: String) -> CollectionReference {
+               return FS_COLLECTION_CONNECTIONS.document(userId).collection("userConnections")
+        }
     
-    
+        static var FS_COLLECTION_ACTIVITY = FS_ROOT.collection("activity")
 }

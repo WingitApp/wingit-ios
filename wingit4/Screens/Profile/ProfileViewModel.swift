@@ -26,7 +26,7 @@ class ProfileViewModel: ObservableObject {
     @Published var hasPendingRequest = false
     
     func updateIsConnected(userId: String) {
-        Ref.FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: Auth.auth().currentUser!.uid).document(userId).getDocument { (document, error) in
+        Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: Auth.auth().currentUser!.uid).document(userId).getDocument { (document, error) in
             if let doc = document, doc.exists {
                 self.isConnected = true
             } else {
@@ -66,7 +66,7 @@ class ProfileViewModel: ObservableObject {
  
     
     func updateConnectionsCount(userId: String) {
-        Ref.FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
+        Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
             
             if let doc = snapshot?.documents {
                 self.connectionsCountState = doc.count

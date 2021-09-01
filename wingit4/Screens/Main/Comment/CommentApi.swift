@@ -14,7 +14,7 @@ class CommentApi {
         let comment = Comment(comment: text, avatarUrl: avatarUrl, ownerId: ownerId, postId: postId, username: username, date: Date().timeIntervalSince1970)
         guard let dict = try? comment.toDictionary() else {return}
         
-        Ref.FIRESTORE_COMMENTS_DOCUMENT_POSTID(postId: postId).collection("postComments").addDocument(data: dict) { (error) in
+        Ref.FS_DOC_COMMENTS_FOR_POSTID(postId: postId).collection("postComments").addDocument(data: dict) { (error) in
             if let error = error {
                 onError(error.localizedDescription)
                 return
@@ -26,7 +26,7 @@ class CommentApi {
     
     
     func getComments(postId: String, onSuccess: @escaping([Comment]) -> Void, onError: @escaping(_ errorMessage: String) -> Void, newComment: @escaping(Comment) -> Void, listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void) {
-        let listenerFirestore = Ref.FIRESTORE_COMMENTS_DOCUMENT_POSTID(postId: postId).collection("postComments").order(by: "date", descending: false).addSnapshotListener { (querySnapshot, error) in
+        let listenerFirestore = Ref.FS_DOC_COMMENTS_FOR_POSTID(postId: postId).collection("postComments").order(by: "date", descending: false).addSnapshotListener { (querySnapshot, error) in
             guard let snapshot = querySnapshot else {
                 return
             }

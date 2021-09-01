@@ -14,7 +14,7 @@ class UserApi {
     func searchUsers(text: String, onSuccess: @escaping(_ users: [User]) -> Void) {
        // print(text.lowercased().removingWhitespaces())
         
-        Ref.FIRESTORE_COLLECTION_USERS.whereField("keywords", arrayContains: text.lowercased().removingWhitespaces()).getDocuments { (snapshot, error) in
+        Ref.FS_COLLECTION_USERS.whereField("keywords", arrayContains: text.lowercased().removingWhitespaces()).getDocuments { (snapshot, error) in
             guard let snap = snapshot else {
              //   print("Error fetching data")
                 return
@@ -34,7 +34,7 @@ class UserApi {
     }
     
     func loadUser(userId: String, onSuccess: @escaping(_ user: User) -> Void) {
-        Ref.FIRESTORE_DOCUMENT_USERID(userId: userId).getDocument { (snapshot, error) in
+        Ref.FS_DOC_USERID(userId: userId).getDocument { (snapshot, error) in
             if let error = error {
                 print(error)
             } else if let snapshot = snapshot {
@@ -57,8 +57,8 @@ class UserApi {
   
     func blockUser(userId: String, postOwnerId: String) {
         
-        Ref.FIRESTORE_COLLECTION_BLOCKED_USERID(userId: userId).collection("userBlocked").document(postOwnerId).setData(["userBlocking": postOwnerId])
-        Ref.FIRESTORE_ROOT.collection("Blocked").document(postOwnerId).collection("userBlockedBy").document(userId).setData(["userBlocked": userId])
+        Ref.FS_DOC_BLOCKED_USERID(userId: userId).collection("userBlocked").document(postOwnerId).setData(["userBlocking": postOwnerId])
+        Ref.FS_ROOT.collection("Blocked").document(postOwnerId).collection("userBlockedBy").document(userId).setData(["userBlocked": userId])
         
     }
     
@@ -112,7 +112,7 @@ class UserApi {
             return
         }
         
-        Ref.FIRESTORE_DOCUMENT_USERID(userId: userId).updateData([
+        Ref.FS_DOC_USERID(userId: userId).updateData([
         
             id: value,
             
@@ -137,7 +137,7 @@ class UserApi {
 
     
     func loadPosts(userId: String, onSuccess: @escaping(_ posts: [Post]) -> Void) {
-        Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("userPosts").order(by: "date", descending: true).getDocuments { (snapshot, error) in
+        Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("userPosts").order(by: "date", descending: true).getDocuments { (snapshot, error) in
             
             guard let snap = snapshot else {
               //  print("Error fetching data")
@@ -155,7 +155,7 @@ class UserApi {
     }
         
     func loadDonePosts(userId: String, onSuccess: @escaping(_ doneposts: [DonePost]) -> Void) {
-        Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("donePosts").order(by: "donedate", descending: true).getDocuments { (snapshot, error) in
+        Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("donePosts").order(by: "donedate", descending: true).getDocuments { (snapshot, error) in
             
             guard let snap = snapshot else {
              //   print("Error fetching data")

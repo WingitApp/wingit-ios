@@ -21,11 +21,11 @@ class CommentInputViewModel: ObservableObject {
 
         Api.Comment.sendComment(text: text, username: username, avatarUrl: avatarUrl, ownerId: currentUserId, postId: post.postId, onSuccess: {
             if Auth.auth().currentUser!.uid != self.post.ownerId {
-                let activityId = Ref.FIRESTORE_COLLECTION_ACTIVITY.document(self.post.ownerId).collection("feedItems").document().documentID
+                let activityId = Ref.FS_COLLECTION_ACTIVITY.document(self.post.ownerId).collection("feedItems").document().documentID
                 let activityObject = Activity(activityId: activityId, type: "comment", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: self.post.postId, mediaUrl: self.post.mediaUrl, comment: text, date: Date().timeIntervalSince1970)
                 guard let activityDict = try? activityObject.toDictionary() else { return }
                 
-                Ref.FIRESTORE_COLLECTION_ACTIVITY.document(self.post.ownerId).collection("feedItems").document(activityId).setData(activityDict)
+                Ref.FS_COLLECTION_ACTIVITY.document(self.post.ownerId).collection("feedItems").document(activityId).setData(activityDict)
                 logToAmplitude(event: .commentOnRec)
             }
             onSuccess()

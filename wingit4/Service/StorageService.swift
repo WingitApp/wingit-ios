@@ -24,9 +24,9 @@ class StorageService {
                       
                       guard let dict = try? chat.toDictionary() else { return }
                       
-                      Ref.FIRESTORE_COLLECTION_CHATROOM(senderId: senderId, recipientId: recipientId).document(messageId).setData(dict) { (error) in
+                      Ref.FS_COLLECTION_CHATROOM(senderId: senderId, recipientId: recipientId).document(messageId).setData(dict) { (error) in
                           if error == nil {
-                               Ref.FIRESTORE_COLLECTION_CHATROOM(senderId: recipientId, recipientId: senderId).document(messageId).setData(dict)
+                               Ref.FS_COLLECTION_CHATROOM(senderId: recipientId, recipientId: senderId).document(messageId).setData(dict)
                               
                               let inboxMessage1 = InboxMessage(lastMessage: "PHOTO", username: recipientUsername, type: "PHOTO", date: Date().timeIntervalSince1970, userId: recipientId, avatarUrl: recipientAvatarUrl)
                               let inboxMessage2 = InboxMessage(lastMessage: "PHOTO", username: senderUsername, type: "PHOTO", date: Date().timeIntervalSince1970, userId: senderId, avatarUrl: senderAvatarUrl)
@@ -34,8 +34,8 @@ class StorageService {
                               guard let inboxDict1 = try? inboxMessage1.toDictionary() else { return }
                               guard let inboxDict2 = try? inboxMessage2.toDictionary() else { return }
 
-                              Ref.FIRESTORE_COLLECTION_INBOX_MESSAGES_DOCUMENT_USERID(senderId: senderId, recipientId: recipientId).setData(inboxDict1)
-                              Ref.FIRESTORE_COLLECTION_INBOX_MESSAGES_DOCUMENT_USERID(senderId: recipientId, recipientId: senderId).setData(inboxDict2)
+                              Ref.FS_DOC_INBOX_DICTIONARY_BETWEEN(senderId: senderId, recipientId: recipientId).setData(inboxDict1)
+                              Ref.FS_DOC_INBOX_DICTIONARY_BETWEEN(senderId: recipientId, recipientId: senderId).setData(inboxDict2)
                               onSuccess()
                           } else {
                               onError(error!.localizedDescription)
@@ -58,7 +58,7 @@ class StorageService {
               }
             storagePostRef.downloadURL { (url, error) in
                 if let metaImageUrl = url?.absoluteString {
-                    let firestorePostRef = Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("userPosts").document(postId)
+                    let firestorePostRef = Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("userPosts").document(postId)
                     let post = Post.init(caption: caption, likes: [:], location: "", ownerId: userId, postId: postId, username: Auth.auth().currentUser!.displayName!, avatar: Auth.auth().currentUser!.photoURL!.absoluteString, mediaUrl: metaImageUrl, date: Date().timeIntervalSince1970, likeCount: 0)
                     guard let dict = try? post.toDictionary() else {return}
                     
@@ -67,8 +67,8 @@ class StorageService {
                           onError(error!.localizedDescription)
                           return
                         }
-                        Ref.FIRESTORE_TIMELINE_DOCUMENT_USERID(userId: userId).collection("timelinePosts").document(postId).setData(dict)
-                        Ref.FIRESTORE_COLLECTION_ALL_ASKS.document(postId).setData(dict)
+                        Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId).collection("timelinePosts").document(postId).setData(dict)
+                        Ref.FS_COLLECTION_ALL_POSTS.document(postId).setData(dict)
                         onSuccess()
                     }
                     
@@ -87,7 +87,7 @@ class StorageService {
               }
             storagePostRef.downloadURL { (url, error) in
                 if let metaImageUrl = url?.absoluteString {
-                    let firestorePostRef = Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("donePosts").document(postId)
+                    let firestorePostRef = Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("donePosts").document(postId)
                     let post = DonePost.init(caption: caption, doneMediaUrl: metaImageUrl, ownerId: userId, postId: postId, username: Auth.auth().currentUser!.displayName!, avatar: Auth.auth().currentUser!.photoURL!.absoluteString, donedate: Date().timeIntervalSince1970, askcaption: askcaption, mediaUrl: mediaUrl, asklocation: asklocation, askdate: askdate)
                 
                     guard let dict = try? post.toDictionary() else {return}
@@ -97,7 +97,7 @@ class StorageService {
                           onError(error!.localizedDescription)
                           return
                         }
-                        Ref.FIRESTORE_COLLECTION_ALL_DONE.document(postId).setData(dict)
+                        Ref.FS_COLLECTION_ALL_DONE.document(postId).setData(dict)
                         onSuccess()
                     }
                     
@@ -129,7 +129,7 @@ class StorageService {
                             }
                         }
                                                     
-                        let firestoreUserId = Ref.FIRESTORE_DOCUMENT_USERID(userId: userId)
+                        let firestoreUserId = Ref.FS_DOC_USERID(userId: userId)
 //                        let userInfor = ["username": self.username, "email": self.email, "profileImageUrl": metaImageUrl]
                         let user = User.init(id: userId, uid: userId, bio: bio, canonicalEmail: email, email: email, firstName: "", keywords: username.splitStringToArray(), lastName: "", profileImageUrl: metaImageUrl, username: username)
 
@@ -171,7 +171,7 @@ class StorageService {
                             }
                         }
 
-                        let firestoreUserId = Ref.FIRESTORE_DOCUMENT_USERID(userId: userId)
+                        let firestoreUserId = Ref.FS_DOC_USERID(userId: userId)
                         firestoreUserId.updateData(["profileImageUrl" : metaImageUrl]){
                             (error) in
                                 if error != nil {

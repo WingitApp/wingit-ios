@@ -16,7 +16,7 @@ class ReportApi {
         let report = Report(comment: text, ownerId: ownerId, postId: postId, username: username)
         guard let dict = try? report.toDictionary() else {return}
         
-        Ref.FIRESTORE_REPORTS_DOCUMENT_POSTID(postId: postId).collection("reportedReports").addDocument(data: dict) { (error) in
+        Ref.FS_DOC_REPORTS_FOR_POSTID(postId: postId).collection("reportedReports").addDocument(data: dict) { (error) in
             if let error = error {
                 onError(error.localizedDescription)
                 return

@@ -16,8 +16,8 @@ class PostApi {
         guard let userId = Auth.auth().currentUser?.uid else {
             return
         }
-        let postId = Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("userPosts").document().documentID
-        let firestorePostRef = Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("userPosts").document(postId)
+        let postId = Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("userPosts").document().documentID
+        let firestorePostRef = Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("userPosts").document(postId)
         let post = Post.init(caption: caption, likes: [:], location: "", ownerId: userId, postId: postId, username: Auth.auth().currentUser!.displayName!, avatar: Auth.auth().currentUser!.photoURL!.absoluteString, mediaUrl: "", date: Date().timeIntervalSince1970, likeCount: 0)
         guard let dict = try? post.toDictionary() else {return}
         
@@ -26,8 +26,8 @@ class PostApi {
               onError(error!.localizedDescription)
               return
             }
-            Ref.FIRESTORE_TIMELINE_DOCUMENT_USERID(userId: userId).collection("timelinePosts").document(postId).setData(dict)
-            Ref.FIRESTORE_COLLECTION_ALL_ASKS.document(postId).setData(dict)
+            Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId).collection("timelinePosts").document(postId).setData(dict)
+            Ref.FS_COLLECTION_ALL_POSTS.document(postId).setData(dict)
             onSuccess()
         }
        
@@ -37,7 +37,7 @@ class PostApi {
         guard let userId = Auth.auth().currentUser?.uid else {
             return
         }
-        let postId = Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("userPosts").document().documentID
+        let postId = Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("userPosts").document().documentID
         let storagePostRef = Ref.STORAGE_POST_ID(postId: postId)
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
@@ -49,7 +49,7 @@ class PostApi {
         guard let userId = Auth.auth().currentUser?.uid else {
             return
         }
-        let firestoreMyPostRef = Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("userPosts").document(postId)
+        let firestoreMyPostRef = Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("userPosts").document(postId)
       //  let storagePostRef = Ref.STORAGE_POST_ID
         firestoreMyPostRef.delete { (err) in
             if err != nil{
@@ -58,8 +58,8 @@ class PostApi {
             }
             let storagePostRef = Ref.STORAGE_POST_ID(postId: postId)
             storagePostRef.delete()
-            Ref.FIRESTORE_TIMELINE_DOCUMENT_USERID(userId: userId).collection("timelinePosts").document(postId).delete()
-            Ref.FIRESTORE_COLLECTION_ALL_ASKS.document(postId).delete()
+            Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId).collection("timelinePosts").document(postId).delete()
+            Ref.FS_COLLECTION_ALL_POSTS.document(postId).delete()
         }
     }
     
@@ -79,7 +79,7 @@ class PostApi {
             return
         }
         self.deleteUserPost(userId: userId, postId: postId)
-        let firestorePostRef = Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("donePosts").document(postId)
+        let firestorePostRef = Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("donePosts").document(postId)
         let donepost = DonePost.init(caption: caption, doneMediaUrl: "", ownerId: userId, postId: postId, username: Auth.auth().currentUser!.displayName!, avatar: Auth.auth().currentUser!.photoURL!.absoluteString, donedate: Date().timeIntervalSince1970, askcaption: askcaption, mediaUrl: mediaUrl, asklocation: asklocation, askdate: askdate)
         guard let dict = try? donepost.toDictionary() else {return}
 
@@ -88,7 +88,7 @@ class PostApi {
               onError(error!.localizedDescription)
               return
             }
-            Ref.FIRESTORE_COLLECTION_ALL_DONE.document(postId).setData(dict)
+            Ref.FS_COLLECTION_ALL_DONE.document(postId).setData(dict)
             onSuccess()
         }
     }
@@ -97,13 +97,13 @@ class PostApi {
             guard let userId = Auth.auth().currentUser?.uid else {
                 return
             }
-            let firestoreMyPostRef = Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("userPosts").document(postId)
+            let firestoreMyPostRef = Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("userPosts").document(postId)
             firestoreMyPostRef.delete { (err) in
                 if err != nil{
                //    print(err!.localizedDescription)
                     return
                 }
-            Ref.FIRESTORE_TIMELINE_DOCUMENT_USERID(userId: userId).collection("timelinePosts").document(postId).delete()
+            Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId).collection("timelinePosts").document(postId).delete()
                 
             
         }
@@ -114,7 +114,7 @@ class PostApi {
         guard let userId = Auth.auth().currentUser?.uid else {
             return
         }
-        let firestoreMyPostRef = Ref.FIRESTORE_MY_POSTS_DOCUMENT_USERID(userId: userId).collection("donePosts").document(postId)
+        let firestoreMyPostRef = Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("donePosts").document(postId)
       //  let storagePostRef = Ref.STORAGE_POST_ID
         firestoreMyPostRef.delete { (err) in
             if err != nil{
@@ -123,7 +123,7 @@ class PostApi {
             }
             let storagePostRef = Ref.STORAGE_POST_ID(postId: postId)
             storagePostRef.delete()
-            Ref.FIRESTORE_COLLECTION_ALL_DONE.document(postId).delete()
+            Ref.FS_COLLECTION_ALL_DONE.document(postId).delete()
         }
     }
     
@@ -133,7 +133,7 @@ class PostApi {
         guard let userId = Auth.auth().currentUser?.uid else {
             return
         }
-        let firestoreMyTimeline = Ref.FIRESTORE_TIMELINE_DOCUMENT_USERID(userId: userId).collection("timelinePosts").document(postId)
+        let firestoreMyTimeline = Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId).collection("timelinePosts").document(postId)
         
         firestoreMyTimeline.delete() { (err) in
             if err != nil{
@@ -158,7 +158,7 @@ class PostApi {
 //    }
 
     func loadPost(postId: String, onSuccess: @escaping(_ post: Post) -> Void) {
-        Ref.FIRESTORE_COLLECTION_ALL_ASKS.document(postId).getDocument { (snapshot, error) in
+        Ref.FS_COLLECTION_ALL_POSTS.document(postId).getDocument { (snapshot, error) in
           guard let snap = snapshot else {
            //   print("Error fetching data")
               return
@@ -173,7 +173,7 @@ class PostApi {
     
     
     func loadPosts(onSuccess: @escaping(_ posts: [Post]) -> Void) {
-        Ref.FIRESTORE_COLLECTION_ALL_ASKS.order(by: "date", descending: true).getDocuments { (snapshot, error) in
+        Ref.FS_COLLECTION_ALL_POSTS.order(by: "date", descending: true).getDocuments { (snapshot, error) in
             guard let snap = snapshot else {
              //   print("Error fetching data")
                 return
@@ -194,7 +194,7 @@ class PostApi {
         guard let userId = Auth.auth().currentUser?.uid else {
                 return
         }
-        let listenerFirestore =  Ref.FIRESTORE_TIMELINE_DOCUMENT_USERID(userId: userId).collection("timelinePosts").order(by: "date", descending: false).addSnapshotListener({ (querySnapshot, error) in
+        let listenerFirestore =  Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId).collection("timelinePosts").order(by: "date", descending: false).addSnapshotListener({ (querySnapshot, error) in
             guard let snapshot = querySnapshot else {
                    return
             }

@@ -25,7 +25,7 @@ class UserProfileViewModel: ObservableObject {
     @Published var hasPendingRequest = false
     
     func updateIsConnected(userId: String) {
-        Ref.FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: Auth.auth().currentUser!.uid).document(userId).getDocument { (document, error) in
+        Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: Auth.auth().currentUser!.uid).document(userId).getDocument { (document, error) in
             if let doc = document, doc.exists {
                 self.isConnected = true
             } else {
@@ -35,7 +35,7 @@ class UserProfileViewModel: ObservableObject {
     }
     
     func updateHasPendingRequest(userId: String) {
-        Ref.FIRESTORE_DOC_CONNECT_REQUEST_SENT(sentByUserId: Auth.auth().currentUser!.uid, receivedByUserId: userId).getDocument { (document, error) in
+        Ref.FS_DOC_CONNECT_REQUEST_SENT(sentByUserId: Auth.auth().currentUser!.uid, receivedByUserId: userId).getDocument { (document, error) in
             if let doc = document, doc.exists {
                 self.hasPendingRequest = true
             } else {
@@ -76,7 +76,7 @@ class UserProfileViewModel: ObservableObject {
     }
     
     func updateConnectionsCount(userId: String) {
-        Ref.FIRESTORE_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
+        Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
             
             if let doc = snapshot?.documents {
                 self.connectionsCountState = doc.count
@@ -86,10 +86,10 @@ class UserProfileViewModel: ObservableObject {
     
     func checkUserBlocked(userId: String, postOwnerId: String?){
         guard let postOwnerId = postOwnerId else { return }
-        Ref.FIRESTORE_COLLECTION_BLOCKED_USERID(userId: userId).collection("userBlocked").document(postOwnerId).getDocument { (document, error) in
+        Ref.FS_DOC_BLOCKED_USERID(userId: userId).collection("userBlocked").document(postOwnerId).getDocument { (document, error) in
             if let doc = document, doc.exists {
                 return
-            }; Ref.FIRESTORE_COLLECTION_BLOCKED_USERID(userId: userId).collection("userBlockedBy").document(postOwnerId).getDocument { (document, error) in
+            }; Ref.FS_DOC_BLOCKED_USERID(userId: userId).collection("userBlockedBy").document(postOwnerId).getDocument { (document, error) in
                 if let doc = document, doc.exists {
                     self.userBlocked = true
                     return
