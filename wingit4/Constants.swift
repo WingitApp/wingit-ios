@@ -144,5 +144,31 @@ class Ref {
         static var FIRESTORE_COLLECTION_ACTIVITY = FIRESTORE_ROOT.collection("activity")
 
         static var FIRESTORE_COLLECTION_DEVICES = FIRESTORE_ROOT.collection("devices")
-
+  
+        static func POST_USER_DEVICE_TOKEN(token: String) -> Void {
+          Ref.FIRESTORE_COLLECTION_DEVICES.whereField("userId", isEqualTo: Auth.auth().currentUser!.uid)
+              .getDocuments() { (querySnapshot, err) in
+                  if let err = err {
+                      return print("Error getting documents: \(err)")
+                  }
+                
+                  if querySnapshot?.isEmpty == true {
+                    
+                    let userDeviceDict : [String:Any] = [
+                      "platform": "ios",
+                      "pushNotificationsEnabled": true,
+                      "pushNotificationToken": token,
+                      "userId": Auth.auth().currentUser!.uid
+                    ]
+                    
+                    Ref.FIRESTORE_COLLECTION_DEVICES.addDocument(data: userDeviceDict) { (error) in
+                      if error != nil { return }
+                      return print("Token saved")
+                    }
+                  } else {
+                    print("Token already exists")
+                  }
+            
+          }
+  }
 }

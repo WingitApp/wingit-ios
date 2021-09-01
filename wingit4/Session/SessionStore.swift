@@ -15,6 +15,7 @@ class SessionStore: ObservableObject {
     
     @Published var isLoggedIn = false
  //   @Published var Agreed = false
+  
     var userSession: User?
     var handle: AuthStateDidChangeListenerHandle?
     

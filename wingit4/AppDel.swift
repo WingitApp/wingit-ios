@@ -21,10 +21,10 @@ class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate {
     FirebaseApp.configure()
     Messaging.messaging().delegate = self
     UNUserNotificationCenter.current().delegate = self
-    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { success, _ in
-      guard success else {
-        return
-      }
+    UNUserNotificationCenter.current().requestAuthorization(
+      options: [.alert, .sound, .badge]
+    ) { success, _ in
+      guard success else { return }
       print("Success in APNS registry")
     }
     
@@ -64,25 +64,40 @@ class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate {
       guard let token = token else {
         return
       }
-      
-      print("TOKEN: \(token)")
+            
+      // check if token exists. if false, save to backend
+      Ref.POST_USER_DEVICE_TOKEN(token: token)
     }
   }
   
-  func application(_ application: UIApplication,
-  didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+  
+  func application(
+    _ application: UIApplication,
+    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+  ) {
+    print("REGISTERED FOR TOKEN")
     Messaging.messaging().apnsToken = deviceToken;
   }
+  
+  func application(
+    _ application: UIApplication,
+    didFailToRegisterForRemoteNotificationsWithError error: Error
+  ) {
+    print("FAILED TO REGISTER FOR TOKEN")
+
+  }
+
    
 }
 
 @available(iOS 10, *)
 extension AppDelegate: UNUserNotificationCenterDelegate {
   // Receive displayed notifications for iOS 10 devices.
-  func userNotificationCenter(_ center: UNUserNotificationCenter,
-                              willPresent notification: UNNotification,
-                              withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions)
-                                -> Void) {
+  func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    willPresent notification: UNNotification,
+    withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+  ) {
     let userInfo = notification.request.content.userInfo
 
     // With swizzling disabled you must let Messaging know about the message, for Analytics
@@ -97,9 +112,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     completionHandler([[.list, .banner, .sound]])
   }
 
-  func userNotificationCenter(_ center: UNUserNotificationCenter,
-                              didReceive response: UNNotificationResponse,
-                              withCompletionHandler completionHandler: @escaping () -> Void) {
+  func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    didReceive response: UNNotificationResponse,
+    withCompletionHandler completionHandler: @escaping () -> Void
+  ) {
     let userInfo = response.notification.request.content.userInfo
 
     // ...
@@ -112,6 +129,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
     completionHandler()
   }
+
 }
 
 @main
