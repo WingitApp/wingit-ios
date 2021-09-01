@@ -37,27 +37,28 @@ class ProfileViewModel: ObservableObject {
     
     func loadUserPosts() {
       if !self.isLoading {
-        guard let userId = Auth.auth().currentUser?.uid else { return }
         self.isLoading.toggle()
-
-        Api.User.loadPosts(userId: userId) { (posts) in
-            self.posts = posts
-            self.splitted = self.posts.splited(into: 3)
-            self.isLoading.toggle()
-
-
-
-        }
-        updateIsConnected(userId: userId)
-        updateConnectionsCount(userId: userId)
-        self.loadDonePosts()
       }
+      
+      guard let userId = Auth.auth().currentUser?.uid else { return }
+
+      Api.User.loadPosts(userId: userId) { (posts) in
+          self.posts = posts
+          self.splitted = self.posts.splited(into: 3)
+          if self.isLoading {
+            self.isLoading.toggle()
+          }
+      }
+    // these calls should be called elsewhere
+      updateIsConnected(userId: userId)
+      updateConnectionsCount(userId: userId)
+      self.loadDonePosts()
     }
     
     
     func loadDonePosts() {
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        isLoading = true
+        self.isLoading = true
         Api.User.loadDonePosts(userId: userId) { (doneposts) in
             self.isLoading = false
             self.doneposts = doneposts

@@ -25,6 +25,7 @@ struct ProfileView: View {
                       ForEach(self.profileViewModel.posts, id: \.postId) { post in
                         LazyVStack {
                             AskCard(post: post, isProfileView: true)
+                              .redacted(reason: self.profileViewModel.isLoading ? .placeholder : [])
                           }
                       }
               //  }

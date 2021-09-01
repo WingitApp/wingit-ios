@@ -21,33 +21,25 @@ struct MainView: View {
     
   var body: some View {
     TabView(selection: $model.selectedIndex) {
-        NavigationTab(
-            tag: 0,
-            icon: "house.fill",
-            screen: AnyView(HomeView())
-        )
-        NavigationTab(
-            tag: 1,
-            icon: IMAGE_PHOTO,
-            screen: AnyView(CameraView())
-        )
-        NavigationTab(
-            tag: 2,
-            icon: "bell",
-            screen: AnyView(NotificationView())
-        )
-        NavigationTab(
-            tag: 3,
-            icon: "person.fill",
-            screen: AnyView(ProfileView())
-        )
+        HomeView()
+          .tabItem({ Image(systemName: "house.fill") })
+          .tag(0)
+        CameraView()
+          .tabItem({ Image(systemName: IMAGE_PHOTO) })
+          .tag(1)
+        NotificationView()
+          .tabItem({ Image(systemName: "bell") })
+          .tag(2)
+        ProfileView()
+          .tabItem({ Image(systemName: "person.fill") })
+          .tag(3)
      }
+    .accentColor(Color(.systemTeal))
     .environmentObject(profileViewModel)
     .environmentObject(activityViewModel)
     .onAppear{
         self.profileViewModel.loadUserPosts()
         self.activityViewModel.loadActivities()
     }
-    .accentColor(Color(.systemTeal))
   }
 }

@@ -11,7 +11,18 @@ import FirebaseAuth
 import FirebaseStorage
 import Firebase
 
+
+// CONSTANTS
+
+let TIMELINE_PAGINATION_PAGE_SIZE = 10
+let TIMELINE_PAGINATION_QUERY = Ref.FS_DOC_TIMELINE_FOR_USERID(
+  userId: Auth.auth().currentUser!.uid)
+  .collection("timelinePosts")
+  .order(by: "date", descending: true)
+  .limit(to: 5)
+
 class PostApi {
+  
     func uploadPost(caption: String, imageData: Data, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
         guard let userId = Auth.auth().currentUser?.uid else {
             return
@@ -160,7 +171,7 @@ class PostApi {
     func loadPost(postId: String, onSuccess: @escaping(_ post: Post) -> Void) {
         Ref.FS_COLLECTION_ALL_POSTS.document(postId).getDocument { (snapshot, error) in
           guard let snap = snapshot else {
-           //   print("Error fetching data")
+              print("Error fetching post")
               return
           }
          
@@ -175,7 +186,7 @@ class PostApi {
     func loadPosts(onSuccess: @escaping(_ posts: [Post]) -> Void) {
         Ref.FS_COLLECTION_ALL_POSTS.order(by: "date", descending: true).getDocuments { (snapshot, error) in
             guard let snap = snapshot else {
-             //   print("Error fetching data")
+                print("Error fetching posts")
                 return
             }
             var posts = [Post]()
@@ -189,36 +200,89 @@ class PostApi {
             onSuccess(posts)
         }
     }
-    
-    func loadTimeline(onSuccess: @escaping(_ posts: [Post]) -> Void, newPost: @escaping(Post) -> Void, deletePost: @escaping(Post) -> Void, listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void) {
-        guard let userId = Auth.auth().currentUser?.uid else {
-                return
-        }
-        let listenerFirestore =  Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId).collection("timelinePosts").order(by: "date", descending: false).addSnapshotListener({ (querySnapshot, error) in
-            guard let snapshot = querySnapshot else {
-                   return
-            }
-            
-            snapshot.documentChanges.forEach { (documentChange) in
-                  switch documentChange.type {
-                  case .added:
-                    var posts = [Post]()
-                      let dict = documentChange.document.data()
-                      guard let decoderPost = try? Post.init(fromDictionary: dict) else {return}
-                      newPost(decoderPost)
-                      posts.append(decoderPost)
-                      onSuccess(posts)
-                  case .modified:
-                      print("type: modified")
-                  case .removed:
-                      let dict = documentChange.document.data()
-                       guard let decoderPost = try? Post.init(fromDictionary: dict) else {return}
-                       deletePost(decoderPost)
-                  }
-            }
-            
+  
+  func loadTimeline(
+    next: Query,
+    onSuccess: @escaping(_ posts: [Post], _ next: Query) -> Void
+  ) -> Void {
+      guard let userId = Auth.auth().currentUser?.uid else {return}
+      next
+        .addSnapshotListener({ (querySnapshot, error) in
+          guard let snapshot = querySnapshot else {
+            print("Error fetching timeline")
+            return
+          }
+          guard let lastSnapshot = snapshot.documents.last else { return }
+          let next = Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId)
+            .collection("timelinePosts")
+            .order(by: "date", descending: true)
+            .limit(to: TIMELINE_PAGINATION_PAGE_SIZE)
+            .start(afterDocument: lastSnapshot)
+          
+          var posts = [Post]()
+
+          snapshot.documentChanges.forEach { (documentChange) in
+            let dict = documentChange.document.data()
+            guard let decoderPost = try? Post.init(fromDictionary: dict) else {return}
+            posts.append(decoderPost)
+          }
+          onSuccess(posts, next)
         })
-        
-        listener(listenerFirestore)
     }
+    
+    
+//    Ref.FIRESTORE_TIMELINE_DOCUMENT_USERID(userId: userId)
+//      .collection("timelinePosts")
+//      .order(by: "date", descending: true)
+//      .limit(to: 10)
+//      .getDocuments { (snapshot, error) in
+//        if let doc = snapshot?.documents {
+//          print("LOAD MORE DOC: \(doc)")
+//        }
+//    }
+
+//  }
+    
+//    func loadTimeline(
+//      onSuccess: @escaping(_ posts: [Post],_ lastVisible: DocumentSnapshot) -> Void,
+//      newPost: @escaping(Post) -> Void,
+//      deletePost: @escaping(Post) -> Void,
+//      listener: @escaping(_ listenerHandle: ListenerRegistration
+//    ) -> Void) {
+//        guard let userId = Auth.auth().currentUser?.uid else {
+//                return
+//        }
+//        let listenerFirestore =  Ref.FIRESTORE_TIMELINE_DOCUMENT_USERID(userId: userId)
+//          .collection("timelinePosts")
+//          .order(by: "date", descending: true)
+//          .limit(to: 10)
+//          .addSnapshotListener({ (querySnapshot, error) in
+//            guard let snapshot = querySnapshot else { return }
+//            snapshot.documentChanges.forEach { (documentChange) in
+//              // grab last document snapshot
+//              let lastVisible = snapshot.documents[snapshot.documents.count - 1]
+//                switch documentChange.type {
+//                case .added:
+//                  var posts = [Post]()
+//                    let dict = documentChange.document.data()
+//                    guard let decoderPost = try?
+//                            Post.init(fromDictionary: dict)
+//                    else {return}
+//
+////                      newPost(decoderPost)
+//                    posts.append(decoderPost)
+//                    onSuccess(posts, lastVisible)
+//                case .modified:
+//                    print("type: modified")
+//                case .removed:
+//                    let dict = documentChange.document.data()
+//                     guard let decoderPost = try? Post.init(fromDictionary: dict) else {return}
+//                     deletePost(decoderPost)
+//                }
+//            }
+//
+//        })
+//
+//        listener(listenerFirestore)
+//    }
 }
