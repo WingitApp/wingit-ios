@@ -382,6 +382,7 @@
 			children = (
 				1524FCEB26D75B1D0000629C /* Actions */,
 				151A3C8A26D32F4600A39FAF /* AskCard.swift */,
+				3B96DD6926DF494800015EED /* ReferHeader.swift */,
 				151A3C8D26D41B5400A39FAF /* AskCardViewModel.swift */,
 				1524FCC726D753170000629C /* AskMenu.swift */,
 				1524FCC926D753240000629C /* AskMenuViewModel.swift */,
@@ -403,6 +404,8 @@
 				1524FCEE26D75B5D0000629C /* CommentButton.swift */,
 				1524FCF026D75F100000629C /* ShareButton.swift */,
 				1524FCF226D75F1E0000629C /* ShareButtonViewModel.swift */,
+				3B96DD6526DF46A500015EED /* ReferButton.swift */,
+				3B96DD6726DF481C00015EED /* ReferViewModel.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -991,6 +994,7 @@
 				3B7AF0872671CA69003BCCF3 /* UsersViewModel.swift in Sources */,
 				156E6AE626D8A13400690E47 /* UserProfileViewModel.swift in Sources */,
 				3BD12F1526C9CA1500E26A87 /* AppDel.swift in Sources */,
+				3B96DD6826DF481C00015EED /* ReferViewModel.swift in Sources */,
 				1524FCF826D812E70000629C /* CircleLoader.swift in Sources */,
 				3B75E3DF267163A1002F3108 /* SignupView.swift in Sources */,
 				3B75E3E1267163FC002F3108 /* Signin+HeaderView.swift in Sources */,
