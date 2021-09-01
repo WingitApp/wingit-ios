@@ -9,11 +9,15 @@ import SwiftUI
 import UIKit
 import FirebaseAuth
 import Amplitude
+<<<<<<< HEAD
 import SPAlert
+=======
+>>>>>>> 2b84d60 (refer Connections check experiement)
 
 class ReferViewModel : ObservableObject, Identifiable {
     
     @Published var isLoading = true
+<<<<<<< HEAD
     @Published var selectedUsers: [String] = []
     @Published var isChecked = false
     
@@ -89,12 +93,20 @@ class ReferViewModel : ObservableObject, Identifiable {
     
     
     func loadConnections(askId: String) {
+=======
+    @Published var users: [User] = []
+    @Published var checked: Bool = false
+  
+    
+    func loadConnections() {
+>>>>>>> 2b84d60 (refer Connections check experiement)
         guard let userId = Auth.auth().currentUser?.uid else { return }
         if !self.isLoading {
             isLoading.toggle()
         }
         Api.Connections.getConnections(userId: userId) { (users) in
             self.isLoading.toggle()
+<<<<<<< HEAD
             self.allUsers = users
             
             // gets users who've already been referred
@@ -114,6 +126,22 @@ class ReferViewModel : ObservableObject, Identifiable {
         }
     }
     
+=======
+            self.users = users
+        }
+    }
+    
+//    func potentialHelper(userId: String){
+//        checked.toggle()
+//        
+//    }
+//    func sendReferral(userId: String){
+//        
+//        
+//    }
+   
+   
+>>>>>>> 2b84d60 (refer Connections check experiement)
 }
 
 
