@@ -15,7 +15,7 @@ import Firebase
 // CONSTANTS
 
 let TIMELINE_PAGINATION_PAGE_SIZE = 10
-let TIMELINE_PAGINATION_QUERY = Ref.FIRESTORE_TIMELINE_DOCUMENT_USERID(
+let TIMELINE_PAGINATION_QUERY = Ref.FS_DOC_TIMELINE_FOR_USERID(
   userId: Auth.auth().currentUser!.uid)
   .collection("timelinePosts")
   .order(by: "date", descending: true)
@@ -213,7 +213,7 @@ class PostApi {
             return
           }
           guard let lastSnapshot = snapshot.documents.last else { return }
-          let next = Ref.FIRESTORE_TIMELINE_DOCUMENT_USERID(userId: userId)
+          let next = Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId)
             .collection("timelinePosts")
             .order(by: "date", descending: true)
             .limit(to: TIMELINE_PAGINATION_PAGE_SIZE)
