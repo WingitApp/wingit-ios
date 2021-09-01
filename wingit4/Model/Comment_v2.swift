@@ -13,16 +13,16 @@ struct Comment_v2: Codable, Identifiable {
     @DocumentID var id: String? // = askId or recId
     @ServerTimestamp var createdTime: Timestamp?
     var askId: String?
-    var children: [Comment]?
+    var children: [String]? // commentIds
     var createdByUser: User?
     var createdBy: String?
-    var likedBy: [User]?
     var likeCount: Int?
+    var likedBy: [String: Bool]?
     var mediaUrls: [String]?
     var parentId: String?
     var recId: String?
     var referralId: String?
-    var text: String
+    var text: String?
     var type: CommentType?
     
     enum CodingKeys: String, CodingKey {
@@ -31,6 +31,7 @@ struct Comment_v2: Codable, Identifiable {
         case askId
         case createdBy
         case likeCount
+        case likedBy
         case mediaUrls
         case parentId
         case recId
