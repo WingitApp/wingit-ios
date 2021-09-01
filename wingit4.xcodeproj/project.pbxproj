@@ -507,16 +507,16 @@
 		3B7AF06526719EB7003BCCF3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				65A9EF9E26DF7C9A00E81CBF /* Referral.swift */,
 				3B7AF0BE2673EAFB003BCCF3 /* Activity.swift */,
 				6523D93526DDEB78007546F5 /* ActivityEvent.swift */,
 				6509E4F926D6C214009CB74D /* Ask.swift */,
 				3B7AF0B62672C21E003BCCF3 /* Chat.swift */,
+				657F35D526DE1D8D0092A1B2 /* Comment_v2.swift */,
 				657F35DA26DEA0C00092A1B2 /* Device.swift */,
 				3B7AF0B82672C29D003BCCF3 /* InboxMessage.swift */,
 				3B7AF0962671D98E003BCCF3 /* Post.swift */,
+				65A9EF9E26DF7C9A00E81CBF /* Referral.swift */,
 				3B7AF02D2671816A003BCCF3 /* User.swift */,
-				657F35D526DE1D8D0092A1B2 /* Comment_v2.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
