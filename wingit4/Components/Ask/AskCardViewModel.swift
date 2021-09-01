@@ -71,34 +71,10 @@ class AskCardViewModel: ObservableObject {
   }
   
   
-  func blockUser(){
+  func blockUser() {
     guard let uid = Auth.auth().currentUser?.uid else { return }
     let postOwnerId = post!.ownerId
     Api.User.blockUser(userId: uid, postOwnerId: postOwnerId)
-    
-    Ref.FIRESTORE_COLLECTION_FOLLOWING_USERID(
-      userId: postOwnerId
-    ).getDocument { (document, error) in
-        if let doc = document, doc.exists {
-            doc.reference.delete()
-        }
-    }
-      
-    Ref.FIRESTORE_COLLECTION_FOLLOWERS_USERID(
-      userId: postOwnerId
-    ).getDocument { (document, error) in
-        if let doc = document, doc.exists {
-          doc.reference.delete()
-        }
-    }
-      
-    Ref.FIRESTORE_COLLECTION_ACTIVITY.document(postOwnerId).collection("feedItems").whereField("type", isEqualTo: "follow").whereField("userId", isEqualTo: Auth.auth().currentUser!.uid).getDocuments { (snapshot, error) in
-        if let doc = snapshot?.documents {
-          if let data = doc.first, data.exists {
-            data.reference.delete()
-          }
-        }
-    }
   }
   
   
