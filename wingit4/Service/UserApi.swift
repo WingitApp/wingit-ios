@@ -23,9 +23,9 @@ class UserApi {
             var users = [User]()
             for document in snap.documents {
                 let dict = document.data()
-                guard let decoderUser = try? User.init(fromDictionary: dict) else {return}
-                if decoderUser.id != Auth.auth().currentUser!.uid {
-                    users.append(decoderUser)
+                guard let decodedUser = try? User.init(fromDictionary: dict) else {return}
+                if decodedUser.id != Auth.auth().currentUser!.uid {
+                    users.append(decodedUser)
                 }
                 
             }
@@ -146,9 +146,9 @@ class UserApi {
             var posts = [Post]()
             for document in snap.documents {
                 let dict = document.data()
-                guard let decoderPost = try? Post.init(fromDictionary: dict) else {return}
+                guard let decodedPost = try? Post.init(fromDictionary: dict) else {return}
 
-                posts.append(decoderPost)
+                posts.append(decodedPost)
             }
             onSuccess(posts)
         }
@@ -164,9 +164,9 @@ class UserApi {
             var doneposts = [DonePost]()
             for document in snap.documents {
                 let dict = document.data()
-                guard let decoderPost = try? DonePost.init(fromDictionary: dict) else {return}
+                guard let decodedPost = try? DonePost.init(fromDictionary: dict) else {return}
 
-                doneposts.append(decoderPost)
+                doneposts.append(decodedPost)
             }
             onSuccess(doneposts)
         }
