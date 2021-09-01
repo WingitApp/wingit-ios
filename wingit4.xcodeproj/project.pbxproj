@@ -495,6 +495,7 @@
 				3B7AF0C02673EE2D003BCCF3 /* ActivityViewModel.swift */,
 				3B7AF0922671D474003BCCF3 /* CameraViewModel.swift */,
 				3B7AF0B22672C04A003BCCF3 /* ChatViewModel.swift */,
+				65A9EF9826DF0B2500E81CBF /* ConnectionsViewModel.swift */,
 				654DA41826BC7BD2002864B8 /* MainViewModel.swift */,
 				3B7AF0BA2672CACE003BCCF3 /* MessageViewModel.swift */,
 				3B7AF0A42671EA03003BCCF3 /* PostPopularViewModel.swift */,
@@ -677,7 +678,6 @@
 		65A9EF9726DF0B2500E81CBF /* Connections */ = {
 			isa = PBXGroup;
 			children = (
-				65A9EF9826DF0B2500E81CBF /* ConnectionsViewModel.swift */,
 				65A9EF9926DF0B2500E81CBF /* ConnectionsApi.swift */,
 				65A9EF9A26DF0B2500E81CBF /* ConnectionsView.swift */,
 			);
