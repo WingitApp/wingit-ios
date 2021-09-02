@@ -8,6 +8,7 @@
 import Foundation
 
 class Api {
+    static var Ask = AskApi()
     static var User = UserApi()
     static var Post = PostApi()
     static var Comment = CommentApi()
