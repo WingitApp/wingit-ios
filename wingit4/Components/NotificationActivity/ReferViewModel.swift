@@ -50,7 +50,8 @@ class ReferViewModel : ObservableObject, Identifiable {
                 senderId: Auth.auth().currentUser!.uid
             )
         }
-        let alertView = SPAlertView(title: "Sent!", message: nil, preset: SPAlertIconPreset.done); alertView.present(duration: 3)
+        let alertView = SPAlertView(title: "Sent!", message: nil, preset: SPAlertIconPreset.done); alertView.present(duration: 2)
+        self.toggleReferListScreen()
     }
     
     func loadConnections() {

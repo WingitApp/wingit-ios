@@ -338,6 +338,7 @@
 				151A3C9326D5679800A39FAF /* AskDoneToggle.swift */,
 				151A3C9526D567A800A39FAF /* AskDoneToggleViewModel.swift */,
 				151A3C9726D5B9F000A39FAF /* BodyCell.swift */,
+				1524FCE626D759CE0000629C /* FooterCell.swift */,
 				1524FCCB26D753310000629C /* FooterCellViewModel.swift */,
 				1524FCCE26D753320000629C /* HeaderCell.swift */,
 				1524FCCC26D753310000629C /* HeaderCellViewModel.swift */,
@@ -373,7 +374,6 @@
 				3B96DD6926DF494800015EED /* ReferHeader.swift */,
 				3B96DD6D26DF4C9E00015EED /* ReferCard.swift */,
 				3B3A880C26E0007A003E780F /* ReferViewModel.swift */,
-				1524FCE626D759CE0000629C /* FooterCell.swift */,
 			);
 			path = NotificationActivity;
 			sourceTree = "<group>";
