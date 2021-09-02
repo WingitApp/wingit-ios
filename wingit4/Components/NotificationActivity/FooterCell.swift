@@ -20,7 +20,7 @@ struct FooterCell: View {
             LikeButton(post: $post)
             CommentButton()
             Spacer()
-            ReferButton()
+            ReferButton(post: $post)
             ShareButton(post: $post)
           }
         }

@@ -12,15 +12,16 @@ import Foundation
 struct Referral: Codable, Identifiable {
     @DocumentID var id: String?
     @ServerTimestamp var createdTime: Timestamp?
-    @ServerTimestamp var firstInteractionTime: Timestamp? // first interaction with the referral
-    @ServerTimestamp var closedTime: Timestamp? // when the receiver is officially done helping and has moved it into a closed state
-    var askId: String
-    var mediaUrl: String
+    @ServerTimestamp var lastUpdatedTime: Timestamp? // first interaction with the referral
+    var askId: String /// postId
+    var children: [String]? // referral can be bumped and create more referrals
+    var closedTime: Timestamp? // when the receiver is officially done helping and has moved it into a closed state
+    var mediaUrl: String /// avatar pic? okie
     var receiverId: String
-    var parentId: String
-    var senderId: String
+    var parentId: String? // referral that led to this referral
+    var senderId: String ///Auth.auth().currentUser?.id
     var status: ReferralStatus
-    var text: String
+    var text: String?
 }
 
 enum ReferralStatus: String, Codable {
