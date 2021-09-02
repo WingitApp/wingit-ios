@@ -121,6 +121,13 @@ struct AskCard: View {
           ReferConnectionsList(post: $post)
             .environmentObject(referViewModel)
         })
+      .sheet(
+        isPresented: $referViewModel.isReferListOpen,
+        content: {
+          ReferConnectionsList(post: $post)
+            .environmentObject(referViewModel)
+
+        })
     }
   }
 }

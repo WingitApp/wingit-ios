@@ -9,14 +9,10 @@ import SwiftUI
 import UIKit
 import FirebaseAuth
 import Amplitude
-<<<<<<< HEAD
 import SPAlert
-=======
->>>>>>> 2b84d60 (refer Connections check experiement)
 
 class ReferViewModel : ObservableObject, Identifiable {
     @Published var isLoading = true
-<<<<<<< HEAD
     @Published var selectedUsers: [String] = []
     @Published var isChecked = false
     
@@ -90,81 +86,19 @@ class ReferViewModel : ObservableObject, Identifiable {
         
     }
     
-    
     func loadConnections(askId: String) {
-=======
-    @Published var users: [User] = []
-    @Published var selectedUsers: [String] = []
-    @Published var isChecked = false
-  
-    func toggleCheck() {
-      withAnimation {
-        self.isChecked.toggle()
-      }
-    }
-    
-//    func clean(){
-//        
-//    }
-    
-    func handleUserSelect(userId: String) {
-        if selectedUsers.contains(userId) {
-            self.selectedUsers.removeAll(where: { $0 == userId })
-        } else {
-            self.selectedUsers.append(userId)
-        }
-
-    }
-    
-    func sendReferral(askId: String, mediaUrl: String) {
-        ///askId(postId) & senderId (auth.dude) & senderId(userId of the one selected
-        // ids -> self.selectedUsers
-        
-        for receiverId in selectedUsers {
-            Api.Referrals.sendReferral(
-                askId: askId,
-                mediaUrl: mediaUrl,
-                receiverId: receiverId,
-                senderId: Auth.auth().currentUser!.uid
-            )
-        }
-    }
-    
-    func loadConnections() {
->>>>>>> 2b84d60 (refer Connections check experiement)
         guard let userId = Auth.auth().currentUser?.uid else { return }
         if !self.isLoading {
             isLoading.toggle()
         }
         Api.Connections.getConnections(userId: userId) { (users) in
             self.isLoading.toggle()
-<<<<<<< HEAD
             self.allUsers = users
-            
-            // gets users who've already been referred
             Api.Referrals.getReferralsByAskId(askId: askId) { (recipientIds) in
-                // compare referrals with allusers
-//                var filteredUsers: [User] = []
-//
-//                for user in self.allUsers {
-//                    if (!recipientIds.contains(user.id!)) {
-//                        filteredUsers.append(user)
-//                    }
-//                }
-////
                 self.allReferralRecipientIds = recipientIds
-//                self.filteredUsers = filteredUsers
             }
         }
     }
-    
-=======
-            self.users = users
-        }
-    }
- 
-   
->>>>>>> 2b84d60 (refer Connections check experiement)
 }
 
 
