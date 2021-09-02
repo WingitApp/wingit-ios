@@ -13,9 +13,15 @@ import SPAlert
 
 class ReferViewModel : ObservableObject, Identifiable {
     @Published var isLoading = true
-    @Published var users: [User] = []
     @Published var selectedUsers: [String] = []
     @Published var isChecked = false
+    
+    // Lists to generate allowedUsers
+    var allReferralRecipientIds: [String] = []
+    var allUsers: [User] = []
+
+    // List to generate ReferConnectionsList
+    @Published var filteredUsers: [User] = []
     
     @Published var isReferListOpen: Bool = false
   
@@ -50,20 +56,48 @@ class ReferViewModel : ObservableObject, Identifiable {
                 senderId: Auth.auth().currentUser!.uid
             )
         }
+        
+        self.allReferralRecipientIds = Array(Set(self.allReferralRecipientIds + self.selectedUsers))
         let alertView = SPAlertView(title: "Sent!", message: nil, preset: SPAlertIconPreset.done); alertView.present(duration: 2)
         self.toggleReferListScreen()
     }
     
-    func loadConnections() {
+//    func refersExists(){
+//
+//    }
+    
+    func getReferralsByAskId(askId: String) {
+        Api.Referrals.getReferralsByAskId(askId: askId) { (referrals) in
+            
+        }
+    }
+    
+    func loadConnections(askId: String) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         if !self.isLoading {
             isLoading.toggle()
         }
         Api.Connections.getConnections(userId: userId) { (users) in
             self.isLoading.toggle()
-            self.users = users
+            self.allUsers = users
+            
+            Api.Referrals.getReferralsByAskId(askId: askId) { (recipientIds) in
+                // compare referrals with allusers
+//                var filteredUsers: [User] = []
+//
+//                for user in self.allUsers {
+//                    if (!recipientIds.contains(user.id!)) {
+//                        filteredUsers.append(user)
+//                    }
+//                }
+////
+                self.allReferralRecipientIds = recipientIds
+//                self.filteredUsers = filteredUsers
+            }
         }
     }
+    
+    
 }
 
 

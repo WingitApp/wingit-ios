@@ -23,6 +23,32 @@ class ReferralsApi {
             print(error)
         }
     }
+    
+    func getReferralsByAskId(askId: String, onSuccess: @escaping(_ recipientIds: [String]) -> Void) {
+        Ref.FS_COLLECTION_REFERRALS.whereField("askId", isEqualTo: askId)
+            .getDocuments { (snapshot, error) in
+                if let error = error {
+                    print(error)
+                } else if let snapshot = snapshot {
+                    let referrals = snapshot.documents.compactMap { (document) -> Referral? in
+                        return try? document.data(as: Referral.self)
+                    }
+                    
+                    var recipientIds: [String] = []
+
+                    for referral in referrals {
+                        recipientIds.append(referral.receiverId)
+                    }
+                    
+                    onSuccess(recipientIds)
+                }
+            }
+    }
+    
+    
+//    func referralExists(askId: String, receiverId: String){
+//        
+//    }
 }
 
 //struct Referral: Codable, Identifiable {

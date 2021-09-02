@@ -47,7 +47,7 @@ struct ReferConnectionsList: View {
                     .padding(.bottom, 10)
                     /// start list
                     List {
-                        ForEach(self.referViewModel.users, id: \.uid) { user in
+                        ForEach(self.referViewModel.allUsers, id: \.uid) { user in
                             CardView(user: user, userId: user.uid)
                         }
                     }
@@ -60,7 +60,7 @@ struct ReferConnectionsList: View {
             
         }
         .onAppear {
-            referViewModel.loadConnections()
+            referViewModel.loadConnections(askId: post.postId)
         }
     }
 }
@@ -73,6 +73,10 @@ struct CardView: View {
     
     func onTapGesture() {
       //  print("onTap called")
+        if self.referViewModel.allReferralRecipientIds.contains(userId) {
+            return
+        }
+        
         self.referViewModel.handleUserSelect(userId: userId)
     }
     
@@ -96,13 +100,13 @@ struct CardView: View {
                 ZStack{
                     Circle()
                         .stroke(
-                            self.referViewModel.selectedUsers.contains(userId)
+                            self.referViewModel.selectedUsers.contains(userId) || self.referViewModel.allReferralRecipientIds.contains(userId)
                                 ? Color.green
                                 : Color.gray,
                                 lineWidth: 1
                         )
                         .frame(width: 25, height: 25)
-                    if self.referViewModel.selectedUsers.contains(userId) {
+                    if self.referViewModel.selectedUsers.contains(userId) || self.referViewModel.allReferralRecipientIds.contains(userId) {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.system(size:25))
                             .foregroundColor(.green)
@@ -111,6 +115,7 @@ struct CardView: View {
             }
         .padding(10)
         .contentShape(Rectangle())
+        .opacity(self.referViewModel.allReferralRecipientIds.contains(userId) ? 0.3 : 1)
         .onTapGesture(perform: onTapGesture)
 //                }
                
