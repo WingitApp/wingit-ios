@@ -105,10 +105,13 @@ class Ref {
     // Firestore - Referrals
     static var FS_COLLECTION_REFERRALS = FS_ROOT.collection("referrals")
     static func FS_COLLECTION_REFERRALS_RECEIVED_BY(userId: String) -> CollectionReference? {
-        return FS_COLLECTION_REFERRALS.whereField("receivedBy", isEqualTo: userId) as? CollectionReference
+        return FS_COLLECTION_REFERRALS.whereField("receiverId", isEqualTo: userId) as? CollectionReference
+    }
+    static func FS_COLLECTION_OPEN_REFERRALS_FOR_USER(userId: String) -> CollectionReference? {
+        return FS_COLLECTION_REFERRALS_RECEIVED_BY(userId: userId)?.whereField("status", isNotEqualTo: "closed") as? CollectionReference
     }
     static func FS_COLLECTION_REFERRALS_SENT_BY(userId: String) -> CollectionReference? {
-        return FS_COLLECTION_REFERRALS.whereField("sentBy", isEqualTo: userId) as? CollectionReference
+        return FS_COLLECTION_REFERRALS.whereField("senderId", isEqualTo: userId) as? CollectionReference
     }
     static func FS_COLLECTION_REFERRALS_FOR_ASK(askId: String) -> CollectionReference? {
         return FS_COLLECTION_REFERRALS.whereField("askId", isEqualTo: askId) as? CollectionReference
