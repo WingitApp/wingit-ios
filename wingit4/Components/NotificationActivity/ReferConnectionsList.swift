@@ -8,9 +8,10 @@
 import SwiftUI
 import Firebase
 import URLImage
+import SPAlert
 
 struct ReferConnectionsList: View {
-    @StateObject var referViewModel = ReferViewModel()
+    @EnvironmentObject var referViewModel: ReferViewModel
     @Binding var post: Post
   //  var postId: String
     
@@ -58,7 +59,6 @@ struct ReferConnectionsList: View {
             }
             
         }
-        .environmentObject(referViewModel)
         .onAppear {
             referViewModel.loadConnections()
         }

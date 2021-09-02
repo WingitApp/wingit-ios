@@ -9,22 +9,25 @@ import SwiftUI
 import UIKit
 import FirebaseAuth
 import Amplitude
+import SPAlert
 
 class ReferViewModel : ObservableObject, Identifiable {
     @Published var isLoading = true
     @Published var users: [User] = []
     @Published var selectedUsers: [String] = []
     @Published var isChecked = false
+    
+    @Published var isReferListOpen: Bool = false
   
+    func toggleReferListScreen() {
+        self.isReferListOpen.toggle()
+    }
+    
     func toggleCheck() {
       withAnimation {
         self.isChecked.toggle()
       }
     }
-    
-//    func clean(){
-//        
-//    }
     
     func handleUserSelect(userId: String) {
         if selectedUsers.contains(userId) {
@@ -47,6 +50,7 @@ class ReferViewModel : ObservableObject, Identifiable {
                 senderId: Auth.auth().currentUser!.uid
             )
         }
+        let alertView = SPAlertView(title: "Sent!", message: nil, preset: SPAlertIconPreset.done); alertView.present(duration: 3)
     }
     
     func loadConnections() {
@@ -59,8 +63,6 @@ class ReferViewModel : ObservableObject, Identifiable {
             self.users = users
         }
     }
- 
-   
 }
 
 

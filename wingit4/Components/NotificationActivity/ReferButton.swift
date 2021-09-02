@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct ReferButton: View {
+    @EnvironmentObject var referViewModel: ReferViewModel
     @Binding var post: Post
   //  @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
 //    @EnvironmentObject var session: SessionStore
 
     var body: some View {
-        NavigationLink(
-            destination: ReferConnectionsList(post: $post),
+        Button(action: {
+            referViewModel.isReferListOpen.toggle()
+        }
+//                ReferConnectionsList(post: $post)
+//                .environmentObject(referViewModel)
+            ,
             label: {
                 Image(systemName: "person.3")
                     .foregroundColor(.gray)

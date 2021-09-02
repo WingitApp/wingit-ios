@@ -18,6 +18,8 @@ struct AskCard: View {
   @StateObject var askMenuViewModel = AskMenuViewModel()
   @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
   @StateObject var commentViewModel = CommentViewModel()
+  @StateObject var referViewModel = ReferViewModel()
+    
 
 
   var body: some View {
@@ -32,6 +34,7 @@ struct AskCard: View {
       .environmentObject(askMenuViewModel)
       .environmentObject(askDoneToggleViewModel)
       .environmentObject(commentViewModel)
+      .environmentObject(referViewModel)
     
       // [START] Animates on Hide
       .opacity(!self.askCardViewModel.isHidden ? 1 : 0)
@@ -62,6 +65,13 @@ struct AskCard: View {
         isPresented: $commentViewModel.isCommentSheetShown,
         content: {
           CommentView(post: $post)
+        })
+      .sheet(
+        isPresented: $referViewModel.isReferListOpen,
+        content: {
+          ReferConnectionsList(post: $post)
+            .environmentObject(referViewModel)
+
         })
     }
   }
