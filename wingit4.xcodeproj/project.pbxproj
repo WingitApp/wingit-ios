@@ -422,7 +422,7 @@
 				3B75E3D126715C3A002F3108 /* Components */,
 				3B7AF06326719E94003BCCF3 /* Screens */,
 				3B7AF06726719EDD003BCCF3 /* Session */,
-				3B7AF06626719EC2003BCCF3 /* Service */,
+				3B7AF06626719EC2003BCCF3 /* Api */,
 				3B7AF06526719EB7003BCCF3 /* Model */,
 				3B7AF06926719EF1003BCCF3 /* UIKit */,
 				3B7AF06826719EE7003BCCF3 /* Modifiers */,
@@ -532,7 +532,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		3B7AF06626719EC2003BCCF3 /* Service */ = {
+		3B7AF06626719EC2003BCCF3 /* Api */ = {
 			isa = PBXGroup;
 			children = (
 				3B7AF0C22673EE9F003BCCF3 /* ActivityApi.swift */,
@@ -545,7 +545,7 @@
 				3B7AF04F26718D42003BCCF3 /* StorageService.swift */,
 				3B7AF08A2671CB68003BCCF3 /* UserApi.swift */,
 			);
-			path = Service;
+			path = Api;
 			sourceTree = "<group>";
 		};
 		3B7AF06726719EDD003BCCF3 /* Session */ = {
