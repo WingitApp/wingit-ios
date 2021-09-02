@@ -120,9 +120,15 @@ class Ref {
     static func FS_COLLECTION_REFERRALS_SENT_BY(userId: String) -> CollectionReference? {
         return FS_COLLECTION_REFERRALS.whereField("senderId", isEqualTo: userId) as? CollectionReference
     }
-    static func FS_COLLECTION_REFERRALS_FOR_ASK(askId: String) -> CollectionReference? {
-        return FS_COLLECTION_REFERRALS.whereField("askId", isEqualTo: askId) as? CollectionReference
+    static func FS_COLLECTION_REFERRALS_FOR_ASK(postId: String) -> CollectionReference? {
+        return FS_COLLECTION_REFERRALS.whereField("askId", isEqualTo: postId) as? CollectionReference
     }
+    
+    ///askId
+//    static func FS_COLLECTION_REFERRALS_FOR_ASK(askId: String) -> CollectionReference? {
+//        return FS_COLLECTION_REFERRALS.whereField("askId", isEqualTo: askId) as? CollectionReference
+//    }
+    
     
     // Firestore - Comments
     static var FS_COLLECTION_COMMENTS = FS_ROOT.collection("comments")

@@ -121,80 +121,54 @@ struct CardView: View {
 
 struct CardView: View {
     @EnvironmentObject var referViewModel: ReferViewModel
-    @State var checked: Bool = false
+
+    var user: User
+    var userId: String
+    
+    func onTapGesture() {
+      //  print("onTap called")
+        self.referViewModel.handleUserSelect(userId: userId)
+    }
     
     var body: some View {
         
-        List {
-            ForEach(self.referViewModel.users, id: \.uid) { user in
-//                Button(action:{checked.toggle()}){
-                        HStack {
-                        URLImage(URL(string: user.profileImageUrl)!,
-                        content: {
-                            $0.image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .clipShape(Circle())
-                        }).frame(width: 50, height: 50)
-                            
-                            VStack(alignment: .leading, spacing: 5) {
-                             Text(user.username).font(.headline).bold()
-                                Text(user.bio).font(.subheadline)
-                            }
-                            Spacer()
-                            
-                               // ZStack{
-//                                    Circle()
-//                                        .stroke(checked ? Color.green : Color.gray, lineWidth: 1)
-//                                        .frame(width: 25, height: 25)
-//                                    if checked {
-//                                        Image(systemName: "checkmark.circle.fill")
-//                                            .font(.system(size:25))
-//                                            .foregroundColor(.green)
-//                                    }
-                              //  }
-                        }
-                        .padding(10)
-                        .contentShape(Rectangle())
-                        .onTapGesture(perform: {})
+        HStack{
+            URLImage(URL(string: user.profileImageUrl)!,
+            content: {
+                $0.image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .clipShape(Circle())
+            }).frame(width: 50, height: 50)
+                
+                VStack(alignment: .leading, spacing: 5) {
+                 Text(user.username).font(.headline).bold()
+                    Text(user.bio).font(.subheadline)
+                }
+                Spacer()
+                
+                ZStack{
+                    Circle()
+                        .stroke(
+                            self.referViewModel.selectedUsers.contains(userId)
+                                ? Color.green
+                                : Color.gray,
+                                lineWidth: 1
+                        )
+                        .frame(width: 25, height: 25)
+                    if self.referViewModel.selectedUsers.contains(userId) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.system(size:25))
+                            .foregroundColor(.green)
+                    }
+                }
+            }
+        .padding(10)
+        .contentShape(Rectangle())
+        .onTapGesture(perform: onTapGesture)
 //                }
                
-            }
         }
-//        List {
-//            ForEach(self.referViewModel.users, id: \.uid) { user in
-////                Button(action:{checked.toggle()}){
-//                        HStack {
-//                        URLImage(URL(string: user.profileImageUrl)!,
-//                        content: {
-//                            $0.image
-//                                .resizable()
-//                                .aspectRatio(contentMode: .fill)
-//                                .clipShape(Circle())
-//                        }).frame(width: 50, height: 50)
-//
-//                            VStack(alignment: .leading, spacing: 5) {
-//                             Text(user.username).font(.headline).bold()
-//                                Text(user.bio).font(.subheadline)
-//                            }
-//                            Spacer()
-//                                ZStack{
-//                                    Circle()
-//                                        .stroke(checked ? Color.green : Color.gray, lineWidth: 1)
-//                                        .frame(width: 25, height: 25)
-//                                    if checked {
-//                                        Image(systemName: "checkmark.circle.fill")
-//                                            .font(.system(size:25))
-//                                            .foregroundColor(.green)
-//                                    }
-//                                }
-//                        }
-//                        .padding(10)
-//                        .contentShape(Rectangle())
-//                        .onTapGesture(perform: {})
-////                }
-//
-//            }
-//        }
-    }
+       
+
 }

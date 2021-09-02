@@ -15,7 +15,6 @@ import SPAlert
 >>>>>>> 2b84d60 (refer Connections check experiement)
 
 class ReferViewModel : ObservableObject, Identifiable {
-    
     @Published var isLoading = true
 <<<<<<< HEAD
     @Published var selectedUsers: [String] = []
@@ -95,8 +94,41 @@ class ReferViewModel : ObservableObject, Identifiable {
     func loadConnections(askId: String) {
 =======
     @Published var users: [User] = []
-    @Published var checked: Bool = false
+    @Published var selectedUsers: [String] = []
+    @Published var isChecked = false
   
+    func toggleCheck() {
+      withAnimation {
+        self.isChecked.toggle()
+      }
+    }
+    
+//    func clean(){
+//        
+//    }
+    
+    func handleUserSelect(userId: String) {
+        if selectedUsers.contains(userId) {
+            self.selectedUsers.removeAll(where: { $0 == userId })
+        } else {
+            self.selectedUsers.append(userId)
+        }
+
+    }
+    
+    func sendReferral(askId: String, mediaUrl: String) {
+        ///askId(postId) & senderId (auth.dude) & senderId(userId of the one selected
+        // ids -> self.selectedUsers
+        
+        for receiverId in selectedUsers {
+            Api.Referrals.sendReferral(
+                askId: askId,
+                mediaUrl: mediaUrl,
+                receiverId: receiverId,
+                senderId: Auth.auth().currentUser!.uid
+            )
+        }
+    }
     
     func loadConnections() {
 >>>>>>> 2b84d60 (refer Connections check experiement)
@@ -130,16 +162,7 @@ class ReferViewModel : ObservableObject, Identifiable {
             self.users = users
         }
     }
-    
-//    func potentialHelper(userId: String){
-//        checked.toggle()
-//        
-//    }
-//    func sendReferral(userId: String){
-//        
-//        
-//    }
-   
+ 
    
 >>>>>>> 2b84d60 (refer Connections check experiement)
 }

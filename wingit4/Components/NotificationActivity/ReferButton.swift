@@ -9,11 +9,15 @@ import SwiftUI
 
 struct ReferButton: View {
 <<<<<<< HEAD
+<<<<<<< HEAD
     @EnvironmentObject var referViewModel: ReferViewModel
     @Binding var post: Post
 =======
     
 >>>>>>> 2b84d60 (refer Connections check experiement)
+=======
+    @Binding var post: Post
+>>>>>>> 77ddfdf (Referrals Api)
   //  @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
 //    @EnvironmentObject var session: SessionStore
 
@@ -27,8 +31,12 @@ struct ReferButton: View {
             ,
 =======
         NavigationLink(
+<<<<<<< HEAD
             destination: ReferConnectionsList(),
 >>>>>>> 2b84d60 (refer Connections check experiement)
+=======
+            destination: ReferConnectionsList(post: $post),
+>>>>>>> 77ddfdf (Referrals Api)
             label: {
                 Image(systemName: "person.3")
                     .foregroundColor(.gray)
