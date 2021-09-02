@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ReferFooter: View {
+  @Binding var referral: Referral
+  
     var body: some View {
         
         HStack(spacing: 20){

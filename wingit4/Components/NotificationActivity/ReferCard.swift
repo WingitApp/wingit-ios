@@ -8,14 +8,23 @@
 import SwiftUI
 
 struct ReferCard: View {
-    
- 
-    
+  
+  @State var referral: Referral
+  
+  // refferal object
+  /**
+    user object for sender
+      - mediaurl
+    post object
+   */
+  
+  
+  
     var body: some View {
         VStack{
-            ReferHeader()
-            ReferBody()
-            ReferFooter()
+            ReferHeader(referral: $referral)
+            ReferBody(referral: $referral)
+            ReferFooter(referral: $referral)
         }
 
      

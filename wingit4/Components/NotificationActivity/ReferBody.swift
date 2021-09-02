@@ -10,7 +10,7 @@ import URLImage
 import FirebaseAuth
 
 struct ReferBody: View {
-    
+  @Binding var referral: Referral
 
     var body: some View {
 

@@ -102,6 +102,9 @@ class ReferralsApi {
     }
     
 
+  
+  
+      // Todo: rename to get referralIds
     func getReferralsByAskId(askId: String, onSuccess: @escaping(_ recipientIds: [String]) -> Void) {
         Ref.FS_COLLECTION_REFERRALS.whereField("askId", isEqualTo: askId)
             .getDocuments { (snapshot, error) in
@@ -122,8 +125,68 @@ class ReferralsApi {
                 }
             }
     }
+  
+//  , onSuccess: @escaping(_ referrals: [Referral]) -> Void
+  
+  func getAllReferrals(onSuccess: @escaping(_ referrals: [Referral]) -> Void) {
+    /**
+          1. get all user's referrals
+          2. get referral's ask (or post)
+          3.  get user object by senderId
+     */
+    
+    
+    Api.Connections.getConnections(userId: Auth.auth().currentUser!.uid ) { (users) in
+      let allConnections = users.reduce([String: User]()) { (dict, user) -> [String: User] in
+        var dict = dict
+        dict[user.id!] = user
+        return dict
+      }
+            
+      Ref.FS_COLLECTION_REFERRALS
+        .whereField("receiverId", isEqualTo: Auth.auth().currentUser!.uid)
+        .getDocuments { (snapshot, error) in
+        if let error = error {
+            return print(error)
+        }
+        
+        if let snapshot = snapshot {
+            let referrals = snapshot.documents.compactMap { (document) -> Referral? in
+              let result = Result { try document.data(as: Referral.self) }
+                switch result {
+                  case .success(let referral):
+                    if var referral = referral {
+                      referral.sender = allConnections[referral.senderId]
+                      guard let decodedReferral = try? Referral.init(fromDictionary: referral) else { return nil }
+                      return decodedReferral
+                    }
+                    else {
+                      print("Document doesn't exist.")
+                    }
+                  case .failure(let error):
+                    // A User could not be initialized from the DocumentSnapshot.
+                      printDecodingError(error: error)
+                  }
+            }
+          
+          
+          onSuccess(referrals)
+          
+        }
+        
+      }
+      
+      
+    }
+    
+    
+  }
+    
+    
+//    func referralExists(askId: String, receiverId: String){
+//        
+//    }
 }
-
 
 
 //struct Referral: Codable, Identifiable {

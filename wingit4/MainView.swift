@@ -29,7 +29,7 @@ struct MainView: View {
         NavigationTab(
             tag: 1,
             icon: "suit.heart",
-            screen: AnyView(ReferCard())
+            screen: AnyView(ReferralView())
         )
         NavigationTab(
             tag: 2,

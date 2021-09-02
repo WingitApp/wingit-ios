@@ -13,6 +13,7 @@ struct Referral: Codable, Identifiable {
     @DocumentID var id: String?
     @ServerTimestamp var createdTime: Timestamp?
     @ServerTimestamp var lastUpdatedTime: Timestamp? // first interaction with the referral
+  
     var askId: String /// postId
     var children: [String]? // referral can be bumped and create more referrals
     var closedTime: Timestamp? // when the receiver is officially done helping and has moved it into a closed state
@@ -22,6 +23,10 @@ struct Referral: Codable, Identifiable {
     var senderId: String ///Auth.auth().currentUser?.id
     var status: ReferralStatus
     var text: String?
+  
+    // client-side join
+//    var ask: Post?
+    var sender: User?
 }
 
 enum ReferralStatus: String, Codable {
@@ -30,3 +35,5 @@ enum ReferralStatus: String, Codable {
     case closed
     case pending
 }
+
+

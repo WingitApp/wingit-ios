@@ -11,6 +11,7 @@ import URLImage
 struct ReferHeader: View {
     
     @EnvironmentObject var referViewModel: ReferViewModel
+  @Binding var referral: Referral
    // @Binding var post: Post
     
     //senderId --> header
