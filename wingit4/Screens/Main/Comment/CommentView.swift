@@ -17,27 +17,25 @@ struct CommentView: View {
     
     var body: some View {
         VStack {
+          AskDetailCard(post: $post)
             ScrollView {
-//                PostPreview(post: post, postId: postId).padding(.leading, 15)
-//                Divider()
-            
-                
-                if !commentViewModel.comments.isEmpty {
+              VStack(alignment: .leading) {
                     ForEach(commentViewModel.comments) { comment in
-                       CommentRow(comment: comment).padding(.bottom, 10)
+                       UserComment(comment: comment)
                    }
-                }
+              }
             }
             CommentInput(post: $post)
-        }.onTapGesture { dismissKeyboard() }
-         .padding(.top, 15).navigationBarTitle(Text(""), displayMode: .inline)
-            .onAppear {
-              self.commentViewModel.loadComments(postId: post.postId)
-            }.onDisappear {
-                if self.commentViewModel.listener != nil {
-                    self.commentViewModel.listener.remove()
-                }
+        }
+        .onTapGesture { dismissKeyboard() }
+        .padding(.top, 15).navigationBarTitle(Text(""), displayMode: .inline)
+        .onAppear {
+          self.commentViewModel.loadComments(postId: post.postId)
+        }.onDisappear {
+            if self.commentViewModel.listener != nil {
+                self.commentViewModel.listener.remove()
             }
+        }
     }
 }
 

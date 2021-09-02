@@ -15,9 +15,10 @@ struct AskDetailView: View {
     var body: some View {
       VStack(alignment: .leading) {
         AskDetailCard(post: $post)
+        CommentInput(post: $post)
         CommentList(post: $post)
         Spacer()
-
+        
       }
       .environmentObject(commentViewModel)
       .frame(

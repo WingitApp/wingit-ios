@@ -10,8 +10,9 @@ import URLImage
 
 struct CommentInput: View {
     @EnvironmentObject var session: SessionStore
-    @Binding var post: Post
     @ObservedObject var commentInputViewModel = CommentInputViewModel()
+
+    @Binding var post: Post
     
     @State var composedMessage: String = ""
     
@@ -32,21 +33,21 @@ struct CommentInput: View {
     var body: some View {
         HStack(spacing: 0) {
             URLImage(URL(string: session.currentUser!.profileImageUrl)!,
-                                                    content: {
-                                                        $0.image
-                                                            .resizable()
-                                                            .aspectRatio(contentMode: .fill)
-                                                            .clipShape(Circle())
-                                                    }).frame(width: 50, height: 50
+              content: {
+                  $0.image
+                      .resizable()
+                      .aspectRatio(contentMode: .fill)
+                      .clipShape(Circle())
+              }).frame(width: 50, height: 50
             ).padding(.leading, 15)
             ZStack {
-                 RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 1).padding()
-                 HStack {
-                     TextField("Add a comment", text: $composedMessage).padding(30)
-                     Button(action: commentAction) {
-                         Image(systemName: "arrow.right.circle").imageScale(.large).foregroundColor(.black).padding(30)
-                     }
-                 }
+               RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 1).padding()
+               HStack {
+                   TextField("Add a comment", text: $composedMessage).padding(30)
+                   Button(action: commentAction) {
+                       Image(systemName: "arrow.right.circle").imageScale(.large).foregroundColor(.black).padding(30)
+                   }
+               }
 
              }.frame(height: 70)
         }

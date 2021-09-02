@@ -10,25 +10,22 @@ import SwiftUI
 struct AskDetailFooter: View {
   @Binding var post: Post
   @EnvironmentObject var askCardViewModel: AskCardViewModel
-  @EnvironmentObject var footerCellViewModel: FooterCellViewModel
-  @EnvironmentObject var shareButtonViewModel: ShareButtonViewModel
+  @StateObject var footerCellViewModel = FooterCellViewModel()
+  @StateObject var shareButtonViewModel = ShareButtonViewModel()
 
 
     var body: some View {
       Divider()
       HStack {
-        Image(systemName: "heart.circle.fill")
-          .foregroundColor(.red)
+        LikeButton(post: $post)
           .font(.system(size: 25))
-                Image(systemName: "message")
-          .foregroundColor(Color(.systemTeal))
-          .padding(.leading, 5)
+        CommentButton()
           .font(.system(size: 20))
-        Spacer()
-        Image(systemName: "arrowshape.turn.up.right")
-          .foregroundColor(Color(.systemTeal))
 
+        Spacer()
+        ShareButton(post: $post)
       }
+      .environmentObject(footerCellViewModel)
       .padding(.leading, 15)
       .padding(.trailing, 15)
       Divider()

@@ -24,10 +24,10 @@ struct CommentButton: View {
             .padding(.leading, 10)
             .accentColor(.red)
       })
-    if !self.commentViewModel.comments.isEmpty {
-      Text("\(commentViewModel.comments.count)")
-        .modifier(CaptionStyle())
-    }
+//    if !self.commentViewModel.comments.isEmpty {
+//      Text("\(commentViewModel.comments.count)")
+//        .modifier(CaptionStyle())
+//    }
   }
     
 }
