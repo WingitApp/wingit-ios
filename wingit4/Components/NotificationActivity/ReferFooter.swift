@@ -9,24 +9,29 @@ import SwiftUI
 
 struct ReferFooter: View {
     var body: some View {
-        HStack(spacing: 40){
-            AcceptButton()
+        
+        HStack(spacing: 20){
+            
             BumpButton()
+            AcceptButton()
+            
         }
     }
 }
 
 struct AcceptButton: View {
     var body: some View {
+        
         Button(action: {},
                label: {
                 VStack{
                     Text("Accept")
+                        .foregroundColor(.green)
                 }
                 .padding(.vertical, 10)
                 .padding(.horizontal, 30)
-                .frame(width: UIScreen.main.bounds.width - 300, height: UIScreen.main.bounds.width / 9)
-                .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray.opacity(0.5),lineWidth: 1.5))
+                .frame(width: UIScreen.main.bounds.width - 235, height: UIScreen.main.bounds.width / 9)
+                .background(RoundedRectangle(cornerRadius: 5).stroke(Color.green.opacity(0.5),lineWidth: 1.5))
         })
 
     }
@@ -38,11 +43,12 @@ struct BumpButton: View {
                label: {
                 VStack{
                     Text("Bump")
+                        .foregroundColor(.pink)
                 }
                 .padding(.vertical, 10)
                 .padding(.horizontal, 30)
-                .frame(width: UIScreen.main.bounds.width - 300, height: UIScreen.main.bounds.width / 9)
-                .background(RoundedRectangle(cornerRadius: 5).stroke(Color.gray.opacity(0.5),lineWidth: 1.5))
+                .frame(width: UIScreen.main.bounds.width - 235, height: UIScreen.main.bounds.width / 9)
+                .background(RoundedRectangle(cornerRadius: 5).stroke(Color.pink.opacity(0.5),lineWidth: 1.5))
         })
 
     }

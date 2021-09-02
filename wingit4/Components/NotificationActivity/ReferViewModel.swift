@@ -66,11 +66,11 @@ class ReferViewModel : ObservableObject, Identifiable {
 //
 //    }
     
-    func getReferralsByAskId(askId: String) {
-        Api.Referrals.getReferralsByAskId(askId: askId) { (referrals) in
-            
-        }
-    }
+//    func getReferralsByAskId(askId: String) {
+//        Api.Referrals.getReferralsByAskId(askId: askId) { (referrals) in
+//
+//        }
+//    }
     
     func loadConnections(askId: String) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
@@ -81,6 +81,7 @@ class ReferViewModel : ObservableObject, Identifiable {
             self.isLoading.toggle()
             self.allUsers = users
             
+            // gets users who've already been referred
             Api.Referrals.getReferralsByAskId(askId: askId) { (recipientIds) in
                 // compare referrals with allusers
 //                var filteredUsers: [User] = []

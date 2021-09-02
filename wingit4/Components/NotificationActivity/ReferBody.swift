@@ -16,7 +16,7 @@ struct ReferBody: View {
 
         VStack {
             HStack {
-                    Image("photo1").resizable().clipShape(Circle())
+                    Image(systemName: "camera").resizable().clipShape(Circle())
                         .frame(width: 35, height: 35)
                     VStack(alignment: .leading) {
                         Text("David").font(.subheadline).bold()
@@ -25,7 +25,7 @@ struct ReferBody: View {
                 Image(systemName: "ellipsis")
                 }.padding(.trailing, 15).padding(.leading, 15)
 
-          Text("helphelphelp")
+          postText()
 
 //            ZStack(alignment: .trailing){
 //                VStack(alignment: .leading){
@@ -41,4 +41,21 @@ struct ReferBody: View {
 
     }
 }
+
+import SwiftUI
+
+struct postText: View {
+    var body: some View {
+        HStack{
+
+            VStack(alignment: .leading, spacing: 10){
+                Text("This studio room is fantastic! Highly recommend people to check out!")
+            }.padding(.horizontal)
+            Spacer(minLength: 0)
+//                Image("photo2").resizable().scaledToFill()
+//                               .frame(width: 200, height: 250).clipped()
+        }
+    }
+}
+
 
