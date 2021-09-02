@@ -134,6 +134,7 @@
 		3BE5800126DD5560005C242F /* SignUpFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE5800026DD5560005C242F /* SignUpFirst.swift */; };
 		3BE61D6F26E08A0D0078C6CF /* ReferralsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE61D6E26E08A0D0078C6CF /* ReferralsApi.swift */; };
 		3BE61D7226E0B10E0078C6CF /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = 3BE61D7126E0B10E0078C6CF /* SPAlert */; };
+		3BE61D7426E15E8C0078C6CF /* ReferFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE61D7326E15E8C0078C6CF /* ReferFooter.swift */; };
 		3BF143E626819E480093488D /* NotificationsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF143E526819E480093488D /* NotificationsApi.swift */; };
 		6509E4FA26D6C214009CB74D /* Ask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6509E4F926D6C214009CB74D /* Ask.swift */; };
 		6523D93426DC1F41007546F5 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6523D93326DC1F41007546F5 /* FirebaseFirestore */; };
@@ -271,6 +272,7 @@
 		3BE57FFA26D9A85E005C242F /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
 		3BE5800026DD5560005C242F /* SignUpFirst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFirst.swift; sourceTree = "<group>"; };
 		3BE61D6E26E08A0D0078C6CF /* ReferralsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralsApi.swift; sourceTree = "<group>"; };
+		3BE61D7326E15E8C0078C6CF /* ReferFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferFooter.swift; sourceTree = "<group>"; };
 		3BF143E526819E480093488D /* NotificationsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsApi.swift; sourceTree = "<group>"; };
 		6502C14226C4FF52007C04C9 /* SecretsDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsDebug.xcconfig; sourceTree = "<group>"; };
 		6502C14326C5024C007C04C9 /* SecretsRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsRelease.xcconfig; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 				3B96DD6526DF46A500015EED /* ReferButton.swift */,
 				3B96DD6F26DF5C6000015EED /* ReferConnectionsList.swift */,
 				3B96DD6926DF494800015EED /* ReferHeader.swift */,
+				3BE61D7326E15E8C0078C6CF /* ReferFooter.swift */,
 				3B96DD6D26DF4C9E00015EED /* ReferCard.swift */,
 				3B3A880C26E0007A003E780F /* ReferViewModel.swift */,
 			);
@@ -906,6 +909,7 @@
 				3B5BDB5A268F98AC0034B18C /* ReportInput.swift in Sources */,
 				151A3C8B26D32F4600A39FAF /* AskCard.swift in Sources */,
 				1524FCED26D75B1D0000629C /* LikeButton.swift in Sources */,
+				3BE61D7426E15E8C0078C6CF /* ReferFooter.swift in Sources */,
 				3B7AF02E2671816A003BCCF3 /* User.swift in Sources */,
 				1524FCF126D75F100000629C /* ShareButton.swift in Sources */,
 				1524FCEF26D75B5D0000629C /* CommentButton.swift in Sources */,

@@ -11,6 +11,7 @@ struct ReferCard: View {
     var body: some View {
         VStack{
             ReferHeader()
+            ReferFooter()
         }
      
     }
