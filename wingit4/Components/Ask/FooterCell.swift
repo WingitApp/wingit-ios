@@ -24,7 +24,7 @@ struct FooterCell: View {
             ShareButton(post: $post)
           }
         }
-        .padding(.bottom, 10)
+        .padding(.bottom, 15)
         .frame(maxWidth: .infinity)
         .environmentObject(footerCellViewModel)
     }

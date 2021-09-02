@@ -23,7 +23,13 @@ struct HeaderCell: View {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .clipShape(Circle())
-                   }).frame(width: 35, height: 35)
+                   })
+                  .frame(width: 35, height: 35)
+                  .overlay(
+                    RoundedRectangle(cornerRadius: 100)
+                      .stroke(Color.gray, lineWidth: 1)
+                  )
+
               }.disabled(self.askCardViewModel.isNavLinkDisabled)
               VStack(alignment: .leading){
                 Text(post.username).modifier(UserNameStyle())
@@ -34,6 +40,6 @@ struct HeaderCell: View {
               AskMenu()
             }.padding(.trailing, 15).padding(.leading, 15)
         }
-        .padding(.top, 10)
+        .padding(.top, 15)
     }
 }

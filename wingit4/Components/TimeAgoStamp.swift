@@ -17,6 +17,7 @@ struct TimeAgoStamp: View {
           currentDate: Date(),
           numericDates: true
         )
-      ).modifier(CaptionStyle())
+      )
+      .modifier(CaptionStyle())
     }
 }

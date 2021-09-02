@@ -484,12 +484,13 @@
 		3B75E3D126715C3A002F3108 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				159EC7EC26E088D600DA3DC0 /* Comments */,
+				159EC7DD26E07B4200DA3DC0 /* AskDetail */,
 				15DA39B026DC5C3B0080193E /* Placeholder */,
 				156E6AD326D8A0A700690E47 /* NotificationActivity */,
 				1524FCF626D812D70000629C /* Loader */,
 				151A3C8926D328F400A39FAF /* Ask */,
 				3B7AF06226719E74003BCCF3 /* Auth */,
-				3B7AF06A26719F19003BCCF3 /* Auth */,
 				151A3C8626D3255C00A39FAF /* Home */,
 				151A3C7D26CE047A00A39FAF /* Navigation */,
 				3B7AF0A32671E435003BCCF3 /* Profile */,
@@ -619,8 +620,7 @@
 				3BE5800026DD5560005C242F /* SignUpFirst.swift */,
 				3B7AF04026718A4D003BCCF3 /* SignupViewModel.swift */,
 			);
-			name = Auth;
-			path = ../Screens/Auth;
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		3B7AF06B26719F24003BCCF3 /* Main */ = {
@@ -848,6 +848,7 @@
 				3B7AF04126718A4D003BCCF3 /* SignupViewModel.swift in Sources */,
 				3B75E3D526715CAC002F3108 /* SignupText.swift in Sources */,
 				65A9EF9B26DF0B2500E81CBF /* ConnectionsViewModel.swift in Sources */,
+				159EC7E326E07BA500DA3DC0 /* AskDetailBody.swift in Sources */,
 				3BD604F726B0A9DD004FFEEC /* DoneView.swift in Sources */,
 				3B96DD6A26DF494800015EED /* ReferHeader.swift in Sources */,
 				3BE57FF526D89823005C242F /* ProfileDetailView.swift in Sources */,
@@ -856,6 +857,7 @@
 				151A3C8526D1E03E00A39FAF /* FeedToggle.swift in Sources */,
 				3B7AF04326718AF1003BCCF3 /* AuthService.swift in Sources */,
 				3B7AF0B12672AB2F003BCCF3 /* CommentViewModel.swift in Sources */,
+				159EC7EB26E07DC400DA3DC0 /* AskDetailRow.swift in Sources */,
 				3B7AF08B2671CB68003BCCF3 /* UserApi.swift in Sources */,
 				3B7AF05226719610003BCCF3 /* SigninViewModel.swift in Sources */,
 				1524FCD026D753320000629C /* HeaderCellViewModel.swift in Sources */,
@@ -882,6 +884,7 @@
 				15762C6A26E170ED00A8E041 /* ReferralsView.swift in Sources */,
 				3B7AF0B92672C29D003BCCF3 /* InboxMessage.swift in Sources */,
 				1524FCE726D759CE0000629C /* FooterCell.swift in Sources */,
+				159EC7DF26E07B8800DA3DC0 /* AskDetailCard.swift in Sources */,
 				151A3C8826D3256F00A39FAF /* HomeFeed.swift in Sources */,
 				3B7AF0872671CA69003BCCF3 /* UsersViewModel.swift in Sources */,
 				156E6AE626D8A13400690E47 /* UserProfileViewModel.swift in Sources */,
@@ -896,11 +899,14 @@
 				15762C6C26E170FA00A8E041 /* ReferralsViewModel.swift in Sources */,
 				3BF143E626819E480093488D /* NotificationsApi.swift in Sources */,
 				156E6AD526D8A0A700690E47 /* NotificationEntry.swift in Sources */,
+				159EC7F226E08B5C00DA3DC0 /* ReferralComment.swift in Sources */,
 				151A3C9826D5B9F000A39FAF /* BodyCell.swift in Sources */,
 				3B5BDB5C268F98E70034B18C /* ReportInputViewModel.swift in Sources */,
 				1524FCD226D753320000629C /* HeaderCell.swift in Sources */,
+				159EC7E526E07BBD00DA3DC0 /* AskDetailFooter.swift in Sources */,
 				65A9EF9C26DF0B2500E81CBF /* ConnectionsApi.swift in Sources */,
 				3B7AF0752671A9C2003BCCF3 /* CameraView.swift in Sources */,
+				159EC7F026E088F300DA3DC0 /* UserComment.swift in Sources */,
 				151A3C8126CE134A00A39FAF /* FontStyles.swift in Sources */,
 				3BD604EF26AA1CDE004FFEEC /* DoneCell.swift in Sources */,
 				3B7AF0A02671E404003BCCF3 /* ProfileInformation.swift in Sources */,
@@ -911,6 +917,7 @@
 				3B7AF054267197BA003BCCF3 /* InitialView.swift in Sources */,
 				654DA41926BC7BD3002864B8 /* MainViewModel.swift in Sources */,
 				159EC7DC26E010D500DA3DC0 /* AskDetailView.swift in Sources */,
+				159EC7E126E07B9400DA3DC0 /* AskDetailHeader.swift in Sources */,
 				3BD604F326B08CA8004FFEEC /* DoneToggle.swift in Sources */,
 				65A9EF9D26DF0B2500E81CBF /* ConnectionsView.swift in Sources */,
 				156E6AE526D8A13400690E47 /* UserProfileView.swift in Sources */,
@@ -922,6 +929,7 @@
 				3B96DD6626DF46A500015EED /* ReferButton.swift in Sources */,
 				3B7AF0812671BBD4003BCCF3 /* MessagesView.swift in Sources */,
 				3B5BDB5A268F98AC0034B18C /* ReportInput.swift in Sources */,
+				159EC7EE26E088E400DA3DC0 /* CommentList.swift in Sources */,
 				151A3C8B26D32F4600A39FAF /* AskCard.swift in Sources */,
 				1524FCED26D75B1D0000629C /* LikeButton.swift in Sources */,
 				3BE61D7426E15E8C0078C6CF /* ReferFooter.swift in Sources */,

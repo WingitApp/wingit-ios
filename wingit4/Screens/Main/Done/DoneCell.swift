@@ -119,7 +119,7 @@ struct DoneCell: View {
 //            CommentView(postId: doneViewModel.donepost.postId)
         })
         .onAppear {
-            self.commentViewModel.postId = doneViewModel.post == nil ? doneViewModel.donepost.postId : doneViewModel.donepost.postId
+//            self.commentViewModel.postId = doneViewModel.post == nil ? doneViewModel.donepost.postId : doneViewModel.donepost.postId
           self.commentViewModel.loadComments(postId: doneViewModel.donepost!.postId)
         }
         .onDisappear {

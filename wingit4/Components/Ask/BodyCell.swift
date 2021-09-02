@@ -27,8 +27,14 @@ struct BodyCell: View {
                         $0.image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                    }).frame(width: UIScreen.main.bounds.width - 60, height: 250)
-                      .cornerRadius(15)
+                    })
+                    
+                    .frame(width: UIScreen.main.bounds.width - 60, height: 250)
+                    .cornerRadius(15)
+                    .overlay(
+                      RoundedRectangle(cornerRadius: 15)
+                        .stroke(Color.black, lineWidth: 0.2)
+                    )
                 })
             }
           }.padding(.horizontal).padding(.bottom, 2)

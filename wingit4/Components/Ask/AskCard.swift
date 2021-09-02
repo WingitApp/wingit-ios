@@ -24,12 +24,28 @@ struct AskCard: View {
 
   var body: some View {
     if !self.askCardViewModel.isHidden {
-      VStack{
-        HeaderCell(post: $post)
-        BodyCell(post: $post)
-        FooterCell(post: $post)
+      NavigationLink( destination:
+        AskDetailView(post: $post)
+          .environmentObject(askCardViewModel)
+          .environmentObject(askMenuViewModel)
+          .environmentObject(askDoneToggleViewModel)
+          .environmentObject(commentViewModel)
+      ) {
+        VStack {
+          HeaderCell(post: $post)
+          BodyCell(post: $post)
+          FooterCell(post: $post)
+        }
+        .overlay(
+          RoundedRectangle(cornerRadius: 20)
+            .stroke(Color.gray, lineWidth: 0.5)
+        )
+       
       }
+      .buttonStyle(PlainButtonStyle())
       .background(Color(.white)).cornerRadius(20)
+      .padding(.bottom, 3)
+      .padding(.top, 3)
       .environmentObject(askCardViewModel)
       .environmentObject(askMenuViewModel)
       .environmentObject(askDoneToggleViewModel)
@@ -50,21 +66,33 @@ struct AskCard: View {
         isPresented: $askCardViewModel.isImageModalOpen,
         content: {
           ImageView(post: $post)
+            .environmentObject(askCardViewModel)
+            .environmentObject(askMenuViewModel)
+            .environmentObject(askDoneToggleViewModel)
       })
       .sheet(
         isPresented: $askMenuViewModel.isReportModalOpen,
         content: {
           ReportInput(post: post, postId: post.postId)
+            .environmentObject(askCardViewModel)
+            .environmentObject(askMenuViewModel)
+            .environmentObject(askDoneToggleViewModel)
       })
       .sheet(
         isPresented: $askDoneToggleViewModel.isMarkedAsDone,
         content: {
           DoneToggle(post: post)
+            .environmentObject(askCardViewModel)
+            .environmentObject(askMenuViewModel)
+            .environmentObject(askDoneToggleViewModel)
       })
       .sheet(
         isPresented: $commentViewModel.isCommentSheetShown,
         content: {
           CommentView(post: $post)
+            .environmentObject(askCardViewModel)
+            .environmentObject(askMenuViewModel)
+            .environmentObject(askDoneToggleViewModel)
         })
       .sheet(
         isPresented: $referViewModel.isReferListOpen,
@@ -72,6 +100,8 @@ struct AskCard: View {
           ReferConnectionsList(post: $post)
             .environmentObject(referViewModel)
         })
+        }
+      )
     }
   }
 }

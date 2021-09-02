@@ -17,30 +17,32 @@ class CommentViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var isCommentSheetShown = false
   
-    var postId: String!
     var listener: ListenerRegistration!
   
     func toggleCommentScreen() {
       self.isCommentSheetShown.toggle()
     }
     
-  func loadComments(postId: String) {
-        self.comments = []
+    func loadComments(postId: String) {
         self.isLoading = true
-        
-    Api.Comment.getComments(postId: postId, onSuccess: { (comments) in
-            if self.comments.isEmpty {
-                self.comments = comments
-            }
-        }, onError: { (errorMessage) in
-            
-        }, newComment: { (comment) in
-            if !self.comments.isEmpty {
-                self.comments.append(comment)
-            }
-        }) { (listener) in
-            self.listener = listener
-        }
-    }
+          
+      Api.Comment.getComments(
+        postId: postId,
+        onSuccess: { (comments) in
+              if self.comments.isEmpty {
+                  self.comments = comments
+              }
+          },
+        onError: { (errorMessage) in
+              
+          },
+        newComment: { (comment) in
+              if !self.comments.isEmpty {
+                  self.comments.append(comment)
+              }
+          }) { (listener) in
+              self.listener = listener
+          }
+      }
     
 }
