@@ -10,8 +10,12 @@ import SwiftUI
 struct ReferCard: View {
   
   @State var referral: Referral
+<<<<<<< HEAD
   @StateObject var referViewModel = ReferViewModel()
     
+=======
+  
+>>>>>>> 1190002 (init fetch referrals function)
   // refferal object
   /**
     user object for sender
@@ -19,6 +23,11 @@ struct ReferCard: View {
     post object
    */
   
+<<<<<<< HEAD
+=======
+  
+  
+>>>>>>> 1190002 (init fetch referrals function)
     var body: some View {
         VStack{
             ReferHeader(referral: $referral)

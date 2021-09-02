@@ -29,7 +29,11 @@ struct MainView: View {
         NavigationTab(
             tag: 1,
             icon: "suit.heart",
+<<<<<<< HEAD
             screen: AnyView(ReferralsView())
+=======
+            screen: AnyView(ReferralView())
+>>>>>>> 1190002 (init fetch referrals function)
         )
         NavigationTab(
             tag: 2,

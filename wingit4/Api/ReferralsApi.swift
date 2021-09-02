@@ -62,6 +62,7 @@ class ReferralsApi {
                 }
             }
     }
+<<<<<<< HEAD
 
     func getPendingReferrals(onSuccess: @escaping(_ referrals: [Referral]) -> Void) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
@@ -98,3 +99,90 @@ class ReferralsApi {
   //}
     }
 }
+=======
+  
+//  , onSuccess: @escaping(_ referrals: [Referral]) -> Void
+  
+  func getAllReferrals(onSuccess: @escaping(_ referrals: [Referral]) -> Void) {
+    /**
+          1. get all user's referrals
+          2. get referral's ask (or post)
+          3.  get user object by senderId
+     */
+    
+    
+    Api.Connections.getConnections(userId: Auth.auth().currentUser!.uid ) { (users) in
+      let allConnections = users.reduce([String: User]()) { (dict, user) -> [String: User] in
+        var dict = dict
+        dict[user.id!] = user
+        return dict
+      }
+            
+      Ref.FS_COLLECTION_REFERRALS
+        .whereField("receiverId", isEqualTo: Auth.auth().currentUser!.uid)
+        .getDocuments { (snapshot, error) in
+        if let error = error {
+            return print(error)
+        }
+        
+        if let snapshot = snapshot {
+            let referrals = snapshot.documents.compactMap { (document) -> Referral? in
+              let result = Result { try document.data(as: Referral.self) }
+                switch result {
+                  case .success(let referral):
+                    if var referral = referral {
+                      referral.sender = allConnections[referral.senderId]
+                      guard let decodedReferral = try? Referral.init(fromDictionary: referral) else { return nil }
+                      return decodedReferral
+                    }
+                    else {
+                      print("Document doesn't exist.")
+                    }
+                  case .failure(let error):
+                    // A User could not be initialized from the DocumentSnapshot.
+                      printDecodingError(error: error)
+                  }
+            }
+          
+          
+          onSuccess(referrals)
+          
+        }
+        
+      }
+      
+      
+    }
+    
+    
+  }
+    
+    
+//    func referralExists(askId: String, receiverId: String){
+//        
+//    }
+}
+
+
+//struct Referral: Codable, Identifiable {
+//    @DocumentID var id: String?
+//    @ServerTimestamp var createdTime: Timestamp?
+//    @ServerTimestamp var firstInteractionTime: Timestamp? // first interaction with the referral
+//    @ServerTimestamp var closedTime: Timestamp? // when the receiver is officially done helping and has moved it into a closed state
+//    var askId: String /// postId
+//    var children: [String]? // referral can be bumped and create more referrals
+//    var mediaUrl: String /// avatar pic? okie
+//    var receiverId: String
+//    var parentId: String? // referral that led to this referral
+//    var senderId: String ///Auth.auth().currentUser?.id
+//    var status: ReferralStatus
+//    var text: String
+//}
+//
+//enum ReferralStatus: String, Codable {
+//    case accepted
+//    case bumped
+//    case closed
+//    case pending
+//}
+>>>>>>> 1190002 (init fetch referrals function)
