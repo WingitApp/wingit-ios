@@ -62,16 +62,6 @@ class ReferViewModel : ObservableObject, Identifiable {
         self.toggleReferListScreen()
     }
     
-//    func refersExists(){
-//
-//    }
-    
-//    func getReferralsByAskId(askId: String) {
-//        Api.Referrals.getReferralsByAskId(askId: askId) { (referrals) in
-//
-//        }
-//    }
-    
     func loadConnections(askId: String) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         if !self.isLoading {
@@ -98,6 +88,31 @@ class ReferViewModel : ObservableObject, Identifiable {
         }
     }
     
+//    func bumpReferral(receiverId: String) {
+//        
+//        // id of person who bumped --> current user
+//        // id of the new receiver
+//
+//    
+//        Ref.FS_COLLECTION_REFERRALS.whereField("receiverId", isEqualTo: receiverId) { (snapshot, error) in
+//            if let error = error {
+//                print(error)
+//            } else if let snapshot = snapshot {
+//                let referrals = snapshot.documents.compactMap { (document) -> Referral? in
+//                    return try? document.data(as: Referral.self)
+//                }
+//            }
+//        }
+////            .where("ask")
+////            .setData([ "status": true ], merge: true)
+//    }
+    
+//    func acceptReferral(askId: String) {
+//
+//    }
+//    func deleteReferral(){
+//
+//    }
     
 }
 

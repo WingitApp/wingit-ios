@@ -23,6 +23,11 @@ struct SigninButtonModifier: ViewModifier {
 
 struct AcceptConnectRequestButtonModifier: ViewModifier {
     func body(content: Content) -> some View {
-        content.padding().background(Color(.systemTeal)).cornerRadius(5).shadow(radius: 10, x: 0, y: 10).padding()
+        content
+            .padding(.vertical, 10)
+            .padding(.horizontal, 30)
+            .font(.system(size: 14))
+            .frame(width: UIScreen.main.bounds.width - 325, height: UIScreen.main.bounds.width / 12)
+            .background(RoundedRectangle(cornerRadius: 5).stroke(Color.pink.opacity(0.5),lineWidth: 1.5))
     }
 }
