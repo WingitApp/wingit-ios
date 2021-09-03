@@ -19,8 +19,8 @@ struct Device: Codable {
     var OSVersion: String?
     var platform: Platform
     var pushNotificationsEnabled: Bool
-    var pushNotificationToken: String
-    var userId: String
+    var pushNotificationToken: String?
+    var userId: String?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -37,4 +37,8 @@ struct Device: Codable {
 
 enum Platform: String, Codable {
     case ios
+}
+
+enum DeviceUserDefaultKeys: String {
+    case id = "id"
 }

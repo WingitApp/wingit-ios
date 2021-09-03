@@ -21,6 +21,7 @@ class SessionStore: ObservableObject {
                 Api.User.loadUser(userId: user.uid) { (decodedUser) in
                   self.currentUser = decodedUser
                   self.isLoggedIn = true
+                  Api.Device.updateDeviceInFirestore()
                 }
             } else {
                 self.isLoggedIn = false

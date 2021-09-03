@@ -10,16 +10,23 @@ import SwiftUI
 import Firebase
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+  private var operationQueue = OperationQueue()
+    
   func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
   ) -> Bool {
   //  print("Colors application is starting up. ApplicationDelegate didFinishLaunchingWithOptions.")
     FirebaseApp.configure()
+    let hasDevice = UserDefaults.standard.string(forKey: DeviceUserDefaultKeys.id.rawValue) != nil
+    if (hasDevice) {
+        Api.Device.updateDeviceInFirestore()
+    } else {
+        Api.Device.createDevice()
+    }
     return true
   }
 }
-
 
 @main
 struct WingitApp: App {

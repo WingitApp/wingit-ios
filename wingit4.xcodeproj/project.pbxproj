@@ -167,6 +167,7 @@
 		654DA41926BC7BD3002864B8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654DA41826BC7BD2002864B8 /* MainViewModel.swift */; };
 		657F35D626DE1D8D0092A1B2 /* Comment_v2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F35D526DE1D8D0092A1B2 /* Comment_v2.swift */; };
 		657F35DB26DEA0C00092A1B2 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F35DA26DEA0C00092A1B2 /* Device.swift */; };
+		659F907526E1732600DE758A /* DeviceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659F907426E1732600DE758A /* DeviceApi.swift */; };
 		65A9EF9B26DF0B2500E81CBF /* ConnectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A9EF9826DF0B2500E81CBF /* ConnectionsViewModel.swift */; };
 		65A9EF9C26DF0B2500E81CBF /* ConnectionsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A9EF9926DF0B2500E81CBF /* ConnectionsApi.swift */; };
 		65A9EF9D26DF0B2500E81CBF /* ConnectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A9EF9A26DF0B2500E81CBF /* ConnectionsView.swift */; };
@@ -331,6 +332,7 @@
 		654DA41826BC7BD2002864B8 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		657F35D526DE1D8D0092A1B2 /* Comment_v2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment_v2.swift; sourceTree = "<group>"; };
 		657F35DA26DEA0C00092A1B2 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		659F907426E1732600DE758A /* DeviceApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DeviceApi.swift; path = wingit4/Api/DeviceApi.swift; sourceTree = "<group>"; };
 		65A9EF9826DF0B2500E81CBF /* ConnectionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionsViewModel.swift; sourceTree = "<group>"; };
 		65A9EF9926DF0B2500E81CBF /* ConnectionsApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionsApi.swift; path = ../Screens/Main/Connections/ConnectionsApi.swift; sourceTree = "<group>"; };
 		65A9EF9A26DF0B2500E81CBF /* ConnectionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionsView.swift; path = ../Main/Connections/ConnectionsView.swift; sourceTree = "<group>"; };
@@ -538,6 +540,7 @@
 			children = (
 				15E4907A26E84BD700B25B56 /* DynamicHeightTextField.swift */,
 				15E4906D26E84A1700B25B56 /* AskDetailView.swift */,
+				659F907426E1732600DE758A /* DeviceApi.swift */,
 				6502C14426C50481007C04C9 /* Config */,
 				3B75E3BC267153BA002F3108 /* wingit4 */,
 				3B75E3BB267153BA002F3108 /* Products */,
@@ -1071,6 +1074,7 @@
 				156E6AE426D8A13400690E47 /* ProfileView.swift in Sources */,
 				1524FCCA26D753240000629C /* AskMenuViewModel.swift in Sources */,
 				3BD604F526B0A332004FFEEC /* DoneViewModel.swift in Sources */,
+				659F907526E1732600DE758A /* DeviceApi.swift in Sources */,
 				3B5BDB5E268FA1980034B18C /* ReportApi.swift in Sources */,
 				3B7AF0AD26729FCC003BCCF3 /* CommentApi.swift in Sources */,
 				3B86E43E26C998E300F64416 /* ActivityIndicatorView.swift in Sources */,

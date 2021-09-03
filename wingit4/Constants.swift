@@ -83,7 +83,9 @@ class Ref {
         static func FS_DOC_BLOCKED_USERID(userId: String) -> DocumentReference {
             return FS_COLLECTION_BLOCKED.document(userId)
         }
-
+    // Firestore - Devices
+    static var FS_COLLECTION_DEVICES = FS_ROOT.collection("devices")
+    
     // Firestore - Asks
     static var FS_COLLECTION_ASKS = FS_ROOT.collection("asks")
     static func FS_COLLECTION_ASKS_FOR_USER(userId: String) -> CollectionReference? {
