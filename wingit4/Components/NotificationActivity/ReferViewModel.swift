@@ -66,6 +66,7 @@ class ReferViewModel : ObservableObject, Identifiable {
         Api.Referrals.statusToBumped(askId: askId, receiverId: receiverId)
         // id of person who bumped --> current user
         // id of the new receiver
+        
 /*
          1. Change status to bumped for the previous referral document.
          2. Toggle new screen for the connections list for new referral
@@ -77,11 +78,14 @@ class ReferViewModel : ObservableObject, Identifiable {
 //            .setData([ "status": true ], merge: true)
     }
     
+    //after accept status is changed, add them into comments.
+    
     func acceptReferral(askId: String) {
         guard let receiverId = Auth.auth().currentUser?.uid else {return}
         Api.Referrals.acceptReferral(askId: askId, receiverId: receiverId)
     }
     
+    //when Referral ignored, status changed.
     func ignoreReferral(askId: String) {
         guard let receiverId = Auth.auth().currentUser?.uid else {return}
         Api.Referrals.ignoreReferral(askId: askId, receiverId: receiverId)

@@ -27,7 +27,6 @@ class UserApi {
                 if decodedUser.id != Auth.auth().currentUser!.uid {
                     users.append(decodedUser)
                 }
-                
             }
             onSuccess(users)
         }

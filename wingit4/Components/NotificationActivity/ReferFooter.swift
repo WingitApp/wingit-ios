@@ -22,6 +22,8 @@ struct ReferFooter: View {
 struct AcceptButton: View {
     var body: some View {
         
+      
+        
         Button(action: {},
                label: {
                 VStack{

@@ -72,19 +72,32 @@ class ReferralsApi {
      2. So the function has to be get referrals in which the status is not closed.
      */
     
+//    func getOpenReferrals(askId: String, receiverId: String, onSuccess: @escaping(_ referrals: [Referral]) -> Void) {
+//
+//        Ref.FS_COLLECTION_OPEN_REFERRALS_FOR_USER(userId: receiverId)?.whereField("askId", isEqualTo: askId).getDocuments { (snapshot, error) in
+//            guard let snap = snapshot else {
+//                return
+//            }
+//            var referrals = [Referral]()
+//            for referral in snap.documents {
+//                let dict = referral.data()
+//                guard let decodedReferral = try? Referral.init(fromDictionary: dict) else {return}
+//                referrals.append(decodedReferral)
+//            }
+//            onSuccess(referrals)
+//        }
+//    }
+    
     func getOpenReferrals(askId: String, receiverId: String, onSuccess: @escaping(_ referrals: [Referral]) -> Void) {
 
         Ref.FS_COLLECTION_OPEN_REFERRALS_FOR_USER(userId: receiverId)?.whereField("askId", isEqualTo: askId).getDocuments { (snapshot, error) in
-            guard let snap = snapshot else {
-                return
+            if let error = error {
+              print(error)
+            } else if let snapshot = snapshot {
+              let referrals: [Referral] = snapshot.documents.compactMap {
+                return try? $0.data(as: Referral.self)
+              }
             }
-            var referrals = [Referral]()
-            for referral in snap.documents {
-                let dict = referral.data()
-                guard let decodedReferral = try? Referral.init(fromDictionary: dict) else {return}
-                referrals.append(decodedReferral)
-            }
-            onSuccess(referrals)
         }
     }
     
@@ -110,6 +123,8 @@ class ReferralsApi {
             }
     }
 }
+
+
 
 //struct Referral: Codable, Identifiable {
 //    @DocumentID var id: String?
