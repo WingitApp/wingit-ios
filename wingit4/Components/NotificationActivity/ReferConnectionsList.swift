@@ -43,7 +43,7 @@ struct ReferConnectionsList: View {
                     /// start list
                     List {
                         ForEach(self.referViewModel.allUsers, id: \.uid) { user in
-                            CardView(user: user, userId: user.uid)
+                            CardView(user: user, userId: user.id ?? "")
                         }
                     }
                     ///end list
@@ -111,60 +111,6 @@ struct CardView: View {
         .padding(10)
         .contentShape(Rectangle())
         .opacity(self.referViewModel.allReferralRecipientIds.contains(userId) ? 0.3 : 1)
-        .onTapGesture(perform: onTapGesture)
-//                }
-               
-        }
-       
-
-}
-
-struct CardView: View {
-    @EnvironmentObject var referViewModel: ReferViewModel
-
-    var user: User
-    var userId: String
-    
-    func onTapGesture() {
-      //  print("onTap called")
-        self.referViewModel.handleUserSelect(userId: userId)
-    }
-    
-    var body: some View {
-        
-        HStack{
-            URLImage(URL(string: user.profileImageUrl)!,
-            content: {
-                $0.image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .clipShape(Circle())
-            }).frame(width: 50, height: 50)
-                
-                VStack(alignment: .leading, spacing: 5) {
-                 Text(user.username).font(.headline).bold()
-                    Text(user.bio).font(.subheadline)
-                }
-                Spacer()
-                
-                ZStack{
-                    Circle()
-                        .stroke(
-                            self.referViewModel.selectedUsers.contains(userId)
-                                ? Color.green
-                                : Color.gray,
-                                lineWidth: 1
-                        )
-                        .frame(width: 25, height: 25)
-                    if self.referViewModel.selectedUsers.contains(userId) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .font(.system(size:25))
-                            .foregroundColor(.green)
-                    }
-                }
-            }
-        .padding(10)
-        .contentShape(Rectangle())
         .onTapGesture(perform: onTapGesture)
 //                }
                

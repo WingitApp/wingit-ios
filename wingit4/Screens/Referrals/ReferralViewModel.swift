@@ -10,11 +10,7 @@ import SwiftUI
 class ReferralViewModel: ObservableObject {
   
   @Published var referrals: [Referral] = []
-  
-  func getReferrals(userId: String) {
 
-  }
-    //
   
 }
 

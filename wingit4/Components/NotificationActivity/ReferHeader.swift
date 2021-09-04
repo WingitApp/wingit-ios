@@ -10,13 +10,8 @@ import URLImage
 
 struct ReferHeader: View {
     
-<<<<<<< HEAD
     @EnvironmentObject var referralsViewModel: ReferralsViewModel
     @Binding var referral: Referral
-=======
-    @EnvironmentObject var referViewModel: ReferViewModel
-  @Binding var referral: Referral
->>>>>>> 1190002 (init fetch referrals function)
    // @Binding var post: Post
     
     //senderId --> header

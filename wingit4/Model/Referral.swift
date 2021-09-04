@@ -11,16 +11,9 @@ import Foundation
 
 struct Referral: Codable, Identifiable {
     @DocumentID var id: String?
-<<<<<<< HEAD
     @ServerTimestamp var createdAt: Timestamp?
   
     var askId: String //postId
-=======
-    @ServerTimestamp var createdTime: Timestamp?
-    @ServerTimestamp var lastUpdatedTime: Timestamp? // first interaction with the referral
-  
-    var askId: String /// postId
->>>>>>> 1190002 (init fetch referrals function)
     var children: [String]? // referral can be bumped and create more referrals
     var closedAt: Timestamp? // when the receiver is officially done helping and has moved it into a closed state
     var mediaUrl: String? // avatar pic? okie
@@ -29,7 +22,6 @@ struct Referral: Codable, Identifiable {
     var senderId: String // Auth.auth().currentUser?.uid
     var status: ReferralStatus
     var text: String?
-<<<<<<< HEAD
     var updatedAt: Timestamp?
   
     // client-side join
@@ -48,12 +40,6 @@ struct Referral: Codable, Identifiable {
         case text
         case updatedAt
     }
-=======
-  
-    // client-side join
-//    var ask: Post?
-    var sender: User?
->>>>>>> 1190002 (init fetch referrals function)
 }
 
 enum ReferralStatus: String, Codable {
@@ -62,5 +48,6 @@ enum ReferralStatus: String, Codable {
     case closed
     case pending
 }
+
 
 

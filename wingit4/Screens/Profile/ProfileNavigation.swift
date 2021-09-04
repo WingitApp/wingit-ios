@@ -29,8 +29,8 @@ struct ProfileNavigation: View {
               .padding(.horizontal, 15)
                 
                 VStack(alignment: .leading, spacing: 5) {
-                 Text(user!.username).font(.headline).bold()
-                    Text(user!.bio? "").font(.subheadline)
+                    Text(user?.displayName ?? "").font(.headline).bold()
+                    Text(user?.username ?? "").font(.subheadline)
                 }.foregroundColor(Color("bw"))
               
             }.frame(maxWidth: .infinity, alignment: .center)
