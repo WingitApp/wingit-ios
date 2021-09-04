@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct ReferCard: View {
+    
+ 
+    
     var body: some View {
         VStack{
             ReferHeader()
             ReferBody()
             ReferFooter()
         }
+
      
     }
 }

@@ -53,7 +53,7 @@ class UserApi {
                         }
             }
       }
-    }
+}
   
     func blockUser(userId: String, postOwnerId: String) {
         

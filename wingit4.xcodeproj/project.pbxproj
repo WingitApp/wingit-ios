@@ -136,6 +136,7 @@
 		3BE61D7226E0B10E0078C6CF /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = 3BE61D7126E0B10E0078C6CF /* SPAlert */; };
 		3BE61D7426E15E8C0078C6CF /* ReferFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE61D7326E15E8C0078C6CF /* ReferFooter.swift */; };
 		3BE61D7626E160C60078C6CF /* ReferBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE61D7526E160C60078C6CF /* ReferBody.swift */; };
+		3BE61D7826E2A1CA0078C6CF /* BumpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE61D7726E2A1CA0078C6CF /* BumpViewModel.swift */; };
 		3BF143E626819E480093488D /* NotificationsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF143E526819E480093488D /* NotificationsApi.swift */; };
 		6509E4FA26D6C214009CB74D /* Ask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6509E4F926D6C214009CB74D /* Ask.swift */; };
 		6523D93426DC1F41007546F5 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6523D93326DC1F41007546F5 /* FirebaseFirestore */; };
@@ -275,6 +276,7 @@
 		3BE61D6E26E08A0D0078C6CF /* ReferralsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralsApi.swift; sourceTree = "<group>"; };
 		3BE61D7326E15E8C0078C6CF /* ReferFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferFooter.swift; sourceTree = "<group>"; };
 		3BE61D7526E160C60078C6CF /* ReferBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferBody.swift; sourceTree = "<group>"; };
+		3BE61D7726E2A1CA0078C6CF /* BumpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BumpViewModel.swift; sourceTree = "<group>"; };
 		3BF143E526819E480093488D /* NotificationsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsApi.swift; sourceTree = "<group>"; };
 		6502C14226C4FF52007C04C9 /* SecretsDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsDebug.xcconfig; sourceTree = "<group>"; };
 		6502C14326C5024C007C04C9 /* SecretsRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsRelease.xcconfig; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 				3BE61D7326E15E8C0078C6CF /* ReferFooter.swift */,
 				3B96DD6D26DF4C9E00015EED /* ReferCard.swift */,
 				3B3A880C26E0007A003E780F /* ReferViewModel.swift */,
+				3BE61D7726E2A1CA0078C6CF /* BumpViewModel.swift */,
 			);
 			path = NotificationActivity;
 			sourceTree = "<group>";
@@ -875,6 +878,7 @@
 				151A3C8826D3256F00A39FAF /* HomeFeed.swift in Sources */,
 				3B7AF0872671CA69003BCCF3 /* UsersViewModel.swift in Sources */,
 				156E6AE626D8A13400690E47 /* UserProfileViewModel.swift in Sources */,
+				3BE61D7826E2A1CA0078C6CF /* BumpViewModel.swift in Sources */,
 				3BD12F1526C9CA1500E26A87 /* AppDel.swift in Sources */,
 				1524FCF826D812E70000629C /* CircleLoader.swift in Sources */,
 				3B75E3DF267163A1002F3108 /* SignupView.swift in Sources */,

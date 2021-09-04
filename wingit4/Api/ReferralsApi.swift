@@ -14,9 +14,9 @@ import FirebaseAuth
 
 class ReferralsApi {
     
-    func sendReferral(askId: String,mediaUrl: String,  receiverId: String, senderId: String?) {
+    func sendReferral(askId: String, receiverId: String, senderId: String?) {
         guard let id = senderId else { return }
-        let referral = Referral(id: nil, createdTime: nil, lastUpdatedTime: nil, askId: askId, children: nil, closedTime: nil, mediaUrl: mediaUrl, receiverId: receiverId, parentId: nil, senderId: id, status: .pending, text: nil)
+        let referral = Referral(id: nil, createdTime: nil, lastUpdatedTime: nil, askId: askId, children: nil, closedTime: nil, mediaUrl: "", receiverId: receiverId, parentId: nil, senderId: id, status: .pending, text: nil)
         do {
             let _ = try Ref.FS_COLLECTION_REFERRALS.addDocument(from: referral)
         } catch {
@@ -24,6 +24,71 @@ class ReferralsApi {
         }
     }
     
+    func statusToBumped(askId: String, receiverId: String){
+
+        Ref.FS_COLLECTION_REFERRALS_FOR_ASK(postId: askId)?.whereField("receiverId", isEqualTo: receiverId).getDocuments { (snapshot, error) in
+            if let error = error {
+                print(error)
+            } else if let doc = snapshot?.documents {
+               
+                if let data = doc.first, data.exists {
+                    data.reference.updateData(["status": "bumped"])
+                }
+            }
+        }
+    }
+    
+    func acceptReferral(askId: String, receiverId: String) {
+        
+        Ref.FS_COLLECTION_REFERRALS_FOR_ASK(postId: askId)?.whereField("receiverId", isEqualTo: receiverId).getDocuments { (snapshot, error) in
+            if let error = error {
+                print(error)
+            } else if let doc = snapshot?.documents {
+               
+                if let data = doc.first, data.exists {
+                    data.reference.updateData(["status": "accepted"])
+                }
+            }
+        }
+    }
+    
+    func ignoreReferral(askId: String, receiverId: String) {
+        
+        Ref.FS_COLLECTION_REFERRALS_FOR_ASK(postId: askId)?.whereField("receiverId", isEqualTo: receiverId).getDocuments { (snapshot, error) in
+            if let error = error {
+                print(error)
+            } else if let doc = snapshot?.documents {
+               
+                if let data = doc.first, data.exists {
+                    data.reference.updateData(["status": "closed"])
+                }
+            }
+        }
+    }
+    
+    
+    /*
+     1. If referral status is opened show on the current user's referral notification.
+     2. So the function has to be get referrals in which the status is not closed.
+     */
+    
+    func getOpenReferrals(askId: String, receiverId: String, onSuccess: @escaping(_ referrals: [Referral]) -> Void) {
+
+        Ref.FS_COLLECTION_OPEN_REFERRALS_FOR_USER(userId: receiverId)?.whereField("askId", isEqualTo: askId).getDocuments { (snapshot, error) in
+            guard let snap = snapshot else {
+                return
+            }
+            var referrals = [Referral]()
+            for referral in snap.documents {
+                let dict = referral.data()
+                guard let decodedReferral = try? Referral.init(fromDictionary: dict) else {return}
+                referrals.append(decodedReferral)
+            }
+            onSuccess(referrals)
+        }
+    }
+    
+
     func getReferralsByAskId(askId: String, onSuccess: @escaping(_ recipientIds: [String]) -> Void) {
         Ref.FS_COLLECTION_REFERRALS.whereField("askId", isEqualTo: askId)
             .getDocuments { (snapshot, error) in
@@ -44,11 +109,6 @@ class ReferralsApi {
                 }
             }
     }
-    
-    
-//    func referralExists(askId: String, receiverId: String){
-//        
-//    }
 }
 
 //struct Referral: Codable, Identifiable {

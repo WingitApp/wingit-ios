@@ -44,14 +44,13 @@ class ReferViewModel : ObservableObject, Identifiable {
 
     }
     
-    func sendReferral(askId: String, mediaUrl: String) {
+    func sendReferral(askId: String) {
         ///askId(postId) & senderId (auth.dude) & senderId(userId of the one selected
         // ids -> self.selectedUsers
         
         for receiverId in selectedUsers {
             Api.Referrals.sendReferral(
                 askId: askId,
-                mediaUrl: mediaUrl,
                 receiverId: receiverId,
                 senderId: Auth.auth().currentUser!.uid
             )
@@ -60,6 +59,32 @@ class ReferViewModel : ObservableObject, Identifiable {
         self.allReferralRecipientIds = Array(Set(self.allReferralRecipientIds + self.selectedUsers))
         let alertView = SPAlertView(title: "Sent!", message: nil, preset: SPAlertIconPreset.done); alertView.present(duration: 2)
         self.toggleReferListScreen()
+    }
+    
+    func bumpReferral(askId: String) {
+        guard let receiverId = Auth.auth().currentUser?.uid else {return}
+        Api.Referrals.statusToBumped(askId: askId, receiverId: receiverId)
+        // id of person who bumped --> current user
+        // id of the new receiver
+/*
+         1. Change status to bumped for the previous referral document.
+         2. Toggle new screen for the connections list for new referral
+         3. Create new referral document with the new receiver & ask Ids.
+         */
+
+     
+//            .where("ask")
+//            .setData([ "status": true ], merge: true)
+    }
+    
+    func acceptReferral(askId: String) {
+        guard let receiverId = Auth.auth().currentUser?.uid else {return}
+        Api.Referrals.acceptReferral(askId: askId, receiverId: receiverId)
+    }
+    
+    func ignoreReferral(askId: String) {
+        guard let receiverId = Auth.auth().currentUser?.uid else {return}
+        Api.Referrals.ignoreReferral(askId: askId, receiverId: receiverId)
     }
     
     func loadConnections(askId: String) {
@@ -87,32 +112,6 @@ class ReferViewModel : ObservableObject, Identifiable {
             }
         }
     }
-    
-//    func bumpReferral(receiverId: String) {
-//        
-//        // id of person who bumped --> current user
-//        // id of the new receiver
-//
-//    
-//        Ref.FS_COLLECTION_REFERRALS.whereField("receiverId", isEqualTo: receiverId) { (snapshot, error) in
-//            if let error = error {
-//                print(error)
-//            } else if let snapshot = snapshot {
-//                let referrals = snapshot.documents.compactMap { (document) -> Referral? in
-//                    return try? document.data(as: Referral.self)
-//                }
-//            }
-//        }
-////            .where("ask")
-////            .setData([ "status": true ], merge: true)
-//    }
-    
-//    func acceptReferral(askId: String) {
-//
-//    }
-//    func deleteReferral(){
-//
-//    }
     
 }
 

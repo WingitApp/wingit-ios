@@ -14,10 +14,6 @@ struct ReferConnectionsList: View {
     @EnvironmentObject var referViewModel: ReferViewModel
     @Binding var post: Post
   //  var postId: String
-    
-    func sendReferral(postId: String, userId: String) {
-//        sendReferral(userId: userId, postId: postId)
-    }
 
     var body: some View {
         VStack {
@@ -33,8 +29,7 @@ struct ReferConnectionsList: View {
                         Button(action: {
                             //askId(postId) & senderId (auth.dude) & senderId(userId of the one selected
                             referViewModel.sendReferral(
-                                askId: post.postId,
-                                mediaUrl: post.avatar
+                                askId: post.postId
                             )
                         },
                                label: {
