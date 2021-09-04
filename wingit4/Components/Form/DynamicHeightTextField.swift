@@ -45,7 +45,7 @@ struct TextView: View {
     private var isSecure: Bool = false
     private var isEditable: Bool = true
     private var isSelectable: Bool = true
-    private var isScrollingEnabled: Bool = false
+    private var isScrollingEnabled: Bool = true
     private var enablesReturnKeyAutomatically: Bool?
     private var autoDetectionTypes: UIDataDetectorTypes = []
 
@@ -91,11 +91,17 @@ struct TextView: View {
                         shouldEditInRange: shouldEditInRange,
                         onEditingChanged: onEditingChanged,
                         onCommit: onCommit)
-            .frame(
-                minHeight: isScrollingEnabled ? 0 : calculatedHeight,
-                maxHeight: isScrollingEnabled ? .infinity : calculatedHeight
-        )
-            .background(placeholderView, alignment: .leading)
+          .frame(
+            minHeight: isScrollingEnabled ? 0 : calculatedHeight,
+            idealHeight: calculatedHeight,
+            maxHeight: calculatedHeight
+          )
+          .padding(
+            EdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5)
+          )
+          .cornerRadius(20)
+          .background(placeholderView.padding(.leading, 10), alignment: .leading)
+            
     }
 
     @ViewBuilder
@@ -299,7 +305,7 @@ private struct SwiftUITextView: UIViewRepresentable {
         view.backgroundColor = UIColor.clear
         view.adjustsFontForContentSizeCategory = true
         view.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        return view
+      return view
     }
 
     func updateUIView(_ view: UIKitTextView, context: Context) {

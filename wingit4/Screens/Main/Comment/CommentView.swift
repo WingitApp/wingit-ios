@@ -25,6 +25,7 @@ struct CommentView: View {
                    }
               }
             }
+            Spacer()
             CommentInput(post: $post)
         }
         .onTapGesture { dismissKeyboard() }

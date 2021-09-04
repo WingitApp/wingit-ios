@@ -31,6 +31,7 @@ struct CommentInput: View {
     }
     
     var body: some View {
+      Divider()
       HStack(alignment: .top, spacing: 0) {
             URLImage(URL(string: session.currentUser!.profileImageUrl)!,
               content: {
@@ -38,28 +39,34 @@ struct CommentInput: View {
                       .resizable()
                       .aspectRatio(contentMode: .fill)
                       .clipShape(Circle())
-              }).frame(width: 50, height: 50
+              }).frame(width: 30, height: 30
             )
-              .padding(
-                EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15)
+              .overlay(
+                RoundedRectangle(cornerRadius: 100)
+                  .stroke(Color.gray, lineWidth: 1)
               )
-            ZStack {
-//               RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 1)
-//                .padding()
-//                .padding(.leading, 10)
-               HStack {
-                   TextView("Add a comment", text: $composedMessage)
-                    .border(Color.black, width: 1)
-                    .padding(
-                      EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15)
-                    )
-                    //        }
-                   Button(action: commentAction) {
-                       Image(systemName: "arrow.right.circle").imageScale(.large).foregroundColor(.black).padding(30)
-                   }
-               }
+              .padding(
+                EdgeInsets(top: 20, leading: 15, bottom: 0, trailing: 15)
+              )
+              
+        HStack(alignment: .top){
+             TextView("Add a comment", text: $composedMessage)
+              .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                  .stroke(Color.gray, lineWidth: 1)
+              )
+              .padding(.top, 15)
+             Button(action: commentAction) {
+                 Image(systemName: "paperplane.fill")
+//                  .imageScale(.large)
+                  .font(.system(size:18))
+                  .foregroundColor(Color(.systemTeal))
+             }
+             .padding(.top, 25)
+             .padding(.trailing, 10)
 
-             }.frame(height: 70)
+         }
+
         }
  
      
