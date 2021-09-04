@@ -31,7 +31,7 @@ struct CommentInput: View {
     }
     
     var body: some View {
-        HStack(spacing: 0) {
+      HStack(alignment: .top, spacing: 0) {
             URLImage(URL(string: session.currentUser!.profileImageUrl)!,
               content: {
                   $0.image
@@ -39,11 +39,21 @@ struct CommentInput: View {
                       .aspectRatio(contentMode: .fill)
                       .clipShape(Circle())
               }).frame(width: 50, height: 50
-            ).padding(.leading, 15)
+            )
+              .padding(
+                EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15)
+              )
             ZStack {
-               RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 1).padding()
+//               RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 1)
+//                .padding()
+//                .padding(.leading, 10)
                HStack {
-                   TextField("Add a comment", text: $composedMessage).padding(30)
+                   TextView("Add a comment", text: $composedMessage)
+                    .border(Color.black, width: 1)
+                    .padding(
+                      EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15)
+                    )
+                    //        }
                    Button(action: commentAction) {
                        Image(systemName: "arrow.right.circle").imageScale(.large).foregroundColor(.black).padding(30)
                    }
@@ -55,9 +65,3 @@ struct CommentInput: View {
      
     }
 }
-
-//struct CommentInput_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CommentInput()
-//    }
-//}

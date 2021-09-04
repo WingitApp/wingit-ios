@@ -19,8 +19,6 @@ struct AskDetailBody: View {
 //              .font(.headline)
 //              .padding(.bottom, 5)
       }
-      .padding(
-        EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15)
-      )
+      .padding(15)
     }
 }

@@ -409,6 +409,7 @@
 		159EC7F326E16A9000DA3DC0 /* Form */ = {
 			isa = PBXGroup;
 			children = (
+				15762C6D26E1973C00A8E041 /* DynamicHeightTextField.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";
