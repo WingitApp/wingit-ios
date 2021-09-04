@@ -19,7 +19,7 @@ struct ReferralView: View {
         }
       }
       .onAppear {
-        Api.Referrals.getAllReferrals() { referrals in
+        Api.Referrals.getReferralsWithJoins() { referrals in
           print("referrals", referrals)
         }
       }

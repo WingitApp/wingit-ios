@@ -101,6 +101,10 @@ class Ref {
     static func FS_COLLECTION_ASKS_BUMPED(userId: String) -> CollectionReference? {
         return FS_COLLECTION_ASKS.whereField("bumpedBy", arrayContains: userId) as? CollectionReference
     }
+  
+    static func FS_DOC_ASKS_FOR_ASKID(askId: String) -> DocumentReference? {
+        return FS_COLLECTION_ASKS.document(askId)
+    }
     
     // Firestore - Referrals
     static var FS_COLLECTION_REFERRALS = FS_ROOT.collection("referrals")

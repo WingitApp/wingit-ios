@@ -104,7 +104,6 @@ class ReferralsApi {
 
   
   
-      // Todo: rename to get referralIds
     func getReferralsByAskId(askId: String, onSuccess: @escaping(_ recipientIds: [String]) -> Void) {
         Ref.FS_COLLECTION_REFERRALS.whereField("askId", isEqualTo: askId)
             .getDocuments { (snapshot, error) in
@@ -126,87 +125,132 @@ class ReferralsApi {
             }
     }
   
-//  , onSuccess: @escaping(_ referrals: [Referral]) -> Void
   
-  func getAllReferrals(onSuccess: @escaping(_ referrals: [Referral]) -> Void) {
-    /**
-          1. get all user's referrals
-          2. get referral's ask (or post)
-          3.  get user object by senderId
-     */
-    
-    
-    Api.Connections.getConnections(userId: Auth.auth().currentUser!.uid ) { (users) in
-      let allConnections = users.reduce([String: User]()) { (dict, user) -> [String: User] in
-        var dict = dict
-        dict[user.id!] = user
-        return dict
-      }
-            
-      Ref.FS_COLLECTION_REFERRALS
-        .whereField("receiverId", isEqualTo: Auth.auth().currentUser!.uid)
+    func getReferralsByUserId(
+      userId: String,
+      onSuccess: @escaping(_ referrals: [Referral]) -> Void
+    ) {
+      Ref.FS_COLLECTION_REFERRALS.whereField("receiverId", isEqualTo: userId)
         .getDocuments { (snapshot, error) in
-        if let error = error {
-            return print(error)
+          guard let snap = snapshot else { return }
+          if let error = error { return print(error) }
+          
+          var referrals = [Referral]()
+          for doc in snap.documents {
+            if let referral = try? doc.data(as: Referral.self) {
+              referrals.append(referral)
+            }
+          }
+
+          onSuccess(referrals)
         }
+    }
+    
+    func getPostFromReferralAskId(
+      askIds: [String],
+      onSuccess: @escaping(_ posts: [Post]) -> Void
+    ) {
+      
+      
+      let dispatchGroup = DispatchGroup();
+      var posts: [Post] = []
+      
+      for askId in askIds {
+        dispatchGroup.enter()
         
-        if let snapshot = snapshot {
-            let referrals = snapshot.documents.compactMap { (document) -> Referral? in
-              let result = Result { try document.data(as: Referral.self) }
-                switch result {
-                  case .success(let referral):
-                    if var referral = referral {
-                      referral.sender = allConnections[referral.senderId]
-                      guard let decodedReferral = try? Referral.init(fromDictionary: referral) else { return nil }
-                      return decodedReferral
-                    }
-                    else {
-                      print("Document doesn't exist.")
-                    }
-                  case .failure(let error):
-                    // A User could not be initialized from the DocumentSnapshot.
-                      printDecodingError(error: error)
-                  }
+        Ref.FS_DOC_ASKS_FOR_ASKID(askId: askId)?.getDocument { (document, error) -> Void in
+          if let error = error {return print(error) }
+                  
+            if let decodedPost = try? document?.data(as: Post.self) {
+              posts.append(decodedPost)
             }
           
-          
-          onSuccess(referrals)
-          
+          dispatchGroup.leave()
         }
-        
+      }
+      
+      dispatchGroup.notify(queue: .main) {
+        // code executes when all posts are fetched
+          onSuccess(posts)
       }
       
       
     }
-    
-    
+  
+    func getReferralsWithJoins(onSuccess: @escaping(_ referrals: [NSMutableDictionary]) -> Void) {
+      
+      Api.Connections.getConnections(userId: Auth.auth().currentUser!.uid ) { (users) in
+        // get connections and make a dictionary
+        let allConnections = users.reduce([String: User]()) { (dict, user) -> [String: User] in
+          var dict = dict
+          dict[user.id!] = user
+          return dict
+        }
+      
+      
+      Ref.FS_COLLECTION_REFERRALS.whereField("receiverId", isEqualTo: Auth.auth().currentUser!.uid).getDocuments { (snapshot, error) in
+        // catch errors
+        guard let snap = snapshot else { return }
+        if let error = error { return print(error) }
+        
+        var referralDicts: [NSMutableDictionary] = []
+        var askIds: [String] = []
+        
+        for document in snap.documents {
+          let referralDict = document.data()
+          askIds.append(referralDict["askId"] as! String)
+          referralDicts.append((referralDict as? NSDictionary)!.mutableCopy() as! NSMutableDictionary)
+        }
+        
+        self.getPostFromReferralAskId(askIds: askIds) { (posts) in
+            // get posts and create accessable dictionary
+            let allReferralPosts = posts.reduce([String: Post]()) { (dict, post) -> [String: Post] in
+              var dict = dict
+              dict[post.postId] = post
+              return dict
+            }
+          
+
+          var results: [NSMutableDictionary] = []
+
+          for referralDict in referralDicts {
+            // create new referral dict with user and post joins
+            let postId = referralDict["askId"]
+            let senderId = referralDict["senderId"]
+            // add User & Post to Referral
+            referralDict["ask"] = allReferralPosts[postId as! String]
+            referralDict["sender"] = allConnections[senderId as! String]
+            results.append(referralDict)
+
+          }
+          // returns referral with joins
+          onSuccess(results)
+        }
+      }
   }
-    
-    
-//    func referralExists(askId: String, receiverId: String){
-//        
-//    }
+
+
+  //struct Referral: Codable, Identifiable {
+  //    @DocumentID var id: String?
+  //    @ServerTimestamp var createdTime: Timestamp?
+  //    @ServerTimestamp var firstInteractionTime: Timestamp? // first interaction with the referral
+  //    @ServerTimestamp var closedTime: Timestamp? // when the receiver is officially done helping and has moved it into a closed state
+  //    var askId: String /// postId
+  //    var children: [String]? // referral can be bumped and create more referrals
+  //    var mediaUrl: String /// avatar pic? okie
+  //    var receiverId: String
+  //    var parentId: String? // referral that led to this referral
+  //    var senderId: String ///Auth.auth().currentUser?.id
+  //    var status: ReferralStatus
+  //    var text: String
+  //}
+  //
+  //enum ReferralStatus: String, Codable {
+  //    case accepted
+  //    case bumped
+  //    case closed
+  //    case pending
+  //}
+    }
+
 }
-
-
-//struct Referral: Codable, Identifiable {
-//    @DocumentID var id: String?
-//    @ServerTimestamp var createdTime: Timestamp?
-//    @ServerTimestamp var firstInteractionTime: Timestamp? // first interaction with the referral
-//    @ServerTimestamp var closedTime: Timestamp? // when the receiver is officially done helping and has moved it into a closed state
-//    var askId: String /// postId
-//    var children: [String]? // referral can be bumped and create more referrals
-//    var mediaUrl: String /// avatar pic? okie
-//    var receiverId: String
-//    var parentId: String? // referral that led to this referral
-//    var senderId: String ///Auth.auth().currentUser?.id
-//    var status: ReferralStatus
-//    var text: String
-//}
-//
-//enum ReferralStatus: String, Codable {
-//    case accepted
-//    case bumped
-//    case closed
-//    case pending
-//}

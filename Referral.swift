@@ -25,7 +25,7 @@ struct Referral: Codable, Identifiable {
     var text: String?
   
     // client-side join
-//    var ask: Post?
+    var ask: Post?
     var sender: User?
 }
 
@@ -35,5 +35,6 @@ enum ReferralStatus: String, Codable {
     case closed
     case pending
 }
+
 
 
