@@ -153,51 +153,39 @@ class PostApi {
             }
         }
     }
-
-//    func loadDonePost(postId: String, onSuccess: @escaping(_ donepost: DonePost) -> Void) {
-//        Ref.FIRESTORE_COLLECTION_ALL_DONE.document(postId).getDocument { (snapshot, error) in
-//          guard let snap = snapshot else {
-//              print("Error fetching data")
-//              return
-//          }
-//
-//              let dict = snap.data()
-//              guard let decoderdonePost = try? DonePost.init(fromDictionary: dict) else {return}
-//
-//            onSuccess(decoderdonePost)
-//      }
-//    }
-
+    
     func loadPost(postId: String, onSuccess: @escaping(_ post: Post) -> Void) {
         Ref.FS_COLLECTION_ALL_POSTS.document(postId).getDocument { (snapshot, error) in
-          guard let snap = snapshot else {
-              print("Error fetching post")
-              return
-          }
-         
-              let dict = snap.data()
-              guard let decoderPost = try? Post.init(fromDictionary: dict) else {return}
-              
-            onSuccess(decoderPost)
-      }
+            if let error = error {
+                print(error)
+            } else if let snapshot = snapshot {
+                let result = Result { try snapshot.data(as: Post.self) }
+                    switch result {
+                        case .success(let post):
+                          if let post = post {
+                            onSuccess(post)
+                          } else {
+                            print("Post document doesn't exist.")
+                          }
+                        case .failure(let error):
+                          // A User could not be initialized from the DocumentSnapshot.
+                            printDecodingError(error: error)
+                        }
+            }
+        }
     }
     
     
     func loadPosts(onSuccess: @escaping(_ posts: [Post]) -> Void) {
         Ref.FS_COLLECTION_ALL_POSTS.order(by: "date", descending: true).getDocuments { (snapshot, error) in
-            guard let snap = snapshot else {
-                print("Error fetching posts")
-                return
+            if let error = error {
+              print(error)
+            } else if let snapshot = snapshot {
+              let posts: [Post] = snapshot.documents.compactMap {
+                return try? $0.data(as: Post.self)
+              }
+                onSuccess(posts)
             }
-            var posts = [Post]()
-            for document in snap.documents {
-                let dict = document.data()
-                guard let decoderPost = try? Post.init(fromDictionary: dict) else {return}
-                posts.append(decoderPost)
-                
-                
-            }
-            onSuccess(posts)
         }
     }
   
@@ -219,70 +207,11 @@ class PostApi {
             .limit(to: TIMELINE_PAGINATION_PAGE_SIZE)
             .start(afterDocument: lastSnapshot)
           
-          var posts = [Post]()
-
-          snapshot.documentChanges.forEach { (documentChange) in
-            let dict = documentChange.document.data()
-            guard let decoderPost = try? Post.init(fromDictionary: dict) else {return}
-            posts.append(decoderPost)
+          let posts: [Post] = snapshot.documentChanges.compactMap {
+            return try? $0.document.data(as: Post.self)
           }
+    
           onSuccess(posts, next)
         })
     }
-    
-    
-//    Ref.FIRESTORE_TIMELINE_DOCUMENT_USERID(userId: userId)
-//      .collection("timelinePosts")
-//      .order(by: "date", descending: true)
-//      .limit(to: 10)
-//      .getDocuments { (snapshot, error) in
-//        if let doc = snapshot?.documents {
-//          print("LOAD MORE DOC: \(doc)")
-//        }
-//    }
-
-//  }
-    
-//    func loadTimeline(
-//      onSuccess: @escaping(_ posts: [Post],_ lastVisible: DocumentSnapshot) -> Void,
-//      newPost: @escaping(Post) -> Void,
-//      deletePost: @escaping(Post) -> Void,
-//      listener: @escaping(_ listenerHandle: ListenerRegistration
-//    ) -> Void) {
-//        guard let userId = Auth.auth().currentUser?.uid else {
-//                return
-//        }
-//        let listenerFirestore =  Ref.FIRESTORE_TIMELINE_DOCUMENT_USERID(userId: userId)
-//          .collection("timelinePosts")
-//          .order(by: "date", descending: true)
-//          .limit(to: 10)
-//          .addSnapshotListener({ (querySnapshot, error) in
-//            guard let snapshot = querySnapshot else { return }
-//            snapshot.documentChanges.forEach { (documentChange) in
-//              // grab last document snapshot
-//              let lastVisible = snapshot.documents[snapshot.documents.count - 1]
-//                switch documentChange.type {
-//                case .added:
-//                  var posts = [Post]()
-//                    let dict = documentChange.document.data()
-//                    guard let decoderPost = try?
-//                            Post.init(fromDictionary: dict)
-//                    else {return}
-//
-////                      newPost(decoderPost)
-//                    posts.append(decoderPost)
-//                    onSuccess(posts, lastVisible)
-//                case .modified:
-//                    print("type: modified")
-//                case .removed:
-//                    let dict = documentChange.document.data()
-//                     guard let decoderPost = try? Post.init(fromDictionary: dict) else {return}
-//                     deletePost(decoderPost)
-//                }
-//            }
-//
-//        })
-//
-//        listener(listenerFirestore)
-//    }
 }

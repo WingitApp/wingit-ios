@@ -26,7 +26,7 @@ class ReferralsApi {
     
     func statusToBumped(askId: String, receiverId: String){
 
-        Ref.FS_COLLECTION_REFERRALS_FOR_ASK(postId: askId)?.whereField("receiverId", isEqualTo: receiverId).getDocuments { (snapshot, error) in
+        Ref.FS_COLLECTION_REFERRALS_FOR_ASK(askId: askId)?.whereField("receiverId", isEqualTo: receiverId).getDocuments { (snapshot, error) in
             if let error = error {
                 print(error)
             } else if let doc = snapshot?.documents {
@@ -40,7 +40,7 @@ class ReferralsApi {
     
     func acceptReferral(askId: String, receiverId: String) {
         
-        Ref.FS_COLLECTION_REFERRALS_FOR_ASK(postId: askId)?.whereField("receiverId", isEqualTo: receiverId).getDocuments { (snapshot, error) in
+        Ref.FS_COLLECTION_REFERRALS_FOR_ASK(askId: askId)?.whereField("receiverId", isEqualTo: receiverId).getDocuments { (snapshot, error) in
             if let error = error {
                 print(error)
             } else if let doc = snapshot?.documents {
@@ -54,7 +54,7 @@ class ReferralsApi {
     
     func ignoreReferral(askId: String, receiverId: String) {
         
-        Ref.FS_COLLECTION_REFERRALS_FOR_ASK(postId: askId)?.whereField("receiverId", isEqualTo: receiverId).getDocuments { (snapshot, error) in
+        Ref.FS_COLLECTION_REFERRALS_FOR_ASK(askId: askId)?.whereField("receiverId", isEqualTo: receiverId).getDocuments { (snapshot, error) in
             if let error = error {
                 print(error)
             } else if let doc = snapshot?.documents {
@@ -88,7 +88,7 @@ class ReferralsApi {
 //        }
 //    }
     
-    func getOpenReferrals(askId: String, receiverId: String, onSuccess: @escaping(_ referrals: [Referral]) -> Void) {
+    func getOpenReferralForAsk(askId: String, receiverId: String, onSuccess: @escaping(_ referrals: [Referral]) -> Void) {
 
         Ref.FS_COLLECTION_OPEN_REFERRALS_FOR_USER(userId: receiverId)?.whereField("askId", isEqualTo: askId).getDocuments { (snapshot, error) in
             if let error = error {
@@ -97,13 +97,11 @@ class ReferralsApi {
               let referrals: [Referral] = snapshot.documents.compactMap {
                 return try? $0.data(as: Referral.self)
               }
+                onSuccess(referrals)
             }
         }
     }
-    
 
-  
-  
     func getReferralsByAskId(askId: String, onSuccess: @escaping(_ recipientIds: [String]) -> Void) {
         Ref.FS_COLLECTION_REFERRALS.whereField("askId", isEqualTo: askId)
             .getDocuments { (snapshot, error) in

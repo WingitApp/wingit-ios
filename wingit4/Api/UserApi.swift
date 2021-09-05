@@ -42,17 +42,16 @@ class UserApi {
                         case .success(let user):
                           if let user = user {
                             onSuccess(user)
-                          }
-                          else {
-                            print("Document doesn't exist.")
+                          } else {
+                            print("User document doesn't exist.")
                           }
                         case .failure(let error):
                           // A User could not be initialized from the DocumentSnapshot.
                             printDecodingError(error: error)
                         }
             }
-      }
-}
+        }
+    }
   
     func blockUser(userId: String, postOwnerId: String) {
         
