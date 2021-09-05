@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct Comment: Encodable, Decodable, Identifiable {
+struct Comment: Encodable, Decodable, Identifiable, Equatable {
     var id = UUID()
     var comment: String
     var avatarUrl: String

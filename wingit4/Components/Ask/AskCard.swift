@@ -19,7 +19,7 @@ struct AskCard: View {
   @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
   @StateObject var commentViewModel = CommentViewModel()
   @StateObject var referViewModel = ReferViewModel()
-    
+  @StateObject var commentInputViewModel = CommentInputViewModel()
 
 
   var body: some View {
@@ -30,6 +30,7 @@ struct AskCard: View {
           .environmentObject(askMenuViewModel)
           .environmentObject(askDoneToggleViewModel)
           .environmentObject(commentViewModel)
+          .environmentObject(commentInputViewModel)
       ) {
         VStack {
           HeaderCell(post: $post)
@@ -51,7 +52,7 @@ struct AskCard: View {
       .environmentObject(askDoneToggleViewModel)
       .environmentObject(commentViewModel)
       .environmentObject(referViewModel)
-    
+      .environmentObject(commentInputViewModel)
       // [START] Animates on Hide
       .opacity(!self.askCardViewModel.isHidden ? 1 : 0)
       .transition(.asymmetric(insertion: .scale, removal: .opacity))
@@ -93,6 +94,8 @@ struct AskCard: View {
             .environmentObject(askCardViewModel)
             .environmentObject(askMenuViewModel)
             .environmentObject(askDoneToggleViewModel)
+            .environmentObject(commentViewModel)
+            .environmentObject(commentInputViewModel)
         })
       .sheet(
         isPresented: $referViewModel.isReferListOpen,

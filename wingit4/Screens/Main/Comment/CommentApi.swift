@@ -10,19 +10,25 @@ import FirebaseAuth
 import FirebaseStorage
 import Firebase
 class CommentApi {
-    func sendComment(text: String, username: String, avatarUrl: String, ownerId: String, postId: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-        let comment = Comment(comment: text, avatarUrl: avatarUrl, ownerId: ownerId, postId: postId, username: username, date: Date().timeIntervalSince1970)
-        guard let dict = try? comment.toDictionary() else {return}
-        
-        Ref.FS_DOC_COMMENTS_FOR_POSTID(postId: postId).collection("postComments").addDocument(data: dict) { (error) in
-            if let error = error {
-                onError(error.localizedDescription)
-                return
-            }
-            onSuccess()
+  func sendComment(
+    commentDict: Dictionary<String, Any>,
+    postId: String,
+    onSuccess: @escaping() -> Void,
+    onError: @escaping(_ errorMessage: String) -> Void
+  ) {
+    
+    Ref.FS_DOC_COMMENTS_FOR_POSTID(postId: postId)
+      .collection("postComments")
+      .addDocument(data: commentDict) { (error) in
+        if let error = error {
+            print("error: \(error)")
+            onError(error.localizedDescription)
+            return
         }
         
+        onSuccess()
     }
+  }
     
     
     func getComments(postId: String, onSuccess: @escaping([Comment]) -> Void, onError: @escaping(_ errorMessage: String) -> Void, newComment: @escaping(Comment) -> Void, listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void) {

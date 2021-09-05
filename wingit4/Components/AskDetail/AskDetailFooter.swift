@@ -18,16 +18,23 @@ struct AskDetailFooter: View {
       Divider()
       HStack {
         LikeButton(post: $post)
+        // todo: like count
         Text("Like")
           .font(.caption)
-//          .padding(.leading, 15)
 //          .font(.system(size: 25))
-//        CommentButton()
-        
-//          .font(.system(size: 20))
+        Spacer()
+        CommentButton()
+          .font(.system(size: 15))
+          .padding(.leading, -15)
+        Text("Comment")
+          .font(.caption)
 
         Spacer()
         ShareButton(post: $post)
+          .padding(.trailing, -15)
+
+        Text("Share")
+          .font(.caption)
       }
       .environmentObject(footerCellViewModel)
       .padding(

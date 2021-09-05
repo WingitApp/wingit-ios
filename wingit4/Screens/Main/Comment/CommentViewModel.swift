@@ -14,11 +14,12 @@ import Firebase
 class CommentViewModel: ObservableObject {
     
     @Published var comments: [Comment] = []
+    @Published var commentIds: [UUID] = []
     @Published var isLoading = false
     @Published var isCommentSheetShown = false
   
     var listener: ListenerRegistration!
-  
+    
     func toggleCommentScreen() {
       self.isCommentSheetShown.toggle()
     }
@@ -26,8 +27,7 @@ class CommentViewModel: ObservableObject {
     func loadComments(postId: String) {
         self.isLoading = true
           
-      Api.Comment.getComments(
-        postId: postId,
+      Api.Comment.getComments( postId: postId,
         onSuccess: { (comments) in
               if self.comments.isEmpty {
                   self.comments = comments
@@ -37,12 +37,13 @@ class CommentViewModel: ObservableObject {
               
           },
         newComment: { (comment) in
-              if !self.comments.isEmpty {
-                  self.comments.append(comment)
+              if !self.comments.contains(comment) {
+                self.comments.append(comment)
               }
           }) { (listener) in
               self.listener = listener
           }
       }
+
     
 }

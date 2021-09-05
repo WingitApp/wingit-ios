@@ -9,26 +9,30 @@ import SwiftUI
 import URLImage
 
 struct CommentInput: View {
+  // VM
     @EnvironmentObject var session: SessionStore
-    @ObservedObject var commentInputViewModel = CommentInputViewModel()
-
+    @EnvironmentObject var commentViewModel: CommentViewModel
+    @EnvironmentObject var commentInputViewModel: CommentInputViewModel
+  
+  // Props & State
     @Binding var post: Post
-    
     @State var composedMessage: String = ""
-    
-    func handleInputViewModel() {
-      Api.Post.loadPost(postId: post.postId) { (post) in
-            self.commentInputViewModel.post = post
-        }
+  
+  
+    func onCommentSubmit() {
+      if !composedMessage.isEmpty {
+        self.commentInputViewModel.saveComment(
+            text: composedMessage,
+            post: post
+          ) { comment in
+            self.composedMessage = ""
+          }
+      } else {
+        //TODO: show feedback message
+      }
     }
+  
     
-    func commentAction() {
-        if !composedMessage.isEmpty {
-            commentInputViewModel.addComments(text: composedMessage) {
-                self.composedMessage = ""
-            }
-        }
-    }
     
     var body: some View {
       Divider()
@@ -39,14 +43,13 @@ struct CommentInput: View {
                       .resizable()
                       .aspectRatio(contentMode: .fill)
                       .clipShape(Circle())
-              }).frame(width: 30, height: 30
-            )
+              }).frame(width: 35, height: 35)
               .overlay(
                 RoundedRectangle(cornerRadius: 100)
                   .stroke(Color.gray, lineWidth: 1)
               )
               .padding(
-                EdgeInsets(top: 20, leading: 15, bottom: 0, trailing: 15)
+                EdgeInsets(top: 20, leading: 10, bottom: 0, trailing: 10)
               )
               
         HStack(alignment: .top){
@@ -56,18 +59,17 @@ struct CommentInput: View {
                   .stroke(Color.gray, lineWidth: 1)
               )
               .padding(.top, 15)
-             Button(action: commentAction) {
+             Button(action: onCommentSubmit) {
                  Image(systemName: "paperplane.fill")
-//                  .imageScale(.large)
                   .font(.system(size:18))
                   .foregroundColor(Color(.systemTeal))
              }
              .padding(.top, 25)
              .padding(.trailing, 10)
-
          }
-
         }
+//      .frame(maxHeight: 200)
+
  
      
     }
