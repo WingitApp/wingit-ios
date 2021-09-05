@@ -44,7 +44,6 @@ class ProfileViewModel: ObservableObject {
 
       Api.User.loadPosts(userId: userId) { (posts) in
           self.posts = posts
-          self.splitted = self.posts.splited(into: 3)
           if self.isLoading {
             self.isLoading.toggle()
           }

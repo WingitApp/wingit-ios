@@ -50,11 +50,7 @@ class UserProfileViewModel: ObservableObject {
 
         Api.User.loadPosts(userId: userId) { (posts) in
             self.posts = posts
-            self.splitted = self.posts.splited(into: 3)
             self.isLoading.toggle()
-
-
-
         }
         updateIsConnected(userId: userId)
         updateHasPendingRequest(userId: userId)
