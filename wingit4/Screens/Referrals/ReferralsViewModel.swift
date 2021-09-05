@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class ReferralViewModel: ObservableObject {
+class ReferralsViewModel: ObservableObject {
   
   @Published var referrals: [Referral] = []
 

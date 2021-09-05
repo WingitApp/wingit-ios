@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct ReferralView: View {
-  @StateObject var referralViewModel = ReferralViewModel()
+  @StateObject var referralsViewModel = ReferralsViewModel()
   
     var body: some View {
       ScrollView {
         VStack(alignment: .leading) {
-          ForEach(self.referralViewModel.referrals, id: \.id) { referral in
+          ForEach(self.referralsViewModel.referrals, id: \.id) { referral in
             ReferCard(referral: referral)
           }
         }
       }
       .onAppear {
         Api.Referrals.getReferrals() { referrals in
-            referralViewModel.referrals = referrals
+            referralsViewModel.referrals = referrals
         }
       }
     }
