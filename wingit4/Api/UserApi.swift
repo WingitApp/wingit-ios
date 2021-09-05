@@ -137,18 +137,14 @@ class UserApi {
     func loadPosts(userId: String, onSuccess: @escaping(_ posts: [Post]) -> Void) {
         Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("userPosts").order(by: "date", descending: true).getDocuments { (snapshot, error) in
             
-            guard let snap = snapshot else {
-              //  print("Error fetching data")
-                return
+            if let error = error {
+              print(error)
+            } else if let snapshot = snapshot {
+              let posts: [Post] = snapshot.documents.compactMap {
+                return try? $0.data(as: Post.self)
+              }
+                onSuccess(posts)
             }
-            var posts = [Post]()
-            for document in snap.documents {
-                let dict = document.data()
-                guard let decodedPost = try? Post.init(fromDictionary: dict) else {return}
-
-                posts.append(decodedPost)
-            }
-            onSuccess(posts)
         }
     }
         

@@ -16,7 +16,7 @@ struct BodyCell: View {
       HStack{
           VStack(alignment: .leading, spacing: 10){
             Text(post.caption).modifier(BodyStyle())
-            if post != nil && post.mediaUrl != "" {
+            if post.mediaUrl != "" {
                 Button(action: {
                     withAnimation(.easeInOut){
                       askCardViewModel.isImageModalOpen.toggle()
