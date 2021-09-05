@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15030AA126E57D550076CF14 /* RollingNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15030AA026E57D550076CF14 /* RollingNumberView.swift */; };
 		151A3C7F26CE049000A39FAF /* NavigationTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151A3C7E26CE049000A39FAF /* NavigationTab.swift */; };
 		151A3C8126CE134A00A39FAF /* FontStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151A3C8026CE134A00A39FAF /* FontStyles.swift */; };
 		151A3C8326D1B0D200A39FAF /* UserAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151A3C8226D1B0D200A39FAF /* UserAvatar.swift */; };
@@ -152,6 +153,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		15030AA026E57D550076CF14 /* RollingNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollingNumberView.swift; sourceTree = "<group>"; };
 		151A3C7E26CE049000A39FAF /* NavigationTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTab.swift; sourceTree = "<group>"; };
 		151A3C8026CE134A00A39FAF /* FontStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyles.swift; sourceTree = "<group>"; };
 		151A3C8226D1B0D200A39FAF /* UserAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatar.swift; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 			isa = PBXGroup;
 			children = (
 				15762C6D26E1973C00A8E041 /* DynamicHeightTextField.swift */,
+				15030AA026E57D550076CF14 /* RollingNumberView.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -909,6 +912,7 @@
 				3BF143E626819E480093488D /* NotificationsApi.swift in Sources */,
 				156E6AD526D8A0A700690E47 /* NotificationEntry.swift in Sources */,
 				159EC7F226E08B5C00DA3DC0 /* ReferralComment.swift in Sources */,
+				15030AA126E57D550076CF14 /* RollingNumberView.swift in Sources */,
 				151A3C9826D5B9F000A39FAF /* BodyCell.swift in Sources */,
 				3B5BDB5C268F98E70034B18C /* ReportInputViewModel.swift in Sources */,
 				1524FCD226D753320000629C /* HeaderCell.swift in Sources */,

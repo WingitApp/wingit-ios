@@ -17,6 +17,8 @@ class FooterCellViewModel: ObservableObject {
   let uid = Auth.auth().currentUser!.uid
     
   func checkPostIsLiked(post: Post) {
+    print("POST LIKES: \(post.likes)")
+    
     if  post.likes["\(uid)"] != nil {
       self.isLikedByUser.toggle()
     }
@@ -29,35 +31,66 @@ class FooterCellViewModel: ObservableObject {
   }
 
   func like(post: Post) {
+      if !self.isLikedByUser {
+        // toggles UI
+        self.toggleLike()
+      }
+        // TODO : Do all "consistency writes" on Cloud Trigger
+    
+    
         Ref.FS_DOC_POSTS_FOR_USERID(userId: post.ownerId)
           .collection("userPosts")
           .document(post.postId)
           .updateData(["likes.\(uid)" : true, "likeCount":  post.likeCount])
-        Ref.FS_COLLECTION_ALL_POSTS.document(post.postId).updateData(["likes.\(uid)" : true,
-                                                                             "likeCount":  post.likeCount])
-        Ref.FS_DOC_TIMELINE_FOR_USERID(userId: post.ownerId).collection("timelinePosts").document(post.postId).updateData(["likes.\(uid)" : true,
-                                                                                                                                   "likeCount":  post.likeCount])
+    
+        Ref.FS_COLLECTION_ALL_POSTS.document(post.postId)
+          .updateData(["likes.\(uid)" : true, "likeCount":  post.likeCount])
+    
+    
+        Ref.FS_DOC_TIMELINE_FOR_USERID(userId: post.ownerId).collection("timelinePosts")
+          .document(post.postId).updateData(["likes.\(uid)" : true, "likeCount":  post.likeCount])
+    
         // find connections and update posts in their timeline using Cloud Function
         if Auth.auth().currentUser!.uid != post.ownerId {
-            let activityId = Ref.FS_COLLECTION_ACTIVITY.document(post.ownerId).collection("feedItems").document().documentID
-            let activityObject = Activity(activityId: activityId, type: "like", username: Auth.auth().currentUser!.displayName!, userId: uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: post.postId, mediaUrl: post.mediaUrl, comment: "", date: Date().timeIntervalSince1970)
-            guard let activityDict = try? activityObject.toDictionary() else { return }
-
-            Ref.FS_COLLECTION_ACTIVITY.document(post.ownerId).collection("feedItems").document(activityId).setData(activityDict)
+          self.createActivityNotification(post: post)
         }
+    
 
-      self.toggleLike()
     }
+  
     
   func unlike(post: Post) {
-        Ref.FS_DOC_POSTS_FOR_USERID(userId: post.ownerId).collection("userPosts").document(post.postId).updateData(["likes.\(uid)" : false,
-                                                                                                                                  "likeCount":  post.likeCount])
-        Ref.FS_COLLECTION_ALL_POSTS.document(post.postId).updateData(["likes.\(uid)" : false,
-                                                                                "likeCount":  post.likeCount])
-        Ref.FS_DOC_TIMELINE_FOR_USERID(userId: post.ownerId).collection("timelinePosts").document(post.postId).updateData(["likes.\(uid)" : false,
-                                                                                                                                      "likeCount":  post.likeCount])
+    
+      if self.isLikedByUser {
+        // toggles UI
+        self.toggleLike()
+      }
+    // TODO : Do all "consistency writes" on Cloud Trigger
+
+        Ref.FS_DOC_POSTS_FOR_USERID(userId: post.ownerId)
+          .collection("userPosts")
+          .document(post.postId)
+          .updateData(["likes.\(uid)" : false, "likeCount":  post.likeCount])
+    
+    
+        Ref.FS_COLLECTION_ALL_POSTS
+          .document(post.postId)
+          .updateData(["likes.\(uid)" : false, "likeCount":  post.likeCount])
+    
+        Ref.FS_DOC_TIMELINE_FOR_USERID(userId: post.ownerId)
+          .collection("timelinePosts")
+          .document(post.postId)
+          .updateData(["likes.\(uid)" : false,"likeCount":  post.likeCount])
+    
         if Auth.auth().currentUser!.uid != post.ownerId {
-            Ref.FS_COLLECTION_ACTIVITY.document(post.ownerId).collection("feedItems").whereField("type", isEqualTo: "like").whereField("userId", isEqualTo: uid).whereField("postId", isEqualTo:  post.postId).getDocuments { (snapshot, error) in
+          
+          // does this remove the notification from the user's activity feed?
+            Ref.FS_COLLECTION_ACTIVITY.document(post.ownerId)
+              .collection("feedItems")
+              .whereField("type", isEqualTo: "like")
+              .whereField("userId", isEqualTo: uid)
+              .whereField("postId", isEqualTo:  post.postId)
+              .getDocuments { (snapshot, error) in
                 if let doc = snapshot?.documents {
                     if let data = doc.first, data.exists {
                         data.reference.delete()
@@ -65,8 +98,37 @@ class FooterCellViewModel: ObservableObject {
                 }
             }
          }
-      self.toggleLike()
+    
+
     }
+  
+  
+  func createActivityNotification(post: Post) {
+    let activityId = Ref.FS_COLLECTION_ACTIVITY
+      .document(post.ownerId)
+      .collection("feedItems")
+      .document()
+      .documentID
+  
+    let activityObject = Activity(
+      activityId: activityId,
+      type: "like",
+      username: Auth.auth().currentUser!.displayName!,
+      userId: uid,
+      userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString,
+      postId: post.postId,
+      mediaUrl: post.mediaUrl,
+      comment: "",
+      date: Date().timeIntervalSince1970
+    )
+  
+    guard let activityDict = try? activityObject.toDictionary() else { return }
+
+    Ref.FS_COLLECTION_ACTIVITY.document(post.ownerId)
+      .collection("feedItems")
+      .document(activityId)
+      .setData(activityDict)
+  }
 
         
 }

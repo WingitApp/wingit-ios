@@ -17,11 +17,21 @@ struct FooterCell: View {
     var body: some View {
       VStack(alignment: .leading, spacing: 8) {
           HStack {
-            LikeButton(post: $post)
-            CommentButton()
+            LikeButton(
+              post: $post,
+              showLabel: true
+            )
             Spacer()
             ReferButton(post: $post)
-            ShareButton(post: $post)
+            Spacer()
+            CommentButton(
+              showLabel: true
+            )
+            Spacer()
+            ShareButton(
+              post: $post,
+              showLabel: true
+            )
           }
         }
         .padding(.bottom, 15)

@@ -10,15 +10,23 @@ import SwiftUI
 struct ShareButton: View {
   @ObservedObject var shareButtonViewModel = ShareButtonViewModel()
   @Binding var post: Post
+  var showLabel: Bool
   
     var body: some View {
-      Button(
-        action: { self.shareButtonViewModel.createDLink(post: post) },
-        label: {
-          Image(systemName: "arrowshape.turn.up.right")
-      })
-      .foregroundColor(.gray)
-      .padding(.trailing, 15)
+      HStack {
+        Button(
+          action: { self.shareButtonViewModel.createDLink(post: post) },
+          label: {
+            Image(systemName: "arrowshape.turn.up.right")
+        })
+        .foregroundColor(.gray)
+        if self.showLabel {
+          Text("Share")
+            .font(.caption)
+            .padding(.trailing, 15)
+
+        }
+      }
     }
 
 }
