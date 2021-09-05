@@ -20,6 +20,7 @@ struct Post: Codable, Identifiable {
     var mediaUrl: String
     var date: Double
     var likeCount: Int
+    var title: String?
 }
 
 struct DonePost: Encodable, Decodable {

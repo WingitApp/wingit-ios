@@ -11,7 +11,7 @@ import URLImage
 struct ReferHeader: View {
     
     @EnvironmentObject var referViewModel: ReferViewModel
-  @Binding var referral: Referral
+    @Binding var referral: Referral
    // @Binding var post: Post
     
     //senderId --> header
@@ -35,7 +35,7 @@ struct ReferHeader: View {
                     Image(systemName: "camera").resizable().clipShape(Circle())
                         .frame(width: 35, height: 35)
                     VStack(alignment: .leading) {
-                        Text("David").font(.subheadline).bold()
+                        Text(referral.sender?.username ?? "").font(.subheadline).bold()
                     }
                 
                     Spacer()
@@ -45,7 +45,7 @@ struct ReferHeader: View {
                 })
                 }.padding(.trailing, 15).padding(.leading, 15)
             VStack(alignment: .leading, spacing: 10){
-                Text("Bumping this ask to you because I think you can help!").font(.system(size: 14)).padding(.horizontal)
+                Text(referral.text ?? "").font(.system(size: 14)).padding(.horizontal)
             }
         }.padding(.top, 10)
     }

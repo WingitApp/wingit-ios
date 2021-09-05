@@ -16,7 +16,7 @@ class ReferralsApi {
     
     func sendReferral(askId: String, receiverId: String, senderId: String?) {
         guard let id = senderId else { return }
-        let referral = Referral(id: nil, createdTime: nil, lastUpdatedTime: nil, askId: askId, children: nil, closedTime: nil, mediaUrl: "", receiverId: receiverId, parentId: nil, senderId: id, status: .pending, text: nil)
+        let referral = Referral(id: nil, createdAt: nil, askId: askId, children: nil, closedAt: nil, receiverId: receiverId, parentId: nil, senderId: id, status: .pending, text: nil)
         do {
             let _ = try Ref.FS_COLLECTION_REFERRALS.addDocument(from: referral)
         } catch {
@@ -174,81 +174,30 @@ class ReferralsApi {
       
       
     }
-  
-    func getReferralsWithJoins(onSuccess: @escaping(_ referrals: [NSMutableDictionary]) -> Void) {
-      
-      Api.Connections.getConnections(userId: Auth.auth().currentUser!.uid ) { (users) in
-        // get connections and make a dictionary
-        let allConnections = users.reduce([String: User]()) { (dict, user) -> [String: User] in
-          var dict = dict
-          dict[user.id!] = user
-          return dict
-        }
-      
-      
+    
+    func getReferrals(onSuccess: @escaping(_ referrals: [Referral]) -> Void) {
       Ref.FS_COLLECTION_REFERRALS.whereField("receiverId", isEqualTo: Auth.auth().currentUser!.uid).getDocuments { (snapshot, error) in
         // catch errors
         guard let snap = snapshot else { return }
         if let error = error { return print(error) }
         
-        var referralDicts: [NSMutableDictionary] = []
-        var askIds: [String] = []
-        
-        for document in snap.documents {
-          let referralDict = document.data()
-          askIds.append(referralDict["askId"] as! String)
-          referralDicts.append((referralDict as? NSDictionary)!.mutableCopy() as! NSMutableDictionary)
+        let referrals: [Referral] = snap.documents.compactMap {
+            return try? $0.data(as: Referral.self)
         }
         
-        self.getPostFromReferralAskId(askIds: askIds) { (posts) in
-            // get posts and create accessable dictionary
-            let allReferralPosts = posts.reduce([String: Post]()) { (dict, post) -> [String: Post] in
-              var dict = dict
-              dict[post.postId] = post
-              return dict
+        var result = [Referral]()
+        for var referral in referrals {
+            Api.Post.loadPost(postId: referral.askId) { (post) in
+                referral.ask = post
             }
-          
-
-          var results: [NSMutableDictionary] = []
-
-          for referralDict in referralDicts {
-            // create new referral dict with user and post joins
-            let postId = referralDict["askId"]
-            let senderId = referralDict["senderId"]
-            // add User & Post to Referral
-            referralDict["ask"] = allReferralPosts[postId as! String]
-            referralDict["sender"] = allConnections[senderId as! String]
-            results.append(referralDict)
-
-          }
-          // returns referral with joins
-          onSuccess(results)
+            
+            Api.User.loadUser(userId: referral.senderId) { (user) in
+                referral.sender = user
+                result.append(referral)
+                onSuccess(result)
+            }
         }
       }
-  }
-
-
-  //struct Referral: Codable, Identifiable {
-  //    @DocumentID var id: String?
-  //    @ServerTimestamp var createdTime: Timestamp?
-  //    @ServerTimestamp var firstInteractionTime: Timestamp? // first interaction with the referral
-  //    @ServerTimestamp var closedTime: Timestamp? // when the receiver is officially done helping and has moved it into a closed state
-  //    var askId: String /// postId
-  //    var children: [String]? // referral can be bumped and create more referrals
-  //    var mediaUrl: String /// avatar pic? okie
-  //    var receiverId: String
-  //    var parentId: String? // referral that led to this referral
-  //    var senderId: String ///Auth.auth().currentUser?.id
-  //    var status: ReferralStatus
-  //    var text: String
-  //}
-  //
-  //enum ReferralStatus: String, Codable {
-  //    case accepted
-  //    case bumped
-  //    case closed
-  //    case pending
   //}
     }
-
 }

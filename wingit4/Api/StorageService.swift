@@ -59,7 +59,7 @@ class StorageService {
             storagePostRef.downloadURL { (url, error) in
                 if let metaImageUrl = url?.absoluteString {
                     let firestorePostRef = Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("userPosts").document(postId)
-                    let post = Post.init(caption: caption, likes: [:], location: "", ownerId: userId, postId: postId, username: Auth.auth().currentUser!.displayName!, avatar: Auth.auth().currentUser!.photoURL!.absoluteString, mediaUrl: metaImageUrl, date: Date().timeIntervalSince1970, likeCount: 0)
+                    let post = Post.init(caption: caption, likes: [:], location: "", ownerId: userId, postId: postId, username: Auth.auth().currentUser!.displayName!, avatar: Auth.auth().currentUser!.photoURL!.absoluteString, mediaUrl: metaImageUrl, date: Date().timeIntervalSince1970, likeCount: 0, title: "")
                     guard let dict = try? post.toDictionary() else {return}
                     
                     firestorePostRef.setData(dict) { (error) in

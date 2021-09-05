@@ -19,21 +19,13 @@ struct ReferBody: View {
                     Image(systemName: "camera").resizable().clipShape(Circle())
                         .frame(width: 35, height: 35)
                     VStack(alignment: .leading) {
-                        Text("David").font(.subheadline).bold()
+                        Text(referral.ask?.username ?? "").font(.subheadline).bold()
                     }
                     Spacer()
                 Image(systemName: "ellipsis")
                 }.padding(.trailing, 15).padding(.leading, 15)
 
-          postText()
-
-//            ZStack(alignment: .trailing){
-//                VStack(alignment: .leading){
-//                Text("This studio room is fantastic! Highly recommend people to check it out. ").font(.subheadline).padding(.leading, 15)
-//                }
-//            Image("photo2").resizable().scaledToFill()
-//                .frame(width: 200, height: 250).clipped()
-//            }
+            PostText(ask: referral.ask)
         }
         .padding(.top, 10).padding(.bottom, 10)
         .frame(width: UIScreen.main.bounds.width - 30)
@@ -44,12 +36,13 @@ struct ReferBody: View {
 
 import SwiftUI
 
-struct postText: View {
+struct PostText: View {
+    var ask: Post?
     var body: some View {
         HStack{
 
             VStack(alignment: .leading, spacing: 10){
-                Text("This studio room is fantastic! Highly recommend people to check out!")
+                Text(ask?.caption ?? "")
             }.padding(.horizontal)
             Spacer(minLength: 0)
 //                Image("photo2").resizable().scaledToFill()
