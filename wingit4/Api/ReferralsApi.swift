@@ -181,22 +181,30 @@ class ReferralsApi {
         guard let snap = snapshot else { return }
         if let error = error { return print(error) }
         
+        let dispatchGroup = DispatchGroup()
+        
         let referrals: [Referral] = snap.documents.compactMap {
             return try? $0.data(as: Referral.self)
         }
         
         var result = [Referral]()
         for var referral in referrals {
+            dispatchGroup.enter()
             Api.Post.loadPost(postId: referral.askId) { (post) in
                 referral.ask = post
-            }
-            
-            Api.User.loadUser(userId: referral.senderId) { (user) in
-                referral.sender = user
-                result.append(referral)
-                onSuccess(result)
+                
+                Api.User.loadUser(userId: referral.senderId) { (user) in
+                    referral.sender = user
+                    result.append(referral)
+                    dispatchGroup.leave()
+                }
             }
         }
+        
+        dispatchGroup.notify(queue: .main) {
+            onSuccess(result)
+        }
+        
       }
   //}
     }
