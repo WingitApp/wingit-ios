@@ -54,11 +54,11 @@ struct SignUpForm: View {
   
     var body: some View {
         VStack{
-            UsernameTextField(
-              username: $signupViewModel.username
+            FirstNameTextField(
+              firstName: $signupViewModel.firstName
             )
-            BioTextField(
-              bio: $signupViewModel.bio
+            LastNameTextField(
+              lastName: $signupViewModel.lastName
             )
             EmailTextField(
               email: $signupViewModel.email

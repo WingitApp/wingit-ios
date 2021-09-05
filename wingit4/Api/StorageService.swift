@@ -108,7 +108,7 @@ class StorageService {
     }
 
     
-    static func saveAvatar(userId: String, username: String, bio: String, email: String, imageData: Data, metadata: StorageMetadata, storageAvatarRef: StorageReference, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+    static func saveAvatar(userId: String, firstName: String, lastName: String, email: String, imageData: Data, metadata: StorageMetadata, storageAvatarRef: StorageReference, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
            storageAvatarRef.putData(imageData, metadata: metadata) { (storageMetadata, error) in
                 if error != nil {
                     onError(error!.localizedDescription)
@@ -120,7 +120,7 @@ class StorageService {
                     if let metaImageUrl = url?.absoluteString {
                         if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
                             changeRequest.photoURL = url
-                            changeRequest.displayName = username
+                            changeRequest.displayName = firstName + " " + lastName
                             changeRequest.commitChanges { (error) in
                                 if error != nil {
                                    onError(error!.localizedDescription)
@@ -129,21 +129,13 @@ class StorageService {
                             }
                         }
                                                     
-                        let firestoreUserId = Ref.FS_DOC_USERID(userId: userId)
-//                        let userInfor = ["username": self.username, "email": self.email, "profileImageUrl": metaImageUrl]
-                        let user = User.init(id: userId, uid: userId, bio: bio, canonicalEmail: email, email: email, firstName: "", keywords: username.splitStringToArray(), lastName: "", profileImageUrl: metaImageUrl, username: username)
+                        let firestoreUserDoc = Ref.FS_DOC_USERID(userId: userId)
+                        let user = User.init(id: userId, uid: userId, bio: "", canonicalEmail: email, email: email, firstName: "", keywords: (firstName + " " + lastName).splitStringToArray(), lastName: "", profileImageUrl: metaImageUrl, username: "")
 
-                        guard let dict = try? user.toDictionary() else {return}
-//
-//                        guard let decoderUser = try? User.init(fromDictionary: dict) else {return}
-//                        print(decoderUser.username)
-                        
-                        firestoreUserId.setData(dict) { (error) in
-                            if error != nil {
-                                onError(error!.localizedDescription)
-                                return
-                            }
-                            onSuccess(user)
+                        do {
+                            try firestoreUserDoc.setData(from: user)
+                        } catch {
+                            print(error)
                         }
                     }
                 }
@@ -185,5 +177,16 @@ class StorageService {
                 
             }
     }
-
+    
+    static func updateDisplayName(userId: String, displayName: String, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+        if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
+            changeRequest.displayName = displayName
+            changeRequest.commitChanges { (error) in
+                if error != nil {
+                   onError(error!.localizedDescription)
+                   return
+                }
+            }
+        }
+    }
 }

@@ -65,7 +65,7 @@ struct UserProfileView: View {
                }
                 .background(Color.black.opacity(0.03)
                 .ignoresSafeArea(.all, edges: .all))
-                .navigationBarTitle(Text(self.user.username), displayMode: .automatic)
+                .navigationBarTitle(Text(Auth.auth().currentUser?.displayName ?? ""), displayMode: .automatic)
                 .environmentObject(connectionsViewModel)
                  .onAppear {
                     logToAmplitude(event: .viewOtherProfile)
@@ -110,17 +110,15 @@ struct UserProfileView: View {
         }
     }
 
-    struct MessageButton: View {
-        var user: User
-        var body: some View {
-            Button(action: {
-                logToAmplitude(event: .tapMessageButton)
-            }) {
-                    NavigationLink(destination: ChatView(recipientId: user.id!, recipientAvatarUrl: user.profileImageUrl, recipientUsername: user.username)) {
-                        Text("Message").foregroundColor(Color("bw")).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal))
-                   
-                }
-                
+struct MessageButton: View {
+    var user: User
+    var body: some View {
+        Button(action: {
+            logToAmplitude(event: .tapMessageButton)
+        }) {
+            NavigationLink(destination: ChatView(recipientId: user.id!, recipientAvatarUrl: user.profileImageUrl, recipientUsername: user.displayName())) {
+                    Text("Message").foregroundColor(Color("bw")).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal))
+               
             }
         }
     }

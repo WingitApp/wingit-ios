@@ -58,71 +58,15 @@ class UserApi {
         StorageService.updateAvatar(userId: userId, imageData: imageData, metadata: metadata, storageAvatarRef: storageAvatarUserId, onSuccess: onSuccess, onError: onError)
     }
     
-//    func updateImage(field : String){
-//        guard let userId = Auth.auth().currentUser?.uid else {
-//            return
-//        }
-//        alertView(msg: "Update \(field)") { (txt) in
-//            if txt != ""{
-//                Ref.FIRESTORE_DOCUMENT_USERID(userId: userId).updateData([
-//
-//                    "profileImageURL": txt
-//
-//                ]) { (err) in
-//
-//                    if err != nil{return}
-//
-//                }
-////                let storageAvatarUserId = Ref.STORAGE_AVATAR_USERID(userId: userId)
-////                let metadata = StorageMetadata()
-////                metadata.contentType = "image/jpg"
-////
-//            }
-//        }
-//
-//    }
-    
-
-    
-    func updateDetails(field : String){
-        
-        alertView(msg: "Update \(field)") { (txt) in
-            
-            if txt != ""{
-                
-                self.updateBio(id: field == "Name" ? "username" : "bio", value: txt)
+    func updateField(field: String) {
+        if let userId = Auth.auth().currentUser?.uid {
+            alertView(msg: "Update \(field)") { (txt) in
+                if txt != ""{
+                    Ref.FS_DOC_USERID(userId: userId).updateData([field: txt, "updatedAt": FieldValue.serverTimestamp() ])
+                }
             }
         }
     }
-    
-    func updateBio(id: String,value: String){
-        guard let userId = Auth.auth().currentUser?.uid else {
-            return
-        }
-        
-        Ref.FS_DOC_USERID(userId: userId).updateData([
-        
-            id: value,
-            
-        ]) { (err) in
-            
-            if err != nil{return}
-            
-        }
-    }
-    
-//    func getUpdate(userId: String, completion: @escaping (User) -> ()) {
-//        Ref.FIRESTORE_DOCUMENT_USERID(userId: userId).getDocument { (snapshot, error) in
-//
-//            if let dict = snapshot?.data() {
-//
-//                guard (try? User.init(fromDictionary: dict)) != nil else {return}
-//            }
-//
-//        }
-//    }
-//
-
     
     func loadPosts(userId: String, onSuccess: @escaping(_ posts: [Post]) -> Void) {
         Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("userPosts").order(by: "date", descending: true).getDocuments { (snapshot, error) in

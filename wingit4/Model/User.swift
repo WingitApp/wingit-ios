@@ -13,7 +13,7 @@ struct User: Codable, Identifiable {
     @DocumentID var id: String?
     @ServerTimestamp var createdTime: Timestamp?
     var uid: String
-    var bio: String
+    var bio: String?
     var canonicalEmail: String?
     var connections: [User]?
     var email: String
@@ -22,7 +22,7 @@ struct User: Codable, Identifiable {
     var lastName: String?
     var profileImageUrl: String
     var tags: [String]?
-    var username: String
+    var username: String?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -36,5 +36,9 @@ struct User: Codable, Identifiable {
         case profileImageUrl
         case tags
         case username
+    }
+    
+    func displayName() -> String {
+        return "\(self.firstName ?? "") \(self.lastName ?? "")"
     }
 }

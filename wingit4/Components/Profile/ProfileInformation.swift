@@ -12,13 +12,13 @@ import URLImage
 struct ProfileInformation: View {
     
     var user: User?
-    let uid = Auth.auth().currentUser?.uid
+    let currentUser = Auth.auth().currentUser
     @State var updatePic : Bool = false
     
     var body: some View {
         
         VStack{
-            if user != nil && self.user!.id == uid{
+            if user != nil && self.user!.id == currentUser?.uid {
                 
                 Button(action: {updatePic.toggle()},
                        label: {
@@ -34,14 +34,17 @@ struct ProfileInformation: View {
             
                        }).padding(.leading, -15).padding(.trailing, -15)
                 
-                Button(action: {Api.User.updateDetails(field: "Name")}) {
-
-                    Text(user!.username).font(.title).bold().foregroundColor(Color("bw"))
+                Button(action: {Api.User.updateField(field: "firstName")}) {
+                    Text(user?.firstName ?? "").font(.title).bold().foregroundColor(Color("bw"))
+                }
+                
+                Button(action: {Api.User.updateField(field: "lastName")}) {
+                    Text(user?.lastName ?? "").font(.title).bold().foregroundColor(Color("bw"))
                 }
                              
-              Button(action: {Api.User.updateDetails(field: "bio")}) {
+              Button(action: {Api.User.updateField(field: "bio")}) {
                   
-                Text("@\(user!.bio)").font(.caption).foregroundColor(.gray)
+                Text(user?.bio ?? "").font(.caption).foregroundColor(.gray)
                     }
             } else {
                 URLImage(URL(string: user!.profileImageUrl)!,
@@ -54,8 +57,8 @@ struct ProfileInformation: View {
                 }).frame(width: 430, height: 330)
                   .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
                   
-                Text(user!.username).bold()
-                Text("@\(user!.bio)").font(.caption).foregroundColor(.gray)
+                Text(user?.displayName() ?? "").bold()
+                Text(user?.bio ?? "").font(.caption).foregroundColor(.gray)
             }
             
         }.sheet(isPresented: $updatePic, content: {

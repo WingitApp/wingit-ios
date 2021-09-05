@@ -33,8 +33,8 @@ struct UsersView: View {
                                         }).frame(width: 50, height: 50)
                                             
                                             VStack(alignment: .leading, spacing: 5) {
-                                             Text(user.username).font(.headline).bold()
-                                                Text(user.bio).font(.subheadline)
+                                             Text(user.displayName()).font(.headline).bold()
+                                                Text(user.bio ?? "").font(.subheadline)
                                             }
                                           
                                         }.padding(10)

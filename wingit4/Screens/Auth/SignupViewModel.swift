@@ -13,10 +13,8 @@ import SwiftUI
 
 class SignupViewModel: ObservableObject {
     
-  @Published var username: String = ""
   @Published var firstName: String = ""
   @Published var lastName: String = ""
-  @Published var bio: String = ""
   @Published var email: String = ""
   @Published var password: String = ""
   @Published var image: Image = Image(IMAGE_USER_PLACEHOLDER)
@@ -33,8 +31,8 @@ class SignupViewModel: ObservableObject {
     
     if self.isFormComplete() {
        return AuthService.signupUser(
-          username: username,
-          bio: bio,
+          firstName: firstName,
+          lastName: lastName,
           email: email,
           password: password,
           imageData: imageData,
@@ -65,12 +63,12 @@ class SignupViewModel: ObservableObject {
   }
   
   func isFormComplete() -> Bool {
-    return !username.isEmpty && !bio.isEmpty && !email.isEmpty && !password.isEmpty
+    return !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty && !password.isEmpty
   }
   
   func clean() {
-    username = ""
-    bio = ""
+    firstName = ""
+    lastName = ""
     email = ""
     password = ""
   }
@@ -82,8 +80,9 @@ class SignupViewModel: ObservableObject {
   
   func ampSignupSuccessEvent(user: User) -> Void {
     setUserPropertiesOnAccountCreation(
-      userID: user.id!,
-      username: user.username,
+        userId: user.id,
+      firstName: user.firstName,
+        lastName: user.lastName,
       email: user.email,
       signupMethod: "email"
     )
