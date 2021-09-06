@@ -18,6 +18,7 @@ struct ReferralView: View {
           }
         }
       }
+      .environmentObject(referralsViewModel)
       .onAppear {
         Api.Referrals.getReferrals() { referrals in
             referralsViewModel.referrals = referrals
