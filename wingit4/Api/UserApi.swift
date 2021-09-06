@@ -12,23 +12,13 @@ import FirebaseAuth
 
 class UserApi {
     func searchUsers(text: String, onSuccess: @escaping(_ users: [User]) -> Void) {
-       // print(text.lowercased().removingWhitespaces())
-        
         Ref.FS_COLLECTION_USERS.whereField("keywords", arrayContains: text.lowercased().removingWhitespaces()).getDocuments { (snapshot, error) in
-            guard let snap = snapshot else {
-             //   print("Error fetching data")
-                return
-            }
-          //  print(snap.documents)
-            var users = [User]()
-            for document in snap.documents {
-                let dict = document.data()
-                guard let decodedUser = try? User.init(fromDictionary: dict) else {return}
-                if decodedUser.id != Auth.auth().currentUser!.uid {
-                    users.append(decodedUser)
+            if let snap = snapshot {
+                let users: [User] = snap.documents.compactMap {
+                  return try? $0.data(as: User.self)
                 }
+                  onSuccess(users)
             }
-            onSuccess(users)
         }
     }
     
