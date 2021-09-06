@@ -18,8 +18,6 @@ struct ReferCard: View {
     post object
    */
   
-  
-  
     var body: some View {
         VStack{
             ReferHeader(referral: $referral)

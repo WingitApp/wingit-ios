@@ -71,7 +71,6 @@ struct AskCard: View {
         content: {
           ReferConnectionsList(post: $post)
             .environmentObject(referViewModel)
-
         })
     }
   }

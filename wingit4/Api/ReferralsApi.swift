@@ -24,46 +24,8 @@ class ReferralsApi {
         }
     }
     
-    func statusToBumped(askId: String, receiverId: String){
-
-        Ref.FS_COLLECTION_REFERRALS_FOR_ASK(askId: askId)?.whereField("receiverId", isEqualTo: receiverId).getDocuments { (snapshot, error) in
-            if let error = error {
-                print(error)
-            } else if let doc = snapshot?.documents {
-               
-                if let data = doc.first, data.exists {
-                    data.reference.updateData(["status": "bumped"])
-                }
-            }
-        }
-    }
-    
-    func acceptReferral(askId: String, receiverId: String) {
-        
-        Ref.FS_COLLECTION_REFERRALS_FOR_ASK(askId: askId)?.whereField("receiverId", isEqualTo: receiverId).getDocuments { (snapshot, error) in
-            if let error = error {
-                print(error)
-            } else if let doc = snapshot?.documents {
-               
-                if let data = doc.first, data.exists {
-                    data.reference.updateData(["status": "accepted"])
-                }
-            }
-        }
-    }
-    
-    func ignoreReferral(askId: String, receiverId: String) {
-        
-        Ref.FS_COLLECTION_REFERRALS_FOR_ASK(askId: askId)?.whereField("receiverId", isEqualTo: receiverId).getDocuments { (snapshot, error) in
-            if let error = error {
-                print(error)
-            } else if let doc = snapshot?.documents {
-               
-                if let data = doc.first, data.exists {
-                    data.reference.updateData(["status": "closed"])
-                }
-            }
-        }
+    func updateStatus(referralId: String, newStatus: ReferralStatus) {
+        Ref.FS_COLLECTION_REFERRALS.document(referralId).updateData(["status": newStatus.rawValue])
     }
     
     
