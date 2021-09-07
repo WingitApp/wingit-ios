@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ReferralView: View {
+struct ReferralsView: View {
   @StateObject var referralsViewModel = ReferralsViewModel()
   
     var body: some View {
@@ -19,8 +19,9 @@ struct ReferralView: View {
         }
       }
       .environmentObject(referralsViewModel)
+      
       .onAppear {
-        Api.Referrals.getReferrals() { referrals in
+        Api.Referrals.getPendingReferrals() { referrals in
             referralsViewModel.referrals = referrals
         }
       }

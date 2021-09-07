@@ -12,6 +12,7 @@ import Amplitude
 import SPAlert
 
 class ReferViewModel : ObservableObject, Identifiable {
+    
     @Published var isLoading = true
     @Published var selectedUsers: [String] = []
     @Published var isChecked = false
@@ -44,6 +45,7 @@ class ReferViewModel : ObservableObject, Identifiable {
 
     }
     
+    
     func sendReferral(askId: String) {
         ///askId(postId) & senderId (auth.dude) & senderId(userId of the one selected
         // ids -> self.selectedUsers
@@ -60,6 +62,32 @@ class ReferViewModel : ObservableObject, Identifiable {
         let alertView = SPAlertView(title: "Sent!", message: nil, preset: SPAlertIconPreset.done); alertView.present(duration: 2)
         self.toggleReferListScreen()
     }
+    
+    func sendBump(askId: String, parentId: String) {
+        ///askId(postId) & senderId (auth.dude) & senderId(userId of the one selected
+        // ids -> self.selectedUsers
+        
+        for receiverId in selectedUsers {
+            Api.Referrals.bumpReferral(
+                askId: askId,
+                receiverId: receiverId,
+                parentId: parentId,
+                senderId: Auth.auth().currentUser!.uid
+            )
+        }
+        
+        self.allReferralRecipientIds = Array(Set(self.allReferralRecipientIds + self.selectedUsers))
+        let alertView = SPAlertView(title: "Sent!", message: nil, preset: SPAlertIconPreset.done); alertView.present(duration: 2)
+                self.bumpReferral(referralId: parentId)
+        self.toggleReferListScreen()
+    }
+    
+    func bumpReferral(referralId: String?) {
+        guard let referralId = referralId else { return }
+        Api.Referrals.updateStatus(referralId: referralId, newStatus: .bumped)
+        
+    }
+    
     
     func loadConnections(askId: String) {
         guard let userId = Auth.auth().currentUser?.uid else { return }

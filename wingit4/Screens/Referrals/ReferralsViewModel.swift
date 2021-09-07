@@ -14,23 +14,6 @@ import SPAlert
 class ReferralsViewModel: ObservableObject {
   
   @Published var referrals: [Referral] = []
-
-    func bumpReferral(referralId: String?) {
-        guard let referralId = referralId else { return }
-        Api.Referrals.updateStatus(referralId: referralId, newStatus: .bumped)
-        // id of person who bumped --> current user
-        // id of the new receiver
-        
-/*
-         1. Change status to bumped for the previous referral document.
-         2. Toggle new screen for the connections list for new referral
-         3. Create new referral document with the new receiver & ask Ids.
-         */
-
-     
-//            .where("ask")
-//            .setData([ "status": true ], merge: true)
-    }
     
     //after accept status is changed, add them into comments.
     

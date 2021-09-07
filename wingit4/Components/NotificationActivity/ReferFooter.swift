@@ -44,13 +44,14 @@ struct AcceptButton: View {
 }
 
 struct BumpButton: View {
-    
-    @EnvironmentObject var referralsViewModel: ReferralsViewModel
+    @EnvironmentObject var referViewModel: ReferViewModel
+
+
     @Binding var referral: Referral
     
     var body: some View {
         
-        Button(action: {referralsViewModel.bumpReferral(referralId: referral.id)},
+        Button(action: {referViewModel.isReferListOpen.toggle()},
                label: {
                 VStack{
                     Text("Bump")
@@ -61,6 +62,7 @@ struct BumpButton: View {
                 .frame(width: UIScreen.main.bounds.width - 235, height: UIScreen.main.bounds.width / 9)
                 .background(RoundedRectangle(cornerRadius: 5).stroke(Color.pink.opacity(0.5),lineWidth: 1.5))
         })
+        
 
     }
 }

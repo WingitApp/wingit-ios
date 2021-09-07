@@ -10,7 +10,8 @@ import SwiftUI
 struct ReferCard: View {
   
   @State var referral: Referral
-  
+  @StateObject var referViewModel = ReferViewModel()
+    
   // refferal object
   /**
     user object for sender
@@ -24,8 +25,14 @@ struct ReferCard: View {
             ReferBody(referral: $referral)
             ReferFooter(referral: $referral)
         }
-
-     
+        .environmentObject(referViewModel)
+        .sheet(
+          isPresented: $referViewModel.isReferListOpen,
+          content: {
+            bumpConnectionsList(referral: $referral)
+              .environmentObject(referViewModel)
+          })
+        
     }
 }
 

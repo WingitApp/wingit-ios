@@ -37,7 +37,7 @@
 		156E6AE526D8A13400690E47 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156E6AE126D8A13400690E47 /* UserProfileView.swift */; };
 		156E6AE626D8A13400690E47 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156E6AE226D8A13400690E47 /* UserProfileViewModel.swift */; };
 		156E6AE726D8A13400690E47 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156E6AE326D8A13400690E47 /* ProfileViewModel.swift */; };
-		15762C6A26E170ED00A8E041 /* ReferralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15762C6926E170ED00A8E041 /* ReferralView.swift */; };
+		15762C6A26E170ED00A8E041 /* ReferralsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15762C6926E170ED00A8E041 /* ReferralsView.swift */; };
 		15762C6C26E170FA00A8E041 /* ReferralsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15762C6B26E170FA00A8E041 /* ReferralsViewModel.swift */; };
 		15DA39B426DC5C620080193E /* AskCardPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA39B326DC5C620080193E /* AskCardPlaceholder.swift */; };
 		3B0DFBDE26B78D86008CE0D1 /* UpdatePhotoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0DFBDD26B78D86008CE0D1 /* UpdatePhotoVM.swift */; };
@@ -118,6 +118,7 @@
 		3B96DD7026DF5C6000015EED /* ReferConnectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6F26DF5C6000015EED /* ReferConnectionsList.swift */; };
 		3B9774252694FE0000F1EF14 /* alertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9774242694FE0000F1EF14 /* alertView.swift */; };
 		3B97807D26813BC1009CE037 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 3B97807C26813BC1009CE037 /* FirebaseMessaging */; };
+		3B9CA05026E5C98D00BB195F /* bumpConnectionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9CA04F26E5C98D00BB195F /* bumpConnectionList.swift */; };
 		3BC155AD26D721600069AFD4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BC155AC26D721600069AFD4 /* GoogleService-Info.plist */; };
 		3BC155AF26D8245C0069AFD4 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 3BC155AE26D8245C0069AFD4 /* FirebaseFirestoreSwift-Beta */; };
 		3BD12F1526C9CA1500E26A87 /* AppDel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD12F1426C9CA1500E26A87 /* AppDel.swift */; };
@@ -181,7 +182,7 @@
 		156E6AE126D8A13400690E47 /* UserProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		156E6AE226D8A13400690E47 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		156E6AE326D8A13400690E47 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
-		15762C6926E170ED00A8E041 /* ReferralView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralView.swift; sourceTree = "<group>"; };
+		15762C6926E170ED00A8E041 /* ReferralsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralsView.swift; sourceTree = "<group>"; };
 		15762C6B26E170FA00A8E041 /* ReferralsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralsViewModel.swift; sourceTree = "<group>"; };
 		15DA39B326DC5C620080193E /* AskCardPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskCardPlaceholder.swift; sourceTree = "<group>"; };
 		3B0DFBDD26B78D86008CE0D1 /* UpdatePhotoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePhotoVM.swift; sourceTree = "<group>"; };
@@ -258,6 +259,7 @@
 		3B96DD6F26DF5C6000015EED /* ReferConnectionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferConnectionsList.swift; sourceTree = "<group>"; };
 		3B9774242694FE0000F1EF14 /* alertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertView.swift; sourceTree = "<group>"; };
 		3B97807E268158B6009CE037 /* wingit4.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wingit4.entitlements; sourceTree = "<group>"; };
+		3B9CA04F26E5C98D00BB195F /* bumpConnectionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bumpConnectionList.swift; sourceTree = "<group>"; };
 		3BC155AC26D721600069AFD4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3BD12F1426C9CA1500E26A87 /* AppDel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDel.swift; sourceTree = "<group>"; };
 		3BD604EE26AA1CDE004FFEEC /* DoneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneCell.swift; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 				3BE61D7526E160C60078C6CF /* ReferBody.swift */,
 				3BE61D7326E15E8C0078C6CF /* ReferFooter.swift */,
 				3B96DD6D26DF4C9E00015EED /* ReferCard.swift */,
+				3B9CA04F26E5C98D00BB195F /* bumpConnectionList.swift */,
 				3B3A880C26E0007A003E780F /* ReferViewModel.swift */,
 			);
 			path = NotificationActivity;
@@ -397,7 +400,7 @@
 		15762C6826E170D500A8E041 /* Referrals */ = {
 			isa = PBXGroup;
 			children = (
-				15762C6926E170ED00A8E041 /* ReferralView.swift */,
+				15762C6926E170ED00A8E041 /* ReferralsView.swift */,
 				15762C6B26E170FA00A8E041 /* ReferralsViewModel.swift */,
 			);
 			path = Referrals;
@@ -875,7 +878,7 @@
 				3B5BDB51268F82790034B18C /* fetchUser.swift in Sources */,
 				3B5BDB58268F94E00034B18C /* ReportModel.swift in Sources */,
 				3BE61D7626E160C60078C6CF /* ReferBody.swift in Sources */,
-				15762C6A26E170ED00A8E041 /* ReferralView.swift in Sources */,
+				15762C6A26E170ED00A8E041 /* ReferralsView.swift in Sources */,
 				3B7AF0B92672C29D003BCCF3 /* InboxMessage.swift in Sources */,
 				1524FCE726D759CE0000629C /* FooterCell.swift in Sources */,
 				151A3C8826D3256F00A39FAF /* HomeFeed.swift in Sources */,
@@ -941,6 +944,7 @@
 				1524FCD526D754500000629C /* TextCell.swift in Sources */,
 				3B7AF0BF2673EAFB003BCCF3 /* Activity.swift in Sources */,
 				3BE57FF726D89994005C242F /* ProfileNavigation.swift in Sources */,
+				3B9CA05026E5C98D00BB195F /* bumpConnectionList.swift in Sources */,
 				3B7AF05826719885003BCCF3 /* MainView.swift in Sources */,
 				156E6AE726D8A13400690E47 /* ProfileViewModel.swift in Sources */,
 				3B75E3DD26716074002F3108 /* Constants.swift in Sources */,

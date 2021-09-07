@@ -111,8 +111,8 @@ class Ref {
     static func FS_COLLECTION_REFERRALS_RECEIVED_BY(userId: String) -> CollectionReference? {
         return FS_COLLECTION_REFERRALS.whereField("receiverId", isEqualTo: userId) as? CollectionReference
     }
-    static func FS_COLLECTION_OPEN_REFERRALS_FOR_USER(userId: String) -> CollectionReference? {
-        return FS_COLLECTION_REFERRALS_RECEIVED_BY(userId: userId)?.whereField("status", isNotEqualTo: "closed") as? CollectionReference
+    static func FS_COLLECTION_PENDING_REFERRALS_FOR_USER(userId: String) -> CollectionReference? {
+        return FS_COLLECTION_REFERRALS_RECEIVED_BY(userId: userId)?.whereField("status", isEqualTo: "pending") as? CollectionReference
     }
     static func FS_COLLECTION_REFERRALS_SENT_BY(userId: String) -> CollectionReference? {
         return FS_COLLECTION_REFERRALS.whereField("senderId", isEqualTo: userId) as? CollectionReference
