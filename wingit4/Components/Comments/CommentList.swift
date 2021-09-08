@@ -19,7 +19,6 @@ struct CommentList: View {
                 UserComment(comment: comment)
              }
           }
-//          Spacer()
         }
       }
     }

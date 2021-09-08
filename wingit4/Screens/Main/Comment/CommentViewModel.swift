@@ -28,7 +28,8 @@ class CommentViewModel: ObservableObject {
         self.isLoading.toggle()
       }
           
-      Api.Comment.getComments( postId: postId,
+      Api.Comment.getComments(
+        postId: postId,
         onSuccess: { (comments) in
               if self.comments.isEmpty {
                   self.comments = comments

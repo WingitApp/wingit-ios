@@ -78,23 +78,7 @@ struct UserNameStyle: ViewModifier {
   func body(content: Content) -> some View {
     content
       .font(.subheadline)
-//      .bold()
+
   }
 }
 
-struct ActionIconStyle: ViewModifier {
-  func body(content: Content) -> some View {
-    content
-      .padding(.leading, 15)
-  }
-}
-
-
-struct CircleDotStyle: ViewModifier {
-  func body(content: Content) -> some View {
-    content
-      .frame(width: 2, height: 2, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-      .foregroundColor(.gray)
-  
-  }
-}

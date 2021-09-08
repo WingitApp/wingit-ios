@@ -157,8 +157,23 @@ extension Color {
         Color(red: 255 / 255, green: 220 / 255, blue: 128 / 255),
         Color(red: 64 / 255, green: 93 / 255, blue: 230 / 255)
     ]
-}
+  
+//  static let cardBlue: Color = Color(red: 109 / 255, green: 155 / 255, blue: 230 / 255)
+//  static let cardOrange: Color = Color(red: 227 / 255, green: 147 / 255, blue: 80 / 255)
+//  static let cardRed: Color = Color(red: 221 / 255, green: 79 / 255, blue: 110 / 255)
+//  static let cardPurp: Color = Color(red: 156 / 255, green: 108 / 255, blue: 231 / 255)
+//  static let cardGreen: Color = Color(red: 91 / 255, green: 211 / 255, blue: 177 / 255)
+//
+  static let charcoal: Color = Color(red: 37 / 255, green: 40 / 255, blue: 42 / 255)
+  
+  static let downeyGreen: Color = Color(red: 109 / 255, green: 204 / 255, blue: 176 / 255)
+  static let mintGreen: Color = Color(red: 241 / 255, green: 255 / 255, blue: 250 / 255)
+  static let carnationRed: Color = Color(red: 253 / 255, green: 84 / 255, blue: 89 / 255)
+  static let apricotWhite: Color = Color(red: 248 / 255, green: 241 / 255, blue: 228 / 255)
+  static let tolopeaViolet: Color = Color(red: 35 / 255, green: 30 / 255, blue: 50 / 255)
 
+  
+}
 // bottom only corners....
 
 struct RoundedShape : Shape {

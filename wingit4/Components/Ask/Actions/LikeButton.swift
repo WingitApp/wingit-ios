@@ -12,7 +12,7 @@ struct LikeButton: View {
 
   
   @Binding var post: Post
-  @State var showLabel: Bool
+  @State var showLabel: Bool = false
 
   
   func onTapGesture() {
@@ -30,21 +30,18 @@ struct LikeButton: View {
   
     var body: some View {
       HStack {
-        // Like Count - shows only if >= 1
-//        Text("\(2200.formatUsingAbbrevation())")
-//          .modifier(CaptionStyle())
-//          .opacity(post.likeCount > 0 ? 1 : 0)
-//          .padding(.trailing, -5)
         Image(systemName: self.footerCellViewModel.isLikedByUser
           ? "heart.fill"
           : "heart"
         )
         .onTapGesture(perform: onTapGesture)
         .foregroundColor(
-          //todo fix like behavior
           self.footerCellViewModel.isLikedByUser ? .red : .gray
         )
-        
+        Text("\(post.likeCount.formatUsingAbbrevation())")
+          .modifier(CaptionStyle())
+          .font(.caption)
+          .opacity(post.likeCount > 0 ? 1 : 0)
         if self.showLabel {
           Text(self.footerCellViewModel.isLikedByUser ? "Liked" : "Like ")
             .font(.caption)
@@ -56,9 +53,5 @@ struct LikeButton: View {
         .asymmetric(
           insertion: .opacity, removal: .scale)
       )
-      .onAppear{
-        // move to top card
-        self.footerCellViewModel.checkPostIsLiked(post: post)
-      }
     }
 }

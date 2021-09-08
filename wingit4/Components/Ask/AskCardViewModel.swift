@@ -36,6 +36,26 @@ class AskCardViewModel: ObservableObject {
     self.getUserFromPost()
   }
   
+  func getColorByIndex(index: Int) -> Color {
+    let modIndex = index % 4
+    
+    switch(modIndex) {
+//      case 0:
+//        return Color.downeyGreen
+//      case 1:
+//        return Color.apricotWhite
+//      case 2:
+//        return Color.carnationRed
+//      case 3:
+//        return Color.tolopeaViolet
+//      case 4:
+//        return Color.cardGreen
+      default:
+        return Color.white
+    }
+  }
+  
+  
   func hidePost() {
     
     // hides card on view

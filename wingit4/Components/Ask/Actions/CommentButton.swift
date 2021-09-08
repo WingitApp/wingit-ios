@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CommentButton: View {
   @EnvironmentObject var commentViewModel: CommentViewModel
-  var showLabel: Bool
+  var showLabel: Bool = false
   
   func onTapCommentIcon() {
     logToAmplitude(event: .viewComments)
@@ -17,18 +17,18 @@ struct CommentButton: View {
   }
   
   var body: some View {
-    Text("\(commentViewModel.comments.count.formatUsingAbbrevation())")
-      .modifier(CaptionStyle())
-      .opacity(self.commentViewModel.comments.isEmpty ? 0 : 1)
+
     Button(
       action: onTapCommentIcon,
       label: {
           Image(systemName: "message")
-            .foregroundColor(.gray)
+            .modifier(IconButtonStyle())
 //            .padding(.leading, 10)
             .accentColor(.red)
       })
-      
+      Text("\(commentViewModel.comments.count.formatUsingAbbrevation())")
+        .modifier(CaptionStyle())
+        .opacity(self.commentViewModel.comments.isEmpty ? 0 : 1)
     if self.showLabel {
       Text("Comment")
         .font(.caption)

@@ -11,16 +11,15 @@ import URLImage
 struct FooterCell: View {
   @Binding var post: Post
   @EnvironmentObject var askCardViewModel: AskCardViewModel
-  @StateObject var footerCellViewModel = FooterCellViewModel()
+  @EnvironmentObject var footerCellViewModel: FooterCellViewModel
+  
   @StateObject var shareButtonViewModel = ShareButtonViewModel()
     
     var body: some View {
       VStack(alignment: .leading, spacing: 8) {
           HStack {
-            LikeButton(
-              post: $post,
-              showLabel: true
-            )
+            LikeButton(post: $post)
+            CommentButton()
             Spacer()
             ReferButton(post: $post)
             Spacer()
@@ -34,9 +33,9 @@ struct FooterCell: View {
             )
           }
         }
+        .padding(.trailing, 15)
         .padding(.bottom, 15)
         .frame(maxWidth: .infinity)
-        .environmentObject(footerCellViewModel)
     }
 }
 

@@ -26,6 +26,7 @@ struct BodyCell: View {
                     content: {
                         $0.image
                             .resizable()
+                            .scaledToFit()
                             .aspectRatio(contentMode: .fill)
                     })
                     
@@ -33,7 +34,7 @@ struct BodyCell: View {
                     .cornerRadius(15)
                     .overlay(
                       RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.black, lineWidth: 0.2)
+                        .stroke(Color.gray, lineWidth: 0.2)
                     )
                 })
             }

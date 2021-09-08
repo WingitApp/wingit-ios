@@ -14,12 +14,17 @@ struct HomeFeed: View {
   var body: some View {
     ScrollView(showsIndicators: false) {
       LazyVStack {
-          ForEach(self.homeViewModel.posts, id: \.postId) { post in
+        ForEach(self.homeViewModel.posts.indices, id: \.self) { index in
             AskCard(
-              post: post,
-              isProfileView: false
+              post: self.homeViewModel.posts[index],
+              isProfileView: false,
+              index: index
             )
-            .onAppear { homeViewModel.loadMoreContentIfNeeded(currentItem: post) }
+            .onAppear {
+              homeViewModel.loadMoreContentIfNeeded(
+                currentItem: self.homeViewModel.posts[index]
+              )
+            }
           }
       }
     }

@@ -48,9 +48,13 @@ struct UserProfileView: View {
                     .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
                     
                     if !self.userProfileViewModel.posts.isEmpty {
-                        ForEach(self.userProfileViewModel.posts, id: \.postId) { post in
+                      ForEach(self.userProfileViewModel.posts.indices, id: \.self) { index in
                             LazyVStack {
-                                AskCard(post: post, isProfileView: false)
+                                AskCard(
+                                  post: self.userProfileViewModel.posts[index],
+                                  isProfileView: false,
+                                  index: index
+                                )
                             }
                        }
                     }

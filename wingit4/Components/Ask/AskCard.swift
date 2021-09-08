@@ -12,15 +12,22 @@ struct AskCard: View {
   
   @State var post: Post
   var isProfileView: Bool
+  var index: Int
   
   @EnvironmentObject var homeViewModel: HomeViewModel
   @StateObject var askCardViewModel = AskCardViewModel()
+  
+  // Menu
   @StateObject var askMenuViewModel = AskMenuViewModel()
   @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
+  // Comment
   @StateObject var commentViewModel = CommentViewModel()
   @StateObject var referViewModel = ReferViewModel()
   @StateObject var commentInputViewModel = CommentInputViewModel()
+  // Like
+  @StateObject var footerCellViewModel = FooterCellViewModel()
 
+//  @StateObject var
 
   var body: some View {
     if !self.askCardViewModel.isHidden {
@@ -31,6 +38,7 @@ struct AskCard: View {
           .environmentObject(askDoneToggleViewModel)
           .environmentObject(commentViewModel)
           .environmentObject(commentInputViewModel)
+          .environmentObject(footerCellViewModel)
       ) {
         VStack {
           HeaderCell(post: $post)
@@ -41,27 +49,36 @@ struct AskCard: View {
           RoundedRectangle(cornerRadius: 20)
             .stroke(Color.gray, lineWidth: 0.5)
         )
-       
       }
       .buttonStyle(PlainButtonStyle())
-      .background(Color(.white)).cornerRadius(20)
-      .padding(.bottom, 3)
-      .padding(.top, 3)
+      .background(
+        self.askCardViewModel.getColorByIndex(index: index).opacity(1)
+      )
+      .cornerRadius(20)
+      .padding(
+        EdgeInsets(top: 3, leading: 15, bottom: 3, trailing: 15)
+      )
+      .modifier(FeedItemShadow())
       .environmentObject(askCardViewModel)
       .environmentObject(askMenuViewModel)
       .environmentObject(askDoneToggleViewModel)
       .environmentObject(commentViewModel)
       .environmentObject(referViewModel)
       .environmentObject(commentInputViewModel)
+      .environmentObject(footerCellViewModel)
       // [START] Animates on Hide
       .opacity(!self.askCardViewModel.isHidden ? 1 : 0)
       .transition(.asymmetric(insertion: .scale, removal: .opacity))
       // [END]
       .onAppear{
-        askCardViewModel.initVM(
+        self.askCardViewModel.initVM(
           post: post,
           isProfileView: isProfileView
         )
+        self.commentViewModel.loadComments(
+          postId: post.postId
+        )
+        self.footerCellViewModel.checkPostIsLiked(post: post)
       }
       .sheet(
         isPresented: $askCardViewModel.isImageModalOpen,
@@ -96,6 +113,7 @@ struct AskCard: View {
             .environmentObject(askDoneToggleViewModel)
             .environmentObject(commentViewModel)
             .environmentObject(commentInputViewModel)
+            .environmentObject(footerCellViewModel)
         })
       .sheet(
         isPresented: $referViewModel.isReferListOpen,

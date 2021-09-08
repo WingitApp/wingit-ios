@@ -32,7 +32,9 @@ struct HeaderCell: View {
 
               }.disabled(self.askCardViewModel.isNavLinkDisabled)
               VStack(alignment: .leading){
-                Text(post.username).modifier(UserNameStyle())
+                Text(post.username)
+                  .fontWeight(.semibold)
+                  .modifier(UserNameStyle())
                 TimeAgoStamp(date: post.date)
               }
               Spacer()

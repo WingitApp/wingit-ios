@@ -33,6 +33,7 @@ struct AskMenu: View {
         }, label: {
           Image(systemName: "ellipsis")
             .rotationEffect(.degrees(-90))
+            .foregroundColor(.white)
         })
       } else {
         Menu(content: {
@@ -44,6 +45,7 @@ struct AskMenu: View {
         }, label: {
           Image(systemName: "ellipsis")
             .rotationEffect(.degrees(-90))
+            .foregroundColor(.white)
         })
       }
    }

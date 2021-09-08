@@ -20,14 +20,11 @@ struct HomeView: View {
     var body: some View {
       NavigationView {
         VStack(alignment: .leading, spacing: 15) {
-//          FeedToggle()
+          // Header Toggle
+//          HomeFeedHeader()
           HomeFeed()
-            .padding(.leading, 10)
-            .padding(.trailing, 10)
         }
-        .background(Color.black.opacity(0.03)
-        .ignoresSafeArea(.all, edges: .all))
-        .onAppear( perform: onAppear )
+        .background(Color.white.ignoresSafeArea(.all, edges: .all))
         .navigationBarTitle(Text("WingIt!"), displayMode: .inline)
         .navigationBarItems(leading:
           Button(action: {}) {
@@ -41,6 +38,7 @@ struct HomeView: View {
               Image(systemName: "envelope").imageScale(Image.Scale.large).foregroundColor(.gray)
             }
           })
+        .onAppear( perform: onAppear )
         .onDisappear {
           if self.homeViewModel.listener != nil {
             self.homeViewModel.listener.remove()

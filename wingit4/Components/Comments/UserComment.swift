@@ -47,7 +47,7 @@ struct UserComment: View {
           Text(comment.comment)
             .font(.caption)
         }
-        .padding(.leading, 10)
+        .padding(.leading, 5)
       }
       .padding(
         EdgeInsets(top: 5, leading: 15, bottom: 5, trailing: 15)
