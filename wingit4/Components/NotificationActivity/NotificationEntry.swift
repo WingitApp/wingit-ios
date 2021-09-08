@@ -9,12 +9,12 @@ import SwiftUI
 import URLImage
 
 struct NotificationEntry: View {
-  var activity: Activity
+  var activity: ActivityEvent
   
   var body: some View {
       HStack {
           URLImage(
-            URL(string: activity.userAvatar)!,
+            URL(string: activity.mediaUrl ?? "")!,
             content: {
                $0.image
                .resizable()
@@ -22,11 +22,11 @@ struct NotificationEntry: View {
                .clipShape(Circle())
           }).frame(width: 50, height: 50)
           VStack(alignment: .leading, spacing: 5) {
-              Text(activity.username).font(.subheadline).bold()
-              Text(activity.typeDescription).font(.subheadline)
+              Text(activity.connectionName ?? "").font(.subheadline).bold()
+              Text(activity.notificationMessage).font(.subheadline)
           }
           Spacer()
-          TimeAgoStamp(date: activity.date)
+        TimeAgoStamp(date: Double(activity.createdAt?.seconds ?? 0))
       }
   }
 }

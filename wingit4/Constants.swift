@@ -201,4 +201,7 @@ class Ref {
         }
     
         static var FS_COLLECTION_ACTIVITY = FS_ROOT.collection("activity")
+        static func FS_COLLECTION_ACTIVITY_EVENTS_FOR_USER(userId: String) -> CollectionReference {
+               return FS_COLLECTION_CONNECTIONS.document(userId).collection("events")
+        }
 }

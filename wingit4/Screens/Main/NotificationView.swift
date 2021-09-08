@@ -9,44 +9,41 @@ import SwiftUI
 import URLImage
 
 struct NotificationView: View {
-    
     @EnvironmentObject var activityViewModel: ActivityViewModel
-    @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
 
-    
     var body: some View {
        
         NavigationView {
             List {
                 if !activityViewModel.activityArray.isEmpty {
-                    ForEach(self.activityViewModel.activityArray, id: \.activityId) { activity in
+                    ForEach(self.activityViewModel.activityArray, id: \.id) { activity in
                           HStack {
-                            if activity.type == "comment" {
+                            if activity.type == .comment {
                                 ZStack {
                                     NotificationEntry(activity: activity)
 //                                    NavigationLink(destination: CommentView(postId: activity.postId)) {
 //                                        EmptyView()
 //                                    }
                                 }
-                            } else if activity.type == "connectRequest" {
+                            } else if activity.type == .connectRequest {
                                 ZStack {
                                     CommentActivityRow(activity: activity, activityViewModel: self.activityViewModel)
                                 }
                             } else {
-                                URLImage(URL(string: activity.userAvatar)!,
-                                                             content: {
-                                                                 $0.image
-                                                                     .resizable()
-                                                                     .aspectRatio(contentMode: .fill)
-                                                                     .clipShape(Circle())
-                                                             }).frame(width: 50, height: 50)
+//                                URLImage(URL(string: activity.mediaUrl)!,
+//                                                             content: {
+//                                                                 $0.image
+//                                                                     .resizable()
+//                                                                     .aspectRatio(contentMode: .fill)
+//                                                                     .clipShape(Circle())
+//                                                             }).frame(width: 50, height: 50)
                                 
                                 VStack(alignment: .leading, spacing: 5) {
-                                    Text(activity.username).font(.subheadline).bold()
-                                    Text(activity.typeDescription).font(.subheadline)
+                                    Text(activity.connectionName ?? "").font(.subheadline).bold()
+                                    Text(activity.notificationMessage).font(.subheadline)
                                 }
                                 Spacer()
-                                Text(timeAgoSinceDate(Date(timeIntervalSince1970: activity.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
+                                TimeAgoStamp(date: Double(activity.createdAt?.seconds ?? 0))
                             }
                        
 
@@ -68,11 +65,11 @@ struct NotificationView: View {
 }
 
 struct CommentActivityRow: View {
-    var activity: Activity
+    var activity: ActivityEvent
     var activityViewModel: ActivityViewModel
     var body: some View {
         HStack {
-            URLImage(URL(string: activity.userAvatar)!,
+            URLImage(URL(string: activity.mediaUrl!)!,
                                          content: {
                                              $0.image
                                                  .resizable()
@@ -82,13 +79,13 @@ struct CommentActivityRow: View {
             HStack{
                 VStack(alignment: .leading) {
                     HStack{
-                        Text(activity.username).font(.subheadline).bold()
+                        Text(activity.connectionName ?? "").font(.subheadline).bold()
                         Spacer()
-                        Text(timeAgoSinceDate(Date(timeIntervalSince1970: activity.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
+//                        TimeAgoStamp(date: Double(activity.createdAt?.seconds ?? 0))
                     }
                     Spacer()
                     HStack{
-                        Text(activity.typeDescription).font(.subheadline)
+                        Text(activity.notificationMessage).font(.subheadline)
                         Spacer()
                         RespondToConnectRequestRow(activity: activity)
                     }
@@ -101,12 +98,12 @@ struct CommentActivityRow: View {
 }
 
 struct RespondToConnectRequestRow: View {
-    var activity: Activity
-    @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
+    var activity: ActivityEvent
+    @EnvironmentObject var activityViewModel: ActivityViewModel
     var body: some View {
         
         HStack {
-                Button(action: { connectionsViewModel.ignoreConnectRequest(fromUserId: activity.userId) }) {
+                Button(action: { activityViewModel.ignoreConnectRequest(fromUserId: activity.connectionId) }) {
                    
                     Text("Ignore")
                         .fontWeight(.bold).foregroundColor(Color.black)
@@ -116,7 +113,7 @@ struct RespondToConnectRequestRow: View {
                 .frame(height: UIScreen.main.bounds.width / 15)
                 .background(RoundedRectangle(cornerRadius: 5).stroke(Color(.gray).opacity(0.5),lineWidth: 1.5))
                 //.modifier(AcceptConnectRequestButtonModifier())
-                Button(action: { connectionsViewModel.acceptConnectRequest(fromUserId: activity.userId) }) {
+                Button(action: { activityViewModel.acceptConnectRequest(fromUserId: activity.connectionId) }) {
               
                     Text("Accept")
                         .fontWeight(.bold).foregroundColor(Color.white)
