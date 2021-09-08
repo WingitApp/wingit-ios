@@ -45,7 +45,7 @@ struct bumpConnectionsList: View {
                     List {
                         ForEach(self.referViewModel.allUsers, id: \.uid) { user in
                            
-                            bumpCardView(user: user, userId: user.uid)
+                            bumpCardView(user: user, userId: user.id)
                         }
                     }
                     ///end list
@@ -66,7 +66,7 @@ struct bumpCardView: View {
     @EnvironmentObject var referViewModel: ReferViewModel
 
     var user: User
-    var userId: String
+    var userId: String?
     
     func onTapGesture() {
       //  print("onTap called")
@@ -80,17 +80,12 @@ struct bumpCardView: View {
     var body: some View {
         
         HStack{
-            URLImage(URL(string: user.profileImageUrl)!,
-            content: {
-                $0.image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .clipShape(Circle())
-            }).frame(width: 50, height: 50)
+            URLImageView(inputURL: user.profileImageUrl)
+                .frame(width: 50, height: 50)
                 
                 VStack(alignment: .leading, spacing: 5) {
-                 Text(user.username).font(.headline).bold()
-                    Text(user.bio).font(.subheadline)
+                 Text(user.displayName ?? "").font(.headline).bold()
+                    Text(user.username ?? "").font(.subheadline)
                 }
                 Spacer()
                 

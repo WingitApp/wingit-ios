@@ -47,16 +47,11 @@ struct ProfileView: View {
   var body: some View {
     ScrollView {
       GeometryReader { geometry in
-        URLImage(
-          URL(string: session.currentUser!.profileImageUrl)!,
-        content: {
-            $0.image
-              .resizable()
-              .scaledToFill()
-              .frame(width: geometry.size.width, height: self.getHeightForHeaderImage(geometry)) // 2
-              .clipped()
-              .offset(x: 0, y: self.getOffsetForHeaderImage(geometry))
-        })
+        URLImageView(inputURL: session.currentUser?.profileImageUrl)
+          .scaledToFill()
+          .frame(width: geometry.size.width, height: self.getHeightForHeaderImage(geometry)) // 2
+          .clipped()
+          .offset(x: 0, y: self.getOffsetForHeaderImage(geometry))
       }.frame(height: 300)
       ForEach(self.profileViewModel.posts.indices, id: \.self) { index in
           LazyVStack {

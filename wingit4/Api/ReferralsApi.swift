@@ -14,8 +14,8 @@ import FirebaseAuth
 
 class ReferralsApi {
     
-    func sendReferral(askId: String, receiverId: String, senderId: String?) {
-        guard let id = senderId else { return }
+    func sendReferral(askId: String, receiverId: String?, senderId: String?) {
+        guard let id = senderId, let receiverId = receiverId else { return }
         let referral = Referral(id: nil, createdAt: nil, askId: askId, children: nil, closedAt: nil, receiverId: receiverId, parentId: nil, senderId: id, status: .pending, text: nil)
         do {
             let _ = try Ref.FS_COLLECTION_REFERRALS.addDocument(from: referral)
@@ -24,8 +24,8 @@ class ReferralsApi {
         }
     }
     
-    func bumpReferral(askId: String, receiverId: String, parentId: String, senderId: String?){
-        guard let id = senderId else { return }
+    func bumpReferral(askId: String, receiverId: String?, parentId: String, senderId: String?){
+        guard let id = senderId, let receiverId = receiverId else { return }
         let referral = Referral(id: nil, createdAt: nil, askId: askId, children: nil, closedAt: nil, receiverId: receiverId, parentId: parentId, senderId: id, status: .pending, text: nil)
         do {
             let _ = try Ref.FS_COLLECTION_REFERRALS.addDocument(from: referral)

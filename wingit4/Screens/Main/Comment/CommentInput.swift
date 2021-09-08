@@ -43,7 +43,7 @@ struct CommentInput: View {
                  RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 1).padding()
                  HStack {
                      TextField("Add a comment", text: $composedMessage).padding(30)
-                     Button(action: commentAction) {
+                     Button(action: onCommentSubmit) {
                          Image(systemName: "arrow.right.circle").imageScale(.large).foregroundColor(.black).padding(30)
                      }
                  }

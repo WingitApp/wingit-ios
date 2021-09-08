@@ -13,11 +13,11 @@ import SPAlert
 
 class ReferViewModel : ObservableObject, Identifiable {
     @Published var isLoading = true
-    @Published var selectedUsers: [String] = []
+    @Published var selectedUsers: [String?] = []
     @Published var isChecked = false
     
     // Lists to generate allowedUsers
-    var allReferralRecipientIds: [String] = []
+    var allReferralRecipientIds: [String?] = []
     var allUsers: [User] = []
 
     // List to generate ReferConnectionsList
@@ -35,7 +35,8 @@ class ReferViewModel : ObservableObject, Identifiable {
       }
     }
     
-    func handleUserSelect(userId: String) {
+    func handleUserSelect(userId: String?) {
+        guard let userId = userId else { return }
         if selectedUsers.contains(userId) {
             self.selectedUsers.removeAll(where: { $0 == userId })
         } else {
