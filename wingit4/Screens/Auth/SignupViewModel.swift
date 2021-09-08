@@ -15,6 +15,7 @@ class SignupViewModel: ObservableObject {
     
   @Published var firstName: String = ""
   @Published var lastName: String = ""
+  @Published var usernamme: String = ""
   @Published var email: String = ""
   @Published var password: String = ""
   @Published var image: Image = Image(IMAGE_USER_PLACEHOLDER)
@@ -33,6 +34,7 @@ class SignupViewModel: ObservableObject {
        return AuthService.signupUser(
           firstName: firstName,
           lastName: lastName,
+          username: username,
           email: email,
           password: password,
           imageData: imageData,

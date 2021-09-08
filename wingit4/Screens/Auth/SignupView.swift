@@ -23,18 +23,14 @@ struct SignupView: View {
             Text(IMAGE_UPLOAD_TEXT)
               .modifier(Caption2Style())
               .multilineTextAlignment(.center)
-              .padding(.bottom, 40)
+              .padding(.bottom, 20)
             SignUpForm()
             Divider()
-            Text(TEXT_SIGNUP_NOTE)
-              .modifier(FootNote())
-              .padding()
-              .lineLimit(nil)
             Text("By signing up, you agree to the")
               .modifier(CaptionStyle())
             EULA()
         }
-        .navigationBarTitle("Register", displayMode: .inline)
+        .navigationBarTitle("Signup", displayMode: .inline)
     }
 }
 
@@ -59,6 +55,9 @@ struct SignUpForm: View {
             )
             LastNameTextField(
               lastName: $signupViewModel.lastName
+            )
+            UsernameTextField(
+              username: $signupViewModel.username
             )
             EmailTextField(
               email: $signupViewModel.email

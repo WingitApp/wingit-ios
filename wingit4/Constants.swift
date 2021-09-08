@@ -28,7 +28,6 @@ let TEXT_BIO = "Bio"
 let TEXT_PASSWORD = "Password"
 let TEXT_SIGNIN_HEADLINE = "Wingit"
 let TEXT_SIGNIN_SUBHEADLINE = "Ask for recommendations and stay connected with your friends!"
-let TEXT_SIGNUP_NOTE = "An account will allow you to save and access photo information across devices. You can delete your account at any time and your information will not be shared."
 let LINK_TERMS_OF_SERVICE = Link("Terms of Service", destination: URL(string: "https://www.wingitapp.co/terms-of-use")!)
 let LINK_PRIVACY_POLICY = Link("Privacy Policy", destination: URL(string: "https://www.wingitapp.co/policy")!)
 let TEXT_SIGNUP_PASSWORD_REQUIRED = "At least 8 characters required"

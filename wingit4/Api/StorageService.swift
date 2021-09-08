@@ -108,7 +108,7 @@ class StorageService {
     }
 
     
-    static func saveAvatar(userId: String, firstName: String, lastName: String, email: String, imageData: Data, metadata: StorageMetadata, storageAvatarRef: StorageReference, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+    static func saveAvatar(userId: String, firstName: String, lastName: String, username: String, email: String, imageData: Data, metadata: StorageMetadata, storageAvatarRef: StorageReference, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
            storageAvatarRef.putData(imageData, metadata: metadata) { (storageMetadata, error) in
                 if error != nil {
                     onError(error!.localizedDescription)
@@ -130,7 +130,7 @@ class StorageService {
                         }
                                                     
                         let firestoreUserDoc = Ref.FS_DOC_USERID(userId: userId)
-                        let user = User.init(id: userId, uid: userId, bio: "", canonicalEmail: email, email: email, firstName: "", keywords: (firstName + " " + lastName).splitStringToArray(), lastName: "", profileImageUrl: metaImageUrl, username: "")
+                        let user = User.init(id: userId, uid: userId, bio: "", canonicalEmail: email, email: email, firstName: "", keywords: (firstName + " " + lastName).splitStringToArray(), lastName: "", profileImageUrl: metaImageUrl, username: username)
 
                         do {
                             try firestoreUserDoc.setData(from: user)
