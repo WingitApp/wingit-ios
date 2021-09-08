@@ -45,7 +45,6 @@ class ReferViewModel : ObservableObject, Identifiable {
 
     }
     
-    
     func sendReferral(askId: String) {
         ///askId(postId) & senderId (auth.dude) & senderId(userId of the one selected
         // ids -> self.selectedUsers

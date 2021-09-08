@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ReferFooter: View {
+    
   @Binding var referral: Referral
   
     var body: some View {
@@ -27,8 +28,14 @@ struct AcceptButton: View {
     @Binding var referral: Referral
     
     var body: some View {
+        //one pressed, status is changed.
+        //deleted from refer page.
+        //enters into the postId or referralId post detail comment view
         
-        Button(action: {referralsViewModel.acceptReferral(referralId: referral.id)},
+        
+        Button(action: {
+            referralsViewModel.acceptReferral(referral: referral, onSuccess: {})
+        },
                label: {
                 VStack{
                     Text("Accept")
@@ -55,12 +62,12 @@ struct BumpButton: View {
                label: {
                 VStack{
                     Text("Bump")
-                        .foregroundColor(.pink)
+                        .foregroundColor(Color(.systemTeal))
                 }
                 .padding(.vertical, 10)
                 .padding(.horizontal, 30)
                 .frame(width: UIScreen.main.bounds.width - 235, height: UIScreen.main.bounds.width / 9)
-                .background(RoundedRectangle(cornerRadius: 5).stroke(Color.pink.opacity(0.5),lineWidth: 1.5))
+                .background(RoundedRectangle(cornerRadius: 5).stroke(Color(.systemTeal).opacity(0.5),lineWidth: 1.5))
         })
         
 

@@ -33,7 +33,6 @@ struct CommentInput: View {
     }
   
     
-    
     var body: some View {
       Divider()
       HStack(alignment: .top, spacing: 0) {

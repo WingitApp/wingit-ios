@@ -10,6 +10,7 @@ import FirebaseAuth
 import FirebaseStorage
 import Firebase
 class CommentApi {
+    
   func sendComment(
     commentDict: Dictionary<String, Any>,
     postId: String,
@@ -25,7 +26,6 @@ class CommentApi {
             onError(error.localizedDescription)
             return
         }
-        
         onSuccess()
     }
   }

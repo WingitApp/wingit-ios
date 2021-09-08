@@ -25,6 +25,8 @@ struct Activity: Encodable, Decodable {
         switch type {
         case "comment":
             output = "replied: \(comment)"
+//        case "bumped":
+//            ouput = ""
         case "follow":
             output = "is following you"
         case "like":

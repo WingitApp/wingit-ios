@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ReferralComment: View {
+
+    
     var body: some View {
       HStack(alignment: .center) {
         Circle()

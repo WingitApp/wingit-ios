@@ -16,11 +16,41 @@ class ReferralsViewModel: ObservableObject {
   @Published var referrals: [Referral] = []
     
     //after accept status is changed, add them into comments.
+    /*
+     1. send into comment type --> referral.
+     2. in comment navigation bring the option for referral comments to come out.
+     */
     
-    func acceptReferral(referralId: String?) {
-        guard let referralId = referralId else { return }
+    func acceptReferral(referral: Referral, onSuccess: @escaping() -> Void) {
+        guard let referralId = referral.id, let currentUser = Auth.auth().currentUser else { return }
         Api.Referrals.updateStatus(referralId: referralId, newStatus: .accepted)
+        let text = "\(referral.sender?.username ?? "") invited \(currentUser.displayName ?? "") to help."
+        saveReferralToComment(text: text, referral: referral, onSuccess: onSuccess)
     }
+    
+    func saveReferralToComment(
+      text: String,
+      referral: Referral,
+      onSuccess: @escaping() -> Void) {
+      // we return early if there is no logged in user
+      guard let currentUser = Auth.auth().currentUser else { return }
+        
+      let comment: Comment = Comment(
+        id: UUID(),
+        comment: text,
+        avatarUrl: currentUser.photoURL!.absoluteString,
+        ownerId: currentUser.uid,
+        postId: referral.askId,
+        username: currentUser.displayName!,
+        date: Date().timeIntervalSince1970
+      )
+      
+      guard let commentDict = try? comment.toDictionary() else {return}
+      Api.Comment.sendComment(
+        commentDict: commentDict,
+        postId: referral.askId,
+        onSuccess: onSuccess) { print($0) }
+      }
     
     //when Referral ignored, status changed.
     func ignoreReferral(referralId: String?) {
