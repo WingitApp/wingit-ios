@@ -16,6 +16,7 @@ struct AskDetailView: View {
       VStack(alignment: .leading) {
         AskDetailCard(post: $post)
         CommentList(post: $post)
+        Divider()
         Spacer()
         CommentInput(post: $post)
 

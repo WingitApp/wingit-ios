@@ -27,19 +27,18 @@ struct AskCard: View {
   // Like
   @StateObject var footerCellViewModel = FooterCellViewModel()
 
-//  @StateObject var
 
   var body: some View {
     if !self.askCardViewModel.isHidden {
-      NavigationLink( destination:
-        AskDetailView(post: $post)
-          .environmentObject(askCardViewModel)
-          .environmentObject(askMenuViewModel)
-          .environmentObject(askDoneToggleViewModel)
-          .environmentObject(commentViewModel)
-          .environmentObject(commentInputViewModel)
-          .environmentObject(footerCellViewModel)
-      ) {
+//      NavigationLink( destination:
+//        AskDetailView(post: $post)
+//          .environmentObject(askCardViewModel)
+//          .environmentObject(askMenuViewModel)
+//          .environmentObject(askDoneToggleViewModel)
+//          .environmentObject(commentViewModel)
+//          .environmentObject(commentInputViewModel)
+//          .environmentObject(footerCellViewModel)
+//      ) {
         VStack {
           HeaderCell(post: $post)
           BodyCell(post: $post)
@@ -49,7 +48,7 @@ struct AskCard: View {
           RoundedRectangle(cornerRadius: 20)
             .stroke(Color.gray, lineWidth: 0.5)
         )
-      }
+//      }
       .buttonStyle(PlainButtonStyle())
       .background(
         self.askCardViewModel.getColorByIndex(index: index).opacity(1)

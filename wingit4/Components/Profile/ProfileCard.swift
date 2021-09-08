@@ -14,16 +14,16 @@ struct ProfileCard: View {
     
     var body: some View {
         VStack{
-            ProfileInformation(user: self.session.currentUser)
-            Connections(
-              user: self.session.currentUser,
-              connectionsCount: $profileViewModel.connectionsCountState
-            )
-            ProfileHeader(
-              user: self.session.currentUser,
-              postCount: profileViewModel.posts.count,
-              doneCount: profileViewModel.doneposts.count
-            )
+//            ProfileInformation(user: self.session.currentUser)
+//            Connections(
+//              user: self.session.currentUser,
+//              connectionsCount: $profileViewModel.connectionsCountState
+//            )
+//            ProfileHeader(
+//              user: self.session.currentUser,
+//              postCount: profileViewModel.posts.count,
+//              doneCount: profileViewModel.doneposts.count
+//            )
         }
         .background(Color(.white))
         .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))

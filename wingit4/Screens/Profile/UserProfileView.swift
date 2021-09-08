@@ -19,59 +19,58 @@ struct UserProfileView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 15){
-                ScrollView {
-                   VStack {
-                    VStack{
-                        ProfileInformation(user: user)
-                        Connections(
-                          user: user,
-                          connectionsCount: $userProfileViewModel.connectionsCountState
-                        )
-                        ProfileHeader(
-                          user: user,
-                          postCount: userProfileViewModel.posts.count,
-                          doneCount: userProfileViewModel.doneposts.count
-                        )
-                        HStack(spacing: 15) {
-                          if userProfileViewModel.userBlocked == false {
-                            ConnectButton(
-                              user: user,
-                              isConnected: $userProfileViewModel.isConnected, hasPendingRequest: $userProfileViewModel.hasPendingRequest,
-                              connectionsCount: $userProfileViewModel.connectionsCountState
-                            )
-                            MessageButton(user: user)
-                          }
-                        }.padding(.leading, 20).padding(.trailing, 20)
-                    }
-                    .padding(.bottom, 10)
-                    .background(Color(.white))
-                    .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
-                    
-                    if !self.userProfileViewModel.posts.isEmpty {
-                      ForEach(self.userProfileViewModel.posts.indices, id: \.self) { index in
-                            LazyVStack {
-                                AskCard(
-                                  post: self.userProfileViewModel.posts[index],
-                                  isProfileView: false,
-                                  index: index
-                                )
-                            }
-                       }
-                    }
-                       
-                }
-                                 
-//                )}
-               }
-                .background(Color.black.opacity(0.03)
-                .ignoresSafeArea(.all, edges: .all))
-                .navigationBarTitle(Text(self.user.username), displayMode: .automatic)
-                .environmentObject(connectionsViewModel)
-                 .onAppear {
-                    logToAmplitude(event: .viewOtherProfile)
-                    self.userProfileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.user.id ?? self.user.uid)
-                 }
-      
+//                ScrollView {
+//                   VStack {
+//                    VStack{
+//                        ProfileInformation(user: user)
+//                        Connections(
+//                          user: user,
+//                          connectionsCount: $userProfileViewModel.connectionsCountState
+//                        )
+//                        ProfileHeader(
+//                          user: user,
+//                          postCount: userProfileViewModel.posts.count,
+//                          doneCount: userProfileViewModel.doneposts.count
+//                        )
+//                        HStack(spacing: 15) {
+//                          if userProfileViewModel.userBlocked == false {
+//                            ConnectButton(
+//                              user: user,
+//                              isConnected: $userProfileViewModel.isConnected, hasPendingRequest: $userProfileViewModel.hasPendingRequest,
+//                              connectionsCount: $userProfileViewModel.connectionsCountState
+//                            )
+//                            MessageButton(user: user)
+//                          }
+//                        }.padding(.leading, 20).padding(.trailing, 20)
+//                    }
+//                    .padding(.bottom, 10)
+//                    .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
+//
+//                    if !self.userProfileViewModel.posts.isEmpty {
+//                      ForEach(self.userProfileViewModel.posts.indices, id: \.self) { index in
+//                            LazyVStack {
+//                                AskCard(
+//                                  post: self.userProfileViewModel.posts[index],
+//                                  isProfileView: false,
+//                                  index: index
+//                                )
+//                            }
+//                       }
+//                    }
+//
+//                }
+//
+////                )}
+//               }
+//                .background(Color.black.opacity(0.03)
+//                .ignoresSafeArea(.all, edges: .all))
+//                .navigationBarTitle(Text(self.user.username), displayMode: .automatic)
+//                .environmentObject(connectionsViewModel)
+//                 .onAppear {
+//                    logToAmplitude(event: .viewOtherProfile)
+//                    self.userProfileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.user.id ?? self.user.uid)
+//                 }
+//
         
     }
 }

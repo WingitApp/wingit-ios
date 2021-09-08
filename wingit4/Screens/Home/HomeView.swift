@@ -10,9 +10,9 @@ import FirebaseAuth
 
 struct HomeView: View {
     
-  @StateObject var homeViewModel = HomeViewModel()
   @ObservedObject var headerCellViewModel = HeaderCellViewModel()
-  
+  @EnvironmentObject var homeViewModel: HomeViewModel
+
   func onAppear() {
     self.homeViewModel.loadTimeline()
   }

@@ -5,7 +5,6 @@
 //  Created by YaeRim Amy Chun on 6/9/21.
 //
 
-
 import SwiftUI
 import URLImage
 struct ProfileHeader: View {
@@ -42,4 +41,3 @@ struct ProfileHeader: View {
         }
     }
 }
-

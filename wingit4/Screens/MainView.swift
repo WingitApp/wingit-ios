@@ -4,7 +4,6 @@
 //
 //  Created by YaeRim Amy Chun on 6/9/21.
 //
-
 import FirebaseAuth
 import Foundation
 import SwiftUI
@@ -14,42 +13,31 @@ struct MainView: View {
   @ObservedObject var model: MainViewModel = MainViewModel()
   @StateObject var profileViewModel = ProfileViewModel()
   @StateObject var activityViewModel = ActivityViewModel()
-  
+  @StateObject var homeViewModel = HomeViewModel()
+
   func logout() {
     session.logout()
   }
     
   var body: some View {
     TabView(selection: $model.selectedIndex) {
-        NavigationTab(
-            tag: 0,
-            icon: "house.fill",
-            screen: AnyView(HomeView())
-        )
-        NavigationTab(
-            tag: 1,
-            icon: "suit.heart",
-            screen: AnyView(ReferralsView())
-        )
-        NavigationTab(
-            tag: 2,
-            icon: IMAGE_PHOTO,
-            screen: AnyView(CameraView())
-        )
-        NavigationTab(
-            tag: 3,
-            icon: "bell",
-            screen: AnyView(NotificationView())
-        )
-        NavigationTab(
-            tag: 4,
-            icon: "person.fill",
-            screen: AnyView(ProfileView())
-        )
+        HomeView()
+          .tabItem({ Image(systemName: "house.fill") })
+          .tag(0)
+        CameraView()
+          .tabItem({ Image(systemName: IMAGE_PHOTO) })
+          .tag(1)
+        NotificationView()
+          .tabItem({ Image(systemName: "bell") })
+          .tag(2)
+        ProfileView()
+          .tabItem({ Image(systemName: "person.fill") })
+          .tag(3)
      }
     .accentColor(Color(.systemTeal))
     .environmentObject(profileViewModel)
     .environmentObject(activityViewModel)
+    .environmentObject(homeViewModel)
     .onAppear{
         self.profileViewModel.loadUserPosts()
         self.activityViewModel.loadActivities()

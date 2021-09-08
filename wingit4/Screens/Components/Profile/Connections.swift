@@ -14,7 +14,6 @@ struct Connections: View {
     @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
     
     var body: some View {
-        HStack{
             NavigationLink(
                 destination: ConnectionsView(user: user!).environmentObject(connectionsViewModel),
                 label: {
@@ -25,6 +24,6 @@ struct Connections: View {
                 })
             }
     }
-}
+
 
 

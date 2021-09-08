@@ -30,7 +30,8 @@ struct HeaderCell: View {
                       .stroke(Color.gray, lineWidth: 1)
                   )
 
-              }.disabled(self.askCardViewModel.isNavLinkDisabled)
+              }
+              .disabled(self.askCardViewModel.isNavLinkDisabled)
               VStack(alignment: .leading){
                 Text(post.username)
                   .fontWeight(.semibold)

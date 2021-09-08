@@ -14,25 +14,64 @@ struct ProfileInformation: View {
     var user: User?
     let uid = Auth.auth().currentUser?.uid
     @State var updatePic : Bool = false
+  
+    private func getScrollOffset(_ geometry: GeometryProxy) -> CGFloat {
+       geometry.frame(in: .global).minY
+    }
+    
+    private func getOffsetForHeaderImage(_ geometry: GeometryProxy) -> CGFloat {
+        let offset = getScrollOffset(geometry)
+        
+        // Image was pulled down
+        if offset > 0 {
+            return -offset
+        }
+        
+        return 0
+    }
+    
+    private func getHeightForHeaderImage(_ geometry: GeometryProxy) -> CGFloat {
+        let offset = getScrollOffset(geometry)
+        let imageHeight = geometry.size.height
+
+        if offset > 0 {
+            return imageHeight + offset
+        }
+
+        return imageHeight
+    }
+    
+  
     
     var body: some View {
         
         VStack{
             if user != nil && self.user!.id == uid{
-                
-                Button(action: {updatePic.toggle()},
-                       label: {
-                        URLImage(URL(string: user!.profileImageUrl)!,
+              GeometryReader { geometry in
+//                Button(
+//                  action: { updatePic.toggle() },
+//                  label: {
+                      URLImage(
+                        URL(string: user!.profileImageUrl)!,
                         content: {
                             $0.image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                               
-                        })
-                           .frame(width: 450, height: 330)
-                           .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
-            
-                       }).padding(.leading, -15).padding(.trailing, -15)
+                              .resizable()
+                              .scaledToFill()
+                              .frame(
+                                width: geometry.size.width,
+                                height: self.getHeightForHeaderImage(geometry)
+                              ) // 2
+                              .clipped()
+                              .offset(x: 0, y: self.getOffsetForHeaderImage(geometry))
+                        }
+                      )
+//                  }
+//                ).frame(
+//                  width: geometry.size.width,
+//                  height: self.getHeightForHeaderImage(geometry)
+//                )
+              }
+
                 
                 Button(action: {Api.User.updateDetails(field: "Name")}) {
 
