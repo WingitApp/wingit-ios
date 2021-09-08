@@ -65,7 +65,7 @@ class ReferralsApi {
 
     func getPendingReferrals(onSuccess: @escaping(_ referrals: [Referral]) -> Void) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        Ref.FS_COLLECTION_REFERRALS.whereField("receiverId", isEqualTo: userId).whereField("status", isEqualTo: "pending").getDocuments { (snapshot, error) in
+        Ref.FS_COLLECTION_REFERRALS.whereField("receiverId", isEqualTo: userId).getDocuments { (snapshot, error) in
         // catch errors
         guard let snap = snapshot else { return }
         if let error = error { return print(error) }
