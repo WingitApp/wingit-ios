@@ -11,6 +11,7 @@ struct ReferralsView: View {
   @StateObject var referralsViewModel = ReferralsViewModel()
   
     var body: some View {
+       NavigationView{
       ScrollView {
         if !referralsViewModel.referrals.isEmpty {
             VStack(alignment: .leading){
@@ -18,12 +19,19 @@ struct ReferralsView: View {
                 HStack {
                     if referral.status.rawValue == "accepted" {
                         ZStack{
+//                            NavigationLink(destination: AskDetailView(post.postId: referral.askId)) {
+//                                                                  EmptyView()
+//                                                              }
                             AcceptedNotification(referral: referral)
-                          //  Text("You have bumped their request")
                         }
                     } else if referral.status.rawValue == "bumped" {
                         ZStack{
                            BumpedNotification(referral: referral)
+                        }
+                    }
+                    else if referral.status.rawValue == "closed" {
+                        ZStack{
+                            ClosedNotification(referral: referral)
                         }
                     }
                     else {
@@ -36,11 +44,13 @@ struct ReferralsView: View {
     
       }
       .environmentObject(referralsViewModel)
-      
       .onAppear {
         Api.Referrals.getPendingReferrals() { referrals in
             referralsViewModel.referrals = referrals
         }
       }
+      .navigationBarTitle("Referrals", displayMode: .inline)
+    }
+      
     }
 }

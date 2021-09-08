@@ -11,8 +11,10 @@ import URLImage
 struct AcceptedNotification: View {
 
     @State var referral: Referral
+ //   @Binding var post: Post 
 
     var body: some View {
+        
         HStack {
             URLImage(
                 URL(string: referral.ask?.avatar ?? "")!,
@@ -59,6 +61,34 @@ struct BumpedNotification: View {
             Spacer()
             //TimeAgoStamp(date: activity.date)
         }.padding()
+    }
+}
+
+struct ClosedNotification: View {
+    
+    @State var referral: Referral
+    
+    var body: some View {
+        HStack {
+            URLImage(
+                URL(string: referral.ask?.avatar ?? "")!,
+              content: {
+                 $0.image
+                 .resizable()
+                 .aspectRatio(contentMode: .fill)
+                 .clipShape(Circle())
+            }).frame(width: 50, height: 50)
+            HStack {
+                Group {
+                Text("You have closed")
+                    Text("\(referral.ask?.username ?? "")'s").bold()
+                Text("ask")
+                }.font(.subheadline)
+            }
+            Spacer()
+            //TimeAgoStamp(date: activity.date)
+        }.padding()
+        .opacity(0.3)
     }
 }
 
