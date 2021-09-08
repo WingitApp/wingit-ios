@@ -28,7 +28,7 @@ struct ConnectionsView: View {
                             }).frame(width: 50, height: 50)
                                 
                                 VStack(alignment: .leading, spacing: 5) {
-                                 Text(user.displayName()).font(.headline).bold()
+                                 Text(user.displayName).font(.headline).bold()
                                     Text(user.bio ?? "").font(.subheadline)
                                 }
                             }.padding(10)

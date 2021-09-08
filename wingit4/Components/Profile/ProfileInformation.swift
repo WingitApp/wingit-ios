@@ -22,7 +22,7 @@ struct ProfileInformation: View {
                 
                 Button(action: {updatePic.toggle()},
                        label: {
-                        URLImage(URL(string: user!.profileImageUrl)!,
+                        URLImage(URL(string: user!.profileImageUrl!)!,
                         content: {
                             $0.image
                                 .resizable()
@@ -57,7 +57,7 @@ struct ProfileInformation: View {
                 }).frame(width: 430, height: 330)
                   .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
                   
-                Text(user?.displayName() ?? "").bold()
+                Text(user?.displayName ?? "").bold()
                 Text(user?.bio ?? "").font(.caption).foregroundColor(.gray)
             }
             

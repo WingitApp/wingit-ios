@@ -116,7 +116,7 @@ struct MessageButton: View {
         Button(action: {
             logToAmplitude(event: .tapMessageButton)
         }) {
-            NavigationLink(destination: ChatView(recipientId: user.id!, recipientAvatarUrl: user.profileImageUrl, recipientUsername: user.displayName())) {
+            NavigationLink(destination: ChatView(recipientId: user.id!, recipientAvatarUrl: user.profileImageUrl, recipientUsername: user.displayName)) {
                     Text("Message").foregroundColor(Color("bw")).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal))
                
             }

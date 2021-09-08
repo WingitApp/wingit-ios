@@ -12,23 +12,28 @@ import FirebaseFirestoreSwift
 struct User: Codable, Identifiable {
     @DocumentID var id: String?
     @ServerTimestamp var createdTime: Timestamp?
-    var uid: String
+    var uid: String?
     var bio: String?
     var canonicalEmail: String?
     var connections: [User]?
     var email: String
     var firstName: String?
-    var keywords: [String]
+    var keywords: [String]?
     var lastName: String?
-    var profileImageUrl: String
+    var profileImageUrl: String?
     var tags: [String]?
     var username: String?
+    
+    var displayName: String {
+        return "\(self.firstName ?? "") \(self.lastName ?? "")"
+    }
 
     enum CodingKeys: String, CodingKey {
         case id
         case uid
         case bio
         case canonicalEmail
+        case displayName
         case email
         case firstName
         case keywords
@@ -36,9 +41,5 @@ struct User: Codable, Identifiable {
         case profileImageUrl
         case tags
         case username
-    }
-    
-    func displayName() -> String {
-        return "\(self.firstName ?? "") \(self.lastName ?? "")"
     }
 }
