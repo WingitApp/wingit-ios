@@ -19,7 +19,7 @@ struct AskDetailCard: View {
         AskDetailHeader(post: $post)
         AskDetailBody(post: $post)
         // AskDetailRow shows the linear progression on bumps
-        AskDetailRow(post: $post)
+//        AskDetailRow(post: $post)
         AskDetailFooter(post: $post)
       }
       .sheet(

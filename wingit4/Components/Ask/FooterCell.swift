@@ -22,15 +22,7 @@ struct FooterCell: View {
             CommentButton()
             Spacer()
             ReferButton(post: $post)
-            Spacer()
-            CommentButton(
-              showLabel: true
-            )
-            Spacer()
-            ShareButton(
-              post: $post,
-              showLabel: true
-            )
+            ShareButton(post: $post)
           }
         }
         .padding(.trailing, 15)

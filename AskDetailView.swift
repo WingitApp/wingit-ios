@@ -25,8 +25,6 @@ struct AskDetailView: View {
         width: UIScreen.main.bounds.size.width
 //        height: UIScreen.main.bounds.size.height
       )
-//      .padding(.top, 200)
-//      .padding(.bottom, 200)
       .onAppear {
         self.commentViewModel.loadComments(postId: post.postId)
       }

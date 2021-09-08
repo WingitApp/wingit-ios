@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "group:/Users/joshslee/Documents/wingit-ios/wingit4/Components/Form"
+      name = "Form">
+   </Group>
    <FileRef
       location = "self:">
    </FileRef>

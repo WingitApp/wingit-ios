@@ -121,8 +121,6 @@ struct AskCard: View {
           ReferConnectionsList(post: $post)
             .environmentObject(referViewModel)
         })
-        }
-      )
     }
   }
 }
