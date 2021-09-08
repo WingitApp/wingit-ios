@@ -22,7 +22,7 @@ struct ProfileInfo: View {
                 
                 Button(action: {updatePic.toggle()},
                        label: {
-                        URLImage(URL(string: user!.profileImageUrl)!,
+                        URLImage(URL(string: user!.profileImageUrl ?? "")!,
                         content: {
                             $0.image
                                 .resizable()
@@ -36,7 +36,7 @@ struct ProfileInfo: View {
                 
                
             } else {
-                URLImage(URL(string: user!.profileImageUrl)!,
+                URLImage(URL(string: user!.profileImageUrl ?? "")!,
                 content: {
                     $0.image
                         .resizable()

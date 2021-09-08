@@ -19,7 +19,7 @@ struct ProfileNavigation: View {
         
         VStack{
             HStack{
-                URLImage(URL(string: user!.profileImageUrl)!,
+                URLImage(URL(string: user!.profileImageUrl!)!,
             content: {
                 $0.image
                     .resizable()
@@ -30,7 +30,7 @@ struct ProfileNavigation: View {
                 
                 VStack(alignment: .leading, spacing: 5) {
                  Text(user!.username).font(.headline).bold()
-                    Text(user!.bio).font(.subheadline)
+                    Text(user!.bio? "").font(.subheadline)
                 }.foregroundColor(Color("bw"))
               
             }.frame(maxWidth: .infinity, alignment: .center)

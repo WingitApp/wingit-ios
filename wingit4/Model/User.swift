@@ -24,7 +24,7 @@ struct User: Codable, Identifiable {
     var tags: [String]?
     var username: String?
     
-    var displayName: String {
+    var displayName: String? {
         return "\(self.firstName ?? "") \(self.lastName ?? "")"
     }
 
@@ -33,7 +33,6 @@ struct User: Codable, Identifiable {
         case uid
         case bio
         case canonicalEmail
-        case displayName
         case email
         case firstName
         case keywords
