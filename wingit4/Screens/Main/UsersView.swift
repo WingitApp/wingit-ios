@@ -28,7 +28,7 @@ struct UsersView: View {
                                             
                                             VStack(alignment: .leading, spacing: 5) {
                                              Text(user.displayName ?? "").font(.headline).bold()
-                                                Text(user.bio ?? "").font(.subheadline)
+                                                Text("@\(user.username ?? "")").font(.subheadline)
                                             }
                                           
                                         }.padding(10)
