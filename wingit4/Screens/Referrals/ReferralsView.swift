@@ -18,8 +18,10 @@ struct ReferralsView: View {
           }
         }
       }
+      .background(Color.black.opacity(0.03)
+      .ignoresSafeArea(.all, edges: .all))
+      .navigationBarTitle(Text("Referrals"), displayMode: .automatic)
       .environmentObject(referralsViewModel)
-      
       .onAppear {
         Api.Referrals.getPendingReferrals() { referrals in
             referralsViewModel.referrals = referrals

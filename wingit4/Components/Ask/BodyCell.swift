@@ -31,7 +31,8 @@ struct BodyCell: View {
                       .cornerRadius(15)
                 })
             }
-          }.padding(.horizontal).padding(.bottom, 2)
+          }
+          .padding(.horizontal).padding(.bottom, 2)
           Spacer(minLength: 0)
       }
       .padding(.top, 10)

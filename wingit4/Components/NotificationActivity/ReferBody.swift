@@ -23,13 +23,14 @@ struct ReferBody: View {
                     }
                     Spacer()
                 Image(systemName: "ellipsis")
-                }.padding(.trailing, 15).padding(.leading, 15)
+                }
+                .padding(.trailing, 15).padding(.leading, 15)
 
             PostText(ask: referral.ask)
         }
         .padding(.top, 10).padding(.bottom, 10)
         .frame(width: UIScreen.main.bounds.width - 30)
-        .background(RoundedRectangle(cornerRadius: 15).stroke(Color.gray.opacity(0.5),lineWidth: 1.5))
+        .background(RoundedRectangle(cornerRadius: 15).stroke(Color.gray.opacity(0.3),lineWidth: 1.5))
 
     }
 }

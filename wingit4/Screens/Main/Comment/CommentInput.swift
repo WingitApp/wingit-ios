@@ -55,8 +55,3 @@ struct CommentInput: View {
     }
 }
 
-//struct CommentInput_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CommentInput()
-//    }
-//}

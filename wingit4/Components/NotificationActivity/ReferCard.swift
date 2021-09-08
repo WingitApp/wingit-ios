@@ -25,6 +25,7 @@ struct ReferCard: View {
             ReferBody(referral: $referral)
             ReferFooter(referral: $referral)
         }
+        .background(Color(.white)).cornerRadius(20)
         .environmentObject(referViewModel)
         .sheet(
           isPresented: $referViewModel.isReferListOpen,

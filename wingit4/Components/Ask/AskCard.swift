@@ -19,7 +19,6 @@ struct AskCard: View {
   @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
   @StateObject var commentViewModel = CommentViewModel()
   @StateObject var referViewModel = ReferViewModel()
-    
 
 
   var body: some View {

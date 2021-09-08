@@ -25,15 +25,13 @@ struct ReferHeader: View {
     var body: some View {
         VStack {
             HStack {
-//                URLImage(URL(string: post.avatar)!,
-//                   content: {
-//                      $0.image
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fill)
-//                        .clipShape(Circle())
-//                   }).frame(width: 35, height: 35)
-                    Image(systemName: "camera").resizable().clipShape(Circle())
-                        .frame(width: 35, height: 35)
+                URLImage(URL(string: referral.sender?.profileImageUrl ?? "")!,
+                   content: {
+                      $0.image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(Circle())
+                   }).frame(width: 35, height: 35)
                     VStack(alignment: .leading) {
                         Text(referral.sender?.username ?? "").font(.subheadline).bold()
                     }

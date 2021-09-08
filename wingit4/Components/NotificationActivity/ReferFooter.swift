@@ -17,7 +17,7 @@ struct ReferFooter: View {
             BumpButton(referral: $referral)
             AcceptButton(referral: $referral)
             
-        }
+        }.padding(.bottom, 10)
     }
 }
 
@@ -55,12 +55,12 @@ struct BumpButton: View {
                label: {
                 VStack{
                     Text("Bump")
-                        .foregroundColor(.pink)
+                        .foregroundColor(Color(.systemTeal))
                 }
                 .padding(.vertical, 10)
                 .padding(.horizontal, 30)
                 .frame(width: UIScreen.main.bounds.width - 235, height: UIScreen.main.bounds.width / 9)
-                .background(RoundedRectangle(cornerRadius: 5).stroke(Color.pink.opacity(0.5),lineWidth: 1.5))
+                .background(RoundedRectangle(cornerRadius: 5).stroke(Color(.systemTeal).opacity(0.5),lineWidth: 1.5))
         })
         
 
