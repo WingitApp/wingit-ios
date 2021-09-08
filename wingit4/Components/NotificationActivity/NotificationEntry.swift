@@ -4,17 +4,16 @@
 //
 //  Created by Joshua Lee on 8/26/21.
 //
-
 import SwiftUI
 import URLImage
 
 struct NotificationEntry: View {
-  var activity: ActivityEvent
+  var activity: Activity
   
   var body: some View {
       HStack {
           URLImage(
-            URL(string: activity.mediaUrl ?? "")!,
+            URL(string: activity.userAvatar)!,
             content: {
                $0.image
                .resizable()
@@ -22,11 +21,11 @@ struct NotificationEntry: View {
                .clipShape(Circle())
           }).frame(width: 50, height: 50)
           VStack(alignment: .leading, spacing: 5) {
-              Text(activity.connectionName ?? "").font(.subheadline).bold()
-              Text(activity.notificationMessage).font(.subheadline)
+              Text(activity.username).font(.subheadline).bold()
+              Text(activity.typeDescription).font(.subheadline)
           }
           Spacer()
-        TimeAgoStamp(date: Double(activity.createdAt?.seconds ?? 0))
+          TimeAgoStamp(date: activity.date)
       }
   }
 }

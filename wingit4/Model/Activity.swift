@@ -31,6 +31,8 @@ struct Activity: Encodable, Decodable {
             output = "is following you"
         case "like":
             output = "liked your post"
+        case "likeAsk":
+            output = "liked your post"
         case "connectRequest":
             output = "wants to connect"
         case "connectRequestAccepted":

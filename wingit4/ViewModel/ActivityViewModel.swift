@@ -13,7 +13,7 @@ import FirebaseFirestoreSwift
 
 class ActivityViewModel: ObservableObject {
     
-    @Published var activityArray: [ActivityEvent] = []
+    @Published var activityArray: [Activity] = []
     var listener: ListenerRegistration!
 
     
@@ -31,7 +31,7 @@ class ActivityViewModel: ObservableObject {
         }, deleteActivity: { (activity) in
             if !self.activityArray.isEmpty {
                 for (index, a) in self.activityArray.enumerated() {
-                    if a.id == activity.id {
+                    if a.activityId == activity.activityId {
                         self.activityArray.remove(at: index)
                     }
                 }
@@ -55,13 +55,11 @@ class ActivityViewModel: ObservableObject {
     }
     
     func sendConnectAcceptedAcknowledgement(userId: String) {
-        let currentUser = Auth.auth().currentUser
-        let activityEvent = ActivityEvent(id: nil, createdAt: nil, connectionId: currentUser?.uid, connectionName: currentUser?.displayName, mediaUrl: currentUser?.photoURL?.absoluteString, text: "", type: .connectRequestAccepted, userId: userId)
-        do {
-            let _ = try Ref.FS_COLLECTION_ACTIVITY_EVENTS_FOR_USER(userId: userId).addDocument(from: activityEvent)
-        } catch {
-            print(error)
-        }
+        let activityId = Ref.FS_COLLECTION_ACTIVITY.document(userId).collection("feedItems").document().documentID
+                 let activityObject = Activity(activityId: activityId, type: "connectRequestAccepted", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: "", mediaUrl: "", comment: "", date: Date().timeIntervalSince1970)
+                guard let activityDict = try? activityObject.toDictionary() else { return }
+
+                Ref.FS_COLLECTION_ACTIVITY.document(userId).collection("feedItems").document(activityId).setData(activityDict)
     }
     
     func deleteConnectRequest(fromUserId: String?) {
