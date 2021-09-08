@@ -153,7 +153,6 @@
 		3BE57FF726D89994005C242F /* ProfileNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE57FF626D89994005C242F /* ProfileNavigation.swift */; };
 		3BE57FF926D95A34005C242F /* ProfileCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE57FF826D95A34005C242F /* ProfileCard.swift */; };
 		3BE57FFB26D9A85E005C242F /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE57FFA26D9A85E005C242F /* ProfileInfo.swift */; };
-		3BE5800126DD5560005C242F /* SignUpFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE5800026DD5560005C242F /* SignUpFirst.swift */; };
 		3BE61D6F26E08A0D0078C6CF /* ReferralsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE61D6E26E08A0D0078C6CF /* ReferralsApi.swift */; };
 		3BE61D7226E0B10E0078C6CF /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = 3BE61D7126E0B10E0078C6CF /* SPAlert */; };
 		3BE61D7426E15E8C0078C6CF /* ReferFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE61D7326E15E8C0078C6CF /* ReferFooter.swift */; };
