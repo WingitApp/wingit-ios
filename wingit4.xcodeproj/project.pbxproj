@@ -133,7 +133,6 @@
 		3B924C9826CB11B300747233 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B924C9726CB11B300747233 /* LaunchScreen.storyboard */; };
 		3B928C3B269EA383007A34B8 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B928C3A269EA383007A34B8 /* ImageView.swift */; };
 		3B94C37426C311ED00BCCFBA /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = 3B94C37326C311ED00BCCFBA /* FirebaseDynamicLinks */; };
-		3B94FFD52676868200B4CC22 /* BioTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B94FFD42676868200B4CC22 /* BioTextField.swift */; };
 		3B96DD6626DF46A500015EED /* ReferButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6526DF46A500015EED /* ReferButton.swift */; };
 		3B96DD6A26DF494800015EED /* ReferHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6926DF494800015EED /* ReferHeader.swift */; };
 		3B96DD6E26DF4C9E00015EED /* ReferCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6D26DF4C9E00015EED /* ReferCard.swift */; };
@@ -298,7 +297,6 @@
 		3B86E43D26C998E300F64416 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		3B924C9726CB11B300747233 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3B928C3A269EA383007A34B8 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
-		3B94FFD42676868200B4CC22 /* BioTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioTextField.swift; sourceTree = "<group>"; };
 		3B96DD6526DF46A500015EED /* ReferButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferButton.swift; sourceTree = "<group>"; };
 		3B96DD6926DF494800015EED /* ReferHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferHeader.swift; sourceTree = "<group>"; };
 		3B96DD6D26DF4C9E00015EED /* ReferCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferCard.swift; sourceTree = "<group>"; };
@@ -317,7 +315,6 @@
 		3BE57FF626D89994005C242F /* ProfileNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNavigation.swift; sourceTree = "<group>"; };
 		3BE57FF826D95A34005C242F /* ProfileCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCard.swift; sourceTree = "<group>"; };
 		3BE57FFA26D9A85E005C242F /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
-		3BE5800026DD5560005C242F /* SignUpFirst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpFirst.swift; path = wingit4/Screens/Auth/SignUpFirst.swift; sourceTree = "<group>"; };
 		3BE61D6E26E08A0D0078C6CF /* ReferralsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralsApi.swift; sourceTree = "<group>"; };
 		3BE61D7326E15E8C0078C6CF /* ReferFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferFooter.swift; sourceTree = "<group>"; };
 		3BE61D7526E160C60078C6CF /* ReferBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferBody.swift; sourceTree = "<group>"; };
@@ -633,7 +630,6 @@
 				3B75E3D426715CAC002F3108 /* SignupText.swift */,
 				3B75E3D826715CDE002F3108 /* EmailTextField.swift */,
 				3B75E3E22671657F002F3108 /* NamesTextField.swift */,
-				3B94FFD42676868200B4CC22 /* BioTextField.swift */,
 				3B75E3D626715CCE002F3108 /* PasswordTextField.swift */,
 				3B75E3E0267163FC002F3108 /* Signin+HeaderView.swift */,
 			);
@@ -984,7 +980,6 @@
 				6523D93626DDEB79007546F5 /* ActivityEvent.swift in Sources */,
 				65A9EF9F26DF7C9A00E81CBF /* Referral.swift in Sources */,
 				3B3A880D26E0007A003E780F /* ReferViewModel.swift in Sources */,
-				3B94FFD52676868200B4CC22 /* BioTextField.swift in Sources */,
 				15030AA626E6805D0076CF14 /* AskDetailDemo.swift in Sources */,
 				3B5BDB51268F82790034B18C /* fetchUser.swift in Sources */,
 				3B5BDB58268F94E00034B18C /* ReportModel.swift in Sources */,
@@ -1053,7 +1048,6 @@
 				3B75E3E526716787002F3108 /* SignupButton.swift in Sources */,
 				15F7E8C026E8490100E5238F /* UserComment.swift in Sources */,
 				3BE57FFB26D9A85E005C242F /* ProfileInfo.swift in Sources */,
-				3BE5800126DD5560005C242F /* SignUpFirst.swift in Sources */,
 				3B7AF03026718263003BCCF3 /* Extensions.swift in Sources */,
 				15F7E8B726E848ED00E5238F /* AskDetailDemo.swift in Sources */,
 				6509E4FA26D6C214009CB74D /* Ask.swift in Sources */,
