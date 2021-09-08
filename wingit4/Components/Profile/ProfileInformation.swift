@@ -47,14 +47,8 @@ struct ProfileInformation: View {
                 Text(user?.bio ?? "").font(.caption).foregroundColor(.gray)
                     }
             } else {
-                URLImage(URL(string: user!.profileImageUrl)!,
-                content: {
-                    $0.image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        
-                       
-                }).frame(width: 430, height: 330)
+                URLImageView(inputURL: user?.profileImageUrl)
+                  .frame(width: 430, height: 330)
                   .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
                   
                 Text(user?.displayName ?? "").bold()

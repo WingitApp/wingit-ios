@@ -28,8 +28,8 @@ class ConnectionsViewModel : ObservableObject {
         }
     }
     
-    func sendConnectRequest(userId: String) {
-        let currentUserId = Auth.auth().currentUser!.uid
+    func sendConnectRequest(userId: String?) {
+        guard let userId = userId, let currentUserId = Auth.auth().currentUser?.uid else { return }
         
         Ref.FS_DOC_CONNECT_REQUEST_SENT(sentByUserId: currentUserId, receivedByUserId: userId).setData([:]) { (error) in
             if error == nil {
@@ -52,8 +52,8 @@ class ConnectionsViewModel : ObservableObject {
     }
     
     
-    func disconnect(userId: String, connectionsCount_onSuccess: @escaping(_ connectionsCount: Int) -> Void) {
-        let currentUserId = Auth.auth().currentUser!.uid
+    func disconnect(userId: String?, connectionsCount_onSuccess: @escaping(_ connectionsCount: Int) -> Void) {
+        guard let userId = userId, let currentUserId = Auth.auth().currentUser?.uid else { return }
         
         Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: currentUserId).document(userId).getDocument { (document, error) in
             if let doc = document, doc.exists {

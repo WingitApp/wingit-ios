@@ -157,6 +157,7 @@
 		3BF143E626819E480093488D /* NotificationsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF143E526819E480093488D /* NotificationsApi.swift */; };
 		650216B726E966A000B42BC6 /* FooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650216B626E966A000B42BC6 /* FooterCell.swift */; };
 		650216B926E9689300B42BC6 /* RollingNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650216B826E9689300B42BC6 /* RollingNumberView.swift */; };
+		650216B526E86C2100B42BC6 /* URLImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650216B426E86C2100B42BC6 /* URLImageView.swift */; };
 		6509E4FA26D6C214009CB74D /* Ask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6509E4F926D6C214009CB74D /* Ask.swift */; };
 		6523D93426DC1F41007546F5 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6523D93326DC1F41007546F5 /* FirebaseFirestore */; };
 		6523D93626DDEB79007546F5 /* ActivityEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6523D93526DDEB78007546F5 /* ActivityEvent.swift */; };
@@ -318,6 +319,7 @@
 		3BF143E526819E480093488D /* NotificationsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsApi.swift; sourceTree = "<group>"; };
 		650216B626E966A000B42BC6 /* FooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterCell.swift; sourceTree = "<group>"; };
 		650216B826E9689300B42BC6 /* RollingNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RollingNumberView.swift; path = wingit4/Components/Ask/RollingNumberView.swift; sourceTree = SOURCE_ROOT; };
+		650216B426E86C2100B42BC6 /* URLImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImageView.swift; sourceTree = "<group>"; };
 		6502C14226C4FF52007C04C9 /* SecretsDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsDebug.xcconfig; sourceTree = "<group>"; };
 		6502C14326C5024C007C04C9 /* SecretsRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsRelease.xcconfig; sourceTree = "<group>"; };
 		6509E4F926D6C214009CB74D /* Ask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ask.swift; sourceTree = "<group>"; };
@@ -604,6 +606,7 @@
 				3B7AF0A32671E435003BCCF3 /* Profile */,
 				3B9774242694FE0000F1EF14 /* alertView.swift */,
 				151A3C8226D1B0D200A39FAF /* UserAvatar.swift */,
+				650216B426E86C2100B42BC6 /* URLImageView.swift */,
 				151A3C9A26D5BEF000A39FAF /* TimeAgoStamp.swift */,
 				15030AA726E805A40076CF14 /* Styles.swift */,
 			);
@@ -983,6 +986,7 @@
 				650216B926E9689300B42BC6 /* RollingNumberView.swift in Sources */,
 				3BE61D7626E160C60078C6CF /* ReferBody.swift in Sources */,
 				15762C6A26E170ED00A8E041 /* ReferralsView.swift in Sources */,
+				650216B526E86C2100B42BC6 /* URLImageView.swift in Sources */,
 				3B7AF0B92672C29D003BCCF3 /* InboxMessage.swift in Sources */,
 				151A3C8826D3256F00A39FAF /* HomeFeed.swift in Sources */,
 				3B7AF0872671CA69003BCCF3 /* UsersViewModel.swift in Sources */,

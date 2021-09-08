@@ -34,38 +34,21 @@ struct CommentInput: View {
   
     
     var body: some View {
-      Divider()
-      HStack(alignment: .top, spacing: 0) {
-            URLImage(URL(string: session.currentUser!.profileImageUrl)!,
-              content: {
-                  $0.image
-                      .resizable()
-                      .aspectRatio(contentMode: .fill)
-                      .clipShape(Circle())
-              }).frame(width: 35, height: 35)
-              .overlay(
-                RoundedRectangle(cornerRadius: 100)
-                  .stroke(Color.gray, lineWidth: 1)
-              )
-              .padding(
-                EdgeInsets(top: 20, leading: 10, bottom: 0, trailing: 10)
-              )
-              
-        HStack(alignment: .top){
-             TextView("Add a comment", text: $composedMessage)
-              .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                  .stroke(Color.gray, lineWidth: 1)
-              )
-              .padding(.top, 15)
-             Button(action: onCommentSubmit) {
-                 Image(systemName: "paperplane.fill")
-                  .font(.system(size:18))
-                  .foregroundColor(Color(.systemTeal))
-             }
-             .padding(.top, 25)
-             .padding(.trailing, 10)
-         }
+        HStack(spacing: 0) {
+            URLImageView(inputURL: session.currentUser?.profileImageUrl)
+                .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                .frame(width: 50, height: 50)
+                .padding(.leading, 15)
+            ZStack {
+                 RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 1).padding()
+                 HStack {
+                     TextField("Add a comment", text: $composedMessage).padding(30)
+                     Button(action: commentAction) {
+                         Image(systemName: "arrow.right.circle").imageScale(.large).foregroundColor(.black).padding(30)
+                     }
+                 }
+
+             }.frame(height: 70)
         }
 //      .frame(maxHeight: 200)
 

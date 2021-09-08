@@ -11,9 +11,9 @@ struct ChatView: View {
     
     @ObservedObject var chatViewModel = ChatViewModel()
     
-    var recipientId = ""
-    var recipientAvatarUrl = ""
-    var recipientUsername = ""
+    var recipientId: String
+    var recipientAvatarUrl: String
+    var recipientUsername: String
 
     func sendTextMessage() {
         

@@ -24,16 +24,10 @@ struct UsersView: View {
                                 ForEach(usersViewModel.users, id: \.id) { user in
                                     NavigationLink(destination: UserProfileView(user: user)) {
                                         HStack {
-                                        URLImage(URL(string: user.profileImageUrl)!,
-                                        content: {
-                                            $0.image
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fill)
-                                                .clipShape(Circle())
-                                        }).frame(width: 50, height: 50)
+                                            URLImageView(inputURL: user.profileImageUrl).clipShape(Circle()).frame(width: 50, height: 50)
                                             
                                             VStack(alignment: .leading, spacing: 5) {
-                                             Text(user.displayName).font(.headline).bold()
+                                             Text(user.displayName ?? "").font(.headline).bold()
                                                 Text(user.bio ?? "").font(.subheadline)
                                             }
                                           

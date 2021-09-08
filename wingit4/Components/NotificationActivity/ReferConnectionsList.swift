@@ -42,7 +42,7 @@ struct ReferConnectionsList: View {
                     .padding(.bottom, 10)
                     /// start list
                     List {
-                        ForEach(self.referViewModel.allUsers, id: \.uid) { user in
+                        ForEach(self.referViewModel.allUsers, id: \.id) { user in
                             CardView(user: user, userId: user.id ?? "")
                         }
                     }
@@ -78,17 +78,11 @@ struct CardView: View {
     var body: some View {
         
         HStack{
-            URLImage(URL(string: user.profileImageUrl)!,
-            content: {
-                $0.image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .clipShape(Circle())
-            }).frame(width: 50, height: 50)
-                
+            URLImageView(inputURL: user.profileImageUrl)
+                .clipShape(Circle())
                 VStack(alignment: .leading, spacing: 5) {
-                 Text(user.username).font(.headline).bold()
-                    Text(user.bio).font(.subheadline)
+                    Text(user.displayName ?? user.username ?? "").font(.headline).bold()
+                    Text(user.bio ?? "").font(.subheadline)
                 }
                 Spacer()
                 

@@ -19,13 +19,8 @@ struct ProfileNavigation: View {
         
         VStack{
             HStack{
-                URLImage(URL(string: user!.profileImageUrl!)!,
-            content: {
-                $0.image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .clipShape(Circle())
-            }).frame(width: 50, height: 50)
+                URLImageView(inputURL: user?.profileImageUrl)
+            .frame(width: 50, height: 50)
               .padding(.horizontal, 15)
                 
                 VStack(alignment: .leading, spacing: 5) {
