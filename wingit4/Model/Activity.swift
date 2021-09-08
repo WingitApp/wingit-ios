@@ -25,8 +25,8 @@ struct Activity: Encodable, Decodable {
         switch type {
         case "comment":
             output = "replied: \(comment)"
-//        case "bumped":
-//            ouput = ""
+        case "referred":
+            output = "\(username) has referred you to help."
         case "follow":
             output = "is following you"
         case "like":
@@ -34,9 +34,9 @@ struct Activity: Encodable, Decodable {
         case "likeAsk":
             output = "liked your post"
         case "connectRequest":
-            output = "wants to connect"
+            output = "wants to connect with you."
         case "connectRequestAccepted":
-            output = "accepted your connect request"
+            output = "accepted your connect request."
         default:
             output = ""
         }
