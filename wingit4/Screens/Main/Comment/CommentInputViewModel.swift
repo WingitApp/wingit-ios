@@ -17,19 +17,16 @@ class CommentInputViewModel: ObservableObject {
     post: Post,
     onSuccess: @escaping(_ comment: Comment) -> Void
   ) {
-    // we return early if there is no logged in user
-    guard let isLoggedIn = Auth.auth().currentUser?.uid else { return }
-    
-    let currentUser = Auth.auth().currentUser
+    guard let currentUser = Auth.auth().currentUser else { return }
 
       
     let comment: Comment = Comment(
       id: UUID(),
       comment: text,
-      avatarUrl: currentUser!.photoURL!.absoluteString,
-      ownerId: currentUser!.uid,
+      avatarUrl: currentUser.photoURL!.absoluteString,
+      ownerId: currentUser.uid,
       postId: post.postId,
-      username: currentUser!.displayName!,
+      username: currentUser.displayName!,
       date: Date().timeIntervalSince1970
     )
     
@@ -40,7 +37,7 @@ class CommentInputViewModel: ObservableObject {
       commentDict: commentDict,
       postId: post.postId,
       onSuccess: {
-            if Auth.auth().currentUser!.uid != post.ownerId {
+            if currentUser.uid != post.ownerId {
               // Is this async? If so, there needs to be callback
                 let activityId = Ref.FS_COLLECTION_ACTIVITY
                   .document(post.ownerId)
@@ -51,9 +48,9 @@ class CommentInputViewModel: ObservableObject {
                 let activityDict: [String: Any] = [
                   "activityId": activityId,
                   "type": "comment",
-                  "username": currentUser!.displayName!,
-                  "userId": currentUser!.uid,
-                  "userAvatar": currentUser!.photoURL!.absoluteString,
+                  "username": currentUser.displayName ?? "",
+                  "userId": currentUser.uid,
+                  "userAvatar": currentUser.photoURL!.absoluteString,
                   "postId": post.postId,
                   "mediaUrl": post.mediaUrl,
                   "comment": text,
