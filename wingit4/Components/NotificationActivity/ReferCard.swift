@@ -10,6 +10,7 @@ import SwiftUI
 struct ReferCard: View {
   
   @State var referral: Referral
+  @State var post: Post
   @StateObject var referViewModel = ReferViewModel()
     
   // refferal object
@@ -20,10 +21,11 @@ struct ReferCard: View {
    */
   
     var body: some View {
+       
         VStack{
-            ReferHeader(referral: $referral)
-            ReferBody(referral: $referral)
-            ReferFooter(referral: $referral)
+            ReferHeader(referral: $referral, post: $post)
+            ReferBody(referral: $referral, post: $post)
+            ReferFooter(referral: $referral, post: $post)
         }
         .environmentObject(referViewModel)
         .sheet(

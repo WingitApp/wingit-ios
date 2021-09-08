@@ -65,28 +65,27 @@ class ReferralsApi {
 
     func getPendingReferrals(onSuccess: @escaping(_ referrals: [Referral]) -> Void) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        Ref.FS_COLLECTION_REFERRALS.whereField("receiverId", isEqualTo: userId).whereField("status", isEqualTo: "pending").getDocuments { (snapshot, error) in
-            // catch errors
-            guard let snap = snapshot else { return }
-            if let error = error { return print(error) }
-            
-            let dispatchGroup = DispatchGroup()
-            
-            let referrals: [Referral] = snap.documents.compactMap {
-                return try? $0.data(as: Referral.self)
-            }
-            
-            var result = [Referral]()
-            for var referral in referrals {
-                dispatchGroup.enter()
-                Api.Post.loadPost(postId: referral.askId) { (post) in
-                    referral.ask = post
-                    
-                    Api.User.loadUser(userId: referral.senderId) { (user) in
-                        referral.sender = user
-                        result.append(referral)
-                        dispatchGroup.leave()
-                    }
+        Ref.FS_COLLECTION_REFERRALS.whereField("receiverId", isEqualTo: userId).getDocuments { (snapshot, error) in
+        // catch errors
+        guard let snap = snapshot else { return }
+        if let error = error { return print(error) }
+        
+        let dispatchGroup = DispatchGroup()
+        
+        let referrals: [Referral] = snap.documents.compactMap {
+            return try? $0.data(as: Referral.self)
+        }
+        
+        var result = [Referral]()
+        for var referral in referrals {
+            dispatchGroup.enter()
+            Api.Post.loadPost(postId: referral.askId) { (post) in
+                referral.ask = post
+                
+                Api.User.loadUser(userId: referral.senderId) { (user) in
+                    referral.sender = user
+                    result.append(referral)
+                    dispatchGroup.leave()
                 }
             }
             

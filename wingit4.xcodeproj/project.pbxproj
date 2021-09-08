@@ -156,6 +156,7 @@
 		650216B526E86C2100B42BC6 /* URLImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650216B426E86C2100B42BC6 /* URLImageView.swift */; };
 		650216B726E966A000B42BC6 /* FooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650216B626E966A000B42BC6 /* FooterCell.swift */; };
 		650216B926E9689300B42BC6 /* RollingNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650216B826E9689300B42BC6 /* RollingNumberView.swift */; };
+		3BFE30EC26E94437005543A0 /* AcceptedNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE30EB26E94437005543A0 /* AcceptedNotification.swift */; };
 		6509E4FA26D6C214009CB74D /* Ask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6509E4F926D6C214009CB74D /* Ask.swift */; };
 		6523D93426DC1F41007546F5 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6523D93326DC1F41007546F5 /* FirebaseFirestore */; };
 		6523D93626DDEB79007546F5 /* ActivityEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6523D93526DDEB78007546F5 /* ActivityEvent.swift */; };
@@ -316,6 +317,7 @@
 		650216B426E86C2100B42BC6 /* URLImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImageView.swift; sourceTree = "<group>"; };
 		650216B626E966A000B42BC6 /* FooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterCell.swift; sourceTree = "<group>"; };
 		650216B826E9689300B42BC6 /* RollingNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RollingNumberView.swift; path = wingit4/Components/Ask/RollingNumberView.swift; sourceTree = SOURCE_ROOT; };
+		3BFE30EB26E94437005543A0 /* AcceptedNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptedNotification.swift; sourceTree = "<group>"; };
 		6502C14226C4FF52007C04C9 /* SecretsDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsDebug.xcconfig; sourceTree = "<group>"; };
 		6502C14326C5024C007C04C9 /* SecretsRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsRelease.xcconfig; sourceTree = "<group>"; };
 		6509E4F926D6C214009CB74D /* Ask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ask.swift; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 			isa = PBXGroup;
 			children = (
 				15762C6926E170ED00A8E041 /* ReferralsView.swift */,
+				3BFE30EB26E94437005543A0 /* AcceptedNotification.swift */,
 				15762C6B26E170FA00A8E041 /* ReferralsViewModel.swift */,
 			);
 			path = Referrals;
@@ -1013,6 +1016,7 @@
 				151A3C9626D567A800A39FAF /* AskDoneToggleViewModel.swift in Sources */,
 				3B7AF054267197BA003BCCF3 /* InitialView.swift in Sources */,
 				654DA41926BC7BD3002864B8 /* MainViewModel.swift in Sources */,
+				3BFE30EC26E94437005543A0 /* AcceptedNotification.swift in Sources */,
 				3BD604F326B08CA8004FFEEC /* DoneToggle.swift in Sources */,
 				65A9EF9D26DF0B2500E81CBF /* ConnectionsView.swift in Sources */,
 				156E6AE526D8A13400690E47 /* UserProfileView.swift in Sources */,

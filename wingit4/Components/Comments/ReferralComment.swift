@@ -32,3 +32,8 @@ struct ReferralComment: View {
     }
 }
 
+struct ReferralComment_Previews: PreviewProvider {
+    static var previews: some View {
+        ReferralComment()
+    }
+}
