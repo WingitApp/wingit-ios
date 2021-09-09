@@ -16,7 +16,7 @@ struct FeedToggle: View {
     if selection == .posts {
         logToAmplitude(event: .viewHomeRecsFeed)
     } else {
-        logToAmplitude(event: .viewHomeRequestsFeed)
+        logToAmplitude(event: .viewHomeAsksFeed)
     }
     
     
