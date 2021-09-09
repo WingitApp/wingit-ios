@@ -23,7 +23,7 @@ let TIMELINE_PAGINATION_QUERY = Ref.FS_DOC_TIMELINE_FOR_USERID(
 
 class PostApi {
   
-    func uploadPost(caption: String, imageData: Data, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+    func postWithoutMedia(caption: String, imageData: Data, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
         guard let userId = Auth.auth().currentUser?.uid else {
             return
         }
@@ -38,10 +38,10 @@ class PostApi {
             onSuccess()
         } catch {
             print(error)
-        }       
+        }
     }
     
-    func uploadImage(caption: String, imageData: Data, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+    func postWithMedia(caption: String, imageData: Data, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
         guard let userId = Auth.auth().currentUser?.uid else {
             return
         }

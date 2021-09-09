@@ -28,11 +28,11 @@ class ComposePostViewModel: ObservableObject {
         
         if !caption.isEmpty && imageData.count == 0 {
             logToAmplitude(event: .postAsk, properties: [.attachedPhoto: false])
-            Api.Post.uploadPost(caption: caption, imageData: imageData, onSuccess: completed, onError: onError)
+            Api.Post.postWithoutMedia(caption: caption, imageData: imageData, onSuccess: completed, onError: onError)
             
           } else if !caption.isEmpty && imageData.count != 0{
             logToAmplitude(event: .postAsk, properties: [.attachedPhoto: true])
-            Api.Post.uploadImage(caption: caption, imageData: imageData, onSuccess: completed, onError: onError)
+            Api.Post.postWithMedia(caption: caption, imageData: imageData, onSuccess: completed, onError: onError)
           } else {
                 showAlert = true
                 errorString = "Please fill in all fields"
