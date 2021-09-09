@@ -27,11 +27,11 @@ class ComposePostViewModel: ObservableObject {
     func sharePost(completed: @escaping() -> Void,  onError: @escaping(_ errorMessage: String) -> Void) {
         
         if !caption.isEmpty && imageData.count == 0 {
-            logToAmplitude(event: .postRequest, properties: [.attachedPhoto: false])
+            logToAmplitude(event: .postAsk, properties: [.attachedPhoto: false])
             Api.Post.uploadPost(caption: caption, imageData: imageData, onSuccess: completed, onError: onError)
             
           } else if !caption.isEmpty && imageData.count != 0{
-            logToAmplitude(event: .postRequest, properties: [.attachedPhoto: true])
+            logToAmplitude(event: .postAsk, properties: [.attachedPhoto: true])
             Api.Post.uploadImage(caption: caption, imageData: imageData, onSuccess: completed, onError: onError)
           } else {
                 showAlert = true

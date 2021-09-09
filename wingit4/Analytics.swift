@@ -29,7 +29,7 @@ enum AmplitudeEvent: String {
     
     // Requests
     case commentOnRequest = "Comment On Request"
-    case postRequest = "Post Request"
+    case postAsk = "Post Ask"
     case markRequestFulfilled = "Mark Request Fulfilled"
     case tapReferButton = "Tap Refer Button"
     case viewOwnRequests = "View Own Requests"
