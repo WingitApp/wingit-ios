@@ -1,5 +1,5 @@
 //
-//  CameraViewModel.swift
+//  ComposePostViewModel.swift
 //  wingit4
 //
 //  Created by YaeRim Amy Chun on 6/9/21.
@@ -13,7 +13,7 @@ import FirebaseStorage
 import SwiftUI
 
 
-class CameraViewModel: ObservableObject {
+class ComposePostViewModel: ObservableObject {
     
     @Published var caption: String = ""
     @Published var image: Image = Image(systemName: IMAGE_PHOTO)
