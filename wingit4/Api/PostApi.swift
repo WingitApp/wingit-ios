@@ -33,7 +33,6 @@ class PostApi {
         
         do {
             try firestorePostRef.setData(from: post)
-            try Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId).collection("timelinePosts").document(postId).setData(from: post)
             try Ref.FS_COLLECTION_ALL_POSTS.document(postId).setData(from: post)
             onSuccess()
         } catch {
