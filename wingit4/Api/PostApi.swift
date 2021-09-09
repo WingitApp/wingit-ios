@@ -29,19 +29,16 @@ class PostApi {
         }
         let postId = Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("userPosts").document().documentID
         let firestorePostRef = Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("userPosts").document(postId)
-        let post = Post.init(caption: caption, likes: [:], location: "", ownerId: userId, postId: postId, username: Auth.auth().currentUser!.displayName!, avatar: Auth.auth().currentUser!.photoURL!.absoluteString, mediaUrl: "", date: Date().timeIntervalSince1970, likeCount: 0, title: "")
-        guard let dict = try? post.toDictionary() else {return}
+        let post = Post.init(id: postId, caption: caption, likes: [:], location: "", ownerId: userId, postId: postId, username: Auth.auth().currentUser!.displayName!, avatar: Auth.auth().currentUser!.photoURL!.absoluteString, mediaUrl: "", date: Date().timeIntervalSince1970, likeCount: 0, title: "")
         
-        firestorePostRef.setData(dict) { (error) in
-            if error != nil {
-              onError(error!.localizedDescription)
-              return
-            }
-            Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId).collection("timelinePosts").document(postId).setData(dict)
-            Ref.FS_COLLECTION_ALL_POSTS.document(postId).setData(dict)
+        do {
+            try firestorePostRef.setData(from: post)
+            try Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId).collection("timelinePosts").document(postId).setData(from: post)
+            try Ref.FS_COLLECTION_ALL_POSTS.document(postId).setData(from: post)
             onSuccess()
-        }
-       
+        } catch {
+            print(error)
+        }       
     }
     
     func uploadImage(caption: String, imageData: Data, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {

@@ -5,7 +5,7 @@
 //  Created by YaeRim Amy Chun on 6/9/21.
 //
 
-
+import SPAlert
 import SwiftUI
 
 
@@ -14,8 +14,10 @@ struct ComposePostView: View {
 
     func sharePost() {
         composePostViewModel.sharePost(completed: {
-         //  print("done")
            self.clean()
+            let alertView = SPAlertView(title: "Your ask was successfully posted.", message: nil, preset: SPAlertIconPreset.done)
+            alertView.present(duration: 2)
+            
         }) { (errorMessage) in
             //   print("Error: \(errorMessage)")
            self.composePostViewModel.showAlert = true
