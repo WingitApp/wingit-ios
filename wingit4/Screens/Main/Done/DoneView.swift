@@ -18,11 +18,14 @@ struct DoneView: View {
                 ForEach(self.doneViewModel.doneposts, id: \.postId) {
                     donepost in
                     VStack{
-                        DoneCell(donepost: donepost)
+                        DoneCard(donepost: donepost)
                     }
                 }
             }
-        }.padding(.top, 10)
+        }
+        .background(Color.black.opacity(0.03)
+        .ignoresSafeArea(.all, edges: .all))
+        .padding(.top, 10)
         .onAppear {
             logToAmplitude(event: .viewFulfilledRequests)
             if let userId = user.id {
@@ -31,6 +34,4 @@ struct DoneView: View {
         }
     }
 }
-
-
 
