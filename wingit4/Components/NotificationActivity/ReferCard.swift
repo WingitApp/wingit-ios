@@ -31,7 +31,7 @@ struct ReferCard: View {
         .sheet(
           isPresented: $referViewModel.isReferListOpen,
           content: {
-            bumpConnectionsList(referral: $referral)
+            BumpConnectionsList(referral: $referral)
               .environmentObject(referViewModel)
           })
         

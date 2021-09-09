@@ -10,10 +10,9 @@ import Firebase
 import URLImage
 import SPAlert
 
-struct bumpConnectionsList: View {
+struct BumpConnectionsList: View {
     @EnvironmentObject var referViewModel: ReferViewModel
     @Binding var referral: Referral
-  //  var postId: String
 
     var body: some View {
         VStack {
@@ -27,7 +26,6 @@ struct bumpConnectionsList: View {
                             .foregroundColor(Color("bw"))
                         Spacer()
                         Button(action: {
-                            //askId(postId) & senderId (auth.dude) & senderId(userId of the one selected
                             referViewModel.sendBump(
                                 askId: referral.askId,
                                 parentId: referral.id!
@@ -36,7 +34,7 @@ struct bumpConnectionsList: View {
                                label: {
                             Text("Send")
                                 .fontWeight(.heavy)
-                                .foregroundColor(.green)
+                                .foregroundColor(Color(.systemTeal))
                         })
                     }
                     .padding([.horizontal,.top])
@@ -81,19 +79,22 @@ struct bumpCardView: View {
         
         HStack{
             URLImageView(inputURL: user.profileImageUrl)
-                .frame(width: 50, height: 50)
-                
+                .frame(width: 40, height: 40)
+                .clipShape(Circle())
+                .overlay(RoundedRectangle(cornerRadius: 100)
+                .stroke(Color.gray, lineWidth: 1))
                 VStack(alignment: .leading, spacing: 5) {
                  Text(user.displayName ?? "").font(.headline).bold()
                     Text(user.username ?? "").font(.subheadline)
                 }
+                .padding(.leading, 5)
                 Spacer()
                 
                 ZStack{
                     Circle()
                         .stroke(
                             self.referViewModel.selectedUsers.contains(userId) || self.referViewModel.allReferralRecipientIds.contains(userId)
-                                ? Color.green
+                                ? Color(.systemTeal)
                                 : Color.gray,
                                 lineWidth: 1
                         )
@@ -101,16 +102,15 @@ struct bumpCardView: View {
                     if self.referViewModel.selectedUsers.contains(userId) || self.referViewModel.allReferralRecipientIds.contains(userId) {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.system(size:25))
-                            .foregroundColor(.green)
+                            .foregroundColor(Color(.systemTeal))
                     }
                 }
             }
-        .padding(10)
+        .padding(
+        EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
+        )
         .contentShape(Rectangle())
         .opacity(self.referViewModel.allReferralRecipientIds.contains(userId) ? 0.3 : 1)
         .onTapGesture(perform: onTapGesture)
-               
         }
-       
-
 }
