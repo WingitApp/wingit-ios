@@ -77,18 +77,13 @@ class ActivityViewModel: ObservableObject {
                 doc.reference.delete()
             }
         }
-    }
-    
-    func ignoreConnectRequest(fromUserId: String?) {
-        guard let fromUserId = fromUserId else { return }
-        deleteConnectRequest(fromUserId: fromUserId)
         
         // Delete the request from notification's feed
         Ref.FS_COLLECTION_ACTIVITY.document(Auth.auth().currentUser!.uid).collection("feedItems").whereField("type", isEqualTo: "connectRequest").whereField("userId", isEqualTo: fromUserId).getDocuments { (snapshot, error) in
-               if let doc = snapshot?.documents {
-                   if let data = doc.first, data.exists {
-                       data.reference.delete()
-                   }
+               if let docs = snapshot?.documents {
+                    for doc in docs {
+                        doc.reference.delete()
+                    }
                }
            }
     }

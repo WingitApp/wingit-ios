@@ -121,7 +121,11 @@ struct RespondToConnectRequestRow: View {
     var body: some View {
         
         HStack {
-                Button(action: { activityViewModel.ignoreConnectRequest(fromUserId: activity.userId) }) {
+                Button(
+                    action: {
+                        activityViewModel.deleteConnectRequest(fromUserId: activity.userId)
+                        
+                    }) {
                    
                     Text("Ignore")
                         .fontWeight(.bold).foregroundColor(Color.black)
