@@ -31,12 +31,17 @@ struct NotificationView: View {
                                 }
                             } else {
                                 URLImage(URL(string: activity.userAvatar)!,
-                                                             content: {
-                                                                 $0.image
-                                                                     .resizable()
-                                                                     .aspectRatio(contentMode: .fill)
-                                                                     .clipShape(Circle())
-                                                             }).frame(width: 50, height: 50)
+                                   content: {
+                                       $0.image
+                                           .resizable()
+                                           .aspectRatio(contentMode: .fill)
+                                           .clipShape(Circle())
+                                   })
+                                  .frame(width: 40, height: 40)
+                                  .overlay(
+                                    RoundedRectangle(cornerRadius: 100)
+                                      .stroke(Color.gray, lineWidth: 1)
+                                  )
                                 
                                 VStack(alignment: .leading, spacing: 5) {
                                     Text(activity.username).font(.subheadline).bold()

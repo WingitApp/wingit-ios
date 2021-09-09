@@ -35,7 +35,7 @@ struct ReferConnectionsList: View {
                                label: {
                             Text("Send")
                                 .fontWeight(.heavy)
-                                .foregroundColor(.green)
+                                .foregroundColor(Color(.systemTeal))
                         })
                     }
                     .padding([.horizontal,.top])
@@ -80,17 +80,23 @@ struct CardView: View {
         HStack{
             URLImageView(inputURL: user.profileImageUrl)
                 .clipShape(Circle())
+                .frame(width: 40, height: 40)
+                .overlay(
+                  RoundedRectangle(cornerRadius: 100)
+                    .stroke(Color.gray, lineWidth: 1)
+                )
                 VStack(alignment: .leading, spacing: 5) {
                     Text(user.displayName ?? user.username ?? "").font(.headline).bold()
                     Text(user.bio ?? "").font(.subheadline)
                 }
+                .padding(.leading, 5)
                 Spacer()
                 
                 ZStack{
                     Circle()
                         .stroke(
                             self.referViewModel.selectedUsers.contains(userId) || self.referViewModel.allReferralRecipientIds.contains(userId)
-                                ? Color.green
+                              ? Color(.systemTeal)
                                 : Color.gray,
                                 lineWidth: 1
                         )
@@ -98,17 +104,16 @@ struct CardView: View {
                     if self.referViewModel.selectedUsers.contains(userId) || self.referViewModel.allReferralRecipientIds.contains(userId) {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.system(size:25))
-                            .foregroundColor(.green)
+                            .foregroundColor(Color(.systemTeal))
                     }
                 }
             }
-        .padding(10)
+        .padding(
+          EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
+        )
         .contentShape(Rectangle())
         .opacity(self.referViewModel.allReferralRecipientIds.contains(userId) ? 0.3 : 1)
         .onTapGesture(perform: onTapGesture)
-//                }
-               
-        }
-       
+      }
 
 }
