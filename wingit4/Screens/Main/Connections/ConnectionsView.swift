@@ -11,7 +11,7 @@ import URLImage
 
 struct ConnectionsView: View {
     @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
-    var user: User
+    var user: User?
    
     var body: some View {
         VStack {
@@ -34,7 +34,7 @@ struct ConnectionsView: View {
         }
         .navigationBarTitle(Text("Connections"), displayMode: .inline)
         .onAppear {
-            connectionsViewModel.loadConnections(userId: user.id)
+            connectionsViewModel.loadConnections(userId: user?.id)
         }
     }
 }

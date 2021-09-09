@@ -16,7 +16,7 @@ struct Connections: View {
     var body: some View {
         HStack{
             NavigationLink(
-                destination: ConnectionsView(user: user!).environmentObject(connectionsViewModel),
+                destination: ConnectionsView(user: user).environmentObject(connectionsViewModel),
                 label: {
                     HStack {
                         Text("\(connectionsCount)").font(.caption).foregroundColor(.gray)

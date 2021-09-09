@@ -169,7 +169,8 @@ class Ref {
             return FS_COLLECTION_CHAT.document(senderId).collection("chatRoom").document(recipientId).collection("chatItems")
         }
         static var FS_COLLECTION_INBOX_MESSAGES = FS_ROOT.collection("messages")
-        static func FS_COLLECTION_INBOX_MESSAGES(userId: String) -> CollectionReference {
+        static func FS_COLLECTION_INBOX_MESSAGES(userId: String?) -> CollectionReference? {
+            guard let userId = userId else { return nil }
                   return FS_COLLECTION_INBOX_MESSAGES.document(userId).collection("inboxMessages")
         }
     

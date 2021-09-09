@@ -90,8 +90,8 @@ class ChatApi {
          listener(listenerFirestore)
     }
     
-    func getInboxMessages(onSuccess: @escaping([InboxMessage]) -> Void, onError: @escaping(_ errorMessage: String) -> Void, newInboxMessage: @escaping(InboxMessage) -> Void, listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void) {
-        let listenerFirestore = Ref.FS_COLLECTION_INBOX_MESSAGES(userId: Auth.auth().currentUser!.uid).order(by: "date", descending: true).addSnapshotListener { (querySnapshot, error) in
+    func getInboxMessages(onSuccess: @escaping([InboxMessage]) -> Void, onError: @escaping(_ errorMessage: String) -> Void, newInboxMessage: @escaping(InboxMessage) -> Void, listener: @escaping(_ listenerHandle: ListenerRegistration?) -> Void) {
+        let listenerFirestore = Ref.FS_COLLECTION_INBOX_MESSAGES(userId: Auth.auth().currentUser?.uid)?.order(by: "date", descending: true).addSnapshotListener { (querySnapshot, error) in
             guard let snapshot = querySnapshot else {
                 return
             }

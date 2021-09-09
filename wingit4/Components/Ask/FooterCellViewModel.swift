@@ -13,12 +13,10 @@ import FirebaseAuth
 class FooterCellViewModel: ObservableObject {
   @Published var isLoading = false
   @Published var isLikedByUser = false
-  
-  let uid = Auth.auth().currentUser!.uid
     
   func checkPostIsLiked(post: Post) {
-    
-    if  post.likes["\(uid)"] != nil {
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+    if post.likes["\(uid)"] != nil {
       self.isLikedByUser.toggle()
     }
   }
@@ -30,6 +28,7 @@ class FooterCellViewModel: ObservableObject {
   }
 
   func like(post: Post) {
+    guard let uid = Auth.auth().currentUser?.uid else { return }
       if !self.isLikedByUser {
         // toggles UI
         self.toggleLike()
@@ -69,7 +68,7 @@ class FooterCellViewModel: ObservableObject {
   
     
   func unlike(post: Post) {
-    
+    guard let uid = Auth.auth().currentUser?.uid else { return }
       if self.isLikedByUser {
         // toggles UI
         self.toggleLike()
@@ -114,6 +113,7 @@ class FooterCellViewModel: ObservableObject {
   
   
   func createActivityNotification(post: Post) {
+    guard let uid = Auth.auth().currentUser?.uid else { return }
     let activityId = Ref.FS_COLLECTION_ACTIVITY
       .document(post.ownerId)
       .collection("feedItems")
