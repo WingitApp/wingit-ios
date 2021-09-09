@@ -19,7 +19,7 @@ let COLOR_WINGIT = Color(red: 93, green: 180, blue: 221, opacity: 0.15)
 // Sign in and Sign up pages
 let TEXT_NEED_AN_ACCOUNT = "Don't have an account?"
 let TEXT_SIGN_UP = "Sign up"
-let TEXT_SIGN_IN = "Sign in"
+let TEXT_SIGN_IN = "Login"
 let TEXT_EMAIL = "Email"
 let TEXT_FIRST_NAME = "First Name"
 let TEXT_LAST_NAME = "Last Name"

@@ -9,15 +9,13 @@ import SwiftUI
 
 struct TextFieldModifier: ViewModifier {
     func body(content: Content) -> some View {
-        content.padding()
-            .border(COLOR_LIGHT_GRAY, width: 1)
-            .padding([.top, .leading, .trailing])
-    }
-}
-
-struct SigninButtonModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content.padding().background(Color(.systemTeal)).cornerRadius(5).shadow(radius: 10, x: 0, y: 10).padding()
+        content
+            .padding()
+            .background(Color.white)
+            .cornerRadius(5)
+        // shadow effect...
+            .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 3)
+            .shadow(color: Color.black.opacity(0.08), radius: 3, x: 0, y: -3)
     }
 }
 

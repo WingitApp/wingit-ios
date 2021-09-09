@@ -23,7 +23,7 @@ struct InitialView: View {
             if session.isLoggedIn {
                 MainView()
             } else {
-                SigninView()
+                NewOnboardingUI()
             }
 
         }.onAppear(perform: listen)

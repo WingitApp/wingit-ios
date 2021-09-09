@@ -13,12 +13,19 @@ struct SigninButton: View {
     var label: String
     var body: some View {
         Button(action: action) {
-            HStack {
-                Spacer()
-                Text(label).fontWeight(.bold).foregroundColor(Color.white)
-                Spacer()
-            }
+        Text(label)
+            .font(.system(size: 20))
+            .foregroundColor(.white)
+            .fontWeight(.bold)
+            .padding(.vertical)
+            .frame(width: UIScreen.main.bounds.width - 50)
+            .background(
             
-        }.modifier(SigninButtonModifier())
+                LinearGradient(gradient: .init(colors: [Color("Color"),Color("Color1")]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            )
+            .cornerRadius(8)
+        }
+        
+       // .modifier(SigninButtonModifier())
     }
 }
