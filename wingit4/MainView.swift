@@ -34,7 +34,7 @@ struct MainView: View {
         NavigationTab(
             tag: 2,
             icon: IMAGE_PHOTO,
-            screen: AnyView(CameraView())
+            screen: AnyView(ComposePostView())
         )
         NavigationTab(
             tag: 3,

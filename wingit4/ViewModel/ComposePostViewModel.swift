@@ -1,5 +1,5 @@
 //
-//  CameraViewModel.swift
+//  ComposePostViewModel.swift
 //  wingit4
 //
 //  Created by YaeRim Amy Chun on 6/9/21.
@@ -13,7 +13,7 @@ import FirebaseStorage
 import SwiftUI
 
 
-class CameraViewModel: ObservableObject {
+class ComposePostViewModel: ObservableObject {
     
     @Published var caption: String = ""
     @Published var image: Image = Image(systemName: IMAGE_PHOTO)
@@ -27,12 +27,12 @@ class CameraViewModel: ObservableObject {
     func sharePost(completed: @escaping() -> Void,  onError: @escaping(_ errorMessage: String) -> Void) {
         
         if !caption.isEmpty && imageData.count == 0 {
-            logToAmplitude(event: .postRequest, properties: [.attachedPhoto: false])
-            Api.Post.uploadPost(caption: caption, imageData: imageData, onSuccess: completed, onError: onError)
+            logToAmplitude(event: .postAsk, properties: [.attachedPhoto: false])
+            Api.Post.postWithoutMedia(caption: caption, imageData: imageData, onSuccess: completed, onError: onError)
             
           } else if !caption.isEmpty && imageData.count != 0{
-            logToAmplitude(event: .postRequest, properties: [.attachedPhoto: true])
-            Api.Post.uploadImage(caption: caption, imageData: imageData, onSuccess: completed, onError: onError)
+            logToAmplitude(event: .postAsk, properties: [.attachedPhoto: true])
+            Api.Post.postWithMedia(caption: caption, imageData: imageData, onSuccess: completed, onError: onError)
           } else {
                 showAlert = true
                 errorString = "Please fill in all fields"

@@ -27,15 +27,16 @@ enum AmplitudeEvent: String {
     case viewOwnProfile = "View Own Profile"
     case userLogout = "User Logout"
     
-    // Requests
-    case commentOnRequest = "Comment On Request"
-    case postRequest = "Post Request"
-    case markRequestFulfilled = "Mark Request Fulfilled"
+    // Asks
+    case commentOnAsk = "Comment On Ask"
+    case postAsk = "Post Ask"
+    case markAskClosed = "Mark Ask Closed"
+    case viewHomeAsksFeed = "View Home Asks Feed"
+    case viewOwnOpenAsks = "View Own Open Asks"
+    case viewOwnClosedAsks = "View Own Closed Asks"
+    
+    // Referrals
     case tapReferButton = "Tap Refer Button"
-    case viewOwnRequests = "View Own Requests"
-    case viewOthersRequests = "View Others Requests"
-    case viewFulfilledRequests = "View Fulfilled Requests"
-    case viewHomeRequestsFeed = "View Home Requests Feed"
     
     // Recs
     case commentOnRec = "Comment On Rec"

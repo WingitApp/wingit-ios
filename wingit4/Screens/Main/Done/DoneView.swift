@@ -27,7 +27,7 @@ struct DoneView: View {
         .ignoresSafeArea(.all, edges: .all))
         .padding(.top, 10)
         .onAppear {
-            logToAmplitude(event: .viewFulfilledRequests)
+            logToAmplitude(event: .viewOwnClosedAsks)
             if let userId = user.id {
                 self.doneViewModel.loadDonePosts(userId: userId)
             }

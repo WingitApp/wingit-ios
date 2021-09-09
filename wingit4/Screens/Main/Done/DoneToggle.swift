@@ -18,7 +18,6 @@ struct DoneToggle: View {
     }
     
     func shareDone() {
-       // cameraViewModel.uploadPost
         doneViewModel.shareDone(completed: {
           // print("done")
            self.clean()
@@ -30,7 +29,6 @@ struct DoneToggle: View {
         }
     }
     func justDone() {
-       // cameraViewModel.uploadPost
         doneViewModel.justDone(completed: {
         //   print("done")
            self.clean()
