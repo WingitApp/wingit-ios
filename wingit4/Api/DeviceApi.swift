@@ -13,9 +13,20 @@ import UIKit
 
 class DeviceApi {
     
-    func createDevice() {
+  func createDevice(token: String) {
         if let deviceId = UIDevice.current.identifierForVendor?.uuidString {
-            let device = Device(id: deviceId, createdTime: nil, appVersion: UIApplication.appVersion!, model: UIDevice().type.rawValue, OSVersion: UIDevice().systemVersion, platform: .ios, pushNotificationsEnabled: true, pushNotificationToken: nil, userId: Auth.auth().currentUser?.uid)
+          
+            let device = Device(
+              id: deviceId,
+              createdTime: nil,
+              appVersion: UIApplication.appVersion!,
+              model: UIDevice().type.rawValue,
+              OSVersion: UIDevice().systemVersion,
+              platform: .ios,
+              pushNotificationsEnabled: true,
+              pushNotificationToken: token,
+              userId: Auth.auth().currentUser?.uid
+            )
                 
             do {
                 try Ref.FS_COLLECTION_DEVICES.document(deviceId).setData(from: device)
@@ -26,9 +37,15 @@ class DeviceApi {
         }
     }
     
-    func updateDeviceInFirestore() {
+  func updateDeviceInFirestore(token: String) {
         if let deviceId = UIDevice.current.identifierForVendor?.uuidString {
+          
+          if token.isEmpty {
             Ref.FS_COLLECTION_DEVICES.document(deviceId).setData(["appVersion": UIApplication.appVersion!, "lastUpdated": FieldValue.serverTimestamp(), "model":  UIDevice().type.rawValue, "OSVersion": UIDevice().systemVersion, "userId": Auth.auth().currentUser?.uid ?? ""], merge: true)
+          } else {
+            Ref.FS_COLLECTION_DEVICES.document(deviceId).setData(["appVersion": UIApplication.appVersion!, "lastUpdated": FieldValue.serverTimestamp(), "model":  UIDevice().type.rawValue, "OSVersion": UIDevice().systemVersion, "userId": Auth.auth().currentUser?.uid ?? "", "pushNotificationToken": token], merge: true)
+          }
+          
         }
     }
     
