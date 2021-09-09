@@ -76,7 +76,7 @@ class AskCardViewModel: ObservableObject {
     Api.User.loadUser(userId: postOwnerId) { (postOwner) in
       self.postOwner = postOwner
       self.destination = AnyView(UserProfileView(user: postOwner))
-      self.isNavLinkDisabled = self.isProfileView
+      self.isNavLinkDisabled = self.isProfileView || self.isOwnPost
     }
   }
   
