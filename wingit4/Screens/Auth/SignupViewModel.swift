@@ -65,12 +65,13 @@ class SignupViewModel: ObservableObject {
   }
   
   func isFormComplete() -> Bool {
-    return !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty && !password.isEmpty
+    return !firstName.isEmpty && !lastName.isEmpty && !username.isEmpty && !email.isEmpty && !password.isEmpty
   }
   
   func clean() {
     firstName = ""
     lastName = ""
+    username = ""
     email = ""
     password = ""
   }
@@ -85,6 +86,7 @@ class SignupViewModel: ObservableObject {
         userId: user.id,
       firstName: user.firstName,
         lastName: user.lastName,
+        username: user.username,
       email: user.email,
       signupMethod: "email"
     )

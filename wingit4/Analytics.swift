@@ -110,8 +110,8 @@ func setUserProperty(property: AmplitudeUserProperty, value: Any) {
     AMPIdentify().set(property.rawValue, value: value as? NSObject)
 }
 
-func setUserPropertiesOnAccountCreation(userId: String?, firstName: String?, lastName: String?, email: String, signupMethod: String) {
-    guard let userId = userId, let firstName = firstName, let lastName = lastName else { return }
+func setUserPropertiesOnAccountCreation(userId: String?, firstName: String?, lastName: String?, username: String?, email: String, signupMethod: String) {
+    guard let userId = userId, let firstName = firstName, let lastName = lastName, let username = username else { return }
     let amplitude = Amplitude.instance()
     amplitude.setUserId(userId)
     guard let identify = AMPIdentify()
@@ -119,6 +119,7 @@ func setUserPropertiesOnAccountCreation(userId: String?, firstName: String?, las
             .setOnce(AmplitudeUserProperty.email.rawValue, value: NSString(string: email))
             .setOnce(AmplitudeUserProperty.firstName.rawValue, value: NSString(string: firstName))
             .setOnce(AmplitudeUserProperty.lastName.rawValue, value: NSString(string: lastName))
+            .setOnce(AmplitudeUserProperty.username.rawValue, value: NSString(string: username))
             .setOnce(AmplitudeUserProperty.signupMethod.rawValue, value: NSString(string: signupMethod))
             .set(AmplitudeUserProperty.connections.rawValue, value: NSNumber(value: 0)) else { return }
     amplitude.identify(identify)
