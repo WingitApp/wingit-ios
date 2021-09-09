@@ -17,7 +17,7 @@ struct NotificationView: View {
             List {
                 if !activityViewModel.activityArray.isEmpty {
                     ForEach(self.activityViewModel.activityArray, id: \.activityId) { activity in
-                          HStack {
+                      HStack(alignment: .top) {
                             if activity.type == "comment" {
                                 ZStack {
                                     NotificationEntry(activity: activity)
@@ -37,22 +37,29 @@ struct NotificationView: View {
                                            .aspectRatio(contentMode: .fill)
                                            .clipShape(Circle())
                                    })
-                                  .frame(width: 40, height: 40)
+                                  .frame(width: 35, height: 35)
                                   .overlay(
                                     RoundedRectangle(cornerRadius: 100)
                                       .stroke(Color.gray, lineWidth: 1)
                                   )
-                                
-                                VStack(alignment: .leading, spacing: 5) {
+                              VStack(alignment: .leading) {
+                                HStack(alignment: .center, spacing: 5) {
                                     Text(activity.username).font(.subheadline).bold()
                                     Text(activity.typeDescription).font(.subheadline)
                                 }
                                 Spacer()
                                 Text(timeAgoSinceDate(Date(timeIntervalSince1970: activity.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
+                              }
+                              .padding(.leading, 3)
+                                
+                               
                             }
                        
 
-                        }.padding(10)
+                        }
+                        .padding(
+                          EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
+                        )
                     }
                 }
                   
@@ -73,30 +80,36 @@ struct CommentActivityRow: View {
     var activity: Activity
     var activityViewModel: ActivityViewModel
     var body: some View {
-        HStack {
+      HStack(alignment: .top) {
             URLImage(URL(string: activity.userAvatar)!,
-                                         content: {
-                                             $0.image
-                                                 .resizable()
-                                                 .aspectRatio(contentMode: .fill)
-                                                 .clipShape(Circle())
-                                         }).frame(width: 50, height: 50)
+               content: {
+                   $0.image
+                       .resizable()
+                       .aspectRatio(contentMode: .fill)
+                       .clipShape(Circle())
+               })
+              .frame(width: 35, height: 35)
+              .overlay(
+                RoundedRectangle(cornerRadius: 100)
+                  .stroke(Color.gray, lineWidth: 1)
+              )
             HStack{
                 VStack(alignment: .leading) {
                     HStack{
                         Text(activity.username).font(.subheadline).bold()
-                        Spacer()
-                        Text(timeAgoSinceDate(Date(timeIntervalSince1970: activity.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
-                    }
-                    Spacer()
-                    HStack{
                         Text(activity.typeDescription).font(.subheadline)
-                        Spacer()
-                        RespondToConnectRequestRow(activity: activity)
                     }
+                    HStack{
+                      Text(timeAgoSinceDate(Date(timeIntervalSince1970: activity.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
+                    }
+                    .padding(.top, 3)
+                    VStack(alignment: .trailing){
+                        RespondToConnectRequestRow(activity: activity)
+                    }.padding(.top, 3)
                  
                 }
             }
+            .padding(.leading, 5)
             
         }
     }

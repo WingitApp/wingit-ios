@@ -17,14 +17,14 @@ struct LikeButton: View {
   
   func onTapGesture() {
     if self.footerCellViewModel.isLikedByUser {
+      post.likeCount -= 1
       self.footerCellViewModel.unlike(post: post)
       // update count
-      post.likeCount -= 1
     } else {
       logToAmplitude(event: .upvote)
+      post.likeCount += 1
       self.footerCellViewModel.like(post: post)
       // update count
-      post.likeCount += 1
     }
   }
   
