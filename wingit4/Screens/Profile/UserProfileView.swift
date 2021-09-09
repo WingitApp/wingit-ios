@@ -65,7 +65,7 @@ struct UserProfileView: View {
                }
                 .background(Color.black.opacity(0.03)
                 .ignoresSafeArea(.all, edges: .all))
-                .navigationBarTitle(Text(Auth.auth().currentUser?.displayName ?? ""), displayMode: .automatic)
+                .navigationBarTitle(Text(user.displayName ?? ""), displayMode: .automatic)
                 .environmentObject(connectionsViewModel)
                  .onAppear {
                     logToAmplitude(event: .viewOtherProfile)
