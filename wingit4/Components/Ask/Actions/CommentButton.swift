@@ -10,10 +10,13 @@ import SwiftUI
 struct CommentButton: View {
   @EnvironmentObject var commentViewModel: CommentViewModel
   var showLabel: Bool = false
+  var isTapDisabled: Bool = false
   
   func onTapCommentIcon() {
-    logToAmplitude(event: .viewComments)
-    self.commentViewModel.toggleCommentScreen()
+    if !isTapDisabled {
+      logToAmplitude(event: .viewComments)
+      self.commentViewModel.toggleCommentScreen()
+    }
   }
   
   var body: some View {
@@ -23,19 +26,18 @@ struct CommentButton: View {
       label: {
           Image(systemName: "message")
             .modifier(IconButtonStyle())
-//            .padding(.leading, 10)
             .accentColor(.red)
+        Text("\(commentViewModel.comments.count.formatUsingAbbrevation())")
+          .modifier(CaptionStyle())
+          .opacity(self.commentViewModel.comments.isEmpty ? 0 : 1)
+        if self.showLabel {
+          Text("Comment")
+            .font(.caption)
+            .font(.system(size: 15))
+        }
       })
-      Text("\(commentViewModel.comments.count.formatUsingAbbrevation())")
-        .modifier(CaptionStyle())
-        .opacity(self.commentViewModel.comments.isEmpty ? 0 : 1)
-    if self.showLabel {
-      Text("Comment")
-        .font(.caption)
-        .font(.system(size: 15))
-        // todo: do this conditionaly
-
-    }
+      .buttonStyle(PlainButtonStyle())
+     
   }
     
 }

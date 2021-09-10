@@ -19,14 +19,14 @@ struct ShareButton: View {
           label: {
             Image(systemName: "arrowshape.turn.up.right")
               .modifier(IconButtonStyle())
+            if self.showLabel {
+              Text("Share")
+                .foregroundColor(.black)
+                .font(.caption)
+                .padding(.trailing, 15)
+            }
         })
-        
-        if self.showLabel {
-          Text("Share")
-            .font(.caption)
-            .padding(.trailing, 15)
-
-        }
+          .buttonStyle(PlainButtonStyle())
       }
     }
 

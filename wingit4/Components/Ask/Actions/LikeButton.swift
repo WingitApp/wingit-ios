@@ -34,7 +34,6 @@ struct LikeButton: View {
           ? "heart.fill"
           : "heart"
         )
-        .onTapGesture(perform: onTapGesture)
         .foregroundColor(
           self.footerCellViewModel.isLikedByUser ? .red : .gray
         )
@@ -43,11 +42,12 @@ struct LikeButton: View {
           .font(.caption)
           .opacity(post.likeCount > 0 ? 1 : 0)
         if self.showLabel {
-          Text(self.footerCellViewModel.isLikedByUser ? "Liked" : "Like ")
+          Text("Like")
             .font(.caption)
             .padding(.leading, -2)
         }
       }
+      .onTapGesture(perform: onTapGesture)
       .modifier(ActionIconStyle())
       .transition(
         .asymmetric(

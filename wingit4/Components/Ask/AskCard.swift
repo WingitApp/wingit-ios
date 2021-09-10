@@ -46,7 +46,7 @@ struct AskCard: View {
           FooterCell(post: $post)
         }
         .overlay(
-          RoundedRectangle(cornerRadius: 20)
+          RoundedRectangle(cornerRadius: 8)
             .stroke(Color.gray, lineWidth: 0.5)
         )
       }
@@ -54,7 +54,7 @@ struct AskCard: View {
       .background(
         self.askCardViewModel.getColorByIndex(index: index).opacity(1)
       )
-      .cornerRadius(20)
+      .cornerRadius(8)
       .padding(
         EdgeInsets(top: 5, leading: 15, bottom: 3, trailing: 15)
       )

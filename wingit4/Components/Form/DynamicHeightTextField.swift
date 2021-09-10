@@ -97,7 +97,7 @@ struct TextView: View {
             maxHeight: calculatedHeight
           )
           .padding(
-            EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 5)
+            EdgeInsets(top: 10, leading: 10, bottom: 5, trailing: 5)
           )
           .cornerRadius(20)
           .background(placeholderView.padding(.leading, 10), alignment: .leading)

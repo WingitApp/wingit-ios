@@ -28,7 +28,8 @@ struct AskDetailFooter: View {
           )
           Spacer()
           CommentButton(
-            showLabel: true
+            showLabel: true,
+            isTapDisabled: true
           )
           Spacer()
           ShareButton(

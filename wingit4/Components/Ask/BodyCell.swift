@@ -31,10 +31,10 @@ struct BodyCell: View {
                     })
                     
                     .frame(width: UIScreen.main.bounds.width - 60, height: 250)
-                    .cornerRadius(15)
+                    .cornerRadius(8)
                     .overlay(
-                      RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.gray, lineWidth: 0.2)
+                      RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.black, lineWidth: 0.3)
                     )
                 })
             }

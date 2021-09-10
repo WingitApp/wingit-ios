@@ -42,6 +42,7 @@
 		15762C6A26E170ED00A8E041 /* ReferralsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15762C6926E170ED00A8E041 /* ReferralsView.swift */; };
 		15762C6C26E170FA00A8E041 /* ReferralsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15762C6B26E170FA00A8E041 /* ReferralsViewModel.swift */; };
 		15DA39B426DC5C620080193E /* AskCardPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA39B326DC5C620080193E /* AskCardPlaceholder.swift */; };
+		15DFD07426EAE005002CBE31 /* ParallaxImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DFD07326EAE005002CBE31 /* ParallaxImage.swift */; };
 		15E4907426E84A1700B25B56 /* AskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4906D26E84A1700B25B56 /* AskDetailView.swift */; };
 		15E4907526E84A1700B25B56 /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4906F26E84A1700B25B56 /* SignupViewModel.swift */; };
 		15E4907726E84A1700B25B56 /* SigninView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4907126E84A1700B25B56 /* SigninView.swift */; };
@@ -214,6 +215,7 @@
 		15762C6926E170ED00A8E041 /* ReferralsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralsView.swift; sourceTree = "<group>"; };
 		15762C6B26E170FA00A8E041 /* ReferralsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralsViewModel.swift; sourceTree = "<group>"; };
 		15DA39B326DC5C620080193E /* AskCardPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskCardPlaceholder.swift; sourceTree = "<group>"; };
+		15DFD07326EAE005002CBE31 /* ParallaxImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxImage.swift; sourceTree = "<group>"; };
 		15E4906D26E84A1700B25B56 /* AskDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskDetailView.swift; sourceTree = "<group>"; };
 		15E4906F26E84A1700B25B56 /* SignupViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		15E4907126E84A1700B25B56 /* SigninView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninView.swift; sourceTree = "<group>"; };
@@ -489,6 +491,7 @@
 			isa = PBXGroup;
 			children = (
 				650216B826E9689300B42BC6 /* RollingNumberView.swift */,
+				15DFD07326EAE005002CBE31 /* ParallaxImage.swift */,
 			);
 			name = Form;
 			path = "/Users/joshslee/Documents/wingit-ios/wingit4/Components/Form";
@@ -1027,6 +1030,7 @@
 				15E4907526E84A1700B25B56 /* SignupViewModel.swift in Sources */,
 				3B7AF0A02671E404003BCCF3 /* ProfileInformation.swift in Sources */,
 				65A9EFA326E0923300E81CBF /* Referral.swift in Sources */,
+				15DFD07426EAE005002CBE31 /* ParallaxImage.swift in Sources */,
 				3B7AF0C12673EE2E003BCCF3 /* ActivityViewModel.swift in Sources */,
 				3B7AF07F2671BBA8003BCCF3 /* UsersView.swift in Sources */,
 				3B7AF0832671BC28003BCCF3 /* ChatView.swift in Sources */,

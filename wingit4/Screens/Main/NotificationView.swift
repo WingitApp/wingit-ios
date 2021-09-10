@@ -102,13 +102,12 @@ struct CommentActivityRow: View {
                         Text(activity.username).font(.subheadline).bold()
                         Text(activity.typeDescription).font(.subheadline)
                     }
-                    HStack{
+                  HStack (alignment: .bottom) {
                       Text(timeAgoSinceDate(Date(timeIntervalSince1970: activity.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
+                      Spacer()
+                        RespondToConnectRequestRow(activity: activity)
                     }
                     .padding(.top, 3)
-                    VStack(alignment: .trailing){
-                        RespondToConnectRequestRow(activity: activity)
-                    }.padding(.top, 3)
                  
                 }
             }
