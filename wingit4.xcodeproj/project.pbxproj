@@ -493,9 +493,8 @@
 				650216B826E9689300B42BC6 /* RollingNumberView.swift */,
 				15DFD07326EAE005002CBE31 /* ParallaxImage.swift */,
 			);
-			name = Form;
-			path = /Users/yrac/wingit/wingit_ios/wingit4/wingit4/Components/Form;
-			sourceTree = "<absolute>";
+			path = Form;
+			sourceTree = "<group>";
 		};
 		15F7E85E26E8429500E5238F /* Recovered References */ = {
 			isa = PBXGroup;
@@ -547,7 +546,6 @@
 			isa = PBXGroup;
 			children = (
 				15E4907A26E84BD700B25B56 /* DynamicHeightTextField.swift */,
-				15E4906D26E84A1700B25B56 /* AskDetailView.swift */,
 				659F907426E1732600DE758A /* DeviceApi.swift */,
 				6502C14426C50481007C04C9 /* Config */,
 				3B75E3BC267153BA002F3108 /* wingit4 */,
@@ -744,6 +742,7 @@
 				65A9EF9726DF0B2500E81CBF /* Connections */,
 				3BD866F326A0916800A49872 /* Comment */,
 				3B5BDB56268F92760034B18C /* Report */,
+				15E4906D26E84A1700B25B56 /* AskDetailView.swift */,
 				3B7AF0822671BC28003BCCF3 /* ChatView.swift */,
 				65FE040326E9FE3200333609 /* ComposePostView.swift */,
 				3B7AF0802671BBD4003BCCF3 /* MessagesView.swift */,
