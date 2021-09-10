@@ -34,7 +34,7 @@ struct BodyCell: View {
                     .cornerRadius(8)
                     .overlay(
                       RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.black, lineWidth: 0.3)
+                        .stroke(Color.gray, lineWidth: 0.3)
                     )
                 })
             }

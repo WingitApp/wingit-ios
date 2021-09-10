@@ -28,30 +28,50 @@ struct AcceptButton: View {
     @EnvironmentObject var referralsViewModel: ReferralsViewModel
     @Binding var referral: Referral
     @Binding var post: Post
-   
+    @State var userHasAccepted: Bool = false
+//    NavigationLink(
+//     destination: AskDetailView(post: $post),
+//     isActive: $userHasAccepted
+//     {EmptyView()}
+    @StateObject var askCardViewModel = AskCardViewModel()
+    @StateObject var askMenuViewModel = AskMenuViewModel()
+    @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
+    // Comment
+    @StateObject var commentViewModel = CommentViewModel()
+    @StateObject var referViewModel = ReferViewModel()
+    @StateObject var commentInputViewModel = CommentInputViewModel()
+    // Like
+    @StateObject var footerCellViewModel = FooterCellViewModel()
     
     var body: some View {
-        //one pressed, status is changed.
-        //deleted from refer page.
-        //enters into the postId or referralId post detail comment view
-        //in current user's notification, also having a navigation view to the comment view. You have accepted. (navigation) or in the referral.
-        Button(action: {
-            referralsViewModel.acceptReferral(referral: referral, onSuccess: {})
-        },
-               label: {
-                VStack{
-                    Text("Accept")
-                        .foregroundColor(.white)
-                        .fontWeight(.bold)
-                }
-                .padding(.vertical, 10)
-                .padding(.horizontal, 30)
-                .frame(width: UIScreen.main.bounds.width - 235, height: UIScreen.main.bounds.width / 9)
-                .background(
-                            LinearGradient(gradient: .init(colors: [Color("Color"),Color("Color1")]), startPoint: .topLeading, endPoint: .bottomTrailing))
-                .cornerRadius(15)
-        })
-
+       
+        NavigationLink(
+            destination: AskDetailView(post: $post)
+                .environmentObject(askCardViewModel)
+                .environmentObject(askMenuViewModel)
+                .environmentObject(askDoneToggleViewModel)
+                .environmentObject(commentViewModel)
+                .environmentObject(commentInputViewModel)
+                .environmentObject(footerCellViewModel),
+            isActive: $userHasAccepted,
+            label: {
+                Button(action: {
+                    referralsViewModel.acceptReferral(referral: referral, onSuccess: {self.userHasAccepted.toggle()})
+                },
+                       label: {
+                        VStack{
+                            Text("Accept")
+                                .foregroundColor(.white)
+                                .fontWeight(.bold)
+                        }
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 30)
+                        .frame(width: UIScreen.main.bounds.width - 235, height: UIScreen.main.bounds.width / 9)
+                        .background(
+                                    LinearGradient(gradient: .init(colors: [Color("Color"),Color("Color1")]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                        .cornerRadius(15)
+                })
+            })
     }
 }
 

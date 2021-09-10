@@ -60,7 +60,7 @@ struct ReferBody: View {
            // .modifier(FeedItemShadow())
             .padding(.top, 10).padding(.bottom, 10)
             .frame(width: UIScreen.main.bounds.width - 30)
-            .background(RoundedRectangle(cornerRadius: 15).stroke(Color.gray.opacity(0.2),lineWidth: 1.5))
+            .background(RoundedRectangle(cornerRadius: 15).stroke(Color.gray, lineWidth: 0.3))
 
         }.buttonStyle(PlainButtonStyle())
         

@@ -225,7 +225,7 @@ struct SignUp1 : View {
         
         VStack{
                 
-                VStack(alignment: .center, spacing: 12) {
+                VStack(alignment: .center, spacing: 3) {
 
                     UserAvatar(
                       image: signupViewModel.image,
@@ -235,6 +235,7 @@ struct SignUp1 : View {
                         self.signupViewModel.isImagePickerShown = true
                       }
                     )
+                    Text("Tap on picture").foregroundColor(.gray).font(.system(size:10))
                 }.padding(.top, 10)
            
             
