@@ -235,7 +235,8 @@ struct SignUp1 : View {
                         self.signupViewModel.isImagePickerShown = true
                       }
                     )
-                    Text("Tap on picture").foregroundColor(.gray).font(.system(size:10))
+                    Text("Tap to add photo")
+                    .modifier(CaptionStyle()).font(.system(size:10))
                 }.padding(.top, 10)
            
             
