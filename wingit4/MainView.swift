@@ -58,7 +58,7 @@ struct MainView: View {
           .environmentObject(activityViewModel)
           .environmentObject(homeViewModel)
      }
-    .accentColor(Color(.systemTeal))
+    .accentColor(Color("Color1"))
     .environmentObject(profileViewModel)
     .environmentObject(activityViewModel)
     .environmentObject(homeViewModel)

@@ -24,7 +24,7 @@ struct ReferConnectionsList: View {
                         Text("Who can help?")
                             .font(.title2)
                             .fontWeight(.heavy)
-                            .foregroundColor(Color("bw"))
+                            .foregroundColor(Color("Color1"))
                         Spacer()
                         Button(action: {
                             //askId(postId) & senderId (auth.dude) & senderId(userId of the one selected
@@ -35,7 +35,7 @@ struct ReferConnectionsList: View {
                                label: {
                             Text("Send")
                                 .fontWeight(.heavy)
-                                .foregroundColor(Color(.systemTeal))
+                                .foregroundColor(Color("Color"))
                         })
                     }
                     .padding([.horizontal,.top])
@@ -104,7 +104,7 @@ struct CardView: View {
                     if self.referViewModel.selectedUsers.contains(userId) || self.referViewModel.allReferralRecipientIds.contains(userId) {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.system(size:25))
-                            .foregroundColor(Color(.systemTeal))
+                            .foregroundColor(Color("Color"))
                     }
                 }
             }

@@ -23,7 +23,7 @@ struct Connections: View {
                         Text("Connections")
                     }
                     .font(.headline)
-                    .foregroundColor(Color(.systemTeal))
+                    .foregroundColor(Color("Color"))
                     .padding(.top, 5)
                 })
             }
