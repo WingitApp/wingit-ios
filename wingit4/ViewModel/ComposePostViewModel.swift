@@ -16,13 +16,15 @@ import SwiftUI
 class ComposePostViewModel: ObservableObject {
     
     @Published var caption: String = ""
+    
     @Published var image: Image = Image(systemName: IMAGE_PHOTO)
     var imageData: Data = Data(count: 0)
+    @Published var showImagePicker: Bool = false
+    
     var errorString = ""
     
     @Published var showAlert: Bool = false
-    @Published var showImagePicker: Bool = false
-   
+    
     
     func sharePost(completed: @escaping() -> Void,  onError: @escaping(_ errorMessage: String) -> Void) {
         

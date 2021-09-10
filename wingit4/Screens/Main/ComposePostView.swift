@@ -34,33 +34,58 @@ struct ComposePostView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text("Need both pic and text to post recs but not asking").foregroundColor(.gray).font(.caption).padding(.top, 10)
-                HStack(alignment: .top) {
-                  
-                    composePostViewModel.image.resizable().scaledToFill().frame(width: 60, height: 60).clipped().foregroundColor(.gray).onTapGesture {
-                            self.composePostViewModel.showImagePicker = true
-                    }
-                      
-                    ScrollView(.vertical, showsIndicators: false) {
-                        
-                        //Chat Content
-                        Text("")
-                    }
-                    TextEditor(text: $composePostViewModel.caption)
-                        .cornerRadius(15)
-                        .padding()
-               }.padding()
-                Spacer()
+                
+//                    composePostViewModel.image.resizable().scaledToFill().frame(width: 60, height: 60).clipped().foregroundColor(.gray).onTapGesture {
+//                            self.composePostViewModel.showImagePicker = true
+//                    }
+                
+                TextEditor(text: $composePostViewModel.caption)
+                    .padding()
+    if composePostViewModel.imageData.count != 0 {
+        ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top)) {
+                Image(uiImage: UIImage(data: composePostViewModel.imageData)!)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: UIScreen.main.bounds.width / 2, height: 150)
+                    .cornerRadius(15)
+                        // Cancel Button...
+                Button(action: {composePostViewModel.imageData = Data(count: 0)}) {
+                    
+                    Image(systemName: "xmark")
+                        .foregroundColor(.white)
+                        .padding(10)
+                        .background(Color("Color"))
+                        .clipShape(Circle())
+                }
+            }
+            .padding()
+        }
+                HStack{
+                    Group{
+                    Image(systemName: "camera.fill")
+                    Text("Add photo").bold()
+                    }.foregroundColor(.black).font(.caption2)
+                }
+                .frame(width: UIScreen.main.bounds.width - 50, height: UIScreen.main.bounds.width / 10)
+                .background(Color.gray).opacity(0.3)
+                .cornerRadius(10)
+                .padding(.bottom, 5)
+                .onTapGesture {
+                        self.composePostViewModel.showImagePicker = true
+                }
+              
             }.sheet(isPresented: $composePostViewModel.showImagePicker) {
                // ImagePickerController()
                 ImagePicker(showImagePicker: self.$composePostViewModel.showImagePicker, pickedImage: self.$composePostViewModel.image, imageData: self.$composePostViewModel.imageData)
             }
-             .navigationBarItems(trailing:
+            .navigationBarTitle("Wingit!", displayMode: .inline)
+            .navigationBarItems(trailing:
                                     
                 Button(action: sharePost) {
 
-                    Text("Wingit!")
+                    Text("Post")
                 }
+                    
            
              .alert(isPresented: $composePostViewModel.showAlert) {
                 Alert(title: Text("Error"), message: Text(self.composePostViewModel.errorString), dismissButton: .default(Text("OK")))
