@@ -18,7 +18,7 @@ class DeviceApi {
           
             let device = Device(
               id: deviceId,
-              createdTime: nil,
+              createdAt: nil,
               appVersion: UIApplication.appVersion!,
               model: UIDevice().type.rawValue,
               OSVersion: UIDevice().systemVersion,

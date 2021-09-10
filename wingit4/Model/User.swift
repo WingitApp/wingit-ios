@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 
 struct User: Codable, Identifiable {
     @DocumentID var id: String?
-    @ServerTimestamp var createdTime: Timestamp?
+    @ServerTimestamp var createdAt: Timestamp?
     var uid: String?
     var bio: String?
     var canonicalEmail: String?

@@ -11,10 +11,10 @@ import Foundation
 
 struct Ask: Identifiable, Codable {
     @DocumentID var id: String?
-    @ServerTimestamp var createdTime: Timestamp?
-    @ServerTimestamp var closedTime: Timestamp?
+    @ServerTimestamp var createdAt: Timestamp?
     var bumpedBy: [String]? // user ids
     var bumpCount: Int
+    var closedAt: Timestamp?
     var comments: [String]?
     var createdBy: String // user id
     var followers: [String]? // user ids
@@ -28,10 +28,10 @@ struct Ask: Identifiable, Codable {
     
     enum CodingKeys: String, CodingKey {
         case id
-        case bumpedBy
-        case createdTime
-        case closedTime
         case bumpCount
+        case bumpedBy
+        case createdAt
+        case closedAt
         case createdBy
         case followers
         case imageUrls

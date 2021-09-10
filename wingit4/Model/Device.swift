@@ -13,7 +13,7 @@ import Foundation
 
 struct Device: Codable {
     @DocumentID var id: String?
-    @ServerTimestamp var createdTime: Timestamp?
+    @ServerTimestamp var createdAt: Timestamp?
     var appVersion: String
     var model: String
     var OSVersion: String?
@@ -24,7 +24,7 @@ struct Device: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id
-        case createdTime
+        case createdAt
         case appVersion
         case model
         case OSVersion

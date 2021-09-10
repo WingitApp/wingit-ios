@@ -11,7 +11,7 @@ import Foundation
 
 struct Comment_v2: Codable, Identifiable {
     @DocumentID var id: String? // = askId or recId
-    @ServerTimestamp var createdTime: Timestamp?
+    @ServerTimestamp var createdAt: Timestamp?
     var askId: String?
     var children: [String]? // commentIds
     var createdByUser: User?
@@ -27,7 +27,7 @@ struct Comment_v2: Codable, Identifiable {
     
     enum CodingKeys: String, CodingKey {
         case id
-        case createdTime
+        case createdAt
         case askId
         case createdBy
         case likeCount
