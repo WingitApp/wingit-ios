@@ -12,42 +12,38 @@ import URLImage
 struct AskDetailBody: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
   @Binding var post: Post
+    @EnvironmentObject var askCardViewModel: AskCardViewModel
 
     var body: some View {
-      VStack(alignment: .leading) {
-        Text(post.caption)
-//          .modifier(BodyStyle())
-          .font(.callout)
-        
-        if !post.mediaUrl.isEmpty {
-          HStack {
+      VStack(alignment: .center) {
+        HStack{
+            Text(post.caption)
+              .font(.callout)
             Spacer()
-            Button(action: {
-                withAnimation(.easeInOut){
-                  askCardViewModel.isImageModalOpen.toggle()
-                }
-            }, label: {
-              URLImage(URL(string: post.mediaUrl)!,
-                content: {
-                    $0.image
-                        .resizable()
-                        .scaledToFit()
-                        .aspectRatio(contentMode: .fill)
-                })
-                
-                .frame(width: UIScreen.main.bounds.width - 60, height: 250)
-                .cornerRadius(8)
-                .overlay(
-                  RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.black, lineWidth: 0.3)
+        }
+       
+      if post.mediaUrl != "" {
+        Button(action: {
+            withAnimation(.easeInOut){
+              askCardViewModel.isImageModalOpen.toggle()
+            }
+        }, label: {
+          URLImage(URL(string: post.mediaUrl)!,
+            content: {
+                $0.image
+                    .resizable()
+                    .scaledToFit()
+                    .aspectRatio(contentMode: .fill)
+            })
+            
+            .frame(width: UIScreen.main.bounds.width - 37, height: 275)
+            .cornerRadius(15)
+            .overlay(
+              RoundedRectangle(cornerRadius: 15)
+                .stroke(Color.gray, lineWidth: 0.2)
                 )
             })
-            Spacer()
-          }
-          .padding(.top, 10)
-            
-        }
-      
+         }
       }
       .padding(15)
     }

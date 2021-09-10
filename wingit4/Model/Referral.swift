@@ -9,7 +9,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import Foundation
 
-struct Referral: Codable, Identifiable {
+struct Referral: Codable, Identifiable{
     @DocumentID var id: String?
     @ServerTimestamp var createdAt: Timestamp?
   
