@@ -19,13 +19,26 @@ struct HomeView: View {
     
     var body: some View {
       NavigationView {
+ 
         VStack(alignment: .leading, spacing: 15) {
           // Header Toggle
 //          HomeFeedHeader()
           HomeFeed()
         }
         .background(Color.white.ignoresSafeArea(.all, edges: .all))
-        .navigationBarTitle(Text("WingIt!"), displayMode: .inline)
+        .toolbar {
+          ToolbarItem(placement: .principal) {
+            VStack {
+              Image(IMAGE_LOGO).resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 35)
+              Text("Wingit")
+                .bold()
+                .padding(.top, -5)
+            }
+          }
+        }
+//        .navigationBarTitle(Text("WingIt!"), displayMode: .inline)
         .navigationBarItems(leading:
           Button(action: {}) {
             NavigationLink(destination: UsersView()) {

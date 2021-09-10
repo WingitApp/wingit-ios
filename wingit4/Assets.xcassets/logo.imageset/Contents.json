@@ -1,7 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "wingitkn.001.jpeg",
+      "filename" : "wingit logo2-1.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "wingit logo2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },

@@ -16,12 +16,15 @@ struct Connections: View {
     var body: some View {
         HStack{
             NavigationLink(
-                destination: ConnectionsView(user: user).environmentObject(connectionsViewModel),
+              destination: ConnectionsView(user: user).environmentObject(connectionsViewModel),
                 label: {
                     HStack {
-                        Text("\(connectionsCount)").font(.caption).foregroundColor(.gray)
-                        Text("Connections").font(.caption2).foregroundColor(.gray)
-                    }.padding(.top, 5).padding(.leading, 15)
+                        Text("\(connectionsCount)")
+                        Text("Connections")
+                    }
+                    .font(.headline)
+                    .foregroundColor(Color(.systemTeal))
+                    .padding(.top, 5)
                 })
             }
     }

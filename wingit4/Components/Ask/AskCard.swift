@@ -56,7 +56,7 @@ struct AskCard: View {
       )
       .cornerRadius(8)
       .padding(
-        EdgeInsets(top: 5, leading: 15, bottom: 3, trailing: 15)
+        EdgeInsets(top: 0, leading: 15, bottom: 10, trailing: 15)
       )
       .modifier(FeedItemShadow())
       .environmentObject(askCardViewModel)

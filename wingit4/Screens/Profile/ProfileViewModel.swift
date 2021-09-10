@@ -17,8 +17,9 @@ class ProfileViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var userBlocked = false
     @Published var showImagePicker: Bool = false
-    @Published var offset: CGFloat = 0
     @Published var connectionsCountState = 0
+  
+    @Published var isUpdatePicSheetOpen: Bool = false
 
     var splitted: [[Post]] = []
     
