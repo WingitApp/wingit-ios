@@ -131,7 +131,10 @@ class StorageService {
                         let user = User.init(id: userId, uid: userId, bio: "", canonicalEmail: email, email: email, firstName: firstName, keywords: (firstName + lastName).splitStringToArray(), lastName: lastName, profileImageUrl: profileImageUrl, username: username)
 
                         do {
-                            try firestoreUserDoc.setData(from: user)
+                            try firestoreUserDoc.setData(from: user) { _ in
+                                // todo: handle error if throws
+                                onSuccess(user)
+                            }
                         } catch {
                             print(error)
                         }

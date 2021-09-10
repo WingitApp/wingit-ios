@@ -27,7 +27,7 @@ class SignupViewModel: ObservableObject {
   @Environment (\.presentationMode) var presentationMode
     
 
-  func signup() {
+    func signup(onSuccess: @escaping (_ user: User) -> Void) {
     self.ampSignupAttemptEvent()
     
     if self.isFormComplete() {
@@ -38,7 +38,7 @@ class SignupViewModel: ObservableObject {
           email: email,
           password: password,
           imageData: imageData,
-          onSuccess: onSignupSuccess,
+          onSuccess: onSuccess,
           onError: onSignupError
         )
     }

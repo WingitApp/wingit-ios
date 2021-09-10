@@ -22,12 +22,15 @@ class UserApi {
         }
     }
     
-    func loadUser(userId: String, onSuccess: @escaping(_ user: User) -> Void) {
+    func loadUser(
+        userId: String,
+        onSuccess: @escaping(_ user: User) -> Void,
+        onError: @escaping() -> Void
+        ) {
         Ref.FS_DOC_USERID(userId: userId).getDocument { (snapshot, error) in
             if let error = error {
                 print(error)
             } else if let snapshot = snapshot {
-                dump(snapshot.data())
                 let result = Result { try snapshot.data(as: User.self) }
                     switch result {
                         case .success(let user):
@@ -35,6 +38,7 @@ class UserApi {
                             onSuccess(user)
                           } else {
                             print("User document doesn't exist.")
+                            onError()
                           }
                         case .failure(let error):
                           // A User could not be initialized from the DocumentSnapshot.

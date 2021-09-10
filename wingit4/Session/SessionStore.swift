@@ -12,17 +12,26 @@ import FirebaseAuth
 
 class SessionStore: ObservableObject {
     @Published var isLoggedIn = false
-    var currentUser: User?
+    @Published var currentUser: User?
     var handle: AuthStateDidChangeListenerHandle?
     
     func listenAuthenticationState() {
         handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
             if let user = user {
-                self.isLoggedIn = true
-                Api.User.loadUser(userId: user.uid) { (decodedUser) in
-                  self.currentUser = decodedUser
-                  Api.Device.updateDeviceInFirestore(token: "")
-                }
+                Api.User.loadUser(
+                    userId: user.uid,
+                    onSuccess: { (decodedUser) in
+                        // user successfully found
+                        self.currentUser = decodedUser
+                        Api.Device.updateDeviceInFirestore(token: "")
+                        self.isLoggedIn = true
+                    },
+                    onError: {
+                        // todo: user doc DNE
+                        print("error fetching user")
+                        self.isLoggedIn = true
+
+                })
             } else {
                 self.isLoggedIn = false
                 self.currentUser = nil

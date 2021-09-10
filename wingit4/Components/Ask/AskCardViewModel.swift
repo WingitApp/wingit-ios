@@ -77,6 +77,8 @@ class AskCardViewModel: ObservableObject {
       self.postOwner = postOwner
       self.destination = AnyView(UserProfileView(user: postOwner))
       self.isNavLinkDisabled = self.isProfileView || self.isOwnPost
+    } onError: {
+        print("errror")
     }
   }
   

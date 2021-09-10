@@ -218,7 +218,7 @@ struct Login1 : View {
 var social = ["twitter","fb","google"]
 
 struct SignUp1 : View {
-    
+    @EnvironmentObject var session: SessionStore
     @ObservedObject var signupViewModel = SignupViewModel()
     
     var body: some View{
@@ -266,7 +266,12 @@ struct SignUp1 : View {
             
             
             SignupButton(
-              action: signupViewModel.signup,
+                action: {
+                    signupViewModel.signup() { user in
+                        signupViewModel.onSignupSuccess(user: user)
+                        self.session.currentUser = user
+                    }
+                },
               label: TEXT_SIGN_UP
             )
             .padding(.horizontal,25)

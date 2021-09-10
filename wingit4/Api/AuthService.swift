@@ -24,6 +24,9 @@ class AuthService {
                     guard let userId = authData?.user.uid else { return }
                     Api.User.loadUser(userId: userId) { (decodedUser) in
                       onSuccess(decodedUser)
+                    } onError: {
+                        //todo
+                        print("error")
                     }
                }
            
@@ -32,6 +35,7 @@ class AuthService {
     static func signupUser(firstName: String, lastName: String, username: String, email: String, password: String, imageData: Data, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
                 Auth.auth().createUser(withEmail: email, password: password) { (authData, error) in
                     if error != nil {
+                        // TODO: Show toast
                         //    print(error!.localizedDescription)
                         onError(error!.localizedDescription)
                         return

@@ -6,34 +6,34 @@
 //
 
 import SwiftUI
-
-struct SignupView: View {
-    @ObservedObject var signupViewModel = SignupViewModel()
- 
-    var body: some View {
-        VStack {
-            UserAvatar(
-              image: signupViewModel.image,
-              height: 80,
-              width: 80,
-              onTapGesture: {
-                self.signupViewModel.isImagePickerShown = true
-              }
-            )
-            Text(IMAGE_UPLOAD_TEXT)
-              .modifier(Caption2Style())
-              .multilineTextAlignment(.center)
-              .padding(.bottom, 20)
-            SignUpForm()
-            Divider()
-            Text("By signing up, you agree to the")
-              .modifier(CaptionStyle())
-            EULA()
-        }
-        .navigationBarTitle("Signup", displayMode: .inline)
-    }
-}
-
+//
+//struct SignupView: View {
+//    @ObservedObject var signupViewModel = SignupViewModel()
+// 
+//    var body: some View {
+//        VStack {
+//            UserAvatar(
+//              image: signupViewModel.image,
+//              height: 80,
+//              width: 80,
+//              onTapGesture: {
+//                self.signupViewModel.isImagePickerShown = true
+//              }
+//            )
+//            Text(IMAGE_UPLOAD_TEXT)
+//              .modifier(Caption2Style())
+//              .multilineTextAlignment(.center)
+//              .padding(.bottom, 20)
+//            SignUpForm()
+//            Divider()
+//            Text("By signing up, you agree to the")
+//              .modifier(CaptionStyle())
+//            EULA()
+//        }
+//        .navigationBarTitle("Signup", displayMode: .inline)
+//    }
+//}
+//
 struct EULA: View {
     var body: some View {
         HStack{
@@ -43,54 +43,54 @@ struct EULA: View {
         }
     }
 }
-
-struct SignUpForm: View {
-    @ObservedObject var signupViewModel = SignupViewModel()
-    
-  
-    var body: some View {
-        VStack{
-            FirstNameTextField(
-              firstName: $signupViewModel.firstName
-            )
-            LastNameTextField(
-              lastName: $signupViewModel.lastName
-            )
-            UsernameTextField(
-              username: $signupViewModel.username
-            )
-            EmailTextField(
-              email: $signupViewModel.email
-            )
-            VStack(alignment: .leading) {
-                PasswordTextField(
-                  password: $signupViewModel.password
-                )
-                Text(TEXT_SIGNUP_PASSWORD_REQUIRED)
-                  .modifier(FootNote())
-                  .padding([.leading])
-            }
-            SignupButton(
-              action: signupViewModel.signup,
-              label: TEXT_SIGN_UP
-            ).alert(
-              isPresented: $signupViewModel.isAlertShown
-            ) {
-                Alert(
-                  title: Text("Error"),
-                  message: Text(self.signupViewModel.errorString),
-                  dismissButton: .default(Text("OK"))
-                )
-            }
-        }
-        .onTapGesture { dismissKeyboard() }
-        .onAppear{ logToAmplitude(event: .viewSignupScreen) }
-        .sheet(isPresented: $signupViewModel.isImagePickerShown) {
-           ImagePicker(
-            showImagePicker: self.$signupViewModel.isImagePickerShown,
-            pickedImage: self.$signupViewModel.image,
-            imageData: self.$signupViewModel.imageData
-           )
-        }
-    }
-}
+//
+//struct SignUpForm: View {
+//    @ObservedObject var signupViewModel = SignupViewModel()
+//    
+//  
+//    var body: some View {
+//        VStack{
+//            FirstNameTextField(
+//              firstName: $signupViewModel.firstName
+//            )
+//            LastNameTextField(
+//              lastName: $signupViewModel.lastName
+//            )
+//            UsernameTextField(
+//              username: $signupViewModel.username
+//            )
+//            EmailTextField(
+//              email: $signupViewModel.email
+//            )
+//            VStack(alignment: .leading) {
+//                PasswordTextField(
+//                  password: $signupViewModel.password
+//                )
+//                Text(TEXT_SIGNUP_PASSWORD_REQUIRED)
+//                  .modifier(FootNote())
+//                  .padding([.leading])
+//            }
+//            SignupButton(
+//              action: signupViewModel.signup,
+//              label: TEXT_SIGN_UP
+//            ).alert(
+//              isPresented: $signupViewModel.isAlertShown
+//            ) {
+//                Alert(
+//                  title: Text("Error"),
+//                  message: Text(self.signupViewModel.errorString),
+//                  dismissButton: .default(Text("OK"))
+//                )
+//            }
+//        }
+//        .onTapGesture { dismissKeyboard() }
+//        .onAppear{ logToAmplitude(event: .viewSignupScreen) }
+//        .sheet(isPresented: $signupViewModel.isImagePickerShown) {
+//           ImagePicker(
+//            showImagePicker: self.$signupViewModel.isImagePickerShown,
+//            pickedImage: self.$signupViewModel.image,
+//            imageData: self.$signupViewModel.imageData
+//           )
+//        }
+//    }
+//}
