@@ -61,7 +61,6 @@ class SignupViewModel: ObservableObject {
   func onSignupError(errorMessage: String) {
     isAlertShown = true
     errorString = errorMessage
-    self.clean()
   }
   
   func isFormComplete() -> Bool {
