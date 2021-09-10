@@ -13,7 +13,9 @@ import FirebaseFirestore
 
 let COLOR_LIGHT_GRAY = Color(red: 0, green: 0, blue: 0, opacity: 0.15)
 let COLOR_WINGIT = Color(red: 93, green: 180, blue: 221, opacity: 0.15)
-
+let DEFAULT_PROFILE_AVATAR = """
+                  https://firebasestorage.googleapis.com/v0/b/wingitapp-1fe28.appspot.com/o/avatar%2Fdefault%2Fuser-placeholder-copy.jpg?alt=media&token=a8b07293-d9db-466c-97f6-8a5e6b42adb0
+                  """
 
 
 // Sign in and Sign up pages

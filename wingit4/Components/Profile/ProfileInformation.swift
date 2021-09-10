@@ -22,13 +22,7 @@ struct ProfileInformation: View {
                 
                 Button(action: {updatePic.toggle()},
                        label: {
-                        URLImage(URL(string: user!.profileImageUrl!)!,
-                        content: {
-                            $0.image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                               
-                        })
+                        URLImageView(inputURL: user?.profileImageUrl)
                            .frame(width: 450, height: 330)
                            .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
             

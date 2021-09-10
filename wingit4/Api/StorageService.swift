@@ -126,7 +126,9 @@ class StorageService {
                         }
                                                     
                         let firestoreUserDoc = Ref.FS_DOC_USERID(userId: userId)
-                        let user = User.init(id: userId, uid: userId, bio: "", canonicalEmail: email, email: email, firstName: firstName, keywords: (firstName + lastName).splitStringToArray(), lastName: lastName, profileImageUrl: metaImageUrl, username: username)
+                        // profileImageUrl should be default if user didn't upload photo
+                        let profileImageUrl = imageData.count == 0 ? DEFAULT_PROFILE_AVATAR : metaImageUrl
+                        let user = User.init(id: userId, uid: userId, bio: "", canonicalEmail: email, email: email, firstName: firstName, keywords: (firstName + lastName).splitStringToArray(), lastName: lastName, profileImageUrl: profileImageUrl, username: username)
 
                         do {
                             try firestoreUserDoc.setData(from: user)

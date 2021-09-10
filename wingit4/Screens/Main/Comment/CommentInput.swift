@@ -36,13 +36,9 @@ struct CommentInput: View {
     
     var body: some View {
       HStack(alignment: .top, spacing: 0) {
-        URLImage(URL(string: session.currentUser!.profileImageUrl!)!,
-              content: {
-                  $0.image
-                      .resizable()
-                      .aspectRatio(contentMode: .fill)
-                      .clipShape(Circle())
-              }).frame(width: 35, height: 35)
+        URLImageView(inputURL: session.currentUser?.profileImageUrl)
+              .frame(width: 35, height: 35)
+              .clipShape(Circle())
               .overlay(
                 RoundedRectangle(cornerRadius: 100)
                   .stroke(Color.gray, lineWidth: 1)
