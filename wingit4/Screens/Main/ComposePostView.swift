@@ -22,7 +22,6 @@ struct ComposePostView: View {
             //   print("Error: \(errorMessage)")
            self.composePostViewModel.showAlert = true
            self.composePostViewModel.errorString = errorMessage
-           self.clean()
         }
     }
         
