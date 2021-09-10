@@ -51,8 +51,11 @@ struct AcceptedNotification: View {
                     Text("\(referral.ask?.username ?? "")'s").bold()
                 Text("ask")
                 }.font(.subheadline)
+                Spacer()
+                Image(systemName: "chevron.right").foregroundColor(.gray).padding(10)
+                    .font(.system(size: 10))
             }
-            Spacer()
+          
             //TimeAgoStamp(date: activity.date)
         }.padding(.leading, 10)
         }.buttonStyle(PlainButtonStyle())
@@ -101,8 +104,11 @@ struct BumpedNotification: View {
                     Text("\(referral.ask?.username ?? "")'s").bold()
                 Text("ask")
                 }.font(.subheadline)
+                Spacer()
+                Image(systemName: "chevron.right").foregroundColor(.gray).padding(10)
+                    .font(.system(size: 10))
             }
-            Spacer()
+        
             //TimeAgoStamp(date: activity.date)
         }.padding(.leading, 10)
         }.buttonStyle(PlainButtonStyle())
@@ -150,8 +156,11 @@ struct ClosedNotification: View {
                     Text("\(referral.ask?.username ?? "")'s").bold()
                 Text("ask")
                 }.font(.subheadline)
+                Spacer()
+                Image(systemName: "chevron.right").foregroundColor(.gray).padding(10)
+                    .font(.system(size: 10))
             }
-            Spacer()
+     
             //TimeAgoStamp(date: activity.date)
         }.padding(.leading, 10)
         .opacity(0.3)
