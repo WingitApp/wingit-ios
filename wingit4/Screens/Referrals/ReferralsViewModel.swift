@@ -23,6 +23,12 @@ class ReferralsViewModel: ObservableObject {
      1. send into comment type --> referral.
      2. in comment navigation bring the option for referral comments to come out.
      */
+  
+    func getPendingRefferals() {
+      Api.Referrals.getPendingReferrals() { referrals in
+        self.referrals = referrals
+      }
+    }
     
     func acceptReferral(referral: Referral, onSuccess: @escaping() -> Void) {
         guard let referralId = referral.id, let currentUser = Auth.auth().currentUser else { return }

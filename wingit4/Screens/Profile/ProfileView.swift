@@ -86,11 +86,11 @@ struct ProfileView: View {
             .offset(y: -80)
             VStack {
               HStack {
-                Button(action: {Api.User.updateField(field: "firstName")}) {
+                Button(action: {Api.User.updateField(field: "firstName", user: session.currentUser!) }) {
                   Text(session.currentUser!.firstName ?? "").font(.title).bold().foregroundColor(Color("bw"))
                 }
                 
-                Button(action: {Api.User.updateField(field: "lastName")}) {
+                Button(action: {Api.User.updateField(field: "lastName", user: session.currentUser!) }) {
                   Text(session.currentUser!.lastName ?? "").font(.title).bold().foregroundColor(Color("bw"))
                 }
               }.frame(width: UIScreen.main.bounds.width)

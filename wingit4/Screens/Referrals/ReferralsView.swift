@@ -46,9 +46,7 @@ struct ReferralsView: View {
       }.padding(.top, 5)
       .environmentObject(referralsViewModel)
       .onAppear {
-        Api.Referrals.getPendingReferrals() { referrals in
-            referralsViewModel.referrals = referrals
-        }
+        self.referralsViewModel.getPendingRefferals()
       }
       .navigationBarTitle("Referrals", displayMode: .inline)
     }
