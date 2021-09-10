@@ -65,6 +65,9 @@ struct NotificationView: View {
                   
            
             }.navigationBarTitle(Text("Notifications"), displayMode: .automatic)
+            .onAppear {
+                self.activityViewModel.loadActivities()
+            }
             .onDisappear {
                  if self.activityViewModel.listener != nil {
                      self.activityViewModel.listener.remove()
