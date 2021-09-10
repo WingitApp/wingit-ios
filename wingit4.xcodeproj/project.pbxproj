@@ -494,7 +494,7 @@
 				15DFD07326EAE005002CBE31 /* ParallaxImage.swift */,
 			);
 			name = Form;
-			path = "/Users/joshslee/Documents/wingit-ios/wingit4/Components/Form";
+			path = /Users/yrac/wingit/wingit_ios/wingit4/wingit4/Components/Form;
 			sourceTree = "<absolute>";
 		};
 		15F7E85E26E8429500E5238F /* Recovered References */ = {
