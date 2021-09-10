@@ -10,11 +10,32 @@ import URLImage
 
 struct AcceptedNotification: View {
 
-    @State var referral: Referral
- //   @Binding var post: Post 
+    @Binding var referral: Referral
+    @Binding var post: Post
+
+    // Menu
+    @StateObject var askCardViewModel = AskCardViewModel()
+    @StateObject var askMenuViewModel = AskMenuViewModel()
+    @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
+    // Comment
+    @StateObject var commentViewModel = CommentViewModel()
+    @StateObject var referViewModel = ReferViewModel()
+    @StateObject var commentInputViewModel = CommentInputViewModel()
+    // Like
+    @StateObject var footerCellViewModel = FooterCellViewModel()
 
     var body: some View {
-        VStack{
+        
+        NavigationLink(
+            destination: AskDetailView(post: $post)
+                .environmentObject(askCardViewModel)
+                .environmentObject(askMenuViewModel)
+                .environmentObject(askDoneToggleViewModel)
+                .environmentObject(commentViewModel)
+                .environmentObject(commentInputViewModel)
+                .environmentObject(footerCellViewModel)
+        )
+        {
         HStack {
             URLImage(
                 URL(string: referral.ask?.avatar ?? "")!,
@@ -33,18 +54,38 @@ struct AcceptedNotification: View {
             }
             Spacer()
             //TimeAgoStamp(date: activity.date)
-        }.padding()
-            Divider()
-        }
+        }.padding(.leading, 5)
+        }.buttonStyle(PlainButtonStyle())
     }
 }
 
 struct BumpedNotification: View {
     
-    @State var referral: Referral
+    @Binding var referral: Referral
+    @Binding var post: Post
+    // Menu
+    @StateObject var askCardViewModel = AskCardViewModel()
+    @StateObject var askMenuViewModel = AskMenuViewModel()
+    @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
+    // Comment
+    @StateObject var commentViewModel = CommentViewModel()
+    @StateObject var referViewModel = ReferViewModel()
+    @StateObject var commentInputViewModel = CommentInputViewModel()
+    // Like
+    @StateObject var footerCellViewModel = FooterCellViewModel()
     
     var body: some View {
-        VStack{
+ 
+            NavigationLink(
+                destination: AskDetailView(post: $post)
+                    .environmentObject(askCardViewModel)
+                    .environmentObject(askMenuViewModel)
+                    .environmentObject(askDoneToggleViewModel)
+                    .environmentObject(commentViewModel)
+                    .environmentObject(commentInputViewModel)
+                    .environmentObject(footerCellViewModel)
+            )
+            {
         HStack {
             URLImage(
                 URL(string: referral.ask?.avatar ?? "")!,
@@ -63,18 +104,37 @@ struct BumpedNotification: View {
             }
             Spacer()
             //TimeAgoStamp(date: activity.date)
-        }.padding()
-            Divider()
-        }
+        }.padding(.leading, 5)
+        }.buttonStyle(PlainButtonStyle())
     }
 }
 
 struct ClosedNotification: View {
     
-    @State var referral: Referral
+    @Binding var referral: Referral
+    @Binding var post: Post
+    // Menu
+    @StateObject var askCardViewModel = AskCardViewModel()
+    @StateObject var askMenuViewModel = AskMenuViewModel()
+    @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
+    // Comment
+    @StateObject var commentViewModel = CommentViewModel()
+    @StateObject var referViewModel = ReferViewModel()
+    @StateObject var commentInputViewModel = CommentInputViewModel()
+    // Like
+    @StateObject var footerCellViewModel = FooterCellViewModel()
     
     var body: some View {
-        VStack{
+        NavigationLink(
+            destination: AskDetailView(post: $post)
+                .environmentObject(askCardViewModel)
+                .environmentObject(askMenuViewModel)
+                .environmentObject(askDoneToggleViewModel)
+                .environmentObject(commentViewModel)
+                .environmentObject(commentInputViewModel)
+                .environmentObject(footerCellViewModel)
+        )
+        {
         HStack {
             URLImage(
                 URL(string: referral.ask?.avatar ?? "")!,
@@ -93,10 +153,9 @@ struct ClosedNotification: View {
             }
             Spacer()
             //TimeAgoStamp(date: activity.date)
-        }.padding()
+        }.padding(.leading, 5)
         .opacity(0.3)
-            Divider()
-        }
+        }.buttonStyle(PlainButtonStyle())
     }
 }
 

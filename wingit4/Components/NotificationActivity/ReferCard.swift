@@ -39,3 +39,73 @@ struct ReferCard: View {
     }
 }
 
+struct BumpCard: View {
+  
+  @State var referral: Referral
+  @State var post: Post
+ 
+    
+  // refferal object
+  /**
+    user object for sender
+      - mediaurl
+    post object
+   */
+  
+    var body: some View {
+       
+        VStack{
+            BumpedNotification(referral: $referral, post: $post)
+            Divider().padding(.top, 5)
+        }
+        
+    }
+}
+
+struct AcceptCard: View {
+  
+  @State var referral: Referral
+  @State var post: Post
+ 
+    
+  // refferal object
+  /**
+    user object for sender
+      - mediaurl
+    post object
+   */
+  
+    var body: some View {
+       
+        VStack{
+            AcceptedNotification(referral: $referral, post: $post)
+            Divider().padding(.top, 5)
+        }
+        
+    }
+}
+
+struct ClosedCard: View {
+  
+  @State var referral: Referral
+  @State var post: Post
+ 
+    
+  // refferal object
+  /**
+    user object for sender
+      - mediaurl
+    post object
+   */
+  
+    var body: some View {
+       
+        VStack{
+            ClosedNotification(referral: $referral, post: $post)
+            Divider().padding(.top, 5)
+        }
+        
+    }
+}
+
+

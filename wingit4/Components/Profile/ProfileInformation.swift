@@ -52,7 +52,7 @@ struct ProfileInformation: View {
                   .frame(width: 430, height: 330)
                   .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
                   
-                Text(user?.displayName ?? "").bold()
+                Text(user?.displayName ?? "").font(.title).bold().foregroundColor(Color("bw"))
                 Text(user?.bio ?? "").font(.caption).foregroundColor(.gray)
             }
             

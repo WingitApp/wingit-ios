@@ -10,6 +10,7 @@ import SwiftUI
 struct ReferralsView: View {
   @StateObject var referralsViewModel = ReferralsViewModel()
   
+  
     var body: some View {
        NavigationView{
       ScrollView {
@@ -22,16 +23,16 @@ struct ReferralsView: View {
 //                            NavigationLink(destination: AskDetailView(post.postId: referral.askId)) {
 //                                                                  EmptyView()
 //                                                              }
-                            AcceptedNotification(referral: referral)
+                            AcceptCard(referral: referral, post: referral.ask!)
                         }
                     } else if referral.status.rawValue == "bumped" {
                         ZStack{
-                           BumpedNotification(referral: referral)
+                            BumpCard(referral: referral, post: referral.ask!)
                         }
                     }
                     else if referral.status.rawValue == "closed" {
                         ZStack{
-                            ClosedNotification(referral: referral)
+                            ClosedCard(referral: referral, post: referral.ask!)
                         }
                     }
                     else {
@@ -42,7 +43,7 @@ struct ReferralsView: View {
             }
         }
     
-      }
+      }.padding(.top, 5)
       .environmentObject(referralsViewModel)
       .onAppear {
         Api.Referrals.getPendingReferrals() { referrals in
