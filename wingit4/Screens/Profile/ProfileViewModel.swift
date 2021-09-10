@@ -23,7 +23,6 @@ class ProfileViewModel: ObservableObject {
     var splitted: [[Post]] = []
     
     @Published var isConnected = false
-    @Published var hasPendingRequest = false
     
     func updateIsConnected(userId: String) {
         Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: Auth.auth().currentUser!.uid).document(userId).getDocument { (document, error) in

@@ -22,7 +22,7 @@ class UserProfileViewModel: ObservableObject {
     var splitted: [[Post]] = []
     
     @Published var isConnected = false
-    @Published var hasPendingRequest = false
+    @Published var sentPendingRequest = false
     
     func updateIsConnected(userId: String) {
         Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: Auth.auth().currentUser!.uid).document(userId).getDocument { (document, error) in
@@ -34,12 +34,12 @@ class UserProfileViewModel: ObservableObject {
         }
     }
     
-    func updateHasPendingRequest(userId: String) {
+    func updateSentPendingRequest(userId: String) {
         Ref.FS_DOC_CONNECT_REQUEST_SENT(sentByUserId: Auth.auth().currentUser!.uid, receivedByUserId: userId).getDocument { (document, error) in
             if let doc = document, doc.exists {
-                self.hasPendingRequest = true
+                self.sentPendingRequest = true
             } else {
-                self.hasPendingRequest = false
+                self.sentPendingRequest = false
             }
         }
     }
@@ -53,7 +53,7 @@ class UserProfileViewModel: ObservableObject {
             self.isLoading.toggle()
         }
         updateIsConnected(userId: userId)
-        updateHasPendingRequest(userId: userId)
+        updateSentPendingRequest(userId: userId)
         updateConnectionsCount(userId: userId)
         self.loadDonePosts(userId: userId)
       }

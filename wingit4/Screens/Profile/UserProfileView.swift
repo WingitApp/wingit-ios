@@ -36,7 +36,7 @@ struct UserProfileView: View {
                           if userProfileViewModel.userBlocked == false {
                             ConnectButton(
                               user: user,
-                              isConnected: $userProfileViewModel.isConnected, hasPendingRequest: $userProfileViewModel.hasPendingRequest,
+                              isConnected: $userProfileViewModel.isConnected, sentPendingRequest: $userProfileViewModel.sentPendingRequest,
                               connectionsCount: $userProfileViewModel.connectionsCountState
                             )
                             MessageButton(user: user)
@@ -82,19 +82,19 @@ struct UserProfileView: View {
         var user: User
         @Binding var connections_Count: Int
         @Binding var isConnected: Bool
-        @Binding var hasPendingRequest: Bool
+        @Binding var sentPendingRequest: Bool
 
-        init(user: User, isConnected: Binding<Bool>, hasPendingRequest: Binding<Bool>, connectionsCount: Binding<Int>) {
+        init(user: User, isConnected: Binding<Bool>, sentPendingRequest: Binding<Bool>, connectionsCount: Binding<Int>) {
             self.user = user
             self._connections_Count = connectionsCount
             self._isConnected = isConnected
-            self._hasPendingRequest = hasPendingRequest
+            self._sentPendingRequest = sentPendingRequest
         }
         
         func buttonTapped() {
-            if !self.isConnected && !self.hasPendingRequest {
+            if !self.isConnected && !self.sentPendingRequest {
                     connectionsViewModel.sendConnectRequest(userId: user.id)
-                    self.hasPendingRequest = true
+                    self.sentPendingRequest = true
                 } else if self.isConnected {
                     connectionsViewModel.disconnect(userId: user.id,  connectionsCount_onSuccess: { (connectionsCount) in
                                  self.connections_Count = connectionsCount
@@ -105,7 +105,7 @@ struct UserProfileView: View {
         
         var body: some View {
             Button(action: buttonTapped) {
-                Text((self.isConnected) ? "Disconnect" : (self.hasPendingRequest) ? "Pending" : "Connect").foregroundColor(Color("bw")).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal)).lineLimit(1)
+                Text((self.isConnected) ? "Disconnect" : (self.sentPendingRequest) ? "Pending" : "Connect").foregroundColor(Color("bw")).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal)).lineLimit(1)
             }
         }
     }

@@ -78,7 +78,7 @@ class ActivityViewModel: ObservableObject {
             }
         }
         
-        // Delete the request from notification's feed
+        // Delete the request from notification feeds
         Ref.FS_COLLECTION_ACTIVITY.document(Auth.auth().currentUser!.uid).collection("feedItems").whereField("type", isEqualTo: "connectRequest").whereField("userId", isEqualTo: fromUserId).getDocuments { (snapshot, error) in
                if let docs = snapshot?.documents {
                     for doc in docs {
