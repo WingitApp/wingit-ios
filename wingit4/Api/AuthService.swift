@@ -48,7 +48,7 @@ class AuthService {
                     let metadata = StorageMetadata()
                     metadata.contentType = "image/jpg"
                     
-                    StorageService.saveAvatar(userId: userId, firstName: firstName, lastName: lastName, username: username, email: email, imageData: imageData, metadata: metadata, storageAvatarRef: storageAvatarUserId, onSuccess: onSuccess, onError: onError)
+                    StorageService.saveUser(userId: userId, firstName: firstName, lastName: lastName, username: username, email: email, imageData: imageData, metadata: metadata, storageAvatarRef: storageAvatarUserId, onSuccess: onSuccess, onError: onError)
  
                 }
     }
