@@ -34,16 +34,16 @@ struct ProfileInformation: View {
             
                        }).padding(.leading, -15).padding(.trailing, -15)
                 HStack {
-                    Button(action: {Api.User.updateField(field: "firstName")}) {
+                    Button(action: {Api.User.updateField(field: "firstName", user: user)}) {
                         Text(user?.firstName ?? "").font(.title).bold().foregroundColor(Color("bw"))
                     }
                     
-                    Button(action: {Api.User.updateField(field: "lastName")}) {
+                    Button(action: {Api.User.updateField(field: "lastName", user: user)}) {
                         Text(user?.lastName ?? "").font(.title).bold().foregroundColor(Color("bw"))
                     }
                 }
                              
-              Button(action: {Api.User.updateField(field: "bio")}) {
+                Button(action: {Api.User.updateField(field: "bio", user: user)}) {
                   
                 Text(user?.bio ?? "").font(.caption).foregroundColor(.gray)
                     }

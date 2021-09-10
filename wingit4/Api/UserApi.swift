@@ -58,11 +58,16 @@ class UserApi {
         StorageService.updateAvatar(userId: userId, imageData: imageData, metadata: metadata, storageAvatarRef: storageAvatarUserId, onSuccess: onSuccess, onError: onError)
     }
     
-    func updateField(field: String) {
-        if let userId = Auth.auth().currentUser?.uid {
+    func updateField(field: String, user: User?) {
+        if let userId = Auth.auth().currentUser?.uid, let user = user {
             alertView(msg: "Update \(field)") { (txt) in
-                if txt != ""{
+                if !txt.isEmpty {
                     Ref.FS_DOC_USERID(userId: userId).updateData([field: txt, "updatedAt": FieldValue.serverTimestamp() ])
+                    if field == "firstName" || field == "lastName" {
+                        let displayName = (field == "firstName") ? "\(txt) \(user.lastName ?? "")" : "\(user.firstName ?? "") \(txt)"
+                        StorageService.updateDisplayName(userId: userId, displayName: displayName, onSuccess: { print($0) }, onError: { print($0) })
+                        Ref.FS_DOC_USERID(userId: userId).updateData(["keywords": displayName.splitStringToArray()])
+                    }
                 }
             }
         }
