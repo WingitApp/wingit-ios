@@ -26,6 +26,7 @@ struct ReferCard: View {
             ReferHeader(referral: $referral, post: $post)
             ReferBody(referral: $referral, post: $post)
             ReferFooter(referral: $referral, post: $post)
+            Divider().padding(.top, 5)
         }
         .environmentObject(referViewModel)
         .sheet(

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import Firebase
 import FirebaseAuth
 import Amplitude
 import SPAlert
@@ -14,6 +15,8 @@ import SPAlert
 class ReferralsViewModel: ObservableObject {
   
   @Published var referrals: [Referral] = []
+    
+    var listener: ListenerRegistration!
     
     //after accept status is changed, add them into comments.
     /*
@@ -57,6 +60,8 @@ class ReferralsViewModel: ObservableObject {
             guard let referralId = referralId else { return }
             Api.Referrals.updateStatus(referralId: referralId, newStatus: .closed)
     }
+    
+    
 
 }
 

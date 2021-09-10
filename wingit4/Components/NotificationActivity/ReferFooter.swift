@@ -41,31 +41,16 @@ struct AcceptButton: View {
                label: {
                 VStack{
                     Text("Accept")
-                        .foregroundColor(.green)
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
                 }
                 .padding(.vertical, 10)
                 .padding(.horizontal, 30)
                 .frame(width: UIScreen.main.bounds.width - 235, height: UIScreen.main.bounds.width / 9)
-                .background(RoundedRectangle(cornerRadius: 5).stroke(Color.green.opacity(0.5),lineWidth: 1.5))
+                .background(
+                            LinearGradient(gradient: .init(colors: [Color("Color"),Color("Color1")]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                .cornerRadius(15)
         })
-//        NavigationLink (
-//            destination: AskDetailView(post: $post),
-//            label: {
-//                Button(action: {
-//                    referralsViewModel.acceptReferral(referral: referral, onSuccess: {})
-//                },
-//                       label: {
-//                        VStack{
-//                            Text("Accept")
-//                                .foregroundColor(.green)
-//                        }
-//                        .padding(.vertical, 10)
-//                        .padding(.horizontal, 30)
-//                        .frame(width: UIScreen.main.bounds.width - 235, height: UIScreen.main.bounds.width / 9)
-//                        .background(RoundedRectangle(cornerRadius: 5).stroke(Color.green.opacity(0.5),lineWidth: 1.5))
-//                })
-//            })
-   
 
     }
 }
@@ -82,12 +67,15 @@ struct BumpButton: View {
                label: {
                 VStack{
                     Text("Bump")
-                        .foregroundColor(Color(.systemTeal))
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
                 }
                 .padding(.vertical, 10)
                 .padding(.horizontal, 30)
                 .frame(width: UIScreen.main.bounds.width - 235, height: UIScreen.main.bounds.width / 9)
-                .background(RoundedRectangle(cornerRadius: 5).stroke(Color(.systemTeal).opacity(0.5),lineWidth: 1.5))
+                .background(
+                            LinearGradient(gradient: .init(colors: [Color("Color1"),Color("Color")]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                .cornerRadius(15)
         })
         
 

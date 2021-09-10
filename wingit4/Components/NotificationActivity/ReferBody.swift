@@ -28,26 +28,6 @@ struct ReferBody: View {
   @Binding var post: Post
 
     var body: some View {
-//NavigationLink (
-//    destination: AskDetailView(post: $post),
-//    label: {
-//        VStack {
-//            HStack {
-//                    Image(systemName: "camera").resizable().clipShape(Circle())
-//                        .frame(width: 35, height: 35)
-//                    VStack(alignment: .leading) {
-//                        Text(referral.ask?.username ?? "").font(.subheadline).bold()
-//                    }
-//                    Spacer()
-//                Image(systemName: "ellipsis")
-//                }.padding(.trailing, 15).padding(.leading, 15)
-//
-//            PostText(ask: referral.ask)
-//        }
-//        .padding(.top, 10).padding(.bottom, 10)
-//        .frame(width: UIScreen.main.bounds.width - 30)
-//        .background(RoundedRectangle(cornerRadius: 15).stroke(Color.gray.opacity(0.5),lineWidth: 1.5))
-//    })
         NavigationLink(
             destination: AskDetailView(post: $post)
                 .environmentObject(askCardViewModel)
@@ -77,6 +57,7 @@ struct ReferBody: View {
 
                 PostText(ask: referral.ask)
             }
+           // .modifier(FeedItemShadow())
             .padding(.top, 10).padding(.bottom, 10)
             .frame(width: UIScreen.main.bounds.width - 30)
             .background(RoundedRectangle(cornerRadius: 15).stroke(Color.gray.opacity(0.5),lineWidth: 1.5))

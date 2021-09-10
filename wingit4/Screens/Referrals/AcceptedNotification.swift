@@ -14,7 +14,7 @@ struct AcceptedNotification: View {
  //   @Binding var post: Post 
 
     var body: some View {
-        
+        VStack{
         HStack {
             URLImage(
                 URL(string: referral.ask?.avatar ?? "")!,
@@ -34,6 +34,8 @@ struct AcceptedNotification: View {
             Spacer()
             //TimeAgoStamp(date: activity.date)
         }.padding()
+            Divider()
+        }
     }
 }
 
@@ -42,6 +44,7 @@ struct BumpedNotification: View {
     @State var referral: Referral
     
     var body: some View {
+        VStack{
         HStack {
             URLImage(
                 URL(string: referral.ask?.avatar ?? "")!,
@@ -61,6 +64,8 @@ struct BumpedNotification: View {
             Spacer()
             //TimeAgoStamp(date: activity.date)
         }.padding()
+            Divider()
+        }
     }
 }
 
@@ -69,6 +74,7 @@ struct ClosedNotification: View {
     @State var referral: Referral
     
     var body: some View {
+        VStack{
         HStack {
             URLImage(
                 URL(string: referral.ask?.avatar ?? "")!,
@@ -89,7 +95,17 @@ struct ClosedNotification: View {
             //TimeAgoStamp(date: activity.date)
         }.padding()
         .opacity(0.3)
+            Divider()
+        }
     }
 }
 
 
+//.overlay(
+//  RoundedRectangle(cornerRadius: 20)
+//    .stroke(Color.gray, lineWidth: 0.5)
+//)
+//.padding(
+//  EdgeInsets(top: 5, leading: 15, bottom: 3, trailing: 15)
+//)
+//.modifier(FeedItemShadow())

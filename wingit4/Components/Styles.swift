@@ -28,7 +28,7 @@ struct FeedItemShadow: ViewModifier {
   func body(content: Content) -> some View {
     content
       .clipped()
-      .shadow(color: Color.gray.opacity(0.3), radius: 3, x: 0, y: 0)
+        .shadow(color: Color.gray.opacity(0.3), radius: 3, x: 0, y: 0)
   }
 }
 

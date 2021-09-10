@@ -6,18 +6,42 @@
 //
 
 import SwiftUI
+import URLImage
 
 struct AskDetailBody: View {
   @Binding var post: Post
+    @EnvironmentObject var askCardViewModel: AskCardViewModel
 
     var body: some View {
-      VStack(alignment: .leading) {
-        Text(post.caption)
-//          .modifier(BodyStyle())
-          .font(.callout)
-//            Text("Description")
-//              .font(.headline)
-//              .padding(.bottom, 5)
+      VStack(alignment: .center) {
+        HStack{
+            Text(post.caption)
+              .font(.callout)
+            Spacer()
+        }
+       
+      if post.mediaUrl != "" {
+        Button(action: {
+            withAnimation(.easeInOut){
+              askCardViewModel.isImageModalOpen.toggle()
+            }
+        }, label: {
+          URLImage(URL(string: post.mediaUrl)!,
+            content: {
+                $0.image
+                    .resizable()
+                    .scaledToFit()
+                    .aspectRatio(contentMode: .fill)
+            })
+            
+            .frame(width: UIScreen.main.bounds.width - 37, height: 275)
+            .cornerRadius(15)
+            .overlay(
+              RoundedRectangle(cornerRadius: 15)
+                .stroke(Color.gray, lineWidth: 0.2)
+                )
+            })
+         }
       }
       .padding(15)
     }
