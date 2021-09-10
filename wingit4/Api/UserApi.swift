@@ -27,6 +27,7 @@ class UserApi {
             if let error = error {
                 print(error)
             } else if let snapshot = snapshot {
+                dump(snapshot.data())
                 let result = Result { try snapshot.data(as: User.self) }
                     switch result {
                         case .success(let user):

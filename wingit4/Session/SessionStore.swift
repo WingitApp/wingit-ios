@@ -18,9 +18,9 @@ class SessionStore: ObservableObject {
     func listenAuthenticationState() {
         handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
             if let user = user {
+                self.isLoggedIn = true
                 Api.User.loadUser(userId: user.uid) { (decodedUser) in
                   self.currentUser = decodedUser
-                  self.isLoggedIn = true
                   Api.Device.updateDeviceInFirestore(token: "")
                 }
             } else {
