@@ -72,25 +72,34 @@ class ReferralsApi {
             guard let snap = snapshot else { return }
             if let error = error { return print(error) }
             
-            let dispatchGroup = DispatchGroup()
-            
-            let referrals: [Referral] = snap.documents.compactMap {
-                return try? $0.data(as: Referral.self)
-            }
-            
-            var result = [Referral]()
-            for var referral in referrals {
-                dispatchGroup.enter()
-                Api.Post.loadPost(postId: referral.askId) { (post) in
-                    referral.ask = post
-                    
-                    Api.User.loadUser(userId: referral.senderId) { (user) in
-                        referral.sender = user
-                        result.append(referral)
-                        dispatchGroup.leave()
-                    } onError: {
-                        print("load user error")
-                    }
+            snap.documentChanges.forEach { (documentChange) in
+                switch documentChange.type {
+                case .added:
+                  
+                  let dispatchGroup = DispatchGroup()
+                  
+                  let referrals: [Referral] = snap.documents.compactMap {
+                      return try? $0.data(as: Referral.self)
+                  }
+                  
+                  var result = [Referral]()
+                  for var referral in referrals {
+                      dispatchGroup.enter()
+                      Api.Post.loadPost(postId: referral.askId) { (post) in
+                          referral.ask = post
+                          
+                          Api.User.loadUser(userId: referral.senderId) { (user) in
+                              referral.sender = user
+                              result.append(referral)
+                              dispatchGroup.leave()
+                          } onError: {
+                            print("load user error")
+                          }
+                      }
+                      
+                      dispatchGroup.notify(queue: .main) {
+                          onSuccess(result)
+                      }
                 }
                 case .modified:
                     print("type: modified")
