@@ -54,7 +54,7 @@ struct AcceptedNotification: View {
             }
             Spacer()
             //TimeAgoStamp(date: activity.date)
-        }.padding(.leading, 5)
+        }.padding(.leading, 10)
         }.buttonStyle(PlainButtonStyle())
     }
 }
@@ -104,7 +104,7 @@ struct BumpedNotification: View {
             }
             Spacer()
             //TimeAgoStamp(date: activity.date)
-        }.padding(.leading, 5)
+        }.padding(.leading, 10)
         }.buttonStyle(PlainButtonStyle())
     }
 }
@@ -153,7 +153,7 @@ struct ClosedNotification: View {
             }
             Spacer()
             //TimeAgoStamp(date: activity.date)
-        }.padding(.leading, 5)
+        }.padding(.leading, 10)
         .opacity(0.3)
         }.buttonStyle(PlainButtonStyle())
     }

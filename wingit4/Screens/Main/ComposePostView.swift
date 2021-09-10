@@ -41,24 +41,25 @@ struct ComposePostView: View {
                 
                 TextEditor(text: $composePostViewModel.caption)
                     .padding()
-    if composePostViewModel.imageData.count != 0 {
-        ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top)) {
-                Image(uiImage: UIImage(data: composePostViewModel.imageData)!)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: UIScreen.main.bounds.width / 2, height: 150)
-                    .cornerRadius(15)
-                        // Cancel Button...
-                Button(action: {composePostViewModel.imageData = Data(count: 0)}) {
-                    
-                    Image(systemName: "xmark")
-                        .foregroundColor(.white)
-                        .padding(10)
-                        .background(Color("Color"))
-                        .clipShape(Circle())
+                    .onTapGesture { dismissKeyboard() }
+        if composePostViewModel.imageData.count != 0 {
+            ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top)) {
+                    Image(uiImage: UIImage(data: composePostViewModel.imageData)!)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: UIScreen.main.bounds.width / 2, height: 150)
+                        .cornerRadius(15)
+                            // Cancel Button...
+                    Button(action: {composePostViewModel.imageData = Data(count: 0)}) {
+                        
+                        Image(systemName: "xmark")
+                            .foregroundColor(.white)
+                            .padding(10)
+                            .background(Color("Color"))
+                            .clipShape(Circle())
+                    }
                 }
-            }
-            .padding()
+                .padding()
         }
                 HStack{
                     Group{
@@ -91,7 +92,8 @@ struct ComposePostView: View {
                 Alert(title: Text("Error"), message: Text(self.composePostViewModel.errorString), dismissButton: .default(Text("OK")))
             }
             ).foregroundColor(.gray)
-        }.onTapGesture { dismissKeyboard() }
+        }
+        //.onTapGesture { dismissKeyboard() }
         
        
     }
