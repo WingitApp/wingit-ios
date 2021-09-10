@@ -43,6 +43,7 @@ struct ComposePostView: View {
                     .cornerRadius(15)
                     .padding()
                     .onTapGesture { dismissKeyboard() }
+                
         if composePostViewModel.imageData.count != 0 {
             ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top)) {
                     Image(uiImage: UIImage(data: composePostViewModel.imageData)!)
@@ -60,13 +61,13 @@ struct ComposePostView: View {
                             .clipShape(Circle())
                     }
                 }
-                .padding()
+            .padding(.bottom, 5)
         }
                 HStack{
                     Group{
                     Image(systemName: "camera.fill")
                     Text("Add photo").bold()
-                    }.foregroundColor(.black).font(.caption2)
+                    }.foregroundColor(.gray).font(.caption2)
                 }
                 .frame(width: UIScreen.main.bounds.width - 50, height: UIScreen.main.bounds.width / 10)
                 .background(Color.white)
