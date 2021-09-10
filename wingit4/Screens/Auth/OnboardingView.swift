@@ -1,5 +1,5 @@
 //
-//  NewOnboardingUI.swift
+//  OnboardingView.swift
 //  wingit4
 //
 //  Created by YaeRim Amy Chun on 9/9/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NewOnboardingUI: View {
+struct OnboardingView: View {
     var body: some View {
         // For Smaller Size iPhones...
         
@@ -31,7 +31,7 @@ struct NewOnboardingUI: View {
 
 struct NewOnboardingUI_Previews: PreviewProvider {
     static var previews: some View {
-        NewOnboardingUI()
+        OnboardingView()
        // SignUp1()
     }
 }

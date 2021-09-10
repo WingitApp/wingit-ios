@@ -158,7 +158,7 @@
 		3BFE30F126E988AA005543A0 /* DoneFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE30F026E988AA005543A0 /* DoneFooter.swift */; };
 		3BFE30F326E988CF005543A0 /* DoneBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE30F226E988CF005543A0 /* DoneBody.swift */; };
 		3BFE30F526E988E8005543A0 /* DoneCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE30F426E988E8005543A0 /* DoneCard.swift */; };
-		3BFE30F726EA8CAA005543A0 /* NewOnboardingUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE30F626EA8CA9005543A0 /* NewOnboardingUI.swift */; };
+		3BFE30F726EA8CAA005543A0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE30F626EA8CA9005543A0 /* OnboardingView.swift */; };
 		650216B526E86C2100B42BC6 /* URLImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650216B426E86C2100B42BC6 /* URLImageView.swift */; };
 		650216B726E966A000B42BC6 /* FooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650216B626E966A000B42BC6 /* FooterCell.swift */; };
 		650216B926E9689300B42BC6 /* RollingNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650216B826E9689300B42BC6 /* RollingNumberView.swift */; };
@@ -325,7 +325,7 @@
 		3BFE30F026E988AA005543A0 /* DoneFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneFooter.swift; sourceTree = "<group>"; };
 		3BFE30F226E988CF005543A0 /* DoneBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneBody.swift; sourceTree = "<group>"; };
 		3BFE30F426E988E8005543A0 /* DoneCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneCard.swift; sourceTree = "<group>"; };
-		3BFE30F626EA8CA9005543A0 /* NewOnboardingUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOnboardingUI.swift; sourceTree = "<group>"; };
+		3BFE30F626EA8CA9005543A0 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		650216B426E86C2100B42BC6 /* URLImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImageView.swift; sourceTree = "<group>"; };
 		650216B626E966A000B42BC6 /* FooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterCell.swift; sourceTree = "<group>"; };
 		650216B826E9689300B42BC6 /* RollingNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RollingNumberView.swift; path = wingit4/Components/Ask/RollingNumberView.swift; sourceTree = SOURCE_ROOT; };
@@ -481,7 +481,7 @@
 				15E4906F26E84A1700B25B56 /* SignupViewModel.swift */,
 				15E4907126E84A1700B25B56 /* SigninView.swift */,
 				15E4907226E84A1700B25B56 /* SignupView.swift */,
-				3BFE30F626EA8CA9005543A0 /* NewOnboardingUI.swift */,
+				3BFE30F626EA8CA9005543A0 /* OnboardingView.swift */,
 				15E4907326E84A1700B25B56 /* SigninViewModel.swift */,
 			);
 			path = Auth;
@@ -1056,7 +1056,7 @@
 				15F7E87A26E8435A00E5238F /* ProfileHeader.swift in Sources */,
 				3B7AF02E2671816A003BCCF3 /* User.swift in Sources */,
 				1524FCF126D75F100000629C /* ShareButton.swift in Sources */,
-				3BFE30F726EA8CAA005543A0 /* NewOnboardingUI.swift in Sources */,
+				3BFE30F726EA8CAA005543A0 /* OnboardingView.swift in Sources */,
 				1524FCEF26D75B5D0000629C /* CommentButton.swift in Sources */,
 				3B75E3D326715C5A002F3108 /* SigninButton.swift in Sources */,
 				1524FCD926D7545F0000629C /* Connections.swift in Sources */,
