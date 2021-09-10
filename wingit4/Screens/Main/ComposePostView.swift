@@ -40,6 +40,7 @@ struct ComposePostView: View {
 //                    }
                 
                 TextEditor(text: $composePostViewModel.caption)
+                    .cornerRadius(15)
                     .padding()
                     .onTapGesture { dismissKeyboard() }
         if composePostViewModel.imageData.count != 0 {
@@ -68,14 +69,18 @@ struct ComposePostView: View {
                     }.foregroundColor(.black).font(.caption2)
                 }
                 .frame(width: UIScreen.main.bounds.width - 50, height: UIScreen.main.bounds.width / 10)
-                .background(Color.gray).opacity(0.3)
+                .background(Color.white)
                 .cornerRadius(10)
                 .padding(.bottom, 5)
                 .onTapGesture {
                         self.composePostViewModel.showImagePicker = true
                 }
               
-            }.sheet(isPresented: $composePostViewModel.showImagePicker) {
+            }
+            .background(
+                LinearGradient(gradient: .init(colors: [Color("Color"),Color("Color1")]), startPoint: .topLeading, endPoint: .bottomTrailing).opacity(1.0)
+                    .ignoresSafeArea(.all, edges: .all)   )
+            .sheet(isPresented: $composePostViewModel.showImagePicker) {
                // ImagePickerController()
                 ImagePicker(showImagePicker: self.$composePostViewModel.showImagePicker, pickedImage: self.$composePostViewModel.image, imageData: self.$composePostViewModel.imageData)
             }
