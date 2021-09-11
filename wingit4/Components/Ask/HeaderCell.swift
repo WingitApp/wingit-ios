@@ -19,19 +19,14 @@ struct HeaderCell: View {
             HStack {
               NavigationLink(destination: self.askCardViewModel.destination) {
                 HStack {
-                  URLImage(URL(string: post.avatar)!,
-                     content: {
-                        $0.image
-                          .resizable()
-                          .aspectRatio(contentMode: .fill)
-                          .clipShape(Circle())
-
-                     })
+                  URLImageView(urlString: post.avatar)
+                    .clipShape(Circle())
                     .frame(width: 35, height: 35)
                     .overlay(
                       RoundedRectangle(cornerRadius: 100)
                         .stroke(Color.gray, lineWidth: 1)
                     )
+                   
                   VStack(alignment: .leading){
                     Text(post.username)
                       .fontWeight(.semibold)

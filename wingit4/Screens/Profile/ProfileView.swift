@@ -41,7 +41,7 @@ struct ProfileView: View {
       ScrollView(showsIndicators: false) {
         ZStack {
           GeometryReader { geometry in
-            URLImageView(inputURL: session.currentUser?.profileImageUrl)
+            URLImageView(urlString: session.currentUser?.profileImageUrl)
                 .frame(
                   height: self.calculateHeight(
                     minHeight: 0,
@@ -51,10 +51,10 @@ struct ProfileView: View {
                 )
                 .clipped()
                 .offset(
-                  y: geometry.frame(in: .global).origin.y < 0 // Is it going up?
-                    ? abs(geometry.frame(in: .global).origin.y) // Push it down!
+                  y: geometry.frame(in: .global).origin.y < 0
+                    ? abs(geometry.frame(in: .global).origin.y)
                     : -geometry.frame(in: .global).origin.y
-                ) // Push it up!
+                )
                 .blur(radius: 1)
           }
           .onTapGesture(perform: self.openUpdatePicSheet)
@@ -62,12 +62,14 @@ struct ProfileView: View {
         
           
           VStack {
-            URLImageView(inputURL: session.currentUser?.profileImageUrl)
-                    .clipShape(Circle())
-                    .frame(width: 150, height: 150)
-                    .padding(5)
-                    .background(Color.white)
-                    .cornerRadius(100)
+            HStack {
+              URLImageView(urlString: session.currentUser?.profileImageUrl)
+                .frame(width: 150, height: 150)
+                .cornerRadius(100)
+                .padding(5)
+            }
+            .background(Color.white)
+            .cornerRadius(100)
             .onTapGesture(perform: self.openUpdatePicSheet)
             .zIndex(2)
             .offset(y: -80)

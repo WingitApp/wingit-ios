@@ -78,7 +78,7 @@ struct CardView: View {
     var body: some View {
         
         HStack{
-            URLImageView(inputURL: user.profileImageUrl)
+            URLImageView(urlString: user.profileImageUrl)
                 .clipShape(Circle())
                 .frame(width: 40, height: 40)
                 .overlay(

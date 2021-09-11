@@ -22,7 +22,7 @@ struct ProfileInformation: View {
                 
                 Button(action: {updatePic.toggle()},
                        label: {
-                        URLImageView(inputURL: user?.profileImageUrl)
+                        URLImageView(urlString: user?.profileImageUrl)
                            .frame(width: 450, height: 330)
                            .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
             
@@ -42,7 +42,7 @@ struct ProfileInformation: View {
                 Text(user?.bio ?? "").font(.caption).foregroundColor(.gray)
                     }
             } else {
-                URLImageView(inputURL: user?.profileImageUrl)
+                URLImageView(urlString: user?.profileImageUrl)
                   .frame(width: 430, height: 330)
                   .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
                   
@@ -59,6 +59,7 @@ struct ProfileInformation: View {
 struct ProfilePicToggle: View {
     var user: User?
     let uid = Auth.auth().currentUser?.uid
+    @EnvironmentObject var profileViewModel: ProfileViewModel
     @ObservedObject var updatePhotoVM = UpdatePhotoVM()
     
     func addAvatar() {
@@ -71,17 +72,12 @@ struct ProfilePicToggle: View {
             self.clean()
         }
     }
+  
+    func closeSheet() {
+      self.profileViewModel.isUpdatePicSheetOpen.toggle()
+      self.clean()
+    }
     
-//    func updateAvatar() {
-//        updatePhotoVM.updatePhoto(completed: {self.clean()}) {
-//            return
-//        } onError: { (errorMessage) in
-//            self.updatePhotoVM.showAlert = true
-//            self.updatePhotoVM.errorString = errorMessage
-//            self.clean()
-//        }
-//    }
-////
     func clean() {
         self.updatePhotoVM.image = Image(systemName: IMAGE_USER_PLACEHOLDER)
         self.updatePhotoVM.imageData = Data()
@@ -90,6 +86,14 @@ struct ProfilePicToggle: View {
     var body: some View {
         
         VStack{
+          VStack(alignment: .trailing) {
+            HStack {
+              Spacer()
+              CloseButton(onTap: closeSheet)
+            }
+          }
+          Spacer()
+
            Text("Change your photo")
                     updatePhotoVM.image
                         .resizable()
@@ -106,10 +110,18 @@ struct ProfilePicToggle: View {
                     .frame(width: 150, height: 50)
                     .background(Color(.systemTeal))
                     .cornerRadius(8)
-         }).padding(.vertical).padding(.horizontal)
-                .alert(isPresented: $updatePhotoVM.showAlert) {
-                    Alert(title: Text("Error"), message: Text(self.updatePhotoVM.errorString), dismissButton: .default(Text("OK")))
-                }
+            })
+              .padding(.vertical)
+              .padding(.horizontal)
+              .alert(isPresented: $updatePhotoVM.showAlert) {
+                  Alert(
+                    title: Text("Error"),
+                    message: Text(self.updatePhotoVM.errorString),
+                    dismissButton: .default(Text("OK"))
+                  )
+              }
+          Spacer()
+
         }.sheet(isPresented: $updatePhotoVM.showImagePicker) {
             // ImagePickerController()
              ImagePicker(showImagePicker: self.$updatePhotoVM.showImagePicker, pickedImage: self.$updatePhotoVM.image, imageData: self.$updatePhotoVM.imageData)

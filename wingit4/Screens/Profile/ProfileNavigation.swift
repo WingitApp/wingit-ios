@@ -19,7 +19,7 @@ struct ProfileNavigation: View {
         
         VStack{
             HStack{
-                URLImageView(inputURL: user?.profileImageUrl)
+              URLImageView(urlString: user?.profileImageUrl)
             .frame(width: 50, height: 50)
               .padding(.horizontal, 15)
                 

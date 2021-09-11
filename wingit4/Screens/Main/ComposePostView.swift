@@ -95,7 +95,7 @@ struct ComposePostView: View {
                 .foregroundColor(.black)
               TextEditor(text: $composePostViewModel.caption)
                   .cornerRadius(8)
-                  .background(Color(.gray).opacity(0.1))
+                  .background(Color(.gray).opacity(0.8))
                   .overlay(
                     RoundedRectangle(cornerRadius: 10)
                       .stroke(Color.gray, lineWidth: 0.3)

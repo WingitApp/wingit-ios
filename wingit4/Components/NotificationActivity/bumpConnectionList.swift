@@ -78,7 +78,7 @@ struct bumpCardView: View {
     var body: some View {
         
         HStack{
-            URLImageView(inputURL: user.profileImageUrl)
+            URLImageView(urlString: user.profileImageUrl)
                 .frame(width: 40, height: 40)
                 .clipShape(Circle())
                 .overlay(RoundedRectangle(cornerRadius: 100)

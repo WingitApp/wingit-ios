@@ -47,7 +47,7 @@ struct UserProfileView: View {
       ScrollView(showsIndicators: false) {
         ZStack {
           GeometryReader { geometry in
-              URLImageView(inputURL: user.profileImageUrl)
+             URLImageView(urlString: user.profileImageUrl)
                 .frame(
                   height: self.calculateHeight(
                     minHeight: 0,
@@ -57,10 +57,10 @@ struct UserProfileView: View {
                 )
                 .clipped()
                 .offset(
-                  y: geometry.frame(in: .global).origin.y < 0 // Is it going up?
-                    ? abs(geometry.frame(in: .global).origin.y) // Push it down!
+                  y: geometry.frame(in: .global).origin.y < 0
+                    ? abs(geometry.frame(in: .global).origin.y)
                     : -geometry.frame(in: .global).origin.y
-                ) // Push it up!
+                )
                 .blur(radius: 1)
           }
           .onTapGesture(perform: self.openImageSheet)
@@ -68,15 +68,18 @@ struct UserProfileView: View {
         
           
           VStack {
-            URLImageView(inputURL: user.profileImageUrl)
-                .clipShape(Circle())
+            HStack {
+              URLImageView(urlString: user.profileImageUrl)
                 .frame(width: 150, height: 150)
-                .padding(5)
-                .background(Color.white)
                 .cornerRadius(100)
+                .padding(5)
+            }
+            .background(Color.white)
+            .cornerRadius(100)
             .onTapGesture(perform: self.openImageSheet)
             .zIndex(2)
             .offset(y: -80)
+            
             VStack {
               // user name
               HStack {
@@ -118,6 +121,7 @@ struct UserProfileView: View {
               .frame(
                 width: UIScreen.main.bounds.width
               )
+              .padding(.top, 5)
               ProfileHeader(
                 user: user,
                 postCount: userProfileViewModel.posts.count,
@@ -131,6 +135,7 @@ struct UserProfileView: View {
             .padding(.top, -80)
             .background(Color.white)
             .frame(width: UIScreen.main.bounds.width)
+            .zIndex(1)
             
             LazyVStack {
               ForEach(userProfileViewModel.posts.indices, id: \.self) { index in
@@ -141,6 +146,7 @@ struct UserProfileView: View {
                   )
                 }
             }
+
           }
           .zIndex(1)
           .padding(.top, 230)
@@ -160,7 +166,6 @@ struct UserProfileView: View {
       content: {  ConnectionsView(user: user).environmentObject(connectionsViewModel) }
     )
     .environmentObject(connectionsViewModel)
-    
   }
 }
 
@@ -196,19 +201,25 @@ struct UserProfileView: View {
         
         var body: some View {
             Button(action: buttonTapped) {
+              Image(systemName: (self.isConnected ? "hand.raised.slash" : "hand.raised"))
+                .foregroundColor(Color(.systemTeal))
               Text((self.isConnected) ? "Disconnect" : (self.sentPendingRequest) ? "Pending" : "Connect")
                   .font(.callout)
                   .foregroundColor(Color(.systemTeal))
                   .bold()
-                  .lineLimit(1)
-                  .padding(
-                    .init(top: 10, leading: 30, bottom: 10, trailing: 30)
-                  )
-                  .cornerRadius(5)
-                  .overlay(RoundedRectangle(cornerRadius: 5)
-                            .stroke(Color(.systemTeal), lineWidth: 1))
-              
+             
+                 
             }
+            .frame(
+              width: (UIScreen.main.bounds.width / 2) - 30
+            )
+            .padding(
+              .init(top: 10, leading: 0, bottom: 10, trailing: 0)
+            )
+            .cornerRadius(5)
+            .overlay(RoundedRectangle(cornerRadius: 5)
+                      .stroke(Color(.systemTeal), lineWidth: 1))
+        
         }
     }
 
@@ -223,7 +234,10 @@ struct UserProfileView: View {
                   .foregroundColor(Color(.white))
                 Text("Message").foregroundColor(Color(.white)).font(.callout).bold().border(Color(.systemTeal)).lineLimit(1)
                 }
-              .padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30))
+              .frame(
+                width: (UIScreen.main.bounds.width / 2) - 30
+              )
+              .padding(.init(top: 10, leading: 0, bottom: 10, trailing: 0))
                 
             }
             .background(Color(.systemTeal))

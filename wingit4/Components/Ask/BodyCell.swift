@@ -24,6 +24,7 @@ struct BodyCell: View {
                 }, label: {
                   URLImage(URL(string: post.mediaUrl)!,
                     content: {
+                      
                         $0.image
                             .resizable()
                             .scaledToFit()

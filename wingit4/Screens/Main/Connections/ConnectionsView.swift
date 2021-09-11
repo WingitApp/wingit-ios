@@ -15,7 +15,7 @@ struct ConnectionRow: View {
     var body: some View {
         NavigationLink(destination: UserProfileView(user: user)) {
           HStack {
-              URLImageView(inputURL: user.profileImageUrl)
+              URLImageView(urlString: user.profileImageUrl)
                   .clipShape(Circle())
                   .frame(width: 40, height: 40)
                   .overlay(

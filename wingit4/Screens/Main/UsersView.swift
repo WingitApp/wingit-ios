@@ -24,15 +24,24 @@ struct UsersView: View {
                                 ForEach(usersViewModel.users, id: \.id) { user in
                                     NavigationLink(destination: UserProfileView(user: user)) {
                                         HStack {
-                                            URLImageView(inputURL: user.profileImageUrl).clipShape(Circle()).frame(width: 50, height: 50)
+                                            URLImageView(urlString: user.profileImageUrl)
+                                              .clipShape(Circle())
+                                              .frame(width: 40, height: 40)
+                                              .overlay(
+                                                RoundedRectangle(cornerRadius: 100)
+                                                  .stroke(Color.gray, lineWidth: 0.5)
+                                              )
                                             
                                             VStack(alignment: .leading, spacing: 5) {
-                                             Text(user.displayName ?? "").font(.headline).bold()
-                                                Text("@\(user.username ?? "")").font(.subheadline)
+                                             Text(user.displayName ?? "")
+                                              .font(.headline).bold()
+                                              Text("@\(user.username ?? "")")
+                                                .font(.subheadline)
+                                                .foregroundColor(Color(.systemTeal))
                                             }
-                                          
-                                        }.padding(10)
+                                        }
                                }
+                                    .padding(10)
                             }
                         }
                    
