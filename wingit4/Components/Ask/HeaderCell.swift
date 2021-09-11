@@ -10,6 +10,7 @@ import URLImage
 import FirebaseAuth
 
 struct HeaderCell: View {
+  
   @EnvironmentObject var askCardViewModel: AskCardViewModel
   @Binding var post: Post
   
@@ -29,14 +30,16 @@ struct HeaderCell: View {
                     RoundedRectangle(cornerRadius: 100)
                       .stroke(Color.gray, lineWidth: 1)
                   )
-
-              }.disabled(self.askCardViewModel.isNavLinkDisabled)
-              VStack(alignment: .leading){
-                Text(post.username)
-                  .fontWeight(.semibold)
-                  .modifier(UserNameStyle())
-                TimeAgoStamp(date: post.date)
+                VStack(alignment: .leading){
+                  Text(post.username)
+                    .fontWeight(.semibold)
+                    .modifier(UserNameStyle())
+                  TimeAgoStamp(date: post.date)
+                }
               }
+              .disabled(self.askCardViewModel.isNavLinkDisabled)
+              .buttonStyle(PlainButtonStyle())
+              
               Spacer()
 //              AskDoneToggle() // rename later
               AskMenu()

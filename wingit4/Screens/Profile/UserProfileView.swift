@@ -91,6 +91,7 @@ struct UserProfileView: View {
             .zIndex(2)
             .offset(y: -80)
             VStack {
+              // user name
               HStack {
                 Button(action: {Api.User.updateField(field: "firstName", user: user ) }) {
                   Text(user.firstName ?? "").font(.title).bold().foregroundColor(Color("bw"))
@@ -100,16 +101,16 @@ struct UserProfileView: View {
                   Text(user.lastName ?? "").font(.title).bold().foregroundColor(Color("bw"))
                 }
               }.frame(width: UIScreen.main.bounds.width)
-              
+             
+//              Text(user.bio ?? "")
+//                .font(.subheadline)
+//                .italic()
+
               Connections(
                 user: user,
                 connectionsCount: $userProfileViewModel.connectionsCountState
               )
-              ProfileHeader(
-                user: user,
-                postCount: userProfileViewModel.posts.count,
-                doneCount: userProfileViewModel.doneposts.count
-              )
+              
               HStack(spacing: 15) {
                 if userProfileViewModel.userBlocked == false {
                   ConnectButton(
@@ -118,9 +119,19 @@ struct UserProfileView: View {
                     connectionsCount: $userProfileViewModel.connectionsCountState
                   )
                   MessageButton(user: user)
+                    .cornerRadius(5)
 
                 }
               }
+              .frame(
+                width: UIScreen.main.bounds.width
+              )
+              ProfileHeader(
+                user: user,
+                postCount: userProfileViewModel.posts.count,
+                doneCount: userProfileViewModel.doneposts.count
+              )
+              
               .padding(
                 EdgeInsets(top: 0, leading: 20, bottom: 10, trailing: 20)
               )
@@ -162,73 +173,6 @@ struct UserProfileView: View {
 }
 
 
-
-
-//struct UserProfileView: View {
-//
-//    var user: User
-//
-//    @ObservedObject var userProfileViewModel = UserProfileViewModel()
-//    @StateObject var connectionsViewModel = ConnectionsViewModel()
-//
-//    var body: some View {
-//        VStack(alignment: .leading, spacing: 15){
-//                ScrollView {
-//                   VStack {
-//                    VStack{
-//                        ProfileInformation(user: user)
-//                        Connections(
-//                          user: user,
-//                          connectionsCount: $userProfileViewModel.connectionsCountState
-//                        )
-//                        ProfileHeader(
-//                          user: user,
-//                          postCount: userProfileViewModel.posts.count,
-//                          doneCount: userProfileViewModel.doneposts.count
-//                        )
-//                        HStack(spacing: 15) {
-//                          if userProfileViewModel.userBlocked == false {
-//                            ConnectButton(
-//                              user: user,
-//                              isConnected: $userProfileViewModel.isConnected, sentPendingRequest: $userProfileViewModel.sentPendingRequest,
-//                              connectionsCount: $userProfileViewModel.connectionsCountState
-//                            )
-//                            MessageButton(user: user)
-//                          }
-//                        }.padding(.leading, 20).padding(.trailing, 20)
-//                    }
-//                    .padding(.bottom, 10)
-//                    .background(Color(.white))
-//                    .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
-//
-//                    if !self.userProfileViewModel.posts.isEmpty {
-//                      ForEach(self.userProfileViewModel.posts.indices, id: \.self) { index in
-//                            LazyVStack {
-//                                AskCard(
-//                                  post: self.userProfileViewModel.posts[index],
-//                                  isProfileView: false,
-//                                  index: index
-//                                )
-//                            }
-//                       }
-//                    }
-//
-//                }
-//
-////                )}
-//               }
-//                .background(Color.black.opacity(0.03)
-//                .ignoresSafeArea(.all, edges: .all))
-//                .navigationBarTitle(Text(user.displayName ?? ""), displayMode: .automatic)
-//                .environmentObject(connectionsViewModel)
-//                 .onAppear {
-//                    logToAmplitude(event: .viewOtherProfile)
-//                    self.userProfileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.user.id ?? self.user.uid)
-//                 }
-//
-//
-//    }
-//}
   
     struct ConnectButton: View {
 
@@ -272,9 +216,12 @@ struct UserProfileView: View {
                 logToAmplitude(event: .tapMessageButton)
             }) {
             NavigationLink(destination: ChatView(recipientId: user.id ?? "", recipientAvatarUrl: user.profileImageUrl ?? "", recipientUsername: user.username ?? "")) {
-              Text("Message").foregroundColor(Color(.white)).font(.callout).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal))
-                   
+                Image(systemName: "square.and.pencil")
+                  .foregroundColor(Color(.white))
+                  Text("Message").foregroundColor(Color(.white)).font(.callout).bold().border(Color(.systemTeal))
+                 
                 }
+              .padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30))
                 
             }
             .background(Color(.systemTeal))

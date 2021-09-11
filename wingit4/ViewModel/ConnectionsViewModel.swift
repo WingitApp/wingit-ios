@@ -23,9 +23,11 @@ class ConnectionsViewModel : ObservableObject {
             isLoading.toggle()
         }
         Api.Connections.getConnections(userId: userId) { (users) in
-            self.isLoading.toggle()
             self.users = users
             self.connectionsCount = users.count
+          if self.isLoading {
+            self.isLoading.toggle()
+          }
         }
     }
     

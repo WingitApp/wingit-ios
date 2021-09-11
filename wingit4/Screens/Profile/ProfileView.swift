@@ -82,6 +82,10 @@ struct ProfileView: View {
                 }
               }.frame(width: UIScreen.main.bounds.width)
               
+              Text(session.currentUser?.bio ?? "")
+                .font(.subheadline)
+                .italic()
+
               Connections(
                 user: self.session.currentUser,
                 connectionsCount: $profileViewModel.connectionsCountState

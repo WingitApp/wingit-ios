@@ -31,30 +31,33 @@ struct AskCard: View {
 
   var body: some View {
     if !self.askCardViewModel.isHidden {
-      NavigationLink( destination:
-        AskDetailView(post: $post)
-          .environmentObject(askCardViewModel)
-          .environmentObject(askMenuViewModel)
-          .environmentObject(askDoneToggleViewModel)
-          .environmentObject(commentViewModel)
-          .environmentObject(commentInputViewModel)
-          .environmentObject(footerCellViewModel)
-      ) {
-        VStack {
-          HeaderCell(post: $post)
-          BodyCell(post: $post)
-          FooterCell(post: $post)
+      VStack {
+        // need to place above to prevent event propagation
+        HeaderCell(post: $post)
+        NavigationLink( destination:
+          AskDetailView(post: $post)
+            .environmentObject(askCardViewModel)
+            .environmentObject(askMenuViewModel)
+            .environmentObject(askDoneToggleViewModel)
+            .environmentObject(commentViewModel)
+            .environmentObject(commentInputViewModel)
+            .environmentObject(footerCellViewModel)
+        ) {
+          VStack {
+            BodyCell(post: $post)
+            FooterCell(post: $post)
+          }
         }
-        .overlay(
-          RoundedRectangle(cornerRadius: 8)
-            .stroke(Color.gray, lineWidth: 0.5)
-        )
+        .buttonStyle(PlainButtonStyle())
       }
-      .buttonStyle(PlainButtonStyle())
       .background(
         self.askCardViewModel.getColorByIndex(index: index).opacity(1)
       )
       .cornerRadius(8)
+      .overlay(
+        RoundedRectangle(cornerRadius: 8)
+          .stroke(Color.gray, lineWidth: 0.5)
+      )
       .padding(
         EdgeInsets(top: 0, leading: 15, bottom: 10, trailing: 15)
       )
@@ -120,13 +123,6 @@ struct AskCard: View {
         content: {
           ReferConnectionsList(post: $post)
             .environmentObject(referViewModel)
-        })
-      .sheet(
-        isPresented: $referViewModel.isReferListOpen,
-        content: {
-          ReferConnectionsList(post: $post)
-            .environmentObject(referViewModel)
-
         })
     }
   }
