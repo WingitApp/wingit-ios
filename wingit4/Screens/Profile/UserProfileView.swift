@@ -87,7 +87,13 @@ struct UserProfileView: View {
                 Button(action: {Api.User.updateField(field: "lastName", user: user) }) {
                   Text(user.lastName ?? "").font(.title).bold().foregroundColor(Color("bw"))
                 }
-              }.frame(width: UIScreen.main.bounds.width)
+              }
+              .frame(width: UIScreen.main.bounds.width)
+              .background(
+                Color.white
+                 .cornerRadius(20, corners: [.topLeft, .topRight])
+                 .padding(.top, -105)
+               )
              
 //              Text(user.bio ?? "")
 //                .font(.subheadline)
@@ -106,7 +112,6 @@ struct UserProfileView: View {
                     connectionsCount: $userProfileViewModel.connectionsCountState
                   )
                   MessageButton(user: user)
-                    .cornerRadius(5)
 
                 }
               }
@@ -120,7 +125,7 @@ struct UserProfileView: View {
               )
               
               .padding(
-                EdgeInsets(top: 0, leading: 20, bottom: 10, trailing: 20)
+                EdgeInsets(top: 5, leading: 20, bottom: 10, trailing: 20)
               )
             }
             .padding(.top, -80)
@@ -131,7 +136,7 @@ struct UserProfileView: View {
               ForEach(userProfileViewModel.posts.indices, id: \.self) { index in
                   AskCard(
                     post: userProfileViewModel.posts[index],
-                    isProfileView: false,
+                    isProfileView: true,
                     index: index
                   )
                 }
@@ -191,7 +196,17 @@ struct UserProfileView: View {
         
         var body: some View {
             Button(action: buttonTapped) {
-              Text((self.isConnected) ? "Disconnect" : (self.sentPendingRequest) ? "Pending" : "Connect").foregroundColor(Color(.systemTeal)).font(.callout).foregroundColor(Color.white).bold().padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30)).border(Color(.systemTeal)).lineLimit(1)
+              Text((self.isConnected) ? "Disconnect" : (self.sentPendingRequest) ? "Pending" : "Connect")
+                  .font(.callout)
+                  .foregroundColor(Color(.systemTeal))
+                  .bold()
+                  .padding(
+                    .init(top: 10, leading: 30, bottom: 10, trailing: 30)
+                  )
+                  .cornerRadius(5)
+                  .overlay(RoundedRectangle(cornerRadius: 5)
+                            .stroke(Color(.systemTeal), lineWidth: 1))
+              
             }
         }
     }
@@ -212,6 +227,7 @@ struct UserProfileView: View {
                 
             }
             .background(Color(.systemTeal))
+            .cornerRadius(5)
 
           
         }

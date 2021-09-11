@@ -18,6 +18,8 @@ struct AskDetailBody: View {
         HStack{
             Text(post.caption)
               .font(.callout)
+              .fixedSize(horizontal: false, vertical: true)
+
             Spacer()
         }
        

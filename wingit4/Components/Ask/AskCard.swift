@@ -48,7 +48,7 @@ struct AskCard: View {
             FooterCell(post: $post)
           }
         }
-        .buttonStyle(PlainButtonStyle())
+        .buttonStyle(FlatLinkStyle())
       }
       .background(
         self.askCardViewModel.getColorByIndex(index: index).opacity(1)

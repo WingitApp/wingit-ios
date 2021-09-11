@@ -49,7 +49,7 @@ struct Home1 : View {
             Image("logo")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 80, height: 80)
+                .frame(width: 40, height: 40)
             
             HStack(spacing: 0){
                 

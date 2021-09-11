@@ -64,7 +64,7 @@ struct NotificationView: View {
                 }
                   
            
-            }.navigationBarTitle(Text("Notifications"), displayMode: .automatic)
+            }.navigationBarTitle(Text("Notifications"), displayMode: .inline)
             .onAppear {
                 self.activityViewModel.loadActivities()
             }

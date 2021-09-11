@@ -42,13 +42,13 @@ struct HomeView: View {
         .navigationBarItems(leading:
           Button(action: {}) {
             NavigationLink(destination: UsersView()) {
-              Image(systemName: "person.badge.plus")
-                .imageScale(Image.Scale.large)
+              Image(systemName: "magnifyingglass")
+                .imageScale(Image.Scale.medium)
                 .foregroundColor(.gray)
             }
           },trailing: Button(action: {}) {
             NavigationLink(destination: MessagesView()) {
-              Image(systemName: "envelope").imageScale(Image.Scale.large).foregroundColor(.gray)
+              Image(systemName: "envelope").imageScale(Image.Scale.medium).foregroundColor(.gray)
             }
           })
         .onAppear( perform: onAppear )

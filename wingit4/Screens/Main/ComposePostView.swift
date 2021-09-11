@@ -33,54 +33,85 @@ struct ComposePostView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                
-//                    composePostViewModel.image.resizable().scaledToFill().frame(width: 60, height: 60).clipped().foregroundColor(.gray).onTapGesture {
-//                            self.composePostViewModel.showImagePicker = true
-//                    }
-                
-                TextEditor(text: $composePostViewModel.caption)
-                    .cornerRadius(15)
-                    .padding()
-                    .onTapGesture { dismissKeyboard() }
-                
-        if composePostViewModel.imageData.count != 0 {
-            ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top)) {
-                    Image(uiImage: UIImage(data: composePostViewModel.imageData)!)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: UIScreen.main.bounds.width / 2, height: 150)
-                        .cornerRadius(15)
-                            // Cancel Button...
-                    Button(action: {composePostViewModel.imageData = Data(count: 0)}) {
-                        
-                        Image(systemName: "xmark")
-                            .foregroundColor(.white)
-                            .padding(10)
-                            .background(Color("Color"))
-                            .clipShape(Circle())
+          
+          
+          
+          VStack(alignment: .leading) {
+            Text("Add a photo")
+              .font(.headline)
+              .padding(.bottom, 5)
+              .foregroundColor(.black)
+            
+            if composePostViewModel.imageData.count != 0 {
+                ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top)) {
+                        Image(uiImage: UIImage(data: composePostViewModel.imageData)!)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: UIScreen.main.bounds.width / 2, height: 150)
+                            .cornerRadius(15)
+                                // Cancel Button...
+                        Button(action: {composePostViewModel.imageData = Data(count: 0)}) {
+                            
+                            Image(systemName: "xmark")
+                                .foregroundColor(.white)
+                                .padding(10)
+                                .background(Color("Color"))
+                                .clipShape(Circle())
+                        }
                     }
-                }
-            .padding(.bottom, 5)
-        }
-                HStack{
-                    Group{
-                    Image(systemName: "camera.fill")
-                    Text("Add photo").bold()
-                    }.foregroundColor(.gray).font(.caption2)
-                }
-                .frame(width: UIScreen.main.bounds.width - 50, height: UIScreen.main.bounds.width / 10)
-                .background(Color.white)
-                .cornerRadius(10)
                 .padding(.bottom, 5)
-                .onTapGesture {
-                        self.composePostViewModel.showImagePicker = true
-                }
+            }
+              HStack{
+                  Group{
+                    Image(systemName: "camera.fill")
+                      .foregroundColor(Color.white)
+
+                    Text("Add photo")
+                      .font(.subheadline)
+                      .bold()
+                      .foregroundColor(Color.white)
+                  }
+              }
+              .frame(
+                width: UIScreen.main.bounds.width - 30,
+                height: UIScreen.main.bounds.width / 10
+              )
+              .background(Color(.systemTeal))
+              .cornerRadius(8)
+              .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                  .stroke(Color.gray, lineWidth: 0.3)
+              )
+              .onTapGesture {
+                      self.composePostViewModel.showImagePicker = true
+              }
+              .padding(.bottom, 5)
+
+            
+      
+              Text("Compose a post")
+                .font(.headline)
+                .padding(.bottom, 5)
+                .foregroundColor(.black)
+              TextEditor(text: $composePostViewModel.caption)
+                  .cornerRadius(8)
+                  .background(Color(.gray).opacity(0.1))
+                  .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                      .stroke(Color.gray, lineWidth: 0.3)
+                  )
+                  .onTapGesture { dismissKeyboard() }
+                  
+                
               
             }
+          .padding(
+            EdgeInsets(top: 15, leading: 20, bottom: 15, trailing: 20)
+          )
             .background(
-                LinearGradient(gradient: .init(colors: [Color("Color"),Color("Color1")]), startPoint: .topLeading, endPoint: .bottomTrailing).opacity(1.0)
-                    .ignoresSafeArea(.all, edges: .all)   )
+              Color(.white)
+                .ignoresSafeArea(.all, edges: .all)
+            )
             .sheet(isPresented: $composePostViewModel.showImagePicker) {
                // ImagePickerController()
                 ImagePicker(showImagePicker: self.$composePostViewModel.showImagePicker, pickedImage: self.$composePostViewModel.image, imageData: self.$composePostViewModel.imageData)
@@ -89,15 +120,15 @@ struct ComposePostView: View {
             .navigationBarItems(trailing:
                                     
                 Button(action: sharePost) {
-
                     Text("Post")
+                      .foregroundColor(Color(.systemTeal))
                 }
                     
            
              .alert(isPresented: $composePostViewModel.showAlert) {
                 Alert(title: Text("Error"), message: Text(self.composePostViewModel.errorString), dismissButton: .default(Text("OK")))
             }
-            ).foregroundColor(.gray)
+            )
         }
         //.onTapGesture { dismissKeyboard() }
         
