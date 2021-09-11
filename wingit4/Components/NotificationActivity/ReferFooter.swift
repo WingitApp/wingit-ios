@@ -86,7 +86,7 @@ struct BumpButton: View {
         Button(action: {referViewModel.isReferListOpen.toggle()},
                label: {
                 VStack{
-                    Text("Bump")
+                    Text("Wing")
                         .foregroundColor(.white)
                         .fontWeight(.bold)
                 }

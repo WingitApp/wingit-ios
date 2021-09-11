@@ -100,7 +100,7 @@ struct BumpedNotification: View {
             }).frame(width: 50, height: 50)
             HStack {
                 Group {
-                Text("You have bumped")
+                Text("You have winged")
                     Text("\(referral.ask?.username ?? "")'s").bold()
                 Text("ask")
                 }.font(.subheadline)
