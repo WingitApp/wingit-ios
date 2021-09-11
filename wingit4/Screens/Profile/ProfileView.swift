@@ -41,57 +41,44 @@ struct ProfileView: View {
       ScrollView(showsIndicators: false) {
         ZStack {
           GeometryReader { geometry in
-              URLImage(
-                URL(string: session.currentUser!.profileImageUrl!)!,
-                content: {
-                  $0.image
-                    .resizable()
-                    .scaledToFill()
-                    .frame(
-                      height: self.calculateHeight(
-                        minHeight: 0,
-                        maxHeight: 230,
-                        yOffset: geometry.frame(in: .global).origin.y
-                      )
-                    )
-                    .clipped()
-                    .offset(
-                      y: geometry.frame(in: .global).origin.y < 0 // Is it going up?
-                        ? abs(geometry.frame(in: .global).origin.y) // Push it down!
-                        : -geometry.frame(in: .global).origin.y
-                    ) // Push it up!
-                    .blur(radius: 1)
-                })
-              
+            URLImageView(inputURL: session.currentUser?.profileImageUrl)
+                .frame(
+                  height: self.calculateHeight(
+                    minHeight: 0,
+                    maxHeight: 230,
+                    yOffset: geometry.frame(in: .global).origin.y
+                  )
+                )
+                .clipped()
+                .offset(
+                  y: geometry.frame(in: .global).origin.y < 0 // Is it going up?
+                    ? abs(geometry.frame(in: .global).origin.y) // Push it down!
+                    : -geometry.frame(in: .global).origin.y
+                ) // Push it up!
+                .blur(radius: 1)
           }
           .onTapGesture(perform: self.openUpdatePicSheet)
           .zIndex(0)
         
           
           VStack {
-            URLImage(URL(string: session.currentUser!.profileImageUrl!)!,
-                     content: {
-                      $0.image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .clipShape(Circle())
-                        .frame(width: 150, height: 150)
-                        .padding(5)
-                        .background(Color.white)
-                        .cornerRadius(100)
-                     }
-            )
+            URLImageView(inputURL: session.currentUser?.profileImageUrl)
+                    .clipShape(Circle())
+                    .frame(width: 150, height: 150)
+                    .padding(5)
+                    .background(Color.white)
+                    .cornerRadius(100)
             .onTapGesture(perform: self.openUpdatePicSheet)
             .zIndex(2)
             .offset(y: -80)
             VStack {
               HStack {
-                Button(action: {Api.User.updateField(field: "firstName", user: session.currentUser!) }) {
-                  Text(session.currentUser!.firstName ?? "").font(.title).bold().foregroundColor(Color("bw"))
+                Button(action: {Api.User.updateField(field: "firstName", user: session.currentUser) }) {
+                  Text(session.currentUser?.firstName ?? "").font(.title).bold().foregroundColor(Color("bw"))
                 }
                 
-                Button(action: {Api.User.updateField(field: "lastName", user: session.currentUser!) }) {
-                  Text(session.currentUser!.lastName ?? "").font(.title).bold().foregroundColor(Color("bw"))
+                Button(action: {Api.User.updateField(field: "lastName", user: session.currentUser) }) {
+                  Text(session.currentUser?.lastName ?? "").font(.title).bold().foregroundColor(Color("bw"))
                 }
               }.frame(width: UIScreen.main.bounds.width)
               
