@@ -15,18 +15,17 @@ struct Connections: View {
     
     var body: some View {
         HStack{
-            NavigationLink(
-              destination: ConnectionsView(user: user).environmentObject(connectionsViewModel),
-                label: {
-                    HStack {
-                        Text("\(connectionsCount)")
-                        Text("Connections")
-                    }
-                    .font(.headline)
-                    .foregroundColor(Color("Color"))
-                    .padding(.top, 5)
-                })
+            HStack {
+                Text("\(connectionsCount)")
+                Text("Connections")
             }
+            .font(.headline)
+            .foregroundColor(Color(.systemTeal))
+            .padding(.top, 5)
+            .onTapGesture {
+              self.connectionsViewModel.isConnectionsSheetOpen.toggle()
+            }
+        }
     }
 }
 

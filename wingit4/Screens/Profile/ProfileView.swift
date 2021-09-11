@@ -110,20 +110,19 @@ struct ProfileView: View {
           .padding(.top, 230)
         }
       }
+      .background(
+        Color.white.ignoresSafeArea(.all, edges: .all)
+      )
+      .sheet(
+        isPresented: $connectionsViewModel.isConnectionsSheetOpen,
+        content: {  ConnectionsView(user: session.currentUser!).environmentObject(connectionsViewModel) }
+      )
       .sheet(
         isPresented:  $profileViewModel.isUpdatePicSheetOpen,
         content: { ProfilePicToggle(user: session.currentUser!) }
       )
-      .background(
-        Color.white.ignoresSafeArea(.all, edges: .all)
-      )
       .environmentObject(connectionsViewModel)
-      .navigationBarTitle(
-        Text(
-          "Profile"
-        ),
-        displayMode: .inline
-      )
+      .navigationBarTitle(Text(session.currentUser!.displayName ?? "Profile"), displayMode: .inline)
       .navigationBarItems(leading:
       Button(action: {}) {
         NavigationLink(destination: UsersView()) {
