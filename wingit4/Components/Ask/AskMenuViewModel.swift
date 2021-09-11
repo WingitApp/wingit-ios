@@ -17,10 +17,5 @@ class AskMenuViewModel: ObservableObject {
 
   }
   
-  func onTapBlockUser() {
-    guard let userId = Auth.auth().currentUser?.uid else { return }
-    let postOwnerId = askCardViewModel.post!.ownerId
-    
-    Api.User.blockUser(userId: userId, postOwnerId: postOwnerId)
-  }
+  
 }

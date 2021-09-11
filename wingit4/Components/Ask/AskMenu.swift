@@ -13,6 +13,7 @@ struct AskMenu: View {
 
 
     var body: some View {
+        VStack{
       if !self.askCardViewModel.isOwnPost {
         Menu(content: {
           Button(
@@ -26,7 +27,7 @@ struct AskMenu: View {
               Text("Report")
           }
           Button(
-            action: self.askMenuViewModel.onTapBlockUser
+            action: self.askCardViewModel.onTapBlockUser
           ) {
               Text("Block")
           }
@@ -35,6 +36,7 @@ struct AskMenu: View {
             .rotationEffect(.degrees(-90))
             .foregroundColor(Color(.systemTeal))
         })
+       
       } else {
         Menu(content: {
           Button(
@@ -48,5 +50,6 @@ struct AskMenu: View {
             .foregroundColor(Color(.systemTeal))
         })
       }
+        }
    }
 }
