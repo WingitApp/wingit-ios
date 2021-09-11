@@ -119,14 +119,14 @@ struct ProfileView: View {
       )
       .sheet(
         isPresented: $connectionsViewModel.isConnectionsSheetOpen,
-        content: {  ConnectionsView(user: session.currentUser!).environmentObject(connectionsViewModel) }
+        content: {  ConnectionsView(user: session.currentUser).environmentObject(connectionsViewModel) }
       )
       .sheet(
         isPresented:  $profileViewModel.isUpdatePicSheetOpen,
-        content: { ProfilePicToggle(user: session.currentUser!) }
+        content: { ProfilePicToggle(user: session.currentUser) }
       )
       .environmentObject(connectionsViewModel)
-      .navigationBarTitle(Text(session.currentUser!.displayName ?? "Profile"), displayMode: .inline)
+      .navigationBarTitle(Text(session.currentUser?.displayName ?? "Profile"), displayMode: .inline)
       .navigationBarItems(leading:
       Button(action: {}) {
         NavigationLink(destination: UsersView()) {
