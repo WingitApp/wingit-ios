@@ -28,7 +28,7 @@ struct MainView: View {
   var body: some View {
     TabView(selection: $model.selectedIndex) {
         HomeView()
-          .tabItem({ Image(systemName: "house.fill") })
+          .tabItem({ Image(systemName: "house") })
           .tag(0)
           .environmentObject(profileViewModel)
           .environmentObject(activityViewModel)
@@ -40,7 +40,10 @@ struct MainView: View {
           .environmentObject(activityViewModel)
           .environmentObject(homeViewModel)
         ComposePostView()
-          .tabItem({ Image(systemName: IMAGE_PHOTO) })
+          .tabItem({
+            Image(systemName: "plus.circle.fill")
+              .foregroundColor(Color(.systemTeal))
+          })
           .tag(2)
           .environmentObject(profileViewModel)
           .environmentObject(activityViewModel)
@@ -52,7 +55,7 @@ struct MainView: View {
           .environmentObject(activityViewModel)
           .environmentObject(homeViewModel)
         ProfileView()
-          .tabItem({ Image(systemName: "person.fill") })
+          .tabItem({ Image(systemName: "person") })
           .tag(4)
           .environmentObject(profileViewModel)
           .environmentObject(activityViewModel)

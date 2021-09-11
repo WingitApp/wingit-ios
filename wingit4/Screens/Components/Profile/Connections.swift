@@ -14,18 +14,17 @@ struct Connections: View {
     @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
     
     var body: some View {
-        HStack{
-            HStack {
+          HStack(alignment: .center, spacing: 5){
                 Text("\(connectionsCount)")
                 Text("Connections")
             }
-            .font(.headline)
+            .font(.subheadline)
             .foregroundColor(Color(.systemTeal))
-            .padding(.top, 5)
-            .onTapGesture {
+            .padding(.top, 2)
+
+              .onTapGesture {
               self.connectionsViewModel.isConnectionsSheetOpen.toggle()
             }
-        }
     }
 }
 

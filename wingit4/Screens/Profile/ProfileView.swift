@@ -71,6 +71,7 @@ struct ProfileView: View {
             .onTapGesture(perform: self.openUpdatePicSheet)
             .zIndex(2)
             .offset(y: -80)
+            
             VStack {
               HStack {
                 Button(action: {Api.User.updateField(field: "firstName", user: session.currentUser) }) {
@@ -80,21 +81,29 @@ struct ProfileView: View {
                 Button(action: {Api.User.updateField(field: "lastName", user: session.currentUser) }) {
                   Text(session.currentUser?.lastName ?? "").font(.title).bold().foregroundColor(Color("bw"))
                 }
-              }.frame(width: UIScreen.main.bounds.width)
+              }
+              .frame(width: UIScreen.main.bounds.width)
+              .background(
+                Color.white
+                 .cornerRadius(20, corners: [.topLeft, .topRight])
+                 .padding(.top, -105)
+               )
               
-              Text(session.currentUser?.bio ?? "")
-                .font(.subheadline)
-                .italic()
+//              Text(session.currentUser?.bio ?? "")
+//                .font(.subheadline)
+//                .italic()
 
               Connections(
                 user: self.session.currentUser,
                 connectionsCount: $profileViewModel.connectionsCountState
               )
+              .padding(.top, 5)
               ProfileHeader(
                 user: self.session.currentUser,
                 postCount: profileViewModel.posts.count,
                 doneCount: profileViewModel.doneposts.count
               )
+              .padding(.top, -3)
             }
             .padding(.top, -80)
             .background(Color.white)
@@ -104,7 +113,7 @@ struct ProfileView: View {
               ForEach(profileViewModel.posts.indices, id: \.self) { index in
                   AskCard(
                     post: profileViewModel.posts[index],
-                    isProfileView: false,
+                    isProfileView: true,
                     index: index
                   )
                 }
@@ -112,6 +121,7 @@ struct ProfileView: View {
           }
           .zIndex(1)
           .padding(.top, 230)
+          
         }
       }
       .background(
@@ -119,30 +129,37 @@ struct ProfileView: View {
       )
       .sheet(
         isPresented: $connectionsViewModel.isConnectionsSheetOpen,
-        content: {  ConnectionsView(user: session.currentUser!).environmentObject(connectionsViewModel) }
+        content: {  ConnectionsView(
+          user: session.currentUser!).environmentObject(connectionsViewModel) }
       )
       .sheet(
         isPresented:  $profileViewModel.isUpdatePicSheetOpen,
-        content: { ProfilePicToggle(user: session.currentUser!) }
+        content: { ProfilePicToggle(user: session.currentUser) }
       )
       .environmentObject(connectionsViewModel)
-      .navigationBarTitle(Text(session.currentUser!.displayName ?? "Profile"), displayMode: .inline)
-      .navigationBarItems(leading:
-      Button(action: {}) {
-        NavigationLink(destination: UsersView()) {
-          Image(systemName: "person.badge.plus")
-            .imageScale(Image.Scale.large)
+      .navigationBarTitle(
+        Text(session.currentUser!.displayName ?? "Profile"), displayMode: .inline
+      )
+      .navigationBarItems(
+        leading: Button(action: {}) {
+          NavigationLink(destination: UsersView()) {
+            Image(systemName: "magnifyingglass")
+              .imageScale(Image.Scale.medium)
+              .foregroundColor(.gray)
+          }
+        },
+        trailing:
+          Button(action: {
+            self.session.logout()
+            
+          }) {
+          Label(
+            title: { Text("Logout").font(.subheadline)},
+            icon: {
+              Image(systemName: "arrow.right.circle")})
+                .imageScale(Image.Scale.medium)
             .foregroundColor(.gray)
-        }
-      },trailing:
-        Button(action: {
-          self.session.logout()
-          
-        }) {
-          Label(title: { Text("Logout")},
-                icon: {Image(systemName: "arrow.right.circle.fill")}).imageScale(Image.Scale.medium).foregroundColor(.gray)
-          
-        } )
+        })
     }
   }
 }

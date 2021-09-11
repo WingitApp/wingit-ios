@@ -28,7 +28,6 @@ struct ConnectionRow: View {
                 Text(user.displayName ?? "").font(.headline).bold()
                 Text("@\(user.username ?? "")")
                 .font(.subheadline)
-                .bold()
                 .foregroundColor(Color(.systemTeal))
               }.padding(.leading, 10)
           }.padding(10)
@@ -57,32 +56,15 @@ struct ConnectionsView: View {
     return title
   }
     var body: some View {
-        VStack {
-            HStack {
-              Text(self.formatTitle())
-                .font(.title2)
-                .bold()
-              Text("\(connectionsViewModel.connectionsCount)")
-                .font(.title2)
-                .bold()
-                .foregroundColor(Color(.systemTeal))
-                .redacted(reason: connectionsViewModel.isLoading ? .placeholder : [])
-              Spacer()
-              Image(systemName: "xmark")
-                .foregroundColor(.gray)
-                .onTapGesture {
-                  self.connectionsViewModel.isConnectionsSheetOpen.toggle()
-                }
-            }
-            .padding(
-              EdgeInsets(top: 20, leading: 15, bottom: 20, trailing: 15)
-            )
             NavigationView {
                 List(self.connectionsViewModel.users) { user in
                     ConnectionRow(user: user)
                 }
+                .navigationBarTitle(formatTitle(), displayMode: .inline)
+                .edgesIgnoringSafeArea([.top, .bottom])
+
             }
-        }
+//            .navigationBarHidden(true)
         .onAppear {
             connectionsViewModel.loadConnections(userId: user?.id)
         }

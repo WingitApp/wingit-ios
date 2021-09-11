@@ -18,27 +18,32 @@ struct HeaderCell: View {
         VStack {
             HStack {
               NavigationLink(destination: self.askCardViewModel.destination) {
-                URLImage(URL(string: post.avatar)!,
-                   content: {
-                      $0.image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .clipShape(Circle())
-                   })
-                  .frame(width: 35, height: 35)
-                  .overlay(
-                    RoundedRectangle(cornerRadius: 100)
-                      .stroke(Color.gray, lineWidth: 1)
-                  )
-                VStack(alignment: .leading){
-                  Text(post.username)
-                    .fontWeight(.semibold)
-                    .modifier(UserNameStyle())
-                  TimeAgoStamp(date: post.date)
+                HStack {
+                  URLImage(URL(string: post.avatar)!,
+                     content: {
+                        $0.image
+                          .resizable()
+                          .aspectRatio(contentMode: .fill)
+                          .clipShape(Circle())
+
+                     })
+                    .frame(width: 35, height: 35)
+                    .overlay(
+                      RoundedRectangle(cornerRadius: 100)
+                        .stroke(Color.gray, lineWidth: 1)
+                    )
+                  VStack(alignment: .leading){
+                    Text(post.username)
+                      .fontWeight(.semibold)
+                      .modifier(UserNameStyle())
+                    TimeAgoStamp(date: post.date)
+                  }
                 }
               }
               .disabled(self.askCardViewModel.isNavLinkDisabled)
+              .buttonStyle(FlatLinkStyle())
               .buttonStyle(PlainButtonStyle())
+
               
               Spacer()
 //              AskDoneToggle() // rename later
