@@ -27,9 +27,9 @@ class PostApi {
         guard let userId = Auth.auth().currentUser?.uid else {
             return
         }
-        let postId = Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("userPosts").document().documentID
-        let firestorePostRef = Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("userPosts").document(postId)
-        let post = Post.init(id: postId, caption: caption, likes: [:], location: "", ownerId: userId, postId: postId, username: Auth.auth().currentUser!.displayName!, avatar: Auth.auth().currentUser!.photoURL!.absoluteString, mediaUrl: "", date: Date().timeIntervalSince1970, likeCount: 0, title: "")
+        let postId = Ref.FS_COLLECTION_ALL_POSTS.document().documentID
+        let firestorePostRef = Ref.FS_COLLECTION_ALL_POSTS.document(postId)
+        let post = Post.init(id: postId, caption: caption, likes: [:], location: "", ownerId: userId, postId: postId, status: .open, username: Auth.auth().currentUser!.displayName!, avatar: Auth.auth().currentUser!.photoURL!.absoluteString, mediaUrl: "", date: Date().timeIntervalSince1970, likeCount: 0, title: "")
         
         do {
             try firestorePostRef.setData(from: post)
@@ -44,7 +44,7 @@ class PostApi {
         guard let userId = Auth.auth().currentUser?.uid else {
             return
         }
-        let postId = Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("userPosts").document().documentID
+        let postId = Ref.FS_COLLECTION_ALL_POSTS.document().documentID
         let storagePostRef = Ref.STORAGE_POST_ID(postId: postId)
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
@@ -56,7 +56,7 @@ class PostApi {
         guard let userId = Auth.auth().currentUser?.uid else {
             return
         }
-        let firestoreMyPostRef = Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("userPosts").document(postId)
+        let firestoreMyPostRef = Ref.FS_COLLECTION_POSTS_FOR_USERID(userId: userId).document(postId)
       //  let storagePostRef = Ref.STORAGE_POST_ID
         firestoreMyPostRef.delete { (err) in
             if err != nil{
@@ -70,71 +70,19 @@ class PostApi {
         }
     }
     
-    func uploadDoneImage(caption: String, imageData: Data, postId: String, askcaption: String, mediaUrl: String, asklocation: String, askdate: Double, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            return
-        }
-        self.deleteUserPost(userId: userId, postId: postId)
-        let storagePostRef = Ref.STORAGE_POST_ID(postId: postId)
-        let metadata = StorageMetadata()
-        metadata.contentType = "image/jpg"
-        StorageService.savePostDonePhoto(userId: userId, caption: caption, postId: postId, askcaption: askcaption, mediaUrl: mediaUrl, asklocation: asklocation, askdate: askdate, imageData: imageData, metadata: metadata, storagePostRef: storagePostRef, onSuccess: onSuccess, onError: onError)
-    }
-    
-    func uploadDone(caption: String, imageData: Data, postId: String, askcaption: String, mediaUrl: String, asklocation: String, askdate: Double, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void){
-        guard let userId = Auth.auth().currentUser?.uid else {
-            return
-        }
-        self.deleteUserPost(userId: userId, postId: postId)
-        let firestorePostRef = Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("donePosts").document(postId)
-        let donepost = DonePost.init(caption: caption, doneMediaUrl: "", ownerId: userId, postId: postId, username: Auth.auth().currentUser!.displayName!, avatar: Auth.auth().currentUser!.photoURL!.absoluteString, donedate: Date().timeIntervalSince1970, askcaption: askcaption, mediaUrl: mediaUrl, asklocation: asklocation, askdate: askdate)
-        guard let dict = try? donepost.toDictionary() else {return}
-
-        firestorePostRef.setData(dict) { (error) in
-            if error != nil {
-              onError(error!.localizedDescription)
-              return
-            }
-            Ref.FS_COLLECTION_ALL_DONE.document(postId).setData(dict)
-            onSuccess()
-        }
-    }
-    
-        func deleteUserPost(userId: String, postId: String){
+        func deleteUserPost(userId: String, postId: String) {
             guard let userId = Auth.auth().currentUser?.uid else {
                 return
             }
-            let firestoreMyPostRef = Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("userPosts").document(postId)
+            let firestoreMyPostRef = Ref.FS_COLLECTION_POSTS_FOR_USERID(userId: userId).document(postId)
             firestoreMyPostRef.delete { (err) in
                 if err != nil{
                //    print(err!.localizedDescription)
                     return
                 }
             Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId).collection("timelinePosts").document(postId).delete()
-                
-            
         }
     }
-
-    
-    func deleteDonePost(userId: String, postId: String) {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            return
-        }
-        let firestoreMyPostRef = Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("donePosts").document(postId)
-      //  let storagePostRef = Ref.STORAGE_POST_ID
-        firestoreMyPostRef.delete { (err) in
-            if err != nil{
-                //print(err!.localizedDescription)
-                return
-            }
-            let storagePostRef = Ref.STORAGE_POST_ID(postId: postId)
-            storagePostRef.delete()
-            Ref.FS_COLLECTION_ALL_DONE.document(postId).delete()
-        }
-    }
-    
-    
     
     func hidePost(userId: String, postId: String) {
         guard let userId = Auth.auth().currentUser?.uid else {

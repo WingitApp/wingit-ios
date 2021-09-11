@@ -12,7 +12,7 @@ import FirebaseAuth
 
 class UserProfileViewModel: ObservableObject {
     @Published var posts: [Post] = []
-    @Published var doneposts: [DonePost] = []
+//    @Published var doneposts: [DonePost] = []
     
     @Published var isLoading = false
     @Published var userBlocked = false
@@ -55,17 +55,17 @@ class UserProfileViewModel: ObservableObject {
         updateIsConnected(userId: userId)
         updateSentPendingRequest(userId: userId)
         updateConnectionsCount(userId: userId)
-        self.loadDonePosts(userId: userId)
+//        self.loadDonePosts(userId: userId)
       }
     }
     
-    func loadDonePosts(userId: String) {
-        isLoading = true
-        Api.User.loadDonePosts(userId: userId) { (doneposts) in
-            self.isLoading = false
-            self.doneposts = doneposts
-        }
-    }
+//    func loadDonePosts(userId: String) {
+//        isLoading = true
+//        Api.User.loadDonePosts(userId: userId) { (doneposts) in
+//            self.isLoading = false
+//            self.doneposts = doneposts
+//        }
+//    }
     
     func updateConnections(userId: String) {
         

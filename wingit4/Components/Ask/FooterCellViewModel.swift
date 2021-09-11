@@ -34,21 +34,11 @@ class FooterCellViewModel: ObservableObject {
         self.toggleLike()
       }
         // TODO : Do all "consistency writes" on Cloud Trigger
-    
-    
-        Ref.FS_DOC_POSTS_FOR_USERID(userId: post.ownerId)
-          .collection("userPosts")
+        Ref.FS_COLLECTION_ALL_POSTS
           .document(post.postId)
           .setData(["likes.\(uid)" : true, "likeCount":  post.likeCount], merge: true) { error in
             
           }
-    
-        Ref.FS_COLLECTION_ALL_POSTS.document(post.postId)
-          .setData(["likes.\(uid)" : true, "likeCount":  post.likeCount], merge: true) { error in
-            // create entry if error
-          }
-    
-    
     
         Ref.FS_DOC_TIMELINE_FOR_USERID(userId: post.ownerId)
           .collection("timelinePosts")
@@ -75,13 +65,6 @@ class FooterCellViewModel: ObservableObject {
       }
     // TODO : Do all "consistency writes" on Cloud Trigger
     
-        Ref.FS_DOC_POSTS_FOR_USERID(userId: post.ownerId)
-          .collection("userPosts")
-          .document(post.postId)
-            .setData(["likes.\(uid)" : false, "likeCount":  post.likeCount], merge: true) { error in
-            }
-    
-    
         Ref.FS_COLLECTION_ALL_POSTS
           .document(post.postId)
           .setData(["likes.\(uid)" : false, "likeCount":  post.likeCount], merge: true)
@@ -107,8 +90,6 @@ class FooterCellViewModel: ObservableObject {
                 }
             }
          }
-    
-
     }
   
   

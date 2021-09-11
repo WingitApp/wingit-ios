@@ -79,7 +79,7 @@ class UserApi {
     }
     
     func loadPosts(userId: String, onSuccess: @escaping(_ posts: [Post]) -> Void) {
-        Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("userPosts").order(by: "date", descending: true).getDocuments { (snapshot, error) in
+        Ref.FS_COLLECTION_ALL_POSTS.whereField("ownerId", isEqualTo: userId).order(by: "date", descending: true).getDocuments { (snapshot, error) in
             
             if let error = error {
               print(error)
@@ -93,7 +93,7 @@ class UserApi {
     }
         
     func loadDonePosts(userId: String, onSuccess: @escaping(_ doneposts: [DonePost]) -> Void) {
-        Ref.FS_DOC_POSTS_FOR_USERID(userId: userId).collection("donePosts").order(by: "donedate", descending: true).getDocuments { (snapshot, error) in
+        Ref.FS_COLLECTION_MY_POSTS.document(userId).collection("donePosts").order(by: "donedate", descending: true).getDocuments { (snapshot, error) in
             
             guard let snap = snapshot else {
              //   print("Error fetching data")

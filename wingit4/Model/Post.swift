@@ -15,12 +15,18 @@ struct Post: Codable, Identifiable {
     var location: String
     var ownerId: String
     var postId: String
+    var status: PostStatus?
     var username: String
     var avatar: String
     var mediaUrl: String
     var date: Double
     var likeCount: Int
     var title: String?
+}
+
+enum PostStatus: String, Codable {
+    case open
+    case closed
 }
 
 struct DonePost: Encodable, Decodable {

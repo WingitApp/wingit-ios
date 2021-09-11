@@ -124,8 +124,8 @@ struct UserProfileView: View {
               .padding(.top, 5)
               ProfileHeader(
                 user: user,
-                postCount: userProfileViewModel.posts.count,
-                doneCount: userProfileViewModel.doneposts.count
+                postCount: userProfileViewModel.posts.count
+//                doneCount: userProfileViewModel.doneposts.count
               )
               
               .padding(

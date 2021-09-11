@@ -18,28 +18,17 @@ struct DoneToggle: View {
     }
     
     func shareDone() {
-        doneViewModel.shareDone(completed: {
-          // print("done")
-           self.clean()
-        }) { (errorMessage) in
-            //  print("Error: \(errorMessage)")
-           self.doneViewModel.showAlert = true
-           self.doneViewModel.errorString = errorMessage
-           self.clean()
-        }
+//        doneViewModel.shareDone(completed: {
+//          // print("done")
+//           self.clean()
+//        }) { (errorMessage) in
+//            //  print("Error: \(errorMessage)")
+//           self.doneViewModel.showAlert = true
+//           self.doneViewModel.errorString = errorMessage
+//           self.clean()
+//        }
     }
-    func justDone() {
-        doneViewModel.justDone(completed: {
-        //   print("done")
-           self.clean()
-        }) { (errorMessage) in
-         //   print("Error: \(errorMessage)")
-           self.doneViewModel.showAlert = true
-           self.doneViewModel.errorString = errorMessage
-           self.clean()
-        }
-    }
-    
+
     func clean() {
       self.doneViewModel.caption = ""
         self.doneViewModel.image = Image(systemName: IMAGE_PHOTO)
@@ -69,7 +58,7 @@ struct DoneToggle: View {
                }.padding()
                 Spacer()
                 HStack{
-                Button(action: justDone) {
+                Button(action: {}) {
                        Text("Just Done")
                            .fontWeight(.bold)
                            .foregroundColor(Color.white)
@@ -78,7 +67,7 @@ struct DoneToggle: View {
                            .background(Color(.systemTeal))
                            .cornerRadius(8)
                 }.padding(.vertical).padding(.horizontal)
-                Button(action: shareDone) {
+                Button(action: {}) {
                        Text("Submit")
                            .fontWeight(.bold)
                            .foregroundColor(Color.white)

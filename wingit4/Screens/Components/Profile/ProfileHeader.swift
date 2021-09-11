@@ -12,7 +12,7 @@ struct ProfileHeader: View {
  //   @EnvironmentObject var session: SessionStore
     var user: User?
     var postCount: Int
-    var doneCount: Int
+//    var doneCount: Int
     
     @State var done: Bool = false
     
@@ -25,19 +25,19 @@ struct ProfileHeader: View {
                         Text("\(postCount)").font(.headline)
                         Text("Asks").font(.subheadline).foregroundColor(.gray)
                     }.padding(10)
-                    NavigationLink(
-                        destination: DoneView(user: user!),
-                        label: {
-                            VStack{
-                            Text("\(doneCount)").font(.headline).foregroundColor(Color("bw"))
-                            Text("Done").font(.subheadline).foregroundColor(.gray)
-                            }.padding(10)
-                        })
+//                    NavigationLink(
+//                        destination: DoneView(user: user!),
+//                        label: {
+//                            VStack{
+//                            Text("\(doneCount)").font(.headline).foregroundColor(Color("bw"))
+//                            Text("Done").font(.subheadline).foregroundColor(.gray)
+//                            }.padding(10)
+//                        })
                     }
             
             }
-            .sheet(isPresented: $done, content: {
-                DoneView(user: user!)   })
+//            .sheet(isPresented: $done, content: {
+//                DoneView(user: user!)   })
 
         }
     }

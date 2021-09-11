@@ -21,8 +21,8 @@ struct ProfileCard: View {
             )
             ProfileHeader(
               user: self.session.currentUser,
-              postCount: profileViewModel.posts.count,
-              doneCount: profileViewModel.doneposts.count
+              postCount: profileViewModel.posts.count
+//              doneCount: profileViewModel.doneposts.count
             )
         }
         .background(Color(.white))

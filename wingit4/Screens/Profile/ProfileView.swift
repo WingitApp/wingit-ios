@@ -102,8 +102,8 @@ struct ProfileView: View {
               .padding(.top, 5)
               ProfileHeader(
                 user: self.session.currentUser,
-                postCount: profileViewModel.posts.count,
-                doneCount: profileViewModel.doneposts.count
+                postCount: profileViewModel.posts.count
+//                doneCount: profileViewModel.doneposts.count
               )
               .padding(.top, -3)
             }

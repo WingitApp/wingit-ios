@@ -151,8 +151,8 @@ class Ref {
         // Firestore - Posts
         static var FS_COLLECTION_ALL_POSTS = FS_ROOT.collection("all_posts")
         static var FS_COLLECTION_MY_POSTS = FS_ROOT.collection("myPosts")
-        static func FS_DOC_POSTS_FOR_USERID(userId: String) -> DocumentReference {
-            return FS_COLLECTION_MY_POSTS.document(userId)
+        static func FS_COLLECTION_POSTS_FOR_USERID(userId: String) -> CollectionReference {
+            return FS_COLLECTION_ALL_POSTS.whereField("ownerId", isEqualTo: userId) as! CollectionReference
         }
     
         static var FS_COLLECTION_ALL_DONE = FS_ROOT.collection("all_done")
