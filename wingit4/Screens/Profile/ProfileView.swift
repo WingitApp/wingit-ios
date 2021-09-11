@@ -138,7 +138,7 @@ struct ProfileView: View {
       )
       .environmentObject(connectionsViewModel)
       .navigationBarTitle(
-        Text(session.currentUser!.displayName ?? "Profile"), displayMode: .inline
+        Text(session.currentUser?.displayName ?? "Profile"), displayMode: .inline
       )
       .navigationBarItems(
         leading: Button(action: {}) {
