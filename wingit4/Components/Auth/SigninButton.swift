@@ -21,7 +21,7 @@ struct SigninButton: View {
             .frame(width: UIScreen.main.bounds.width - 50)
             .background(
             
-                LinearGradient(gradient: .init(colors: [Color("Color"),Color("Color1")]), startPoint: .topLeading, endPoint: .bottomTrailing)
+               Color("Color")
             )
             .cornerRadius(8)
         }

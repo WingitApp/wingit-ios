@@ -25,11 +25,11 @@ struct AskMenu: View {
           ) {
               Text("Report")
           }
-//          Button(
-//            action: self.askMenuViewModel.onTapBlockUser
-//          ) {
-//              Text("Block")
-//          }
+          Button(
+            action: self.askMenuViewModel.onTapBlockUser
+          ) {
+              Text("Block")
+          }
         }, label: {
           Image(systemName: "ellipsis")
             .rotationEffect(.degrees(-90))
