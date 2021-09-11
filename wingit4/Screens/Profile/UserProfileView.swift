@@ -200,6 +200,7 @@ struct UserProfileView: View {
                   .font(.callout)
                   .foregroundColor(Color(.systemTeal))
                   .bold()
+                  .lineLimit(1)
                   .padding(
                     .init(top: 10, leading: 30, bottom: 10, trailing: 30)
                   )
@@ -220,16 +221,13 @@ struct UserProfileView: View {
             NavigationLink(destination: ChatView(recipientId: user.id ?? "", recipientAvatarUrl: user.profileImageUrl ?? "", recipientUsername: user.username ?? "")) {
                 Image(systemName: "square.and.pencil")
                   .foregroundColor(Color(.white))
-                  Text("Message").foregroundColor(Color(.white)).font(.callout).bold().border(Color(.systemTeal))
-                 
+                Text("Message").foregroundColor(Color(.white)).font(.callout).bold().border(Color(.systemTeal)).lineLimit(1)
                 }
               .padding(.init(top: 10, leading: 30, bottom: 10, trailing: 30))
                 
             }
             .background(Color(.systemTeal))
             .cornerRadius(5)
-
-          
         }
     }
 
