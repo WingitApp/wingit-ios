@@ -20,7 +20,7 @@ struct ReferButton: View {
 //                .environmentObject(referViewModel)
             ,
             label: {
-                Image(systemName: "person.3")
+                Image(systemName: "link.badge.plus")
                     .foregroundColor(.gray)
                     .padding(.trailing, 10)
             })

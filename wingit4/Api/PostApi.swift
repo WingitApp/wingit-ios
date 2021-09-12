@@ -135,7 +135,7 @@ class PostApi {
     
     func loadClosedPosts(userId: String?, onSuccess: @escaping(_ posts: [Post]) -> Void) {
         guard let userId = userId else { return }
-        Ref.FS_COLLECTION_ALL_POSTS.whereField("ownerId", isEqualTo: userId).whereField("status", isEqualTo: "open").order(by: "date", descending: true).getDocuments { (snapshot, error) in
+        Ref.FS_COLLECTION_ALL_POSTS.whereField("ownerId", isEqualTo: userId).whereField("status", isEqualTo: "closed").order(by: "date", descending: true).getDocuments { (snapshot, error) in
             if let error = error {
               print(error)
             } else if let snapshot = snapshot {
