@@ -53,14 +53,7 @@ struct AskCard: View {
       .background(
         self.askCardViewModel.getColorByIndex(index: index).opacity(1)
       )
-      .cornerRadius(8)
-      .overlay(
-        RoundedRectangle(cornerRadius: 8)
-          .stroke(Color.gray, lineWidth: 0.5)
-      )
-      .padding(
-        EdgeInsets(top: 0, leading: 15, bottom: 10, trailing: 15)
-      )
+      .modifier(CardStyle())
       .modifier(FeedItemShadow())
       .environmentObject(askCardViewModel)
       .environmentObject(askMenuViewModel)

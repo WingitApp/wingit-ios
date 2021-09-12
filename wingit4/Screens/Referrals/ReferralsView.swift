@@ -53,6 +53,9 @@ struct ReferralsView: View {
               }
            }
           .padding(.top, 5)
+          .background(
+            Color.white.ignoresSafeArea(.all, edges: .all)
+          )
           .environmentObject(referralsViewModel)
           .onAppear {
             self.referralsViewModel.getReferrals()

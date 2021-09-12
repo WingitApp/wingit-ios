@@ -28,6 +28,8 @@ struct ReferCard: View {
             ReferFooter(referral: $referral, post: $post)
             Divider().padding(.top, 5)
         }
+        .modifier(CardStyle())
+        .modifier(FeedItemShadow())
         .environmentObject(referViewModel)
         .sheet(
           isPresented: $referViewModel.isReferListOpen,

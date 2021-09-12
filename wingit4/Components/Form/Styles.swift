@@ -50,3 +50,28 @@ struct ConnectionNotifButtonStyle: ViewModifier {
       .cornerRadius(5)
   }
 }
+
+struct CardStyle: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .cornerRadius(8)
+      .overlay(
+        RoundedRectangle(cornerRadius: 8)
+          .stroke(Color.gray, lineWidth: 0.5)
+      )
+      .padding(
+        EdgeInsets(top: 0, leading: 15, bottom: 10, trailing: 15)
+      )
+  }
+}
+
+struct UserAvatarStyle: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+    .clipShape(Circle())
+    .overlay(
+      RoundedRectangle(cornerRadius: 100)
+        .stroke(Color.gray, lineWidth: 1)
+    )
+  }
+}

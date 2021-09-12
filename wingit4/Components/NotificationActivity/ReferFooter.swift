@@ -15,11 +15,10 @@ struct ReferFooter: View {
     var body: some View {
         
         HStack(spacing: 20){
-            
             WingButton(referral: $referral)
             AcceptButton(referral: $referral, post: $post)
-            
         }
+
     }
 }
 
@@ -59,16 +58,21 @@ struct AcceptButton: View {
                     referralsViewModel.acceptReferral(referral: referral, onSuccess: {self.userHasAccepted.toggle()})
                 },
                        label: {
-                        VStack{
+                        HStack(alignment: .center) {
+                          Image(systemName: "checkmark.circle")
+                            .foregroundColor(.white)
                             Text("Accept")
-                                .foregroundColor(.white)
                                 .fontWeight(.bold)
                         }
+                        .foregroundColor(.white)
                         .padding(.vertical, 10)
-                        .padding(.horizontal, 30)
-                        .frame(width: UIScreen.main.bounds.width - 235, height: UIScreen.main.bounds.width / 9)
-                        .background(Color("Color"))
-                        .cornerRadius(15)
+                        .frame(width: (UIScreen.main.bounds.width / 2 ) - 40)
+                        .background(Color("Color1"))
+                        .cornerRadius(5)
+                        .overlay(
+                          RoundedRectangle(cornerRadius: 5).stroke(Color(.lightGray),
+                          lineWidth: 1)
+                        )
                 })
             })
     }
@@ -84,16 +88,25 @@ struct WingButton: View {
         
         Button(action: {referViewModel.isReferListOpen.toggle()},
                label: {
-                VStack{
+                HStack(alignment: .center){
+                  Image(IMAGE_LOGO)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 25)
+                  
                     Text("Wing")
-                        .foregroundColor(.white)
-                        .fontWeight(.bold)
+                      .foregroundColor(Color("Color"))
+                      .fontWeight(.bold)
                 }
+                
                 .padding(.vertical, 10)
-                .padding(.horizontal, 30)
-                .frame(width: UIScreen.main.bounds.width - 235, height: UIScreen.main.bounds.width / 9)
-                .background( Color("Color1"))
-                .cornerRadius(15)
+                .frame(width: (UIScreen.main.bounds.width / 2 ) - 40)
+                .background(Color.white)
+                .cornerRadius(5)
+                .overlay(
+                  RoundedRectangle(cornerRadius: 5).stroke(Color("Color"),
+                  lineWidth: 1)
+                )
         })
         
 

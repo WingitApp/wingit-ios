@@ -25,34 +25,31 @@ struct ReferHeader: View {
 
   
     var body: some View {
-        VStack {
+      VStack(alignment: .leading){
             HStack {
-                URLImage(URL(string: referral.sender?.profileImageUrl ?? "")!,
-                   content: {
-                      $0.image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .clipShape(Circle())
-                   }).frame(width: 35, height: 35)
-//                            Image(systemName: "camera").resizable().clipShape(Circle())
-//                                .frame(width: 35, height: 35)
-                    VStack(alignment: .leading) {
-                        Text(referral.sender?.username ?? "").font(.subheadline).bold()
-                    }
+                URLImageView(urlString: referral.sender?.profileImageUrl)
+                  .clipShape(Circle())
+                  .frame(width: 35, height: 35)
+                  .overlay(
+                    RoundedRectangle(cornerRadius: 100)
+                      .stroke(Color.gray, lineWidth: 1)
+                  )
+                VStack(alignment: .leading) {
+                    Text(referral.sender?.username ?? "").font(.subheadline).bold()
+                }
                 
-                    Spacer()
+                Spacer()
                 Button(action: {referralsViewModel.ignoreReferral(referralId: referral.id)},
                        label: {
                         Image(systemName: "xmark").foregroundColor(.gray)
                 })
                 }
-              .padding(.trailing, 15).padding(.leading, 15)
-            VStack(alignment: .leading, spacing: 10){
-                Text("Hey, I'm referring you to help with this ask.").font(.system(size: 14)).padding(.horizontal)
-//                Text(referral.text ?? "").font(.system(size: 14)).padding(.horizontal)
-            }
-        }.padding(.top, 10)
-
-      
+            Text("Hey, I'm referring you to help with this ask.")
+              .font(.system(size: 14))
+              .padding(.top, 5)
+        }
+        .padding(
+          EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15)
+        )
     }
 }
