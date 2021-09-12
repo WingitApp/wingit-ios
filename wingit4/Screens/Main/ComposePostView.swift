@@ -120,7 +120,7 @@ struct ComposePostView: View {
             .navigationBarItems(trailing:
                                     
                 Button(action: sharePost) {
-                    Text("Post")
+                    Text("Ask")
                       .foregroundColor(Color(.systemTeal))
                 }
                     
