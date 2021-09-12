@@ -13,8 +13,10 @@ import Amplitude
 import SPAlert
 
 class ReferralsViewModel: ObservableObject {
-  
-  @Published var referrals: [Referral] = []
+  @Published var pendingReferrals: [Referral] = []
+  @Published var acceptedReferrals: [Referral] = []
+  @Published var closedReferrals: [Referral] = []
+  @Published var wingedReferrals: [Referral] = []
     
     var listener: ListenerRegistration!
     
@@ -23,11 +25,36 @@ class ReferralsViewModel: ObservableObject {
      1. send into comment type --> referral.
      2. in comment navigation bring the option for referral comments to come out.
      */
-  
-    func getPendingRefferals() {
-      Api.Referrals.getPendingReferrals() { referrals in
-        self.referrals = referrals
-      }
+    
+    func getReferrals() {
+        getPendingReferrals()
+        getAcceptedReferrals()
+        getClosedReferrals()
+        getWingedReferrals()
+    }
+    
+    func getPendingReferrals() {
+        Api.Referrals.getReferrals(status: .pending) { referrals in
+            self.pendingReferrals = referrals
+        }
+    }
+    
+    func getAcceptedReferrals() {
+        Api.Referrals.getReferrals(status: .accepted) { referrals in
+            self.acceptedReferrals = referrals
+        }
+    }
+
+    func getClosedReferrals() {
+        Api.Referrals.getReferrals(status: .closed) { referrals in
+            self.pendingReferrals = referrals
+        }
+    }
+    
+    func getWingedReferrals() {
+        Api.Referrals.getReferrals(status: .winged) { referrals in
+            self.wingedReferrals = referrals
+        }
     }
     
     func acceptReferral(referral: Referral, onSuccess: @escaping() -> Void) {
@@ -66,8 +93,4 @@ class ReferralsViewModel: ObservableObject {
             guard let referralId = referralId else { return }
             Api.Referrals.updateStatus(referralId: referralId, newStatus: .closed)
     }
-    
-    
-
 }
-

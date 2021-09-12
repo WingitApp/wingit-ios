@@ -24,7 +24,7 @@ class ReferralsApi {
         }
     }
     
-    func bumpReferral(askId: String, receiverId: String?, parentId: String, senderId: String?){
+    func rewingReferral(askId: String, receiverId: String?, parentId: String, senderId: String?) {
         guard let id = senderId, let receiverId = receiverId else { return }
         let referral = Referral(id: nil, createdAt: nil, askId: askId, children: nil, closedAt: nil, receiverId: receiverId, parentId: parentId, senderId: id, status: .pending, text: nil)
         do {
@@ -63,10 +63,12 @@ class ReferralsApi {
             }
     }
 
-    func getPendingReferrals(onSuccess: @escaping(_ referrals: [Referral]) -> Void) {
+    func getReferrals(status: ReferralStatus, onSuccess: @escaping(_ referrals: [Referral]) -> Void) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         Ref.FS_COLLECTION_REFERRALS
           .whereField("receiverId", isEqualTo: userId)
+          .whereField("status", isEqualTo: status.rawValue)
+          .order(by: "createdAt", descending: true)
           .addSnapshotListener { (snapshot, error) in
             // catch errors
             guard let snap = snapshot else { return }

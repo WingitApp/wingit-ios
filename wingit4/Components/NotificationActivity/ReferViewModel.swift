@@ -45,7 +45,7 @@ class ReferViewModel : ObservableObject, Identifiable {
 
     }
     
-    func sendReferral(askId: String) {
+    func sendReferrals(askId: String) {
         ///askId(postId) & senderId (auth.dude) & senderId(userId of the one selected
         // ids -> self.selectedUsers
         
@@ -62,12 +62,12 @@ class ReferViewModel : ObservableObject, Identifiable {
         self.toggleReferListScreen()
     }
     
-    func sendBump(askId: String, parentId: String) {
+    func rewingReferral(askId: String, parentId: String) {
         ///askId(postId) & senderId (auth.dude) & senderId(userId of the one selected
         // ids -> self.selectedUsers
-        
+        Api.Referrals.updateStatus(referralId: parentId, newStatus: .winged)
         for receiverId in selectedUsers {
-            Api.Referrals.bumpReferral(
+            Api.Referrals.rewingReferral(
                 askId: askId,
                 receiverId: receiverId,
                 parentId: parentId,
@@ -77,14 +77,7 @@ class ReferViewModel : ObservableObject, Identifiable {
         
         self.allReferralRecipientIds = Array(Set(self.allReferralRecipientIds + self.selectedUsers))
         let alertView = SPAlertView(title: "Sent!", message: nil, preset: SPAlertIconPreset.done); alertView.present(duration: 2)
-                self.bumpReferral(referralId: parentId)
         self.toggleReferListScreen()
-    }
-    
-    func bumpReferral(referralId: String?) {
-        guard let referralId = referralId else { return }
-        Api.Referrals.updateStatus(referralId: referralId, newStatus: .bumped)
-        
     }
     
     func loadConnections(askId: String) {

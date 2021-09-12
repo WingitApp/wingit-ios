@@ -32,14 +32,14 @@ struct ReferCard: View {
         .sheet(
           isPresented: $referViewModel.isReferListOpen,
           content: {
-            BumpConnectionsList(referral: $referral)
+            WingConnectionsList(referral: $referral)
               .environmentObject(referViewModel)
           })
         
     }
 }
 
-struct BumpCard: View {
+struct WingCard: View {
   
   @State var referral: Referral
   @State var post: Post
@@ -55,7 +55,7 @@ struct BumpCard: View {
     var body: some View {
        
         VStack{
-            BumpedNotification(referral: $referral, post: $post)
+            WingNotification(referral: $referral, post: $post)
             Divider().padding(.top, 5)
         }
         

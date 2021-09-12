@@ -140,7 +140,7 @@
 		3B96DD7026DF5C6000015EED /* ReferConnectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B96DD6F26DF5C6000015EED /* ReferConnectionsList.swift */; };
 		3B9774252694FE0000F1EF14 /* alertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9774242694FE0000F1EF14 /* alertView.swift */; };
 		3B97807D26813BC1009CE037 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 3B97807C26813BC1009CE037 /* FirebaseMessaging */; };
-		3B9CA05026E5C98D00BB195F /* bumpConnectionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9CA04F26E5C98D00BB195F /* bumpConnectionList.swift */; };
+		3B9CA05026E5C98D00BB195F /* WingConnectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9CA04F26E5C98D00BB195F /* WingConnectionsList.swift */; };
 		3BC155AD26D721600069AFD4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BC155AC26D721600069AFD4 /* GoogleService-Info.plist */; };
 		3BC155AF26D8245C0069AFD4 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 3BC155AE26D8245C0069AFD4 /* FirebaseFirestoreSwift-Beta */; };
 		3BD12F1526C9CA1500E26A87 /* AppDel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD12F1426C9CA1500E26A87 /* AppDel.swift */; };
@@ -307,7 +307,7 @@
 		3B96DD6F26DF5C6000015EED /* ReferConnectionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferConnectionsList.swift; sourceTree = "<group>"; };
 		3B9774242694FE0000F1EF14 /* alertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertView.swift; sourceTree = "<group>"; };
 		3B97807E268158B6009CE037 /* wingit4.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wingit4.entitlements; sourceTree = "<group>"; };
-		3B9CA04F26E5C98D00BB195F /* bumpConnectionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bumpConnectionList.swift; sourceTree = "<group>"; };
+		3B9CA04F26E5C98D00BB195F /* WingConnectionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WingConnectionsList.swift; sourceTree = "<group>"; };
 		3BC155AC26D721600069AFD4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3BD12F1426C9CA1500E26A87 /* AppDel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDel.swift; sourceTree = "<group>"; };
 		3BE57FF626D89994005C242F /* ProfileNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNavigation.swift; sourceTree = "<group>"; };
@@ -432,7 +432,7 @@
 				3BE61D7526E160C60078C6CF /* ReferBody.swift */,
 				3BE61D7326E15E8C0078C6CF /* ReferFooter.swift */,
 				3B96DD6D26DF4C9E00015EED /* ReferCard.swift */,
-				3B9CA04F26E5C98D00BB195F /* bumpConnectionList.swift */,
+				3B9CA04F26E5C98D00BB195F /* WingConnectionsList.swift */,
 				3B3A880C26E0007A003E780F /* ReferViewModel.swift */,
 			);
 			path = NotificationActivity;
@@ -1061,7 +1061,7 @@
 				1524FCD526D754500000629C /* TextCell.swift in Sources */,
 				3B7AF0BF2673EAFB003BCCF3 /* Activity.swift in Sources */,
 				3BE57FF726D89994005C242F /* ProfileNavigation.swift in Sources */,
-				3B9CA05026E5C98D00BB195F /* bumpConnectionList.swift in Sources */,
+				3B9CA05026E5C98D00BB195F /* WingConnectionsList.swift in Sources */,
 				3B7AF05826719885003BCCF3 /* MainView.swift in Sources */,
 				15DFD07826EC39E2002CBE31 /* Button.swift in Sources */,
 				15DFD07626EBE438002CBE31 /* RoundedCorner.swift in Sources */,

@@ -14,42 +14,39 @@ struct ReferralsView: View {
     var body: some View {
        NavigationView{
       ScrollView {
-        if !referralsViewModel.referrals.isEmpty {
-            VStack(alignment: .leading){
-              ForEach(self.referralsViewModel.referrals, id: \.id) { referral in
-                HStack {
-                    if referral.status.rawValue == "accepted" {
-                        ZStack{
-//                            NavigationLink(destination: AskDetailView(post.postId: referral.askId)) {
-//                                                                  EmptyView()
-//                                                              }
-                            AcceptCard(referral: referral, post: referral.ask!)
-                        }
-                    } else if referral.status.rawValue == "bumped" {
-                        ZStack{
-                            BumpCard(referral: referral, post: referral.ask!)
+        VStack(alignment: .leading) {
+                ForEach(self.referralsViewModel.pendingReferrals) { referral in
+                    HStack {
+                        ZStack {
+                            ReferCard(referral: referral, post: referral.ask!)
                         }
                     }
-                    else if referral.status.rawValue == "closed" {
+                }
+                ForEach(self.referralsViewModel.acceptedReferrals) { referral in
+                        HStack {
+                            ZStack{
+                                AcceptCard(referral: referral, post: referral.ask!)
+                            }
+                        }
+                }
+                ForEach(self.referralsViewModel.wingedReferrals) { referral in
+                        ZStack{
+                            WingCard(referral: referral, post: referral.ask!)
+                        }
+                }
+                ForEach(self.referralsViewModel.closedReferrals) { referral in
                         ZStack{
                             ClosedCard(referral: referral, post: referral.ask!)
                         }
-                    }
-                    else {
-                        ReferCard(referral: referral, post: referral.ask!)
-                    }
                 }
-              }
-            }
-        }
-    
-      }.padding(.top, 5)
+          }
+       }
+      .padding(.top, 5)
       .environmentObject(referralsViewModel)
       .onAppear {
-        self.referralsViewModel.getPendingRefferals()
+        self.referralsViewModel.getReferrals()
       }
       .navigationBarTitle("Referrals", displayMode: .inline)
-    }
-      
+      }
     }
 }

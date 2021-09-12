@@ -16,7 +16,7 @@ struct ReferFooter: View {
         
         HStack(spacing: 20){
             
-            BumpButton(referral: $referral)
+            WingButton(referral: $referral)
             AcceptButton(referral: $referral, post: $post)
             
         }
@@ -74,7 +74,7 @@ struct AcceptButton: View {
     }
 }
 
-struct BumpButton: View {
+struct WingButton: View {
     @EnvironmentObject var referViewModel: ReferViewModel
 
 

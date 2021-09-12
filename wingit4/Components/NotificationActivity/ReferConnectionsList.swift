@@ -28,7 +28,7 @@ struct ReferConnectionsList: View {
                         Spacer()
                         Button(action: {
                             //askId(postId) & senderId (auth.dude) & senderId(userId of the one selected
-                            referViewModel.sendReferral(
+                            referViewModel.sendReferrals(
                                 askId: post.postId
                             )
                         },

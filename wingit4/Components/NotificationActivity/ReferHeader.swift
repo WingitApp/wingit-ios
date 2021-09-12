@@ -48,7 +48,7 @@ struct ReferHeader: View {
                 }
               .padding(.trailing, 15).padding(.leading, 15)
             VStack(alignment: .leading, spacing: 10){
-                Text("Bumping this ask to you because I think you can help!").font(.system(size: 14)).padding(.horizontal)
+                Text("Hey, I'm referring you to help with this ask.").font(.system(size: 14)).padding(.horizontal)
 //                Text(referral.text ?? "").font(.system(size: 14)).padding(.horizontal)
             }
         }.padding(.top, 10)

@@ -62,7 +62,7 @@ struct AcceptedNotification: View {
     }
 }
 
-struct BumpedNotification: View {
+struct WingNotification: View {
     
     @Binding var referral: Referral
     @Binding var post: Post

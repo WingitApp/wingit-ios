@@ -1,5 +1,5 @@
 //
-//  BumpConnectionList.swift
+//  WingConnectionsList.swift
 //  wingit4
 //
 //  Created by YaeRim Amy Chun on 9/5/21.
@@ -10,7 +10,7 @@ import Firebase
 import URLImage
 import SPAlert
 
-struct BumpConnectionsList: View {
+struct WingConnectionsList: View {
     @EnvironmentObject var referViewModel: ReferViewModel
     @Binding var referral: Referral
 
@@ -26,7 +26,7 @@ struct BumpConnectionsList: View {
                             .foregroundColor(Color("Color1"))
                         Spacer()
                         Button(action: {
-                            referViewModel.sendBump(
+                            referViewModel.rewingReferral(
                                 askId: referral.askId,
                                 parentId: referral.id!
                             )
@@ -43,7 +43,7 @@ struct BumpConnectionsList: View {
                     List {
                         ForEach(self.referViewModel.allUsers, id: \.uid) { user in
                            
-                            bumpCardView(user: user, userId: user.id)
+                            WingOptionsCardView(user: user, userId: user.id)
                         }
                     }
                     ///end list
@@ -60,7 +60,7 @@ struct BumpConnectionsList: View {
     }
 }
 
-struct bumpCardView: View {
+struct WingOptionsCardView: View {
     @EnvironmentObject var referViewModel: ReferViewModel
 
     var user: User
