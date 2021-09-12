@@ -11,8 +11,8 @@ import SwiftUI
 import FirebaseAuth
 
 class UserProfileViewModel: ObservableObject {
-    @Published var posts: [Post] = []
-//    @Published var doneposts: [DonePost] = []
+    @Published var openPosts: [Post] = []
+    @Published var closedPosts: [Post] = []
     
     @Published var isLoading = false
     @Published var userBlocked = false
@@ -48,24 +48,25 @@ class UserProfileViewModel: ObservableObject {
       if !self.isLoading {
         self.isLoading.toggle()
 
-        Api.User.loadPosts(userId: userId) { (posts) in
-            self.posts = posts
+        Api.Post.loadOpenPosts(userId: userId) { (posts) in
+            self.openPosts = posts
             self.isLoading.toggle()
         }
         updateIsConnected(userId: userId)
         updateSentPendingRequest(userId: userId)
         updateConnectionsCount(userId: userId)
-//        self.loadDonePosts(userId: userId)
+        self.loadClosedPosts(userId: userId)
       }
     }
     
-//    func loadDonePosts(userId: String) {
-//        isLoading = true
-//        Api.User.loadDonePosts(userId: userId) { (doneposts) in
-//            self.isLoading = false
-//            self.doneposts = doneposts
-//        }
-//    }
+    func loadClosedPosts(userId: String?) {
+        guard let userId = userId else { return }
+        isLoading = true
+        Api.Post.loadClosedPosts(userId: userId) { (posts) in
+            self.isLoading = false
+            self.closedPosts = posts
+        }
+    }
     
     func updateConnections(userId: String) {
         
@@ -91,7 +92,7 @@ class UserProfileViewModel: ObservableObject {
                     return
                 } else {
                 self.loadUserPosts(userId: postOwnerId)
-              //  self.loadDonePosts(userId: postOwnerId)
+                self.loadClosedPosts(userId: postOwnerId)
             }
         }
     }

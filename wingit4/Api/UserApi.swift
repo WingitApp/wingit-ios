@@ -77,36 +77,4 @@ class UserApi {
             }
         }
     }
-    
-    func loadPosts(userId: String, onSuccess: @escaping(_ posts: [Post]) -> Void) {
-        Ref.FS_COLLECTION_ALL_POSTS.whereField("ownerId", isEqualTo: userId).order(by: "date", descending: true).getDocuments { (snapshot, error) in
-            
-            if let error = error {
-              print(error)
-            } else if let snapshot = snapshot {
-              let posts: [Post] = snapshot.documents.compactMap {
-                return try? $0.data(as: Post.self)
-              }
-                onSuccess(posts)
-            }
-        }
-    }
-        
-    func loadDonePosts(userId: String, onSuccess: @escaping(_ doneposts: [DonePost]) -> Void) {
-        Ref.FS_COLLECTION_MY_POSTS.document(userId).collection("donePosts").order(by: "donedate", descending: true).getDocuments { (snapshot, error) in
-            
-            guard let snap = snapshot else {
-             //   print("Error fetching data")
-                return
-            }
-            var doneposts = [DonePost]()
-            for document in snap.documents {
-                let dict = document.data()
-                guard let decodedPost = try? DonePost.init(fromDictionary: dict) else {return}
-
-                doneposts.append(decodedPost)
-            }
-            onSuccess(doneposts)
-        }
-    }
 }

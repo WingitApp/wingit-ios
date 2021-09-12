@@ -19,10 +19,8 @@ struct ProfileCard: View {
               user: self.session.currentUser,
               connectionsCount: $profileViewModel.connectionsCountState
             )
-            ProfileHeader(
-              user: self.session.currentUser,
-              postCount: profileViewModel.posts.count
-//              doneCount: profileViewModel.doneposts.count
+            PersonalProfileHeader(
+              user: self.session.currentUser
             )
         }
         .background(Color(.white))

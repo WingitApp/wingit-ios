@@ -100,10 +100,8 @@ struct ProfileView: View {
                 connectionsCount: $profileViewModel.connectionsCountState
               )
               .padding(.top, 5)
-              ProfileHeader(
-                user: self.session.currentUser,
-                postCount: profileViewModel.posts.count
-//                doneCount: profileViewModel.doneposts.count
+              PersonalProfileHeader(
+                user: self.session.currentUser
               )
               .padding(.top, -3)
             }
@@ -112,9 +110,9 @@ struct ProfileView: View {
             .frame(width: UIScreen.main.bounds.width)
             
             LazyVStack {
-              ForEach(profileViewModel.posts.indices, id: \.self) { index in
+              ForEach(profileViewModel.openPosts.indices, id: \.self) { index in
                   AskCard(
-                    post: profileViewModel.posts[index],
+                    post: profileViewModel.openPosts[index],
                     isProfileView: true,
                     index: index
                   )

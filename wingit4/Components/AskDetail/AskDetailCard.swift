@@ -10,7 +10,6 @@ import SwiftUI
 struct AskDetailCard: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
   @EnvironmentObject var askMenuViewModel: AskMenuViewModel
-  @EnvironmentObject var askDoneToggleViewModel: AskDoneToggleViewModel
   
   @Binding var post: Post
   
@@ -28,7 +27,6 @@ struct AskDetailCard: View {
           ImageView(post: $post)
             .environmentObject(askCardViewModel)
             .environmentObject(askMenuViewModel)
-            .environmentObject(askDoneToggleViewModel)
       })
       .sheet(
         isPresented: $askMenuViewModel.isReportModalOpen,
@@ -36,15 +34,6 @@ struct AskDetailCard: View {
           ReportInput(post: post, postId: post.postId)
             .environmentObject(askCardViewModel)
             .environmentObject(askMenuViewModel)
-            .environmentObject(askDoneToggleViewModel)
-      })
-      .sheet(
-        isPresented: $askDoneToggleViewModel.isMarkedAsDone,
-        content: {
-          DoneToggle(post: post)
-            .environmentObject(askCardViewModel)
-            .environmentObject(askMenuViewModel)
-            .environmentObject(askDoneToggleViewModel)
       })
     }
   

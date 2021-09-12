@@ -122,10 +122,10 @@ struct UserProfileView: View {
                 width: UIScreen.main.bounds.width
               )
               .padding(.top, 5)
-              ProfileHeader(
+              UserProfileHeader(
                 user: user,
-                postCount: userProfileViewModel.posts.count
-//                doneCount: userProfileViewModel.doneposts.count
+                openCount: userProfileViewModel.openPosts.count,
+                closedCount: userProfileViewModel.closedPosts.count
               )
               
               .padding(
@@ -138,9 +138,9 @@ struct UserProfileView: View {
             .zIndex(1)
             
             LazyVStack {
-              ForEach(userProfileViewModel.posts.indices, id: \.self) { index in
+              ForEach(userProfileViewModel.openPosts.indices, id: \.self) { index in
                   AskCard(
-                    post: userProfileViewModel.posts[index],
+                    post: userProfileViewModel.openPosts[index],
                     isProfileView: true,
                     index: index
                   )

@@ -10,8 +10,8 @@ import SwiftUI
 import FirebaseAuth
 
 class ProfileViewModel: ObservableObject {
-    @Published var posts: [Post] = []
-    @Published var doneposts: [DonePost] = []
+    @Published var openPosts: [Post] = []
+    @Published var closedPosts: [Post] = []
     var user: User!
 
     @Published var isLoading = false
@@ -20,8 +20,6 @@ class ProfileViewModel: ObservableObject {
     @Published var connectionsCountState = 0
   
     @Published var isUpdatePicSheetOpen: Bool = false
-
-    var splitted: [[Post]] = []
     
     @Published var isConnected = false
     
@@ -42,8 +40,8 @@ class ProfileViewModel: ObservableObject {
       
       guard let userId = Auth.auth().currentUser?.uid else { return }
 
-      Api.User.loadPosts(userId: userId) { (posts) in
-          self.posts = posts
+      Api.Post.loadOpenPosts(userId: userId) { (posts) in
+          self.openPosts = posts
           if self.isLoading {
             self.isLoading.toggle()
           }
@@ -51,19 +49,17 @@ class ProfileViewModel: ObservableObject {
     // these calls should be called elsewhere
       updateIsConnected(userId: userId)
       updateConnectionsCount(userId: userId)
-      self.loadDonePosts()
+      self.loadClosedPosts()
     }
     
-    
-    func loadDonePosts() {
+    func loadClosedPosts() {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         self.isLoading = true
-        Api.User.loadDonePosts(userId: userId) { (doneposts) in
+        Api.Post.loadClosedPosts(userId: userId) { (posts) in
             self.isLoading = false
-            self.doneposts = doneposts
+            self.closedPosts = posts
         }
     }
- 
     
     func updateConnectionsCount(userId: String) {
         Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in

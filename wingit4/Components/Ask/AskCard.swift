@@ -89,7 +89,6 @@ struct AskCard: View {
           ImageView(post: $post)
             .environmentObject(askCardViewModel)
             .environmentObject(askMenuViewModel)
-            .environmentObject(askDoneToggleViewModel)
       })
       .sheet(
         isPresented: $askMenuViewModel.isReportModalOpen,
@@ -97,15 +96,6 @@ struct AskCard: View {
           ReportInput(post: post, postId: post.postId)
             .environmentObject(askCardViewModel)
             .environmentObject(askMenuViewModel)
-            .environmentObject(askDoneToggleViewModel)
-      })
-      .sheet(
-        isPresented: $askDoneToggleViewModel.isMarkedAsDone,
-        content: {
-          DoneToggle(post: post)
-            .environmentObject(askCardViewModel)
-            .environmentObject(askMenuViewModel)
-            .environmentObject(askDoneToggleViewModel)
       })
       .sheet(
         isPresented: $commentViewModel.isCommentSheetShown,
@@ -113,7 +103,6 @@ struct AskCard: View {
           CommentView(post: $post)
             .environmentObject(askCardViewModel)
             .environmentObject(askMenuViewModel)
-            .environmentObject(askDoneToggleViewModel)
             .environmentObject(commentViewModel)
             .environmentObject(commentInputViewModel)
             .environmentObject(footerCellViewModel)
