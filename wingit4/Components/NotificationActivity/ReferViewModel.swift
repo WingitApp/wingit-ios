@@ -19,9 +19,6 @@ class ReferViewModel : ObservableObject, Identifiable {
     // Lists to generate allowedUsers
     var allReferralRecipientIds: [String?] = []
     var allUsers: [User] = []
-
-    // List to generate ReferConnectionsList
-    @Published var filteredUsers: [User] = []
     
     @Published var isReferListOpen: Bool = false
   
