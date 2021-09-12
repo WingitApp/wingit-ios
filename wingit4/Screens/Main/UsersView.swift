@@ -22,7 +22,7 @@ struct UsersView: View {
                         if !usersViewModel.isLoading {
 
                                 ForEach(usersViewModel.users, id: \.id) { user in
-                                    NavigationLink(destination: UserProfileView(user: user)) {
+                                  NavigationLink(destination: UserProfileView(userId: nil, user: user)) {
                                         HStack {
                                             URLImageView(urlString: user.profileImageUrl)
                                               .clipShape(Circle())

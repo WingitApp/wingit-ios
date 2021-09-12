@@ -15,7 +15,6 @@ class AskCardViewModel: ObservableObject {
   var post: Post?
   var isProfileView: Bool = false
   @Published var postOwner: User!
-  @Published var destination: AnyView = AnyView(HomeView())
   @Published var isOwnPost: Bool = false
   @Published var isNavLinkDisabled: Bool = true
   
@@ -33,7 +32,7 @@ class AskCardViewModel: ObservableObject {
     self.post = post
     self.isProfileView = isProfileView
     self.isOwnPost = Auth.auth().currentUser?.uid == post.ownerId
-    self.getUserFromPost()
+    self.isNavLinkDisabled = self.isProfileView || self.isOwnPost
   }
   
   func getColorByIndex(index: Int) -> Color {
@@ -81,8 +80,7 @@ class AskCardViewModel: ObservableObject {
     let postOwnerId = self.post!.ownerId
     Api.User.loadUser(userId: postOwnerId) { (postOwner) in
       self.postOwner = postOwner
-      self.destination = AnyView(UserProfileView(user: postOwner))
-      self.isNavLinkDisabled = self.isProfileView || self.isOwnPost
+//      self.destination = AnyView(UserProfileView(userId: self.post!.ownerId))
     } onError: {
         print("errror")
     }

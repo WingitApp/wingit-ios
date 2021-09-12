@@ -15,8 +15,6 @@ import URLImage
 
 struct UserProfileView: View {
     // props
-    var user: User
-
     @EnvironmentObject var session: SessionStore
     @ObservedObject var userProfileViewModel = UserProfileViewModel()
     @StateObject var connectionsViewModel = ConnectionsViewModel()
@@ -24,17 +22,20 @@ struct UserProfileView: View {
     // state
     @State var isImageSheetOpen: Bool = false
   
+  init (userId: String?, user: User? ) {
+    if user == nil {
+      userProfileViewModel.fetchUserFromId(userId: userId!)
+    } else {
+      userProfileViewModel.user = user!
+    }
+  }
+  
   
   
   func calculateHeight(minHeight: CGFloat, maxHeight: CGFloat, yOffset: CGFloat) -> CGFloat {
-    // If scrolling up, yOffset will be a negative number
     if maxHeight + yOffset < minHeight {
-      // SCROLLING UP
-      // Never go smaller than our minimum height
       return minHeight
     }
-    
-    // SCROLLING DOWN
     return maxHeight + yOffset
   }
   
@@ -47,7 +48,7 @@ struct UserProfileView: View {
       ScrollView(showsIndicators: false) {
         ZStack {
           GeometryReader { geometry in
-             URLImageView(urlString: user.profileImageUrl)
+             URLImageView(urlString: userProfileViewModel.user.profileImageUrl)
                 .frame(
                   height: self.calculateHeight(
                     minHeight: 0,
@@ -69,7 +70,7 @@ struct UserProfileView: View {
           
           VStack {
             HStack {
-              URLImageView(urlString: user.profileImageUrl)
+              URLImageView(urlString: userProfileViewModel.user.profileImageUrl)
                 .frame(width: 150, height: 150)
                 .cornerRadius(100)
                 .padding(5)
@@ -83,12 +84,12 @@ struct UserProfileView: View {
             VStack {
               // user name
               HStack {
-                Button(action: {Api.User.updateField(field: "firstName", user: user ) }) {
-                  Text(user.firstName ?? "").font(.title).bold().foregroundColor(Color("bw"))
+                Button(action: {Api.User.updateField(field: "firstName", user: userProfileViewModel.user ) }) {
+                  Text(userProfileViewModel.user.firstName ?? "").font(.title).bold().foregroundColor(Color("bw"))
                 }
                 
-                Button(action: {Api.User.updateField(field: "lastName", user: user) }) {
-                  Text(user.lastName ?? "").font(.title).bold().foregroundColor(Color("bw"))
+                Button(action: {Api.User.updateField(field: "lastName", user: userProfileViewModel.user) }) {
+                  Text(userProfileViewModel.user.lastName ?? "").font(.title).bold().foregroundColor(Color("bw"))
                 }
               }
               .frame(width: UIScreen.main.bounds.width)
@@ -97,37 +98,39 @@ struct UserProfileView: View {
                  .cornerRadius(20, corners: [.topLeft, .topRight])
                  .padding(.top, -105)
                )
+              .redacted(reason: self.userProfileViewModel.isLoadingUser ? .placeholder : [])
              
 //              Text(user.bio ?? "")
 //                .font(.subheadline)
 //                .italic()
 
               Connections(
-                user: user,
+                user: userProfileViewModel.user,
                 connectionsCount: $userProfileViewModel.connectionsCountState
-              )
+              ).redacted(reason: self.userProfileViewModel.isLoadingUser ? .placeholder : [])
               
               HStack(spacing: 15) {
                 if userProfileViewModel.userBlocked == false {
                   ConnectButton(
-                    user: user,
+                    user: userProfileViewModel.user,
                     isConnected: $userProfileViewModel.isConnected, sentPendingRequest: $userProfileViewModel.sentPendingRequest,
                     connectionsCount: $userProfileViewModel.connectionsCountState
                   )
-                  MessageButton(user: user)
+                  MessageButton(user: userProfileViewModel.user)
 
                 }
               }
               .frame(
                 width: UIScreen.main.bounds.width
               )
+              .redacted(reason: self.userProfileViewModel.isLoadingUser ? .placeholder : [])
               .padding(.top, 5)
               UserProfileHeader(
                 user: user,
                 openCount: userProfileViewModel.openPosts.count,
                 closedCount: userProfileViewModel.closedPosts.count
               )
-              
+              .redacted(reason: self.userProfileViewModel.isLoadingUser ? .placeholder : [])
               .padding(
                 EdgeInsets(top: 5, leading: 20, bottom: 10, trailing: 20)
               )
@@ -152,18 +155,18 @@ struct UserProfileView: View {
           .padding(.top, 230)
         }
       }
-     
-    .navigationBarTitle(Text(user.displayName ?? ""), displayMode: .inline)
+
+    .navigationBarTitle(Text(userProfileViewModel.user.displayName ?? ""), displayMode: .inline)
     .onAppear {
       logToAmplitude(event: .viewOtherProfile)
-      self.userProfileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.user.id ?? self.user.uid)
+      self.userProfileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.userProfileViewModel.user.id ?? self.userProfileViewModel.user.uid)
     }
     .background(
       Color.white.ignoresSafeArea(.all, edges: .all)
     )
     .sheet(
       isPresented: $connectionsViewModel.isConnectionsSheetOpen,
-      content: {  ConnectionsView(user: user).environmentObject(connectionsViewModel) }
+      content: {  ConnectionsView(user: userProfileViewModel.user).environmentObject(connectionsViewModel) }
     )
     .environmentObject(connectionsViewModel)
   }

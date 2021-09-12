@@ -17,7 +17,7 @@ struct HeaderCell: View {
     var body: some View {
         VStack {
             HStack {
-              NavigationLink(destination: self.askCardViewModel.destination) {
+              NavigationLink(destination:  UserProfileView(userId: post.ownerId, user: nil)) {
                 HStack {
                   URLImageView(urlString: post.avatar)
                     .clipShape(Circle())

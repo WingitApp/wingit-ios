@@ -38,3 +38,15 @@ struct IconButtonStyle: ViewModifier {
       .foregroundColor(.gray)
   }
 }
+
+struct ConnectionNotifButtonStyle: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .padding(.horizontal, 10)
+      .frame(
+        width: ((UIScreen.main.bounds.width - 40) / 2) - 30,
+        height: UIScreen.main.bounds.width / 10
+      )
+      .cornerRadius(5)
+  }
+}

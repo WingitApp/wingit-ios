@@ -15,6 +15,7 @@ class UserProfileViewModel: ObservableObject {
     @Published var closedPosts: [Post] = []
     
     @Published var isLoading = false
+    @Published var isLoadingUser: Bool = false
     @Published var userBlocked = false
     @Published var connectionsCountState = 0
     @Published var showImagePicker: Bool = false
@@ -23,6 +24,27 @@ class UserProfileViewModel: ObservableObject {
     
     @Published var isConnected = false
     @Published var sentPendingRequest = false
+  
+    @Published var user: User = USER_PROFILE_DEFAULT_PLACEHOLDER
+  
+  
+  func fetchUserFromId(userId: String) {
+    if !isLoadingUser {
+      isLoadingUser.toggle()
+    }
+    Api.User.loadUser(
+     userId: userId,
+     onSuccess: { (user) in
+      self.user = user
+      if self.isLoadingUser {
+        self.isLoadingUser.toggle()
+      }
+     },
+     onError: {
+         print("errror")
+     }
+   )
+  }
     
     func updateIsConnected(userId: String) {
         Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: Auth.auth().currentUser!.uid).document(userId).getDocument { (document, error) in

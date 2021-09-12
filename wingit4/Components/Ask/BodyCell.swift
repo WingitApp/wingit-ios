@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import URLImage
 
 struct BodyCell: View {
   @Binding var post: Post
@@ -22,15 +21,7 @@ struct BodyCell: View {
                       askCardViewModel.isImageModalOpen.toggle()
                     }
                 }, label: {
-                  URLImage(URL(string: post.mediaUrl)!,
-                    content: {
-                      
-                        $0.image
-                            .resizable()
-                            .scaledToFit()
-                            .aspectRatio(contentMode: .fill)
-                    })
-                    
+                  URLImageView(urlString: post.mediaUrl)
                     .frame(width: UIScreen.main.bounds.width - 60, height: 250)
                     .cornerRadius(8)
                     .overlay(

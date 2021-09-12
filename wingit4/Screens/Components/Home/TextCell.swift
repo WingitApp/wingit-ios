@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import URLImage
 import FirebaseAuth
 
 struct TextCell: View {
@@ -34,12 +33,9 @@ struct TextCell: View {
                         ImageScreen.toggle()
                     }
                 }, label: {
-                    URLImage(URL(string: headerCellViewModel.post.mediaUrl)!,
-                          content: {
-                              $0.image
-                                  .resizable()
-                                  .aspectRatio(contentMode: .fill)
-                          }) .frame(width: UIScreen.main.bounds.width - 60, height: 250).cornerRadius(15)
+                    URLImageView(urlString: headerCellViewModel.post.mediaUrl)
+                      .frame(width: UIScreen.main.bounds.width - 60, height: 250)
+                      .cornerRadius(15)
                 })
         
             }

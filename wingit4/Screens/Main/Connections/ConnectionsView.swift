@@ -7,13 +7,12 @@
 
 import SwiftUI
 import Firebase
-import URLImage
 
 struct ConnectionRow: View {
     var user: User
     
     var body: some View {
-        NavigationLink(destination: UserProfileView(user: user)) {
+      NavigationLink(destination: UserProfileView(userId: nil, user: user)) {
           HStack {
               URLImageView(urlString: user.profileImageUrl)
                   .clipShape(Circle())

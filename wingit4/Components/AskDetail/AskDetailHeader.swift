@@ -14,15 +14,9 @@ struct AskDetailHeader: View {
   
     var body: some View {
       HStack {
-          URLImage(URL(string: post.avatar)!,
-             content: {
-                $0.image
-                  .resizable()
-                  .aspectRatio(contentMode: .fill)
-                  .clipShape(Circle())
-                  .frame(width: 40, height: 40)
-             }
-          )
+        URLImageView(urlString: post.avatar)
+          .clipShape(Circle())
+          .frame(width: 40, height: 40)
           .overlay(
             RoundedRectangle(cornerRadius: 100)
               .stroke(Color.gray, lineWidth: 1)

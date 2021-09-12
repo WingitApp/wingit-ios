@@ -6,27 +6,20 @@
 //
 
 import SwiftUI
-import URLImage
 
 struct UserComment: View {
   var comment: Comment
   
     var body: some View {
       HStack(alignment: .top) {
-        URLImage(URL(string: comment.avatarUrl)!,
-          content: {
-            $0.image
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-              .clipShape(Circle())
-          }
-        )
-        .frame(width: 25, height: 25, alignment: .center)
-        .foregroundColor(Color(.systemTeal))
-        .overlay(
-          RoundedRectangle(cornerRadius: 20)
-            .stroke(Color.gray, lineWidth: 0.5)
-        )
+        URLImageView(urlString: comment.avatarUrl)
+          .clipShape(Circle())
+          .frame(width: 25, height: 25, alignment: .center)
+          .foregroundColor(Color(.systemTeal))
+          .overlay(
+            RoundedRectangle(cornerRadius: 20)
+              .stroke(Color.gray, lineWidth: 0.5)
+          )
         VStack(alignment: .leading) {
           HStack(alignment: .center) {
             Text(comment.username)

@@ -46,6 +46,7 @@
 		15DFD07826EC39E2002CBE31 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DFD07726EC39E2002CBE31 /* Button.swift */; };
 		15DFD07A26ED2E29002CBE31 /* URLImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DFD07926ED2E29002CBE31 /* URLImageViewModel.swift */; };
 		15DFD07C26ED37A4002CBE31 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DFD07B26ED37A4002CBE31 /* CloseButton.swift */; };
+		15DFD07E26ED9B71002CBE31 /* UserProfileDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DFD07D26ED9B71002CBE31 /* UserProfileDefault.swift */; };
 		15E4907426E84A1700B25B56 /* AskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4906D26E84A1700B25B56 /* AskDetailView.swift */; };
 		15E4907526E84A1700B25B56 /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4906F26E84A1700B25B56 /* SignupViewModel.swift */; };
 		15E4907726E84A1700B25B56 /* SigninView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4907126E84A1700B25B56 /* SigninView.swift */; };
@@ -217,6 +218,7 @@
 		15DFD07726EC39E2002CBE31 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		15DFD07926ED2E29002CBE31 /* URLImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImageViewModel.swift; sourceTree = "<group>"; };
 		15DFD07B26ED37A4002CBE31 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
+		15DFD07D26ED9B71002CBE31 /* UserProfileDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileDefault.swift; sourceTree = "<group>"; };
 		15E4906D26E84A1700B25B56 /* AskDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskDetailView.swift; sourceTree = "<group>"; };
 		15E4906F26E84A1700B25B56 /* SignupViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		15E4907126E84A1700B25B56 /* SigninView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninView.swift; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 			isa = PBXGroup;
 			children = (
 				15DA39B326DC5C620080193E /* AskCardPlaceholder.swift */,
+				15DFD07D26ED9B71002CBE31 /* UserProfileDefault.swift */,
 			);
 			path = Placeholder;
 			sourceTree = "<group>";
@@ -946,6 +949,7 @@
 				15E4907426E84A1700B25B56 /* AskDetailView.swift in Sources */,
 				15E4907726E84A1700B25B56 /* SigninView.swift in Sources */,
 				6531838326B238AA0006D9E2 /* Analytics.swift in Sources */,
+				15DFD07E26ED9B71002CBE31 /* UserProfileDefault.swift in Sources */,
 				3BE61D6F26E08A0D0078C6CF /* ReferralsApi.swift in Sources */,
 				3B7AF04126718A4D003BCCF3 /* SignupViewModel.swift in Sources */,
 				3B75E3D526715CAC002F3108 /* SignupText.swift in Sources */,
