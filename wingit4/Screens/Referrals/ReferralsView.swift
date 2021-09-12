@@ -14,9 +14,9 @@ struct ReferralsView: View {
         NavigationView{
           ScrollView {
             VStack(alignment: .leading) {
-                if !referralsViewModel.pendingReferrals.isEmpty {
-                    Text("Pending")
-                }
+//                if !referralsViewModel.pendingReferrals.isEmpty {
+//                    Text("Pending")
+//                }
                 ForEach(self.referralsViewModel.pendingReferrals) { referral in
                     HStack {
                         ZStack {
@@ -24,9 +24,9 @@ struct ReferralsView: View {
                         }
                     }
                 }
-                if !referralsViewModel.acceptedReferrals.isEmpty {
-                    Text("Accepted")
-                }
+//                if !referralsViewModel.acceptedReferrals.isEmpty {
+//                    Text("Accepted")
+//                }
                 ForEach(self.referralsViewModel.acceptedReferrals) { referral in
                         HStack {
                             ZStack{
@@ -34,17 +34,17 @@ struct ReferralsView: View {
                             }
                         }
                 }
-                if !referralsViewModel.wingedReferrals.isEmpty {
-                    Text("Winged")
-                }
+//                if !referralsViewModel.wingedReferrals.isEmpty {
+//                    Text("Winged")
+//                }
                 ForEach(self.referralsViewModel.wingedReferrals) { referral in
                         ZStack{
                             WingCard(referral: referral, post: referral.ask!)
                         }
                 }
-                if !referralsViewModel.closedReferrals.isEmpty {
-                    Text("Closed")
-                }
+//                if !referralsViewModel.closedReferrals.isEmpty {
+//                    Text("Closed")
+//                }
                 ForEach(self.referralsViewModel.closedReferrals) { referral in
                         ZStack{
                             ClosedCard(referral: referral, post: referral.ask!)
