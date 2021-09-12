@@ -43,7 +43,7 @@ class ShareButtonViewModel: ObservableObject{
       linkBuilder.iOSParameters?.appStoreID = APPSTOREID
       // 3
       linkBuilder.socialMetaTagParameters =  DynamicLinkSocialMetaTagParameters()
-      linkBuilder.socialMetaTagParameters?.title = "\(post.username) requested on Wingit"
+      linkBuilder.socialMetaTagParameters?.title = "\(post.username) asked on Wingit"
       linkBuilder.socialMetaTagParameters?.descriptionText = post.caption
      // image of profile pic? or post? (still thinking...)
               linkBuilder.socialMetaTagParameters?.imageURL = URL(string: LOGO_URL)!
@@ -76,7 +76,7 @@ class ShareButtonViewModel: ObservableObject{
     self.activityIndicator = false
     self.isShareSheetShown.toggle()
     
-    let subjectLine = "\(post.username) requested '\(post.caption)'"
+    let subjectLine = "\(post.username) asked '\(post.caption)' on Wingit"
     let activityView = UIActivityViewController(activityItems: [subjectLine, url], applicationActivities: nil)
     UIApplication.shared.windows.first?.rootViewController?.present(activityView, animated: true, completion: nil)
   }
