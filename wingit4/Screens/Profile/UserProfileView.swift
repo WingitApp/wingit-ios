@@ -202,13 +202,9 @@ struct UserProfileView: View {
         var body: some View {
             Button(action: buttonTapped) {
               Image(systemName: (self.isConnected ? "hand.raised.slash" : "hand.raised"))
-                .foregroundColor(Color(.systemTeal))
               Text((self.isConnected) ? "Disconnect" : (self.sentPendingRequest) ? "Pending" : "Connect")
                   .font(.callout)
-                  .foregroundColor(Color(.systemTeal))
                   .bold()
-             
-                 
             }
             .frame(
               width: (UIScreen.main.bounds.width / 2) - 30
@@ -216,9 +212,13 @@ struct UserProfileView: View {
             .padding(
               .init(top: 10, leading: 0, bottom: 10, trailing: 0)
             )
+            .background(Color.lightGray)
+            .foregroundColor(Color.black)
             .cornerRadius(5)
-            .overlay(RoundedRectangle(cornerRadius: 5)
-                      .stroke(Color(.systemTeal), lineWidth: 1))
+            .overlay(
+              RoundedRectangle(cornerRadius: 5).stroke(Color(.lightGray),
+              lineWidth: 1)
+            )
         
         }
     }
@@ -242,6 +242,10 @@ struct UserProfileView: View {
             }
             .background(Color(.systemTeal))
             .cornerRadius(5)
+            .overlay(
+              RoundedRectangle(cornerRadius: 5).stroke(Color(.lightGray),
+              lineWidth: 1)
+            )
         }
     }
 

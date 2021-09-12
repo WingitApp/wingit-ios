@@ -9,7 +9,7 @@ import SwiftUI
 
 class URLImageViewModel: ObservableObject {
   @Published var image: UIImage?
-  @Published var isImageLoading: Bool = true
+  @Published var isImageLoading: Bool = false
   var urlString: String?
   var imageCache = ImageCache.getImageCache()
   
@@ -19,7 +19,14 @@ class URLImageViewModel: ObservableObject {
   }
   
   func loadImage() {
+    if !isImageLoading {
+      isImageLoading.toggle()
+    }
+    
     if loadImageFromCache() {
+      if isImageLoading {
+        isImageLoading.toggle()
+      }
         return
     }
     
@@ -59,12 +66,13 @@ class URLImageViewModel: ObservableObject {
     }
     
     DispatchQueue.main.async {
-      guard let loadedImage = UIImage(data: data) else {
-        return
-      }
+      guard let loadedImage = UIImage(data: data) else { return }
       
       self.image = loadedImage
       self.imageCache.set(forKey: self.urlString!, image: loadedImage)
+      if self.isImageLoading {
+        self.isImageLoading.toggle()
+      }
     }
     
     

@@ -22,7 +22,7 @@ struct URLImageView: View {
     Image(uiImage: urlImageViewModel.image ?? URLImageView.defaultImage!)
       .resizable()
       .aspectRatio(contentMode: .fill)
-//      .background(Color(.systemTeal))
+      .redacted(reason: urlImageViewModel.isImageLoading ? .placeholder : .init())
   }
   
 }

@@ -413,6 +413,8 @@ extension Color {
   static let carnationRed: Color = Color(red: 253 / 255, green: 84 / 255, blue: 89 / 255)
   static let apricotWhite: Color = Color(red: 248 / 255, green: 241 / 255, blue: 228 / 255)
   static let tolopeaViolet: Color = Color(red: 35 / 255, green: 30 / 255, blue: 50 / 255)
+  
+  static let lightGray: Color = Color(red: 238 / 255, green: 241 / 255, blue: 243 / 255)
 
   
 }

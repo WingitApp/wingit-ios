@@ -14,8 +14,8 @@ struct CommentView: View {
     
     var body: some View {
         VStack {
-          AskDetailCard(post: $post)
             ScrollView {
+              AskDetailCard(post: $post)
               VStack(alignment: .leading) {
                 ForEach(self.commentViewModel.comments) { comment in
                      UserComment(comment: comment)

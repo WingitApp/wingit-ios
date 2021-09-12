@@ -44,9 +44,11 @@ struct NotificationView: View {
                                   )
                               VStack(alignment: .leading) {
                                 HStack(alignment: .center, spacing: 5) {
-                                    Text(activity.username).font(.subheadline).bold()
-                                    Text(activity.typeDescription).font(.subheadline)
+                                  Text(activity.username).bold() + Text(" ") + Text(activity.typeDescription)
                                 }
+                                .font(.subheadline)
+                                .fixedSize(horizontal: false, vertical: true)
+
                                 Spacer()
                                 Text(timeAgoSinceDate(Date(timeIntervalSince1970: activity.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
                               }
@@ -98,11 +100,12 @@ struct CommentActivityRow: View {
               )
             HStack{
                 VStack(alignment: .leading) {
-                    HStack{
-                        Text(activity.username).font(.subheadline).bold()
-                        Text(activity.typeDescription).font(.subheadline)
-                    }
-                  HStack (alignment: .bottom) {
+                  HStack(alignment: .center, spacing: 5) {
+                    Text(activity.username).bold() + Text(" ") + Text(activity.typeDescription)
+                  }
+                  .font(.subheadline)
+                  .fixedSize(horizontal: false, vertical: true)
+                  VStack(alignment: .leading) {
                       Text(timeAgoSinceDate(Date(timeIntervalSince1970: activity.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
                       Spacer()
                         RespondToConnectRequestRow(activity: activity)
@@ -131,24 +134,31 @@ struct RespondToConnectRequestRow: View {
                    
                     Text("Ignore")
                         .fontWeight(.bold).foregroundColor(Color.black)
-                        .font(.system(size: 10))
+                        .font(.system(size: 14))
                 }
-                .padding(.horizontal, 5)
-                .frame(height: UIScreen.main.bounds.width / 15)
-                .background(RoundedRectangle(cornerRadius: 5).stroke(Color(.gray).opacity(0.5),lineWidth: 1.5))
+                .padding(.horizontal, 10)
+                .frame(
+                  width: ((UIScreen.main.bounds.width - 40) / 2) - 30,
+                  height: UIScreen.main.bounds.width / 10
+                )
+                .background(Color.lightGray)
+                .cornerRadius(5)
                 //.modifier(AcceptConnectRequestButtonModifier())
                 Button(action: { activityViewModel.acceptConnectRequest(fromUserId: activity.userId) }) {
               
                     Text("Accept")
                         .fontWeight(.bold).foregroundColor(Color.white)
-                        .font(.system(size: 10))
+                        .font(.system(size: 14))
                 }
-                .padding(.horizontal, 5)
-                .frame(height: UIScreen.main.bounds.width / 15)
+                .padding(.horizontal, 10)
+                .frame(
+                  width: ((UIScreen.main.bounds.width - 40) / 2) - 30,
+                  height: UIScreen.main.bounds.width / 10
+                )
                 .background(Color(.systemTeal))
-                .background(RoundedRectangle(cornerRadius: 5))
-              
+                .cornerRadius(5)              
                 //.modifier(AcceptConnectRequestButtonModifier())
-            }
+        }
+        .padding(.top, 5)
     }
 }

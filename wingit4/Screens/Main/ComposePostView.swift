@@ -94,10 +94,10 @@ struct ComposePostView: View {
                 .padding(.bottom, 5)
                 .foregroundColor(.black)
               TextEditor(text: $composePostViewModel.caption)
+                  .padding(10)
                   .cornerRadius(8)
-                  .background(Color(.gray).opacity(0.8))
                   .overlay(
-                    RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 8)
                       .stroke(Color.gray, lineWidth: 0.3)
                   )
                   .onTapGesture { dismissKeyboard() }
