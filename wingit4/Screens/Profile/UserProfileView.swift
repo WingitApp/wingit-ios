@@ -126,7 +126,7 @@ struct UserProfileView: View {
               .redacted(reason: self.userProfileViewModel.isLoadingUser ? .placeholder : [])
               .padding(.top, 5)
               UserProfileHeader(
-                user: user,
+                user: userProfileViewModel.user,
                 openCount: userProfileViewModel.openPosts.count,
                 closedCount: userProfileViewModel.closedPosts.count
               )
