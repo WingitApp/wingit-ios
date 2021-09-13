@@ -84,21 +84,24 @@ struct CommentActivityRow: View {
     var activity: Activity
     var activityViewModel: ActivityViewModel
     var body: some View {
-      NavigationLink (destination: UserProfileView(userId: activity.userId, user: nil)){
 
         HStack(alignment: .top) {
-          URLImageView(urlString: activity.userAvatar)
-              .clipShape(Circle())
-              .frame(width: 35, height: 35)
-              .overlay(
-                RoundedRectangle(cornerRadius: 100)
-                  .stroke(Color.gray, lineWidth: 1)
-              )
+          NavigationLink (destination: UserProfileView(userId: activity.userId, user: nil)){
+            URLImageView(urlString: activity.userAvatar)
+                .clipShape(Circle())
+                .frame(width: 35, height: 35)
+                .overlay(
+                  RoundedRectangle(cornerRadius: 100)
+                    .stroke(Color.gray, lineWidth: 1)
+                )
+          }
+          .buttonStyle(FlatLinkStyle())
           HStack{
               VStack(alignment: .leading) {
                 HStack(alignment: .center, spacing: 5) {
                   Text(activity.username).bold() + Text(" ") + Text(activity.typeDescription)
                 }
+                .frame(width: UIScreen.main.bounds.width)
                 .font(.subheadline)
                 .fixedSize(horizontal: false, vertical: true)
                 VStack(alignment: .leading) {
@@ -111,9 +114,6 @@ struct CommentActivityRow: View {
           }
           .padding(.leading, 5)
           }
-      }
-        .buttonStyle(FlatLinkStyle())
-        .frame(width: 35, height: 35)
 
     }
 }
