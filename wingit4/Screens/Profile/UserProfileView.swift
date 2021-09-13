@@ -206,9 +206,9 @@ struct UserProfileView: View {
         
         func buttonTapped() {
             if !self.isConnected && !self.sentPendingRequest {
+                self.sentPendingRequest = true
                 logToAmplitude(event: .sendConnectRequest, properties: [.userId: user.id])
                     connectionsViewModel.sendConnectRequest(userId: user.id)
-                    self.sentPendingRequest = true
                 } else if self.isConnected {
                     logToAmplitude(event: .disconnectFromUser, properties: [.userId: user.id])
                     connectionsViewModel.disconnect(userId: user.id,  connectionsCount_onSuccess: { (connectionsCount) in
@@ -225,6 +225,7 @@ struct UserProfileView: View {
                   .font(.callout)
                   .bold()
             }
+            .disabled(self.sentPendingRequest)
             .frame(
               width: (UIScreen.main.bounds.width / 2) - 30
             )
