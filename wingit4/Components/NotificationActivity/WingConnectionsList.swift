@@ -26,6 +26,7 @@ struct WingConnectionsList: View {
                             .foregroundColor(Color("Color1"))
                         Spacer()
                         Button(action: {
+                            logToAmplitude(event: .rewingReferral, properties: [.askId : referral.askId])
                             referViewModel.rewingReferral(
                                 askId: referral.askId,
                                 parentId: referral.id!

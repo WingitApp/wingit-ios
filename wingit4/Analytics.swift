@@ -41,6 +41,7 @@ enum AmplitudeEvent: String {
     // Referrals
     case ignoreReferral = "Ignore Referral"
     case tapWingReferralButton = "Tap Wing Referral Button"
+    case rewingReferral = "Rewing Referral"
     
     // Recs
     case commentOnRec = "Comment On Rec"
@@ -80,6 +81,7 @@ enum AmplitudeUserProperty: String {
 }
 
 enum AmplitudeProperty: String {
+    case askId = "askId"
     case attachedPhoto = "attached photo"
     case fromUser = "from user"
     case method = "method"
