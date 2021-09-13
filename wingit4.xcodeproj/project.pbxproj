@@ -686,6 +686,7 @@
 				6523D93526DDEB78007546F5 /* ActivityEvent.swift */,
 				6509E4F926D6C214009CB74D /* Ask.swift */,
 				3B7AF0B62672C21E003BCCF3 /* Chat.swift */,
+				3B7AF0AE2672A053003BCCF3 /* Comment.swift */,
 				657F35D526DE1D8D0092A1B2 /* Comment_v2.swift */,
 				657F35DA26DEA0C00092A1B2 /* Device.swift */,
 				3B7AF0B82672C29D003BCCF3 /* InboxMessage.swift */,
@@ -787,7 +788,6 @@
 				3B7AF0AA26729F81003BCCF3 /* CommentInputViewModel.swift */,
 				3B7AF0B02672AB2F003BCCF3 /* CommentViewModel.swift */,
 				3B7AF0AC26729FCC003BCCF3 /* CommentApi.swift */,
-				3B7AF0AE2672A053003BCCF3 /* Comment.swift */,
 			);
 			path = Comment;
 			sourceTree = "<group>";
