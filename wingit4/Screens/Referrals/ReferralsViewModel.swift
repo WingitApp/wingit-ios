@@ -60,7 +60,7 @@ class ReferralsViewModel: ObservableObject {
     func acceptReferral(referral: Referral, onSuccess: @escaping() -> Void) {
         guard let referralId = referral.id, let currentUser = Auth.auth().currentUser else { return }
         Api.Referrals.updateStatus(referralId: referralId, newStatus: .accepted)
-        let text = "\(referral.sender?.username ?? "") invited \(currentUser.displayName ?? "") to help."
+        let text = "\(referral.sender?.displayName ?? "") invited \(currentUser.displayName ?? "") to help."
         postInvitedReferralComment(text: text, referral: referral, onSuccess: onSuccess)
     }
     
