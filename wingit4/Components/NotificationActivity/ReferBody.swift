@@ -37,7 +37,7 @@ struct ReferBody: View {
                 .environmentObject(commentInputViewModel)
                 .environmentObject(footerCellViewModel)
         ) {
-            VStack {
+          VStack(alignment: .leading) {
                 HStack {
                     URLImageView(urlString: referral.ask?.avatar)
                       .clipShape(Circle())
@@ -53,17 +53,18 @@ struct ReferBody: View {
                         }.padding(.top, 5)
                         Spacer()
                   //  Image(systemName: "ellipsis")
-                    }.padding(.trailing, 15).padding(.leading, 15)
+                    }
+              
+                .padding(.trailing, 15).padding(.leading, 15)
 
                 PostText(ask: referral.ask)
             }
+            .frame(maxWidth: UIScreen.main.bounds.width - 60)
             .padding(.top, 15).padding(.bottom, 25)
-            .frame(width: UIScreen.main.bounds.width - 60)
             .background(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 0.3))
-
         }
         .buttonStyle(PlainButtonStyle())
-        .background(Color.lightGray.opacity(0.1))
+        .background(Color.lightGray.opacity(0.2))
         .padding(.bottom, 10)
         
     }
@@ -78,8 +79,8 @@ struct PostText: View {
 
             VStack(alignment: .leading, spacing: 10){
                 Text(ask?.caption ?? "")
-                  .fixedSize(horizontal: false, vertical: true)
             }
+            .fixedSize(horizontal: false, vertical: true)
             .padding(.horizontal)
             Spacer(minLength: 0)
 //                Image("photo2").resizable().scaledToFill()
