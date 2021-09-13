@@ -48,10 +48,9 @@ class HomeViewModel: ObservableObject {
             self.isLoading = false
           }
       }, newPost: { (post) in
-          if !self.posts.isEmpty {
-              self.posts.insert(post, at: 0)
-
-          }
+        if !self.posts.contains(post) {
+          self.posts.insert(post, at: 0)
+        }
       }, deletePost: { (post) in
           if !self.posts.isEmpty {
               for (index, p) in self.posts.enumerated() {

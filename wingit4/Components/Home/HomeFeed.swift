@@ -20,11 +20,11 @@ struct HomeFeed: View {
               isProfileView: false,
               index: index
             )
-            .onAppear {
-              homeViewModel.loadMoreContentIfNeeded(
-                currentItem: self.homeViewModel.posts[index]
-              )
-            }
+//            .onAppear {
+//              homeViewModel.loadMoreContentIfNeeded(
+//                currentItem: self.homeViewModel.posts[index]
+//              )
+//            }
           }
       }
     }
