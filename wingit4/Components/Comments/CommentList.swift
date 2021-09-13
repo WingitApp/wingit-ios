@@ -16,7 +16,11 @@ struct CommentList: View {
         VStack(alignment: .leading) {
           if !commentViewModel.comments.isEmpty {
               ForEach(commentViewModel.comments) { comment in
-                UserComment(comment: comment)
+                if comment.type == .invitedReferral {
+                  ReferralComment(comment: comment)
+                } else {
+                  UserComment(comment: comment)
+                }
              }
           }
         }

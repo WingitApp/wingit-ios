@@ -7,33 +7,37 @@
 
 import SwiftUI
 
-struct ReferralComment: View {
 
-    
+
+struct ReferralComment: View {
+    var comment: Comment
+  
     var body: some View {
       HStack(alignment: .center) {
-        Circle()
+        URLImageView(urlString: comment.avatarUrl)
           .frame(width: 23, height: 23, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
           .foregroundColor(Color(.systemTeal))
-        Circle()
+          .overlay(
+            RoundedRectangle(cornerRadius: 100)
+              .stroke(Color.gray, lineWidth: 1)
+          )
+        URLImageView(urlString: comment.inviterAvatarUrl)
           .frame(width: 23, height: 35, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
           .foregroundColor(.pink)
+          .overlay(
+            RoundedRectangle(cornerRadius: 100)
+              .stroke(Color.gray, lineWidth: 1)
+          )
           .padding(.leading, -15)
         Group {
-          Text("Daniel Yee ").bold() +
-          Text("invited ") +
-          Text("Joshua Lee ").bold() +
-          Text("to help.")
+          Text("\(comment.username)").bold() +
+          Text(" invited ") +
+            Text("\(comment.displayName)").bold() +
+          Text(" to help.")
         }.font(.caption)
         Spacer()
       }
       .padding(.leading, 10)
       Divider() //END
-    }
-}
-
-struct ReferralComment_Previews: PreviewProvider {
-    static var previews: some View {
-        ReferralComment()
     }
 }
