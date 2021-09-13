@@ -138,6 +138,7 @@ struct ProfileView: View {
       }
       .onAppear {
           logToAmplitude(event: .viewOwnProfile)
+      }
       .onDisappear {
         if self.profileViewModel.openListener != nil {
           self.profileViewModel.openListener.remove()

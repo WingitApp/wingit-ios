@@ -122,7 +122,7 @@ class AskCardViewModel: ObservableObject {
     guard let postId = post.id else { return }
     print("toggle postID: \(postId)")
     var newStatus: PostStatus  {
-      if post!.status == .closed {
+      if post.status == .closed {
         logToAmplitude(event: .reopenAsk)
         return .open
       } else {
