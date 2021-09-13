@@ -113,7 +113,7 @@ class PostApi {
     deletePost: @escaping(Post) -> Void,
     listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
   ) {
- 
+          guard let userId = userId else { return }
           let listenerFirestore =  Ref.FS_COLLECTION_ALL_POSTS
             .whereField("ownerId", isEqualTo: userId)
             .whereField("status", isEqualTo: "open")
@@ -158,7 +158,7 @@ class PostApi {
       deletePost: @escaping(Post) -> Void,
       listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
     ) {
-
+          guard let userId = userId else { return }
           let listenerFirestore =  Ref.FS_COLLECTION_ALL_POSTS
             .whereField("ownerId", isEqualTo: userId)
             .whereField("status", isEqualTo: "closed")
