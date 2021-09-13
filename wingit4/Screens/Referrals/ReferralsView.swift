@@ -24,6 +24,7 @@ struct ReferralsView: View {
                         }
                     }
                 }
+              
 //                if !referralsViewModel.acceptedReferrals.isEmpty {
 //                    Text("Accepted")
 //                }

@@ -14,7 +14,8 @@ struct ReferralComment: View {
   
     var body: some View {
       HStack(alignment: .center) {
-        URLImageView(urlString: comment.avatarUrl)
+        
+        URLImageView(urlString: comment.inviterAvatarUrl)
           .clipShape(Circle())
           .frame(width: 23, height: 23, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
           .foregroundColor(Color(.systemTeal))
@@ -22,7 +23,7 @@ struct ReferralComment: View {
             RoundedRectangle(cornerRadius: 100)
               .stroke(Color.gray, lineWidth: 1)
           )
-        URLImageView(urlString: comment.inviterAvatarUrl)
+        URLImageView(urlString: comment.avatarUrl)
           .clipShape(Circle())
           .frame(width: 23, height: 23, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
           .foregroundColor(.pink)

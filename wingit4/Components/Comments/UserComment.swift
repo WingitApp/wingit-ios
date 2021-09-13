@@ -10,16 +10,22 @@ import SwiftUI
 struct UserComment: View {
   var comment: Comment
   
+  
     var body: some View {
       HStack(alignment: .top) {
-        URLImageView(urlString: comment.avatarUrl)
-          .clipShape(Circle())
-          .frame(width: 25, height: 25, alignment: .center)
-          .foregroundColor(Color(.systemTeal))
-          .overlay(
-            RoundedRectangle(cornerRadius: 20)
-              .stroke(Color.gray, lineWidth: 0.5)
-          )
+        NavigationLink(
+          destination: UserProfileView(userId: comment.ownerId, user: nil)
+        ) {
+          URLImageView(urlString: comment.avatarUrl)
+            .clipShape(Circle())
+            .frame(width: 25, height: 25, alignment: .center)
+            .foregroundColor(Color(.systemTeal))
+            .overlay(
+              RoundedRectangle(cornerRadius: 20)
+                .stroke(Color.gray, lineWidth: 0.5)
+            )
+        }
+        .buttonStyle(PlainButtonStyle())
         VStack(alignment: .leading) {
           HStack(alignment: .center) {
             Text(comment.username)
@@ -37,6 +43,7 @@ struct UserComment: View {
               .foregroundColor(.gray)
               .font(.system(size: 10))
           }
+          
           Text(comment.comment)
             .font(.caption)
         }
