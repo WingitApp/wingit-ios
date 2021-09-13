@@ -106,14 +106,14 @@ class PostApi {
     }
     
   func loadOpenPosts(
+    userId: String?,
     onSuccess: @escaping(_ posts: [Post]) -> Void,
     newPost: @escaping(Post) -> Void,
+    modifiedPost: @escaping(Post) -> Void,
     deletePost: @escaping(Post) -> Void,
     listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
   ) {
-          guard let userId = Auth.auth().currentUser?.uid else {
-                  return
-          }
+ 
           let listenerFirestore =  Ref.FS_COLLECTION_ALL_POSTS
             .whereField("ownerId", isEqualTo: userId)
             .whereField("status", isEqualTo: "open")
@@ -127,12 +127,18 @@ class PostApi {
                       var posts = [Post]()
                       guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
                         newPost(decodedPost)
+                      print("OPEN ADDED: \(decodedPost.id)")
+
                         posts.append(decodedPost)
                         onSuccess(posts)
                     case .modified:
-                        print("type: modified")
+                      guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
+                      print("OPEN MODIFIED: \(decodedPost.id)")
+
+                      modifiedPost(decodedPost)
                     case .removed:
                       guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
+                      print("OPEN REMOVED: \(decodedPost.id)")
                       deletePost(decodedPost)
                     }
               }
@@ -144,22 +150,58 @@ class PostApi {
   
 
     
-    func loadClosedPosts(userId: String?, onSuccess: @escaping(_ posts: [Post]) -> Void) {
-        guard let userId = userId else { return }
-        Ref.FS_COLLECTION_ALL_POSTS.whereField("ownerId", isEqualTo: userId).whereField("status", isEqualTo: "closed").order(by: "date", descending: true).getDocuments { (snapshot, error) in
-            if let error = error {
-              print(error)
-            } else if let snapshot = snapshot {
-              let posts: [Post] = snapshot.documents.compactMap {
-                return try? $0.data(as: Post.self)
+    func loadClosedPosts(
+      userId: String?,
+      onSuccess: @escaping(_ posts: [Post]) -> Void,
+      newPost: @escaping(Post) -> Void,
+      modifiedPost: @escaping(Post) -> Void,
+      deletePost: @escaping(Post) -> Void,
+      listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
+    ) {
+
+          let listenerFirestore =  Ref.FS_COLLECTION_ALL_POSTS
+            .whereField("ownerId", isEqualTo: userId)
+            .whereField("status", isEqualTo: "closed")
+            .order(by: "date", descending: true)
+            .addSnapshotListener({ (querySnapshot, error) in
+              guard let snapshot = querySnapshot else { return }
+
+              snapshot.documentChanges.forEach { (documentChange) in
+                    switch documentChange.type {
+                    case .added:
+                      var posts = [Post]()
+                      guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
+                        newPost(decodedPost)
+                      print("CLOSED ADDED: \(decodedPost.id)")
+                        posts.append(decodedPost)
+                        onSuccess(posts)
+                    case .modified:
+                      guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
+                      print("CLOSED MODIFIED: \(decodedPost.id)")
+
+                      modifiedPost(decodedPost)
+                    case .removed:
+                      guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
+                      print("CLOSED REMOVED: \(decodedPost.id)")
+
+                      deletePost(decodedPost)
+                    }
               }
-                onSuccess(posts)
-            }
-        }
+              
+          })
+          
+          listener(listenerFirestore)
     }
     
-    func updateStatus(postId: String, newStatus: PostStatus) {
-        Ref.FS_COLLECTION_ALL_POSTS.document(postId).updateData(["status": newStatus.rawValue])
+  func updateStatus(postId: String, newStatus: PostStatus, onSuccess: @escaping(_ newStatus: PostStatus) -> Void) {
+        Ref.FS_COLLECTION_ALL_POSTS.document(postId)
+          .updateData(["status": newStatus.rawValue]) { error in
+            if error != nil {
+              return printDecodingError(error: error as! Error)
+            } else {
+              onSuccess(newStatus)
+            }
+          }
     }
   
   func loadTimeline(

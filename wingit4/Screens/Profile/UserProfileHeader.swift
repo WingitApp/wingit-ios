@@ -21,18 +21,30 @@ struct UserProfileHeader: View {
             if user != nil {
                 VStack(alignment:.center) {
                     HStack{
-                    VStack {
-                        Text("\(openCount)").font(.headline)
-                        Text("Open").font(.subheadline).foregroundColor(.gray)
-                    }.padding(10)
-                    NavigationLink(
-                        destination: PersonalClosedPostsView(user: user!),
-                        label: {
-                            VStack{
-                            Text("\(closedCount)").font(.headline).foregroundColor(Color("bw"))
-                            Text("Closed").font(.subheadline).foregroundColor(.gray)
-                            }.padding(10)
-                        })
+                      VStack {
+                          Text("\(openCount)")
+                            .font(.headline)
+                            .foregroundColor(userProfileViewModel.showOpenPosts ? Color(.systemTeal) : Color("bw"))
+                          Text("Open")
+                            .font(.subheadline)
+                            .foregroundColor(userProfileViewModel.showOpenPosts ? Color(.systemTeal) : .gray)
+                      }
+                      .padding(10)
+                      .onTapGesture {
+                        self.userProfileViewModel.showOpenPosts = true
+                      }
+                      VStack{
+                        Text("\(closedCount)")
+                          .font(.headline)
+                          .foregroundColor(userProfileViewModel.showOpenPosts ? Color("bw") : Color(.systemTeal))
+                        Text("Closed")
+                          .font(.subheadline)
+                          .foregroundColor(userProfileViewModel.showOpenPosts ? .gray : Color(.systemTeal))
+
+                      }.padding(10)
+                      .onTapGesture {
+                        self.userProfileViewModel.showOpenPosts = false
+                      }
                     }
             
             }

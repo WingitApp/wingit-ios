@@ -41,7 +41,7 @@ struct HeaderCell: View {
 
               
               Spacer()
-                AskDoneToggle() // rename later
+                AskDoneToggle(post: $post) // rename later
                 AskMenu()
             }.padding(.trailing, 15).padding(.leading, 15)
         }

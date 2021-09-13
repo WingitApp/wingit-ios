@@ -20,18 +20,29 @@ struct PersonalProfileHeader: View {
                 VStack(alignment:.center) {
                     HStack{
                     VStack {
-                        Text("\(profileViewModel.openPosts.count)").font(.headline)
-                        Text("Open").font(.subheadline).foregroundColor(.gray)
-                    }.padding(10)
-                    NavigationLink(
-                        destination: PersonalClosedPostsView(user: user!),
-                        label: {
-                            VStack{
-                            Text("\(profileViewModel.closedPosts.count)").font(.headline).foregroundColor(Color("bw"))
-                            Text("Closed").font(.subheadline).foregroundColor(.gray)
-                            }.padding(10)
-                        })
+                        Text("\(profileViewModel.openPosts.count)")
+                          .font(.headline)
+                          .foregroundColor(profileViewModel.showOpenPosts ? Color(.systemTeal) : Color("bw"))
+                        Text("Open")
+                          .font(.subheadline)
+                          .foregroundColor(profileViewModel.showOpenPosts ? Color(.systemTeal) : .gray)
                     }
+                    .padding(10)
+                    .onTapGesture {
+                      profileViewModel.showOpenPosts = true
+                    }
+                      VStack{
+                      Text("\(profileViewModel.closedPosts.count)")
+                        .font(.headline)
+                        .foregroundColor(profileViewModel.showOpenPosts ?  Color("bw") : Color(.systemTeal))
+                      Text("Closed")
+                        .font(.subheadline)
+                        .foregroundColor(profileViewModel.showOpenPosts ? .gray : Color(.systemTeal))
+                      }
+                      .padding(10)
+                      .onTapGesture {
+                        profileViewModel.showOpenPosts = false
+                      }
             
             }
             .sheet(isPresented: $viewingClosedPosts, content: {
@@ -40,3 +51,4 @@ struct PersonalProfileHeader: View {
     }
 }
 
+}

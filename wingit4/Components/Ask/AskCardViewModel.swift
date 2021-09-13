@@ -111,15 +111,16 @@ class AskCardViewModel: ObservableObject {
     let postOwnerId = post!.ownerId
     Api.User.blockUser(userId: uid, postOwnerId: postOwnerId)
   }
+//
+//    func onTapMarkAsDone() {
+//      withAnimation {
+//        self.isMarkedAsDone.toggle()
+//      }
+//    }
   
-    func onTapMarkAsDone() {
-      withAnimation {
-        self.isMarkedAsDone.toggle()
-      }
-    }
-  
-  func openCloseToggle() {
-    guard let postId = post!.id else { return }
+  func openCloseToggle(post: Post) {
+    guard let postId = post.id else { return }
+    print("toggle postID: \(postId)")
     var newStatus: PostStatus  {
       if post!.status == .closed {
         logToAmplitude(event: .reopenAsk)
@@ -129,9 +130,12 @@ class AskCardViewModel: ObservableObject {
         return .closed
       }
     }
-    Api.Post.updateStatus(postId: postId, newStatus: newStatus)
-    self.onTapMarkAsDone()
-    let alertView = SPAlertView(title: "Done!", message: "Woohoo! Congrats!", preset: SPAlertIconPreset.done); alertView.present(duration: 2)
+
+    Api.Post.updateStatus(postId: postId, newStatus: newStatus) { newStatus in
+      print("newStatus success: \(newStatus)")
+      self.post!.status = newStatus
+      let alertView = SPAlertView(title: "Done!", message: "Woohoo! Congrats!", preset: SPAlertIconPreset.done); alertView.present(duration: 2)
+    }
   }
 
   

@@ -25,10 +25,12 @@ class UserProfileViewModel: ObservableObject {
     
     @Published var isConnected = false
     @Published var sentPendingRequest = false
-  
+    
     @Published var user: User = USER_PROFILE_DEFAULT_PLACEHOLDER
-  
-    var listener: ListenerRegistration!
+    @Published var showOpenPosts = true
+    var closedListener: ListenerRegistration!
+    var openListener: ListenerRegistration!
+
   
   
   func fetchUserFromId(userId: String) {
@@ -71,13 +73,14 @@ class UserProfileViewModel: ObservableObject {
   
   
     
-    func loadUserPosts(userId: String) {
-      guard let userId = Auth.auth().currentUser?.uid else { return }
-      
+    func loadUserPosts(userId: String?) {
+      guard let userId = userId else { return }
+
       self.openPosts = []
       isLoading = true
       
       Api.Post.loadOpenPosts(
+        userId: userId,
         onSuccess: { (posts) in
           if self.openPosts.isEmpty {
               self.openPosts = posts
@@ -89,18 +92,25 @@ class UserProfileViewModel: ObservableObject {
               self.openPosts.insert(post, at: 0)
             }
           }
+      }, modifiedPost: { (post) in
+            if !self.openPosts.isEmpty {
+                for (index, p) in self.openPosts.enumerated() {
+                    if p.postId == post.postId {
+                      self.openPosts.remove(at: index)
+                    }
+                }
+            }
+        
       }, deletePost: { (post) in
           if !self.openPosts.isEmpty {
               for (index, p) in self.openPosts.enumerated() {
-            print("p: \(p)")
-            print("index: \(index)")
                   if p.postId == post.postId {
                       self.openPosts.remove(at: index)
                   }
               }
           }
       }) { (listener) in
-          self.listener = listener
+          self.openListener = listener
       }
       
         updateIsConnected(userId: userId)
@@ -112,9 +122,39 @@ class UserProfileViewModel: ObservableObject {
     func loadClosedPosts(userId: String?) {
         guard let userId = userId else { return }
         isLoading = true
-        Api.Post.loadClosedPosts(userId: userId) { (posts) in
-            self.isLoading = false
-            self.closedPosts = posts
+      
+        Api.Post.loadClosedPosts(
+          userId: userId,
+          onSuccess: { (posts) in
+            if self.closedPosts.isEmpty {
+                self.closedPosts = posts
+                self.isLoading = false
+            }
+        }, newPost: { (post) in
+            if !self.closedPosts.isEmpty {
+              if !self.closedPosts.contains(post) {
+                self.closedPosts.insert(post, at: 0)
+              }
+            }
+        }, modifiedPost: { (post) in
+              if !self.closedPosts.isEmpty {
+                  for (index, p) in self.closedPosts.enumerated() {
+                      if p.postId == post.postId {
+                        self.closedPosts.remove(at: index)
+                      }
+                  }
+              }
+          
+        }, deletePost: { (post) in
+            if !self.closedPosts.isEmpty {
+                for (index, p) in self.closedPosts.enumerated() {
+                    if p.postId == post.postId {
+                        self.closedPosts.remove(at: index)
+                    }
+                }
+            }
+        }) { (listener) in
+          self.closedListener = listener
         }
     }
     

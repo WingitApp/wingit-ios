@@ -23,8 +23,11 @@ class ProfileViewModel: ObservableObject {
     @Published var isUpdatePicSheetOpen: Bool = false
     
     @Published var isConnected = false
+    @Published var showOpenPosts = true
   
-    var listener: ListenerRegistration!
+    var openListener: ListenerRegistration!
+    var closedListener: ListenerRegistration!
+  
 
     
     func updateIsConnected(userId: String) {
@@ -44,6 +47,7 @@ class ProfileViewModel: ObservableObject {
       isLoading = true
       
       Api.Post.loadOpenPosts(
+        userId: userId,
         onSuccess: { (posts) in
           if self.openPosts.isEmpty {
               self.openPosts = posts
@@ -53,7 +57,17 @@ class ProfileViewModel: ObservableObject {
           if !self.openPosts.isEmpty {
               self.openPosts.insert(post, at: 0)
           }
-      }, deletePost: { (post) in
+      }, modifiedPost: {(post) in
+        if !self.openPosts.isEmpty {
+          for (index, p) in self.openPosts.enumerated() {
+              if p.postId == post.postId {
+                self.openPosts.remove(at: index)
+              }
+          }
+
+        }
+      },
+        deletePost: { (post) in
         
           if !self.openPosts.isEmpty {
               for (index, p) in self.openPosts.enumerated() {
@@ -63,7 +77,7 @@ class ProfileViewModel: ObservableObject {
               }
           }
       }) { (listener) in
-          self.listener = listener
+          self.openListener = listener
       }
       
     // these calls should be called elsewhere
@@ -75,16 +89,48 @@ class ProfileViewModel: ObservableObject {
     func loadClosedPosts() {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         self.isLoading = true
-        Api.Post.loadClosedPosts(userId: userId) { (posts) in
-            self.isLoading = false
-            self.closedPosts = posts
-        }
+    
+      Api.Post.loadClosedPosts(
+        userId: userId,
+        onSuccess: { (posts) in
+          if self.closedPosts.isEmpty {
+              self.closedPosts = posts
+              self.isLoading = false
+          }
+      }, newPost: { (post) in
+          if !self.closedPosts.isEmpty {
+            if !self.closedPosts.contains(post) {
+              self.closedPosts.insert(post, at: 0)
+            }
+          }
+      }, modifiedPost: { (post) in
+            if !self.closedPosts.isEmpty {
+                for (index, p) in self.closedPosts.enumerated() {
+                    if p.postId == post.postId {
+                      self.closedPosts.remove(at: index)
+                    }
+                }
+            }
+      }, deletePost: { (post) in
+          if !self.closedPosts.isEmpty {
+              for (index, p) in self.closedPosts.enumerated() {
+                  if p.postId == post.postId {
+                      self.closedPosts.remove(at: index)
+                  }
+              }
+          }
+      }) { (listener) in
+        self.closedListener = listener
+      }
     }
     
     func updateConnectionsCount(userId: String) {
         Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
+          
+          print("snapshot?.documents: \(snapshot?.documents)")
             
             if let doc = snapshot?.documents {
+                
                 self.connectionsCountState = doc.count
             }
         }

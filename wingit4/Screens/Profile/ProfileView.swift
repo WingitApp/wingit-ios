@@ -108,15 +108,28 @@ struct ProfileView: View {
             .background(Color.white)
             .frame(width: UIScreen.main.bounds.width)
             
-            LazyVStack {
-              ForEach(profileViewModel.openPosts.indices, id: \.self) { index in
-                  AskCard(
-                    post: profileViewModel.openPosts[index],
-                    isProfileView: true,
-                    index: index
-                  )
-                }
+            if profileViewModel.showOpenPosts {
+              LazyVStack {
+                ForEach(profileViewModel.openPosts.indices, id: \.self) { index in
+                    AskCard(
+                      post: profileViewModel.openPosts[index],
+                      isProfileView: true,
+                      index: index
+                    )
+                  }
+              }
+            } else {
+              LazyVStack {
+                ForEach(profileViewModel.closedPosts.indices, id: \.self) { index in
+                    AskCard(
+                      post: profileViewModel.closedPosts[index],
+                      isProfileView: true,
+                      index: index
+                    )
+                  }
+              }
             }
+
           }
           .zIndex(1)
           .padding(.top, 230)
@@ -125,6 +138,13 @@ struct ProfileView: View {
       }
       .onAppear {
           logToAmplitude(event: .viewOwnProfile)
+      .onDisappear {
+        if self.profileViewModel.openListener != nil {
+          self.profileViewModel.openListener.remove()
+        }
+        if self.profileViewModel.closedListener != nil {
+          self.profileViewModel.closedListener.remove()
+        }
       }
       .background(
         Color.white.ignoresSafeArea(.all, edges: .all)
@@ -139,6 +159,8 @@ struct ProfileView: View {
         content: { ProfilePicToggle(user: session.currentUser) }
       )
       .environmentObject(connectionsViewModel)
+      .environmentObject(profileViewModel)
+
       .navigationBarTitle(
         Text(session.currentUser?.displayName ?? "Profile"), displayMode: .inline
       )

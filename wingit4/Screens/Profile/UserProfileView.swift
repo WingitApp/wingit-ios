@@ -140,14 +140,26 @@ struct UserProfileView: View {
             .frame(width: UIScreen.main.bounds.width)
             .zIndex(1)
             
-            LazyVStack {
-              ForEach(userProfileViewModel.openPosts.indices, id: \.self) { index in
-                  AskCard(
-                    post: userProfileViewModel.openPosts[index],
-                    isProfileView: true,
-                    index: index
-                  )
-                }
+            if userProfileViewModel.showOpenPosts {
+              LazyVStack {
+                ForEach(userProfileViewModel.openPosts.indices, id: \.self) { index in
+                    AskCard(
+                      post: userProfileViewModel.openPosts[index],
+                      isProfileView: true,
+                      index: index
+                    )
+                  }
+              }
+            } else {
+              LazyVStack {
+                ForEach(userProfileViewModel.closedPosts.indices, id: \.self) { index in
+                    AskCard(
+                      post: userProfileViewModel.closedPosts[index],
+                      isProfileView: true,
+                      index: index
+                    )
+                  }
+              }
             }
 
           }
@@ -169,6 +181,7 @@ struct UserProfileView: View {
       content: {  ConnectionsView(user: userProfileViewModel.user).environmentObject(connectionsViewModel) }
     )
     .environmentObject(connectionsViewModel)
+    .environmentObject(userProfileViewModel)
   }
 }
 
