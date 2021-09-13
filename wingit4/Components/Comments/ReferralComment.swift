@@ -30,9 +30,9 @@ struct ReferralComment: View {
           )
           .padding(.leading, -15)
         Group {
-          Text("\(comment.username)").bold() +
+          Text("\(comment.inviterDisplayName ?? "Anon")").bold() +
           Text(" invited ") +
-          Text("\(comment.inviterDisplayName!)").bold() +
+          Text("\(comment.username)").bold() +
           Text(" to help.")
         }.font(.caption)
         Spacer()
