@@ -85,14 +85,17 @@ class UserProfileViewModel: ObservableObject {
           }
       }, newPost: { (post) in
           if !self.openPosts.isEmpty {
+            if !self.openPosts.contains(post) {
               self.openPosts.insert(post, at: 0)
+            }
           }
       }, deletePost: { (post) in
           if !self.openPosts.isEmpty {
               for (index, p) in self.openPosts.enumerated() {
+            print("p: \(p)")
+            print("index: \(index)")
                   if p.postId == post.postId {
                       self.openPosts.remove(at: index)
-
                   }
               }
           }

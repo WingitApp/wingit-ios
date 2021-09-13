@@ -54,11 +54,11 @@ class ProfileViewModel: ObservableObject {
               self.openPosts.insert(post, at: 0)
           }
       }, deletePost: { (post) in
+        
           if !self.openPosts.isEmpty {
               for (index, p) in self.openPosts.enumerated() {
                   if p.postId == post.postId {
                       self.openPosts.remove(at: index)
-
                   }
               }
           }
