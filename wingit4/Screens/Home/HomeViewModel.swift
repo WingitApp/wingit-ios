@@ -43,14 +43,16 @@ class HomeViewModel: ObservableObject {
       }
       
       Api.Post.loadTimeline(
-        next: self.next!,
-        onSuccess: { (posts, next) in
-            self.posts = self.posts + posts
-            self.next = next
+        onSuccess: { posts in
+          print("on success called")
+          self.posts = posts
           if self.isLoading {
             self.isLoading.toggle()
           }
-        }
-      )
+        },
+        listener: { (listener) in
+          self.listener = listener
+        })
+
     }
 }

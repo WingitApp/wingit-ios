@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 import FirebaseAuth
+import Firebase
 
 class UserProfileViewModel: ObservableObject {
     @Published var openPosts: [Post] = []
@@ -26,6 +27,8 @@ class UserProfileViewModel: ObservableObject {
     @Published var sentPendingRequest = false
   
     @Published var user: User = USER_PROFILE_DEFAULT_PLACEHOLDER
+  
+    var listener: ListenerRegistration!
   
   
   func fetchUserFromId(userId: String) {
@@ -70,10 +73,15 @@ class UserProfileViewModel: ObservableObject {
       if !self.isLoading {
         self.isLoading.toggle()
 
-        Api.Post.loadOpenPosts(userId: userId) { (posts) in
+        Api.Post.loadOpenPosts(
+          userId: userId,
+          onSuccess: { (posts) in
             self.openPosts = posts
             self.isLoading.toggle()
-        }
+          },
+          listener: { (listener) in
+            self.listener = listener
+          })
         updateIsConnected(userId: userId)
         updateSentPendingRequest(userId: userId)
         updateConnectionsCount(userId: userId)

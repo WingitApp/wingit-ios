@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import FirebaseAuth
+import Firebase
 
 class ProfileViewModel: ObservableObject {
     @Published var openPosts: [Post] = []
@@ -22,6 +23,9 @@ class ProfileViewModel: ObservableObject {
     @Published var isUpdatePicSheetOpen: Bool = false
     
     @Published var isConnected = false
+  
+    var listener: ListenerRegistration!
+
     
     func updateIsConnected(userId: String) {
         Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: Auth.auth().currentUser!.uid).document(userId).getDocument { (document, error) in
@@ -40,12 +44,15 @@ class ProfileViewModel: ObservableObject {
       
       guard let userId = Auth.auth().currentUser?.uid else { return }
 
-      Api.Post.loadOpenPosts(userId: userId) { (posts) in
+      Api.Post.loadOpenPosts(
+        userId: userId,
+        onSuccess: { (posts) in
           self.openPosts = posts
-          if self.isLoading {
-            self.isLoading.toggle()
-          }
-      }
+          self.isLoading.toggle()
+        },
+        listener: { (listener) in
+          self.listener = listener
+        })
     // these calls should be called elsewhere
       updateIsConnected(userId: userId)
       updateConnectionsCount(userId: userId)

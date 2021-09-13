@@ -119,19 +119,34 @@ class PostApi {
         }
     }
     
-    func loadOpenPosts(userId: String, onSuccess: @escaping(_ posts: [Post]) -> Void) {
-        Ref.FS_COLLECTION_ALL_POSTS.whereField("ownerId", isEqualTo: userId).whereField("status", isEqualTo: "open").order(by: "date", descending: true).getDocuments { (snapshot, error) in
+    func loadOpenPosts(
+      userId: String,
+      onSuccess: @escaping(_ posts: [Post]) -> Void,
+      listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
+    ) {
+      let postFirestoreListener = Ref.FS_COLLECTION_ALL_POSTS.whereField("ownerId", isEqualTo: userId)
+          .whereField("status", isEqualTo: "open")
+          .order(by: "date", descending: true)
+          .addSnapshotListener { (querySnapshot, error) in
+            guard let snapshot = querySnapshot else { return }
             
-            if let error = error {
-              print(error)
-            } else if let snapshot = snapshot {
-              let posts: [Post] = snapshot.documents.compactMap {
-                return try? $0.data(as: Post.self)
+       
+            let posts: [Post] = snapshot.documentChanges.compactMap {
+              switch $0.type {
+                case .added:
+                  return try? $0.document.data(as: Post.self)
+                case .modified:
+                  return try? $0.document.data(as: Post.self)
+                case .removed:
+                  return nil
               }
-                onSuccess(posts)
             }
-        }
+            
+            onSuccess(posts)
+          }
+      listener(postFirestoreListener)
     }
+
     
     func loadClosedPosts(userId: String?, onSuccess: @escaping(_ posts: [Post]) -> Void) {
         guard let userId = userId else { return }
@@ -152,6 +167,32 @@ class PostApi {
     }
   
   func loadTimeline(
+    onSuccess: @escaping(_ posts: [Post]) -> Void,
+    listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
+  ) {
+    let timelineListenerFirestore =
+      Ref.FS_DOC_TIMELINE_FOR_USERID(userId: Auth.auth().currentUser!.uid)
+      .collection("timelinePosts")
+      .order(by: "date", descending: true)
+      .addSnapshotListener({ (querySnapshot, error) in
+        guard let snapshot = querySnapshot else { return }
+        let posts: [Post] = snapshot.documentChanges.compactMap {
+          switch $0.type {
+            case .added:
+              return try? $0.document.data(as: Post.self)
+            case .modified:
+              return try? $0.document.data(as: Post.self)
+            case .removed:
+              return nil
+          }
+        }
+//        print("posts: \(posts)")
+        onSuccess(posts)
+      })
+      listener(timelineListenerFirestore)
+  }
+  
+  func loadTimelinePaginated(
     next: Query,
     onSuccess: @escaping(_ posts: [Post], _ next: Query) -> Void
   ) -> Void {
