@@ -62,7 +62,7 @@ struct AcceptButton: View {
                           Image(systemName: "checkmark.circle")
                             .foregroundColor(.white)
                           Text("Accept")
-                              .fontWeight(.bold)
+                            .fontWeight(.bold)
                         }
                         .foregroundColor(.white)
                         .padding(.vertical, 10)
