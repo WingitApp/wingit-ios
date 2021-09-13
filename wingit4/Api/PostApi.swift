@@ -57,7 +57,7 @@ class PostApi {
             return
         }
         let firestoreMyPostRef =
-            Ref.FS_COLLECTION_ALL_POSTS.whereField("ownerId", isEqualTo: userId)
+            Ref.FS_COLLECTION_ALL_POSTS.document(postId)
       //  let storagePostRef = Ref.STORAGE_POST_ID
         firestoreMyPostRef.delete { (err) in
             if err != nil{
@@ -66,21 +66,6 @@ class PostApi {
             }
             let storagePostRef = Ref.STORAGE_POST_ID(postId: postId)
             storagePostRef.delete()
-            Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId).collection("timelinePosts").document(postId).delete()
-            Ref.FS_COLLECTION_ALL_POSTS.document(postId).delete()
-        }
-    }
-    
-        func deleteUserPost(userId: String, postId: String) {
-            guard let userId = Auth.auth().currentUser?.uid else {
-                return
-            }
-            guard let firestoreMyPostRef = Ref.FS_COLLECTION_POSTS_FOR_USERID(userId: userId)?.document(postId) else { return }
-            firestoreMyPostRef.delete { (err) in
-                if err != nil{
-               //    print(err!.localizedDescription)
-                    return
-                }
             Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId).collection("timelinePosts").document(postId).delete()
         }
     }
