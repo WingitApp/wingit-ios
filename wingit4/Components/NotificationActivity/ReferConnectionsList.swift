@@ -35,7 +35,7 @@ struct ReferConnectionsList: View {
                                label: {
                             Text("Send")
                                 .fontWeight(.heavy)
-                                .foregroundColor(Color("Color"))
+                                .foregroundColor(Color(.systemTeal))
                         })
                     }
                     .padding([.horizontal,.top])
