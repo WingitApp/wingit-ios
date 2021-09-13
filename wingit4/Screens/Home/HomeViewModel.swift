@@ -44,7 +44,6 @@ class HomeViewModel: ObservableObject {
       
       Api.Post.loadTimeline(
         onSuccess: { posts in
-          print("on success called")
           self.posts = posts
           if self.isLoading {
             self.isLoading.toggle()

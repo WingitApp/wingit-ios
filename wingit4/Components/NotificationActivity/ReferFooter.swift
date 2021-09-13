@@ -61,8 +61,8 @@ struct AcceptButton: View {
                         HStack(alignment: .center) {
                           Image(systemName: "checkmark.circle")
                             .foregroundColor(.white)
-                            Text("Accept")
-                                .fontWeight(.bold)
+                          Text("Accept")
+                              .fontWeight(.bold)
                         }
                         .foregroundColor(.white)
                         .padding(.vertical, 10)
@@ -89,10 +89,12 @@ struct WingButton: View {
         Button(action: {referViewModel.isReferListOpen.toggle()},
                label: {
                 HStack(alignment: .center){
-                  Image(IMAGE_LOGO)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 25)
+                  VStack {
+                    Image(IMAGE_LOGO)
+                      .resizable()
+                      .scaledToFit()
+                  }
+                  .frame(width: 25, height: 20)
                   
                     Text("Wing")
                       .foregroundColor(Color("Color"))

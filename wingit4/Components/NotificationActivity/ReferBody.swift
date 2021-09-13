@@ -41,7 +41,7 @@ struct ReferBody: View {
                 HStack {
                     URLImageView(urlString: referral.ask?.avatar)
                       .clipShape(Circle())
-                      .frame(width: 35, height: 35)
+                      .frame(width: 30, height: 30)
                       .overlay(
                         RoundedRectangle(cornerRadius: 100)
                           .stroke(Color.gray, lineWidth: 1)
@@ -49,14 +49,15 @@ struct ReferBody: View {
                         VStack(alignment: .leading) {
                             Text(referral.ask?.username ?? "")
                               .font(.subheadline).bold()
-                        }
+                          
+                        }.padding(.top, 5)
                         Spacer()
                   //  Image(systemName: "ellipsis")
                     }.padding(.trailing, 15).padding(.leading, 15)
 
                 PostText(ask: referral.ask)
             }
-            .padding(.top, 10).padding(.bottom, 10)
+            .padding(.top, 15).padding(.bottom, 25)
             .frame(width: UIScreen.main.bounds.width - 60)
             .background(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 0.3))
 
@@ -77,6 +78,7 @@ struct PostText: View {
 
             VStack(alignment: .leading, spacing: 10){
                 Text(ask?.caption ?? "")
+                  .fixedSize(horizontal: false, vertical: true)
             }
             .padding(.horizontal)
             Spacer(minLength: 0)
