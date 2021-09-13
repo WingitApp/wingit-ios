@@ -84,6 +84,7 @@ enum AmplitudeProperty: String {
     case method = "method"
     case platform = "platform"
     case toUser = "to user"
+    case userId = "user id"
 }
 
   func logToAmplitude(event: AmplitudeEvent) {
@@ -101,7 +102,7 @@ enum AmplitudeProperty: String {
       }
   }
 
-  func logToAmplitude(event: AmplitudeEvent, properties: [AmplitudeProperty: Any]) {
+  func logToAmplitude(event: AmplitudeEvent, properties: [AmplitudeProperty: Any?]) {
       Amplitude.instance().logEvent(event.rawValue, withEventProperties:
           Dictionary(uniqueKeysWithValues: properties.map { (key, value) in (key.rawValue, value) }))
   }
