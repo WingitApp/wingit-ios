@@ -135,7 +135,9 @@ struct RespondToConnectRequestRow: View {
           .background(Color.lightGray)
           
           // Accept Button (todo: put in own file)
-          Button(action: { activityViewModel.acceptConnectRequest(fromUserId: activity.userId) }) {
+          Button(action: {
+                    logToAmplitude(event: .acceptConnectRequest, properties: [.userId: activity.userId])
+                    activityViewModel.acceptConnectRequest(fromUserId: activity.userId) }) {
               Text("Accept")
                   .fontWeight(.bold).foregroundColor(Color.white)
                   .font(.system(size: 14))

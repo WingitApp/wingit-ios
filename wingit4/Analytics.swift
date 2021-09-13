@@ -55,7 +55,7 @@ enum AmplitudeEvent: String {
     
     // Social
     case acceptConnectRequest = "Accept Connect Request"
-    case disconnect = "Disconnect"
+    case disconnectFromUser = "Disconnect From User"
     case ignoreConnectRequest = "Ignore Connect Request"
     case searchForFriends = "Search For Friends"
     case sendConnectRequest = "Send Connect Request"
