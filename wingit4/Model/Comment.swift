@@ -13,6 +13,9 @@ struct Comment: Encodable, Decodable, Identifiable, Equatable {
     var id = UUID()
     var comment: String
     var avatarUrl: String
+    var inviterAvatarUrl: String?
+    var inviterDisplayName: String?
+    var inviterId: String?
     var ownerId: String
     var postId: String
     var username: String
