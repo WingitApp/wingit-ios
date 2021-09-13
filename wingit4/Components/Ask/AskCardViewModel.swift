@@ -88,12 +88,11 @@ class AskCardViewModel: ObservableObject {
   }
   
   func removePost() {
-    guard let uid = Auth.auth().currentUser?.uid else { return }
-    let postOwnerId = self.post!.ownerId
+    guard let uid = Auth.auth().currentUser?.uid, let postId = self.post?.id else { return }
     
     Api.Post.deletePost(
       userId: uid,
-      postId: postOwnerId
+      postId: postId
     )
   }
   
