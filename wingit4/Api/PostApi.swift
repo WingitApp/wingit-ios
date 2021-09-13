@@ -168,29 +168,41 @@ class PostApi {
   
   func loadTimeline(
     onSuccess: @escaping(_ posts: [Post]) -> Void,
+    newPost: @escaping(Post) -> Void,
+    deletePost: @escaping(Post) -> Void,
     listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
   ) {
-    let timelineListenerFirestore =
-      Ref.FS_DOC_TIMELINE_FOR_USERID(userId: Auth.auth().currentUser!.uid)
-      .collection("timelinePosts")
-      .order(by: "date", descending: true)
-      .addSnapshotListener({ (querySnapshot, error) in
-        guard let snapshot = querySnapshot else { return }
-        let posts: [Post] = snapshot.documentChanges.compactMap {
-          switch $0.type {
-            case .added:
-              return try? $0.document.data(as: Post.self)
-            case .modified:
-              return try? $0.document.data(as: Post.self)
-            case .removed:
-              return nil
+          guard let userId = Auth.auth().currentUser?.uid else {
+                  return
           }
-        }
-//        print("posts: \(posts)")
-        onSuccess(posts)
-      })
-      listener(timelineListenerFirestore)
-  }
+          let listenerFirestore =  Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId)
+            .collection("timelinePosts")
+            .order(by: "date", descending: false)
+            .addSnapshotListener({ (querySnapshot, error) in
+              guard let snapshot = querySnapshot else { return }
+              
+              snapshot.documentChanges.forEach { (documentChange) in
+                    switch documentChange.type {
+                    case .added:
+                      var posts = [Post]()
+                        let dict = documentChange.document.data()
+                        guard let decoderPost = try? Post.init(fromDictionary: dict) else {return}
+                        newPost(decoderPost)
+                        posts.append(decoderPost)
+                        onSuccess(posts)
+                    case .modified:
+                        print("type: modified")
+                    case .removed:
+                        let dict = documentChange.document.data()
+                         guard let decoderPost = try? Post.init(fromDictionary: dict) else {return}
+                         deletePost(decoderPost)
+                    }
+              }
+              
+          })
+          
+          listener(listenerFirestore)
+      }
   
   func loadTimelinePaginated(
     next: Query,
