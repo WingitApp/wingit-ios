@@ -21,6 +21,7 @@ enum AmplitudeEvent: String {
     // Navigation
     case viewComments = "View Comments"
     case viewHomeScreen = "View Home Screen"
+    case viewReferralsScreen = "View Referrals Screen"
     case viewDiscoverScreen = "View Discover Screen"
     case viewComposePostScreen = "View Compose Post Screen"
     case viewNotifications = "View Notifications"
