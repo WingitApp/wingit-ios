@@ -34,6 +34,14 @@ class AskCardViewModel: ObservableObject {
     self.isProfileView = isProfileView
     self.isOwnPost = Auth.auth().currentUser?.uid == post.ownerId
     self.isNavLinkDisabled = self.isProfileView || self.isOwnPost
+    var status: Bool {
+      if post.status == .open {
+        return false
+      } else {
+        return true
+      }
+    }
+    self.isMarkedAsDone = status
   }
   
   func getColorByIndex(index: Int) -> Color {
@@ -104,14 +112,23 @@ class AskCardViewModel: ObservableObject {
   }
   
     func onTapMarkAsDone() {
-      self.isMarkedAsDone.toggle()
-    }
-
-      func statusClosed(){
-        guard let postId = post!.id else { return }
-          Api.Post.updateStatus(postId: postId, newStatus: .closed)
-          self.onTapMarkAsDone()
+      withAnimation {
+        self.isMarkedAsDone.toggle()
       }
+    }
   
+  func openCloseToggle() {
+    guard let postId = post!.id else { return }
+    var newStatus: PostStatus  {
+      if post!.status == .closed {
+        return .open
+      } else {
+        return .closed
+      }
+    }
+    Api.Post.updateStatus(postId: postId, newStatus: newStatus)
+    self.onTapMarkAsDone()
+  }
+
   
 }

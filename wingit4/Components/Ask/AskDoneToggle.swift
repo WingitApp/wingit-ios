@@ -9,16 +9,15 @@ import SwiftUI
 
 struct AskDoneToggle: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
- // @ObservedObject var askDoneToggleViewModel = AskDoneToggleViewModel()
-   // @Binding var post: Post
-
+ 
     var body: some View {
       
       if askCardViewModel.isOwnPost {
         Button(
-            action: askCardViewModel.statusClosed,
+            action: askCardViewModel.openCloseToggle,
           label: {
             Image(systemName: "checkmark.circle")
+              .foregroundColor(self.askCardViewModel.isMarkedAsDone ? Color("Color1") : Color.gray)
               }
             )
       }
