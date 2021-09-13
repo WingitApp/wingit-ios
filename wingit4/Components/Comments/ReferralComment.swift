@@ -22,7 +22,7 @@ struct ReferralComment: View {
               .stroke(Color.gray, lineWidth: 1)
           )
         URLImageView(urlString: comment.inviterAvatarUrl)
-          .frame(width: 23, height: 35, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+          .frame(width: 23, height: 23, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
           .foregroundColor(.pink)
           .overlay(
             RoundedRectangle(cornerRadius: 100)
@@ -32,7 +32,7 @@ struct ReferralComment: View {
         Group {
           Text("\(comment.username)").bold() +
           Text(" invited ") +
-            Text("\(comment.displayName)").bold() +
+          Text("\(comment.inviterDisplayName!)").bold() +
           Text(" to help.")
         }.font(.caption)
         Spacer()
