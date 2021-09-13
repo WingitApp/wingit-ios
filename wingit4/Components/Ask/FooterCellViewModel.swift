@@ -33,20 +33,33 @@ class FooterCellViewModel: ObservableObject {
         // toggles UI
         self.toggleLike()
       }
+        var likes = post.likes
+        likes[uid] = true
         // TODO : Do all "consistency writes" on Cloud Trigger
         Ref.FS_COLLECTION_ALL_POSTS
           .document(post.postId)
-          .setData(["likes.\(uid)" : true, "likeCount":  post.likeCount], merge: true) { error in
-            
+            .updateData(["likes": likes]) { error in
+                print(error ?? "")
           }
+    Ref.FS_COLLECTION_ALL_POSTS
+      .document(post.postId)
+        .updateData(["likeCount": post.likeCount]) { error in
+            print(error ?? "")
+      }
     
-        Ref.FS_DOC_TIMELINE_FOR_USERID(userId: post.ownerId)
+        Ref.FS_DOC_TIMELINE_FOR_USERID(userId: uid)
           .collection("timelinePosts")
           .document(post.postId)
-          .setData(["likes.\(uid)" : true, "likeCount":  post.likeCount], merge: true) { error in
-            // create entry if error
-          }
+            .updateData(["likes": likes]) { error in
+                print(error ?? "")
+            }
     
+        Ref.FS_DOC_TIMELINE_FOR_USERID(userId: uid)
+          .collection("timelinePosts")
+          .document(post.postId)
+            .updateData(["likeCount": post.likeCount]) { error in
+                print(error ?? "")
+            }
     
         // find connections and update posts in their timeline using Cloud Function
         if Auth.auth().currentUser!.uid != post.ownerId {
@@ -63,16 +76,34 @@ class FooterCellViewModel: ObservableObject {
         // toggles UI
         self.toggleLike()
       }
+        var likes = post.likes
+        likes[uid] = false
     // TODO : Do all "consistency writes" on Cloud Trigger
     
         Ref.FS_COLLECTION_ALL_POSTS
           .document(post.postId)
-          .setData(["likes.\(uid)" : false, "likeCount":  post.likeCount], merge: true)
-    
-        Ref.FS_DOC_TIMELINE_FOR_USERID(userId: post.ownerId)
+            .updateData(["likes": likes]) { error in
+                print(error ?? "")
+          }
+        Ref.FS_COLLECTION_ALL_POSTS
+          .document(post.postId)
+            .updateData(["likeCount": post.likeCount]) { error in
+                print(error ?? "")
+          }
+
+        Ref.FS_DOC_TIMELINE_FOR_USERID(userId: uid)
           .collection("timelinePosts")
           .document(post.postId)
-          .setData(["likes.\(uid)" : false,"likeCount":  post.likeCount], merge: true)
+            .updateData(["likes": likes]) { error in
+                print(error ?? "")
+            }
+
+        Ref.FS_DOC_TIMELINE_FOR_USERID(userId: uid)
+          .collection("timelinePosts")
+          .document(post.postId)
+            .updateData(["likeCount": post.likeCount]) { error in
+                print(error ?? "")
+            }
     
         if Auth.auth().currentUser!.uid != post.ownerId {
           
