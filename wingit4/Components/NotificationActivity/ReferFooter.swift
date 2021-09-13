@@ -86,7 +86,10 @@ struct WingButton: View {
     
     var body: some View {
         
-        Button(action: {referViewModel.isReferListOpen.toggle()},
+        Button(action: {
+            logToAmplitude(event: .tapWingReferralButton)
+            referViewModel.isReferListOpen.toggle()
+        },
                label: {
                 HStack(alignment: .center){
                   VStack {
