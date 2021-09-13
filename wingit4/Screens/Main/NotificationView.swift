@@ -67,7 +67,6 @@ struct NotificationView: View {
            
             }.navigationBarTitle(Text("Notifications"), displayMode: .inline)
             .onAppear {
-                logToAmplitude(event: .viewNotifications)
                 self.activityViewModel.loadActivities()
             }
             .onDisappear {

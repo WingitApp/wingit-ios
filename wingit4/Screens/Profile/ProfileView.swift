@@ -116,9 +116,6 @@ struct ProfileView: View {
           
         }
       }
-      .onAppear {
-          logToAmplitude(event: .viewOwnProfile)
-      }
       .background(
         Color.white.ignoresSafeArea(.all, edges: .all)
       )
