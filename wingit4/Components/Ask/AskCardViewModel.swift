@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 import FirebaseAuth
+import SPAlert
 
 class AskCardViewModel: ObservableObject {
   
@@ -130,6 +131,7 @@ class AskCardViewModel: ObservableObject {
     }
     Api.Post.updateStatus(postId: postId, newStatus: newStatus)
     self.onTapMarkAsDone()
+    let alertView = SPAlertView(title: "Done!", message: "Woohoo! Congrats!", preset: SPAlertIconPreset.done); alertView.present(duration: 2)
   }
 
   

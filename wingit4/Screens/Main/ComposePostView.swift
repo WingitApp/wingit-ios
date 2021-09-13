@@ -10,6 +10,7 @@ import SwiftUI
 
 
 struct ComposePostView: View {
+    
     @ObservedObject var composePostViewModel = ComposePostViewModel()
 
     func sharePost() {
@@ -118,13 +119,14 @@ struct ComposePostView: View {
             }
             .navigationBarTitle("Wingit!", displayMode: .inline)
             .navigationBarItems(trailing:
+            
                                     
                 Button(action: sharePost) {
                     Text("Ask")
                       .foregroundColor(Color(.systemTeal))
-                }
+                        
+                }.disabled(composePostViewModel.isDisabled)
                     
-           
              .alert(isPresented: $composePostViewModel.showAlert) {
                 Alert(title: Text("Error"), message: Text(self.composePostViewModel.errorString), dismissButton: .default(Text("OK")))
             }

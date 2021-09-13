@@ -24,6 +24,7 @@ class ComposePostViewModel: ObservableObject {
     var errorString = ""
     
     @Published var showAlert: Bool = false
+    @Published var isDisabled: Bool = false
     
     
     func sharePost(completed: @escaping() -> Void,  onError: @escaping(_ errorMessage: String) -> Void) {
@@ -31,10 +32,11 @@ class ComposePostViewModel: ObservableObject {
         if !caption.isEmpty && imageData.count == 0 {
             logToAmplitude(event: .postAsk, properties: [.attachedPhoto: false])
             Api.Post.postWithoutMedia(caption: caption, imageData: imageData, onSuccess: completed, onError: onError)
-            
-          } else if !caption.isEmpty && imageData.count != 0{
+              isDisabled = true
+           } else if !caption.isEmpty && imageData.count != 0{
             logToAmplitude(event: .postAsk, properties: [.attachedPhoto: true])
             Api.Post.postWithMedia(caption: caption, imageData: imageData, onSuccess: completed, onError: onError)
+            isDisabled = true
           } else {
                 showAlert = true
                 errorString = "Please fill in all fields"
