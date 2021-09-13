@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-struct Post: Codable, Identifiable {
+struct Post: Codable, Identifiable, Equatable {
     @DocumentID var id: String?
     var caption: String
     var likes: [String: Bool]
