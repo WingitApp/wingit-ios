@@ -56,7 +56,8 @@ class PostApi {
         guard let userId = Auth.auth().currentUser?.uid else {
             return
         }
-        guard let firestoreMyPostRef = Ref.FS_COLLECTION_POSTS_FOR_USERID(userId: userId)?.document(postId) else { return }
+        let firestoreMyPostRef =
+            Ref.FS_COLLECTION_ALL_POSTS.whereField("ownerId", isEqualTo: userId)
       //  let storagePostRef = Ref.STORAGE_POST_ID
         firestoreMyPostRef.delete { (err) in
             if err != nil{
