@@ -142,9 +142,9 @@ struct UserProfileView: View {
             
             if userProfileViewModel.showOpenPosts {
               LazyVStack {
-                ForEach(userProfileViewModel.openPosts.indices, id: \.self) { index in
+                ForEach(Array(userProfileViewModel.openPosts.enumerated()), id: \.element) { index, post in
                     AskCard(
-                      post: userProfileViewModel.openPosts[index],
+                      post: post,
                       isProfileView: true,
                       index: index
                     )
@@ -152,15 +152,16 @@ struct UserProfileView: View {
               }
             } else {
               LazyVStack {
-                ForEach(userProfileViewModel.closedPosts.indices, id: \.self) { index in
+                ForEach(Array(userProfileViewModel.closedPosts.enumerated()), id: \.element) { index, post in
                     AskCard(
-                      post: userProfileViewModel.closedPosts[index],
+                      post: post,
                       isProfileView: true,
                       index: index
                     )
                   }
               }
             }
+
 
           }
           .zIndex(1)

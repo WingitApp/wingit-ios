@@ -127,18 +127,13 @@ class PostApi {
                       var posts = [Post]()
                       guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
                         newPost(decodedPost)
-                      print("OPEN ADDED: \(decodedPost.id)")
-
                         posts.append(decodedPost)
                         onSuccess(posts)
                     case .modified:
                       guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
-                      print("OPEN MODIFIED: \(decodedPost.id)")
-
                       modifiedPost(decodedPost)
                     case .removed:
                       guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
-                      print("OPEN REMOVED: \(decodedPost.id)")
                       deletePost(decodedPost)
                     }
               }
@@ -172,18 +167,13 @@ class PostApi {
                       var posts = [Post]()
                       guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
                         newPost(decodedPost)
-                      print("CLOSED ADDED: \(decodedPost.id)")
                         posts.append(decodedPost)
                         onSuccess(posts)
                     case .modified:
                       guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
-                      print("CLOSED MODIFIED: \(decodedPost.id)")
-
                       modifiedPost(decodedPost)
                     case .removed:
                       guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
-                      print("CLOSED REMOVED: \(decodedPost.id)")
-
                       deletePost(decodedPost)
                     }
               }

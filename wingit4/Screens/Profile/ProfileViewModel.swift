@@ -72,7 +72,7 @@ class ProfileViewModel: ObservableObject {
           if !self.openPosts.isEmpty {
               for (index, p) in self.openPosts.enumerated() {
                   if p.postId == post.postId {
-                      self.openPosts.remove(at: index)
+                    self.openPosts.remove(at: index)
                   }
               }
           }
@@ -115,7 +115,7 @@ class ProfileViewModel: ObservableObject {
           if !self.closedPosts.isEmpty {
               for (index, p) in self.closedPosts.enumerated() {
                   if p.postId == post.postId {
-                      self.closedPosts.remove(at: index)
+                    self.closedPosts.remove(at: index)
                   }
               }
           }
@@ -126,9 +126,7 @@ class ProfileViewModel: ObservableObject {
     
     func updateConnectionsCount(userId: String) {
         Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
-          
-          print("snapshot?.documents: \(snapshot?.documents)")
-            
+                      
             if let doc = snapshot?.documents {
                 
                 self.connectionsCountState = doc.count

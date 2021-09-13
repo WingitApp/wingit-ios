@@ -55,11 +55,6 @@ struct HomeView: View {
 //          }
         )
         .onAppear( perform: onAppear )
-        .onDisappear {
-          if self.homeViewModel.listener != nil {
-            self.homeViewModel.listener.remove()
-          }
-        }
       }.environmentObject(homeViewModel)
     }
 }

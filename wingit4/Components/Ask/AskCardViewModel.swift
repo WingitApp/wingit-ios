@@ -120,7 +120,6 @@ class AskCardViewModel: ObservableObject {
   
   func openCloseToggle(post: Post) {
     guard let postId = post.id else { return }
-    print("toggle postID: \(postId)")
     var newStatus: PostStatus  {
       if post.status == .closed {
         logToAmplitude(event: .reopenAsk)
@@ -131,10 +130,12 @@ class AskCardViewModel: ObservableObject {
       }
     }
 
-    Api.Post.updateStatus(postId: postId, newStatus: newStatus) { newStatus in
-      print("newStatus success: \(newStatus)")
+    Api.Post.updateStatus(
+      postId: postId,
+      newStatus: newStatus
+    ) { newStatus in
       self.post!.status = newStatus
-      let alertView = SPAlertView(title: "Done!", message: "Woohoo! Congrats!", preset: SPAlertIconPreset.done); alertView.present(duration: 2)
+//      let alertView = SPAlertView(title: "Done!", message: "Woohoo! Congrats!", preset: SPAlertIconPreset.done); alertView.present(duration: 2)
     }
   }
 

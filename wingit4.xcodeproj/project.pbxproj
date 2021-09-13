@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1500983526EFE45B00D31B8C /* ProfileFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1500983426EFE45B00D31B8C /* ProfileFeed.swift */; };
 		15030AA626E6805D0076CF14 /* AskDetailDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15030AA526E6805C0076CF14 /* AskDetailDemo.swift */; };
 		15030AA826E805A50076CF14 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15030AA726E805A40076CF14 /* Styles.swift */; };
 		15030AAA26E807C10076CF14 /* HomeFeedHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15030AA926E807C10076CF14 /* HomeFeedHeader.swift */; };
@@ -179,6 +180,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1500983426EFE45B00D31B8C /* ProfileFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFeed.swift; sourceTree = "<group>"; };
 		15030AA526E6805C0076CF14 /* AskDetailDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AskDetailDemo.swift; path = wingit4/Components/AskDetail/AskDetailDemo.swift; sourceTree = "<group>"; };
 		15030AA726E805A40076CF14 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		15030AA926E807C10076CF14 /* HomeFeedHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedHeader.swift; sourceTree = "<group>"; };
@@ -454,6 +456,7 @@
 				156E6AE326D8A13400690E47 /* ProfileViewModel.swift */,
 				65A7DC0926ED9F2E0032C739 /* PersonalClosedPostsView.swift */,
 				15F7E87826E8435A00E5238F /* PersonalProfileHeader.swift */,
+				1500983426EFE45B00D31B8C /* ProfileFeed.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1079,6 +1082,7 @@
 				65FE040426E9FE3200333609 /* ComposePostView.swift in Sources */,
 				3B86E43E26C998E300F64416 /* ActivityIndicatorView.swift in Sources */,
 				3B7AF05A26719AB2003BCCF3 /* HomeView.swift in Sources */,
+				1500983526EFE45B00D31B8C /* ProfileFeed.swift in Sources */,
 				15F7E8C126E8490100E5238F /* CommentList.swift in Sources */,
 				15DA39B426DC5C620080193E /* AskCardPlaceholder.swift in Sources */,
 				3B7AF0B72672C21F003BCCF3 /* Chat.swift in Sources */,
