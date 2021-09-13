@@ -22,6 +22,7 @@ class AskCardViewModel: ObservableObject {
   @Published var isImageModalOpen: Bool = false
 //  @Published var isCommentsModalOpen: Bool = false
 //  @Published var isShareSheetShowing = false
+    @Published var isMarkedAsDone: Bool = false
 
   
   // View Conditional
@@ -103,7 +104,15 @@ class AskCardViewModel: ObservableObject {
     Api.User.blockUser(userId: uid, postOwnerId: postOwnerId)
   }
   
-  
+    func onTapMarkAsDone() {
+      self.isMarkedAsDone.toggle()
+    }
+
+      func statusClosed(){
+        guard let postId = post!.id else { return }
+          Api.Post.updateStatus(postId: postId, newStatus: .closed)
+          self.onTapMarkAsDone()
+      }
   
   
 }

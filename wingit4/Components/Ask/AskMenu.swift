@@ -15,6 +15,7 @@ struct AskMenu: View {
     var body: some View {
         VStack{
       if !self.askCardViewModel.isOwnPost {
+        
         Menu(content: {
           Button(
             action: self.askCardViewModel.hidePost

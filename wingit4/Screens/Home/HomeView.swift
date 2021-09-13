@@ -46,11 +46,13 @@ struct HomeView: View {
                 .imageScale(Image.Scale.medium)
                 .foregroundColor(.gray)
             }
-          },trailing: Button(action: {}) {
-            NavigationLink(destination: MessagesView()) {
-              Image(systemName: "envelope").imageScale(Image.Scale.medium).foregroundColor(.gray)
-            }
-          })
+          }
+//                            ,trailing: Button(action: {}) {
+//            NavigationLink(destination: MessagesView()) {
+//              Image(systemName: "envelope").imageScale(Image.Scale.medium).foregroundColor(.gray)
+//            }
+//          }
+        )
         .onAppear( perform: onAppear )
         .onDisappear {
           if self.homeViewModel.listener != nil {

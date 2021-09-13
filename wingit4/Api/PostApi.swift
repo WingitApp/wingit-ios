@@ -146,6 +146,10 @@ class PostApi {
             }
         }
     }
+    
+    func updateStatus(postId: String, newStatus: PostStatus) {
+        Ref.FS_COLLECTION_ALL_POSTS.document(postId).updateData(["status": newStatus.rawValue])
+    }
   
   func loadTimeline(
     next: Query,

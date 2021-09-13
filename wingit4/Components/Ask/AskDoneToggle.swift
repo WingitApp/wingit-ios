@@ -9,17 +9,18 @@ import SwiftUI
 
 struct AskDoneToggle: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
-  @ObservedObject var askDoneToggleViewModel = AskDoneToggleViewModel()
+ // @ObservedObject var askDoneToggleViewModel = AskDoneToggleViewModel()
+   // @Binding var post: Post
 
     var body: some View {
       
       if askCardViewModel.isOwnPost {
         Button(
-          action: askDoneToggleViewModel.onTapMarkAsDone,
+            action: askCardViewModel.statusClosed,
           label: {
             Image(systemName: "checkmark.circle")
-          }
-        )
+              }
+            )
       }
     }
 }

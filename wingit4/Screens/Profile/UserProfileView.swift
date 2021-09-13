@@ -116,7 +116,7 @@ struct UserProfileView: View {
                     isConnected: $userProfileViewModel.isConnected, sentPendingRequest: $userProfileViewModel.sentPendingRequest,
                     connectionsCount: $userProfileViewModel.connectionsCountState
                   )
-                  MessageButton(user: userProfileViewModel.user)
+                 // MessageButton(user: userProfileViewModel.user)
 
                 }
               }
