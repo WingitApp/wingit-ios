@@ -58,7 +58,6 @@ struct ReferralsView: View {
           )
           .environmentObject(referralsViewModel)
           .onAppear {
-            logToAmplitude(event: .viewReferralsScreen)
             self.referralsViewModel.getReferrals()
           }
           .navigationBarTitle("Referrals", displayMode: .inline)

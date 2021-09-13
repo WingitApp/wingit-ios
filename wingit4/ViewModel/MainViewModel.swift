@@ -21,7 +21,7 @@ final class MainViewModel: ObservableObject {
             case 0:
                 logToAmplitude(event: .viewHomeScreen)
             case 1:
-                logToAmplitude(event: .viewDiscoverScreen)
+                logToAmplitude(event: .viewReferralsScreen)
             case 2:
                 logToAmplitude(event: .viewComposePostScreen)
             case 3:
