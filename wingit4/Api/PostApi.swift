@@ -120,33 +120,43 @@ class PostApi {
         }
     }
     
-    func loadOpenPosts(
-      userId: String,
-      onSuccess: @escaping(_ posts: [Post]) -> Void,
-      listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
-    ) {
-      let postFirestoreListener = Ref.FS_COLLECTION_ALL_POSTS.whereField("ownerId", isEqualTo: userId)
-          .whereField("status", isEqualTo: "open")
-          .order(by: "date", descending: true)
-          .addSnapshotListener { (querySnapshot, error) in
-            guard let snapshot = querySnapshot else { return }
-            
-       
-            let posts: [Post] = snapshot.documentChanges.compactMap {
-              switch $0.type {
-                case .added:
-                  return try? $0.document.data(as: Post.self)
-                case .modified:
-                  return try? $0.document.data(as: Post.self)
-                case .removed:
-                  return nil
-              }
-            }
-            
-            onSuccess(posts)
+  func loadOpenPosts(
+    onSuccess: @escaping(_ posts: [Post]) -> Void,
+    newPost: @escaping(Post) -> Void,
+    deletePost: @escaping(Post) -> Void,
+    listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
+  ) {
+          guard let userId = Auth.auth().currentUser?.uid else {
+                  return
           }
-      listener(postFirestoreListener)
-    }
+          let listenerFirestore =  Ref.FS_COLLECTION_ALL_POSTS
+            .whereField("ownerId", isEqualTo: userId)
+            .whereField("status", isEqualTo: "open")
+            .order(by: "date", descending: true)
+            .addSnapshotListener({ (querySnapshot, error) in
+              guard let snapshot = querySnapshot else { return }
+
+              snapshot.documentChanges.forEach { (documentChange) in
+                    switch documentChange.type {
+                    case .added:
+                      var posts = [Post]()
+                      guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
+                        newPost(decodedPost)
+                        posts.append(decodedPost)
+                        onSuccess(posts)
+                    case .modified:
+                        print("type: modified")
+                    case .removed:
+                      guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
+                      deletePost(decodedPost)
+                    }
+              }
+              
+          })
+          
+          listener(listenerFirestore)
+      }
+  
 
     
     func loadClosedPosts(userId: String?, onSuccess: @escaping(_ posts: [Post]) -> Void) {
@@ -181,13 +191,7 @@ class PostApi {
             .order(by: "date", descending: false)
             .addSnapshotListener({ (querySnapshot, error) in
               guard let snapshot = querySnapshot else { return }
-              
-//              let posts: [Post] = snapshot.documentChanges.compactMap {
-//                return try? $0.document.data(as: Post.self)
-//              }
-//              onSuccess(posts)
 
-              
               snapshot.documentChanges.forEach { (documentChange) in
                     switch documentChange.type {
                     case .added:

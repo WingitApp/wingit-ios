@@ -38,21 +38,34 @@ class ProfileViewModel: ObservableObject {
     }
     
     func loadUserPosts() {
-      if !self.isLoading {
-        self.isLoading.toggle()
+      guard let userId = Auth.auth().currentUser?.uid else { return }
+      
+      self.openPosts = []
+      isLoading = true
+      
+      Api.Post.loadOpenPosts(
+        onSuccess: { (posts) in
+          if self.openPosts.isEmpty {
+              self.openPosts = posts
+            self.isLoading = false
+          }
+      }, newPost: { (post) in
+          if !self.openPosts.isEmpty {
+              self.openPosts.insert(post, at: 0)
+          }
+      }, deletePost: { (post) in
+          if !self.openPosts.isEmpty {
+              for (index, p) in self.openPosts.enumerated() {
+                  if p.postId == post.postId {
+                      self.openPosts.remove(at: index)
+
+                  }
+              }
+          }
+      }) { (listener) in
+          self.listener = listener
       }
       
-      guard let userId = Auth.auth().currentUser?.uid else { return }
-
-      Api.Post.loadOpenPosts(
-        userId: userId,
-        onSuccess: { (posts) in
-          self.openPosts = posts
-          self.isLoading.toggle()
-        },
-        listener: { (listener) in
-          self.listener = listener
-        })
     // these calls should be called elsewhere
       updateIsConnected(userId: userId)
       updateConnectionsCount(userId: userId)

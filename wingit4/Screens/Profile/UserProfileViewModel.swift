@@ -68,25 +68,42 @@ class UserProfileViewModel: ObservableObject {
             }
         }
     }
+  
+  
     
     func loadUserPosts(userId: String) {
-      if !self.isLoading {
-        self.isLoading.toggle()
+      guard let userId = Auth.auth().currentUser?.uid else { return }
+      
+      self.openPosts = []
+      isLoading = true
+      
+      Api.Post.loadOpenPosts(
+        onSuccess: { (posts) in
+          if self.openPosts.isEmpty {
+              self.openPosts = posts
+            self.isLoading = false
+          }
+      }, newPost: { (post) in
+          if !self.openPosts.isEmpty {
+              self.openPosts.insert(post, at: 0)
+          }
+      }, deletePost: { (post) in
+          if !self.openPosts.isEmpty {
+              for (index, p) in self.openPosts.enumerated() {
+                  if p.postId == post.postId {
+                      self.openPosts.remove(at: index)
 
-        Api.Post.loadOpenPosts(
-          userId: userId,
-          onSuccess: { (posts) in
-            self.openPosts = posts
-            self.isLoading.toggle()
-          },
-          listener: { (listener) in
-            self.listener = listener
-          })
+                  }
+              }
+          }
+      }) { (listener) in
+          self.listener = listener
+      }
+      
         updateIsConnected(userId: userId)
         updateSentPendingRequest(userId: userId)
         updateConnectionsCount(userId: userId)
         self.loadClosedPosts(userId: userId)
-      }
     }
     
     func loadClosedPosts(userId: String?) {
