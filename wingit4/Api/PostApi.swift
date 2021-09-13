@@ -56,7 +56,7 @@ class PostApi {
         guard let userId = Auth.auth().currentUser?.uid else {
             return
         }
-        let firestoreMyPostRef = Ref.FS_COLLECTION_POSTS_FOR_USERID(userId: userId).document(postId)
+        guard let firestoreMyPostRef = Ref.FS_COLLECTION_POSTS_FOR_USERID(userId: userId)?.document(postId) else { return }
       //  let storagePostRef = Ref.STORAGE_POST_ID
         firestoreMyPostRef.delete { (err) in
             if err != nil{
@@ -74,7 +74,7 @@ class PostApi {
             guard let userId = Auth.auth().currentUser?.uid else {
                 return
             }
-            let firestoreMyPostRef = Ref.FS_COLLECTION_POSTS_FOR_USERID(userId: userId).document(postId)
+            guard let firestoreMyPostRef = Ref.FS_COLLECTION_POSTS_FOR_USERID(userId: userId)?.document(postId) else { return }
             firestoreMyPostRef.delete { (err) in
                 if err != nil{
                //    print(err!.localizedDescription)
