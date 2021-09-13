@@ -41,7 +41,9 @@ struct HeaderCell: View {
 
               
               Spacer()
+              if askCardViewModel.isProfileView {
                 AskDoneToggle(post: $post) // rename later
+              }
                 AskMenu()
             }.padding(.trailing, 15).padding(.leading, 15)
         }

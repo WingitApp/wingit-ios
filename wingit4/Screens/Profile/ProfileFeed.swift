@@ -21,6 +21,11 @@ struct ProfileFeed: View {
               )
             }
         }
+        .onAppear {
+          self.profileViewModel.openPosts.sort {
+            $0.date > $1.date
+          }
+        }
       } else {
         LazyVStack {
           ForEach(Array(profileViewModel.closedPosts.enumerated()), id: \.element) { index, post in
@@ -30,6 +35,11 @@ struct ProfileFeed: View {
                 index: index
               )
             }
+        }
+        .onAppear {
+          self.profileViewModel.closedPosts.sort {
+            $0.date > $1.date
+          }
         }
       }
     }

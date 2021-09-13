@@ -197,6 +197,7 @@ class PostApi {
   func loadTimeline(
     onSuccess: @escaping(_ posts: [Post]) -> Void,
     newPost: @escaping(Post) -> Void,
+    modifiedPost: @escaping(Post) -> Void,
     deletePost: @escaping(Post) -> Void,
     listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
   ) {
@@ -218,7 +219,8 @@ class PostApi {
                         posts.append(decodedPost)
                         onSuccess(posts)
                     case .modified:
-                        print("type: modified")
+                      guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
+                      modifiedPost(decodedPost)
                     case .removed:
                       guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
                       deletePost(decodedPost)

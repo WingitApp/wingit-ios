@@ -51,6 +51,13 @@ class HomeViewModel: ObservableObject {
             if !self.posts.isEmpty {
                 self.posts.insert(post, at: 0)
             }
+        }, modifiedPost: { (post) in
+          if !self.posts.isEmpty {
+            if let index = self.posts.firstIndex(where: {$0.id == post.id}) {
+              self.posts[index] = post
+            }
+          }
+          
         }, deletePost: { (post) in
             if !self.posts.isEmpty {
                 for (index, p) in self.posts.enumerated() {

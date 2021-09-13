@@ -50,7 +50,7 @@ class ProfileViewModel: ObservableObject {
         userId: userId,
         onSuccess: { (posts) in
           if self.openPosts.isEmpty {
-              self.openPosts = posts
+            self.openPosts = posts
             self.isLoading = false
           }
       }, newPost: { (post) in
@@ -59,12 +59,10 @@ class ProfileViewModel: ObservableObject {
           }
       }, modifiedPost: {(post) in
         if !self.openPosts.isEmpty {
-          for (index, p) in self.openPosts.enumerated() {
-              if p.postId == post.postId {
-                self.openPosts.remove(at: index)
-              }
-          }
+          if let index = self.openPosts.firstIndex(where: {$0.id == post.id}) {
+            self.openPosts[index] = post
 
+          }
         }
       },
         deletePost: { (post) in
@@ -105,11 +103,9 @@ class ProfileViewModel: ObservableObject {
           }
       }, modifiedPost: { (post) in
             if !self.closedPosts.isEmpty {
-                for (index, p) in self.closedPosts.enumerated() {
-                    if p.postId == post.postId {
-                      self.closedPosts.remove(at: index)
-                    }
-                }
+              if let index = self.closedPosts.firstIndex(where: {$0.id == post.id}) {
+                self.closedPosts[index] = post
+              }
             }
       }, deletePost: { (post) in
           if !self.closedPosts.isEmpty {
