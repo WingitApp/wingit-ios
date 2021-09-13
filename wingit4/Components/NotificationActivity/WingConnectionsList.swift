@@ -85,7 +85,9 @@ struct WingOptionsCardView: View {
                 .stroke(Color.gray, lineWidth: 1))
                 VStack(alignment: .leading, spacing: 5) {
                  Text(user.displayName ?? "").font(.headline).bold()
-                    Text(user.username ?? "").font(.subheadline)
+                    Text("@\(user.username ?? "")")
+                        .font(.subheadline)
+                        .foregroundColor(Color(.systemTeal))
                 }
                 .padding(.leading, 5)
                 Spacer()

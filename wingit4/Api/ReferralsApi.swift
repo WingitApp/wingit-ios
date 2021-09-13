@@ -19,6 +19,11 @@ class ReferralsApi {
         let referral = Referral(id: nil, createdAt: nil, askId: askId, children: nil, closedAt: nil, receiverId: receiverId, parentId: nil, senderId: id, status: .pending, text: nil)
         do {
             let _ = try Ref.FS_COLLECTION_REFERRALS.addDocument(from: referral)
+            let activityId = Ref.FS_COLLECTION_ACTIVITY.document(receiverId).collection("feedItems").document().documentID
+             let activityObject = Activity(activityId: activityId, type: "referred", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: askId, mediaUrl: "", comment: "", date: Date().timeIntervalSince1970)
+            guard let activityDict = try? activityObject.toDictionary() else { return }
+
+            Ref.FS_COLLECTION_ACTIVITY.document(receiverId).collection("feedItems").document(activityId).setData(activityDict)
         } catch {
             print(error)
         }
@@ -29,6 +34,11 @@ class ReferralsApi {
         let referral = Referral(id: nil, createdAt: nil, askId: askId, children: nil, closedAt: nil, receiverId: receiverId, parentId: parentId, senderId: id, status: .pending, text: nil)
         do {
             let _ = try Ref.FS_COLLECTION_REFERRALS.addDocument(from: referral)
+            let activityId = Ref.FS_COLLECTION_ACTIVITY.document(receiverId).collection("feedItems").document().documentID
+             let activityObject = Activity(activityId: activityId, type: "referred", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: askId, mediaUrl: "", comment: "", date: Date().timeIntervalSince1970)
+            guard let activityDict = try? activityObject.toDictionary() else { return }
+
+            Ref.FS_COLLECTION_ACTIVITY.document(receiverId).collection("feedItems").document(activityId).setData(activityDict)
         } catch {
             print(error)
         }

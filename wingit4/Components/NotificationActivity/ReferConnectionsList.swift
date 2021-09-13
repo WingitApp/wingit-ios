@@ -88,6 +88,7 @@ struct CardView: View {
                 VStack(alignment: .leading, spacing: 5) {
                     Text(user.displayName ?? user.username ?? "").font(.headline).bold()
                     Text("@\(user.username ?? "")").font(.subheadline)
+                        .foregroundColor(Color(.systemTeal))
                 }
                 .padding(.leading, 5)
                 Spacer()

@@ -26,7 +26,7 @@ struct Activity: Encodable, Decodable {
         case "comment":
             output = "replied: \(comment)"
         case "referred":
-            output = "\(username) has referred you to help."
+            output = "has referred you to help."
         case "follow":
             output = "is following you."
         case "like":
