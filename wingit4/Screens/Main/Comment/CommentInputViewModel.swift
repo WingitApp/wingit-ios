@@ -27,7 +27,8 @@ class CommentInputViewModel: ObservableObject {
       ownerId: currentUser.uid,
       postId: post.postId,
       username: currentUser.displayName!,
-      date: Date().timeIntervalSince1970
+      date: Date().timeIntervalSince1970,
+      type: .askPost
     )
     
     guard let commentDict = try? comment.toDictionary() else {return}

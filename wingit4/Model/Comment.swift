@@ -17,5 +17,10 @@ struct Comment: Encodable, Decodable, Identifiable, Equatable {
     var postId: String
     var username: String
     var date: Double
+    var type: CommentType?
 }
 
+enum CommentType: String, Codable {
+    case askPost
+    case invitedReferral
+}

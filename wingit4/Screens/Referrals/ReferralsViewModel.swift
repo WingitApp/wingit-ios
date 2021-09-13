@@ -61,10 +61,10 @@ class ReferralsViewModel: ObservableObject {
         guard let referralId = referral.id, let currentUser = Auth.auth().currentUser else { return }
         Api.Referrals.updateStatus(referralId: referralId, newStatus: .accepted)
         let text = "\(referral.sender?.username ?? "") invited \(currentUser.displayName ?? "") to help."
-        postReferralInviteComment(text: text, referral: referral, onSuccess: onSuccess)
+        postInvitedReferralComment(text: text, referral: referral, onSuccess: onSuccess)
     }
     
-    func postReferralInviteComment(
+    func postInvitedReferralComment(
       text: String,
       referral: Referral,
       onSuccess: @escaping() -> Void) {
@@ -78,7 +78,8 @@ class ReferralsViewModel: ObservableObject {
         ownerId: currentUser.uid,
         postId: referral.askId,
         username: currentUser.displayName!,
-        date: Date().timeIntervalSince1970
+        date: Date().timeIntervalSince1970,
+        type: .invitedReferral
       )
       
       guard let commentDict = try? comment.toDictionary() else {return}
