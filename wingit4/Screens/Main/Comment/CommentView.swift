@@ -13,7 +13,7 @@ struct CommentView: View {
     @Binding var post: Post
     
     var body: some View {
-      NavigationView {
+//      NavigationView {
         VStack {
             ScrollView {
               AskDetailCard(post: $post)
@@ -27,8 +27,8 @@ struct CommentView: View {
             CommentInput(post: $post)
         }
         .onTapGesture { dismissKeyboard() }
-      }
-      .navigationBarTitle("Comments", displayMode: .inline)
+//      }
+//      .navigationBarTitle("Comments", displayMode: .inline)
         .onAppear {
           self.commentViewModel.loadComments(postId: post.postId)
         }.onDisappear {
