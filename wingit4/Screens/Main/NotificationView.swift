@@ -86,24 +86,17 @@ struct CommentActivityRow: View {
     var body: some View {
 
         HStack(alignment: .top) {
-          NavigationLink (destination: UserProfileView(userId: activity.userId, user: nil)){
-            URLImageView(urlString: activity.userAvatar)
-                .clipShape(Circle())
-                .frame(width: 35, height: 35)
-                .overlay(
-                  RoundedRectangle(cornerRadius: 100)
-                    .stroke(Color.gray, lineWidth: 1)
-                )
-          }
-          .buttonStyle(FlatLinkStyle())
+          URLImageView(urlString: activity.userAvatar)
+              .clipShape(Circle())
+              .frame(width: 35, height: 35)
+              .overlay(
+                RoundedRectangle(cornerRadius: 100)
+                  .stroke(Color.gray, lineWidth: 1)
+              )
           HStack{
               VStack(alignment: .leading) {
-                HStack(alignment: .center, spacing: 5) {
                   Text(activity.username).bold() + Text(" ") + Text(activity.typeDescription)
-                }
-                .frame(width: UIScreen.main.bounds.width)
-                .font(.subheadline)
-                .fixedSize(horizontal: false, vertical: true)
+                
                 VStack(alignment: .leading) {
                     Text(timeAgoSinceDate(Date(timeIntervalSince1970: activity.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
                     Spacer()
@@ -111,7 +104,10 @@ struct CommentActivityRow: View {
                   }
                   .padding(.top, 3)
               }
+              .font(.subheadline)
+              .fixedSize(horizontal: false, vertical: true)
           }
+          .frame(maxWidth: UIScreen.main.bounds.width - 40)
           .padding(.leading, 5)
           }
 
@@ -133,7 +129,7 @@ struct RespondToConnectRequestRow: View {
           }
           .modifier(ConnectionNotifButtonStyle())
           .background(Color.lightGray)
-          
+
           // Accept Button (todo: put in own file)
           Button(action: {
                     logToAmplitude(event: .acceptConnectRequest, properties: [.userId: activity.userId])

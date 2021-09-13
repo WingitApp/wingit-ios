@@ -26,7 +26,9 @@ class ActivityViewModel: ObservableObject {
             }
         }, newActivity: { (activity) in
             if !self.activityArray.isEmpty {
+              if !self.activityArray.contains(activity) {
                 self.activityArray.insert(activity, at: 0)
+              }
             }
         }, deleteActivity: { (activity) in
             if !self.activityArray.isEmpty {
