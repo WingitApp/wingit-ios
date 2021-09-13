@@ -15,6 +15,7 @@ struct ReferralComment: View {
     var body: some View {
       HStack(alignment: .center) {
         URLImageView(urlString: comment.avatarUrl)
+          .clipShape(Circle())
           .frame(width: 23, height: 23, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
           .foregroundColor(Color(.systemTeal))
           .overlay(
@@ -22,6 +23,7 @@ struct ReferralComment: View {
               .stroke(Color.gray, lineWidth: 1)
           )
         URLImageView(urlString: comment.inviterAvatarUrl)
+          .clipShape(Circle())
           .frame(width: 23, height: 23, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
           .foregroundColor(.pink)
           .overlay(

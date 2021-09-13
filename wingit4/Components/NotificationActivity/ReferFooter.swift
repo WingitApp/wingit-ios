@@ -67,7 +67,7 @@ struct AcceptButton: View {
                         .foregroundColor(.white)
                         .padding(.vertical, 10)
                         .frame(width: (UIScreen.main.bounds.width / 2 ) - 40)
-                        .background(Color("Color1"))
+                        .background(Color(.systemTeal))
                         .cornerRadius(5)
                         .overlay(
                           RoundedRectangle(cornerRadius: 5).stroke(Color(.lightGray),

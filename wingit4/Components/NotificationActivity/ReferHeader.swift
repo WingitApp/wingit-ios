@@ -34,8 +34,12 @@ struct ReferHeader: View {
                     RoundedRectangle(cornerRadius: 100)
                       .stroke(Color.gray, lineWidth: 1)
                   )
+                
                 VStack(alignment: .leading) {
-                    Text(referral.sender?.username ?? "").font(.subheadline).bold()
+                    Text(referral.sender?.username ?? "")
+                      .fontWeight(.semibold)
+                      .modifier(UserNameStyle())
+                    TimeAgoStamp(date: Double(referral.createdAt?.seconds ?? 0))
                 }
                 
                 Spacer()

@@ -47,9 +47,10 @@ struct ReferBody: View {
                           .stroke(Color.gray, lineWidth: 1)
                       )
                         VStack(alignment: .leading) {
-                            Text(referral.ask?.username ?? "")
-                              .font(.subheadline).bold()
-                          
+                          Text(referral.ask?.username ?? "")
+                            .fontWeight(.semibold)
+                            .modifier(UserNameStyle())
+                          TimeAgoStamp(date: post.date)
                         }.padding(.top, 5)
                         Spacer()
                   //  Image(systemName: "ellipsis")
