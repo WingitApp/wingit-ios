@@ -15,6 +15,7 @@ struct HomeView: View {
   
   func onAppear() {
     self.homeViewModel.loadTimeline()
+    logToAmplitude(event: .viewHomeAsksFeed)
   }
     
     var body: some View {
