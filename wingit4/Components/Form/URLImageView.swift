@@ -12,17 +12,18 @@ import SwiftUI
 struct URLImageView: View {
   @ObservedObject var urlImageViewModel: URLImageViewModel
   
-  static var defaultImage = UIImage(systemName: "photo")
+  static var defaultImage = UIColor.systemGray6.image(CGSize(width: 128, height: 128))
+
   
   init(urlString: String?) {
     urlImageViewModel = URLImageViewModel(urlString: urlString)
   }
     
   var body: some View {
-    Image(uiImage: urlImageViewModel.image ?? URLImageView.defaultImage!)
+    Image(uiImage: urlImageViewModel.image ?? URLImageView.defaultImage)
       .resizable()
       .aspectRatio(contentMode: .fill)
-      .redacted(reason: urlImageViewModel.isImageLoading ? .placeholder : .init())
+      .background(Color.gray)
   }
   
 }

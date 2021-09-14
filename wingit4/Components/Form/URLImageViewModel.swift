@@ -19,14 +19,8 @@ class URLImageViewModel: ObservableObject {
   }
   
   func loadImage() {
-    if !isImageLoading {
-      isImageLoading.toggle()
-    }
     
     if loadImageFromCache() {
-      if isImageLoading {
-        isImageLoading.toggle()
-      }
         return
     }
     

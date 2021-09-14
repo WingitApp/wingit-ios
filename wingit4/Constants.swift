@@ -205,3 +205,4 @@ class Ref {
                return FS_COLLECTION_CONNECTIONS.document(userId).collection("events")
         }
 }
+
