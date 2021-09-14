@@ -42,7 +42,9 @@ struct ReferConnectionsList: View {
                     /// start list
                     List {
                         ForEach(self.referViewModel.allUsers, id: \.id) { user in
-                            CardView(user: user, userId: user.id ?? "")
+                            if (user.id != post.ownerId) {
+                                CardView(user: user, userId: user.id ?? "")
+                            }
                         }
                     }
                     ///end list
