@@ -37,19 +37,18 @@ struct AcceptedNotification: View {
         )
         {
         HStack {
-            URLImage(
-                URL(string: referral.ask?.avatar ?? "")!,
-              content: {
-                 $0.image
-                 .resizable()
-                 .aspectRatio(contentMode: .fill)
-                 .clipShape(Circle())
-            }).frame(width: 50, height: 50)
+            URLImageView(urlString: referral.ask?.avatar ?? "")
+                .clipShape(Circle())
+                .frame(width: 35, height: 35)
+                .overlay(
+                  RoundedRectangle(cornerRadius: 100)
+                    .stroke(Color.gray, lineWidth: 1)
+                )
             HStack {
                 Group {
-                Text("You have accepted")
-                    Text("\(referral.ask?.username ?? "")'s").bold()
-                Text("ask")
+                Text("You have accepted ") +
+                  Text("\(referral.ask?.username ?? "")" + "'s").fontWeight(.semibold) +
+                Text(" ask")
                 }.font(.subheadline)
                 Spacer()
                 Image(systemName: "chevron.right").foregroundColor(.gray).padding(10)
@@ -57,7 +56,7 @@ struct AcceptedNotification: View {
             }
           
             //TimeAgoStamp(date: activity.date)
-        }.padding(.leading, 10)
+        }.padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
         }.buttonStyle(PlainButtonStyle())
     }
 }
@@ -90,19 +89,18 @@ struct WingNotification: View {
             )
             {
         HStack {
-            URLImage(
-                URL(string: referral.ask?.avatar ?? "")!,
-              content: {
-                 $0.image
-                 .resizable()
-                 .aspectRatio(contentMode: .fill)
+            URLImageView(urlString: referral.ask?.avatar ?? "")
                  .clipShape(Circle())
-            }).frame(width: 50, height: 50)
+                .frame(width: 35, height: 35)
+              .overlay(
+                RoundedRectangle(cornerRadius: 100)
+                  .stroke(Color.gray, lineWidth: 1)
+              )
             HStack {
                 Group {
-                Text("You have winged")
-                    Text("\(referral.ask?.username ?? "")'s").bold()
-                Text("ask")
+                Text("You have winged ") +
+                Text("\(referral.ask?.username ?? "")'s").fontWeight(.semibold) +
+                Text(" ask")
                 }.font(.subheadline)
                 Spacer()
                 Image(systemName: "chevron.right").foregroundColor(.gray).padding(10)
@@ -110,7 +108,7 @@ struct WingNotification: View {
             }
         
             //TimeAgoStamp(date: activity.date)
-        }.padding(.leading, 10)
+        }.padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
         }.buttonStyle(PlainButtonStyle())
     }
 }
@@ -142,19 +140,18 @@ struct ClosedNotification: View {
         )
         {
         HStack {
-            URLImage(
-                URL(string: referral.ask?.avatar ?? "")!,
-              content: {
-                 $0.image
-                 .resizable()
-                 .aspectRatio(contentMode: .fill)
-                 .clipShape(Circle())
-            }).frame(width: 50, height: 50)
+          URLImageView(urlString: referral.ask?.avatar ?? "")
+               .clipShape(Circle())
+              .frame(width: 35, height: 35)
+              .overlay(
+                RoundedRectangle(cornerRadius: 100)
+                  .stroke(Color.gray, lineWidth: 1)
+              )
             HStack {
                 Group {
-                Text("You have closed")
-                    Text("\(referral.ask?.username ?? "")'s").bold()
-                Text("ask")
+                Text("You have closed ") +
+                  Text("\(referral.ask?.username ?? "")'s").fontWeight(.semibold) +
+                Text(" ask")
                 }.font(.subheadline)
                 Spacer()
                 Image(systemName: "chevron.right").foregroundColor(.gray).padding(10)
@@ -162,7 +159,7 @@ struct ClosedNotification: View {
             }
      
             //TimeAgoStamp(date: activity.date)
-        }.padding(.leading, 10)
+        }.padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
         .opacity(0.3)
         }.buttonStyle(PlainButtonStyle())
     }
