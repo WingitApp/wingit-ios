@@ -29,7 +29,7 @@ struct WingConnectionsList: View {
                             logToAmplitude(event: .rewingReferral, properties: [.askId : referral.askId])
                             referViewModel.rewingReferral(
                                 askId: referral.askId,
-                                parentId: referral.id!
+                                parentId: referral.id
                             )
                         },
                                label: {
@@ -43,8 +43,9 @@ struct WingConnectionsList: View {
                     /// start list
                     List {
                         ForEach(self.referViewModel.allUsers, id: \.uid) { user in
-                           
-                            WingOptionsCardView(user: user, userId: user.id)
+                            if (user.id != referral.ask?.ownerId) {
+                                WingOptionsCardView(user: user, userId: user.id)
+                            }
                         }
                     }
                     ///end list

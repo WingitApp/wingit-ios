@@ -16,7 +16,6 @@ class ReferViewModel : ObservableObject, Identifiable {
     @Published var selectedUsers: [String?] = []
     @Published var isChecked = false
     
-    // Lists to generate allowedUsers
     var allReferralRecipientIds: [String?] = []
     var allUsers: [User] = []
     
@@ -59,9 +58,8 @@ class ReferViewModel : ObservableObject, Identifiable {
         self.toggleReferListScreen()
     }
     
-    func rewingReferral(askId: String, parentId: String) {
-        ///askId(postId) & senderId (auth.dude) & senderId(userId of the one selected
-        // ids -> self.selectedUsers
+    func rewingReferral(askId: String, parentId: String?) {
+        guard let parentId = parentId else { return }
         Api.Referrals.updateStatus(referralId: parentId, newStatus: .winged)
         for receiverId in selectedUsers {
             Api.Referrals.rewingReferral(

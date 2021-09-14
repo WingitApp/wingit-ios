@@ -27,7 +27,6 @@ struct ReferConnectionsList: View {
                             .foregroundColor(Color("Color1"))
                         Spacer()
                         Button(action: {
-                            //askId(postId) & senderId (auth.dude) & senderId(userId of the one selected
                             referViewModel.sendReferrals(
                                 askId: post.postId
                             )

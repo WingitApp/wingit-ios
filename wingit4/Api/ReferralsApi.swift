@@ -29,7 +29,7 @@ class ReferralsApi {
         }
     }
     
-    func rewingReferral(askId: String, receiverId: String?, parentId: String, senderId: String?) {
+    func rewingReferral(askId: String, receiverId: String?, parentId: String?, senderId: String?) {
         guard let id = senderId, let receiverId = receiverId else { return }
         let referral = Referral(id: nil, createdAt: nil, askId: askId, children: nil, closedAt: nil, receiverId: receiverId, parentId: parentId, senderId: id, status: .pending, text: nil)
         do {
