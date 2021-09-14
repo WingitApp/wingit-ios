@@ -73,7 +73,7 @@ struct AcceptButton: View {
                           RoundedRectangle(cornerRadius: 5).stroke(Color(.lightGray),
                           lineWidth: 1)
                         )
-                })
+                }).disabled(self.userHasAccepted)
             })
     }
 }
