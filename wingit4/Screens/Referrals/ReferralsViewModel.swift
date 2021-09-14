@@ -47,7 +47,7 @@ class ReferralsViewModel: ObservableObject {
 
     func getClosedReferrals() {
         Api.Referrals.getReferrals(status: .closed) { referrals in
-            self.pendingReferrals = referrals
+            self.closedReferrals = referrals
         }
     }
     
