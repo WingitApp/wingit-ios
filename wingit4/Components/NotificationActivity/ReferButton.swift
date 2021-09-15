@@ -21,7 +21,7 @@ struct ReferButton: View {
           Image(IMAGE_LOGO)
             .resizable()
             .scaledToFit()
-            .frame(width: 25, height: 20)
+            .frame(width: 25, height: 25)
           if self.showLabel {
             Text("Wing")
               .font(.caption)

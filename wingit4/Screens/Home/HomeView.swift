@@ -9,9 +9,8 @@ import SwiftUI
 import FirebaseAuth
 
 struct HomeView: View {
-    
-  @StateObject var homeViewModel = HomeViewModel()
-  @ObservedObject var headerCellViewModel = HeaderCellViewModel()
+  
+  @EnvironmentObject var homeViewModel: HomeViewModel
   
   func onAppear() {
     // should move to mainView

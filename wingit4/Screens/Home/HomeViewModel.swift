@@ -31,10 +31,13 @@ class HomeViewModel: ObservableObject {
          return
        }
    
-      let thresholdIndex = posts.index(posts.endIndex, offsetBy: -5)
+//      let thresholdIndex = posts.index(posts.endIndex, offsetBy: -5)
+      let thresholdIndex = posts.index(posts.endIndex, offsetBy: -2)
+      
       if posts.firstIndex(where: { $0.postId == item.postId }) == thresholdIndex {
-        loadTimeline()
+        loadTimelineNext()
       }
+      
      }
   
   func loadTimeline() {
@@ -42,14 +45,20 @@ class HomeViewModel: ObservableObject {
         isLoading = true
         
         Api.Post.loadTimeline(
+          firstCall: posts.count == 0,
           onSuccess: { (posts) in
-            if self.posts.isEmpty {
-                self.posts = posts
+            if self.posts.count < posts.count {
+              self.posts = posts
               self.isLoading = false
             }
         }, newPost: { (post) in
             if !self.posts.isEmpty {
-                self.posts.insert(post, at: 0)
+                if !self.posts.contains(post) {
+                  self.posts.insert(post, at: 0)
+                  self.posts.sort {
+                    $0.date > $1.date
+                  }
+                }
             }
         }, modifiedPost: { (post) in
           if !self.posts.isEmpty {
@@ -63,12 +72,24 @@ class HomeViewModel: ObservableObject {
                 for (index, p) in self.posts.enumerated() {
                     if p.postId == post.postId {
                         self.posts.remove(at: index)
-
                     }
                 }
             }
-        }) { (listener) in
-            self.listener = listener
-        }
+        }, listener: { listenerHandler in
+            self.listener = listenerHandler
+        }, nextQuery: { next in
+          self.next = next
+        })
     }
+  
+  func loadTimelineNext() {
+    Api.Post.loadTimelinePaginated(
+      next: self.next!,
+      onSuccess: { posts, next in
+        self.posts += posts
+        self.next = next
+      }
+    )
+  }
+  
 }
