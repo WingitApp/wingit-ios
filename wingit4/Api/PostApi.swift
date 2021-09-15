@@ -105,6 +105,19 @@ class PostApi {
         }
     }
     
+    func loadWingers(postId: String, onSuccess: @escaping(_ users: [User]) -> Void) {
+        Ref.FS_COLLECTION_ALL_POSTS.document(postId).collection("wingers").getDocuments { (snapshot, error) in
+            if let error = error {
+                print(error)
+            } else if let snap = snapshot {
+                let users: [User] = snap.documents.compactMap {
+                  return try? $0.data(as: User.self)
+                }
+                onSuccess(users)
+            }
+        }
+    }
+    
   func loadOpenPosts(
     userId: String?,
     onSuccess: @escaping(_ posts: [Post]) -> Void,
