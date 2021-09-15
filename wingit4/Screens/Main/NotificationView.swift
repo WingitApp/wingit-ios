@@ -41,6 +41,8 @@ struct NotificationView: View {
                                   )
                                   .padding(.trailing, 10)
 
+                                // NotificationUserAvatar(imageUrl: activity.userAvatar)
+                            
                               VStack(alignment: .leading) {
                                 HStack(alignment: .center, spacing: 5) {
                                   Text(activity.username).bold() + Text(" ") + Text(activity.typeDescription)
@@ -61,7 +63,7 @@ struct NotificationView: View {
 
                         }
                         .padding(
-                          EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
+                          EdgeInsets(top: 15, leading: 0, bottom: 15, trailing: 0)
                         )
                     }
                 }

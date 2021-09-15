@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1500983526EFE45B00D31B8C /* ProfileFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1500983426EFE45B00D31B8C /* ProfileFeed.swift */; };
+		1500983726F173AA00D31B8C /* NotificationUserAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1500983626F173A900D31B8C /* NotificationUserAvatar.swift */; };
 		15030AA626E6805D0076CF14 /* AskDetailDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15030AA526E6805C0076CF14 /* AskDetailDemo.swift */; };
 		15030AA826E805A50076CF14 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15030AA726E805A40076CF14 /* Styles.swift */; };
 		15030AAA26E807C10076CF14 /* HomeFeedHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15030AA926E807C10076CF14 /* HomeFeedHeader.swift */; };
@@ -181,6 +182,7 @@
 
 /* Begin PBXFileReference section */
 		1500983426EFE45B00D31B8C /* ProfileFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFeed.swift; sourceTree = "<group>"; };
+		1500983626F173A900D31B8C /* NotificationUserAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUserAvatar.swift; sourceTree = "<group>"; };
 		15030AA526E6805C0076CF14 /* AskDetailDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AskDetailDemo.swift; path = wingit4/Components/AskDetail/AskDetailDemo.swift; sourceTree = "<group>"; };
 		15030AA726E805A40076CF14 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		15030AA926E807C10076CF14 /* HomeFeedHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedHeader.swift; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 				3B96DD6D26DF4C9E00015EED /* ReferCard.swift */,
 				3B9CA04F26E5C98D00BB195F /* WingConnectionsList.swift */,
 				3B3A880C26E0007A003E780F /* ReferViewModel.swift */,
+				1500983626F173A900D31B8C /* NotificationUserAvatar.swift */,
 			);
 			path = NotificationActivity;
 			sourceTree = "<group>";
@@ -948,6 +951,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1500983726F173AA00D31B8C /* NotificationUserAvatar.swift in Sources */,
 				3B7AF09C2671E1DA003BCCF3 /* Selection.swift in Sources */,
 				15E4907426E84A1700B25B56 /* AskDetailView.swift in Sources */,
 				15E4907726E84A1700B25B56 /* SigninView.swift in Sources */,
