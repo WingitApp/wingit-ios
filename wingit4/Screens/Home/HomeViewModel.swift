@@ -16,6 +16,8 @@ class HomeViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var selection: Selection = .posts
     @Published var isFetching: Bool = true
+    @Published var emptyState = false
+    
     private var canLoadMorePages = true
     private var next: Query? =  TIMELINE_PAGINATION_QUERY
       
@@ -43,6 +45,7 @@ class HomeViewModel: ObservableObject {
   func loadTimeline() {
         self.posts = []
         isLoading = true
+        emptyState = true
         
         Api.Post.loadTimeline(
           firstCall: posts.count == 0,
@@ -50,6 +53,7 @@ class HomeViewModel: ObservableObject {
             if self.posts.count < posts.count {
               self.posts = posts
               self.isLoading = false
+              self.emptyState = false
             }
         }, newPost: { (post) in
             if !self.posts.isEmpty {
