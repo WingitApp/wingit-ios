@@ -13,43 +13,31 @@ struct ReferralsView: View {
     var body: some View {
         NavigationView{
           ScrollView {
-            VStack(alignment: .leading) {
+            LazyVStack(alignment: .leading) {
 //                if !referralsViewModel.pendingReferrals.isEmpty {
 //                    Text("Pending")
 //                }
-                ForEach(self.referralsViewModel.pendingReferrals) { referral in
-                    HStack {
-                        ZStack {
-                            ReferCard(referral: referral, post: referral.ask!)
-                        }
-                    }
+                ForEach(Array(self.referralsViewModel.pendingReferrals.enumerated()), id: \.element) { index, referral in
+                    ReferCard(referral: referral, post: referral.ask!)
                 }
               
 //                if !referralsViewModel.acceptedReferrals.isEmpty {
 //                    Text("Accepted")
 //                }
-                ForEach(self.referralsViewModel.acceptedReferrals) { referral in
-                        HStack {
-                            ZStack{
-                                AcceptCard(referral: referral, post: referral.ask!)
-                            }
-                        }
+                ForEach(Array(self.referralsViewModel.acceptedReferrals.enumerated()), id: \.element) { index, referral in
+                    AcceptCard(referral: referral, post: referral.ask!)
                 }
 //                if !referralsViewModel.wingedReferrals.isEmpty {
 //                    Text("Winged")
 //                }
-                ForEach(self.referralsViewModel.wingedReferrals) { referral in
-                        ZStack{
-                            WingCard(referral: referral, post: referral.ask!)
-                        }
+                ForEach(Array(self.referralsViewModel.wingedReferrals.enumerated()), id: \.element) { index, referral in
+                    WingCard(referral: referral, post: referral.ask!)
                 }
 //                if !referralsViewModel.closedReferrals.isEmpty {
 //                    Text("Closed")
 //                }
-                ForEach(self.referralsViewModel.closedReferrals) { referral in
-                        ZStack{
-                            ClosedCard(referral: referral, post: referral.ask!)
-                        }
+                ForEach(Array(self.referralsViewModel.closedReferrals.enumerated()), id: \.element) { index, referral in
+                    ClosedCard(referral: referral, post: referral.ask!)
                 }
               }
            }

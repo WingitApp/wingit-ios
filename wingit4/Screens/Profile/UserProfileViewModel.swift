@@ -73,8 +73,6 @@ class UserProfileViewModel: ObservableObject {
         }
     }
   
-  
-    
     func loadUserPosts(userId: String?) {
       guard let userId = userId else { return }
 

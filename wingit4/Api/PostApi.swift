@@ -84,7 +84,7 @@ class PostApi {
         }
     }
     
-    func loadPost(postId: String, onSuccess: @escaping(_ post: Post) -> Void) {
+    func loadPost(postId: String, onSuccess: @escaping(_ post: Post?) -> Void) {
         Ref.FS_COLLECTION_ALL_POSTS.document(postId).getDocument { (snapshot, error) in
             if let error = error {
                 print(error)
@@ -95,6 +95,7 @@ class PostApi {
                           if let post = post {
                             onSuccess(post)
                           } else {
+                            onSuccess(nil)
                             print("Post document doesn't exist.")
                           }
                         case .failure(let error):
@@ -200,7 +201,7 @@ class PostApi {
         Ref.FS_COLLECTION_ALL_POSTS.document(postId)
           .updateData(["status": newStatus.rawValue]) { error in
             if error != nil {
-              return printDecodingError(error: error as! Error)
+                return printDecodingError(error: error!)
             } else {
               onSuccess(newStatus)
             }

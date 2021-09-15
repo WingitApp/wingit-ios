@@ -73,14 +73,19 @@ class ReferralsApi {
             }
     }
 
-    func getPendingReferrals(onSuccess: @escaping(_ referrals: [Referral]) -> Void) {
+    func getPendingReferrals(
+      onSuccess: @escaping(_ referrals: [Referral]) -> Void,
+      newReferral: @escaping(Referral) -> Void,
+      modifiedReferral: @escaping(Referral) -> Void,
+      deleteReferral: @escaping(Referral) -> Void,
+      listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
+    ) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         Ref.FS_COLLECTION_REFERRALS
           .whereField("receiverId", isEqualTo: userId)
-            .whereField("status", isEqualTo: ReferralStatus.pending.rawValue)
+          .whereField("status", isEqualTo: "pending")
           .order(by: "createdAt", descending: true)
           .addSnapshotListener { (snapshot, error) in
-            // catch errors
             guard let snap = snapshot else { return }
             if let error = error { return print(error) }
             
@@ -98,7 +103,6 @@ class ReferralsApi {
                       dispatchGroup.enter()
                       Api.Post.loadPost(postId: referral.askId) { (post) in
                           referral.ask = post
-                          
                           Api.User.loadUser(userId: referral.senderId) { (user) in
                               referral.sender = user
                               result.append(referral)
@@ -107,36 +111,66 @@ class ReferralsApi {
                             print("load user error")
                           }
                       }
-                      
+                }
+                    dispatchGroup.notify(queue: .main) {
+                        onSuccess(result)
+                    }
+                case .modified:
+                  guard var referral = try? documentChange.document.data(as: Referral.self) else { return }
+                    let dispatchGroup = DispatchGroup()
+                    dispatchGroup.enter()
+                    Api.Post.loadPost(postId: referral.askId) { (post) in
+                        referral.ask = post
+                        Api.User.loadUser(userId: referral.senderId) { (user) in
+                            referral.sender = user
+                            dispatchGroup.leave()
+                        } onError: {
+                          print("load user error")
+                        }
+                    }
+                    dispatchGroup.notify(queue: .main) {
+                        modifiedReferral(referral)
+                    }
+                case .removed:
+                    guard var referral = try? documentChange.document.data(as: Referral.self) else { return }
+                      let dispatchGroup = DispatchGroup()
+                      dispatchGroup.enter()
+                      Api.Post.loadPost(postId: referral.askId) { (post) in
+                          referral.ask = post
+                          Api.User.loadUser(userId: referral.senderId) { (user) in
+                              referral.sender = user
+                              dispatchGroup.leave()
+                          } onError: {
+                            print("load user error")
+                          }
+                      }
                       dispatchGroup.notify(queue: .main) {
-                          onSuccess(result)
+                          deleteReferral(referral)
                       }
                 }
-                case .modified:
-                    print("pending referral modified")
-                case .removed:
-                    print("pending referral removed")
-                }
             }
-
         }
     }
     
-    func getAcceptedReferrals(onSuccess: @escaping(_ referrals: [Referral]) -> Void) {
+    func getAcceptedReferrals(
+      onSuccess: @escaping(_ referrals: [Referral]) -> Void,
+      newReferral: @escaping(Referral) -> Void,
+      modifiedReferral: @escaping(Referral) -> Void,
+      deleteReferral: @escaping(Referral) -> Void,
+      listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
+    ) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         Ref.FS_COLLECTION_REFERRALS
           .whereField("receiverId", isEqualTo: userId)
-            .whereField("status", isEqualTo: ReferralStatus.accepted.rawValue)
+          .whereField("status", isEqualTo: ReferralStatus.accepted.rawValue)
           .order(by: "createdAt", descending: true)
           .addSnapshotListener { (snapshot, error) in
-            // catch errors
             guard let snap = snapshot else { return }
             if let error = error { return print(error) }
             
             snap.documentChanges.forEach { (documentChange) in
                 switch documentChange.type {
                 case .added:
-                  
                   let dispatchGroup = DispatchGroup()
                   
                   let referrals: [Referral] = snap.documents.compactMap {
@@ -148,7 +182,6 @@ class ReferralsApi {
                       dispatchGroup.enter()
                       Api.Post.loadPost(postId: referral.askId) { (post) in
                           referral.ask = post
-                          
                           Api.User.loadUser(userId: referral.senderId) { (user) in
                               referral.sender = user
                               result.append(referral)
@@ -157,36 +190,66 @@ class ReferralsApi {
                             print("load user error")
                           }
                       }
-                      
+                }
+                    dispatchGroup.notify(queue: .main) {
+                        onSuccess(result)
+                    }
+                case .modified:
+                  guard var referral = try? documentChange.document.data(as: Referral.self) else { return }
+                    let dispatchGroup = DispatchGroup()
+                    dispatchGroup.enter()
+                    Api.Post.loadPost(postId: referral.askId) { (post) in
+                        referral.ask = post
+                        Api.User.loadUser(userId: referral.senderId) { (user) in
+                            referral.sender = user
+                            dispatchGroup.leave()
+                        } onError: {
+                          print("load user error")
+                        }
+                    }
+                    dispatchGroup.notify(queue: .main) {
+                        modifiedReferral(referral)
+                    }
+                case .removed:
+                    guard var referral = try? documentChange.document.data(as: Referral.self) else { return }
+                      let dispatchGroup = DispatchGroup()
+                      dispatchGroup.enter()
+                      Api.Post.loadPost(postId: referral.askId) { (post) in
+                          referral.ask = post
+                          Api.User.loadUser(userId: referral.senderId) { (user) in
+                              referral.sender = user
+                              dispatchGroup.leave()
+                          } onError: {
+                            print("load user error")
+                          }
+                      }
                       dispatchGroup.notify(queue: .main) {
-                          onSuccess(result)
+                          deleteReferral(referral)
                       }
                 }
-                case .modified:
-                    print("accepted referral modified")
-                case .removed:
-                    print("accepted referral removed")
-                }
             }
-
         }
     }
     
-    func getWingedReferrals(onSuccess: @escaping(_ referrals: [Referral]) -> Void) {
+    func getWingedReferrals(
+      onSuccess: @escaping(_ referrals: [Referral]) -> Void,
+      newReferral: @escaping(Referral) -> Void,
+      modifiedReferral: @escaping(Referral) -> Void,
+      deleteReferral: @escaping(Referral) -> Void,
+      listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
+    ) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         Ref.FS_COLLECTION_REFERRALS
           .whereField("receiverId", isEqualTo: userId)
           .whereField("status", isEqualTo: ReferralStatus.winged.rawValue)
           .order(by: "createdAt", descending: true)
           .addSnapshotListener { (snapshot, error) in
-            // catch errors
             guard let snap = snapshot else { return }
             if let error = error { return print(error) }
             
             snap.documentChanges.forEach { (documentChange) in
                 switch documentChange.type {
                 case .added:
-                  
                   let dispatchGroup = DispatchGroup()
                   
                   let referrals: [Referral] = snap.documents.compactMap {
@@ -198,7 +261,6 @@ class ReferralsApi {
                       dispatchGroup.enter()
                       Api.Post.loadPost(postId: referral.askId) { (post) in
                           referral.ask = post
-                          
                           Api.User.loadUser(userId: referral.senderId) { (user) in
                               referral.sender = user
                               result.append(referral)
@@ -207,36 +269,66 @@ class ReferralsApi {
                             print("load user error")
                           }
                       }
-                      
+                }
+                    dispatchGroup.notify(queue: .main) {
+                        onSuccess(result)
+                    }
+                case .modified:
+                  guard var referral = try? documentChange.document.data(as: Referral.self) else { return }
+                    let dispatchGroup = DispatchGroup()
+                    dispatchGroup.enter()
+                    Api.Post.loadPost(postId: referral.askId) { (post) in
+                        referral.ask = post
+                        Api.User.loadUser(userId: referral.senderId) { (user) in
+                            referral.sender = user
+                            dispatchGroup.leave()
+                        } onError: {
+                          print("load user error")
+                        }
+                    }
+                    dispatchGroup.notify(queue: .main) {
+                        modifiedReferral(referral)
+                    }
+                case .removed:
+                    guard var referral = try? documentChange.document.data(as: Referral.self) else { return }
+                      let dispatchGroup = DispatchGroup()
+                      dispatchGroup.enter()
+                      Api.Post.loadPost(postId: referral.askId) { (post) in
+                          referral.ask = post
+                          Api.User.loadUser(userId: referral.senderId) { (user) in
+                              referral.sender = user
+                              dispatchGroup.leave()
+                          } onError: {
+                            print("load user error")
+                          }
+                      }
                       dispatchGroup.notify(queue: .main) {
-                          onSuccess(result)
+                          deleteReferral(referral)
                       }
                 }
-                case .modified:
-                    print("winged referral modified")
-                case .removed:
-                    print("winged referral removed")
-                }
             }
-
         }
     }
     
-    func getClosedReferrals(onSuccess: @escaping(_ referrals: [Referral]) -> Void) {
+    func getClosedReferrals(
+      onSuccess: @escaping(_ referrals: [Referral]) -> Void,
+      newReferral: @escaping(Referral) -> Void,
+      modifiedReferral: @escaping(Referral) -> Void,
+      deleteReferral: @escaping(Referral) -> Void,
+      listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
+    ) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         Ref.FS_COLLECTION_REFERRALS
           .whereField("receiverId", isEqualTo: userId)
-            .whereField("status", isEqualTo: ReferralStatus.closed.rawValue)
+          .whereField("status", isEqualTo: ReferralStatus.closed.rawValue)
           .order(by: "createdAt", descending: true)
           .addSnapshotListener { (snapshot, error) in
-            // catch errors
             guard let snap = snapshot else { return }
             if let error = error { return print(error) }
             
             snap.documentChanges.forEach { (documentChange) in
                 switch documentChange.type {
                 case .added:
-                  
                   let dispatchGroup = DispatchGroup()
                   
                   let referrals: [Referral] = snap.documents.compactMap {
@@ -248,7 +340,6 @@ class ReferralsApi {
                       dispatchGroup.enter()
                       Api.Post.loadPost(postId: referral.askId) { (post) in
                           referral.ask = post
-                          
                           Api.User.loadUser(userId: referral.senderId) { (user) in
                               referral.sender = user
                               result.append(referral)
@@ -257,18 +348,44 @@ class ReferralsApi {
                             print("load user error")
                           }
                       }
-                      
+                }
+                    dispatchGroup.notify(queue: .main) {
+                        onSuccess(result)
+                    }
+                case .modified:
+                  guard var referral = try? documentChange.document.data(as: Referral.self) else { return }
+                    let dispatchGroup = DispatchGroup()
+                    dispatchGroup.enter()
+                    Api.Post.loadPost(postId: referral.askId) { (post) in
+                        referral.ask = post
+                        Api.User.loadUser(userId: referral.senderId) { (user) in
+                            referral.sender = user
+                            dispatchGroup.leave()
+                        } onError: {
+                          print("load user error")
+                        }
+                    }
+                    dispatchGroup.notify(queue: .main) {
+                        modifiedReferral(referral)
+                    }
+                case .removed:
+                    guard var referral = try? documentChange.document.data(as: Referral.self) else { return }
+                      let dispatchGroup = DispatchGroup()
+                      dispatchGroup.enter()
+                      Api.Post.loadPost(postId: referral.askId) { (post) in
+                          referral.ask = post
+                          Api.User.loadUser(userId: referral.senderId) { (user) in
+                              referral.sender = user
+                              dispatchGroup.leave()
+                          } onError: {
+                            print("load user error")
+                          }
+                      }
                       dispatchGroup.notify(queue: .main) {
-                          onSuccess(result)
+                          deleteReferral(referral)
                       }
                 }
-                case .modified:
-                    print("Closed referral modified")
-                case .removed:
-                    print("Closed referral removed")
-                }
             }
-
         }
     }
 }

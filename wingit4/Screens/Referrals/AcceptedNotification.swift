@@ -46,7 +46,7 @@ struct AcceptedNotification: View {
                 )
             HStack {
                 Group {
-                Text("You have accepted ") +
+                Text("You have accepted to help with ") +
                   Text("\(referral.ask?.username ?? "")" + "'s").fontWeight(.semibold) +
                 Text(" ask")
                 }.font(.subheadline)
@@ -149,7 +149,7 @@ struct ClosedNotification: View {
               )
             HStack {
                 Group {
-                Text("You have closed ") +
+                Text("You have closed the referral for ") +
                   Text("\(referral.ask?.username ?? "")'s").fontWeight(.semibold) +
                 Text(" ask")
                 }.font(.subheadline)
