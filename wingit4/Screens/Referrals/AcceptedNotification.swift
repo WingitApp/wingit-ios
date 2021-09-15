@@ -37,14 +37,8 @@ struct AcceptedNotification: View {
         )
         {
         HStack {
-            URLImageView(urlString: referral.ask?.avatar ?? "")
-                .clipShape(Circle())
-                .frame(width: 50, height: 50)
-                .overlay(
-                  RoundedRectangle(cornerRadius: 100)
-                    .stroke(Color.gray, lineWidth: 1)
-                )
-              .padding(.trailing, 10)
+          NotificationUserAvatar(imageUrl: referral.ask?.avatar ?? "", type: referral.status.rawValue)
+            .padding(.trailing, 10)
           
             HStack {
               VStack(alignment: .leading) {
@@ -102,15 +96,9 @@ struct WingNotification: View {
             )
             {
         HStack {
-            URLImageView(urlString: referral.ask?.avatar ?? "")
-                 .clipShape(Circle())
-                .frame(width: 50, height: 50)
-              .overlay(
-                RoundedRectangle(cornerRadius: 100)
-                  .stroke(Color.gray, lineWidth: 1)
-              )
-              .padding(.trailing, 10)
-
+          NotificationUserAvatar(imageUrl: referral.ask?.avatar ?? "", type: referral.status.rawValue)
+            .padding(.trailing, 10)
+      
             HStack {
               VStack(alignment: .leading) {
                 Group {
@@ -163,15 +151,8 @@ struct ClosedNotification: View {
         )
         {
         HStack {
-          URLImageView(urlString: referral.ask?.avatar ?? "")
-               .clipShape(Circle())
-              .frame(width: 50, height: 50)
-              .overlay(
-                RoundedRectangle(cornerRadius: 100)
-                  .stroke(Color.gray, lineWidth: 1)
-              )
+          NotificationUserAvatar(imageUrl: referral.ask?.avatar ?? "", type: referral.status.rawValue)
             .padding(.trailing, 10)
-
             HStack {
               VStack(alignment: .leading){
                 Group {

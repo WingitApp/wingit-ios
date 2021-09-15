@@ -24,25 +24,19 @@ struct NotificationView: View {
 //                                        EmptyView()
 //                                    }
                             } else if activity.type == "connectRequest" {
-                                ZStack {
                                     CommentActivityRow(
                                       activity: activity,
                                       activityViewModel: self.activityViewModel
                                     )
-                                }
                             } else {
                               NavigationLink (destination: UserProfileView(userId: activity.userId, user: nil)){
-                                URLImageView(urlString: activity.userAvatar)
-                                  .clipShape(Circle())
-                                  .frame(width: 50, height: 50)
-                                  .overlay(
-                                    RoundedRectangle(cornerRadius: 100)
-                                      .stroke(Color.gray, lineWidth: 1)
-                                  )
+
+                                 NotificationUserAvatar(
+                                  imageUrl: activity.userAvatar,
+                                  type: activity.type
+                                 )
                                   .padding(.trailing, 10)
 
-                                // NotificationUserAvatar(imageUrl: activity.userAvatar)
-                            
                               VStack(alignment: .leading) {
                                 HStack(alignment: .center, spacing: 5) {
                                   Text(activity.username).bold() + Text(" ") + Text(activity.typeDescription)
@@ -90,13 +84,11 @@ struct CommentActivityRow: View {
     var body: some View {
 
         HStack(alignment: .top) {
-          URLImageView(urlString: activity.userAvatar)
-              .clipShape(Circle())
-              .frame(width: 50, height: 50)
-              .overlay(
-                RoundedRectangle(cornerRadius: 100)
-                  .stroke(Color.gray, lineWidth: 1)
-              )
+          NotificationUserAvatar(
+           imageUrl: activity.userAvatar,
+           type: activity.type
+          )
+           .padding(.trailing, 10)
             .padding(.trailing, 10)
 
           HStack{
