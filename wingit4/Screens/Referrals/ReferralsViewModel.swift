@@ -13,47 +13,44 @@ import Amplitude
 import SPAlert
 
 class ReferralsViewModel: ObservableObject {
-  @Published var pendingReferrals: [Referral] = []
-  @Published var acceptedReferrals: [Referral] = []
-  @Published var closedReferrals: [Referral] = []
-  @Published var wingedReferrals: [Referral] = []
+    @Published var pendingReferrals: [Referral] = []
+    @Published var acceptedReferrals: [Referral] = []
+    @Published var wingedReferrals: [Referral] = []
+    @Published var closedReferrals: [Referral] = []
     
-    var listener: ListenerRegistration!
-    
-    //after accept status is changed, add them into comments.
-    /*
-     1. send into comment type --> referral.
-     2. in comment navigation bring the option for referral comments to come out.
-     */
+    var pendingListener: ListenerRegistration!
+    var acceptedListener: ListenerRegistration!
+    var wingedListener: ListenerRegistration!
+    var closedListener: ListenerRegistration!
     
     func getReferrals() {
         getPendingReferrals()
         getAcceptedReferrals()
-        getClosedReferrals()
         getWingedReferrals()
+        getClosedReferrals()
     }
     
     func getPendingReferrals() {
-        Api.Referrals.getReferrals(status: .pending) { referrals in
+        Api.Referrals.getPendingReferrals() { referrals in
             self.pendingReferrals = referrals
         }
     }
     
     func getAcceptedReferrals() {
-        Api.Referrals.getReferrals(status: .accepted) { referrals in
+        Api.Referrals.getAcceptedReferrals() { referrals in
             self.acceptedReferrals = referrals
-        }
-    }
-
-    func getClosedReferrals() {
-        Api.Referrals.getReferrals(status: .closed) { referrals in
-            self.closedReferrals = referrals
         }
     }
     
     func getWingedReferrals() {
-        Api.Referrals.getReferrals(status: .winged) { referrals in
+        Api.Referrals.getWingedReferrals() { referrals in
             self.wingedReferrals = referrals
+        }
+    }
+    
+    func getClosedReferrals() {
+        Api.Referrals.getClosedReferrals() { referrals in
+            self.closedReferrals = referrals
         }
     }
     
