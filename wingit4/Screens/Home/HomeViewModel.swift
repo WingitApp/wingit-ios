@@ -53,10 +53,12 @@ class HomeViewModel: ObservableObject {
             }
         }, newPost: { (post) in
             if !self.posts.isEmpty {
-                self.posts.insert(post, at: 0)
-              self.posts.sort {
-                $0.date > $1.date
-              }
+                if !self.posts.contains(post) {
+                  self.posts.insert(post, at: 0)
+                  self.posts.sort {
+                    $0.date > $1.date
+                  }
+                }
             }
         }, modifiedPost: { (post) in
           if !self.posts.isEmpty {
