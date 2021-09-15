@@ -46,7 +46,6 @@ class SigninViewModel: ObservableObject {
   /// Callback on signin error
   func onSignInError(errorMessage: String) -> Void{
     self.showErrorMessage(message: errorMessage)
-    self.resetFields()
   }
   
   /// Displays error message through alert (SignInView)
