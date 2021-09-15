@@ -26,19 +26,26 @@ struct ReferHeader: View {
   
     var body: some View {
       VStack(alignment: .leading){
-            HStack {
+        HStack(alignment: .top) {
                 URLImageView(urlString: referral.sender?.profileImageUrl)
                   .clipShape(Circle())
-                  .frame(width: 35, height: 35)
+                  .frame(width: 50, height: 50)
                   .overlay(
                     RoundedRectangle(cornerRadius: 100)
                       .stroke(Color.gray, lineWidth: 1)
                   )
+                  .padding(.trailing, 10)
                 
                 VStack(alignment: .leading) {
-                    Text(referral.sender?.username ?? "")
-                      .fontWeight(.semibold)
-                      .modifier(UserNameStyle())
+                  Group {
+                    Text(referral.sender?.displayName ?? "").fontWeight(.semibold) +
+                    Text(" referred you to help ") +
+                      Text(referral.ask?.username ?? "").fontWeight(.semibold) +
+                    Text("'s ask.")
+                  }
+                  .font(.subheadline)
+                  .fixedSize(horizontal: false, vertical: true)
+                    Spacer()
                     TimeAgoStamp(date: Double(referral.createdAt?.seconds ?? 0))
                 }
                 
@@ -48,12 +55,11 @@ struct ReferHeader: View {
                         Image(systemName: "xmark").foregroundColor(.gray)
                 })
                 }
-            Text("Hey, I'm referring you to help with this ask.")
-              .font(.system(size: 14))
-              .padding(.top, 5)
+           
+
         }
         .padding(
-          EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15)
+          EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
         )
     }
 }

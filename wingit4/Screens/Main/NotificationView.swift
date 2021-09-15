@@ -34,11 +34,13 @@ struct NotificationView: View {
                               NavigationLink (destination: UserProfileView(userId: activity.userId, user: nil)){
                                 URLImageView(urlString: activity.userAvatar)
                                   .clipShape(Circle())
-                                  .frame(width: 35, height: 35)
+                                  .frame(width: 50, height: 50)
                                   .overlay(
                                     RoundedRectangle(cornerRadius: 100)
                                       .stroke(Color.gray, lineWidth: 1)
                                   )
+                                  .padding(.trailing, 10)
+
                               VStack(alignment: .leading) {
                                 HStack(alignment: .center, spacing: 5) {
                                   Text(activity.username).bold() + Text(" ") + Text(activity.typeDescription)
@@ -49,7 +51,7 @@ struct NotificationView: View {
                                 Spacer()
                                 Text(timeAgoSinceDate(Date(timeIntervalSince1970: activity.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
                               }
-                              .padding(.leading, 3)
+
                                 
                                
                             }                          .buttonStyle(PlainButtonStyle())
@@ -88,11 +90,13 @@ struct CommentActivityRow: View {
         HStack(alignment: .top) {
           URLImageView(urlString: activity.userAvatar)
               .clipShape(Circle())
-              .frame(width: 35, height: 35)
+              .frame(width: 50, height: 50)
               .overlay(
                 RoundedRectangle(cornerRadius: 100)
                   .stroke(Color.gray, lineWidth: 1)
               )
+            .padding(.trailing, 10)
+
           HStack{
               VStack(alignment: .leading) {
                   Text(activity.username).bold() + Text(" ") + Text(activity.typeDescription)
@@ -108,7 +112,6 @@ struct CommentActivityRow: View {
               .fixedSize(horizontal: false, vertical: true)
           }
           .frame(maxWidth: UIScreen.main.bounds.width - 40)
-          .padding(.leading, 5)
           }
 
     }

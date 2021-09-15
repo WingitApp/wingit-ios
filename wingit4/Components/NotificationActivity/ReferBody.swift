@@ -60,7 +60,7 @@ struct ReferBody: View {
 
                 PostText(ask: referral.ask)
             }
-            .frame(maxWidth: UIScreen.main.bounds.width - 60)
+            .frame(maxWidth: UIScreen.main.bounds.width - 30)
             .padding(.top, 15).padding(.bottom, 25)
             .background(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 0.3))
         }

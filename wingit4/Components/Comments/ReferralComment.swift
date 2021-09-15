@@ -15,29 +15,39 @@ struct ReferralComment: View {
     var body: some View {
       HStack(alignment: .center) {
         
-        URLImageView(urlString: comment.inviterAvatarUrl)
+        HStack {
+          Image(IMAGE_LOGO)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 25, height: 25)
+        }
           .clipShape(Circle())
-          .frame(width: 23, height: 23, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-          .foregroundColor(Color(.systemTeal))
+        .background(Color.white)
+          .frame(width: 35, height: 35, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
           .overlay(
             RoundedRectangle(cornerRadius: 100)
-              .stroke(Color.gray, lineWidth: 1)
+              .stroke(Color.wingitBlue, lineWidth: 1)
           )
-        URLImageView(urlString: comment.avatarUrl)
-          .clipShape(Circle())
-          .frame(width: 23, height: 23, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-          .foregroundColor(.pink)
-          .overlay(
-            RoundedRectangle(cornerRadius: 100)
-              .stroke(Color.gray, lineWidth: 1)
+          .padding(.trailing, 10)
+        VStack(alignment: .leading) {
+          Text(
+            timeAgoSinceDate(
+              Date(timeIntervalSince1970: comment.date),
+              currentDate: Date(),
+              numericDates: true
+            )
           )
-          .padding(.leading, -15)
-        Group {
-          Text("\(comment.inviterDisplayName ?? "Anon")").bold() +
-          Text(" invited ") +
-          Text("\(comment.username)").bold() +
-          Text(" to help.")
-        }.font(.caption)
+          .foregroundColor(.gray)
+          .font(.system(size: 10))
+          Spacer()
+          Group {
+            Text("\(comment.inviterDisplayName ?? "Anon")").bold() +
+            Text(" invited ") +
+            Text("\(comment.username)").bold() +
+            Text(" to help.")
+          }.font(.caption)
+        }
+        
         Spacer()
       }
       .padding(.leading, 10)

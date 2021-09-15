@@ -66,11 +66,11 @@ struct AcceptButton: View {
                         }
                         .foregroundColor(.white)
                         .padding(.vertical, 10)
-                        .frame(width: (UIScreen.main.bounds.width / 2 ) - 40)
+                        .frame(width: (UIScreen.main.bounds.width / 2 ) - 25)
                         .background(Color(.systemTeal))
                         .cornerRadius(5)
                         .overlay(
-                          RoundedRectangle(cornerRadius: 5).stroke(Color(.lightGray),
+                          RoundedRectangle(cornerRadius: 5).stroke(Color(.systemTeal),
                           lineWidth: 1)
                         )
                 }).disabled(self.userHasAccepted)
@@ -97,20 +97,20 @@ struct WingButton: View {
                       .resizable()
                       .scaledToFit()
                   }
-                  .frame(width: 25, height: 20)
+                  .frame(width: 30, height: 20)
                   
                     Text("Wing")
-                      .foregroundColor(Color("Color"))
+                      .foregroundColor(Color.wingitBlue)
                       .fontWeight(.bold)
                 }
                 
                 .padding(.vertical, 10)
-                .frame(width: (UIScreen.main.bounds.width / 2 ) - 40)
+                .frame(width: (UIScreen.main.bounds.width / 2 ) - 25)
                 .background(Color.white)
                 .cornerRadius(5)
                 .overlay(
-                  RoundedRectangle(cornerRadius: 5).stroke(Color("Color"),
-                  lineWidth: 1)
+                  RoundedRectangle(cornerRadius: 5).stroke(Color.wingitBlue,
+                                                           lineWidth: 1.5)
                 )
         })
         

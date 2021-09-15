@@ -14,13 +14,15 @@ struct CommentList: View {
     var body: some View {
       ScrollView {
           if !commentViewModel.comments.isEmpty {
+            VStack(alignment: .leading){
               ForEach(commentViewModel.comments) { comment in
-                if comment.type != nil || comment.type == .invitedReferral {
+                if comment.type == .invitedReferral {
                   ReferralComment(comment: comment)
                 } else {
                   UserComment(comment: comment)
                 }
              }
+            }
           }
       }
     }

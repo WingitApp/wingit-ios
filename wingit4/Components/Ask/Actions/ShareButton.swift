@@ -26,7 +26,7 @@ struct ShareButton: View {
               Text("Share")
                 .foregroundColor(.black)
                 .font(.caption)
-                .padding(.trailing, 15)
+                .padding(.trailing, 10)
             }
         })
           .buttonStyle(PlainButtonStyle())

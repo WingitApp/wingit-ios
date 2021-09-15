@@ -18,7 +18,7 @@ struct UserComment: View {
         ) {
           URLImageView(urlString: comment.avatarUrl)
             .clipShape(Circle())
-            .frame(width: 25, height: 25, alignment: .center)
+            .frame(width: 35, height: 35, alignment: .center)
             .foregroundColor(Color(.systemTeal))
             .overlay(
               RoundedRectangle(cornerRadius: 20)
@@ -47,10 +47,11 @@ struct UserComment: View {
           Text(comment.comment)
             .font(.caption)
         }
-        .padding(.leading, 5)
+        .padding(.leading, 10)
+
       }
       .padding(
-        EdgeInsets(top: 5, leading: 15, bottom: 5, trailing: 15)
+        EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
       )
       Divider()
     }

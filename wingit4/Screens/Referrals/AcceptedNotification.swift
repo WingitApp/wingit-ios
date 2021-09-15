@@ -39,21 +39,34 @@ struct AcceptedNotification: View {
         HStack {
             URLImageView(urlString: referral.ask?.avatar ?? "")
                 .clipShape(Circle())
-                .frame(width: 35, height: 35)
+                .frame(width: 50, height: 50)
                 .overlay(
                   RoundedRectangle(cornerRadius: 100)
                     .stroke(Color.gray, lineWidth: 1)
                 )
+              .padding(.trailing, 10)
+          
             HStack {
+              VStack(alignment: .leading) {
                 Group {
-                Text("You have accepted to help with ") +
-                  Text("\(referral.ask?.username ?? "")" + "'s").fontWeight(.semibold) +
-                Text(" ask")
-                }.font(.subheadline)
+                Text("You have accepted ") +
+                  Text("\(referral.sender?.displayName ?? "")" + "'s").fontWeight(.semibold) +
+                Text(" request to help ") +
+                  Text("\(referral.ask?.username ?? "").").fontWeight(.semibold)
+                }
+                .font(.subheadline)
+                .fixedSize(horizontal: false, vertical: true)
+                Spacer()
+
+                TimeAgoStamp(date: Double(referral.createdAt?.seconds ?? 0))
+
+                }
+
                 Spacer()
                 Image(systemName: "chevron.right").foregroundColor(.gray).padding(10)
                     .font(.system(size: 10))
             }
+
           
             //TimeAgoStamp(date: activity.date)
         }.padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
@@ -91,17 +104,27 @@ struct WingNotification: View {
         HStack {
             URLImageView(urlString: referral.ask?.avatar ?? "")
                  .clipShape(Circle())
-                .frame(width: 35, height: 35)
+                .frame(width: 50, height: 50)
               .overlay(
                 RoundedRectangle(cornerRadius: 100)
                   .stroke(Color.gray, lineWidth: 1)
               )
+              .padding(.trailing, 10)
+
             HStack {
+              VStack(alignment: .leading) {
                 Group {
-                Text("You have winged ") +
-                Text("\(referral.ask?.username ?? "")'s").fontWeight(.semibold) +
-                Text(" ask")
-                }.font(.subheadline)
+                  Text("You have winged ") +
+                  Text("\(referral.ask?.username ?? "")'s").fontWeight(.semibold) +
+                  Text(" ask.")
+                }
+                .font(.subheadline)
+                .fixedSize(horizontal: false, vertical: true)
+                Spacer()
+                TimeAgoStamp(date: Double(referral.createdAt?.seconds ?? 0))
+              }
+                
+
                 Spacer()
                 Image(systemName: "chevron.right").foregroundColor(.gray).padding(10)
                     .font(.system(size: 10))
@@ -142,17 +165,27 @@ struct ClosedNotification: View {
         HStack {
           URLImageView(urlString: referral.ask?.avatar ?? "")
                .clipShape(Circle())
-              .frame(width: 35, height: 35)
+              .frame(width: 50, height: 50)
               .overlay(
                 RoundedRectangle(cornerRadius: 100)
                   .stroke(Color.gray, lineWidth: 1)
               )
+            .padding(.trailing, 10)
+
             HStack {
+              VStack(alignment: .leading){
                 Group {
-                Text("You have closed the referral for ") +
+                Text("You have declined") +
                   Text("\(referral.ask?.username ?? "")'s").fontWeight(.semibold) +
-                Text(" ask")
-                }.font(.subheadline)
+                Text(" referral.")
+                }
+                .font(.subheadline)
+                .fixedSize(horizontal: false, vertical: true)
+                Spacer()
+                TimeAgoStamp(date: Double(referral.createdAt?.seconds ?? 0))
+              }
+               
+
                 Spacer()
                 Image(systemName: "chevron.right").foregroundColor(.gray).padding(10)
                     .font(.system(size: 10))

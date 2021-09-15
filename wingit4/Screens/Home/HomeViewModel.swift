@@ -33,10 +33,10 @@ class HomeViewModel: ObservableObject {
          return
        }
    
-//      let thresholdIndex = posts.index(posts.endIndex, offsetBy: -5)
-      let thresholdIndex = posts.index(posts.endIndex, offsetBy: -2)
+      let thresholdIndex = posts.index(posts.endIndex, offsetBy: -1)
       
       if posts.firstIndex(where: { $0.postId == item.postId }) == thresholdIndex {
+        print("call next")
         loadTimelineNext()
       }
       

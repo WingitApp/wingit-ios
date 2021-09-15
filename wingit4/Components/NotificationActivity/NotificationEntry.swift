@@ -16,15 +16,18 @@ struct NotificationEntry: View {
           
           URLImageView(urlString: activity.userAvatar)
             .clipShape(Circle())
-            .frame(width: 40, height: 40)
+            .frame(width: 50, height: 50)
             .overlay(
               RoundedRectangle(cornerRadius: 100)
                 .stroke(Color.gray, lineWidth: 1)
             )
+            .padding(.trailing, 10)
+
           VStack(alignment: .leading, spacing: 5) {
               Text(activity.username).font(.subheadline).bold()
               Text(activity.typeDescription).font(.subheadline)
           }
+        
           Spacer()
           TimeAgoStamp(date: activity.date)
       }
