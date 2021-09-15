@@ -22,6 +22,7 @@ struct Post: Codable, Identifiable, Equatable, Hashable {
     var date: Double
     var likeCount: Int
     var title: String?
+    var wingers: [User]?
 }
 
 enum PostStatus: String, Codable {

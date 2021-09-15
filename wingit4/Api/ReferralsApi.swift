@@ -45,11 +45,11 @@ class ReferralsApi {
     }
     
     func updateStatus(referralId: String, newStatus: ReferralStatus) {
-        Ref.FS_COLLECTION_REFERRALS.document(referralId).updateData(["status": newStatus.rawValue])
+        Ref.FS_COLLECTION_REFERRALS.document(referralId).updateData(["status": newStatus.rawValue, "updatedAt": FieldValue.serverTimestamp()])
     }
     
-    func addChildrenId(referralId: String, childrenId: String){
-        Ref.FS_COLLECTION_REFERRALS.document(referralId).updateData(["children": childrenId])
+    func addChildrenId(referralId: String, childrenIds: [String]) {
+        Ref.FS_COLLECTION_REFERRALS.document(referralId).updateData(["children": childrenIds])
     }
     
     func getReferralsByAskId(askId: String, onSuccess: @escaping(_ recipientIds: [String]) -> Void) {
