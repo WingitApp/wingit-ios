@@ -9,11 +9,13 @@ import SwiftUI
 import FirebaseAuth
 
 struct AskCard: View {
-  
+  // Props (passed from parents)
   @State var post: Post
   var isProfileView: Bool
   var index: Int
   
+  
+  // Observable Objects
   @EnvironmentObject var homeViewModel: HomeViewModel
   @StateObject var askCardViewModel = AskCardViewModel()
   
@@ -27,7 +29,6 @@ struct AskCard: View {
   // Like
   @StateObject var footerCellViewModel = FooterCellViewModel()
 
-//  @StateObject var
 
   var body: some View {
     if !self.askCardViewModel.isHidden {
@@ -42,6 +43,7 @@ struct AskCard: View {
             .environmentObject(commentViewModel)
             .environmentObject(commentInputViewModel)
             .environmentObject(footerCellViewModel)
+            .environmentObject(referViewModel)
         ) {
           VStack {
             BodyCell(post: $post)

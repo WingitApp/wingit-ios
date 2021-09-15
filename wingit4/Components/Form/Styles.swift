@@ -35,7 +35,7 @@ struct FeedItemShadow: ViewModifier {
 struct IconButtonStyle: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .foregroundColor(.gray)
+      .foregroundColor(.wingitBlue)
   }
 }
 
@@ -57,7 +57,7 @@ struct CardStyle: ViewModifier {
       .cornerRadius(8)
       .overlay(
         RoundedRectangle(cornerRadius: 8)
-          .stroke(Color.gray, lineWidth: 0.5)
+          .stroke(Color.lightGray, lineWidth: 1)
       )
       .padding(
         EdgeInsets(top: 0, leading: 15, bottom: 10, trailing: 15)

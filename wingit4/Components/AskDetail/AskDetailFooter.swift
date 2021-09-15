@@ -16,16 +16,13 @@ struct AskDetailFooter: View {
 
     var body: some View {
       VStack {
-        HStack {
-          // Like & Comment count summary
-        }
         Divider()
         HStack {
-          // todo: dividers
-          LikeButton(
+          ReferButton(
             post: $post,
             showLabel: true
           )
+          .padding(.leading, 15)
           Spacer()
           CommentButton(
             showLabel: true,

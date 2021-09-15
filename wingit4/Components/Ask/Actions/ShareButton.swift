@@ -17,8 +17,11 @@ struct ShareButton: View {
         Button(
           action: { self.shareButtonViewModel.createDLink(post: post) },
           label: {
-            Image(systemName: "arrowshape.turn.up.right")
-              .modifier(IconButtonStyle())
+            Text(
+              Image(systemName: "arrowshape.turn.up.right")
+            )
+            .fontWeight(.light)
+            .modifier(IconButtonStyle())
             if self.showLabel {
               Text("Share")
                 .foregroundColor(.black)

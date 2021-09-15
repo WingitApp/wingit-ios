@@ -415,7 +415,9 @@ extension Color {
   static let tolopeaViolet: Color = Color(red: 35 / 255, green: 30 / 255, blue: 50 / 255)
   
   static let lightGray: Color = Color(red: 238 / 255, green: 241 / 255, blue: 243 / 255)
-
+  static let wingitBlue: Color = Color(red: 33 / 255, green: 113 / 255, blue: 150 / 255)
+  
+  static let backgroundGray: Color = Color(red: 245 / 255, green: 247 / 255, blue: 248 / 255)
   
 }
 // bottom only corners....

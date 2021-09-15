@@ -14,6 +14,7 @@ struct HomeView: View {
   @ObservedObject var headerCellViewModel = HeaderCellViewModel()
   
   func onAppear() {
+    // should move to mainView
     self.homeViewModel.loadTimeline()
     logToAmplitude(event: .viewHomeAsksFeed)
   }
@@ -26,7 +27,8 @@ struct HomeView: View {
 //          HomeFeedHeader()
           HomeFeed()
         }
-        .background(Color.white.ignoresSafeArea(.all, edges: .all))
+        .onAppear( perform: onAppear )
+        .background(Color.backgroundGray.ignoresSafeArea(.all, edges: .all))
         .toolbar {
           ToolbarItem(placement: .principal) {
             VStack {
@@ -39,7 +41,6 @@ struct HomeView: View {
             }
           }
         }
-//        .navigationBarTitle(Text("WingIt!"), displayMode: .inline)
         .navigationBarItems(leading:
           Button(action: {}) {
             NavigationLink(destination: UsersView()) {
@@ -47,14 +48,7 @@ struct HomeView: View {
                 .imageScale(Image.Scale.medium)
                 .foregroundColor(.gray)
             }
-          }
-//                            ,trailing: Button(action: {}) {
-//            NavigationLink(destination: MessagesView()) {
-//              Image(systemName: "envelope").imageScale(Image.Scale.medium).foregroundColor(.gray)
-//            }
-//          }
-        )
-        .onAppear( perform: onAppear )
+        })
       }.environmentObject(homeViewModel)
     }
 }

@@ -24,12 +24,15 @@ struct CommentButton: View {
     Button(
       action: onTapCommentIcon,
       label: {
-          Image(systemName: "message")
-            .modifier(IconButtonStyle())
-            .accentColor(.red)
         Text("\(commentViewModel.comments.count.formatUsingAbbrevation())")
-          .modifier(CaptionStyle())
+          .font(.caption)
           .opacity(self.commentViewModel.comments.isEmpty ? 0 : 1)
+        Text(
+          Image(systemName: "message")
+        )
+        .fontWeight(.light)
+        .modifier(IconButtonStyle())
+
         if self.showLabel {
           Text("Comment")
             .font(.caption)
