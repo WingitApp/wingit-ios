@@ -32,7 +32,7 @@ struct ReferralComment: View {
           Image(IMAGE_LOGO)
             .resizable()
             .scaledToFit()
-            .frame(width: 25, height: 25)
+            .frame(width: 23, height: 23)
         }
         .background(Color.white)
           .frame(width: 35, height: 35, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
@@ -76,6 +76,7 @@ struct ReferralComment: View {
         
         Spacer()
       }
+      .padding(.top, 4)
       .padding(.leading, 10)
       Divider() //END
     }
