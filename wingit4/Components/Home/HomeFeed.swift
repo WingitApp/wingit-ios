@@ -20,6 +20,12 @@ struct HomeFeed: View {
               isProfileView: false,
               index: index
             )
+            .onAppear {
+              homeViewModel.loadMoreContentIfNeeded(
+                currentItem: post
+              )
+            }
+          
           }
       }
     }

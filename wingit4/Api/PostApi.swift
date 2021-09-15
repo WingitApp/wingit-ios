@@ -208,21 +208,40 @@ class PostApi {
     }
   
   func loadTimeline(
+    firstCall: Bool,
     onSuccess: @escaping(_ posts: [Post]) -> Void,
     newPost: @escaping(Post) -> Void,
     modifiedPost: @escaping(Post) -> Void,
     deletePost: @escaping(Post) -> Void,
-    listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
+    listener: @escaping(_ listenerHandler: ListenerRegistration) -> Void,
+    nextQuery: @escaping(_ next: Query) -> Void
   ) {
-          guard let userId = Auth.auth().currentUser?.uid else {
-                  return
-          }
+          guard let userId = Auth.auth().currentUser?.uid else { return }
+    
           let listenerFirestore =  Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId)
             .collection("timelinePosts")
-            .order(by: "date", descending: false)
+            .order(by: "date", descending: true) // reversed b/c append method (only for first call)
+            .limit(to: 5)
             .addSnapshotListener({ (querySnapshot, error) in
               guard let snapshot = querySnapshot else { return }
 
+              
+              if firstCall {
+                // construct pagination start
+                guard let lastSnapshot = snapshot.documents.last else { return }
+                
+                let next = Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId)
+                  .collection("timelinePosts")
+                  .order(by: "date", descending: true)
+                  .limit(to: TIMELINE_PAGINATION_PAGE_SIZE)
+                  .start(afterDocument: lastSnapshot)
+                // construct pagination end
+                
+                nextQuery(next)
+              }
+             
+              
+              
               snapshot.documentChanges.forEach { (documentChange) in
                     switch documentChange.type {
                     case .added:
@@ -239,9 +258,8 @@ class PostApi {
                       deletePost(decodedPost)
                     }
               }
-              
+              // pass pagination query
           })
-          
           listener(listenerFirestore)
       }
   
@@ -250,13 +268,13 @@ class PostApi {
     onSuccess: @escaping(_ posts: [Post], _ next: Query) -> Void
   ) -> Void {
       guard let userId = Auth.auth().currentUser?.uid else {return}
-      next
-        .addSnapshotListener({ (querySnapshot, error) in
+    next.getDocuments(completion: { (querySnapshot, error) in
           guard let snapshot = querySnapshot else {
-            print("Error fetching timeline")
+            print("Error fetching next timeline")
             return
           }
           guard let lastSnapshot = snapshot.documents.last else { return }
+        
           let next = Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId)
             .collection("timelinePosts")
             .order(by: "date", descending: true)
