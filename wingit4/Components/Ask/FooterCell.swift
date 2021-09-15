@@ -21,20 +21,23 @@ struct FooterCell: View {
               post: $post,
               showLabel: true
             )
-              .padding(.leading, 15)
+            .frame(width: (UIScreen.main.bounds.width - 30) / 3)
             Spacer()
             CommentButton(
               showLabel: true
             )
+            .frame(width: (UIScreen.main.bounds.width - 30) / 3)
             Spacer()
             ShareButton(
               post: $post,
               showLabel: true
             )
+            .frame(width: (UIScreen.main.bounds.width - 30) / 3)
           }
         }
+        .padding(.leading, 15)
         .padding(.trailing, 15)
         .padding(.bottom, 15)
-        .frame(maxWidth: .infinity)
+      .frame(maxWidth: UIScreen.main.bounds.width - 30)
     }
 }
