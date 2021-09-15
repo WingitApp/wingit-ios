@@ -14,7 +14,7 @@ import Firebase
 
 // CONSTANTS
 
-let TIMELINE_PAGINATION_PAGE_SIZE = 10
+let TIMELINE_PAGINATION_PAGE_SIZE = 5
 let TIMELINE_PAGINATION_QUERY = Ref.FS_DOC_TIMELINE_FOR_USERID(
   userId: Auth.auth().currentUser!.uid)
   .collection("timelinePosts")
