@@ -20,6 +20,8 @@ class UserProfileViewModel: ObservableObject {
     @Published var userBlocked = false
     @Published var connectionsCountState = 0
     @Published var showImagePicker: Bool = false
+    
+    @Published var isImageModalOpen: Bool = false
 
     var splitted: [[Post]] = []
     
@@ -30,8 +32,8 @@ class UserProfileViewModel: ObservableObject {
     @Published var showOpenPosts = true
     var closedListener: ListenerRegistration!
     var openListener: ListenerRegistration!
-
-  
+    
+    
   
   func fetchUserFromId(userId: String) {
     if !isLoadingUser {

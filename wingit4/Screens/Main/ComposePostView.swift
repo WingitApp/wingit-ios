@@ -124,7 +124,6 @@ struct ComposePostView: View {
                 Button(action: sharePost) {
                     Text("Ask")
                       .foregroundColor(Color(.systemTeal))
-                        
                 }.disabled(composePostViewModel.isDisabled)
                     
              .alert(isPresented: $composePostViewModel.showAlert) {

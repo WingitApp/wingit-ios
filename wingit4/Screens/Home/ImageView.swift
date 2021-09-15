@@ -32,3 +32,29 @@ struct ImageView: View {
 
     }
 }
+
+struct profileImageView: View {
+
+  @ObservedObject var userProfileViewModel = UserProfileViewModel()
+  @Environment(\.presentationMode) var presentationmode
+    
+    var body: some View {
+        
+        ZStack{
+            HStack{
+                Button(action: {presentationmode.wrappedValue.dismiss()},
+                       label: { Text("Cancel")}).padding()
+            }
+            Color.black
+                .ignoresSafeArea()
+            
+            URLImage(URL(string: userProfileViewModel.user.profileImageUrl ?? "")!,
+                  content: {
+                      $0.image
+                          .resizable()
+                          .aspectRatio(contentMode: .fit)
+                  })
+        }
+
+    }
+}

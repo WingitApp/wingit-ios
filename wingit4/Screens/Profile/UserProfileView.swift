@@ -20,7 +20,7 @@ struct UserProfileView: View {
     @StateObject var connectionsViewModel = ConnectionsViewModel()
   
     // state
-    @State var isImageSheetOpen: Bool = false
+   // @State var isImageSheetOpen: Bool = false
   
   init (userId: String?, user: User? ) {
     if user == nil {
@@ -39,16 +39,20 @@ struct UserProfileView: View {
     return maxHeight + yOffset
   }
   
-  func openImageSheet() {
-    self.isImageSheetOpen.toggle()
-  }
+//  func openImageSheet() {
+//    self.isImageSheetOpen.toggle()
+//  }
+    
+    func openPicSheet() {
+        self.userProfileViewModel.isImageModalOpen.toggle()
+    }
   
   
   var body: some View {
       ScrollView(showsIndicators: false) {
         ZStack {
           GeometryReader { geometry in
-             URLImageView(urlString: userProfileViewModel.user.profileImageUrl)
+            URLImageView(urlString: userProfileViewModel.user.profileImageUrl)
                 .frame(
                   height: self.calculateHeight(
                     minHeight: 0,
@@ -64,7 +68,8 @@ struct UserProfileView: View {
                 )
                 .blur(radius: 1)
           }
-          .onTapGesture(perform: self.openImageSheet)
+          .onTapGesture(perform: self.openPicSheet)
+       //   .onTapGesture(perform: self.openImageSheet)
           .zIndex(0)
         
           
@@ -77,7 +82,8 @@ struct UserProfileView: View {
             }
             .background(Color.white)
             .cornerRadius(100)
-            .onTapGesture(perform: self.openImageSheet)
+            .onTapGesture(perform: self.openPicSheet)
+          //  .onTapGesture(perform: self.openImageSheet)
             .zIndex(2)
             .offset(y: -80)
             
@@ -181,6 +187,12 @@ struct UserProfileView: View {
       isPresented: $connectionsViewModel.isConnectionsSheetOpen,
       content: {  ConnectionsView(user: userProfileViewModel.user).environmentObject(connectionsViewModel) }
     )
+      .sheet(
+        isPresented: $userProfileViewModel.isImageModalOpen,
+        content: {
+          profileImageView(userProfileViewModel: userProfileViewModel)
+      })
+      
     .environmentObject(connectionsViewModel)
     .environmentObject(userProfileViewModel)
   }
