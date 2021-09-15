@@ -12,19 +12,24 @@ struct NotificationEntry: View {
   
   var body: some View {
     NavigationLink (destination: UserProfileView(userId: activity.userId, user: nil)){
-      HStack {
+      HStack(alignment: .top) {
           NotificationUserAvatar(
            imageUrl: activity.userAvatar,
            type: activity.type
           )
          .padding(.trailing, 10)
           VStack(alignment: .leading, spacing: 5) {
-              Text(activity.username).font(.subheadline).bold()
+            Group {
+              Text("\(activity.username) ").font(.subheadline).bold() +
               Text(activity.typeDescription).font(.subheadline)
+            }
+            .fixedSize(horizontal: false, vertical: true)
+            .lineLimit(2)
+              Spacer()
+              TimeAgoStamp(date: activity.date)
           }
-        
-          Spacer()
-          TimeAgoStamp(date: activity.date)
+
+          
       }
     }
     .buttonStyle(PlainButtonStyle())
