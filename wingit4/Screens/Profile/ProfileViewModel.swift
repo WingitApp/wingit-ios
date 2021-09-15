@@ -66,7 +66,7 @@ class ProfileViewModel: ObservableObject {
         }
       },
         deletePost: { (post) in
-        
+
           if !self.openPosts.isEmpty {
               for (index, p) in self.openPosts.enumerated() {
                   if p.postId == post.postId {
@@ -91,6 +91,7 @@ class ProfileViewModel: ObservableObject {
       Api.Post.loadClosedPosts(
         userId: userId,
         onSuccess: { (posts) in
+
           if self.closedPosts.isEmpty {
               self.closedPosts = posts
               self.isLoading = false
@@ -108,6 +109,7 @@ class ProfileViewModel: ObservableObject {
               }
             }
       }, deletePost: { (post) in
+
           if !self.closedPosts.isEmpty {
               for (index, p) in self.closedPosts.enumerated() {
                   if p.postId == post.postId {

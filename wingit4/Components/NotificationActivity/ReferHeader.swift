@@ -27,19 +27,13 @@ struct ReferHeader: View {
     var body: some View {
       VStack(alignment: .leading){
         HStack(alignment: .top) {
-                URLImageView(urlString: referral.sender?.profileImageUrl)
-                  .clipShape(Circle())
-                  .frame(width: 50, height: 50)
-                  .overlay(
-                    RoundedRectangle(cornerRadius: 100)
-                      .stroke(Color.gray, lineWidth: 1)
-                  )
+          NotificationUserAvatar(imageUrl: referral.sender?.profileImageUrl ?? "", type: referral.status.rawValue)
                   .padding(.trailing, 10)
                 
                 VStack(alignment: .leading) {
                   Group {
                     Text(referral.sender?.displayName ?? "").fontWeight(.semibold) +
-                    Text(" referred you to help ") +
+                    Text(" has referred you to help with ") +
                       Text(referral.ask?.username ?? "").fontWeight(.semibold) +
                     Text("'s ask.")
                   }

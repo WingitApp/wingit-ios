@@ -232,7 +232,7 @@ struct UserProfileView: View {
         
         var body: some View {
             Button(action: buttonTapped) {
-              Image(systemName: (self.isConnected ? "hand.raised.slash" : "hand.raised"))
+              Image(systemName: (self.isConnected ? "person.badge.minus.fill" : "link"))
               Text((self.isConnected) ? "Disconnect" : (self.sentPendingRequest) ? "Pending" : "Connect")
                   .font(.callout)
                   .bold()
