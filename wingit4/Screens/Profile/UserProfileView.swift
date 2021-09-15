@@ -49,6 +49,7 @@ struct UserProfileView: View {
   
   
   var body: some View {
+    
       ScrollView(showsIndicators: false) {
         ZStack {
           GeometryReader { geometry in
@@ -146,7 +147,7 @@ struct UserProfileView: View {
             .frame(width: UIScreen.main.bounds.width)
             .zIndex(1)
             
-            if userProfileViewModel.showOpenPosts {
+            if userProfileViewModel.showOpenPosts && userProfileViewModel.openPosts.count != 0 {
               LazyVStack {
                 ForEach(Array(userProfileViewModel.openPosts.enumerated()), id: \.element) { index, post in
                     AskCard(
@@ -156,7 +157,7 @@ struct UserProfileView: View {
                     )
                   }
               }
-            } else {
+            } else if userProfileViewModel.closedPosts.count != 0 {
               LazyVStack {
                 ForEach(Array(userProfileViewModel.closedPosts.enumerated()), id: \.element) { index, post in
                     AskCard(
@@ -166,8 +167,27 @@ struct UserProfileView: View {
                     )
                   }
               }
+            } else if userProfileViewModel.openPosts.count == 0{
+                Image("logo")
+                   .resizable()
+                   .aspectRatio(contentMode: .fill)
+                   .frame(width: 40, height: 40)
+               Text("No Asks atm.")
+                   .font(.system(size: 12))
+                   .fontWeight(.bold)
+                   .foregroundColor(.gray)
+                   .padding(.top, 25)
+            } else {
+                Image("logo")
+                   .resizable()
+                   .aspectRatio(contentMode: .fill)
+                   .frame(width: 40, height: 40)
+               Text("No Closed Asks atm.")
+                   .font(.system(size: 12))
+                   .fontWeight(.bold)
+                   .foregroundColor(.gray)
+                   .padding(.top, 25)
             }
-
 
           }
           .zIndex(1)

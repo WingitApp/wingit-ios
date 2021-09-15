@@ -24,6 +24,7 @@ class ReferralsViewModel: ObservableObject {
     var closedListener: ListenerRegistration!
     
     func getReferrals() {
+        
         getPendingReferrals()
         getAcceptedReferrals()
         getWingedReferrals()
@@ -66,6 +67,7 @@ class ReferralsViewModel: ObservableObject {
         onSuccess: { (referrals) in
           if self.acceptedReferrals.isEmpty {
               self.acceptedReferrals = referrals
+             
           }
       }, newReferral: { (referral) in
           if !self.acceptedReferrals.isEmpty {
@@ -97,6 +99,7 @@ class ReferralsViewModel: ObservableObject {
         onSuccess: { (referrals) in
           if self.wingedReferrals.isEmpty {
               self.wingedReferrals = referrals
+       
           }
       }, newReferral: { (referral) in
           if !self.wingedReferrals.isEmpty {
@@ -128,6 +131,7 @@ class ReferralsViewModel: ObservableObject {
         onSuccess: { (referrals) in
           if self.closedReferrals.isEmpty {
               self.closedReferrals = referrals
+            
           }
       }, newReferral: { (referral) in
           if !self.closedReferrals.isEmpty {

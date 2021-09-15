@@ -24,6 +24,7 @@ class ProfileViewModel: ObservableObject {
     
     @Published var isConnected = false
     @Published var showOpenPosts = true
+    @Published var emptyState = false
   
     var openListener: ListenerRegistration!
     var closedListener: ListenerRegistration!
@@ -45,6 +46,7 @@ class ProfileViewModel: ObservableObject {
       
       self.openPosts = []
       isLoading = true
+      emptyState = true
       
       Api.Post.loadOpenPosts(
         userId: userId,
@@ -52,6 +54,7 @@ class ProfileViewModel: ObservableObject {
           if self.openPosts.isEmpty {
             self.openPosts = posts
             self.isLoading = false
+            self.emptyState = false
           }
       }, newPost: { (post) in
           if !self.openPosts.isEmpty {
