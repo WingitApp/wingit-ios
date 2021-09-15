@@ -11,19 +11,32 @@ import SwiftUI
 
 struct ReferralComment: View {
     var comment: Comment
+    @State var pushToInviter: Bool = false
+    @State var pushToOwner: Bool = false
   
     var body: some View {
       HStack(alignment: .center) {
-        
+        NavigationLink(
+          destination: UserProfileView(userId: comment.inviterId, user: nil),
+          isActive: $pushToInviter
+        ) {
+          EmptyView()
+        }
+        NavigationLink(
+          destination: UserProfileView(userId: comment.ownerId, user: nil),
+          isActive: $pushToOwner
+        ) {
+          EmptyView()
+        }
         HStack {
           Image(IMAGE_LOGO)
             .resizable()
             .scaledToFit()
             .frame(width: 25, height: 25)
         }
-          .clipShape(Circle())
         .background(Color.white)
           .frame(width: 35, height: 35, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+          .clipShape(Circle())
           .overlay(
             RoundedRectangle(cornerRadius: 100)
               .stroke(Color.wingitBlue, lineWidth: 1)
@@ -40,12 +53,25 @@ struct ReferralComment: View {
           .foregroundColor(.gray)
           .font(.system(size: 10))
           Spacer()
-          Group {
-            Text("\(comment.inviterDisplayName ?? "Anon")").bold() +
-            Text(" invited ") +
-            Text("\(comment.username)").bold() +
+          
+
+          HStack(spacing: 0) {
+              Text("\(comment.inviterDisplayName ?? "Anon")")
+                .bold()
+                .onTapGesture {
+                  self.pushToInviter.toggle()
+                }
+              Text(" invited ")
+              Text("\(comment.username)")
+                .bold()
+                .onTapGesture {
+                  self.pushToOwner.toggle()
+                }
             Text(" to help.")
-          }.font(.caption)
+          }
+          .font(.caption)
+          .fixedSize(horizontal: false, vertical: true)
+
         }
         
         Spacer()
