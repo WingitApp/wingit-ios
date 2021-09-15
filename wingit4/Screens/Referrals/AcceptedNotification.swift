@@ -156,9 +156,10 @@ struct ClosedNotification: View {
             HStack {
               VStack(alignment: .leading){
                 Group {
-                Text("You have declined") +
-                  Text("\(referral.ask?.username ?? "")'s").fontWeight(.semibold) +
-                Text(" referral.")
+                Text("You have declined ") +
+                  Text("\(referral.sender?.displayName ?? "")'s").fontWeight(.semibold) +
+                  Text(" request to help ") +
+                  Text("\(referral.ask?.username ?? "").").fontWeight(.semibold)
                 }
                 .font(.subheadline)
                 .fixedSize(horizontal: false, vertical: true)
@@ -174,7 +175,6 @@ struct ClosedNotification: View {
      
             //TimeAgoStamp(date: activity.date)
         }.padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
-        .opacity(0.3)
         }.buttonStyle(PlainButtonStyle())
     }
 }

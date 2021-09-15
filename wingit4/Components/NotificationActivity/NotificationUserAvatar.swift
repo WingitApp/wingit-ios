@@ -33,7 +33,7 @@ struct NotificationUserAvatar: View {
       case "accepted":
         return "checkmark"
       case "closed":
-        return "return"
+        return "person.crop.circle.fill.badge.xmark"
       case "pending":
         return "heart.text.square.fill"
       case "winged":
@@ -49,7 +49,7 @@ struct NotificationUserAvatar: View {
     case "comment":
       return Color(.systemTeal)
     case "follow":
-      return Color(.systemBlue)
+      return Color(.systemIndigo)
     case "like":
       return Color(.systemRed)
     case "likeAsk":
@@ -59,14 +59,14 @@ struct NotificationUserAvatar: View {
     case "connectRequestAccepted":
       return Color("Color1")
     case "referred":
-      return Color(.systemPink)
+      return Color(.systemBlue)
     // referral
     case "accepted":
       return Color("Color1")
     case "closed":
-      return Color(.systemGreen)
+      return Color(.systemIndigo)
     case "pending":
-      return Color(.systemPink)
+      return Color(.systemBlue)
     case "winged":
       return Color.wingitBlue
     default:
