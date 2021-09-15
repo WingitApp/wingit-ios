@@ -159,7 +159,7 @@ class ReferralsApi {
         Ref.FS_COLLECTION_REFERRALS
           .whereField("receiverId", isEqualTo: userId)
           .whereField("status", isEqualTo: ReferralStatus.accepted.rawValue)
-          .order(by: "createdAt", descending: true)
+          .order(by: "updatedAt", descending: true)
           .addSnapshotListener { (snapshot, error) in
             guard let snap = snapshot else { return }
             if let error = error { return print(error) }
@@ -238,7 +238,7 @@ class ReferralsApi {
         Ref.FS_COLLECTION_REFERRALS
           .whereField("receiverId", isEqualTo: userId)
           .whereField("status", isEqualTo: ReferralStatus.winged.rawValue)
-          .order(by: "createdAt", descending: true)
+          .order(by: "updatedAt", descending: true)
           .addSnapshotListener { (snapshot, error) in
             guard let snap = snapshot else { return }
             if let error = error { return print(error) }
@@ -317,7 +317,7 @@ class ReferralsApi {
         Ref.FS_COLLECTION_REFERRALS
           .whereField("receiverId", isEqualTo: userId)
           .whereField("status", isEqualTo: ReferralStatus.closed.rawValue)
-          .order(by: "createdAt", descending: true)
+          .order(by: "updatedAt", descending: true)
           .addSnapshotListener { (snapshot, error) in
             guard let snap = snapshot else { return }
             if let error = error { return print(error) }
