@@ -24,7 +24,7 @@ struct NotificationEntry: View {
               Text(activity.typeDescription).font(.subheadline)
             }
             .fixedSize(horizontal: false, vertical: true)
-            .lineLimit(2)
+            .lineLimit(3)
               Spacer()
               TimeAgoStamp(date: activity.date)
           }

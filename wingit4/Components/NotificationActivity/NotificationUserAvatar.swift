@@ -33,7 +33,7 @@ struct NotificationUserAvatar: View {
       case "accepted":
         return "checkmark"
       case "closed":
-        return "person.crop.circle.fill.badge.xmark"
+        return "xmark"
       case "pending":
         return "heart.text.square.fill"
       case "winged":
@@ -64,7 +64,7 @@ struct NotificationUserAvatar: View {
     case "accepted":
       return Color("Color1")
     case "closed":
-      return Color(.systemIndigo)
+      return Color(.lightGray)
     case "pending":
       return Color(.systemBlue)
     case "winged":

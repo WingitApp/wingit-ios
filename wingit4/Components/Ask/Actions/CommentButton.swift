@@ -24,9 +24,9 @@ struct CommentButton: View {
     Button(
       action: onTapCommentIcon,
       label: {
-        Text("\(commentViewModel.comments.count.formatUsingAbbrevation())")
-          .font(.caption)
-          .opacity(self.commentViewModel.comments.isEmpty ? 0 : 1)
+//        Text("\(commentViewModel.comments.count.formatUsingAbbrevation())")
+//          .font(.caption)
+//          .opacity(self.commentViewModel.comments.isEmpty ? 0 : 1)
         Text(
           Image(systemName: "message")
         )
