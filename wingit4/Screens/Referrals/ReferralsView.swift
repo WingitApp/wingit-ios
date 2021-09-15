@@ -25,7 +25,9 @@ struct ReferralsView: View {
 //                    Text("Accepted")
 //                }
                 ForEach(Array(self.referralsViewModel.acceptedReferrals.enumerated()), id: \.element) { index, referral in
-                    AcceptCard(referral: referral, post: referral.ask!)
+                    if (referral.ask != nil) {
+                        AcceptCard(referral: referral, post: referral.ask!)
+                    }
                 }
 //                if !referralsViewModel.wingedReferrals.isEmpty {
 //                    Text("Winged")
