@@ -9,73 +9,74 @@ import SwiftUI
 
 struct ProfileFeed: View {
     @EnvironmentObject var profileViewModel: ProfileViewModel
+  /**these function are needed to keep posts sorted b/c
+   posts are closed/opened at random sequences by user*/
+    func sortOpenPosts() -> Void {
+      self.profileViewModel.openPosts.sort { $0.date > $1.date }
+    }
+  
+    func sortClosedPosts() -> Void {
+      self.profileViewModel.closedPosts.sort { $0.date > $1.date }
+    }
+  
 
     var body: some View {
         
-    
-//        if profileViewModel.emptyState == true {
-//            Image("logo")
-//                .resizable()
-//                .aspectRatio(contentMode: .fill)
-//                .frame(width: 40, height: 40)
-//            Text("No Asks! Anything you need to ask?") .font(.system(size: 12))
-//                .fontWeight(.bold)
-//        } else
-        if profileViewModel.showOpenPosts && profileViewModel.openPosts.count != 0 {
-        LazyVStack {
-          ForEach(Array(profileViewModel.openPosts.enumerated()), id: \.element) { index, post in
-              AskCard(
-                post: post,
-                isProfileView: true,
-                index: index
-              )
-            }
-        }
-        .onAppear {
-          self.profileViewModel.openPosts.sort {
-            $0.date > $1.date
+      if profileViewModel.showOpenPosts {
+        if !profileViewModel.isLoading && profileViewModel.openPosts.count == 0 {
+          if profileViewModel.closedPosts.count == 0 {
+            /** State when user has not made any posts yet*/
+            EmptyState(
+              title: "Write your first post!",
+              description: "Click on the Plus Tab to get started.",
+              iconName: "pencil.and.outline",
+              iconColor: Color(.systemTeal),
+              function: nil
+            )
+          } else {
+            /** State when user has closed every ask*/
+            EmptyState(
+              title: "All done!",
+              description: "All your asks have been closed.",
+              iconName: "checkmark",
+              iconColor: Color("Color1"),
+              function: nil
+            )
           }
-        }
-        } else if profileViewModel.closedPosts.count != 0 {
-        LazyVStack {
-          ForEach(Array(profileViewModel.closedPosts.enumerated()), id: \.element) { index, post in
-              AskCard(
-                post: post,
-                isProfileView: true,
-                index: index
-              )
-            }
-        }
-        .onAppear {
-          self.profileViewModel.closedPosts.sort {
-            $0.date > $1.date
-          }
-        }
-        } else if profileViewModel.openPosts.count == 0 {
-            Image("logo")
-               .resizable()
-               .aspectRatio(contentMode: .fill)
-               .frame(width: 40, height: 40)
-               .padding(.top, 30)
-           Text("No Asks! Anything you need to ask?")
-               .font(.system(size: 12))
-               .fontWeight(.bold)
-               .font(.system(size: 12))
-               .foregroundColor(.gray)
-               .padding(.top, 25)
+          
         } else {
-            Image("logo")
-               .resizable()
-               .aspectRatio(contentMode: .fill)
-               .frame(width: 40, height: 40)
-               .padding(.top, 30)
-           Text("No Closed Asks atm.")
-               .font(.system(size: 12))
-               .fontWeight(.bold)
-               .font(.system(size: 12))
-               .foregroundColor(.gray)
-               .padding(.top, 25)
+          LazyVStack {
+            ForEach(Array(profileViewModel.openPosts.enumerated()), id: \.element) { index, post in
+                AskCard(
+                  post: post,
+                  isProfileView: true,
+                  index: index
+                )
+              }
+          }.onAppear(perform: sortOpenPosts)
         }
-    }
+      } else {
+        if !profileViewModel.isLoading && profileViewModel.closedPosts.count == 0 {
+          EmptyState(
+            title: "Hmm nothing was found...",
+            description: "Close of of your asks to see them here!",
+            iconName: "magnifyingglass",
+            iconColor: Color(.systemBlue),
+            function: nil
+          )
+        } else {
+          LazyVStack {
+            ForEach(Array(profileViewModel.closedPosts.enumerated()), id: \.element) { index, post in
+                AskCard(
+                  post: post,
+                  isProfileView: true,
+                  index: index
+                )
+              }
+          }.onAppear(perform: sortClosedPosts)
+        }
+          
+      }
+   }
 }
 

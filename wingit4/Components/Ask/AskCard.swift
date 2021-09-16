@@ -12,7 +12,7 @@ struct AskCard: View {
   // Props (passed from parents)
   @State var post: Post
   var isProfileView: Bool
-  var index: Int
+  var index: Int = 0
   
   
   // Observable Objects
