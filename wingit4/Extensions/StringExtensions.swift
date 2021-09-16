@@ -22,4 +22,8 @@ extension String {
         }
         return substringArray
     }
+    
+    func normalizeEmail(email: String) -> String {
+        components(separatedBy: .whitespaces).joined()
+    }
 }

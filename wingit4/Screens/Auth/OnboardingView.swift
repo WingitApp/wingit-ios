@@ -135,7 +135,7 @@ struct Home1 : View {
             }
             else{
                 
-                SignUp1()
+                SignUpForm()
             }
         }
     }
@@ -217,7 +217,7 @@ struct Login1 : View {
 
 var social = ["twitter","fb","google"]
 
-struct SignUp1 : View {
+struct SignUpForm : View {
     @EnvironmentObject var session: SessionStore
     @ObservedObject var signupViewModel = SignupViewModel()
     
