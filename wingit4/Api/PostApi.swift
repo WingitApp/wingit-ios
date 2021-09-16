@@ -106,17 +106,39 @@ class PostApi {
         }
     }
     
-    func loadWingers(postId: String, onSuccess: @escaping(_ users: [User]) -> Void) {
-        Ref.FS_COLLECTION_ALL_POSTS.document(postId).collection("wingers").getDocuments { (snapshot, error) in
-            if let error = error {
-                print(error)
-            } else if let snap = snapshot {
-                let users: [User] = snap.documents.compactMap {
-                  return try? $0.data(as: User.self)
+    func loadWingers(
+      postId: String,
+      onSuccess: @escaping(_ users: [User]) -> Void,
+      onAddition: @escaping(_ user: User) -> Void,
+      onRemoval: @escaping(_ user: User) -> Void,
+      listener: @escaping(_ listenerHandler: ListenerRegistration) -> Void
+    ){
+      let listenerWingers = Ref.FS_COLLECTION_ALL_POSTS.document(postId)
+          .collection("wingers")
+          .addSnapshotListener({ (snapshot, error) in
+  
+          guard let snap = snapshot else { return }
+          
+          snap.documentChanges.forEach { (documentChange) in
+                switch documentChange.type {
+                  case .added:
+                    
+                    var wingers = [User]()
+                    guard let winger = try? documentChange.document.data(as: User.self) else {return}
+                      print("winger added:", winger)
+                      onAddition(winger)
+                      wingers.append(winger)
+                      onSuccess(wingers)
+                  case .removed:
+                    guard let winger = try? documentChange.document.data(as: User.self) else {return}
+                    onRemoval(winger)
+                  case .modified:
+                    print("winger modified")
                 }
-                onSuccess(users)
-            }
-        }
+          }
+        })
+    
+      listener(listenerWingers)
     }
     
   func loadOpenPosts(
@@ -126,7 +148,7 @@ class PostApi {
     newPost: @escaping(Post) -> Void,
     modifiedPost: @escaping(Post) -> Void,
     deletePost: @escaping(Post) -> Void,
-    listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
+    listener: @escaping(_ listenerHandler: ListenerRegistration) -> Void
   ) {
           guard let userId = userId else { return }
           let listenerFirestore =  Ref.FS_COLLECTION_ALL_POSTS

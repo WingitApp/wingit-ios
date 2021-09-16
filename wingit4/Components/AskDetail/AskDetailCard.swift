@@ -10,7 +10,8 @@ import SwiftUI
 struct AskDetailCard: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
   @EnvironmentObject var askMenuViewModel: AskMenuViewModel
-  
+  @EnvironmentObject var referViewModel: ReferViewModel
+
   @Binding var post: Post
   
     var body: some View {
@@ -18,9 +19,12 @@ struct AskDetailCard: View {
         AskDetailHeader(post: $post)
         AskDetailBody(post: $post)
         // AskDetailRow shows the linear progression on bumps
-//        AskDetailRow(post: $post)
+        AskDetailRow(post: $post)
         AskDetailFooter(post: $post)
       }
+      .environmentObject(referViewModel)
+      .environmentObject(askCardViewModel)
+      .environmentObject(askMenuViewModel)
       .sheet(
         isPresented: $askCardViewModel.isImageModalOpen,
         content: {

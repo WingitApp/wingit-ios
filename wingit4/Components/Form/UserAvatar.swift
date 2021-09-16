@@ -9,23 +9,25 @@ import SwiftUI
 
 
 struct UserAvatar: View {
-  var image: Image
+  var user: User
   var height: CGFloat = 35
   var width: CGFloat = 35
-  var onTapGesture: () -> Void
+  @State var isTapped: Bool = false
   
   func onUserAvatarTap() {
-    onTapGesture()
+    isTapped = true
   }
   
   var body: some View {
-    image
-      .resizable()
-      .aspectRatio(contentMode: .fill)
+    NavigationLink(
+      destination: UserProfileView(userId: user.id, user: user),
+      isActive: $isTapped
+    ) {
+      EmptyView()
+    }
+    URLImageView(urlString: user.profileImageUrl)
       .clipShape(Circle())
       .frame(width: width, height: height)
-      .onTapGesture {
-        onUserAvatarTap()
-      }
+      .onTapGesture(perform: onUserAvatarTap)
   }
 }

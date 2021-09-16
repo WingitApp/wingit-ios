@@ -8,23 +8,27 @@
 import SwiftUI
 import UIKit
 import FirebaseAuth
+import Firebase
 import SPAlert
 
 class AskCardViewModel: ObservableObject {
   
-  // MetaData
+  // Props
   var post: Post?
   var isProfileView: Bool = false
+  
+  // Winger State
+  @Published var wingers: [User] = []
+  @Published var isLoadingWingers: Bool = false
+  @Published var listenerWingers: ListenerRegistration?
+
   @Published var postOwner: User!
   @Published var isOwnPost: Bool = false
   @Published var isNavLinkDisabled: Bool = true
   
   // Modal, Menu, Screens
   @Published var isImageModalOpen: Bool = false
-//  @Published var isCommentsModalOpen: Bool = false
-//  @Published var isShareSheetShowing = false
-    @Published var isMarkedAsDone: Bool = false
-
+  @Published var isMarkedAsDone: Bool = false
   
   // View Conditional
   @Published var isHidden: Bool = false
@@ -35,14 +39,48 @@ class AskCardViewModel: ObservableObject {
     self.isProfileView = isProfileView
     self.isOwnPost = Auth.auth().currentUser?.uid == post.ownerId
     self.isNavLinkDisabled = self.isProfileView || self.isOwnPost
-    var status: Bool {
+    var isPostClosed: Bool {
       if post.status == .open {
         return false
       } else {
         return true
       }
     }
-    self.isMarkedAsDone = status
+    self.isMarkedAsDone = isPostClosed
+    self.getWingersByPostId(postId: post.postId)
+  }
+  
+  func getWingersByPostId(postId: String) {
+    self.wingers = []
+    isLoadingWingers =  true
+    
+    Api.Post.loadWingers(
+      postId: postId,
+      onSuccess: { (wingers) in
+        if self.wingers.count < wingers.count {
+          self.wingers = wingers
+          self.isLoadingWingers = false
+        }
+      },
+      onAddition: { (winger) in
+        if !self.wingers.isEmpty {
+            if !self.wingers.contains(winger) {
+              self.wingers.append(winger)
+            }
+        }
+      },
+      onRemoval: { (winger) in
+        if !self.wingers.isEmpty {
+            for (index, w) in self.wingers.enumerated() {
+                if w.uid == winger.uid {
+                    self.wingers.remove(at: index)
+                }
+            }
+        }
+      },
+      listener: { listenerHandler in
+        self.listenerWingers = listenerHandler
+    })
   }
   
   func getColorByIndex(index: Int) -> Color {
@@ -86,16 +124,6 @@ class AskCardViewModel: ObservableObject {
   }
   
   
-  func getUserFromPost(){
-    let postOwnerId = self.post!.ownerId
-    Api.User.loadUser(userId: postOwnerId) { (postOwner) in
-      self.postOwner = postOwner
-//      self.destination = AnyView(UserProfileView(userId: self.post!.ownerId))
-    } onError: {
-        print("error")
-    }
-  }
-  
   func removePost() {
     guard let uid = Auth.auth().currentUser?.uid, let postId = self.post?.id else { return }
     
@@ -111,12 +139,6 @@ class AskCardViewModel: ObservableObject {
     let postOwnerId = post!.ownerId
     Api.User.blockUser(userId: uid, postOwnerId: postOwnerId)
   }
-//
-//    func onTapMarkAsDone() {
-//      withAnimation {
-//        self.isMarkedAsDone.toggle()
-//      }
-//    }
   
   func openCloseToggle(post: Post) {
     guard let postId = post.id else { return }

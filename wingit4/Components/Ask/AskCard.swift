@@ -101,6 +101,7 @@ struct AskCard: View {
             .environmentObject(commentViewModel)
             .environmentObject(commentInputViewModel)
             .environmentObject(footerCellViewModel)
+            .environmentObject(referViewModel)
         })
       .sheet(
         isPresented: $referViewModel.isReferListOpen,
