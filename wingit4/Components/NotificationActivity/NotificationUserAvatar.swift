@@ -89,11 +89,23 @@ struct NotificationUserAvatar: View {
             .font(.system(size: 12))
             .foregroundColor(.white)
             .padding(5)
-            .background(getBackgroundByType())
+            .background(
+              LinearGradient(
+                gradient: Gradient(
+                  colors: [getBackgroundByType().lighter(by: 10), getBackgroundByType()]),
+                  startPoint: .top,
+                  endPoint: .bottom
+                )
+            )
             .cornerRadius(100)
             .offset(x: 18, y: 13)
             .frame(width: 20, height: 20)
+            .shadow(
+              color: Color.black.opacity(0.3),
+              radius: 3, x: 0, y: 0.5
+            )
             .zIndex(1)
+
             
       }
     }

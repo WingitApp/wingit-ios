@@ -472,11 +472,51 @@ extension Int {
 
 }
 
+extension Color {
+  public func lighter(by amount: CGFloat = 0.2) -> Self { Self(UIColor(self).lighter(by: amount)!) }
+  public func darker(by amount: CGFloat = 0.2) -> Self { Self(UIColor(self).darker(by: amount)!) }
+}
+
 extension UIColor {
     func image(_ size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
         return UIGraphicsImageRenderer(size: size).image { rendererContext in
             self.setFill()
             rendererContext.fill(CGRect(origin: .zero, size: size))
         }
+    }
+  
+
+    func lighter(by percentage: CGFloat = 30.0) -> UIColor? {
+        return self.adjust(by: abs(percentage) )
+    }
+
+    func darker(by percentage: CGFloat = 30.0) -> UIColor? {
+        return self.adjust(by: -1 * abs(percentage) )
+    }
+
+    func adjust(by percentage: CGFloat = 30.0) -> UIColor? {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        if self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
+            return UIColor(red: min(red + percentage/100, 1.0),
+                           green: min(green + percentage/100, 1.0),
+                           blue: min(blue + percentage/100, 1.0),
+                           alpha: alpha)
+        } else {
+            return nil
+        }
+    }
+  
+  func adjustBrightness(by percentage: CGFloat = 30.0) -> UIColor {
+      var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+      if self.getHue(&h, saturation: &s, brightness: &b, alpha: &a) {
+        if b < 1.0 {
+          let newB: CGFloat = max(min(b + (percentage/100.0)*b, 1.0), 0.0)
+          return UIColor(hue: h, saturation: s, brightness: newB, alpha: a)
+        } else {
+          let newS: CGFloat = min(max(s - (percentage/100.0)*s, 0.0), 1.0)
+          return UIColor(hue: h, saturation: newS, brightness: b, alpha: a)
+        }
+      }
+      return self
     }
 }
