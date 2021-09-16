@@ -43,9 +43,11 @@ struct UserComment: View {
               .foregroundColor(.gray)
               .font(.system(size: 10))
           }
-          
-          Text(comment.comment)
-            .font(.caption)
+            TextViewWrapper(
+                attributedText: NSAttributedString(
+                    string: comment.comment
+                )
+            )
         }
         .padding(.leading, 10)
 
@@ -57,4 +59,24 @@ struct UserComment: View {
     }
 }
 
-
+struct TextViewWrapper: UIViewRepresentable {
+    var attributedText: NSAttributedString
+    
+    func makeUIView(context: Context) -> UITextView {
+        let uiView = UITextView()
+        
+        uiView.backgroundColor = .clear
+        uiView.linkTextAttributes = [.foregroundColor: UIColor.systemBlue]
+        uiView.isSelectable = true
+        uiView.isEditable = false
+        uiView.isScrollEnabled = false
+        uiView.isUserInteractionEnabled = true
+        uiView.dataDetectorTypes = .link
+        
+        return uiView
+    }
+    
+    func updateUIView(_ uiView: UITextView, context: Context) {
+        uiView.attributedText = attributedText
+    }
+}
