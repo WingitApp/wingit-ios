@@ -128,7 +128,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 }
 
-@main
+    @main
 struct WingitApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 

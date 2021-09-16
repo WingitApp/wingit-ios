@@ -63,7 +63,7 @@ struct TextViewWrapper: UIViewRepresentable {
     var attributedText: NSAttributedString
     
     func makeUIView(context: Context) -> UITextView {
-        let uiView = UITextView()
+        let uiView = UITextView(frame: .zero)
         
         uiView.backgroundColor = .clear
         uiView.linkTextAttributes = [.foregroundColor: UIColor.systemBlue]
@@ -72,6 +72,7 @@ struct TextViewWrapper: UIViewRepresentable {
         uiView.isScrollEnabled = false
         uiView.isUserInteractionEnabled = true
         uiView.dataDetectorTypes = .link
+        uiView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         
         return uiView
     }
