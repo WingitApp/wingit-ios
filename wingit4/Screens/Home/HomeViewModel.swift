@@ -44,10 +44,6 @@ class HomeViewModel: ObservableObject {
   func loadTimeline() {
         self.posts = []
         isLoading = true
-<<<<<<< HEAD
-      
-=======
->>>>>>> 1604729 (add gradient and shadow to notification ui. add extension to color and uicolor class)
         
         Api.Post.loadTimeline(
           firstCall: posts.count == 0,
@@ -55,10 +51,6 @@ class HomeViewModel: ObservableObject {
             if self.posts.count < posts.count {
               self.posts = posts
               self.isLoading = false
-<<<<<<< HEAD
-            
-=======
->>>>>>> 1604729 (add gradient and shadow to notification ui. add extension to color and uicolor class)
             }
         }, newPost: { (post) in
             if !self.posts.isEmpty {

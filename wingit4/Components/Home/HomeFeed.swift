@@ -12,16 +12,13 @@ struct HomeFeed: View {
   @State var isInTransition: Bool = true
 
   var body: some View {
-<<<<<<< HEAD
-    if homeViewModel.posts.count == 0 {
+
+    if homeViewModel.isLoading == false && homeViewModel.posts.count == 0 {
         VStack{
         Image("logo")
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(width: 40, height: 40)
-=======
-    if homeViewModel.isLoading == false && homeViewModel.posts.count == 0 {
->>>>>>> 1604729 (add gradient and shadow to notification ui. add extension to color and uicolor class)
         Text("No Posts! Connect with your friends")
             .font(.system(size: 12))
             .fontWeight(.bold)
