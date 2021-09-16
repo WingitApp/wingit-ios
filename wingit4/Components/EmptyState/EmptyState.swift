@@ -24,7 +24,7 @@ struct EmptyState: View {
         ZStack {
           AskCardPlaceholder()
             .foregroundColor(Color.lightGray)
-            .blur(radius: 2.5)
+            .blur(radius: 2)
             .zIndex(0)
             VStack(alignment: .center) {
               Image(systemName: "\(iconName)")
@@ -48,10 +48,11 @@ struct EmptyState: View {
               Text("\(title)")
                 .font(.headline)
                 .padding(.top, 10)
-                .padding(.bottom, 10)
+                .padding(.bottom, 3)
               Text("\(description)")
                 .font(.callout)
-                .fontWeight(.regular)
+                .fontWeight(.medium)
+                .fixedSize(horizontal: false, vertical: true)
               if !buttonLabel.isEmpty {
                 Button(action: onTapButton) {
                     Text("\(buttonLabel)")

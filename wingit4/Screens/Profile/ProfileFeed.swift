@@ -58,8 +58,8 @@ struct ProfileFeed: View {
       } else {
         if !profileViewModel.isLoading && profileViewModel.closedPosts.count == 0 {
           EmptyState(
-            title: "Hmm nothing was found...",
-            description: "Close of of your asks to see them here!",
+            title: "Hm nothing was found...",
+            description: "Close your posts to see them here!",
             iconName: "magnifyingglass",
             iconColor: Color(.systemBlue),
             function: nil
