@@ -204,12 +204,6 @@ public extension UIDevice {
     }
 }
 
-extension String {
-    func removingWhitespaces() -> String {
-        return components(separatedBy: .whitespaces).joined()
-    }
-}
-
 extension View {
     func dismissKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -351,19 +345,6 @@ extension Array {
          }
          return splittedArray
      }
-}
-
-extension String {
-    func splitStringToArray() -> [String] {
-        let trimmedText = String(self.filter { !" \n\t\r".contains($0) })
-        var substringArray: [String] = []
-        for (index, _) in trimmedText.enumerated() {
-            let prefixIndex = index + 1
-            let substringPrefix = String(trimmedText.prefix(prefixIndex)).lowercased()
-            substringArray.append(substringPrefix)
-        }
-        return substringArray
-    }
 }
 
 extension Encodable {

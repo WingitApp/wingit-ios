@@ -180,6 +180,7 @@
 		65A9EF9D26DF0B2500E81CBF /* ConnectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A9EF9A26DF0B2500E81CBF /* ConnectionsView.swift */; };
 		65A9EFA326E0923300E81CBF /* Referral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A9EFA226E0923300E81CBF /* Referral.swift */; };
 		65A9EFA526E0B2EC00E81CBF /* AskApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A9EFA426E0B2EC00E81CBF /* AskApi.swift */; };
+		65F7314F26F3C91700A73781 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7314E26F3C91700A73781 /* StringExtensions.swift */; };
 		65FE040426E9FE3200333609 /* ComposePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE040326E9FE3200333609 /* ComposePostView.swift */; };
 /* End PBXBuildFile section */
 
@@ -352,6 +353,7 @@
 		65A9EF9A26DF0B2500E81CBF /* ConnectionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionsView.swift; path = ../Main/Connections/ConnectionsView.swift; sourceTree = "<group>"; };
 		65A9EFA226E0923300E81CBF /* Referral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Referral.swift; sourceTree = "<group>"; };
 		65A9EFA426E0B2EC00E81CBF /* AskApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskApi.swift; sourceTree = "<group>"; };
+		65F7314E26F3C91700A73781 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		65FE040326E9FE3200333609 /* ComposePostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposePostView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -602,11 +604,11 @@
 				3BD12F1426C9CA1500E26A87 /* AppDel.swift */,
 				3B86E43D26C998E300F64416 /* ActivityIndicatorView.swift */,
 				3B75E3DC26716074002F3108 /* Constants.swift */,
-				3B7AF02F26718263003BCCF3 /* Extensions.swift */,
 				3B7AF09B2671E1DA003BCCF3 /* Selection.swift */,
 				3B7AF053267197BA003BCCF3 /* InitialView.swift */,
 				3B7AF05726719885003BCCF3 /* MainView.swift */,
 				3B75E3D126715C3A002F3108 /* Components */,
+				65F7314D26F3C8E400A73781 /* Extensions */,
 				3B7AF06326719E94003BCCF3 /* Screens */,
 				3B7AF06726719EDD003BCCF3 /* Session */,
 				3B7AF06626719EC2003BCCF3 /* Api */,
@@ -854,6 +856,15 @@
 			children = (
 			);
 			path = Connections;
+			sourceTree = "<group>";
+		};
+		65F7314D26F3C8E400A73781 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3B7AF02F26718263003BCCF3 /* Extensions.swift */,
+				65F7314E26F3C91700A73781 /* StringExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1118,6 +1129,7 @@
 				15F7E87C26E8436100E5238F /* TextCell.swift in Sources */,
 				3B928C3B269EA383007A34B8 /* ImageView.swift in Sources */,
 				15DFD07A26ED2E29002CBE31 /* URLImageViewModel.swift in Sources */,
+				65F7314F26F3C91700A73781 /* StringExtensions.swift in Sources */,
 				151A3C9426D5679800A39FAF /* AskDoneToggle.swift in Sources */,
 				3B7AF06D2671A01B003BCCF3 /* CommentRow.swift in Sources */,
 				3B0DFBDE26B78D86008CE0D1 /* UpdatePhotoVM.swift in Sources */,
