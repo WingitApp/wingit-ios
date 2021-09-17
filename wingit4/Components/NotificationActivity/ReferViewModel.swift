@@ -13,11 +13,12 @@ import SPAlert
 
 class ReferViewModel : ObservableObject, Identifiable {
     @Published var isLoading = true
-    @Published var selectedUsers: [String?] = []
     @Published var isChecked = false
     
-    var allReferralRecipientIds: [String?] = []
-    var allUsers: [User] = []
+    @Published var connections: [User] = []
+    @Published var wingers: [User] = []
+    @Published var selectedUsers: [String?] = []
+
     
     @Published var isReferListOpen: Bool = false
   
@@ -56,33 +57,38 @@ class ReferViewModel : ObservableObject, Identifiable {
     }
     
     func rewingReferral(askId: String, parentId: String?) {
-        guard let parentId = parentId else { return }
-        Api.Referrals.updateStatus(referralId: parentId, newStatus: .winged)
-        for receiverId in selectedUsers {
-            Api.Referrals.rewingReferral(
-                askId: askId,
-                receiverId: receiverId,
-                parentId: parentId,
-                senderId: Auth.auth().currentUser!.uid
-            )
-        }
-        
-        self.allReferralRecipientIds = Array(Set(self.allReferralRecipientIds + self.selectedUsers))
-        let alertView = SPAlertView(title: "Sent!", message: nil, preset: SPAlertIconPreset.done); alertView.present(duration: 2)
-        self.toggleReferListScreen()
+       guard let parentId = parentId else { return }
+       Api.Referrals.updateStatus(referralId: parentId, newStatus: .winged)
+       for receiverId in selectedUsers {
+           Api.Referrals.rewingReferral(
+               askId: askId,
+               receiverId: receiverId,
+               parentId: parentId,
+               senderId: Auth.auth().currentUser!.uid
+           )
+       }
+
+       self.allReferralRecipientIds = Array(Set(self.allReferralRecipientIds + self.selectedUsers))
+       let alertView = SPAlertView(title: "Sent!", message: nil, preset: SPAlertIconPreset.done); alertView.present(duration: 2)
+       self.toggleReferListScreen()
     }
     
-    func loadConnections(askId: String) {
+    func loadConnections(post: Post) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        if !self.isLoading {
-            isLoading.toggle()
-        }
-        Api.Connections.getConnections(userId: userId) { (users) in
-            self.isLoading.toggle()
-            self.allUsers = users
-            Api.Referrals.getReferralsByAskId(askId: askId) { (recipientIds) in
-                self.allReferralRecipientIds = recipientIds
+        isLoading = true
+      
+        Api.Connections.getConnections(userId: userId) { users in
+          Api.Referrals.getWingersByPostId(askId: post.postId) { wingers in
+            // we only show connections that are available
+            self.connections = users.compactMap { user in
+              if wingers.contains(user) || user.id == post.ownerId {
+                return nil
+              }
+              return user
             }
+            self.wingers = wingers
+            self.isLoading = false
+          }
         }
     }
 }

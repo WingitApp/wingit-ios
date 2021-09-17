@@ -20,6 +20,8 @@ struct MainView: View {
   @StateObject var profileViewModel = ProfileViewModel()
   @StateObject var activityViewModel = ActivityViewModel()
   @StateObject var homeViewModel = HomeViewModel()
+  @StateObject var referViewModel = ReferViewModel()
+
 
   func logout() {
     session.logout()
@@ -33,12 +35,14 @@ struct MainView: View {
           .environmentObject(profileViewModel)
           .environmentObject(activityViewModel)
           .environmentObject(homeViewModel)
+          .environmentObject(referViewModel)
         ReferralsView()
           .tabItem({ Image(systemName: "suit.heart") })
           .tag(1)
           .environmentObject(profileViewModel)
           .environmentObject(activityViewModel)
           .environmentObject(homeViewModel)
+          .environmentObject(referViewModel)
         ComposePostView()
           .tabItem({
             Image(systemName: "plus.circle.fill")
@@ -61,11 +65,14 @@ struct MainView: View {
           .environmentObject(profileViewModel)
           .environmentObject(activityViewModel)
           .environmentObject(homeViewModel)
+          .environmentObject(referViewModel)
      }
-    .accentColor(Color("Color1"))
+    .accentColor(.wingitBlue)
     .environmentObject(profileViewModel)
     .environmentObject(activityViewModel)
     .environmentObject(homeViewModel)
+    .environmentObject(referViewModel)
+
     .onAppear{
         self.profileViewModel.loadUserPosts()
         self.activityViewModel.loadActivities()

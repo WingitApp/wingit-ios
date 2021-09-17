@@ -25,9 +25,12 @@ struct UserAvatar: View {
     ) {
       EmptyView()
     }
+    .frame(width: 0, height: 0)
+    .hidden()
     URLImageView(urlString: user.profileImageUrl)
       .clipShape(Circle())
       .frame(width: width, height: height)
+      .modifier(RoundBorderStyle(color: Color.gray, lineWidth: 1))
       .onTapGesture(perform: onUserAvatarTap)
   }
 }

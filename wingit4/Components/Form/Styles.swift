@@ -75,3 +75,16 @@ struct UserAvatarStyle: ViewModifier {
     )
   }
 }
+
+struct RoundBorderStyle: ViewModifier {
+  var color: Color
+  var lineWidth: CGFloat = 1
+  
+  func body(content: Content) -> some View {
+    content
+      .overlay(
+        RoundedRectangle(cornerRadius: 100)
+          .stroke(color, lineWidth: lineWidth)
+      )
+  }
+}

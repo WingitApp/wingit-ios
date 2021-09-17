@@ -14,109 +14,75 @@ struct ReferConnectionsList: View {
     @EnvironmentObject var referViewModel: ReferViewModel
     @Binding var post: Post
   //  var postId: String
+  
+    func onSend() {
+      print("onSend")
+//      referViewModel.sendReferrals(
+//          askId: post.postId
+//      )
+    }
+  
+    func onAppearLoadConnectionsList() {
+      referViewModel.loadConnections(post: post)
+    }
+    
+  
 
     var body: some View {
         VStack {
-            VStack{
-                Spacer()
-                VStack(spacing: 18){
-                    HStack{
-                        Text("Who can help?")
-                            .font(.title2)
-                            .fontWeight(.heavy)
-                            .foregroundColor(Color("Color1"))
-                        Spacer()
-                        Button(action: {
-                            referViewModel.sendReferrals(
-                                askId: post.postId
-                            )
-                        },
-                               label: {
-                            Text("Send")
-                                .fontWeight(.heavy)
-                                .foregroundColor(Color(.systemTeal))
-                        })
+            Spacer()
+            VStack(alignment: .leading, spacing: 0){
+                  HStack{
+                      Text("Choose friends who can help")
+                          .font(.title3)
+                          .fontWeight(.semibold)
+                          .foregroundColor(Color("bw"))
+                      Spacer()
+                      Button(
+                        action: onSend,
+                        label: {
+                          Text("Send")
+                            .fontWeight(.semibold)
+                            .foregroundColor(Color(.systemTeal))
+                      })
+                  }
+                  .padding([.horizontal,.top])
+                  .padding(.bottom, 15)
+              
+                  HStack(alignment: .center) {
+                    WingersRow(wingers: self.$referViewModel.wingers)
+                    Spacer()
+                  }
+                  .frame(width: UIScreen.main.bounds.width)
+                  .padding(.bottom, 15)
+              
+                Text("Your Connections")
+                  .font(.headline)
+                  .padding(.leading, 15)
+                  .padding(.bottom, 3)
+                Divider()
+                List {
+                  ForEach(
+                    Array(self.referViewModel.connections.enumerated()),
+                    id: \.element
+                  ) { index, user in
+                        ReferralUserCard(user: user)
                     }
-                    .padding([.horizontal,.top])
-                    .padding(.bottom, 10)
-                    /// start list
-                    List {
-                        ForEach(self.referViewModel.allUsers, id: \.id) { user in
-                            if (user.id != post.ownerId) {
-                                CardView(user: user, userId: user.id ?? "")
-                            }
-                        }
-                    }
-                    ///end list
+                  ForEach(
+                    Array(self.referViewModel.wingers.enumerated()),
+                    id: \.element
+                  ) { index, user in
+                      ReferralUserCard(user: user, isChecked: true)
+                  }.opacity(0.7)
                 }
-//                .padding(.bottom,10)
-//                .padding(.top,10)
-                .background(Color.white)
-            }
+                .padding(.leading, -15)
+              }
+              .background(Color.white)
             
         }
-        .onAppear {
-            referViewModel.loadConnections(askId: post.postId)
-        }
         .preferredColorScheme(.light)
+        .onAppear(perform: onAppearLoadConnectionsList)
+        .environmentObject(referViewModel)
     }
 }
 
-struct CardView: View {
-    @EnvironmentObject var referViewModel: ReferViewModel
-
-    var user: User
-    var userId: String
-    
-    func onTapGesture() {
-      //  print("onTap called")
-        if self.referViewModel.allReferralRecipientIds.contains(userId) {
-            return
-        }
-        
-        self.referViewModel.handleUserSelect(userId: userId)
-    }
-    
-    var body: some View {
-        
-        HStack{
-            URLImageView(urlString: user.profileImageUrl)
-                .clipShape(Circle())
-                .frame(width: 40, height: 40)
-                .overlay(
-                  RoundedRectangle(cornerRadius: 100)
-                    .stroke(Color.gray, lineWidth: 1)
-                )
-                VStack(alignment: .leading, spacing: 5) {
-                    Text(user.displayName ?? user.username ?? "").font(.headline).bold()
-                    Text("@\(user.username ?? "")").font(.subheadline)
-                        .foregroundColor(Color(.systemTeal))
-                }
-                .padding(.leading, 5)
-                Spacer()
-                
-                ZStack{
-                    Circle()
-                        .stroke(
-                            self.referViewModel.selectedUsers.contains(userId) || self.referViewModel.allReferralRecipientIds.contains(userId)
-                              ? Color(.systemTeal)
-                                : Color.gray,
-                                lineWidth: 1
-                        )
-                        .frame(width: 25, height: 25)
-                    if self.referViewModel.selectedUsers.contains(userId) || self.referViewModel.allReferralRecipientIds.contains(userId) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .font(.system(size:25))
-                            .foregroundColor(Color("Color"))
-                    }
-                }
-            }
-        .padding(
-          EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
-        )
-        .contentShape(Rectangle())
-        .opacity(self.referViewModel.allReferralRecipientIds.contains(userId) ? 0.3 : 1)
-        .onTapGesture(perform: onTapGesture)
-      }
-
-}

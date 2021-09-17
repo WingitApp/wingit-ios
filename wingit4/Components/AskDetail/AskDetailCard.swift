@@ -11,6 +11,7 @@ struct AskDetailCard: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
   @EnvironmentObject var askMenuViewModel: AskMenuViewModel
   @EnvironmentObject var referViewModel: ReferViewModel
+  
 
   @Binding var post: Post
   
@@ -19,7 +20,7 @@ struct AskDetailCard: View {
         AskDetailHeader(post: $post)
         AskDetailBody(post: $post)
         // AskDetailRow shows the linear progression on bumps
-        AskDetailRow(post: $post)
+        WingersRow(wingers: $askCardViewModel.wingers)
         AskDetailFooter(post: $post)
       }
       .environmentObject(referViewModel)

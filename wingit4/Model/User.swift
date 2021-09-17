@@ -25,7 +25,7 @@ struct User: Codable, Identifiable, Equatable, Hashable {
     var username: String?
     
     var displayName: String? {
-        return "\(self.firstName ?? "") \(self.lastName ?? "")"
+      return "\(self.firstName ?? "") \(self.lastName ?? "")".trimmingCharacters(in: .whitespacesAndNewlines).capitalized
     }
 
     enum CodingKeys: String, CodingKey {
