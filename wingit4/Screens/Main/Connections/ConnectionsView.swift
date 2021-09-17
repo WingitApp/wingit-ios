@@ -10,7 +10,7 @@ import Firebase
 
 struct ConnectionRow: View {
     var user: User
-  //  @ObservedObject var userProfileViewModel = UserProfileViewModel()
+    @EnvironmentObject var userProfileViewModel: UserProfileViewModel
     
     var body: some View {
     
@@ -33,15 +33,15 @@ struct ConnectionRow: View {
               }.padding(.leading, 10)
           }.padding(10)
         
-//        ZStack{
-//            if userProfileViewModel.userBlocked == false {
-//              ConnectButton(
-//                user: userProfileViewModel.user,
-//                isConnected: $userProfileViewModel.isConnected, sentPendingRequest: $userProfileViewModel.sentPendingRequest,
-//                connectionsCount: $userProfileViewModel.connectionsCountState
-//              )
-//        }
-//      }
+        ZStack{
+            if userProfileViewModel.userBlocked == false {
+              ConnectButtonList(
+                user: user,
+                isConnected: $userProfileViewModel.isConnected, sentPendingRequest: $userProfileViewModel.sentPendingRequest,
+                connectionsCount: $userProfileViewModel.connectionsCountState
+              )
+        }
+      }
       .buttonStyle(FlatLinkStyle())
        
         }
@@ -50,6 +50,7 @@ struct ConnectionRow: View {
 
 struct ConnectionsView: View {
     @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
+    @EnvironmentObject var userProfileViewModel: UserProfileViewModel
   
     var user: User?
    
@@ -74,7 +75,7 @@ struct ConnectionsView: View {
                 if connectionsViewModel.users.count == 0 {
                     EmptyState(
                       title: "No connections!",
-                      description: "Be the first to connect with them.",
+                      description: "Help each other out.",
                       iconName: "person.badge.plus",
                       iconColor: Color("Color1"),
                       function: nil
@@ -83,6 +84,7 @@ struct ConnectionsView: View {
                 List(self.connectionsViewModel.users) { user in
                     HStack{
                     ConnectionRow(user: user)
+                        .environmentObject(userProfileViewModel)
                     }
                 }
                 .navigationBarTitle(formatTitle(), displayMode: .inline)
@@ -93,6 +95,60 @@ struct ConnectionsView: View {
         .onAppear {
             connectionsViewModel.loadConnections(userId: user?.id)
         }
+    }
+}
+
+
+struct ConnectButtonList: View {
+
+    @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
+
+    var user: User
+    @Binding var connections_Count: Int
+    @Binding var isConnected: Bool
+    @Binding var sentPendingRequest: Bool
+
+    init(user: User, isConnected: Binding<Bool>, sentPendingRequest: Binding<Bool>, connectionsCount: Binding<Int>) {
+        self.user = user
+        self._connections_Count = connectionsCount
+        self._isConnected = isConnected
+        self._sentPendingRequest = sentPendingRequest
+    }
+    
+    func buttonTapped() {
+        if !self.isConnected && !self.sentPendingRequest {
+            self.sentPendingRequest = true
+                connectionsViewModel.sendConnectRequest(userId: user.id)
+            } else if self.isConnected {
+                connectionsViewModel.disconnect(userId: user.id,  connectionsCount_onSuccess: { (connectionsCount) in
+                             self.connections_Count = connectionsCount
+             })
+            self.isConnected = false
+        }
+    }
+    
+    var body: some View {
+        Button(action: buttonTapped) {
+          Image(systemName: (self.isConnected ? "person.badge.minus.fill" : "link"))
+          Text((self.isConnected) ? "Disconnect" : (self.sentPendingRequest) ? "Pending" : "Connect")
+              .font(.callout)
+              .bold()
+        }
+        .disabled(self.sentPendingRequest)
+        .frame(
+          width: (UIScreen.main.bounds.width / 2) - 30
+        )
+        .padding(
+          .init(top: 10, leading: 0, bottom: 10, trailing: 0)
+        )
+        .background(Color.lightGray)
+        .foregroundColor(Color.black)
+        .cornerRadius(5)
+        .overlay(
+          RoundedRectangle(cornerRadius: 5).stroke(Color(.lightGray),
+          lineWidth: 1)
+        )
+    
     }
 }
 

@@ -16,7 +16,7 @@ import URLImage
 struct UserProfileView: View {
     // props
     @EnvironmentObject var session: SessionStore
-    @ObservedObject var userProfileViewModel = UserProfileViewModel()
+    @StateObject var userProfileViewModel = UserProfileViewModel()
     @StateObject var connectionsViewModel = ConnectionsViewModel()
   
     // state
@@ -217,7 +217,9 @@ struct UserProfileView: View {
     )
     .sheet(
       isPresented: $connectionsViewModel.isConnectionsSheetOpen,
-      content: {  ConnectionsView(user: userProfileViewModel.user).environmentObject(connectionsViewModel) }
+      content: {  ConnectionsView(user: userProfileViewModel.user).environmentObject(connectionsViewModel)
+          .environmentObject(userProfileViewModel)
+      }
     )
       .sheet(
         isPresented: $userProfileViewModel.isImageModalOpen,

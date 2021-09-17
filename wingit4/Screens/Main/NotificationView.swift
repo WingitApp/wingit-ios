@@ -18,7 +18,7 @@ struct NotificationView: View {
                   title: "No notifications!",
                   description: "Start interacting with friends to get the party started.",
                   iconName: "mustache",
-                  iconColor: Color("Color1"),
+                  iconColor: Color("Color"),
                   function: nil
                 )
             } else {
