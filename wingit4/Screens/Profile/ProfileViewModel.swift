@@ -46,15 +46,16 @@ class ProfileViewModel: ObservableObject {
       
       self.openPosts = []
       isLoading = true
-      emptyState = true
       
       Api.Post.loadOpenPosts(
         userId: userId,
+        onEmpty: {
+          self.isLoading = false
+        },
         onSuccess: { (posts) in
           if self.openPosts.isEmpty {
             self.openPosts = posts
             self.isLoading = false
-            self.emptyState = false
           }
       }, newPost: { (post) in
           if !self.openPosts.isEmpty {
@@ -93,6 +94,9 @@ class ProfileViewModel: ObservableObject {
     
       Api.Post.loadClosedPosts(
         userId: userId,
+        onEmpty: {
+          self.isLoading = false
+        },
         onSuccess: { (posts) in
 
           if self.closedPosts.isEmpty {

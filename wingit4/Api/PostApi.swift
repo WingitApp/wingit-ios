@@ -121,6 +121,7 @@ class PostApi {
     
   func loadOpenPosts(
     userId: String?,
+    onEmpty: @escaping() -> Void,
     onSuccess: @escaping(_ posts: [Post]) -> Void,
     newPost: @escaping(Post) -> Void,
     modifiedPost: @escaping(Post) -> Void,
@@ -134,7 +135,12 @@ class PostApi {
             .order(by: "date", descending: true)
             .addSnapshotListener({ (querySnapshot, error) in
               guard let snapshot = querySnapshot else { return }
-
+              
+              if snapshot.documentChanges.count == 0 {
+                return onEmpty()
+              }
+              
+              
               snapshot.documentChanges.forEach { (documentChange) in
                     switch documentChange.type {
                     case .added:
@@ -161,6 +167,7 @@ class PostApi {
     
     func loadClosedPosts(
       userId: String?,
+      onEmpty: @escaping() -> Void,
       onSuccess: @escaping(_ posts: [Post]) -> Void,
       newPost: @escaping(Post) -> Void,
       modifiedPost: @escaping(Post) -> Void,
@@ -174,7 +181,11 @@ class PostApi {
             .order(by: "date", descending: true)
             .addSnapshotListener({ (querySnapshot, error) in
               guard let snapshot = querySnapshot else { return }
-
+              
+              if snapshot.documentChanges.count == 0 {
+                return onEmpty()
+              }
+              
               snapshot.documentChanges.forEach { (documentChange) in
                     switch documentChange.type {
                     case .added:

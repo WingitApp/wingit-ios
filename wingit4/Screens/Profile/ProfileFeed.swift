@@ -21,7 +21,7 @@ struct ProfileFeed: View {
   
 
     var body: some View {
-        
+      
       if profileViewModel.showOpenPosts {
         if !profileViewModel.isLoading && profileViewModel.openPosts.count == 0 {
           if profileViewModel.closedPosts.count == 0 {
@@ -73,7 +73,10 @@ struct ProfileFeed: View {
                   index: index
                 )
               }
-          }.onAppear(perform: sortClosedPosts)
+          }.onAppear {
+            sortOpenPosts()
+            sortClosedPosts()
+          }
         }
           
       }

@@ -81,25 +81,31 @@ class UserProfileViewModel: ObservableObject {
       
       Api.Post.loadOpenPosts(
         userId: userId,
+        onEmpty: {
+          self.isLoading = false
+        },
         onSuccess: { (posts) in
           if self.openPosts.isEmpty {
               self.openPosts = posts
             self.isLoading = false
           }
-      }, newPost: { (post) in
+        },
+        newPost: { (post) in
           if !self.openPosts.isEmpty {
             if !self.openPosts.contains(post) {
               self.openPosts.insert(post, at: 0)
             }
           }
-      }, modifiedPost: { (post) in
+        },
+        modifiedPost: { (post) in
             if !self.openPosts.isEmpty {
               if let index = self.openPosts.firstIndex(where: {$0.id == post.id}) {
                 self.openPosts[index] = post
               }
             }
         
-      }, deletePost: { (post) in
+        },
+        deletePost: { (post) in
           if !self.openPosts.isEmpty {
               for (index, p) in self.openPosts.enumerated() {
                   if p.postId == post.postId {
@@ -107,9 +113,9 @@ class UserProfileViewModel: ObservableObject {
                   }
               }
           }
-      }) { (listener) in
+        }) { (listener) in
           self.openListener = listener
-      }
+        }
       
         updateIsConnected(userId: userId)
         updateSentPendingRequest(userId: userId)
@@ -123,25 +129,31 @@ class UserProfileViewModel: ObservableObject {
       
         Api.Post.loadClosedPosts(
           userId: userId,
-          onSuccess: { (posts) in
+          onEmpty: {
+            self.isLoading = false
+          },
+          onSuccess: { (posts)  in
             if self.closedPosts.isEmpty {
                 self.closedPosts = posts
                 self.isLoading = false
             }
-        }, newPost: { (post) in
+          },
+          newPost: { (post) in
             if !self.closedPosts.isEmpty {
               if !self.closedPosts.contains(post) {
                 self.closedPosts.insert(post, at: 0)
               }
             }
-        }, modifiedPost: { (post) in
+          },
+          modifiedPost: { (post) in
               if !self.closedPosts.isEmpty {
                 if let index = self.closedPosts.firstIndex(where: {$0.id == post.id}) {
                   self.closedPosts[index] = post
                 }
               }
           
-        }, deletePost: { (post) in
+          },
+          deletePost: { (post) in
             if !self.closedPosts.isEmpty {
                 for (index, p) in self.closedPosts.enumerated() {
                     if p.postId == post.postId {
