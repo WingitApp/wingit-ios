@@ -14,7 +14,11 @@ import FirebaseStorage
 class AuthService {
     
     static func signInUser(email: String, password: String, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-               Auth.auth().signIn(withEmail: email, password: password) { (authData, error) in
+                if !String.isValidEmailAddress(emailAddressString: email) {
+                    onError("Email input is not valid")
+                    return
+                }
+               Auth.auth().signIn(withEmail: email.normalizeEmail(), password: password) { (authData, error) in
                    if error != nil {
                         print(error!.localizedDescription)
                         onError(error!.localizedDescription)
@@ -33,7 +37,12 @@ class AuthService {
     }
     
     static func signupUser(firstName: String, lastName: String, username: String, email: String, password: String, imageData: Data, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-                Auth.auth().createUser(withEmail: email, password: password) { (authData, error) in
+                if !String.isValidEmailAddress(emailAddressString: email) {
+                    onError("Email input is not valid")
+                    return
+                }
+                let normalizedEmail = email.normalizeEmail()
+                Auth.auth().createUser(withEmail: normalizedEmail, password: password) { (authData, error) in
                     if error != nil {
                         // TODO: Show toast
                         //    print(error!.localizedDescription)
@@ -48,7 +57,7 @@ class AuthService {
                     let metadata = StorageMetadata()
                     metadata.contentType = "image/jpg"
                     
-                    StorageService.saveUser(userId: userId, firstName: firstName, lastName: lastName, username: username, email: email, imageData: imageData, metadata: metadata, storageAvatarRef: storageAvatarUserId, onSuccess: onSuccess, onError: onError)
+                    StorageService.saveUser(userId: userId, firstName: firstName, lastName: lastName, username: username, email: email, normalizedEmail: normalizedEmail, imageData: imageData, metadata: metadata, storageAvatarRef: storageAvatarUserId, onSuccess: onSuccess, onError: onError)
  
                 }
     }

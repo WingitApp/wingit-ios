@@ -74,7 +74,7 @@ class StorageService {
     
     }
     
-    static func saveUser(userId: String, firstName: String, lastName: String, username: String, email: String, imageData: Data, metadata: StorageMetadata, storageAvatarRef: StorageReference, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+    static func saveUser(userId: String, firstName: String, lastName: String, username: String, email: String, normalizedEmail: String, imageData: Data, metadata: StorageMetadata, storageAvatarRef: StorageReference, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
            storageAvatarRef.putData(imageData, metadata: metadata) { (storageMetadata, error) in
                 if error != nil {
                     onError(error!.localizedDescription)
@@ -98,7 +98,7 @@ class StorageService {
                         let firestoreUserDoc = Ref.FS_DOC_USERID(userId: userId)
                         // profileImageUrl should be default if user didn't upload photo
                         let profileImageUrl = imageData.count == 0 ? DEFAULT_PROFILE_AVATAR : metaImageUrl
-                        let user = User.init(id: userId, uid: userId, bio: "", canonicalEmail: email, email: email, firstName: firstName, keywords: (firstName + lastName).splitStringToArray(), lastName: lastName, profileImageUrl: profileImageUrl, username: username)
+                        let user = User.init(id: userId, uid: userId, bio: "", canonicalEmail: normalizedEmail, email: email, firstName: firstName, keywords: (firstName + lastName).splitStringToArray(), lastName: lastName, profileImageUrl: profileImageUrl, username: username)
 
                         do {
                             try firestoreUserDoc.setData(from: user) { _ in
