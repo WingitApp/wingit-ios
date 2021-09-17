@@ -55,7 +55,7 @@ struct MainView: View {
           .environmentObject(activityViewModel)
           .environmentObject(homeViewModel)
         ProfileView()
-       // ProfileDetail2()
+//        ProfileDetail2()
           .tabItem({ Image(systemName: "person") })
           .tag(4)
           .environmentObject(profileViewModel)

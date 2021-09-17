@@ -10,8 +10,10 @@ import Firebase
 
 struct ConnectionRow: View {
     var user: User
+  //  @ObservedObject var userProfileViewModel = UserProfileViewModel()
     
     var body: some View {
+    
       NavigationLink(destination: UserProfileView(userId: nil, user: user)) {
           HStack {
               URLImageView(urlString: user.profileImageUrl)
@@ -30,13 +32,25 @@ struct ConnectionRow: View {
                 .foregroundColor(Color(.systemTeal))
               }.padding(.leading, 10)
           }.padding(10)
-      }
+        
+//        ZStack{
+//            if userProfileViewModel.userBlocked == false {
+//              ConnectButton(
+//                user: userProfileViewModel.user,
+//                isConnected: $userProfileViewModel.isConnected, sentPendingRequest: $userProfileViewModel.sentPendingRequest,
+//                connectionsCount: $userProfileViewModel.connectionsCountState
+//              )
+//        }
+//      }
       .buttonStyle(FlatLinkStyle())
+       
+        }
     }
 }
 
 struct ConnectionsView: View {
     @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
+  
     var user: User?
    
   func formatTitle() -> String {
@@ -54,10 +68,13 @@ struct ConnectionsView: View {
     
     return title
   }
+    
     var body: some View {
             NavigationView {
                 List(self.connectionsViewModel.users) { user in
+                    HStack{
                     ConnectionRow(user: user)
+                    }
                 }
                 .navigationBarTitle(formatTitle(), displayMode: .inline)
                 .edgesIgnoringSafeArea([.top, .bottom])
@@ -69,3 +86,6 @@ struct ConnectionsView: View {
         }
     }
 }
+
+
+

@@ -117,7 +117,7 @@ struct UserProfileView: View {
               ).redacted(reason: self.userProfileViewModel.isLoadingUser ? .placeholder : [])
               
               HStack(spacing: 15) {
-                if userProfileViewModel.userBlocked == false {
+                if userProfileViewModel.userBlocked == false && userProfileViewModel.user.uid != Auth.auth().currentUser?.uid {
                   ConnectButton(
                     user: userProfileViewModel.user,
                     isConnected: $userProfileViewModel.isConnected, sentPendingRequest: $userProfileViewModel.sentPendingRequest,
