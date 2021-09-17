@@ -10,7 +10,8 @@ import URLImage
 
 
 struct AskDetailHeader: View {
-  @Binding var post: Post
+  var post: Post
+  
   
     var body: some View {
       HStack {

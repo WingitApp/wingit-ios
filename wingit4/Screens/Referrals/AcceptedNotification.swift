@@ -11,31 +11,12 @@ import URLImage
 struct AcceptedNotification: View {
 
     @Binding var referral: Referral
-    @Binding var post: Post
+    var post: Post
 
-    // Menu
-    @StateObject var askCardViewModel = AskCardViewModel()
-    @StateObject var askMenuViewModel = AskMenuViewModel()
-    @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
-    // Comment
-    @StateObject var commentViewModel = CommentViewModel()
-    @StateObject var referViewModel = ReferViewModel()
-    @StateObject var commentInputViewModel = CommentInputViewModel()
-    // Like
-    @StateObject var footerCellViewModel = FooterCellViewModel()
 
     var body: some View {
         
-        NavigationLink(
-            destination: AskDetailView(post: $post)
-                .environmentObject(askCardViewModel)
-                .environmentObject(askMenuViewModel)
-                .environmentObject(askDoneToggleViewModel)
-                .environmentObject(commentViewModel)
-                .environmentObject(commentInputViewModel)
-                .environmentObject(footerCellViewModel)
-        )
-        {
+      NavigationLink( destination: AskDetailView(postId: post.postId, post: post, isProfileView: false)) {
         HStack {
           NotificationUserAvatar(imageUrl: referral.ask?.avatar ?? "", type: referral.status.rawValue)
             .padding(.trailing, 10)
@@ -71,30 +52,11 @@ struct AcceptedNotification: View {
 struct WingNotification: View {
     
     @Binding var referral: Referral
-    @Binding var post: Post
-    // Menu
-    @StateObject var askCardViewModel = AskCardViewModel()
-    @StateObject var askMenuViewModel = AskMenuViewModel()
-    @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
-    // Comment
-    @StateObject var commentViewModel = CommentViewModel()
-    @StateObject var referViewModel = ReferViewModel()
-    @StateObject var commentInputViewModel = CommentInputViewModel()
-    // Like
-    @StateObject var footerCellViewModel = FooterCellViewModel()
+    var post: Post
     
     var body: some View {
  
-            NavigationLink(
-                destination: AskDetailView(post: $post)
-                    .environmentObject(askCardViewModel)
-                    .environmentObject(askMenuViewModel)
-                    .environmentObject(askDoneToggleViewModel)
-                    .environmentObject(commentViewModel)
-                    .environmentObject(commentInputViewModel)
-                    .environmentObject(footerCellViewModel)
-            )
-            {
+            NavigationLink(destination: AskDetailView(postId: post.postId, post: post, isProfileView: false)) {
         HStack {
           NotificationUserAvatar(imageUrl: referral.ask?.avatar ?? "", type: referral.status.rawValue)
             .padding(.trailing, 10)
@@ -127,29 +89,12 @@ struct WingNotification: View {
 struct ClosedNotification: View {
     
     @Binding var referral: Referral
-    @Binding var post: Post
-    // Menu
-    @StateObject var askCardViewModel = AskCardViewModel()
-    @StateObject var askMenuViewModel = AskMenuViewModel()
-    @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
-    // Comment
-    @StateObject var commentViewModel = CommentViewModel()
-    @StateObject var referViewModel = ReferViewModel()
-    @StateObject var commentInputViewModel = CommentInputViewModel()
-    // Like
-    @StateObject var footerCellViewModel = FooterCellViewModel()
+    var post: Post
     
     var body: some View {
         NavigationLink(
-            destination: AskDetailView(post: $post)
-                .environmentObject(askCardViewModel)
-                .environmentObject(askMenuViewModel)
-                .environmentObject(askDoneToggleViewModel)
-                .environmentObject(commentViewModel)
-                .environmentObject(commentInputViewModel)
-                .environmentObject(footerCellViewModel)
-        )
-        {
+          destination: AskDetailView(postId: post.postId, post: post, isProfileView: false)
+        ) {
         HStack {
           NotificationUserAvatar(imageUrl: referral.ask?.avatar ?? "", type: referral.status.rawValue)
             .padding(.trailing, 10)

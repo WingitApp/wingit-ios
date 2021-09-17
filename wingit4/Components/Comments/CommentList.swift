@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CommentList: View {
   @EnvironmentObject var commentViewModel : CommentViewModel
-  @Binding var post: Post
+  var post: Post
   
     var body: some View {
       ScrollView {

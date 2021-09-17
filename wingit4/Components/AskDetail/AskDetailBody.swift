@@ -11,7 +11,7 @@ import URLImage
 
 struct AskDetailBody: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
-  @Binding var post: Post
+  var post: Post
 
     var body: some View {
       VStack(alignment: .center) {

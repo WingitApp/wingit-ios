@@ -10,13 +10,13 @@ import SwiftUI
 struct ReferFooter: View {
     
   @Binding var referral: Referral
-  @Binding var post: Post
+  var post: Post
   
     var body: some View {
         
         HStack(spacing: 20){
             WingButton(referral: $referral)
-            AcceptButton(referral: $referral, post: $post)
+            AcceptButton(referral: $referral, post: post)
         }
 
     }
@@ -26,7 +26,7 @@ struct AcceptButton: View {
     
     @EnvironmentObject var referralsViewModel: ReferralsViewModel
     @Binding var referral: Referral
-    @Binding var post: Post
+    var post: Post
     @State var userHasAccepted: Bool = false
 //    NavigationLink(
 //     destination: AskDetailView(post: $post),
@@ -35,7 +35,7 @@ struct AcceptButton: View {
     
     var body: some View {
         Button(action: {
-            referralsViewModel.acceptReferral(referral: referral, post: $post)
+            referralsViewModel.acceptReferral(referral: referral, post: post)
         },
                label: {
                 HStack(alignment: .center) {

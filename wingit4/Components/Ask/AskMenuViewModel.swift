@@ -9,7 +9,6 @@ import FirebaseAuth
 import SwiftUI
 
 class AskMenuViewModel: ObservableObject {
-  @EnvironmentObject var askCardViewModel: AskCardViewModel
   @Published var isReportModalOpen = false
   
   func onTapOpenReportScreen() {

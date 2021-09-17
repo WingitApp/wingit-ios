@@ -13,29 +13,12 @@ import FirebaseAuth
 
 struct ReferBody: View {
     
-// Menu
-@StateObject var askCardViewModel = AskCardViewModel()
-@StateObject var askMenuViewModel = AskMenuViewModel()
-@StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
-// Comment
-@StateObject var commentViewModel = CommentViewModel()
-@StateObject var referViewModel = ReferViewModel()
-@StateObject var commentInputViewModel = CommentInputViewModel()
-// Like
-@StateObject var footerCellViewModel = FooterCellViewModel()
-    
   @Binding var referral: Referral
-  @Binding var post: Post
+  var post: Post
 
     var body: some View {
         NavigationLink(
-            destination: AskDetailView(post: $post)
-                .environmentObject(askCardViewModel)
-                .environmentObject(askMenuViewModel)
-                .environmentObject(askDoneToggleViewModel)
-                .environmentObject(commentViewModel)
-                .environmentObject(commentInputViewModel)
-                .environmentObject(footerCellViewModel)
+          destination: AskDetailView(postId: post.postId, post: post, isProfileView: false)
         ) {
           VStack(alignment: .leading) {
                 HStack {

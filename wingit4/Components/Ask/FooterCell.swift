@@ -8,17 +8,15 @@ import SwiftUI
 import URLImage
 
 struct FooterCell: View {
-  @Binding var post: Post
+  var post: Post
   @EnvironmentObject var askCardViewModel: AskCardViewModel
-  @EnvironmentObject var footerCellViewModel: FooterCellViewModel
-  
-  @StateObject var shareButtonViewModel = ShareButtonViewModel()
+  @StateObject var footerCellViewModel = FooterCellViewModel()
     
     var body: some View {
       VStack(alignment: .leading, spacing: 8) {
           HStack {
             ReferButton(
-              post: $post,
+              post: post,
               showLabel: true
             )
             .frame(width: (UIScreen.main.bounds.width - 30) / 3)
@@ -29,7 +27,7 @@ struct FooterCell: View {
             .frame(width: (UIScreen.main.bounds.width - 30) / 3)
             Spacer()
             ShareButton(
-              post: $post,
+              post: post,
               showLabel: true
             )
             .frame(width: (UIScreen.main.bounds.width - 30) / 3)
@@ -38,6 +36,7 @@ struct FooterCell: View {
         .padding(.leading, 15)
         .padding(.trailing, 15)
         .padding(.bottom, 15)
-      .frame(maxWidth: UIScreen.main.bounds.width - 30)
+        .frame(maxWidth: UIScreen.main.bounds.width - 30)
+        .environmentObject(footerCellViewModel)
     }
 }

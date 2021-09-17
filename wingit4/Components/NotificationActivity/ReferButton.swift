@@ -8,26 +8,24 @@
 import SwiftUI
 
 struct ReferButton: View {
-    @EnvironmentObject var referViewModel: ReferViewModel
-    @Binding var post: Post
+    @ObservedObject var referViewModel = ReferViewModel()
+  
+    var post: Post
     var showLabel: Bool = false
-  //  @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
-//    @EnvironmentObject var session: SessionStore
+
     var body: some View {
-        Button(action: {
-            referViewModel.isReferListOpen.toggle()
-        },
-        label: {
-          Image(IMAGE_LOGO)
-            .resizable()
-            .scaledToFit()
-            .frame(width: 35, height: 28)
-          if self.showLabel {
-            Text("Wing")
-              .font(.caption)
-              .font(.system(size: 15))
-//              .padding(.leading, 10)
-          }
+        Button(
+          action: referViewModel.toggleReferListScreen,
+          label: {
+            Image(IMAGE_LOGO)
+              .resizable()
+              .scaledToFit()
+              .frame(width: 35, height: 28)
+            if self.showLabel {
+              Text("Wing")
+                .font(.caption)
+                .font(.system(size: 15))
+            }
         })
         .buttonStyle(PlainButtonStyle())
 

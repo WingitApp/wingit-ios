@@ -10,13 +10,13 @@ import URLImage
 
 struct CommentView: View {
     @EnvironmentObject var commentViewModel: CommentViewModel
-    @Binding var post: Post
+    var post: Post
     
     var body: some View {
       NavigationView {
         VStack {
             ScrollView {
-              AskDetailCard(post: $post)
+              AskDetailCard(post: post)
               VStack(alignment: .leading) {
                 ForEach(self.commentViewModel.comments) { comment in
                      UserComment(comment: comment)
@@ -24,7 +24,7 @@ struct CommentView: View {
               }
             }
             Spacer()
-            CommentInput(post: $post)
+            CommentInput(post: post)
         }
         .onTapGesture { dismissKeyboard() }
         .navigationBarTitle("Comments", displayMode: .inline)

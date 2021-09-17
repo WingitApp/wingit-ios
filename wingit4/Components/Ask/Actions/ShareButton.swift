@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ShareButton: View {
   @ObservedObject var shareButtonViewModel = ShareButtonViewModel()
-  @Binding var post: Post
+  var post: Post
   var showLabel: Bool = false
   
     var body: some View {

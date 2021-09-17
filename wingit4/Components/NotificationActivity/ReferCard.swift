@@ -10,7 +10,7 @@ import SwiftUI
 struct ReferCard: View {
   
   @State var referral: Referral
-  @State var post: Post
+  var post: Post
   @StateObject var referViewModel = ReferViewModel()
     
   // refferal object
@@ -23,9 +23,9 @@ struct ReferCard: View {
     var body: some View {
        
         VStack{
-            ReferHeader(referral: $referral, post: $post)
-            ReferBody(referral: $referral, post: $post)
-            ReferFooter(referral: $referral, post: $post)
+            ReferHeader(referral: $referral, post: post)
+            ReferBody(referral: $referral, post: post)
+            ReferFooter(referral: $referral, post: post)
             Divider().padding(.top, 5)
         }
 //        .modifier(CardStyle())
@@ -45,7 +45,7 @@ struct ReferCard: View {
 struct WingCard: View {
   
   @State var referral: Referral
-  @State var post: Post
+  var post: Post
  
     
   // refferal object
@@ -58,7 +58,7 @@ struct WingCard: View {
     var body: some View {
        
         VStack{
-            WingNotification(referral: $referral, post: $post)
+            WingNotification(referral: $referral, post: post)
             Divider().padding(.top, 5)
         }
         
@@ -68,7 +68,7 @@ struct WingCard: View {
 struct AcceptCard: View {
   
   @State var referral: Referral
-  @State var post: Post
+  var post: Post
  
     
   // refferal object
@@ -81,7 +81,7 @@ struct AcceptCard: View {
     var body: some View {
        
         VStack{
-            AcceptedNotification(referral: $referral, post: $post)
+            AcceptedNotification(referral: $referral, post: post)
             Divider().padding(.top, 5)
         }
         
@@ -91,7 +91,7 @@ struct AcceptCard: View {
 struct ClosedCard: View {
   
   @State var referral: Referral
-  @State var post: Post
+  var post: Post
  
     
   // refferal object
@@ -104,7 +104,7 @@ struct ClosedCard: View {
     var body: some View {
        
         VStack{
-            ClosedNotification(referral: $referral, post: $post)
+            ClosedNotification(referral: $referral, post: post)
             Divider().padding(.top, 5)
         }
         

@@ -15,14 +15,9 @@ class CommentViewModel: ObservableObject {
     
     @Published var comments: [Comment] = []
     @Published var isLoading: Bool = false
-    @Published var isCommentSheetShown = false
   
     var listener: ListenerRegistration!
-    
-    func toggleCommentScreen() {
-      self.isCommentSheetShown.toggle()
-    }
-    
+  
     func loadComments(postId: String) {
       if !self.isLoading {
         self.isLoading.toggle()

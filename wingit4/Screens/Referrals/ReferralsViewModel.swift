@@ -17,7 +17,7 @@ class ReferralsViewModel: ObservableObject {
     @Published var acceptedReferrals: [Referral] = []
     @Published var wingedReferrals: [Referral] = []
     @Published var closedReferrals: [Referral] = []
-    @Published var destination: AnyView = AnyView(EmptyView())
+    @Published var destination = AskDetailView(postId: nil, post: Placeholder.post, isProfileView: false)
     @Published var isLinkActive: Bool = false
     
     var pendingListener: ListenerRegistration!
@@ -159,12 +159,12 @@ class ReferralsViewModel: ObservableObject {
       }
     }
     
-    func acceptReferral(referral: Referral, post: Binding<Post>) {
+    func acceptReferral(referral: Referral, post: Post) {
 //        guard let referralId = referral.id, let currentUser = Auth.auth().currentUser else { return }
 //        Api.Referrals.updateStatus(referralId: referralId, newStatus: .accepted)
 //        let text = "\(referral.sender?.displayName ?? "") invited \(currentUser.displayName ?? "") to help."
 //        postInvitedReferralComment(text: text, referral: referral) {
-            self.destination = AnyView(AskDetailCard(post: post))
+      self.destination = AskDetailView(postId: post.postId, post: post, isProfileView: false)
         self.isLinkActive = true
         print("isLikeActive:", self.isLinkActive)
 //        }

@@ -10,7 +10,7 @@ import FirebaseAuth
 
 struct AskCard: View {
   // Props (passed from parents)
-  @State var post: Post
+  var post: Post
   var isProfileView: Bool
   var index: Int = 0
   
@@ -34,20 +34,11 @@ struct AskCard: View {
     if !self.askCardViewModel.isHidden {
       VStack {
         // need to place above to prevent event propagation
-        HeaderCell(post: $post)
-        NavigationLink( destination:
-          AskDetailView(post: $post)
-            .environmentObject(askCardViewModel)
-            .environmentObject(askMenuViewModel)
-            .environmentObject(askDoneToggleViewModel)
-            .environmentObject(commentViewModel)
-            .environmentObject(commentInputViewModel)
-            .environmentObject(footerCellViewModel)
-            .environmentObject(referViewModel)
-        ) {
+        HeaderCell(post: post)
+        NavigationLink( destination: AskDetailView(postId: post.postId, post: post, isProfileView: isProfileView) ) {
           VStack {
-            BodyCell(post: $post)
-            FooterCell(post: $post)
+            BodyCell(post: post)
+            FooterCell(post: post)
           }
         }
         .buttonStyle(FlatLinkStyle())
@@ -70,8 +61,8 @@ struct AskCard: View {
       // [END]
       .onAppear{
         self.askCardViewModel.initVM(
-          post: post,
-          isProfileView: isProfileView
+          postId: nil,
+          post: post
         )
         self.commentViewModel.loadComments(
           postId: post.postId
@@ -81,7 +72,7 @@ struct AskCard: View {
       .sheet(
         isPresented: $askCardViewModel.isImageModalOpen,
         content: {
-          ImageView(post: $post)
+          ImageView(post: post)
             .environmentObject(askCardViewModel)
             .environmentObject(askMenuViewModel)
       })
@@ -93,9 +84,9 @@ struct AskCard: View {
             .environmentObject(askMenuViewModel)
       })
       .sheet(
-        isPresented: $commentViewModel.isCommentSheetShown,
+        isPresented: $askCardViewModel.isCommentSheetShown,
         content: {
-          CommentView(post: $post)
+          CommentView(post: post)
             .environmentObject(askCardViewModel)
             .environmentObject(askMenuViewModel)
             .environmentObject(commentViewModel)
@@ -103,9 +94,9 @@ struct AskCard: View {
             .environmentObject(footerCellViewModel)
         })
       .sheet(
-        isPresented: $referViewModel.isReferListOpen,
+        isPresented: $askCardViewModel.isReferListOpen,
         content: {
-          ReferConnectionsList(post: $post)
+          ReferConnectionsList(post: post)
             .environmentObject(referViewModel)
         })
     }

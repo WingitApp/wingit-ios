@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct CommentButton: View {
+  @EnvironmentObject var askCardViewModel: AskCardViewModel
   @EnvironmentObject var commentViewModel: CommentViewModel
+  
   var showLabel: Bool = false
   var isTapDisabled: Bool = false
   
   func onTapCommentIcon() {
     if !isTapDisabled {
       logToAmplitude(event: .viewComments)
-      self.commentViewModel.toggleCommentScreen()
+      askCardViewModel.toggleCommentScreen()
     }
   }
   

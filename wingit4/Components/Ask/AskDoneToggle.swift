@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AskDoneToggle: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
-  @Binding var post: Post
+  var post: Post
   
     var body: some View {
       

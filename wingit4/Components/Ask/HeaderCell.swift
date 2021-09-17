@@ -12,7 +12,7 @@ import FirebaseAuth
 struct HeaderCell: View {
   
   @EnvironmentObject var askCardViewModel: AskCardViewModel
-  @Binding var post: Post
+  var post: Post
   
     var body: some View {
         VStack {
@@ -42,7 +42,7 @@ struct HeaderCell: View {
               
               Spacer()
               if askCardViewModel.isProfileView {
-                AskDoneToggle(post: $post) // rename later
+                AskDoneToggle(post: post) // rename later
               }
                 AskMenu()
             }.padding(.trailing, 15).padding(.leading, 15)

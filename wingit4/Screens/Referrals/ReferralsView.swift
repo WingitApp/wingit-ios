@@ -9,15 +9,6 @@ import SwiftUI
 
 struct ReferralsView: View {
     @StateObject var referralsViewModel = ReferralsViewModel()
-    @StateObject var askCardViewModel = AskCardViewModel()
-    @StateObject var askMenuViewModel = AskMenuViewModel()
-    @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
-    // Comment
-    @StateObject var commentViewModel = CommentViewModel()
-    @StateObject var referViewModel = ReferViewModel()
-    @StateObject var commentInputViewModel = CommentInputViewModel()
-    // Like
-    @StateObject var footerCellViewModel = FooterCellViewModel()
   
     var body: some View {
         NavigationView {
@@ -67,14 +58,7 @@ struct ReferralsView: View {
                     }
                  }
                 NavigationLink(
-                    destination:
-                        self.referralsViewModel.destination
-                        .environmentObject(askCardViewModel)
-                        .environmentObject(askMenuViewModel)
-                        .environmentObject(askDoneToggleViewModel)
-                        .environmentObject(commentViewModel)
-                        .environmentObject(commentInputViewModel)
-                        .environmentObject(footerCellViewModel),
+                    destination: self.referralsViewModel.destination,
                     isActive: self.$referralsViewModel.isLinkActive
                 ) {
                     EmptyView()

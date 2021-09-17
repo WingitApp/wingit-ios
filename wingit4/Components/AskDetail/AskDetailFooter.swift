@@ -8,18 +8,17 @@
 import SwiftUI
 
 struct AskDetailFooter: View {
-  @Binding var post: Post
+  var post: Post
+  
   @EnvironmentObject var askCardViewModel: AskCardViewModel
-  @EnvironmentObject var footerCellViewModel: FooterCellViewModel
-  @StateObject var shareButtonViewModel = ShareButtonViewModel()
-
+  @StateObject var footerCellViewModel = FooterCellViewModel()
 
     var body: some View {
       VStack {
         Divider()
         HStack {
           ReferButton(
-            post: $post,
+            post: post,
             showLabel: true
           )
           .padding(.leading, 15)
@@ -30,13 +29,14 @@ struct AskDetailFooter: View {
           )
           Spacer()
           ShareButton(
-            post: $post,
+            post: post,
             showLabel: true
           )
         }
         .padding(
           EdgeInsets(top: 3, leading: 0, bottom: 3, trailing: 15)
         )
+        .environmentObject(footerCellViewModel)
         Divider()
       }
   

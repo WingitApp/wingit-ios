@@ -12,7 +12,7 @@ import SPAlert
 
 struct ReferConnectionsList: View {
     @EnvironmentObject var referViewModel: ReferViewModel
-    @Binding var post: Post
+    var post: Post
   //  var postId: String
 
     var body: some View {
@@ -26,20 +26,18 @@ struct ReferConnectionsList: View {
                             .fontWeight(.heavy)
                             .foregroundColor(Color("Color1"))
                         Spacer()
-                        Button(action: {
-                            referViewModel.sendReferrals(
-                                askId: post.postId
-                            )
-                        },
-                               label: {
+                        Button(
+                          action: {
+                            referViewModel.sendReferrals(askId: post.postId)
+                          },
+                          label: {
                             Text("Send")
-                                .fontWeight(.heavy)
-                                .foregroundColor(Color(.systemTeal))
+                              .fontWeight(.heavy)
+                              .foregroundColor(Color(.systemTeal))
                         })
                     }
                     .padding([.horizontal,.top])
                     .padding(.bottom, 10)
-                    /// start list
                     List {
                         ForEach(self.referViewModel.allUsers, id: \.id) { user in
                             if (user.id != post.ownerId) {
@@ -47,10 +45,7 @@ struct ReferConnectionsList: View {
                             }
                         }
                     }
-                    ///end list
                 }
-//                .padding(.bottom,10)
-//                .padding(.top,10)
                 .background(Color.white)
             }
             

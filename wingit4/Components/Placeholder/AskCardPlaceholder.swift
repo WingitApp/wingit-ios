@@ -9,7 +9,20 @@ import SwiftUI
 //
 //
 struct AskCardPlaceholder: View {
-  let postPlaceholder = Post(
+  
+    var body: some View {
+        AskCard(
+          post: Placeholder.post,
+          isProfileView: true
+        )
+        .allowsHitTesting(false)
+        .redacted(reason: .placeholder)
+        .padding(.bottom, 15)
+    }
+}
+
+class Placeholder {
+  static let post = Post(
     caption: "This is a placeholder caption for a placeholer card.",
     likes: ["hello" : false],
     location: "",
@@ -21,16 +34,4 @@ struct AskCardPlaceholder: View {
     date: 1626821818.914922,
     likeCount: 0
   )
-  
-
-    var body: some View {
-        AskCard(
-          post: postPlaceholder,
-          isProfileView: true
-        )
-        .allowsHitTesting(false)
-//        .foregroundColor(Color(.orange))
-        .redacted(reason: .placeholder)
-        .padding(.bottom, 15)
-    }
 }

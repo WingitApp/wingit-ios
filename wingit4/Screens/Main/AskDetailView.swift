@@ -9,27 +9,36 @@ import SwiftUI
 
 struct AskDetailView: View {
     @StateObject var commentViewModel = CommentViewModel()
-    @Binding var post: Post
-    
+    @StateObject var askCardViewModel = AskCardViewModel()
+    @StateObject var askMenuViewModel = AskMenuViewModel()
+  
+    var postId: String?
+    var post: Post?
+    var isProfileView: Bool = false
+  
   
     var body: some View {
  
       VStack(alignment: .leading) {
         ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
-          AskDetailCard(post: $post)
-          CommentList(post: $post)
+          AskDetailCard(post: askCardViewModel.post)
+          CommentList(post: askCardViewModel.post)
           Spacer()
         }
-        CommentInput(post: $post)
+        CommentInput(post: askCardViewModel.post)
       }
-      .padding(.top, -10)
+      .redacted(reason: self.askCardViewModel.isLoadingPost ? .placeholder :[])
+      .environmentObject(askCardViewModel)
+      .environmentObject(askMenuViewModel)
       .environmentObject(commentViewModel)
+      .padding(.top, -10)
       .frame(
         width: UIScreen.main.bounds.size.width
-//        height: UIScreen.main.bounds.size.height
       )
       .onAppear {
-        self.commentViewModel.loadComments(postId: post.postId)
+        self.commentViewModel.loadComments(postId: askCardViewModel.post.postId)
+        self.askCardViewModel.initVM(postId: postId, post: post)
+        self.askCardViewModel.isProfileView = isProfileView
       }
       .onDisappear {
         if self.commentViewModel.listener != nil {

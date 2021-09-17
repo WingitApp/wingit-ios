@@ -10,31 +10,30 @@ import SwiftUI
 struct AskDetailCard: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
   @EnvironmentObject var askMenuViewModel: AskMenuViewModel
+  var post: Post
   
-  @Binding var post: Post
-  
-    var body: some View {
-      VStack(alignment: .leading) {
-        AskDetailHeader(post: $post)
-        AskDetailBody(post: $post)
-        // AskDetailRow shows the linear progression on bumps
+  var body: some View {
+    VStack(alignment: .leading) {
+      AskDetailHeader(post: post)
+      AskDetailBody(post: post)
+      // AskDetailRow shows the linear progression on bumps
 //        AskDetailRow(post: $post)
-        AskDetailFooter(post: $post)
-      }
-      .sheet(
-        isPresented: $askCardViewModel.isImageModalOpen,
-        content: {
-          ImageView(post: $post)
-            .environmentObject(askCardViewModel)
-            .environmentObject(askMenuViewModel)
-      })
-      .sheet(
-        isPresented: $askMenuViewModel.isReportModalOpen,
-        content: {
-          ReportInput(post: post, postId: post.postId)
-            .environmentObject(askCardViewModel)
-            .environmentObject(askMenuViewModel)
-      })
+      AskDetailFooter(post: post)
     }
+    .sheet(
+      isPresented: $askCardViewModel.isImageModalOpen,
+      content: {
+        ImageView(post: post)
+          .environmentObject(askCardViewModel)
+          .environmentObject(askMenuViewModel)
+    })
+    .sheet(
+      isPresented: $askMenuViewModel.isReportModalOpen,
+      content: {
+        ReportInput(post: post, postId: askCardViewModel.post.postId)
+          .environmentObject(askCardViewModel)
+          .environmentObject(askMenuViewModel)
+    })
+  }
   
 }
