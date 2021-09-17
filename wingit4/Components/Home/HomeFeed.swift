@@ -13,18 +13,17 @@ struct HomeFeed: View {
 
   var body: some View {
 
-    if homeViewModel.isLoading == false && homeViewModel.posts.count == 0 {
-        VStack{
-        Image("logo")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 40, height: 40)
-        Text("No Posts! Connect with your friends")
-            .font(.system(size: 12))
-            .fontWeight(.bold)
-            .foregroundColor(.gray)
-            .padding(.top, 25)
-        }.background(Color.white)
+    if homeViewModel.posts.count == 0 {
+        NavigationLink(destination: UsersView()) {
+            EmptyState(
+              title: "No posts!",
+              description: "Tap here and connect with your friends to start the chain.",
+              iconName: "person.badge.plus",
+              iconColor: Color("Color1"),
+              function: nil
+            )
+        }.buttonStyle(PlainButtonStyle())
+       
     } else {
         ScrollView(showsIndicators: false) {
           LazyVStack {

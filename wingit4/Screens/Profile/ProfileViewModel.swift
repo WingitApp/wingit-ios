@@ -24,7 +24,6 @@ class ProfileViewModel: ObservableObject {
     
     @Published var isConnected = false
     @Published var showOpenPosts = true
-    @Published var emptyState = false
   
     var openListener: ListenerRegistration!
     var closedListener: ListenerRegistration!

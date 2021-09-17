@@ -15,18 +15,13 @@ struct ReferralsView: View {
         NavigationView{
             ScrollView {
             if referralsViewModel.pendingReferrals.count == 0 && referralsViewModel.acceptedReferrals.count == 0 && referralsViewModel.wingedReferrals.count == 0 && referralsViewModel.closedReferrals.count == 0 {
-                VStack{
-                Image("logo")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 40, height: 40)
-                    .padding(.top, 350)
-                Text("No Referrals yet!")
-                    .font(.system(size: 12))
-                    .fontWeight(.bold)
-                    .foregroundColor(.gray)
-                    .padding(.top, 25)
-                }
+                EmptyState(
+                  title: "No Referrals!",
+                  description: "Tell your friends to wing asks to you.",
+                  iconName: "airplane",
+                  iconColor: Color("Color"),
+                  function: nil
+                ).padding(.top, 285)
             } else {
                   LazyVStack(alignment: .leading) {
       //                if !referralsViewModel.pendingReferrals.isEmpty {

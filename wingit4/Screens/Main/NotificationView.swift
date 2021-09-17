@@ -13,6 +13,15 @@ struct NotificationView: View {
     var body: some View {
        
         NavigationView {
+            if activityViewModel.activityArray.count == 0 {
+                EmptyState(
+                  title: "No notifications!",
+                  description: "Start interacting with friends to get the party started.",
+                  iconName: "mustache",
+                  iconColor: Color("Color1"),
+                  function: nil
+                )
+            } else {
             List {
                 if !activityViewModel.activityArray.isEmpty {
                     ForEach(self.activityViewModel.activityArray, id: \.activityId) { activity in
@@ -72,7 +81,7 @@ struct NotificationView: View {
                      self.activityViewModel.listener.remove()
                  }
               }
-
+        }
         }
       
     }

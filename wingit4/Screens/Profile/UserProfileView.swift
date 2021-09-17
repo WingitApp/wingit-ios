@@ -145,52 +145,66 @@ struct UserProfileView: View {
             .frame(width: UIScreen.main.bounds.width)
             .zIndex(1)
             
-            if userProfileViewModel.showOpenPosts && userProfileViewModel.openPosts.count != 0 {
-              LazyVStack {
-                ForEach(Array(userProfileViewModel.openPosts.enumerated()), id: \.element) { index, post in
-                    AskCard(
-                      post: post,
-                      isProfileView: true,
-                      index: index
-                    )
-                  }
-              }
-            } else if userProfileViewModel.closedPosts.count != 0 {
-              LazyVStack {
-                ForEach(Array(userProfileViewModel.closedPosts.enumerated()), id: \.element) { index, post in
-                    AskCard(
-                      post: post,
-                      isProfileView: true,
-                      index: index
-                    )
-                  }
-              }
-            } else if userProfileViewModel.openPosts.count == 0{
-                Image("logo")
-                   .resizable()
-                   .aspectRatio(contentMode: .fill)
-                   .frame(width: 40, height: 40)
-               Text("No Asks atm.")
-                   .font(.system(size: 12))
-                   .fontWeight(.bold)
-                   .foregroundColor(.gray)
-                   .padding(.top, 25)
+            if userProfileViewModel.showOpenPosts {
+                if !userProfileViewModel.isLoading && userProfileViewModel.openPosts.count == 0{
+                    if userProfileViewModel.closedPosts.count == 0{
+                        EmptyState(
+                          title: "Write your first post!",
+                          description: "Click on the Plus Tab to get started.",
+                          iconName: "pencil.and.outline",
+                          iconColor: Color(.systemTeal),
+                          function: nil
+                        )
+                    } else {
+                        EmptyState(
+                          title: "All done!",
+                          description: "All your asks have been closed.",
+                          iconName: "checkmark",
+                          iconColor: Color("Color1"),
+                          function: nil
+                        )
+                      }
+                } else {
+                    LazyVStack {
+                      ForEach(Array(userProfileViewModel.openPosts.enumerated()), id: \.element) { index, post in
+                          AskCard(
+                            post: post,
+                            isProfileView: true,
+                            index: index
+                          )
+                        }
+                    }
+                }
             } else {
-                Image("logo")
-                   .resizable()
-                   .aspectRatio(contentMode: .fill)
-                   .frame(width: 40, height: 40)
-               Text("No Closed Asks atm.")
-                   .font(.system(size: 12))
-                   .fontWeight(.bold)
-                   .foregroundColor(.gray)
-                   .padding(.top, 25)
+                if !userProfileViewModel.isLoading && userProfileViewModel.closedPosts.count == 0 {
+                    EmptyState(
+                      title: "Hm nothing was found...",
+                      description: "Close your posts to see them here!",
+                      iconName: "magnifyingglass",
+                      iconColor: Color(.systemBlue),
+                      function: nil
+                    )
+                } else {
+                    LazyVStack {
+                      ForEach(Array(userProfileViewModel.closedPosts.enumerated()), id: \.element) { index, post in
+                          AskCard(
+                            post: post,
+                            isProfileView: true,
+                            index: index
+                          )
+                        }
+                    }.onAppear {
+                        logToAmplitude(event: .viewOtherProfile)
+                        self.userProfileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.userProfileViewModel.user.id ?? self.userProfileViewModel.user.uid)
+                      }
             }
 
           }
+        
+        }
           .zIndex(1)
           .padding(.top, 230)
-        }
+      }
       }
 
     .navigationBarTitle(Text(userProfileViewModel.user.displayName ?? ""), displayMode: .inline)

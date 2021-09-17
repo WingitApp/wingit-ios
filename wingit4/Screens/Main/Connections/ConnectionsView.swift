@@ -71,6 +71,15 @@ struct ConnectionsView: View {
     
     var body: some View {
             NavigationView {
+                if connectionsViewModel.users.count == 0 {
+                    EmptyState(
+                      title: "No connections!",
+                      description: "Be the first to connect with them.",
+                      iconName: "person.badge.plus",
+                      iconColor: Color("Color1"),
+                      function: nil
+                    )
+                } else {
                 List(self.connectionsViewModel.users) { user in
                     HStack{
                     ConnectionRow(user: user)
@@ -78,7 +87,7 @@ struct ConnectionsView: View {
                 }
                 .navigationBarTitle(formatTitle(), displayMode: .inline)
                 .edgesIgnoringSafeArea([.top, .bottom])
-
+                }
             }
 //            .navigationBarHidden(true)
         .onAppear {
