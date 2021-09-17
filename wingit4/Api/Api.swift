@@ -8,15 +8,15 @@
 import Foundation
 
 class Api {
-    static var Ask = AskApi()
-    static var Device = DeviceApi()
-    static var User = UserApi()
-    static var Post = PostApi()
-    static var Comment = CommentApi()
-    static var Chat = ChatApi()
     static var Activity = ActivityApi()
-    static var Report = ReportApi()
+    static var Ask = AskApi()
+    static var Chat = ChatApi()
+    static var Comment = CommentApi()
     static var Connections = ConnectionsApi()
-    static var Referrals = ReferralsApi()
     static var Contacts = ContactsService()
+    static var Device = DeviceApi()
+    static var Post = PostApi()
+    static var Referrals = ReferralsApi()
+    static var Report = ReportApi()
+    static var User = UserApi()
 }
