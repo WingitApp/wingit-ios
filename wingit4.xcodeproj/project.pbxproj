@@ -164,6 +164,11 @@
 		650216B726E966A000B42BC6 /* FooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650216B626E966A000B42BC6 /* FooterCell.swift */; };
 		650216B926E9689300B42BC6 /* RollingNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650216B826E9689300B42BC6 /* RollingNumberView.swift */; };
 		6509E4FA26D6C214009CB74D /* Ask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6509E4F926D6C214009CB74D /* Ask.swift */; };
+		6522122126F54D6600A48B07 /* ContactsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522122026F54D6600A48B07 /* ContactsListView.swift */; };
+		6522122326F54E0900A48B07 /* ContactItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522122226F54E0900A48B07 /* ContactItem.swift */; };
+		6522122726F557B400A48B07 /* ContactDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522122626F557B400A48B07 /* ContactDetailView.swift */; };
+		6522122926F5584000A48B07 /* ContactDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522122826F5584000A48B07 /* ContactDetailViewModel.swift */; };
+		6522122B26F558D000A48B07 /* EditContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522122A26F558D000A48B07 /* EditContactView.swift */; };
 		6523D93426DC1F41007546F5 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6523D93326DC1F41007546F5 /* FirebaseFirestore */; };
 		6523D93626DDEB79007546F5 /* ActivityEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6523D93526DDEB78007546F5 /* ActivityEvent.swift */; };
 		6531838126B232640006D9E2 /* Amplitude in Frameworks */ = {isa = PBXBuildFile; productRef = 6531838026B232640006D9E2 /* Amplitude */; };
@@ -183,6 +188,7 @@
 		65F7314F26F3C91700A73781 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7314E26F3C91700A73781 /* StringExtensions.swift */; };
 		65F7315426F51FB400A73781 /* ContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315326F51FB400A73781 /* ContactsService.swift */; };
 		65F7315626F5276900A73781 /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315526F5276900A73781 /* Contacts.swift */; };
+		65F7315826F5295500A73781 /* ContactsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315726F5295500A73781 /* ContactsListViewModel.swift */; };
 		65FE040426E9FE3200333609 /* ComposePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE040326E9FE3200333609 /* ComposePostView.swift */; };
 /* End PBXBuildFile section */
 
@@ -340,6 +346,11 @@
 		6502C14226C4FF52007C04C9 /* SecretsDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsDebug.xcconfig; sourceTree = "<group>"; };
 		6502C14326C5024C007C04C9 /* SecretsRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsRelease.xcconfig; sourceTree = "<group>"; };
 		6509E4F926D6C214009CB74D /* Ask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ask.swift; sourceTree = "<group>"; };
+		6522122026F54D6600A48B07 /* ContactsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactsListView.swift; path = "../../../../../wingit/wingit-ios/wingit4/Components/Contacts/ContactsListView.swift"; sourceTree = "<group>"; };
+		6522122226F54E0900A48B07 /* ContactItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactItem.swift; path = "../../../../../wingit/wingit-ios/wingit4/Components/Contacts/ContactItem.swift"; sourceTree = "<group>"; };
+		6522122626F557B400A48B07 /* ContactDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactDetailView.swift; path = "../../../../../wingit/wingit-ios/wingit4/Components/Contacts/ContactDetailView.swift"; sourceTree = "<group>"; };
+		6522122826F5584000A48B07 /* ContactDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactDetailViewModel.swift; path = "../../../../wingit/wingit-ios/wingit4/ViewModel/ContactDetailViewModel.swift"; sourceTree = "<group>"; };
+		6522122A26F558D000A48B07 /* EditContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditContactView.swift; path = "../../../../../wingit/wingit-ios/wingit4/Components/Contacts/EditContactView.swift"; sourceTree = "<group>"; };
 		6523D93526DDEB78007546F5 /* ActivityEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityEvent.swift; sourceTree = "<group>"; };
 		6531022F26D4CB0B00EEF041 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6531838226B238AA0006D9E2 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
@@ -358,6 +369,7 @@
 		65F7314E26F3C91700A73781 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		65F7315326F51FB400A73781 /* ContactsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsService.swift; sourceTree = "<group>"; };
 		65F7315526F5276900A73781 /* Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
+		65F7315726F5295500A73781 /* ContactsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewModel.swift; sourceTree = "<group>"; };
 		65FE040326E9FE3200333609 /* ComposePostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposePostView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -644,6 +656,7 @@
 				3B7AF06226719E74003BCCF3 /* Auth */,
 				151A3C8926D328F400A39FAF /* Ask */,
 				15F7E8AA26E848ED00E5238F /* AskDetail */,
+				6522121F26F54D4F00A48B07 /* Contacts */,
 				15E4907C26E84BD700B25B56 /* Form */,
 				15F7E8BB26E8490100E5238F /* Comments */,
 				15DA39B026DC5C3B0080193E /* Placeholder */,
@@ -701,6 +714,8 @@
 				3B7AF0922671D474003BCCF3 /* ComposePostViewModel.swift */,
 				3B7AF0B22672C04A003BCCF3 /* ChatViewModel.swift */,
 				65A9EF9826DF0B2500E81CBF /* ConnectionsViewModel.swift */,
+				6522122826F5584000A48B07 /* ContactDetailViewModel.swift */,
+				65F7315726F5295500A73781 /* ContactsListViewModel.swift */,
 				654DA41826BC7BD2002864B8 /* MainViewModel.swift */,
 				3B7AF0BA2672CACE003BCCF3 /* MessageViewModel.swift */,
 				3B7AF0862671CA69003BCCF3 /* UsersViewModel.swift */,
@@ -738,13 +753,13 @@
 				3B7AF04226718AF1003BCCF3 /* AuthService.swift */,
 				3B7AF0B42672C15A003BCCF3 /* ChatApi.swift */,
 				65A9EF9926DF0B2500E81CBF /* ConnectionsApi.swift */,
+				65F7315326F51FB400A73781 /* ContactsService.swift */,
 				3B5BDB50268F82790034B18C /* fetchUser.swift */,
 				3BF143E526819E480093488D /* NotificationsApi.swift */,
 				3B7AF0942671D5FA003BCCF3 /* PostApi.swift */,
 				3B7AF04F26718D42003BCCF3 /* StorageService.swift */,
 				3B7AF08A2671CB68003BCCF3 /* UserApi.swift */,
 				3BE61D6E26E08A0D0078C6CF /* ReferralsApi.swift */,
-				65F7315326F51FB400A73781 /* ContactsService.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -830,6 +845,17 @@
 				6502C14326C5024C007C04C9 /* SecretsRelease.xcconfig */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		6522121F26F54D4F00A48B07 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				6522122226F54E0900A48B07 /* ContactItem.swift */,
+				6522122026F54D6600A48B07 /* ContactsListView.swift */,
+				6522122626F557B400A48B07 /* ContactDetailView.swift */,
+				6522122A26F558D000A48B07 /* EditContactView.swift */,
+			);
+			path = Contacts;
 			sourceTree = "<group>";
 		};
 		653BBDE926D485FA002F6A2E /* Firebase */ = {
@@ -995,6 +1021,7 @@
 				3B7AF04126718A4D003BCCF3 /* SignupViewModel.swift in Sources */,
 				3B75E3D526715CAC002F3108 /* SignupText.swift in Sources */,
 				65A9EF9B26DF0B2500E81CBF /* ConnectionsViewModel.swift in Sources */,
+				6522122326F54E0900A48B07 /* ContactItem.swift in Sources */,
 				15DFD07C26ED37A4002CBE31 /* CloseButton.swift in Sources */,
 				3B96DD6A26DF494800015EED /* ReferHeader.swift in Sources */,
 				151A3C8326D1B0D200A39FAF /* UserAvatar.swift in Sources */,
@@ -1090,10 +1117,13 @@
 				3BFE30F726EA8CAA005543A0 /* OnboardingView.swift in Sources */,
 				1524FCEF26D75B5D0000629C /* CommentButton.swift in Sources */,
 				3B75E3D326715C5A002F3108 /* SigninButton.swift in Sources */,
+				65F7315826F5295500A73781 /* ContactsListViewModel.swift in Sources */,
+				6522122B26F558D000A48B07 /* EditContactView.swift in Sources */,
 				65A7DC0A26ED9F2E0032C739 /* PersonalClosedPostsView.swift in Sources */,
 				1524FCD926D7545F0000629C /* Connections.swift in Sources */,
 				657F35D626DE1D8D0092A1B2 /* Comment_v2.swift in Sources */,
 				3B7AF0932671D474003BCCF3 /* ComposePostViewModel.swift in Sources */,
+				6522122126F54D6600A48B07 /* ContactsListView.swift in Sources */,
 				657F35DB26DEA0C00092A1B2 /* Device.swift in Sources */,
 				3B75E3E526716787002F3108 /* SignupButton.swift in Sources */,
 				15F7E8C026E8490100E5238F /* UserComment.swift in Sources */,
@@ -1131,6 +1161,7 @@
 				15F7E8BF26E8490100E5238F /* ReferralComment.swift in Sources */,
 				1524FCC826D753170000629C /* AskMenu.swift in Sources */,
 				3B7AF0852671C08F003BCCF3 /* SearchBar.swift in Sources */,
+				6522122926F5584000A48B07 /* ContactDetailViewModel.swift in Sources */,
 				3B7AF0C32673EEA0003BCCF3 /* ActivityApi.swift in Sources */,
 				15F7E87C26E8436100E5238F /* TextCell.swift in Sources */,
 				3B928C3B269EA383007A34B8 /* ImageView.swift in Sources */,
@@ -1138,6 +1169,7 @@
 				65F7315426F51FB400A73781 /* ContactsService.swift in Sources */,
 				65F7314F26F3C91700A73781 /* StringExtensions.swift in Sources */,
 				65F7315626F5276900A73781 /* Contacts.swift in Sources */,
+				6522122726F557B400A48B07 /* ContactDetailView.swift in Sources */,
 				151A3C9426D5679800A39FAF /* AskDoneToggle.swift in Sources */,
 				3B7AF06D2671A01B003BCCF3 /* CommentRow.swift in Sources */,
 				3B0DFBDE26B78D86008CE0D1 /* UpdatePhotoVM.swift in Sources */,

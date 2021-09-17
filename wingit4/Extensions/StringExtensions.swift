@@ -2,7 +2,7 @@
 //  StringExtensions.swift
 //  wingit4
 //
-//  Created by (310) 748-1434 on 9/16/21.
+//  Created by Daniel Yee on 9/16/21.
 //
 
 import Foundation

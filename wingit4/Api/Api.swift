@@ -18,4 +18,5 @@ class Api {
     static var Report = ReportApi()
     static var Connections = ConnectionsApi()
     static var Referrals = ReferralsApi()
+    static var Contacts = ContactsService()
 }
