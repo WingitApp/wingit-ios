@@ -17,6 +17,8 @@ class ReferralsViewModel: ObservableObject {
     @Published var acceptedReferrals: [Referral] = []
     @Published var wingedReferrals: [Referral] = []
     @Published var closedReferrals: [Referral] = []
+    @Published var destination: AnyView = AnyView(EmptyView())
+    @Published var isLinkActive: Bool = false
     
     var pendingListener: ListenerRegistration!
     var acceptedListener: ListenerRegistration!
@@ -24,7 +26,6 @@ class ReferralsViewModel: ObservableObject {
     var closedListener: ListenerRegistration!
     
     func getReferrals() {
-        
         getPendingReferrals()
         getAcceptedReferrals()
         getWingedReferrals()
@@ -158,11 +159,15 @@ class ReferralsViewModel: ObservableObject {
       }
     }
     
-    func acceptReferral(referral: Referral, onSuccess: @escaping() -> Void) {
-        guard let referralId = referral.id, let currentUser = Auth.auth().currentUser else { return }
-        Api.Referrals.updateStatus(referralId: referralId, newStatus: .accepted)
-        let text = "\(referral.sender?.displayName ?? "") invited \(currentUser.displayName ?? "") to help."
-        postInvitedReferralComment(text: text, referral: referral, onSuccess: onSuccess)
+    func acceptReferral(referral: Referral, post: Binding<Post>) {
+//        guard let referralId = referral.id, let currentUser = Auth.auth().currentUser else { return }
+//        Api.Referrals.updateStatus(referralId: referralId, newStatus: .accepted)
+//        let text = "\(referral.sender?.displayName ?? "") invited \(currentUser.displayName ?? "") to help."
+//        postInvitedReferralComment(text: text, referral: referral) {
+            self.destination = AnyView(AskDetailCard(post: post))
+        self.isLinkActive = true
+        print("isLikeActive:", self.isLinkActive)
+//        }
     }
     
     func postInvitedReferralComment(
