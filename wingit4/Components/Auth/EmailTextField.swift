@@ -15,5 +15,6 @@ struct EmailTextField: View {
        
         TextField("email", text: $email)
         .modifier(TextFieldModifier())
+        .disableAutocorrection(true)
     }
 }

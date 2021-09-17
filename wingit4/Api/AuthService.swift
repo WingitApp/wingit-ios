@@ -14,8 +14,8 @@ import FirebaseStorage
 class AuthService {
     
     static func signInUser(email: String, password: String, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-                if !String.isValidEmailAddress(emailAddressString: email) {
-                    onError("Email input is not valid")
+                if !String.isValidEmailAddress(emailAddress: email) {
+                    onError("Email input is not a valid email address.")
                     return
                 }
                Auth.auth().signIn(withEmail: email.normalizeEmail(), password: password) { (authData, error) in
@@ -37,10 +37,14 @@ class AuthService {
     }
     
     static func signupUser(firstName: String, lastName: String, username: String, email: String, password: String, imageData: Data, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-                if !String.isValidEmailAddress(emailAddressString: email) {
-                    onError("Email input is not valid")
+                if !String.isValidEmailAddress(emailAddress: email) {
+                    onError("Email input is not a valid email address.")
                     return
                 }
+        if !String.isValidUsername(username: username) {
+            onError("Username must be alphanumeric or underscores with no whitespaces.")
+            return
+        }
                 let normalizedEmail = email.normalizeEmail()
                 Auth.auth().createUser(withEmail: normalizedEmail, password: password) { (authData, error) in
                     if error != nil {

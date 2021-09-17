@@ -13,6 +13,7 @@ struct FirstNameTextField: View {
      var body: some View {
         TextField("first name", text: $firstName)
          .modifier(TextFieldModifier())
+         .disableAutocorrection(true)
      }
 }
 
@@ -22,6 +23,7 @@ struct LastNameTextField: View {
      var body: some View {
         TextField("last name", text: $lastName)
          .modifier(TextFieldModifier())
+         .disableAutocorrection(true)
      }
 }
 
@@ -31,5 +33,6 @@ struct UsernameTextField: View {
      var body: some View {
         TextField("username", text: $username)
          .modifier(TextFieldModifier())
+         .disableAutocorrection(true)
      }
 }
