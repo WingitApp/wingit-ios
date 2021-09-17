@@ -91,13 +91,11 @@ struct UserProfileView: View {
             VStack {
               // user name
               HStack {
-                Button(action: {Api.User.updateField(field: "firstName", user: userProfileViewModel.user ) }) {
+               
                   Text(userProfileViewModel.user.firstName ?? "").font(.title).bold().foregroundColor(Color("bw"))
-                }
                 
-                Button(action: {Api.User.updateField(field: "lastName", user: userProfileViewModel.user) }) {
                   Text(userProfileViewModel.user.lastName ?? "").font(.title).bold().foregroundColor(Color("bw"))
-                }
+                
               }
               .frame(width: UIScreen.main.bounds.width)
               .background(
