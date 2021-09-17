@@ -21,6 +21,7 @@ struct AskDetailCard: View {
         AskDetailBody(post: $post)
         // AskDetailRow shows the linear progression on bumps
         WingersRow(wingers: $askCardViewModel.wingers)
+          .padding(.bottom, 10)
         AskDetailFooter(post: $post)
       }
       .environmentObject(referViewModel)

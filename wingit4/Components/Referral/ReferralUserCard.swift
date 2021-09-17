@@ -14,12 +14,8 @@ struct ReferralUserCard: View {
     var isChecked: Bool = false
   
     func onTapGesture() {
-      //  print("onTap called")
-//      if self.referViewModel.allReferralRecipientIds.contains(user.id) {
-//            return
-//        }
-//
-//      self.referViewModel.handleUserSelect(userId: user.id)
+      print("card tapped")
+      self.referViewModel.handleUserSelect(user: user)
     }
     
     var body: some View {
@@ -41,13 +37,13 @@ struct ReferralUserCard: View {
             ZStack{
                 Circle()
                   .stroke(
-                    isChecked || self.referViewModel.selectedUsers.contains(user.id)
+                  isChecked
                       ? Color(.systemTeal)
                       : Color.gray,
                     lineWidth: 1
                   )
                   .frame(width: 25, height: 25)
-              if isChecked || self.referViewModel.selectedUsers.contains(user.id) {
+              if isChecked {
                   Image(systemName: "checkmark.circle.fill")
                       .font(.system(size:25))
                     .foregroundColor(Color(.systemTeal))
@@ -58,7 +54,7 @@ struct ReferralUserCard: View {
           EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
         )
         .contentShape(Rectangle())
-        .opacity(self.referViewModel.selectedUsers.contains(user.id) ? 0.3 : 1)
+        .opacity(isChecked ? 0.7 : 1)
         .onTapGesture(perform: onTapGesture)
       }
 

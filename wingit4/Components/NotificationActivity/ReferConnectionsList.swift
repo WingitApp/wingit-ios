@@ -16,10 +16,9 @@ struct ReferConnectionsList: View {
   //  var postId: String
   
     func onSend() {
-      print("onSend")
-//      referViewModel.sendReferrals(
-//          askId: post.postId
-//      )
+      referViewModel.sendReferrals(
+          askId: post.postId
+      )
     }
   
     func onAppearLoadConnectionsList() {
@@ -66,14 +65,24 @@ struct ReferConnectionsList: View {
                     Array(self.referViewModel.connections.enumerated()),
                     id: \.element
                   ) { index, user in
-                        ReferralUserCard(user: user)
+                        ReferralUserCard(
+                          user: user,
+                          isChecked: (
+                            self.referViewModel.wingers.contains(user) ||
+                            self.referViewModel.selectedUsers.contains(user)
+                          )
+                        )
                     }
                   ForEach(
                     Array(self.referViewModel.wingers.enumerated()),
                     id: \.element
                   ) { index, user in
-                      ReferralUserCard(user: user, isChecked: true)
-                  }.opacity(0.7)
+                      ReferralUserCard(
+                        user: user,
+                        isChecked: true
+                      )
+                      .allowsHitTesting(false)
+                  }
                 }
                 .padding(.leading, -15)
               }

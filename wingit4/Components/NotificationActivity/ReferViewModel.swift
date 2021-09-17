@@ -17,7 +17,7 @@ class ReferViewModel : ObservableObject, Identifiable {
     
     @Published var connections: [User] = []
     @Published var wingers: [User] = []
-    @Published var selectedUsers: [String?] = []
+    @Published var selectedUsers: [User] = []
 
     
     @Published var isReferListOpen: Bool = false
@@ -32,13 +32,13 @@ class ReferViewModel : ObservableObject, Identifiable {
       }
     }
     
-    func handleUserSelect(userId: String?) {
-        guard let userId = userId else { return }
-        if selectedUsers.contains(userId) {
-            self.selectedUsers.removeAll(where: { $0 == userId })
-        } else {
-            self.selectedUsers.append(userId)
-        }
+  func handleUserSelect(user: User) {
+      guard let userId = user.id else { return }
+      if selectedUsers.contains(user) {
+        self.selectedUsers.removeAll(where: { $0 == user })
+      } else {
+          self.selectedUsers.append(user)
+      }
 
     }
     
