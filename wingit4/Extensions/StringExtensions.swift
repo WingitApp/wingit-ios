@@ -23,15 +23,6 @@ extension String {
         return substringArray
     }
     
-    private func regExprOfDetectingStringsBetween(str1: String, str2: String) -> String {
-            return "(?:\(str1))(.*?)(?:\(str2))"
-        }
-        
-    func replacingOccurrences(from subString1: String, to subString2: String, with replacement: String) -> String {
-        let regExpr = regExprOfDetectingStringsBetween(str1: subString1, str2: subString2)
-        return replacingOccurrences(of: regExpr, with: replacement, options: .regularExpression)
-    }
-    
     func normalizeEmail() -> String {
         let email = self
         let trimmedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -50,16 +41,6 @@ extension String {
             let emailWithoutPlus = emailWithoutPeriods.split(separator: "+")[0]
             // put back the domain name
             return emailWithoutPlus + "@" + chunks[1]
-        } else {
-          return str
-        }
-      }
-    
-    func removePlusAlias() -> String {
-        let str = self
-        let chunks = str.split(separator: "+")
-        if chunks.count > 1 {
-            return String(chunks[0])
         } else {
           return str
         }
