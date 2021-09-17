@@ -48,6 +48,14 @@ struct HomeView: View {
                 .foregroundColor(.gray)
             }
         })
+        .navigationBarItems(trailing:
+          Button(action: {}) {
+            NavigationLink(destination: ContactsListView()) {
+              Image(systemName: "person.3")
+                .imageScale(Image.Scale.medium)
+                .foregroundColor(.gray)
+            }
+        })
       }.environmentObject(homeViewModel)
     }
 }

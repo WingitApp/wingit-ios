@@ -13,10 +13,12 @@ struct UsersView: View {
     
     @ObservedObject var usersViewModel = UsersViewModel()
 
-
     var body: some View {
                 VStack {
-                    SearchBar(text: $usersViewModel.searchText, onSearchButtonChanged: usersViewModel.searchTextDidChange)
+                    SearchBar(
+                        text: $usersViewModel.searchText,
+                        placeholder: "Search for users",
+                        onSearchButtonChanged: usersViewModel.searchTextDidChange)
 
                     List {
                         if !usersViewModel.isLoading {
