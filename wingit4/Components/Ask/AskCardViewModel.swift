@@ -92,7 +92,7 @@ class AskCardViewModel: ObservableObject {
       self.postOwner = postOwner
 //      self.destination = AnyView(UserProfileView(userId: self.post!.ownerId))
     } onError: {
-        print("errror")
+        print("error")
     }
   }
   

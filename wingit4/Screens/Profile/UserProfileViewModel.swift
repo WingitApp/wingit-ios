@@ -48,7 +48,7 @@ class UserProfileViewModel: ObservableObject {
       }
      },
      onError: {
-         print("errror")
+         print("error")
      }
    )
   }
