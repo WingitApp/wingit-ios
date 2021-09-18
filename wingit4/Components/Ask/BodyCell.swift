@@ -15,7 +15,9 @@ struct BodyCell: View {
     var body: some View {
       HStack{
           VStack(alignment: .leading, spacing: 10){
-            Text(post.caption).modifier(BodyStyle())
+            Text(post.caption)
+              .fontWeight(.medium)
+              .modifier(BodyStyle())
             if post.mediaUrl != "" {
                 Button(action: {
                     withAnimation(.easeInOut){
@@ -31,7 +33,10 @@ struct BodyCell: View {
                     )
                 })
             }
-          }.padding(.horizontal).padding(.bottom, 2)
+
+          }.padding(.horizontal)
+          .padding(.bottom, 2)
+        
           Spacer(minLength: 0)
       }
       .padding(.top, 10)

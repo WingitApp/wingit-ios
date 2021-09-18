@@ -125,7 +125,6 @@ class PostApi {
                     
                     var wingers = [User]()
                     guard let winger = try? documentChange.document.data(as: User.self) else {return}
-                      print("winger added:", winger)
                       onAddition(winger)
                       wingers.append(winger)
                       onSuccess(wingers)

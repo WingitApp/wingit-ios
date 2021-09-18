@@ -33,10 +33,7 @@ struct WingersRow: View {
   }
   
   func getPaddingByIndex(index: Int) -> CGFloat {
-    if index > 0 {
-      return -15
-    }
-    return 0
+    return index > 0 ? -15 : 0
   }
   
  
@@ -91,7 +88,7 @@ class WingerTextDescription {
     } else if wingers.count == 2 {
       return (
         Text(wingers[0].displayName!.capitalized).bold() +
-        Text(" and ") +
+        Text(" & ").bold() +
         Text(wingers[1].displayName!.capitalized).bold() +
         Text(" have winged this request.")
       )

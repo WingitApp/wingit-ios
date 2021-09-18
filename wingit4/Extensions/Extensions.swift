@@ -393,13 +393,31 @@ extension Color {
   static let mintGreen: Color = Color(red: 241 / 255, green: 255 / 255, blue: 250 / 255)
   static let carnationRed: Color = Color(red: 253 / 255, green: 84 / 255, blue: 89 / 255)
   static let apricotWhite: Color = Color(red: 248 / 255, green: 241 / 255, blue: 228 / 255)
-  static let tolopeaViolet: Color = Color(red: 35 / 255, green: 30 / 255, blue: 50 / 255)
   
   static let lightGray: Color = Color(red: 238 / 255, green: 241 / 255, blue: 243 / 255)
   static let wingitBlue: Color = Color(red: 33 / 255, green: 113 / 255, blue: 150 / 255)
   
   static let backgroundGray: Color = Color(red: 245 / 255, green: 247 / 255, blue: 248 / 255)
   
+  static let backgroundBlueGray: Color = Color(red: 240 / 255, green: 247 / 255, blue: 251 / 255)
+  
+  static let borderGray: Color = Color(red: 216 / 255, green: 216 / 255, blue: 217 / 255)
+  
+  
+  // TAG Color
+  static let uiviolet: Color = Color(red: 69 / 255, green: 73 / 255, blue: 255 / 255)
+  static let uilightViolet: Color = Color(red: 234 / 255, green: 235 / 255, blue: 254 / 255)
+  
+  static let uiblue: Color = Color(red: 118 / 255, green: 153 / 255, blue: 173 / 255)
+  static let uilightBlue: Color = Color(red: 240 / 255, green: 251 / 255, blue: 255 / 255)
+  
+  static let uigreen: Color = Color(red: 102 / 255, green: 137 / 255, blue: 74 / 255)
+  static let uilightGreen: Color = Color(red: 241 / 255, green: 255 / 255, blue: 230 / 255)
+  
+  static let uilightOrange: Color = Color(red: 255 / 255, green: 245 / 255, blue: 239 / 255)
+  static let uiorange: Color = Color(red: 175 / 255, green: 130 / 255, blue: 107 / 255)
+
+
 }
 // bottom only corners....
 

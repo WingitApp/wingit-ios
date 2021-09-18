@@ -83,10 +83,10 @@ class AskCardViewModel: ObservableObject {
     })
   }
   
-  func getColorByIndex(index: Int) -> Color {
-    let modIndex = index % 4
-    
-    switch(modIndex) {
+//  func getColorByIndex(index: Int) -> Color {
+//    let modIndex = index % 5
+//
+//    switch(modIndex) {
 //      case 0:
 //        return Color.downeyGreen
 //      case 1:
@@ -94,13 +94,13 @@ class AskCardViewModel: ObservableObject {
 //      case 2:
 //        return Color.carnationRed
 //      case 3:
-//        return Color.tolopeaViolet
+//        return Color.violet
 //      case 4:
-//        return Color.cardGreen
-      default:
-        return Color.white
-    }
-  }
+//        return Color.orange
+//      default:
+//        return Color.white
+//    }
+//  }
   
   
   func hidePost() {

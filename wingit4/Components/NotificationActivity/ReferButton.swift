@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ReferButton: View {
     @EnvironmentObject var referViewModel: ReferViewModel
+    @EnvironmentObject var askCardViewModel: AskCardViewModel
+
     @Binding var post: Post
     var showLabel: Bool = false
   //  @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
@@ -18,10 +20,14 @@ struct ReferButton: View {
             referViewModel.isReferListOpen.toggle()
         },
         label: {
-          Image(IMAGE_LOGO)
-            .resizable()
-            .scaledToFit()
-            .frame(width: 35, height: 28)
+          Text(Image(systemName: "paperplane"))
+            .fontWeight(.light)
+            .modifier(IconButtonStyle())
+          if self.askCardViewModel.wingers.count > 0 {
+            Text("\(askCardViewModel.wingers.count.formatUsingAbbrevation())")
+              .font(.caption)
+              .foregroundColor(Color.wingitBlue)
+          }
           if self.showLabel {
             Text("Wing")
               .font(.caption)

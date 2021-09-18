@@ -34,7 +34,13 @@ struct AskCard: View {
     if !self.askCardViewModel.isHidden {
       VStack {
         // need to place above to prevent event propagation
-        HeaderCell(post: $post)
+        HStack {
+          WingerCountSummary( wingers: self.$askCardViewModel.wingers)
+          Spacer()
+        }
+        .padding(EdgeInsets(top: 10, leading: 15, bottom: 5, trailing: 15))
+        Divider()
+        HeaderCell(post: $post, index: index)
         NavigationLink( destination:
           AskDetailView(post: $post)
             .environmentObject(askCardViewModel)
@@ -53,7 +59,8 @@ struct AskCard: View {
         .buttonStyle(FlatLinkStyle())
       }
       .background(
-        self.askCardViewModel.getColorByIndex(index: index).opacity(1)
+//        self.askCardViewModel.getColorByIndex(index: index).opacity(1)
+        Color.white
       )
       .modifier(CardStyle())
       .modifier(FeedItemShadow())
