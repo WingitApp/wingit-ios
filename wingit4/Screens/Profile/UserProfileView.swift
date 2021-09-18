@@ -90,9 +90,9 @@ struct UserProfileView: View {
               // user name
               HStack {
                
-                  Text(userProfileViewModel.user.firstName ?? "").font(.title).bold().foregroundColor(Color("bw"))
+                Text(userProfileViewModel.user.firstName ?? "").font(.title).bold().foregroundColor(Color.black)
                 
-                  Text(userProfileViewModel.user.lastName ?? "").font(.title).bold().foregroundColor(Color("bw"))
+                Text(userProfileViewModel.user.lastName ?? "").font(.title).bold().foregroundColor(Color.black)
                 
               }
               .frame(width: UIScreen.main.bounds.width)

@@ -76,11 +76,11 @@ struct ProfileView: View {
             VStack {
               HStack {
                 Button(action: {Api.User.updateField(field: "firstName", user: session.currentUser) }) {
-                  Text(session.currentUser?.firstName ?? "").font(.title).bold().foregroundColor(Color("bw"))
+                    Text(session.currentUser?.firstName ?? "").font(.title).bold().foregroundColor(Color.black)
                 }
                 
                 Button(action: {Api.User.updateField(field: "lastName", user: session.currentUser) }) {
-                  Text(session.currentUser?.lastName ?? "").font(.title).bold().foregroundColor(Color("bw"))
+                    Text(session.currentUser?.lastName ?? "").font(.title).bold().foregroundColor(Color.black)
                 }
               }
               .frame(width: UIScreen.main.bounds.width)

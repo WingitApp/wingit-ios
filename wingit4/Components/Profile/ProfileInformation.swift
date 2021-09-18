@@ -29,11 +29,11 @@ struct ProfileInformation: View {
                        }).padding(.leading, -15).padding(.trailing, -15)
                 HStack {
                     Button(action: {Api.User.updateField(field: "firstName", user: user)}) {
-                        Text(user?.firstName ?? "").font(.title).bold().foregroundColor(Color("bw"))
+                        Text(user?.firstName ?? "").font(.title).bold().foregroundColor(Color.black)
                     }
                     
                     Button(action: {Api.User.updateField(field: "lastName", user: user)}) {
-                        Text(user?.lastName ?? "").font(.title).bold().foregroundColor(Color("bw"))
+                        Text(user?.lastName ?? "").font(.title).bold().foregroundColor(Color.black)
                     }
                 }
                              
@@ -46,7 +46,7 @@ struct ProfileInformation: View {
                   .frame(width: 430, height: 330)
                   .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
                   
-                Text(user?.displayName ?? "").font(.title).bold().foregroundColor(Color("bw"))
+                Text(user?.displayName ?? "").font(.title).bold().foregroundColor(Color.black)
                 Text(user?.bio ?? "").font(.caption).foregroundColor(.gray)
             }
             
