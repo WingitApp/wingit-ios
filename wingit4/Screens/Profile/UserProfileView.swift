@@ -156,7 +156,7 @@ struct UserProfileView: View {
                     } else {
                         EmptyState(
                           title: "All done!",
-                          description: "All your asks have been closed.",
+                          description: "All asks have been closed.",
                           iconName: "checkmark",
                           iconColor: Color("Color1"),
                           function: nil
@@ -177,7 +177,7 @@ struct UserProfileView: View {
                 if !userProfileViewModel.isLoading && userProfileViewModel.closedPosts.count == 0 {
                     EmptyState(
                       title: "Hm nothing was found...",
-                      description: "Close your posts to see them here!",
+                      description: "No Closed posts to see!",
                       iconName: "magnifyingglass",
                       iconColor: Color(.systemBlue),
                       function: nil
