@@ -11,6 +11,7 @@ struct ProfileDetailView: View {
     
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var profileViewModel: ProfileViewModel
+    @State var toggle: Bool = false
     
     func calculateHeight(minHeight: CGFloat, maxHeight: CGFloat, yOffset: CGFloat) -> CGFloat {
       // If scrolling up, yOffset will be a negative number
@@ -29,9 +30,7 @@ struct ProfileDetailView: View {
             
         VStack(alignment: .leading, spacing: 5){
         VStack(alignment: .center, spacing: 10){
-            Text("jolly").bold().foregroundColor(.gray)
-            Text("Skater").font(.caption).foregroundColor(.gray)
-            Divider().frame(width: 75).padding(.bottom, 5)
+           
             Text("Hi I love to eat, jump, laugh, play the guitar, think, talk, and do nothing. If you want to talk about these things please hit me up. :)").font(.caption).foregroundColor(.gray).padding()
             HStack{
                 Text("Interests:").bold().font(.caption).foregroundColor(.gray).padding(.leading)
@@ -40,10 +39,14 @@ struct ProfileDetailView: View {
         }
             HStack{
                 Image(systemName: "link").foregroundColor(.gray).padding(.leading).padding(.top, 10)
-                Image(systemName: "arrowtriangle.down.fill").foregroundColor(.gray).padding(.top, 10).font(.caption2)
+                
+                Image(systemName: self.toggle ?  "arrowtriangle.down.fill" : "arrowtriangle.forward.fill").foregroundColor(.gray).padding(.top, 10).font(.caption2)
+                    .onTapGesture{toggle.toggle()}
             }
+            
+            if toggle == true {
             Text("sub links").padding(.horizontal, 25).font(.caption).foregroundColor(.gray)
-            Text("sub links").padding(.horizontal, 25).font(.caption).foregroundColor(.gray)
+                Text("sub links").padding(.horizontal, 25).font(.caption).foregroundColor(.gray)    }
             Image("fb")
                 .resizable()
                 .scaledToFit()

@@ -49,6 +49,7 @@ class ReferralsApi {
     }
     
     func getReferralsByAskId(askId: String, onSuccess: @escaping(_ recipientIds: [String]) -> Void) {
+        
         Ref.FS_COLLECTION_REFERRALS.whereField("askId", isEqualTo: askId)
             .getDocuments { (snapshot, error) in
                 if let error = error {

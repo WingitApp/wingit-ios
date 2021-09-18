@@ -7,10 +7,22 @@
 
 import SwiftUI
 import Firebase
+import FirebaseAuth
 
 struct ConnectionRow: View {
+  
+    @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
+    @ObservedObject var userProfileViewModel: UserProfileViewModel
+    
     var user: User
-    @EnvironmentObject var userProfileViewModel: UserProfileViewModel
+    var userId: String
+    
+    func onTapGesture() {
+        if self.connectionsViewModel.allConnectRecipientIds.contains(userId) {
+            return
+        }
+        self.connectionsViewModel.handleUserSelect(userId: userId)
+    }
     
     var body: some View {
     
@@ -32,26 +44,30 @@ struct ConnectionRow: View {
                 .foregroundColor(Color(.systemTeal))
               }.padding(.leading, 10)
           }.padding(10)
-        
+
         ZStack{
-            if userProfileViewModel.userBlocked == false {
-              ConnectButtonList(
-                user: user,
-                isConnected: $userProfileViewModel.isConnected, sentPendingRequest: $userProfileViewModel.sentPendingRequest,
-                connectionsCount: $userProfileViewModel.connectionsCountState
-              )
-        }
-      }
+
+            Circle()
+                .stroke(
+                    self.connectionsViewModel.selectedUsers.contains(userId) || self.connectionsViewModel.allConnectRecipientIds.contains(userId) ? Color(.systemTeal) : Color.gray, lineWidth: 1
+                ) .frame(width: 25, height: 25)
+            if self.connectionsViewModel.selectedUsers.contains(userId) || self.connectionsViewModel.allConnectRecipientIds.contains(userId) {
+                //add send connect button function
+                Image(systemName: "checkmark.circle.fill")
+                    .font(.system(size: 25))
+                    .foregroundColor(Color("Color"))
+            }
+        }.onTapGesture(perform: onTapGesture)
       .buttonStyle(FlatLinkStyle())
-       
-        }
+      }
     }
 }
 
 struct ConnectionsView: View {
     @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
-    @EnvironmentObject var userProfileViewModel: UserProfileViewModel
-  
+  //  @EnvironmentObject var userProfileViewModel: UserProfileViewModel
+    @ObservedObject var userProfileViewModel = UserProfileViewModel()
+    
     var user: User?
    
   func formatTitle() -> String {
@@ -83,8 +99,8 @@ struct ConnectionsView: View {
                 } else {
                 List(self.connectionsViewModel.users) { user in
                     HStack{
-                    ConnectionRow(user: user)
-                        .environmentObject(userProfileViewModel)
+                        ConnectionRow(userProfileViewModel: userProfileViewModel, user: user, userId: user.id ?? "")
+                       
                     }
                 }
                 .navigationBarTitle(formatTitle(), displayMode: .inline)
@@ -94,6 +110,7 @@ struct ConnectionsView: View {
 //            .navigationBarHidden(true)
         .onAppear {
             connectionsViewModel.loadConnections(userId: user?.id)
+           
         }
     }
 }

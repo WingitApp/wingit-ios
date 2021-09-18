@@ -16,7 +16,7 @@ import URLImage
 struct UserProfileView: View {
     // props
     @EnvironmentObject var session: SessionStore
-    @StateObject var userProfileViewModel = UserProfileViewModel()
+    @ObservedObject var userProfileViewModel = UserProfileViewModel()
     @StateObject var connectionsViewModel = ConnectionsViewModel()
   
     // state
@@ -29,8 +29,6 @@ struct UserProfileView: View {
       userProfileViewModel.user = user!
     }
   }
-  
-  
   
   func calculateHeight(minHeight: CGFloat, maxHeight: CGFloat, yOffset: CGFloat) -> CGFloat {
     if maxHeight + yOffset < minHeight {
@@ -218,7 +216,6 @@ struct UserProfileView: View {
     .sheet(
       isPresented: $connectionsViewModel.isConnectionsSheetOpen,
       content: {  ConnectionsView(user: userProfileViewModel.user).environmentObject(connectionsViewModel)
-          .environmentObject(userProfileViewModel)
       }
     )
       .sheet(

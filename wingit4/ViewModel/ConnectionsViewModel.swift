@@ -17,6 +17,13 @@ class ConnectionsViewModel : ObservableObject {
     @Published var connectionsCount = 0
     @Published var isConnectionsSheetOpen: Bool = false
     
+    @Published var selectedUsers: [String?] = []
+    var allConnectRecipientIds: [String?] = []
+    
+    @Published var isConnected = false
+    @Published var sentPendingRequest = false
+    @Published var connectionsCountState = 0
+    
     func loadConnections(userId: String?) {
         guard let userId = userId else { return }
         if !self.isLoading {
@@ -28,6 +35,16 @@ class ConnectionsViewModel : ObservableObject {
           if self.isLoading {
             self.isLoading.toggle()
           }
+        }
+    }
+    
+    func handleUserSelect(userId: String?) {
+        guard let userId = userId else { return }
+        if selectedUsers.contains(userId) {
+            self.selectedUsers.removeAll(where: { $0 == userId })
+           // self.sendConnectRequest(userId: userId)
+        } else {
+            self.selectedUsers.append(userId)
         }
     }
     

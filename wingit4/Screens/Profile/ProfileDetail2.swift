@@ -82,7 +82,8 @@ struct ProfileDetail2: View {
                    .cornerRadius(20, corners: [.topLeft, .topRight])
                    .padding(.top, -105)
                  )
-                
+                Text("Skater").font(.caption).foregroundColor(.gray).padding(.top, 5)
+                Divider().frame(width: 75)
               }
               .padding(.top, -80)
               .background(Color.white)
