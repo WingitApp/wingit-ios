@@ -28,53 +28,28 @@ struct AcceptButton: View {
     @Binding var referral: Referral
     @Binding var post: Post
     @State var userHasAccepted: Bool = false
-//    NavigationLink(
-//     destination: AskDetailView(post: $post),
-//     isActive: $userHasAccepted
-//     {EmptyView()}
-    @StateObject var askCardViewModel = AskCardViewModel()
-    @StateObject var askMenuViewModel = AskMenuViewModel()
-    @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
-    // Comment
-    @StateObject var commentViewModel = CommentViewModel()
-    @StateObject var referViewModel = ReferViewModel()
-    @StateObject var commentInputViewModel = CommentInputViewModel()
-    // Like
-    @StateObject var footerCellViewModel = FooterCellViewModel()
     
     var body: some View {
-       
-        NavigationLink(
-            destination: AskDetailView(post: $post)
-                .environmentObject(askCardViewModel)
-                .environmentObject(askMenuViewModel)
-                .environmentObject(askDoneToggleViewModel)
-                .environmentObject(commentViewModel)
-                .environmentObject(commentInputViewModel)
-                .environmentObject(footerCellViewModel),
-            isActive: $userHasAccepted,
-            label: {
-                Button(action: {
-                    referralsViewModel.acceptReferral(referral: referral, onSuccess: {self.userHasAccepted.toggle()})
-                },
-                       label: {
-                        HStack(alignment: .center) {
-                          Image(systemName: "checkmark.circle")
-                            .foregroundColor(.white)
-                          Text("Accept")
-                            .fontWeight(.bold)
-                        }
-                        .foregroundColor(.white)
-                        .padding(.vertical, 10)
-                        .frame(width: (UIScreen.main.bounds.width / 2 ) - 25)
-                        .background(Color(.systemTeal))
-                        .cornerRadius(5)
-                        .overlay(
-                          RoundedRectangle(cornerRadius: 5).stroke(Color(.systemTeal),
-                          lineWidth: 1)
-                        )
-                }).disabled(self.userHasAccepted)
-            })
+        Button(action: {
+            referralsViewModel.acceptReferral(referral: referral, post: $post)
+        },
+               label: {
+                HStack(alignment: .center) {
+                  Image(systemName: "checkmark.circle")
+                    .foregroundColor(.white)
+                  Text("Accept")
+                    .fontWeight(.bold)
+                }
+                .foregroundColor(.white)
+                .padding(.vertical, 10)
+                .frame(width: (UIScreen.main.bounds.width / 2 ) - 25)
+                .background(Color(.systemTeal))
+                .cornerRadius(5)
+                .overlay(
+                  RoundedRectangle(cornerRadius: 5).stroke(Color(.systemTeal),
+                  lineWidth: 1)
+                )
+        }).disabled(self.userHasAccepted)
     }
 }
 
@@ -113,7 +88,5 @@ struct WingButton: View {
                                                            lineWidth: 1.5)
                 )
         })
-        
-
     }
 }

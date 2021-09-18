@@ -42,9 +42,6 @@ class ReferViewModel : ObservableObject, Identifiable {
     }
     
     func sendReferrals(askId: String) {
-        ///askId(postId) & senderId (auth.dude) & senderId(userId of the one selected
-        // ids -> self.selectedUsers
-        
         for receiverId in selectedUsers {
             Api.Referrals.sendReferral(
                 askId: askId,

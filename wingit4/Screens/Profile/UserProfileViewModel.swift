@@ -39,6 +39,10 @@ class UserProfileViewModel: ObservableObject {
     if !isLoadingUser {
       isLoadingUser.toggle()
     }
+    if userId == "placeholder" {
+        self.user = USER_PROFILE_DEFAULT_PLACEHOLDER
+        return
+    }
     Api.User.loadUser(
      userId: userId,
      onSuccess: { (user) in
