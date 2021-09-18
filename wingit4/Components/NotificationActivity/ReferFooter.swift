@@ -28,10 +28,6 @@ struct AcceptButton: View {
     @Binding var referral: Referral
     @Binding var post: Post
     @State var userHasAccepted: Bool = false
-//    NavigationLink(
-//     destination: AskDetailView(post: $post),
-//     isActive: $userHasAccepted
-//     {EmptyView()}
     
     var body: some View {
         Button(action: {
@@ -92,7 +88,5 @@ struct WingButton: View {
                                                            lineWidth: 1.5)
                 )
         })
-        
-
     }
 }
