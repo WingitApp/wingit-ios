@@ -45,19 +45,19 @@ struct ConnectionRow: View {
               }.padding(.leading, 10)
           }.padding(10)
 
-        ZStack{
-
-            Circle()
-                .stroke(
-                    self.connectionsViewModel.selectedUsers.contains(userId) || self.connectionsViewModel.allConnectRecipientIds.contains(userId) ? Color(.systemTeal) : Color.gray, lineWidth: 1
-                ) .frame(width: 25, height: 25)
-            if self.connectionsViewModel.selectedUsers.contains(userId) || self.connectionsViewModel.allConnectRecipientIds.contains(userId) {
-                //add send connect button function
-                Image(systemName: "checkmark.circle.fill")
-                    .font(.system(size: 25))
-                    .foregroundColor(Color("Color"))
-            }
-        }.onTapGesture(perform: onTapGesture)
+//        ZStack{
+//
+//            Circle()
+//                .stroke(
+//                    self.connectionsViewModel.selectedUsers.contains(userId) || self.connectionsViewModel.allConnectRecipientIds.contains(userId) ? Color(.systemTeal) : Color.gray, lineWidth: 1
+//                ) .frame(width: 25, height: 25)
+//            if self.connectionsViewModel.selectedUsers.contains(userId) || self.connectionsViewModel.allConnectRecipientIds.contains(userId) {
+//                //add send connect button function
+//                Image(systemName: "checkmark.circle.fill")
+//                    .font(.system(size: 25))
+//                    .foregroundColor(Color("Color"))
+//            }
+//        }.onTapGesture(perform: onTapGesture)
       .buttonStyle(FlatLinkStyle())
       }
     }
