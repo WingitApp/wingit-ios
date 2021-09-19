@@ -40,22 +40,22 @@ struct HomeView: View {
             }
           }
         }
-        .navigationBarItems(leading:
-          Button(action: {}) {
+        .navigationBarItems(
+          leading: Button(action: {}) {
             NavigationLink(destination: UsersView()) {
               Image(systemName: "magnifyingglass")
                 .imageScale(Image.Scale.medium)
                 .foregroundColor(.gray)
             }
-        })
-        .navigationBarItems(trailing:
-          Button(action: {}) {
-            NavigationLink(destination: ContactsListView()) {
-              Image(systemName: "person.3")
-                .imageScale(Image.Scale.medium)
-                .foregroundColor(.gray)
-            }
-        })
+          },
+          trailing:
+            Button(action: {}) {
+              NavigationLink(destination: ContactsListView()) {
+                Image(systemName: "person.3")
+                  .imageScale(Image.Scale.medium)
+                  .foregroundColor(.gray)
+              }
+          })
       }.environmentObject(homeViewModel)
     }
 }
