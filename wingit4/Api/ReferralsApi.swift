@@ -78,7 +78,7 @@ class ReferralsApi {
       listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
     ) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        Ref.FS_COLLECTION_REFERRALS
+        let listenerFirestore = Ref.FS_COLLECTION_REFERRALS
           .whereField("receiverId", isEqualTo: userId)
           .whereField("status", isEqualTo: "pending")
           .order(by: "createdAt", descending: true)
@@ -147,6 +147,8 @@ class ReferralsApi {
                 }
             }
         }
+        
+        listener(listenerFirestore)
     }
     
     func getAcceptedReferrals(
@@ -157,7 +159,7 @@ class ReferralsApi {
       listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
     ) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        Ref.FS_COLLECTION_REFERRALS
+        let listenerFirestore = Ref.FS_COLLECTION_REFERRALS
           .whereField("receiverId", isEqualTo: userId)
           .whereField("status", isEqualTo: ReferralStatus.accepted.rawValue)
           .order(by: "updatedAt", descending: true)
@@ -226,6 +228,8 @@ class ReferralsApi {
                 }
             }
         }
+        
+        listener(listenerFirestore)
     }
     
     func getWingedReferrals(
@@ -236,7 +240,7 @@ class ReferralsApi {
       listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
     ) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        Ref.FS_COLLECTION_REFERRALS
+        let listenerFirestore = Ref.FS_COLLECTION_REFERRALS
           .whereField("receiverId", isEqualTo: userId)
           .whereField("status", isEqualTo: ReferralStatus.winged.rawValue)
           .order(by: "updatedAt", descending: true)
@@ -305,6 +309,8 @@ class ReferralsApi {
                 }
             }
         }
+        
+        listener(listenerFirestore)
     }
     
     func getClosedReferrals(
@@ -315,7 +321,7 @@ class ReferralsApi {
       listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
     ) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        Ref.FS_COLLECTION_REFERRALS
+        let listenerFirestore = Ref.FS_COLLECTION_REFERRALS
           .whereField("receiverId", isEqualTo: userId)
           .whereField("status", isEqualTo: ReferralStatus.closed.rawValue)
           .order(by: "updatedAt", descending: true)
@@ -384,6 +390,8 @@ class ReferralsApi {
                 }
             }
         }
+        
+        listener(listenerFirestore)
     }
 }
 

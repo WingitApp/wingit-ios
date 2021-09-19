@@ -68,7 +68,6 @@ class ReferralsViewModel: ObservableObject {
         onSuccess: { (referrals) in
           if self.acceptedReferrals.isEmpty {
               self.acceptedReferrals = referrals
-             
           }
       }, newReferral: { (referral) in
           if !self.acceptedReferrals.isEmpty {
@@ -80,6 +79,8 @@ class ReferralsViewModel: ObservableObject {
             if !self.acceptedReferrals.isEmpty {
               if let index = self.acceptedReferrals.firstIndex(where: {$0.id == referral.id}) {
                 self.acceptedReferrals[index] = referral
+              } else {
+                self.acceptedReferrals.insert(referral, at: 0)
               }
             }
       }, deleteReferral: { (referral) in
@@ -112,6 +113,8 @@ class ReferralsViewModel: ObservableObject {
             if !self.wingedReferrals.isEmpty {
               if let index = self.wingedReferrals.firstIndex(where: {$0.id == referral.id}) {
                 self.wingedReferrals[index] = referral
+              } else {
+                self.wingedReferrals.insert(referral, at: 0)
               }
             }
       }, deleteReferral: { (referral) in
@@ -144,6 +147,8 @@ class ReferralsViewModel: ObservableObject {
             if !self.closedReferrals.isEmpty {
               if let index = self.closedReferrals.firstIndex(where: {$0.id == referral.id}) {
                 self.closedReferrals[index] = referral
+              } else {
+                self.closedReferrals.insert(referral, at: 0)
               }
             }
       }, deleteReferral: { (referral) in
