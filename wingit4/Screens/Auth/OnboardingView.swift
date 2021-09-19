@@ -144,6 +144,7 @@ struct Home1 : View {
 struct Login1 : View {
     
     @ObservedObject var signinViewModel = SigninViewModel()
+    @EnvironmentObject var session: SessionStore
     
     var body: some View{
         
@@ -210,7 +211,9 @@ struct Login1 : View {
 //            .padding(.top,25)
         }.onTapGesture(perform: dismissKeyboard)
         .onAppear{
-            logToAmplitude(event: .viewLoginScreen)
+            if (!session.isLoggedIn) {
+                logToAmplitude(event: .viewLoginScreen)
+            }
         }
     }
 }
