@@ -44,20 +44,6 @@ struct ConnectionRow: View {
                 .foregroundColor(Color(.systemTeal))
               }.padding(.leading, 10)
           }.padding(10)
-
-//        ZStack{
-//
-//            Circle()
-//                .stroke(
-//                    self.connectionsViewModel.selectedUsers.contains(userId) || self.connectionsViewModel.allConnectRecipientIds.contains(userId) ? Color(.systemTeal) : Color.gray, lineWidth: 1
-//                ) .frame(width: 25, height: 25)
-//            if self.connectionsViewModel.selectedUsers.contains(userId) || self.connectionsViewModel.allConnectRecipientIds.contains(userId) {
-//                //add send connect button function
-//                Image(systemName: "checkmark.circle.fill")
-//                    .font(.system(size: 25))
-//                    .foregroundColor(Color("Color"))
-//            }
-//        }.onTapGesture(perform: onTapGesture)
       .buttonStyle(FlatLinkStyle())
       }
     }
@@ -114,61 +100,3 @@ struct ConnectionsView: View {
         }
     }
 }
-
-
-struct ConnectButtonList: View {
-
-    @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
-
-    var user: User
-    @Binding var connections_Count: Int
-    @Binding var isConnected: Bool
-    @Binding var sentPendingRequest: Bool
-
-    init(user: User, isConnected: Binding<Bool>, sentPendingRequest: Binding<Bool>, connectionsCount: Binding<Int>) {
-        self.user = user
-        self._connections_Count = connectionsCount
-        self._isConnected = isConnected
-        self._sentPendingRequest = sentPendingRequest
-    }
-    
-    func buttonTapped() {
-        if !self.isConnected && !self.sentPendingRequest {
-            self.sentPendingRequest = true
-                connectionsViewModel.sendConnectRequest(userId: user.id)
-            } else if self.isConnected {
-                connectionsViewModel.disconnect(userId: user.id,  connectionsCount_onSuccess: { (connectionsCount) in
-                             self.connections_Count = connectionsCount
-                             setUserProperty(property: .connections, value: connectionsCount)
-             })
-            self.isConnected = false
-        }
-    }
-    
-    var body: some View {
-        Button(action: buttonTapped) {
-          Image(systemName: (self.isConnected ? "person.badge.minus.fill" : "link"))
-          Text((self.isConnected) ? "Disconnect" : (self.sentPendingRequest) ? "Pending" : "Connect")
-              .font(.callout)
-              .bold()
-        }
-        .disabled(self.sentPendingRequest)
-        .frame(
-          width: (UIScreen.main.bounds.width / 2) - 30
-        )
-        .padding(
-          .init(top: 10, leading: 0, bottom: 10, trailing: 0)
-        )
-        .background(Color.lightGray)
-        .foregroundColor(Color.black)
-        .cornerRadius(5)
-        .overlay(
-          RoundedRectangle(cornerRadius: 5).stroke(Color(.lightGray),
-          lineWidth: 1)
-        )
-    
-    }
-}
-
-
-
