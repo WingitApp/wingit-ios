@@ -30,7 +30,7 @@ struct UserProfileClosedPostsView: View {
         .ignoresSafeArea(.all, edges: .all))
         .padding(.top, 10)
         .onAppear {
-            logToAmplitude(event: .viewOtherUsersClosedAsks)
+            logToAmplitude(event: .viewOtherUsersClosedAsks, properties: [.userId: user.id])
             self.userProfileViewModel.loadClosedPosts(userId: user.id)
         }
     }
