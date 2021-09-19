@@ -139,6 +139,7 @@ struct ConnectButtonList: View {
             } else if self.isConnected {
                 connectionsViewModel.disconnect(userId: user.id,  connectionsCount_onSuccess: { (connectionsCount) in
                              self.connections_Count = connectionsCount
+                             setUserProperty(property: .connections, value: connectionsCount)
              })
             self.isConnected = false
         }

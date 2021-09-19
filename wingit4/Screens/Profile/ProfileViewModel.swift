@@ -132,7 +132,7 @@ class ProfileViewModel: ObservableObject {
         Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
                       
             if let doc = snapshot?.documents {
-                
+                setUserProperty(property: .connections, value: doc.count)
                 self.connectionsCountState = doc.count
             }
         }
