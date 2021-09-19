@@ -5,6 +5,7 @@
 //  Created by YaeRim Amy Chun on 8/15/21.
 //
 
+import Amplitude
 import Foundation
 import SwiftUI
 import Firebase
@@ -21,6 +22,18 @@ class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate {
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
 
     FirebaseApp.configure()
+    
+    // Amplitude analytics
+    if let amplitudeKey = Bundle.main.object(forInfoDictionaryKey: "AmplitudeKey") as? String {
+        let amplitude = Amplitude.instance()
+        amplitude.trackingSessionEvents = true
+        amplitude.initializeApiKey(amplitudeKey)
+        if let accountId = Auth.auth().currentUser?.uid {
+            amplitude.setUserId(accountId)
+        }
+        logToAmplitude(event: .appStart)
+    }
+    
     Messaging.messaging().delegate = self
     UNUserNotificationCenter.current().delegate = self
     UNUserNotificationCenter.current().requestAuthorization(
