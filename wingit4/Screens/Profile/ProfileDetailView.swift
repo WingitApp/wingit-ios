@@ -47,6 +47,12 @@ struct ProfileDetailView: View {
             if toggle == true {
             Text("sub links").padding(.horizontal, 25).font(.caption).foregroundColor(.gray)
                 Text("sub links").padding(.horizontal, 25).font(.caption).foregroundColor(.gray)    }
+//         TODO: save links in a dictionary upon edit( [.website : link]
+//            if link.isValidURL
+//              Link(link, destination: URL(string: link)!)
+//            else {
+//              Text(link)
+//            }
             Image("fb")
                 .resizable()
                 .scaledToFit()
