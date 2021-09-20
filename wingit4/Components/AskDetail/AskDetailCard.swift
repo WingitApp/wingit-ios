@@ -22,12 +22,15 @@ struct AskDetailCard: View {
         // AskDetailRow shows the linear progression on bumps
         VStack(alignment: .leading) {
           Text("Bumpers")
-            .font(.headline)
+            .bold()
+            .font(.subheadline)
+            
             .padding(.top, 10)
             .padding(.bottom, 10)
           BumperCountSummary(bumpers: $askCardViewModel.bumpers)
           Text("Wingers")
-            .font(.headline)
+            .bold()
+            .font(.subheadline)
             .padding(.top, 10)
             .padding(.bottom, 10)
           WingerCountSummary(wingers: $askCardViewModel.wingers)

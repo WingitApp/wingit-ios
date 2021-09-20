@@ -36,7 +36,10 @@ struct AskCard: View {
         // need to place above to prevent event propagation
         HStack {
 //          WingerCountSummary( wingers: self.$askCardViewModel.wingers)
-          BumperCountSummary(bumpers: self.$askCardViewModel.bumpers)
+          BumperCountSummary(
+            bumpers: self.$askCardViewModel.bumpers,
+            showDescription: true
+          )
           Spacer()
         }
         .padding(EdgeInsets(top: 10, leading: 15, bottom: 5, trailing: 15))

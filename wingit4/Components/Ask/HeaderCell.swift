@@ -88,9 +88,9 @@ struct HeaderCell: View {
                 .clipped()
                 .shadow(color: secondaryColorByIndex(index: index!).darker(by: 4).opacity(0.5), radius: 2, x: 0, y: 0)
               Spacer()
-              if askCardViewModel.isProfileView {
+//              if askCardViewModel.isProfileView {
                 AskDoneToggle(post: $post) // rename later
-              }
+//              }
                 AskMenu()
             }
             .padding(

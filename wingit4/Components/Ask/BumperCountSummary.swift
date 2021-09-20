@@ -12,6 +12,7 @@ struct BumperCountSummary: View {
   @Binding var bumpers: [User]
   var limit: Int = 3
   var size: CGFloat = 25
+  var showDescription: Bool = false
   
   func primaryColorByIndex(index: Int) -> Color {
     let modIndex = index % 4
@@ -59,12 +60,22 @@ struct BumperCountSummary: View {
           .padding(.leading, getPaddingByIndex(index: index))
           
         }
-        BumpersTextDescription.getFormattedCount(
-          users: bumpers,
-          limit: limit,
-          emptyMessage: nil
-        )
-        .font(.caption2)
+        if showDescription {
+          BumpersTextDescription.getFormattedString(
+            bumpers: bumpers,
+            limit: limit,
+            emptyMessage: nil
+          )
+          .font(.caption2)
+        } else {
+          BumpersTextDescription.getFormattedCount(
+            users: bumpers,
+            limit: limit,
+            emptyMessage: nil
+          )
+          .font(.caption2)
+        }
+       
     }
   }
 }

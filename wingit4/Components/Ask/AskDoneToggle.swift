@@ -13,7 +13,6 @@ struct AskDoneToggle: View {
   
     var body: some View {
       
-      if askCardViewModel.isOwnPost {
         Button(
           action: {
             askCardViewModel.openCloseToggle(post: post)
@@ -22,8 +21,10 @@ struct AskDoneToggle: View {
             Image(systemName: "checkmark.circle")
               .foregroundColor(self.post.status == .closed ? Color("Color1") : Color.gray)
               }
-            )
-      }
+        )
+        .disabled(!askCardViewModel.isOwnPost)
+        .allowsHitTesting(askCardViewModel.isOwnPost)
+        
     }
 }
 
