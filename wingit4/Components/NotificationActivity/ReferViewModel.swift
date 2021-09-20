@@ -82,7 +82,9 @@ class ReferViewModel : ObservableObject, Identifiable {
           self.connections = users.compactMap { user in
             if user.id == post.ownerId { return nil }
             return user
-          }
+          }.sorted(by: {
+            $0.firstName! < $1.firstName!
+          })
           
           self.loadUserBumpers(post: post)
         }

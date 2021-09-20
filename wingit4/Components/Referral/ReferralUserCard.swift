@@ -57,7 +57,6 @@ struct ReferralUserCard: View {
           EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
         )
         .contentShape(Rectangle())
-        .opacity(isChecked ? 0.7 : 1)
         .onTapGesture(perform: onTapGesture)
       }
 

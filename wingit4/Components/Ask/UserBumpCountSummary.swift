@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UserBumpCountSummary: View {
-    @Binding var users: [User]
+    var users: [User]
     var limit: Int = 3
     var size: CGFloat = 25
 

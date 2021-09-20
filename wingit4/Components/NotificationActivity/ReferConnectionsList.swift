@@ -51,7 +51,9 @@ struct ReferConnectionsList: View {
                   HStack(alignment: .center) {
                     
                     UserBumpCountSummary(
-                      users: self.$referViewModel.userBumps
+                      users:
+                        self.referViewModel.userBumps +
+                        self.referViewModel.selectedUsers
                     )
               
                     Spacer()
@@ -76,6 +78,7 @@ struct ReferConnectionsList: View {
                             self.referViewModel.selectedUsers.contains(user)
                           )
                         )
+                        .opacity(self.referViewModel.userBumps.contains(user) ? 0.6 : 1)
                     }
 //                  ForEach(
 //                    Array(self.referViewModel.userBumps.enumerated()),

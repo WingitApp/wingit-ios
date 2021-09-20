@@ -28,6 +28,7 @@
 		1524E0FF26F6713100D5BDB4 /* BumperCountSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1524E0FE26F6713100D5BDB4 /* BumperCountSummary.swift */; };
 		1524E10126F8136800D5BDB4 /* UserBumpCountSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1524E10026F8136800D5BDB4 /* UserBumpCountSummary.swift */; };
 		1524E10426F83E5F00D5BDB4 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1524E10326F83E5F00D5BDB4 /* Lottie */; };
+		1524E10726F8418D00D5BDB4 /* OnBumpSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1524E10626F8418D00D5BDB4 /* OnBumpSuccess.swift */; };
 		1524FCC826D753170000629C /* AskMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1524FCC726D753170000629C /* AskMenu.swift */; };
 		1524FCCA26D753240000629C /* AskMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1524FCC926D753240000629C /* AskMenuViewModel.swift */; };
 		1524FCCF26D753320000629C /* FooterCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1524FCCB26D753310000629C /* FooterCellViewModel.swift */; };
@@ -213,6 +214,7 @@
 		1524E0FC26F66FD600D5BDB4 /* BumpersRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BumpersRow.swift; sourceTree = "<group>"; };
 		1524E0FE26F6713100D5BDB4 /* BumperCountSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BumperCountSummary.swift; sourceTree = "<group>"; };
 		1524E10026F8136800D5BDB4 /* UserBumpCountSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBumpCountSummary.swift; sourceTree = "<group>"; };
+		1524E10626F8418D00D5BDB4 /* OnBumpSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBumpSuccess.swift; sourceTree = "<group>"; };
 		1524FCC726D753170000629C /* AskMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskMenu.swift; sourceTree = "<group>"; };
 		1524FCC926D753240000629C /* AskMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskMenuViewModel.swift; sourceTree = "<group>"; };
 		1524FCCB26D753310000629C /* FooterCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooterCellViewModel.swift; sourceTree = "<group>"; };
@@ -444,6 +446,14 @@
 			path = Ask;
 			sourceTree = "<group>";
 		};
+		1524E10526F8417300D5BDB4 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				1524E10626F8418D00D5BDB4 /* OnBumpSuccess.swift */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
 		1524FCEB26D75B1D0000629C /* Actions */ = {
 			isa = PBXGroup;
 			children = (
@@ -667,6 +677,7 @@
 		3B75E3D126715C3A002F3108 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				1524E10526F8417300D5BDB4 /* Animation */,
 				15685B3F26F40DA800FC84D8 /* Referral */,
 				150DB46126F3018B00373D26 /* EmptyState */,
 				3B7AF06226719E74003BCCF3 /* Auth */,
@@ -1155,6 +1166,7 @@
 				65FE040426E9FE3200333609 /* ComposePostView.swift in Sources */,
 				3B86E43E26C998E300F64416 /* ActivityIndicatorView.swift in Sources */,
 				3B7AF05A26719AB2003BCCF3 /* HomeView.swift in Sources */,
+				1524E10726F8418D00D5BDB4 /* OnBumpSuccess.swift in Sources */,
 				1500983526EFE45B00D31B8C /* ProfileFeed.swift in Sources */,
 				15F7E8C126E8490100E5238F /* CommentList.swift in Sources */,
 				15DA39B426DC5C620080193E /* AskCardPlaceholder.swift in Sources */,

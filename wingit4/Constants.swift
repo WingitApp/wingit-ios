@@ -197,7 +197,7 @@ class Ref {
             return FS_COLLECTION_CONNECTIONS.document(user1Id).collection("userConnections").document(user2Id)
         }
         static func FS_COLLECTION_CONNECTIONS_FOR_USER(userId: String) -> CollectionReference {
-               return FS_COLLECTION_CONNECTIONS.document(userId).collection("userConnections")
+          return FS_COLLECTION_CONNECTIONS.document(userId).collection("userConnections")
         }
     
         static var FS_COLLECTION_ACTIVITY = FS_ROOT.collection("activity")
