@@ -22,8 +22,8 @@ struct ProfilePicOnboarding: View {
 
                 UserAvatar(
                   image: signupViewModel.image,
-                  height: 65,
-                  width: 65,
+                  height: 150,
+                  width: 150,
                   onTapGesture: {
                     self.signupViewModel.isImagePickerShown = true
                   }
@@ -45,6 +45,7 @@ struct ProfilePicOnboarding: View {
                        Color("Color")
                     )
                     .cornerRadius(8)
+                    .padding(.top, 40)
             })
             Button(action: {},
                    label: {

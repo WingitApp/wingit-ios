@@ -16,14 +16,18 @@ class ActivityViewModel: ObservableObject {
     
     @Published var activityArray: [Activity] = []
     var listener: ListenerRegistration!
+    
+    @Published var isLoading = false
 
     
     func loadActivities() {
         self.activityArray = []
+        isLoading = true
         
         Api.Activity.loadActivities(onSuccess: { (activityArray) in
             if self.activityArray.isEmpty {
                 self.activityArray = activityArray
+              self.isLoading = false
             }
         }, newActivity: { (activity) in
             if !self.activityArray.isEmpty {
