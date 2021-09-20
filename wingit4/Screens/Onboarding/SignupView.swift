@@ -6,34 +6,72 @@
 //
 
 import SwiftUI
-//
-//struct SignupView: View {
-//    @ObservedObject var signupViewModel = SignupViewModel()
-// 
-//    var body: some View {
-//        VStack {
-//            UserAvatar(
-//              image: signupViewModel.image,
-//              height: 80,
-//              width: 80,
-//              onTapGesture: {
-//                self.signupViewModel.isImagePickerShown = true
-//              }
-//            )
-//            Text(IMAGE_UPLOAD_TEXT)
-//              .modifier(Caption2Style())
-//              .multilineTextAlignment(.center)
-//              .padding(.bottom, 20)
-//            SignUpForm()
-//            Divider()
-//            Text("By signing up, you agree to the")
-//              .modifier(CaptionStyle())
-//            EULA()
-//        }
-//        .navigationBarTitle("Signup", displayMode: .inline)
-//    }
-//}
-//
+
+struct SignupView : View {
+    @EnvironmentObject var session: SessionStore
+    @ObservedObject var signupViewModel = SignupViewModel()
+    
+    var body: some View{
+        
+        VStack{
+           
+            
+            VStack(alignment: .leading, spacing: 15) {
+                
+                HStack{
+                FirstNameTextField(
+                  firstName: $signupViewModel.firstName
+                )
+            
+                LastNameTextField(
+                  lastName: $signupViewModel.lastName
+                )
+                }
+                UsernameTextField(
+                  username: $signupViewModel.username
+                )
+                EmailTextField(
+                  email: $signupViewModel.email
+                )
+                PasswordTextField(
+                  password: $signupViewModel.password
+                )
+            }
+            .padding(.horizontal,25)
+            .padding(.top,25)
+            
+            
+            SignupButton(
+                action: {
+                    signupViewModel.signup() { user in
+                        signupViewModel.onSignupSuccess(user: user)
+                        self.session.currentUser = user
+                    }
+                },
+              label: TEXT_SIGN_UP
+            )
+            .padding(.horizontal,25)
+            .padding(.top,25)
+            .alert(
+              isPresented: $signupViewModel.isAlertShown
+            ) {
+                Alert(
+                  title: Text("Error"),
+                  message: Text(self.signupViewModel.errorString),
+                  dismissButton: .default(Text("OK"))
+                )
+            }
+            
+            Text("By signing up, you agree to the").padding(.top, 10)
+              .modifier(CaptionStyle())
+            EULA()
+        }
+        .onTapGesture { dismissKeyboard() }
+        .onAppear{ logToAmplitude(event: .viewSignupScreen) }
+
+    }
+}
+
 struct EULA: View {
     var body: some View {
         HStack{
@@ -43,54 +81,3 @@ struct EULA: View {
         }
     }
 }
-//
-//struct SignUpForm: View {
-//    @ObservedObject var signupViewModel = SignupViewModel()
-//    
-//  
-//    var body: some View {
-//        VStack{
-//            FirstNameTextField(
-//              firstName: $signupViewModel.firstName
-//            )
-//            LastNameTextField(
-//              lastName: $signupViewModel.lastName
-//            )
-//            UsernameTextField(
-//              username: $signupViewModel.username
-//            )
-//            EmailTextField(
-//              email: $signupViewModel.email
-//            )
-//            VStack(alignment: .leading) {
-//                PasswordTextField(
-//                  password: $signupViewModel.password
-//                )
-//                Text(TEXT_SIGNUP_PASSWORD_REQUIRED)
-//                  .modifier(FootNote())
-//                  .padding([.leading])
-//            }
-//            SignupButton(
-//              action: signupViewModel.signup,
-//              label: TEXT_SIGN_UP
-//            ).alert(
-//              isPresented: $signupViewModel.isAlertShown
-//            ) {
-//                Alert(
-//                  title: Text("Error"),
-//                  message: Text(self.signupViewModel.errorString),
-//                  dismissButton: .default(Text("OK"))
-//                )
-//            }
-//        }
-//        .onTapGesture { dismissKeyboard() }
-//        .onAppear{ logToAmplitude(event: .viewSignupScreen) }
-//        .sheet(isPresented: $signupViewModel.isImagePickerShown) {
-//           ImagePicker(
-//            showImagePicker: self.$signupViewModel.isImagePickerShown,
-//            pickedImage: self.$signupViewModel.image,
-//            imageData: self.$signupViewModel.imageData
-//           )
-//        }
-//    }
-//}

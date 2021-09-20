@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    @State var shouldShowOnboarding: Bool = true
+    
     var body: some View {
         // For Smaller Size iPhones...
         
         VStack{
-            
             if UIScreen.main.bounds.height < 750{
-                
                 ScrollView(.vertical, showsIndicators: false) {
-                    
                     Home1()
                 }
             }
@@ -32,7 +31,6 @@ struct OnboardingView: View {
 struct NewOnboardingUI_Previews: PreviewProvider {
     static var previews: some View {
         OnboardingView()
-       // SignUp1()
     }
 }
 
@@ -130,185 +128,11 @@ struct Home1 : View {
             // Changing Views Based On Index...
             
             if index == 0{
-                
-                Login1()
+                SigninView()
             }
             else{
-                
-                SignUpForm()
+                SignupView()
             }
-        }
-    }
-}
-
-struct Login1 : View {
-    
-    @ObservedObject var signinViewModel = SigninViewModel()
-    @EnvironmentObject var session: SessionStore
-    
-    var body: some View{
-        
-        VStack{
-            
-            HStack{
-                
-                VStack(alignment: .center, spacing: 12) {
-                    
-                    Text("Welcome Back")
-                        .fontWeight(.bold)
-                    
-                }
-                
-      
-            }
-            .padding(.horizontal,25)
-            .padding(.top,30)
-            
-            VStack(alignment: .leading, spacing: 35) {
-            
-                EmailTextField(email: $signinViewModel.email)
-                PasswordTextField(password: $signinViewModel.password)
-                
-            }
-            .padding(.horizontal,25)
-            .padding(.top,25)
-            
-            // Login Button....
-            
-            SigninButton(
-             action: signinViewModel.signin,
-             label: TEXT_SIGN_IN
-            )
-            .padding(.horizontal,25)
-            .padding(.top,25)
-            .alert(isPresented: $signinViewModel.isAlertShown) {
-                 Alert(
-                     title: Text("Something went wrong..."),
-                     message: Text(self.signinViewModel.errorString),
-                     dismissButton: .default(Text("OK"))
-                 )
-             }
-            
-            
-            // Social Buttons...
-            
-          
-//
-//            HStack(spacing: 30){
-//
-//                ForEach(social,id: \.self){name in
-//
-//                    Button(action: {}) {
-//
-//                        Image(name)
-//                            .renderingMode(.template)
-//                            .resizable()
-//                            .frame(width: 24,height: 24)
-//                            .foregroundColor(Color(name == "google" ? "Color1" : "Color"))
-//                    }
-//                }
-//            }
-//            .padding(.top,25)
-        }.onTapGesture(perform: dismissKeyboard)
-        .onAppear{
-            if (!session.isLoggedIn) {
-                logToAmplitude(event: .viewLoginScreen)
-            }
-        }
-    }
-}
-
-var social = ["twitter","fb","google"]
-
-struct SignUpForm : View {
-    @EnvironmentObject var session: SessionStore
-    @ObservedObject var signupViewModel = SignupViewModel()
-    
-    var body: some View{
-        
-        VStack{
-           
-            
-            VStack(alignment: .leading, spacing: 15) {
-                
-                HStack{
-                FirstNameTextField(
-                  firstName: $signupViewModel.firstName
-                )
-            
-                LastNameTextField(
-                  lastName: $signupViewModel.lastName
-                )
-                }
-                UsernameTextField(
-                  username: $signupViewModel.username
-                )
-                EmailTextField(
-                  email: $signupViewModel.email
-                )
-                PasswordTextField(
-                  password: $signupViewModel.password
-                )
-            }
-            .padding(.horizontal,25)
-            .padding(.top,25)
-            
-            
-            SignupButton(
-                action: {
-                    signupViewModel.signup() { user in
-                        signupViewModel.onSignupSuccess(user: user)
-                        self.session.currentUser = user
-                    }
-                },
-              label: TEXT_SIGN_UP
-            )
-            .padding(.horizontal,25)
-            .padding(.top,25)
-            .alert(
-              isPresented: $signupViewModel.isAlertShown
-            ) {
-                Alert(
-                  title: Text("Error"),
-                  message: Text(self.signupViewModel.errorString),
-                  dismissButton: .default(Text("OK"))
-                )
-            }
-            
-            Text("By signing up, you agree to the").padding(.top, 10)
-              .modifier(CaptionStyle())
-            EULA()
-            // Social Buttons...
-            
-//
-//            HStack(spacing: 30){
-//
-//                ForEach(social,id: \.self){name in
-//
-//                    Button(action: {}) {
-//
-//                        Image(name)
-//                            .renderingMode(.template)
-//                            .resizable()
-//                            .frame(width: 24,height: 24)
-//                            .foregroundColor(Color(name == "google" ? "Color1" : "Color"))
-//                    }
-//                }
-//            }
-//            .padding(.top,25)
-        }
-        .onTapGesture { dismissKeyboard() }
-        .onAppear{ logToAmplitude(event: .viewSignupScreen) }
-
-    }
-}
-
-struct EULA1: View {
-    var body: some View {
-        HStack{
-            LINK_TERMS_OF_SERVICE.modifier(LinkStyle())
-            Text("and").modifier(CaptionStyle())
-            LINK_PRIVACY_POLICY.modifier(LinkStyle())
         }
     }
 }
