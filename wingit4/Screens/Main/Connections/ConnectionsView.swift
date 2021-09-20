@@ -98,5 +98,6 @@ struct ConnectionsView: View {
             connectionsViewModel.loadConnections(userId: user?.id)
            
         }
+            .preferredColorScheme(.light)
     }
 }

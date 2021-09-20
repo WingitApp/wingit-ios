@@ -126,6 +126,7 @@ struct ProfilePicToggle: View {
             // ImagePickerController()
              ImagePicker(showImagePicker: self.$updatePhotoVM.showImagePicker, pickedImage: self.$updatePhotoVM.image, imageData: self.$updatePhotoVM.imageData)
          }
+        .preferredColorScheme(.light)
     }
 }
 
