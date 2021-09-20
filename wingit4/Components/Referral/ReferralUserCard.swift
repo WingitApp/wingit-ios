@@ -9,16 +9,16 @@ import SwiftUI
 
 struct ReferralUserCard: View {
     @EnvironmentObject var referViewModel: ReferViewModel
-  @EnvironmentObject var session: SessionStore
 
     var user: User
     var isChecked: Bool = false
   
     func onTapGesture() {
-      self.referViewModel.handleUserSelect(
-        user: user,
-        currentUser: session.currentUser!
-      )
+      if self.referViewModel.userBumps.contains(user) {
+        // we don't need to add users who are already bumped
+        return
+      }
+      self.referViewModel.handleUserSelect(user: user)
     }
     
     var body: some View {

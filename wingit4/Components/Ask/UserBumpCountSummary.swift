@@ -28,23 +28,29 @@ struct UserBumpCountSummary: View {
             .font(.headline)
             .padding(.top, 10)
             .padding(.bottom, 10)
-          HStack {
+          HStack(alignment: .center) {
             ForEach(Array(users.prefix(limit).enumerated()), id: \.element) { index, user in
               UserAvatar(
                 user: user,
                 height: size,
                 width: size
               )
-              .modifier(UserAvatarStyle(index: index))
+              .modifier(
+                UserAvatarStyle(
+                  index: index,
+                  color: Color.wingitBlue
+                )
+              )
               
             }
             BumpersTextDescription.getFormattedCount(
               users: users,
               limit: limit,
-              emptyMessage: "Bump this request to your first friend!"
+              emptyMessage: "You haven't bumped this request to any friends."
             )
             .font(.caption2)
-        }
+            .frame(height: 17)
+          }
         }
         .padding(.leading, 15)
         .padding(.bottom, 10)

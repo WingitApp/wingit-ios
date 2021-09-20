@@ -59,7 +59,6 @@ struct BumperCountSummary: View {
           .padding(.leading, getPaddingByIndex(index: index))
           
         }
-//        formatDescription()
         BumpersTextDescription.getFormattedString(
           bumpers: bumpers,
           limit: limit,

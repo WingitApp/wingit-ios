@@ -84,19 +84,17 @@ class BumpersTextDescription {
     emptyMessage: String?
   ) -> Text {
     
-    if users.count == 0 {
-      return Text(emptyMessage ?? "")
-    }
-        
+
     switch users.count {
+      case 0:
+        return Text(emptyMessage ?? "")
       case 1:
         return Text(users[0].displayName!.capitalized).bold()
       case 2:
         return (
           Text(users[0].displayName!.capitalized).bold() +
           Text(" & ").bold() +
-          Text(users[1].displayName!.capitalized).bold() +
-          Text(" have bumped this request.")
+          Text(users[1].displayName!.capitalized).bold()
         )
       default:
         var names: [String] = []

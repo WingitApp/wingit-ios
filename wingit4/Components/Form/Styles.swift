@@ -67,13 +67,14 @@ struct CardStyle: ViewModifier {
 
 struct UserAvatarStyle: ViewModifier {
   var index: Int = 0
+  var color: Color = Color.gray
   
   func body(content: Content) -> some View {
     content
     .clipShape(Circle())
     .overlay(
       RoundedRectangle(cornerRadius: 100)
-        .stroke(Color.gray, lineWidth: 1)
+        .stroke(color, lineWidth: 1)
     )
     .padding(.leading, index > 0 ? -15 : 0)
   }

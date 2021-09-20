@@ -17,7 +17,6 @@ class ReferViewModel : ObservableObject, Identifiable {
     @Published var isChecked = false
     
     @Published var connections: [User] = []
-    @Published var wingers: [User] = []
     @Published var userBumps: [User] = []
     @Published var selectedUsers: [User] = []
     
@@ -35,14 +34,11 @@ class ReferViewModel : ObservableObject, Identifiable {
       }
     }
     
-  func handleUserSelect(user: User, currentUser: User) {
-      guard let userId = user.id else { return }
+  func handleUserSelect(user: User) {
       if selectedUsers.contains(user) {
         self.selectedUsers.removeAll(where: { $0 == user })
-        self.wingers.removeAll(where: {$0 == currentUser})
       } else {
-          self.selectedUsers.append(user)
-        self.wingers.append(currentUser)
+        self.selectedUsers.append(user)
       }
 
     }
@@ -89,7 +85,6 @@ class ReferViewModel : ObservableObject, Identifiable {
           }
           
           self.loadUserBumpers(post: post)
-          
         }
     }
   
