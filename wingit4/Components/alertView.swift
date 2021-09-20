@@ -31,9 +31,3 @@ func alertView(msg: String,completion: @escaping (String) -> ()){
     
     UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true)
 }
-
-//func EULA(){
-//
-//}
-
-
