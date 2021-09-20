@@ -238,7 +238,6 @@
 		1524FCCC26D753310000629C /* HeaderCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCellViewModel.swift; sourceTree = "<group>"; };
 		1524FCCE26D753320000629C /* HeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
 		1524FCD326D754500000629C /* TextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextCell.swift; path = wingit4/Screens/Components/Home/TextCell.swift; sourceTree = SOURCE_ROOT; };
-		1524FCD726D7545E0000629C /* Connections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Connections.swift; path = wingit4/Screens/Components/Profile/Connections.swift; sourceTree = SOURCE_ROOT; };
 		1524FCEC26D75B1D0000629C /* LikeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeButton.swift; sourceTree = "<group>"; };
 		1524FCEE26D75B5D0000629C /* CommentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentButton.swift; sourceTree = "<group>"; };
 		1524FCF026D75F100000629C /* ShareButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareButton.swift; sourceTree = "<group>"; };
@@ -273,7 +272,6 @@
 		15E4907A26E84BD700B25B56 /* DynamicHeightTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DynamicHeightTextField.swift; path = wingit4/Components/Form/DynamicHeightTextField.swift; sourceTree = "<group>"; };
 		15F7E87726E8435A00E5238F /* Connections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Connections.swift; path = wingit4/Screens/Components/Profile/Connections.swift; sourceTree = SOURCE_ROOT; };
 		15F7E87826E8435A00E5238F /* PersonalProfileHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonalProfileHeader.swift; path = wingit4/Screens/Components/Profile/PersonalProfileHeader.swift; sourceTree = SOURCE_ROOT; };
-		15F7E87B26E8436100E5238F /* TextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextCell.swift; path = wingit4/Screens/Components/Home/TextCell.swift; sourceTree = SOURCE_ROOT; };
 		15F7E8AB26E848ED00E5238F /* AskDetailHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskDetailHeader.swift; sourceTree = "<group>"; };
 		15F7E8AC26E848ED00E5238F /* WingersRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WingersRow.swift; sourceTree = "<group>"; };
 		15F7E8AE26E848ED00E5238F /* AskDetailCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskDetailCard.swift; sourceTree = "<group>"; };
@@ -1268,7 +1266,6 @@
 				1524E0FD26F66FD600D5BDB4 /* BumpersRow.swift in Sources */,
 				15685B4126F40DD000FC84D8 /* ReferralUserCard.swift in Sources */,
 				15030AAA26E807C10076CF14 /* HomeFeedHeader.swift in Sources */,
-				151A3C9B26D5BEF000A39FAF /* TimeAgoStamp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
