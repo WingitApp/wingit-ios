@@ -519,7 +519,7 @@
 			path = Placeholder;
 			sourceTree = "<group>";
 		};
-		15E4906E26E84A1700B25B56 /* Auth */ = {
+		15E4906E26E84A1700B25B56 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
 				15E4906F26E84A1700B25B56 /* SignupViewModel.swift */,
@@ -530,7 +530,7 @@
 				3BFBE7FA26F815A800B0DFE2 /* ProfilePicOnboarding.swift */,
 				15E4907326E84A1700B25B56 /* SigninViewModel.swift */,
 			);
-			path = Auth;
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		15E4907C26E84BD700B25B56 /* Form */ = {
@@ -702,11 +702,11 @@
 		3B7AF06326719E94003BCCF3 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				15E4906E26E84A1700B25B56 /* Auth */,
-				15762C6826E170D500A8E041 /* Referrals */,
-				156E6ADF26D8A13400690E47 /* Profile */,
 				3B7AF06126719E46003BCCF3 /* Home */,
 				3B7AF06B26719F24003BCCF3 /* Main */,
+				15E4906E26E84A1700B25B56 /* Onboarding */,
+				156E6ADF26D8A13400690E47 /* Profile */,
+				15762C6826E170D500A8E041 /* Referrals */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
