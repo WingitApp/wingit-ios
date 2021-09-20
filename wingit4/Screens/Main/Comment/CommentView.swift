@@ -36,5 +36,6 @@ struct CommentView: View {
                 self.commentViewModel.listener.remove()
             }
         }
+       .preferredColorScheme(.light)
     }
 }

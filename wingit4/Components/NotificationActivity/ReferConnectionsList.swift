@@ -58,6 +58,7 @@ struct ReferConnectionsList: View {
         .onAppear {
             referViewModel.loadConnections(askId: post.postId)
         }
+        .preferredColorScheme(.light)
     }
 }
 

@@ -64,6 +64,7 @@ struct ReportInput: View {
              }.padding(.vertical).padding(.horizontal)
 
         }
+        .preferredColorScheme(.light)
     }
 }
 
