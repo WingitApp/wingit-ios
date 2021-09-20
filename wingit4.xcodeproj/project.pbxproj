@@ -156,6 +156,8 @@
 		3BF143E626819E480093488D /* NotificationsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF143E526819E480093488D /* NotificationsApi.swift */; };
 		3BFBE7F526F3C75100B0DFE2 /* ProfileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFBE7F426F3C75100B0DFE2 /* ProfileDetailView.swift */; };
 		3BFBE7F726F3D42800B0DFE2 /* ProfileDetail2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFBE7F626F3D42800B0DFE2 /* ProfileDetail2.swift */; };
+		3BFBE7F926F8159B00B0DFE2 /* ContactsOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFBE7F826F8159B00B0DFE2 /* ContactsOnboarding.swift */; };
+		3BFBE7FB26F815A800B0DFE2 /* ProfilePicOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFBE7FA26F815A800B0DFE2 /* ProfilePicOnboarding.swift */; };
 		3BFE30EC26E94437005543A0 /* AcceptedNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE30EB26E94437005543A0 /* AcceptedNotification.swift */; };
 		3BFE30F726EA8CAA005543A0 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE30F626EA8CA9005543A0 /* OnboardingView.swift */; };
 		650216B526E86C2100B42BC6 /* URLImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650216B426E86C2100B42BC6 /* URLImageView.swift */; };
@@ -327,6 +329,8 @@
 		3BF143E526819E480093488D /* NotificationsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsApi.swift; sourceTree = "<group>"; };
 		3BFBE7F426F3C75100B0DFE2 /* ProfileDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailView.swift; sourceTree = "<group>"; };
 		3BFBE7F626F3D42800B0DFE2 /* ProfileDetail2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetail2.swift; sourceTree = "<group>"; };
+		3BFBE7F826F8159B00B0DFE2 /* ContactsOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsOnboarding.swift; sourceTree = "<group>"; };
+		3BFBE7FA26F815A800B0DFE2 /* ProfilePicOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePicOnboarding.swift; sourceTree = "<group>"; };
 		3BFE30EB26E94437005543A0 /* AcceptedNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptedNotification.swift; sourceTree = "<group>"; };
 		3BFE30F626EA8CA9005543A0 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		650216B426E86C2100B42BC6 /* URLImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImageView.swift; sourceTree = "<group>"; };
@@ -506,6 +510,8 @@
 				15E4907126E84A1700B25B56 /* SigninView.swift */,
 				15E4907226E84A1700B25B56 /* SignupView.swift */,
 				3BFE30F626EA8CA9005543A0 /* OnboardingView.swift */,
+				3BFBE7F826F8159B00B0DFE2 /* ContactsOnboarding.swift */,
+				3BFBE7FA26F815A800B0DFE2 /* ProfilePicOnboarding.swift */,
 				15E4907326E84A1700B25B56 /* SigninViewModel.swift */,
 			);
 			path = Auth;
@@ -1063,6 +1069,7 @@
 				65A9EF9D26DF0B2500E81CBF /* ConnectionsView.swift in Sources */,
 				156E6AE526D8A13400690E47 /* UserProfileView.swift in Sources */,
 				3B7AF0952671D5FA003BCCF3 /* PostApi.swift in Sources */,
+				3BFBE7F926F8159B00B0DFE2 /* ContactsOnboarding.swift in Sources */,
 				3B7AF0712671A1FC003BCCF3 /* CommentInput.swift in Sources */,
 				15F7E8B926E848ED00E5238F /* AskDetailBody.swift in Sources */,
 				65A9EFA526E0B2EC00E81CBF /* AskApi.swift in Sources */,
@@ -1096,6 +1103,7 @@
 				15F7E8B426E848ED00E5238F /* AskDetailRow.swift in Sources */,
 				3B7AF0972671D98E003BCCF3 /* Post.swift in Sources */,
 				3B7AF0BB2672CACE003BCCF3 /* MessageViewModel.swift in Sources */,
+				3BFBE7FB26F815A800B0DFE2 /* ProfilePicOnboarding.swift in Sources */,
 				3B7AF0B52672C15A003BCCF3 /* ChatApi.swift in Sources */,
 				1524FCD526D754500000629C /* TextCell.swift in Sources */,
 				3B7AF0BF2673EAFB003BCCF3 /* Activity.swift in Sources */,
