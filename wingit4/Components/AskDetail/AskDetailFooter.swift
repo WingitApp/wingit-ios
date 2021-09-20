@@ -18,25 +18,18 @@ struct AskDetailFooter: View {
       VStack {
         Divider()
         HStack {
-          ReferButton(
-            post: $post,
-            showLabel: true
-          )
-          .padding(.leading, 15)
           Spacer()
           CommentButton(
-            showLabel: true,
             isTapDisabled: true
           )
-          Spacer()
-          ShareButton(
-            post: $post,
-            showLabel: true
+          ReferButton(
+            post: $post
           )
         }
         .padding(
-          EdgeInsets(top: 3, leading: 0, bottom: 3, trailing: 15)
+          EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 15)
         )
+        .frame(height: 30)
         Divider()
       }
   

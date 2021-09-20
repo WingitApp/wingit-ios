@@ -58,10 +58,10 @@ struct WingerCountSummary: View {
           .padding(.leading, getPaddingByIndex(index: index))
           
         }
-//        formatDescription()
-        WingerTextDescription.getFormattedString(
-          wingers: wingers,
-          limit: limit
+        BumpersTextDescription.getFormattedCount(
+          users: wingers,
+          limit: limit,
+          emptyMessage: "Know someone who can help? Be the first to bump this ask"
         )
         .font(.caption2)
     }

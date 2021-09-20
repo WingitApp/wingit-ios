@@ -20,8 +20,21 @@ struct AskDetailCard: View {
         AskDetailHeader(post: $post)
         AskDetailBody(post: $post)
         // AskDetailRow shows the linear progression on bumps
-        WingersRow(wingers: $askCardViewModel.wingers)
-          .padding(.bottom, 10)
+        VStack(alignment: .leading) {
+          Text("Bumpers")
+            .font(.headline)
+            .padding(.top, 10)
+            .padding(.bottom, 10)
+          BumperCountSummary(bumpers: $askCardViewModel.bumpers)
+          Text("Wingers")
+            .font(.headline)
+            .padding(.top, 10)
+            .padding(.bottom, 10)
+          WingerCountSummary(wingers: $askCardViewModel.wingers)
+        }
+        .padding([.horizontal])
+        .padding(.bottom, 10)
+
         AskDetailFooter(post: $post)
       }
       .environmentObject(referViewModel)

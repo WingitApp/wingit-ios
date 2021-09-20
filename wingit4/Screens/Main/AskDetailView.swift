@@ -22,7 +22,8 @@ struct AskDetailView: View {
         }
         CommentInput(post: $post)
       }
-      .padding(.top, -10)
+      .edgesIgnoringSafeArea(.top)
+      .padding(.top, 1)
       .environmentObject(commentViewModel)
       .frame(
         width: UIScreen.main.bounds.size.width
