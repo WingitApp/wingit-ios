@@ -49,7 +49,11 @@ struct ReferConnectionsList: View {
                   .padding(.bottom, 15)
               
                   HStack(alignment: .center) {
-                    WingersRow(wingers: self.$referViewModel.wingers)
+                    
+                    UserBumpCountSummary(
+                      users: self.$referViewModel.userBumps
+                    )
+              
                     Spacer()
                   }
                   .frame(width: UIScreen.main.bounds.width)
@@ -68,21 +72,21 @@ struct ReferConnectionsList: View {
                         ReferralUserCard(
                           user: user,
                           isChecked: (
-                            self.referViewModel.wingers.contains(user) ||
+                            self.referViewModel.userBumps.contains(user) ||
                             self.referViewModel.selectedUsers.contains(user)
                           )
                         )
                     }
-                  ForEach(
-                    Array(self.referViewModel.wingers.enumerated()),
-                    id: \.element
-                  ) { index, user in
-                      ReferralUserCard(
-                        user: user,
-                        isChecked: true
-                      )
-                      .allowsHitTesting(false)
-                  }
+//                  ForEach(
+//                    Array(self.referViewModel.userBumps.enumerated()),
+//                    id: \.element
+//                  ) { index, user in
+//                      ReferralUserCard(
+//                        user: user,
+//                        isChecked: true
+//                      )
+//                      .allowsHitTesting(false)
+//                  }
                 }
                 .padding(.leading, -15)
               }

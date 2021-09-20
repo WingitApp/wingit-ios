@@ -66,6 +66,8 @@ struct CardStyle: ViewModifier {
 }
 
 struct UserAvatarStyle: ViewModifier {
+  var index: Int = 0
+  
   func body(content: Content) -> some View {
     content
     .clipShape(Circle())
@@ -73,6 +75,7 @@ struct UserAvatarStyle: ViewModifier {
       RoundedRectangle(cornerRadius: 100)
         .stroke(Color.gray, lineWidth: 1)
     )
+    .padding(.leading, index > 0 ? -15 : 0)
   }
 }
 

@@ -17,7 +17,12 @@ class AskCardViewModel: ObservableObject {
   var post: Post?
   var isProfileView: Bool = false
   
-  // Winger State
+  // Bumpers State
+  @Published var bumpers: [User] = []
+  @Published var isLoadingBumpers: Bool = false
+  @Published var listenerBumpers: ListenerRegistration?
+  
+  // Wingers State
   @Published var wingers: [User] = []
   @Published var isLoadingWingers: Bool = false
   @Published var listenerWingers: ListenerRegistration?
@@ -47,7 +52,41 @@ class AskCardViewModel: ObservableObject {
       }
     }
     self.isMarkedAsDone = isPostClosed
+    self.getBumpersByPostId(postId: post.postId)
     self.getWingersByPostId(postId: post.postId)
+  }
+  
+  func getBumpersByPostId(postId: String) {
+    self.bumpers = []
+    isLoadingBumpers =  true
+    
+    Api.Post.loadBumpers(
+      postId: postId,
+      onSuccess: { (bumpers) in
+        if self.bumpers.count < bumpers.count {
+          self.bumpers = bumpers
+          self.isLoadingBumpers = false
+        }
+      },
+      onAddition: { (bumper) in
+        if !self.bumpers.isEmpty {
+            if !self.bumpers.contains(bumper) {
+              self.bumpers.append(bumper)
+            }
+        }
+      },
+      onRemoval: { (bumper) in
+        if !self.bumpers.isEmpty {
+            for (index, w) in self.bumpers.enumerated() {
+                if w.uid == bumper.uid {
+                    self.bumpers.remove(at: index)
+                }
+            }
+        }
+      },
+      listener: { listenerHandler in
+        self.listenerBumpers = listenerHandler
+    })
   }
   
   func getWingersByPostId(postId: String) {

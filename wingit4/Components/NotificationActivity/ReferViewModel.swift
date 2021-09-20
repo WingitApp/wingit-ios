@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 import FirebaseAuth
+import Firebase
 import Amplitude
 import SPAlert
 
@@ -17,10 +18,12 @@ class ReferViewModel : ObservableObject, Identifiable {
     
     @Published var connections: [User] = []
     @Published var wingers: [User] = []
+    @Published var userBumps: [User] = []
     @Published var selectedUsers: [User] = []
-
     
     @Published var isReferListOpen: Bool = false
+    
+    @Published var userBumpsListener: ListenerRegistration?
   
     func toggleReferListScreen() {
         self.isReferListOpen.toggle()
@@ -32,12 +35,14 @@ class ReferViewModel : ObservableObject, Identifiable {
       }
     }
     
-  func handleUserSelect(user: User) {
+  func handleUserSelect(user: User, currentUser: User) {
       guard let userId = user.id else { return }
       if selectedUsers.contains(user) {
         self.selectedUsers.removeAll(where: { $0 == user })
+        self.wingers.removeAll(where: {$0 == currentUser})
       } else {
           self.selectedUsers.append(user)
+        self.wingers.append(currentUser)
       }
 
     }
@@ -78,18 +83,43 @@ class ReferViewModel : ObservableObject, Identifiable {
         isLoading = true
       
         Api.Connections.getConnections(userId: userId) { users in
-          Api.Referrals.getWingersByPostId(askId: post.postId) { wingers in
-            // we only show connections that are available
-            self.connections = users.compactMap { user in
-              if wingers.contains(user) || user.id == post.ownerId {
-                return nil
-              }
-              return user
-            }
-            self.wingers = wingers
-            self.isLoading = false
+          self.connections = users.compactMap { user in
+            if user.id == post.ownerId { return nil }
+            return user
           }
+          
+          self.loadUserBumpers(post: post)
+          
         }
+    }
+  
+    func loadUserBumpers(post: Post) {
+      Api.Post.getUserBumpsByPost(
+        askId: post.postId,
+        onSuccess: { bumpers in
+          if bumpers.count > self.userBumps.count {
+            self.userBumps = bumpers
+          }
+          
+        },
+        onAddition: { bumper in
+          if !self.userBumps.contains(bumper) {
+            self.userBumps.append(bumper)
+          }
+        },
+        onRemoval: { bumper in
+          if !self.userBumps.isEmpty {
+              for (index, w) in self.userBumps.enumerated() {
+                  if w.uid == bumper.uid {
+                    self.userBumps.remove(at: index)
+                  }
+              }
+          }
+        },
+        listener: { listener in
+          self.userBumpsListener = listener
+        }
+      )
     }
 }
 

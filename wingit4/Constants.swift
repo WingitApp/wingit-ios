@@ -204,5 +204,9 @@ class Ref {
         static func FS_COLLECTION_ACTIVITY_EVENTS_FOR_USER(userId: String) -> CollectionReference {
                return FS_COLLECTION_CONNECTIONS.document(userId).collection("events")
         }
+  
+        static func FS_COLLECTION_USER_BUMPS_BY_POST(userId: String, postId: String) -> CollectionReference {
+          return FS_COLLECTION_USERS.document(userId).collection("bumpedPosts").document(postId).collection("users")
+        }
 }
 

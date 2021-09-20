@@ -5,6 +5,8 @@
 //  Created by Joshua Lee on 9/1/21.
 //
 
+//TODO: Refactor this component by moving methods to a global class or struct
+
 import SwiftUI
 
 struct WingersRow: View {

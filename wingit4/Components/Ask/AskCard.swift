@@ -35,7 +35,8 @@ struct AskCard: View {
       VStack {
         // need to place above to prevent event propagation
         HStack {
-          WingerCountSummary( wingers: self.$askCardViewModel.wingers)
+//          WingerCountSummary( wingers: self.$askCardViewModel.wingers)
+          BumperCountSummary(bumpers: self.$askCardViewModel.bumpers)
           Spacer()
         }
         .padding(EdgeInsets(top: 10, leading: 15, bottom: 5, trailing: 15))
@@ -85,6 +86,9 @@ struct AskCard: View {
         )
         self.footerCellViewModel.checkPostIsLiked(post: post)
       }
+//      .onDisapper {
+//        // remove listners
+//      }
       .sheet(
         isPresented: $askCardViewModel.isImageModalOpen,
         content: {

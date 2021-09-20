@@ -9,13 +9,16 @@ import SwiftUI
 
 struct ReferralUserCard: View {
     @EnvironmentObject var referViewModel: ReferViewModel
+  @EnvironmentObject var session: SessionStore
 
     var user: User
     var isChecked: Bool = false
   
     func onTapGesture() {
-      print("card tapped")
-      self.referViewModel.handleUserSelect(user: user)
+      self.referViewModel.handleUserSelect(
+        user: user,
+        currentUser: session.currentUser!
+      )
     }
     
     var body: some View {

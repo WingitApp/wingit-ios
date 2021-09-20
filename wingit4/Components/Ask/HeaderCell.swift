@@ -76,11 +76,10 @@ struct HeaderCell: View {
               Text(textByIndex(index: index!).uppercased())
                 .fontWeight(.heavy)
                 .kerning(1)
-//                .font(.footnote)
                 .font(.system(size: 9))
                 .foregroundColor(primaryColorByIndex(index: index!))
                 .padding(
-                  EdgeInsets(top: 5, leading: 8, bottom: 5, trailing: 8)
+                  EdgeInsets(top: 3, leading: 8, bottom: 3, trailing: 8)
                 )
                 .background(secondaryColorByIndex(index: index!))
                 .cornerRadius(5)

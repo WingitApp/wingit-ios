@@ -48,18 +48,19 @@ class ReferralsApi {
         Ref.FS_COLLECTION_REFERRALS.document(referralId).updateData(["status": newStatus.rawValue, "updatedAt": FieldValue.serverTimestamp()])
     }
   
-  /**Used to get list of users who have winged (no listener attached)*/
-  func getWingersByPostId(askId: String, onSuccess: @escaping(_ wingers: [User]) -> Void) {
-    Ref.FS_COLLECTION_ALL_POSTS.document(askId).collection("wingers").getDocuments { (snapshot, error) in
-      if error != nil { return print(error) }
-      guard let snap = snapshot else { return }
-      
-      let wingers = snap.documents.compactMap {
-        return try? $0.data(as: User.self)
+    /**Used to get list of users who have winged (no listener attached)*/
+    func getWingersByPostId(askId: String, onSuccess: @escaping(_ wingers: [User]) -> Void) {
+      Ref.FS_COLLECTION_ALL_POSTS.document(askId).collection("wingers").getDocuments { (snapshot, error) in
+        if error != nil { return print(error) }
+        guard let snap = snapshot else { return }
+        
+        let wingers = snap.documents.compactMap {
+          return try? $0.data(as: User.self)
+        }
+        onSuccess(wingers)
       }
-      onSuccess(wingers)
     }
-  }
+    
     
     func getReferralsByAskId(askId: String, onSuccess: @escaping(_ recipientIds: [String]) -> Void) {
         

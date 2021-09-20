@@ -61,7 +61,7 @@ struct WingerCountSummary: View {
 //        formatDescription()
         WingerTextDescription.getFormattedString(
           wingers: wingers,
-          limit: WingersRow.WINGER_DISPLAY_LIMIT
+          limit: limit
         )
         .font(.caption2)
     }

@@ -105,6 +105,73 @@ class PostApi {
             }
         }
     }
+  
+    func getUserBumpsByPost(
+      askId: String,
+      onSuccess: @escaping(_ bumpers: [User]) -> Void,
+      onAddition: @escaping(_ user: User) -> Void,
+      onRemoval: @escaping(_ user: User) -> Void,
+      listener: @escaping(_ listenerHandler: ListenerRegistration) -> Void
+    ) {
+      guard let userId = Auth.auth().currentUser?.uid else { return }
+
+      let listenerUserBumpers = Ref.FS_COLLECTION_USER_BUMPS_BY_POST(userId: userId, postId: askId)
+        .addSnapshotListener { (snapshot, error) in
+          guard let snap = snapshot else { return }
+          if let error = error { return print(error) }
+          
+          snap.documentChanges.forEach { (documentChange) in
+            switch documentChange.type {
+              case .added:
+                var bumpers = [User]()
+                guard let bumper = try? documentChange.document.data(as: User.self) else {return}
+                  onAddition(bumper)
+                  bumpers.append(bumper)
+                  onSuccess(bumpers)
+              case .removed:
+                guard let bumper = try? documentChange.document.data(as: User.self) else {return}
+                onRemoval(bumper)
+              case .modified:
+                print("winger modified")
+            }
+        }
+      }
+      
+      listener(listenerUserBumpers)
+    }
+    
+    func loadBumpers(
+      postId: String,
+      onSuccess: @escaping(_ users: [User]) -> Void,
+      onAddition: @escaping(_ user: User) -> Void,
+      onRemoval: @escaping(_ user: User) -> Void,
+      listener: @escaping(_ listenerHandler: ListenerRegistration) -> Void
+    ){
+      let listenerWingers = Ref.FS_COLLECTION_ALL_POSTS.document(postId)
+          .collection("bumpers")
+          .addSnapshotListener({ (snapshot, error) in
+
+          guard let snap = snapshot else { return }
+          
+          snap.documentChanges.forEach { (documentChange) in
+                switch documentChange.type {
+                  case .added:
+                    var bumpers = [User]()
+                    guard let bumper = try? documentChange.document.data(as: User.self) else {return}
+                      onAddition(bumper)
+                      bumpers.append(bumper)
+                      onSuccess(bumpers)
+                  case .removed:
+                    guard let bumper = try? documentChange.document.data(as: User.self) else {return}
+                    onRemoval(bumper)
+                  case .modified:
+                    print("winger modified")
+                }
+          }
+        })
+    
+      listener(listenerWingers)
+    }
     
     func loadWingers(
       postId: String,
