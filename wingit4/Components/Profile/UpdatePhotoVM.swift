@@ -14,7 +14,7 @@ import SwiftUI
 
 class UpdatePhotoVM: ObservableObject {
 
-    @Published var image: Image = Image(systemName: IMAGE_PHOTO)
+    @Published var image: Image = Image(systemName: "person.crop.circle")
     var imageData: Data = Data(count: 0)
     var errorString = ""
 
@@ -22,14 +22,14 @@ class UpdatePhotoVM: ObservableObject {
     @Published var showImagePicker: Bool = false
     
     
-    func updatePhoto(imageData: Data, completed: @escaping(_ user: User) -> Void,  onError: @escaping(_ errorMessage: String) -> Void) {
+    func updatePhoto(imageData: Data, completed: @escaping() -> Void,  onError: @escaping(_ errorMessage: String) -> Void) {
         if imageData.count != 0 {
            // showscreen.toggle()
             Api.User.updateImage(imageData: imageData, onSuccess: completed, onError: onError)
         }
         else {
             showAlert = true
-            errorString = "Please fill in all fields"
+            errorString = "Please add a photo to upload"
         }
     }
 }

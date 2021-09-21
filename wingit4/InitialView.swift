@@ -11,7 +11,7 @@ import SwiftUI
 import Firebase
 
 struct InitialView: View {
-    
+    @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
     @EnvironmentObject var session: SessionStore
     
     func listen() {
@@ -19,16 +19,19 @@ struct InitialView: View {
     }
     
     var body: some View {
-        Group {
-            if session.isLoggedIn {
-                MainView()
+            if shouldShowOnboarding {
+                IntroView().preferredColorScheme(.light)
             } else {
-                OnboardingView()
+                Group {
+                    if session.isLoggedIn {
+                        MainView()
+                    } else {
+                        SigninView()
+                    }
+                }
+                .onAppear(perform: listen)
+                .preferredColorScheme(.light)
+                //  .environment(\.colorScheme, .dark)
             }
-
-        }
-        .onAppear(perform: listen)
-        .preferredColorScheme(.light)
-      //  .environment(\.colorScheme, .dark)
     }
 }

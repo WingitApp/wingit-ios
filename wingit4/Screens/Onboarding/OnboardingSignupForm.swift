@@ -7,17 +7,14 @@
 
 import SwiftUI
 
-struct SignupView : View {
+struct OnboardingSignupForm : View {
+    @Binding var tabSelection: Int
     @EnvironmentObject var session: SessionStore
     @ObservedObject var signupViewModel = SignupViewModel()
     
     var body: some View{
-        
-        VStack{
-           
-            
+        VStack {
             VStack(alignment: .leading, spacing: 15) {
-                
                 HStack{
                 FirstNameTextField(
                   firstName: $signupViewModel.firstName
@@ -37,21 +34,19 @@ struct SignupView : View {
                   password: $signupViewModel.password
                 )
             }
-            .padding(.horizontal,25)
-            .padding(.top,25)
-            
-            
+            .padding(.horizontal, 25)
             SignupButton(
                 action: {
                     signupViewModel.signup() { user in
-                        signupViewModel.onSignupSuccess(user: user)
+                        self.tabSelection = 1
                         self.session.currentUser = user
+                        signupViewModel.onSignupSuccess(user: user)
                     }
                 },
               label: TEXT_SIGN_UP
             )
-            .padding(.horizontal,25)
-            .padding(.top,25)
+            .padding(.horizontal, 25)
+            .padding(.top, 25)
             .alert(
               isPresented: $signupViewModel.isAlertShown
             ) {
@@ -68,7 +63,8 @@ struct SignupView : View {
         }
         .onTapGesture { dismissKeyboard() }
         .onAppear{ logToAmplitude(event: .viewSignupScreen) }
-
+        .navigationTitle("Create a Profile")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

@@ -120,7 +120,7 @@ struct ProfileView: View {
       )
       .sheet(
         isPresented:  $profileViewModel.isUpdatePicSheetOpen,
-        content: { ProfilePicToggle(user: session.currentUser) }
+        content: { UpdateProfilePhoto(user: session.currentUser) }
       )
       .environmentObject(connectionsViewModel)
       .environmentObject(profileViewModel)
