@@ -13,7 +13,8 @@ struct OnboardingView: View {
 
     var body: some View {
         TabView (selection: $tabSelection) {
-            OnboardingSignupForm(tabSelection: $tabSelection).tag(0)
+            // DragGesture prevents the user from swiping past the SignupForm
+            OnboardingSignupForm(tabSelection: $tabSelection).gesture(DragGesture()).tag(0)
             OnboardingProfilePhoto(selectedTab: $tabSelection).tag(1)
             OnboardingContacts().tag(2)
         }
