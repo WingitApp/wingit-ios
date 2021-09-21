@@ -57,7 +57,7 @@ struct LottieView: UIViewRepresentable {
 
   var name: String!
   var onAnimationEnd: () -> Void
-  var animationSpeed: Double = 1.5
+  var animationSpeed: CGFloat = 1.5
 
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)
@@ -66,7 +66,7 @@ struct LottieView: UIViewRepresentable {
         let animation = Animation.named(name)
         animationView.animation = animation
         animationView.contentMode = .scaleAspectFit
-        animationView.animationSpeed = 1.5
+        animationView.animationSpeed = animationSpeed
 
         animationView.play() { (finished) in
 //          animationView.isHidden = true

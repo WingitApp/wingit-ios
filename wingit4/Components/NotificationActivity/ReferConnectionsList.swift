@@ -50,7 +50,7 @@ struct ReferConnectionsList: View {
                            Text(
                             Image(systemName: "paperplane")
                            )
-                            .font(.system(size:18))
+                            .font(.system(size:20))
                             .fontWeight(.semibold)
                             .foregroundColor(.wingitBlue)
                            .padding(.trailing, 5)
@@ -73,10 +73,11 @@ struct ReferConnectionsList: View {
  
               if referViewModel.showOnSuccessAnimation {
                 LottieView(
-                  name: "bumpSuccess",
+                  name: "letterPlane",
                   onAnimationEnd: {
                     self.referViewModel.toggleReferListScreen()
-                  }
+                  },
+                  animationSpeed: 3.5
                 )
                   .transition(.moveAndFade)
               } else {

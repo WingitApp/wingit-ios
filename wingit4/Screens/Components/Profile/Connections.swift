@@ -19,7 +19,7 @@ struct Connections: View {
                 Text("Connections")
             }
             .font(.subheadline)
-            .foregroundColor(Color(.systemTeal))
+            .foregroundColor(.wingitBlue)
             .padding(.top, 2)
 
               .onTapGesture {

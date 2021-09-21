@@ -31,6 +31,10 @@
 		1524E10726F8418D00D5BDB4 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1524E10626F8418D00D5BDB4 /* LottieView.swift */; };
 		1524E11626F90F5700D5BDB4 /* plane.json in Resources */ = {isa = PBXBuildFile; fileRef = 1524E11526F90F5700D5BDB4 /* plane.json */; };
 		1524E11826F910A000D5BDB4 /* bumpSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = 1524E11726F910A000D5BDB4 /* bumpSuccess.json */; };
+		1524E11E26F9D08F00D5BDB4 /* letterPlane.json in Resources */ = {isa = PBXBuildFile; fileRef = 1524E11D26F9D08E00D5BDB4 /* letterPlane.json */; };
+		1524E12026F9D41800D5BDB4 /* 30762-social-media-network.json in Resources */ = {isa = PBXBuildFile; fileRef = 1524E11F26F9D41800D5BDB4 /* 30762-social-media-network.json */; };
+		1524E12226F9D49900D5BDB4 /* 74908-girl-chatting-with-online-friends.json in Resources */ = {isa = PBXBuildFile; fileRef = 1524E12126F9D49900D5BDB4 /* 74908-girl-chatting-with-online-friends.json */; };
+		1524E12426F9D4A300D5BDB4 /* 56172-online-meetings.json in Resources */ = {isa = PBXBuildFile; fileRef = 1524E12326F9D4A300D5BDB4 /* 56172-online-meetings.json */; };
 		1524FCC826D753170000629C /* AskMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1524FCC726D753170000629C /* AskMenu.swift */; };
 		1524FCCA26D753240000629C /* AskMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1524FCC926D753240000629C /* AskMenuViewModel.swift */; };
 		1524FCCF26D753320000629C /* FooterCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1524FCCB26D753310000629C /* FooterCellViewModel.swift */; };
@@ -219,6 +223,10 @@
 		1524E10626F8418D00D5BDB4 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		1524E11526F90F5700D5BDB4 /* plane.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = plane.json; sourceTree = "<group>"; };
 		1524E11726F910A000D5BDB4 /* bumpSuccess.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bumpSuccess.json; sourceTree = "<group>"; };
+		1524E11D26F9D08E00D5BDB4 /* letterPlane.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = letterPlane.json; sourceTree = "<group>"; };
+		1524E11F26F9D41800D5BDB4 /* 30762-social-media-network.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "30762-social-media-network.json"; sourceTree = "<group>"; };
+		1524E12126F9D49900D5BDB4 /* 74908-girl-chatting-with-online-friends.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "74908-girl-chatting-with-online-friends.json"; sourceTree = "<group>"; };
+		1524E12326F9D4A300D5BDB4 /* 56172-online-meetings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "56172-online-meetings.json"; sourceTree = "<group>"; };
 		1524FCC726D753170000629C /* AskMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskMenu.swift; sourceTree = "<group>"; };
 		1524FCC926D753240000629C /* AskMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskMenuViewModel.swift; sourceTree = "<group>"; };
 		1524FCCB26D753310000629C /* FooterCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooterCellViewModel.swift; sourceTree = "<group>"; };
@@ -461,6 +469,10 @@
 		1524E10A26F8562100D5BDB4 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				1524E12326F9D4A300D5BDB4 /* 56172-online-meetings.json */,
+				1524E11F26F9D41800D5BDB4 /* 30762-social-media-network.json */,
+				1524E12126F9D49900D5BDB4 /* 74908-girl-chatting-with-online-friends.json */,
+				1524E11D26F9D08E00D5BDB4 /* letterPlane.json */,
 				1524E11726F910A000D5BDB4 /* bumpSuccess.json */,
 			);
 			path = Lottie;
@@ -1003,9 +1015,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1524E11826F910A000D5BDB4 /* bumpSuccess.json in Resources */,
+				1524E12226F9D49900D5BDB4 /* 74908-girl-chatting-with-online-friends.json in Resources */,
 				3B75E3C7267153BB002F3108 /* Preview Assets.xcassets in Resources */,
 				3BC155AD26D721600069AFD4 /* GoogleService-Info.plist in Resources */,
+				1524E12426F9D4A300D5BDB4 /* 56172-online-meetings.json in Resources */,
 				3B924C9826CB11B300747233 /* LaunchScreen.storyboard in Resources */,
+				1524E11E26F9D08F00D5BDB4 /* letterPlane.json in Resources */,
+				1524E12026F9D41800D5BDB4 /* 30762-social-media-network.json in Resources */,
 				3B75E3C4267153BB002F3108 /* Assets.xcassets in Resources */,
 				1524E11626F90F5700D5BDB4 /* plane.json in Resources */,
 			);

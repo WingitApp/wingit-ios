@@ -59,14 +59,14 @@ class ReferViewModel : ObservableObject, Identifiable {
       
         ///askId(postId) & senderId (auth.dude) & senderId(userId of the one selected
         // ids -> self.selectedUsers
-        for receivers in selectedUsers {
-            let receiverId = receivers.id
-            Api.Referrals.sendReferral(
-                askId: askId,
-                receiverId: receiverId,
-                senderId: Auth.auth().currentUser!.uid
-            )
-        }
+//        for receivers in selectedUsers {
+//            let receiverId = receivers.id
+//            Api.Referrals.sendReferral(
+//                askId: askId,
+//                receiverId: receiverId,
+//                senderId: Auth.auth().currentUser!.uid
+//            )
+//        }
 //        let alertView = SPAlertView(title: "Sent!", message: nil, preset: SPAlertIconPreset.done); alertView.present(duration: 2)
       
       self.toggleSuccessAnimation()

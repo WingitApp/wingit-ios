@@ -22,10 +22,10 @@ struct PersonalProfileHeader: View {
                     VStack {
                         Text("\(profileViewModel.openPosts.count)")
                           .font(.headline)
-                            .foregroundColor(profileViewModel.showOpenPosts ? Color(.systemTeal) : Color.black)
+                          .foregroundColor(profileViewModel.showOpenPosts ? .wingitBlue : Color("bw"))
                         Text("Open")
                           .font(.subheadline)
-                          .foregroundColor(profileViewModel.showOpenPosts ? Color(.systemTeal) : .gray)
+                          .foregroundColor(profileViewModel.showOpenPosts ? .wingitBlue : .gray)
                     }
                     .padding(10)
                     .onTapGesture {
@@ -34,10 +34,10 @@ struct PersonalProfileHeader: View {
                       VStack{
                       Text("\(profileViewModel.closedPosts.count)")
                         .font(.headline)
-                        .foregroundColor(profileViewModel.showOpenPosts ?  Color.black : Color(.systemTeal))
+                        .foregroundColor(profileViewModel.showOpenPosts ?  Color("bw") : .wingitBlue)
                       Text("Closed")
                         .font(.subheadline)
-                        .foregroundColor(profileViewModel.showOpenPosts ? .gray : Color(.systemTeal))
+                        .foregroundColor(profileViewModel.showOpenPosts ? .gray : .wingitBlue)
                       }
                       .padding(10)
                       .onTapGesture {

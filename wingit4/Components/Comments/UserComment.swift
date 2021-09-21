@@ -55,6 +55,7 @@ struct UserComment: View {
       .padding(
         EdgeInsets(top: 5, leading: 15, bottom: 5, trailing: 15)
       )
+      .onTapGesture(perform: { isNavActive.toggle() })
       Divider()
     }
 }
