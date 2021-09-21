@@ -14,7 +14,7 @@ import SwiftUI
 
 class UpdatePhotoVM: ObservableObject {
 
-    @Published var image: Image = Image(systemName: "person.crop.circle")
+    @Published var image: Image = Image(IMAGE_USER_PLACEHOLDER)
     var imageData: Data = Data(count: 0)
     var errorString = ""
 
