@@ -21,28 +21,27 @@ class SignupViewModel: ObservableObject {
   @Published var image: Image = Image(IMAGE_USER_PLACEHOLDER)
   @Published var imageData: Data = Data()
   @Published var errorString = ""
-  @Published var isImagePickerShown: Bool = false
   @Published var isAlertShown: Bool = false
   @Published var showscreen: Bool = false
   @Environment (\.presentationMode) var presentationMode
     
 
     func signup(onSuccess: @escaping (_ user: User) -> Void) {
-    self.ampSignupAttemptEvent()
-    
-    if self.isFormComplete() {
-       return AuthService.signupUser(
-          firstName: firstName,
-          lastName: lastName,
-          username: username,
-          email: email,
-          password: password,
-          imageData: imageData,
-          onSuccess: onSuccess,
-          onError: onSignupError
-        )
-    }
-    self.showErrorMessage(message: "Please fill in all fields")
+        self.ampSignupAttemptEvent()
+        
+        if self.isFormComplete() {
+           return AuthService.signupUser(
+              firstName: firstName,
+              lastName: lastName,
+              username: username,
+              email: email,
+              password: password,
+              imageData: imageData,
+              onSuccess: onSuccess,
+              onError: onSignupError
+            )
+        }
+        self.showErrorMessage(message: "Please fill in all fields")
   }
   
   /// Displays error message through alert (SignInView)
@@ -55,7 +54,6 @@ class SignupViewModel: ObservableObject {
   
   func onSignupSuccess(user: User) {
     ampSignupSuccessEvent(user: user)
-    self.clean()
   }
   
   func onSignupError(errorMessage: String) {

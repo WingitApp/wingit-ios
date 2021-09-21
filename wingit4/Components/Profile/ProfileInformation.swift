@@ -51,19 +51,19 @@ struct ProfileInformation: View {
             }
             
         }.sheet(isPresented: $updatePic, content: {
-            ProfilePicToggle(user: user)
+            UpdateProfilePhoto(user: user)
         })
     }
 }
 
-struct ProfilePicToggle: View {
+struct UpdateProfilePhoto: View {
     var user: User?
     let uid = Auth.auth().currentUser?.uid
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @ObservedObject var updatePhotoVM = UpdatePhotoVM()
     
     func addAvatar() {
-        updatePhotoVM.updatePhoto(imageData: updatePhotoVM.imageData, completed: { (user) in
+        updatePhotoVM.updatePhoto(imageData: updatePhotoVM.imageData, completed: {
             self.clean()
             // Switch to the Main App
         }) { (errorMessage) in
