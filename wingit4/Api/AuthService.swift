@@ -37,14 +37,6 @@ class AuthService {
     }
     
     static func signupUser(firstName: String, lastName: String, username: String, email: String, password: String, imageData: Data, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-            if !String.isValidEmailAddress(emailAddress: email) {
-                onError("Email input is not a valid email address.")
-                return
-            }
-            if !String.isValidUsername(username: username) {
-                onError("Username must be alphanumeric or underscores with no whitespaces.")
-                return
-            }
             let normalizedEmail = email.normalizeEmail()
             Auth.auth().createUser(withEmail: normalizedEmail, password: password) { (authData, error) in
                     if error != nil {

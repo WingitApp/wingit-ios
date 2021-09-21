@@ -25,5 +25,7 @@ struct ContactsListView: View {
             }
 //            .modifier(ResignKeyboardOnDragGesture())
         }
+         .navigationTitle("Invite friends")
+         .navigationBarTitleDisplayMode(.inline)
     }
 }
