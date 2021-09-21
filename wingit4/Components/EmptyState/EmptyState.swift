@@ -47,7 +47,7 @@ struct EmptyState: View {
                 )
               Text("\(title)")
                 .font(.headline)
-                .padding(.top, 10)
+//                .padding(.top, 10)
                 .padding(.bottom, 3)
               Text("\(description)")
                 .font(.callout)

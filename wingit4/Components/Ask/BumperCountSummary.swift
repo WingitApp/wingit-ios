@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct BumperCountSummary: View {
-  @Binding var bumpers: [User]
+  var users: [User]
   var limit: Int = 3
   var size: CGFloat = 25
   var showDescription: Bool = false
@@ -36,7 +36,7 @@ struct BumperCountSummary: View {
   }
   
   func formatDescription() -> Text? {
-    let remainder = bumpers.count - limit
+    let remainder = users.count - limit
     return remainder > 0
       ? Text("+ \(remainder)")
         .fontWeight(.semibold)
@@ -47,7 +47,7 @@ struct BumperCountSummary: View {
   
     var body: some View {
       HStack {
-        ForEach(Array(bumpers.prefix(limit).enumerated()), id: \.element) { index, bumper in
+        ForEach(Array(users.prefix(limit).enumerated()), id: \.element) { index, bumper in
           UserAvatar(
             user: bumper,
             height: size,
@@ -62,14 +62,15 @@ struct BumperCountSummary: View {
         }
         if showDescription {
           BumpersTextDescription.getFormattedString(
-            bumpers: bumpers,
+            bumpers: users,
             limit: limit,
             emptyMessage: nil
           )
           .font(.caption2)
+
         } else {
           BumpersTextDescription.getFormattedCount(
-            users: bumpers,
+            users: users,
             limit: limit,
             emptyMessage: nil
           )

@@ -29,38 +29,47 @@ struct AskCard: View {
   // Like
   @StateObject var footerCellViewModel = FooterCellViewModel()
 
+  func openReferConnectionsList() -> Void{
+    referViewModel.toggleReferListScreen()
+  }
+  
+  func navigateToAskCardDetailView() -> Void {
+    commentViewModel.toggleCommentScreen()
+  }
 
   var body: some View {
     if !self.askCardViewModel.isHidden {
       VStack {
         // need to place above to prevent event propagation
         HStack {
-//          WingerCountSummary( wingers: self.$askCardViewModel.wingers)
           BumperCountSummary(
-            bumpers: self.$askCardViewModel.bumpers,
+            users: self.askCardViewModel.bumpers,
             showDescription: true
           )
           Spacer()
         }
         .padding(EdgeInsets(top: 10, leading: 15, bottom: 5, trailing: 15))
+        .onTapGesture(perform: openReferConnectionsList)
         Divider()
         HeaderCell(post: $post, index: index)
-        NavigationLink( destination:
-          AskDetailView(post: $post)
+        VStack {
+          BodyCell(post: $post)
+          FooterCell(post: $post)
+        }
+        .onTapGesture(perform: navigateToAskCardDetailView)
+        NavigationLink(
+          destination: AskDetailView(post: $post)
             .environmentObject(askCardViewModel)
             .environmentObject(askMenuViewModel)
             .environmentObject(askDoneToggleViewModel)
             .environmentObject(commentViewModel)
             .environmentObject(commentInputViewModel)
             .environmentObject(footerCellViewModel)
-            .environmentObject(referViewModel)
+            .environmentObject(referViewModel),
+          isActive: $commentViewModel.isCommentSheetShown
         ) {
-          VStack {
-            BodyCell(post: $post)
-            FooterCell(post: $post)
-          }
-        }
-        .buttonStyle(FlatLinkStyle())
+          EmptyView()
+        }.hidden()
       }
       .background(
 //        self.askCardViewModel.getColorByIndex(index: index).opacity(1)
@@ -106,17 +115,17 @@ struct AskCard: View {
             .environmentObject(askCardViewModel)
             .environmentObject(askMenuViewModel)
       })
-      .sheet(
-        isPresented: $commentViewModel.isCommentSheetShown,
-        content: {
-          CommentView(post: $post)
-            .environmentObject(askCardViewModel)
-            .environmentObject(askMenuViewModel)
-            .environmentObject(commentViewModel)
-            .environmentObject(commentInputViewModel)
-            .environmentObject(footerCellViewModel)
-            .environmentObject(referViewModel)
-        })
+//      .sheet(
+//        isPresented: $commentViewModel.isCommentSheetShown,
+//        content: {
+//          CommentView(post: $post)
+//            .environmentObject(askCardViewModel)
+//            .environmentObject(askMenuViewModel)
+//            .environmentObject(commentViewModel)
+//            .environmentObject(commentInputViewModel)
+//            .environmentObject(footerCellViewModel)
+//            .environmentObject(referViewModel)
+//        })
       .sheet(
         isPresented: $referViewModel.isReferListOpen,
         content: {

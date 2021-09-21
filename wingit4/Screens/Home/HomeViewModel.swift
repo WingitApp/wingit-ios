@@ -62,6 +62,7 @@ class HomeViewModel: ObservableObject {
                 }
             }
         }, modifiedPost: { (post) in
+          print("modified:", post)
           if !self.posts.isEmpty {
             if let index = self.posts.firstIndex(where: {$0.id == post.id}) {
               self.posts[index] = post

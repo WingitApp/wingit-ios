@@ -13,7 +13,6 @@ import SwiftUI
 final class MainViewModel: ObservableObject {
 
     var savedSelectedMainTabIndex: Int = 0
-    
     @Published var selectedIndex: Int = 0 {
         didSet {
             savedSelectedMainTabIndex = selectedIndex

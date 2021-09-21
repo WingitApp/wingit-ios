@@ -51,6 +51,7 @@ struct WingerCountSummary: View {
             height: size,
             width: size
           )
+      
           .overlay(
             RoundedRectangle(cornerRadius: 100)
               .stroke(Color.gray, lineWidth: 1)
@@ -61,7 +62,7 @@ struct WingerCountSummary: View {
         BumpersTextDescription.getFormattedCount(
           users: wingers,
           limit: limit,
-          emptyMessage: "Know someone who can help? Be the first to bump this ask"
+          emptyMessage: nil
         )
         .font(.caption2)
     }

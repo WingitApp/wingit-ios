@@ -35,34 +35,31 @@ struct CommentInput: View {
   
     
     var body: some View {
-      HStack(alignment: .top, spacing: 0) {
-        URLImageView(urlString: session.currentUser?.profileImageUrl)
-          
-              .frame(width: 35, height: 35)
-              .clipShape(Circle())
-              .overlay(
-                RoundedRectangle(cornerRadius: 100)
-                  .stroke(Color.gray, lineWidth: 1)
-              )
-          .padding(.trailing, 10)
-              
-        HStack(alignment: .top){
-             TextView("Add a comment", text: $composedMessage)
-              .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                  .stroke(Color.gray, lineWidth: 1)
-              )
+      VStack() {
+//        URLImageView(urlString: session.currentUser?.profileImageUrl)
+//
+//              .frame(width: 35, height: 35)
+//              .clipShape(Circle())
+//              .overlay(
+//                RoundedRectangle(cornerRadius: 100)
+//                  .stroke(Color.gray, lineWidth: 1)
+//              )
+//          .padding(.trailing, 10)
+        Divider()
+        HStack(alignment: .bottom){
+             TextView("Write a response", text: $composedMessage)
              Button(action: onCommentSubmit) {
-                 Image(systemName: "paperplane.fill")
-                  .font(.system(size:20))
-                  .foregroundColor(Color(.systemTeal))
+                 Image(systemName: "arrow.up.circle.fill")
+                  .font(.system(size:23))
+                  .foregroundColor(.wingitBlue)
              }
              .padding(.top, 8)
          }
+        .padding(
+          EdgeInsets(top: 5, leading: 10, bottom: 10, trailing: 10)
+        )
       }
-      .padding(
-        EdgeInsets(top: 5, leading: 10, bottom: 10, trailing: 10)
-      )
+
         
 //      .frame(maxHeight: 200)
  

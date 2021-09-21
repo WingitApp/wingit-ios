@@ -17,28 +17,22 @@ struct AskDetailCard: View {
   
     var body: some View {
       VStack(alignment: .leading) {
-        AskDetailHeader(post: $post)
+
         AskDetailBody(post: $post)
-        // AskDetailRow shows the linear progression on bumps
         VStack(alignment: .leading) {
-          Text("Bumpers")
-            .bold()
-            .font(.subheadline)
-            
-            .padding(.top, 10)
+          if askCardViewModel.bumpers.count + askCardViewModel.wingers.count > 0 {
+            Text("Collaborators")
+              .bold()
+              .font(.subheadline)
+              .padding(.top, 10)
+          }
+          BumperCountSummary(users: askCardViewModel.bumpers + askCardViewModel.wingers)
             .padding(.bottom, 10)
-          BumperCountSummary(bumpers: $askCardViewModel.bumpers)
-          Text("Wingers")
-            .bold()
-            .font(.subheadline)
-            .padding(.top, 10)
-            .padding(.bottom, 10)
-          WingerCountSummary(wingers: $askCardViewModel.wingers)
+
         }
         .padding([.horizontal])
         .padding(.bottom, 10)
-
-        AskDetailFooter(post: $post)
+        Divider()
       }
       .environmentObject(referViewModel)
       .environmentObject(askCardViewModel)

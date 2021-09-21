@@ -15,7 +15,9 @@ struct AskDoneToggle: View {
       
         Button(
           action: {
-            askCardViewModel.openCloseToggle(post: post)
+            askCardViewModel.openCloseToggle(post: post) { newStatus in
+                post.status = newStatus
+            }
           },
           label: {
             Image(systemName: "checkmark.circle")

@@ -33,7 +33,7 @@ struct ReferralUserCard: View {
             VStack(alignment: .leading, spacing: 5) {
                 Text(user.displayName ?? user.username ?? "").font(.headline).bold()
                 Text("@\(user.username ?? "")").font(.subheadline)
-                    .foregroundColor(Color(.systemTeal))
+                  .foregroundColor(.wingitBlue)
             }
             .padding(.leading, 5)
             Spacer()
@@ -41,7 +41,7 @@ struct ReferralUserCard: View {
                 Circle()
                   .stroke(
                   isChecked
-                      ? Color(.systemTeal)
+                      ? Color.wingitBlue
                       : Color.gray,
                     lineWidth: 1
                   )
@@ -49,7 +49,7 @@ struct ReferralUserCard: View {
               if isChecked {
                   Image(systemName: "checkmark.circle.fill")
                       .font(.system(size:25))
-                    .foregroundColor(Color(.systemTeal))
+                    .foregroundColor(.wingitBlue)
               }
             }
         }

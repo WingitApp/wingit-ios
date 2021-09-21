@@ -47,9 +47,13 @@ struct ReferConnectionsList: View {
                        Button(
                          action: onSend,
                          label: {
-                           Text("Send")
-                             .fontWeight(.semibold)
-                             .foregroundColor(Color(.systemTeal))
+                           Text(
+                            Image(systemName: "paperplane")
+                           )
+                            .font(.system(size:18))
+                            .fontWeight(.semibold)
+                            .foregroundColor(.wingitBlue)
+                           .padding(.trailing, 5)
                        })
                    }
                    .padding([.horizontal,.top])
@@ -62,7 +66,6 @@ struct ReferConnectionsList: View {
                          self.referViewModel.userBumps +
                          self.referViewModel.selectedUsers
                      )
- 
                      Spacer()
                    }
                    .frame(width: UIScreen.main.bounds.width)
@@ -80,7 +83,7 @@ struct ReferConnectionsList: View {
                 Text("Your Connections")
                   .font(.headline)
                   .padding(.leading, 15)
-                  .padding(.bottom, 3)
+                  .padding(.bottom, 5)
                 Divider()
                 List {
                   ForEach(

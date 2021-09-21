@@ -32,12 +32,12 @@ struct TextView: View {
     private var shouldEditInRange: ((Range<String.Index>, String) -> Bool)?
     private var onCommit: (() -> Void)?
 
-    private var placeholderFont: Font = .body
+    private var placeholderFont: Font = .callout
     private var placeholderAlignment: TextAlignment = .leading
     private var foregroundColor: UIColor = .label
     private var autocapitalization: UITextAutocapitalizationType = .sentences
     private var multilineTextAlignment: NSTextAlignment = .left
-    private var font: UIFont = .preferredFont(forTextStyle: .body)
+  private var font: UIFont = .preferredFont(forTextStyle: .callout)
     private var returnKeyType: UIReturnKeyType?
     private var clearsOnInsertion: Bool = false
     private var autocorrection: UITextAutocorrectionType = .default
@@ -97,10 +97,9 @@ struct TextView: View {
             maxHeight: calculatedHeight
           )
           .padding(
-            EdgeInsets(top: 10, leading: 10, bottom: 5, trailing: 5)
+            EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0)
           )
-          .cornerRadius(20)
-          .background(placeholderView.padding(.leading, 10), alignment: .leading)
+          .background(placeholderView.padding(.leading, 5), alignment: .leading)
             
     }
 

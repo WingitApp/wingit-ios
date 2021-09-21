@@ -36,6 +36,7 @@ struct FooterCell: View {
             }
             Spacer()
             CommentButton(
+              
 //              showLabel: true
             )
             ReferButton(

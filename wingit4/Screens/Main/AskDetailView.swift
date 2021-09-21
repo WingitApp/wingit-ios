@@ -14,15 +14,20 @@ struct AskDetailView: View {
   
     var body: some View {
  
-      VStack(alignment: .leading) {
+      VStack(alignment: .leading, spacing: 0) {
+        Divider()
+        AskDetailHeader(post: $post)
+        Divider()
         ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
           AskDetailCard(post: $post)
           CommentList(post: $post)
-          Spacer()
         }
         CommentInput(post: $post)
       }
-//      .edgesIgnoringSafeArea(.top)
+      .navigationBarTitle("")
+      .navigationBarHidden(true)
+      .edgesIgnoringSafeArea(.top)
+      .padding(.top, 10)
       .environmentObject(commentViewModel)
       .frame(
         width: UIScreen.main.bounds.size.width

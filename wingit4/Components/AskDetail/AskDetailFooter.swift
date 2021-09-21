@@ -18,6 +18,20 @@ struct AskDetailFooter: View {
       VStack {
         Divider()
         HStack {
+//          URLImageView(urlString: post.avatar)
+//            .clipShape(Circle())
+//            .frame(width: 30, height: 30)
+//            .overlay(
+//              RoundedRectangle(cornerRadius: 100)
+//                .stroke(Color.gray, lineWidth: 1)
+//            )
+//          VStack(alignment: .leading){
+//            Text(post.username)
+//              .font(.headline)
+//              .fontWeight(.bold)
+//            TimeAgoStamp(date: post.date)
+//              .font(.caption2)
+//          }
           Spacer()
           CommentButton(
             isTapDisabled: true
@@ -29,7 +43,6 @@ struct AskDetailFooter: View {
         .padding(
           EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 15)
         )
-        .frame(height: 30)
         Divider()
       }
   

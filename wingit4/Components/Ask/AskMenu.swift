@@ -10,7 +10,7 @@ import SwiftUI
 struct AskMenu: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
   @EnvironmentObject var askMenuViewModel: AskMenuViewModel
-
+  var isHorizontal: Bool = false
 
     var body: some View {
         VStack{
@@ -34,8 +34,8 @@ struct AskMenu: View {
           }
         }, label: {
           Image(systemName: "ellipsis")
-            .rotationEffect(.degrees(-90))
-            .foregroundColor(Color(.systemTeal))
+            .rotationEffect(.degrees(isHorizontal ? 0 : -90))
+            .foregroundColor(.wingitBlue)
         })
        
       } else {
@@ -47,8 +47,8 @@ struct AskMenu: View {
           }
         }, label: {
           Image(systemName: "ellipsis")
-            .rotationEffect(.degrees(-90))
-            .foregroundColor(Color(.systemTeal))
+            .rotationEffect(.degrees(isHorizontal ? 0 : -90))
+            .foregroundColor(.wingitBlue)
         })
       }
         }

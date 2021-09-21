@@ -50,6 +50,8 @@ struct UserBumpCountSummary: View {
             )
             .font(.caption2)
             .frame(height: 17)
+            .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.1)))
+            .id(UUID().uuidString)
           }
         }
         .padding(.leading, 15)

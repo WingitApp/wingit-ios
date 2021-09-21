@@ -11,7 +11,7 @@ struct CommentButton: View {
   @EnvironmentObject var commentViewModel: CommentViewModel
   var showLabel: Bool = false
   var isTapDisabled: Bool = false
-  
+    
   func onTapCommentIcon() {
     if !isTapDisabled {
       logToAmplitude(event: .viewComments)
@@ -20,7 +20,6 @@ struct CommentButton: View {
   }
   
   var body: some View {
-
     Button(
       action: onTapCommentIcon,
       label: {

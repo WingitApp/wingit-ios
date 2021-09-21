@@ -10,29 +10,42 @@ import URLImage
 
 
 struct AskDetailHeader: View {
+  @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
   @Binding var post: Post
   
     var body: some View {
       HStack {
-        URLImageView(urlString: post.avatar)
-          .clipShape(Circle())
-          .frame(width: 40, height: 40)
-          .overlay(
-            RoundedRectangle(cornerRadius: 100)
-              .stroke(Color.gray, lineWidth: 1)
-          )
-        VStack(alignment: .leading){
-        Text(post.username.capitalized)
-            .font(.title3)
-            .fontWeight(.bold)
-          TimeAgoStamp(date: post.date)
-            .font(.caption2)
+        Button(action: {
+          // custom back button
+          self.presentationMode.wrappedValue.dismiss()
+        }) {
+          HStack(alignment: .center) {
+            Image(systemName: "chevron.left.circle.fill")
+            Text("Back")
+              .font(.callout)
+          }
+          .foregroundColor(.wingitBlue)
+   
         }
+        
+        
+
         Spacer()
-        AskMenu()
+        CommentButton(
+          isTapDisabled: true
+        )
+        ReferButton(
+          post: $post
+        )
+        AskDoneToggle(
+          post: $post
+        ) // rename later
+        AskMenu(
+          isHorizontal: true
+        )
       }
       .padding(
-        EdgeInsets(top: 15, leading: 15, bottom: 0, trailing: 15)
+        EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15)
       )
     }
 }

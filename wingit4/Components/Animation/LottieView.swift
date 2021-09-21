@@ -57,6 +57,7 @@ struct LottieView: UIViewRepresentable {
 
   var name: String!
   var onAnimationEnd: () -> Void
+  var animationSpeed: Double = 1.5
 
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)

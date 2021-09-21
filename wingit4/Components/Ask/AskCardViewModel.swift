@@ -179,7 +179,10 @@ class AskCardViewModel: ObservableObject {
     Api.User.blockUser(userId: uid, postOwnerId: postOwnerId)
   }
   
-  func openCloseToggle(post: Post) {
+  func openCloseToggle(
+    post: Post,
+    onSuccess: @escaping(_ newStatus: PostStatus) -> Void
+  ) {
     guard let postId = post.id else { return }
     var newStatus: PostStatus  {
       if post.status == .closed {
@@ -193,11 +196,9 @@ class AskCardViewModel: ObservableObject {
 
     Api.Post.updateStatus(
       postId: postId,
-      newStatus: newStatus
-    ) { newStatus in
-      self.post!.status = newStatus
-//      let alertView = SPAlertView(title: "Done!", message: "Woohoo! Congrats!", preset: SPAlertIconPreset.done); alertView.present(duration: 2)
-    }
+      newStatus: newStatus,
+      onSuccess: onSuccess
+    )
   }
 
   

@@ -14,13 +14,30 @@ struct AskDetailBody: View {
   @Binding var post: Post
 
     var body: some View {
-      VStack(alignment: .center) {
+      VStack(alignment: .leading) {
+
+        HStack {
+          URLImageView(urlString: post.avatar)
+            .clipShape(Circle())
+            .frame(width: 30, height: 30)
+            .overlay(
+              RoundedRectangle(cornerRadius: 100)
+                .stroke(Color.gray, lineWidth: 1)
+            )
+          VStack(alignment: .leading){
+            Text(post.username)
+              .font(.subheadline)
+              .fontWeight(.bold)
+            TimeAgoStamp(date: post.date)
+              .font(.caption2)
+          }
+          Spacer()
+        }
         HStack{
             Text(post.caption)
-              .font(.callout)
+              .fontWeight(.medium)
+              .modifier(BodyStyle())
               .fixedSize(horizontal: false, vertical: true)
-
-            Spacer()
         }
        
       if post.mediaUrl != "" {
