@@ -11,13 +11,13 @@ struct OnboardingContacts: View {
     @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
     
     var body: some View {
-        VStack(alignment: .center){
-        Text("Invite your friends")
-            .fontWeight(.bold)
-            .font(.system(size:30))
-            .padding(.horizontal)
-            .padding(.bottom, 50)
-            .multilineTextAlignment(.center)
+        VStack(alignment: .center) {
+            Text("Invite your friends")
+                .fontWeight(.bold)
+                .font(.system(size:30))
+                .padding(.horizontal)
+                .padding(.bottom, 50)
+                .multilineTextAlignment(.center)
             NavigationLink(destination: ContactsListView()) {
                 Text("Access your Contacts")
                     .font(.system(size: 20))
@@ -46,7 +46,6 @@ struct OnboardingContacts: View {
                 }
             )
         }
-        
     }
 }
 

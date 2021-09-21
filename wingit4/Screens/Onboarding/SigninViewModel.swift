@@ -14,7 +14,7 @@ import Amplitude
 
 
 class SigninViewModel: ObservableObject {
-    
+  @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
   @Published var email: String = ""
   @Published var password: String = ""
   @Published var errorString: String = ""
@@ -26,12 +26,13 @@ class SigninViewModel: ObservableObject {
     self.ampSignInAttemptEvent()
     
     if (self.isFormComplete()) { // Auth only when fields are filled
-      return AuthService.signInUser(
-        email: email,
-        password: password,
-        onSuccess: onSignInSuccess,
-        onError: onSignInError
-      )
+        shouldShowOnboarding = false
+        return AuthService.signInUser(
+            email: email,
+            password: password,
+            onSuccess: onSignInSuccess,
+            onError: onSignInError
+        )
     }
     
     self.showErrorMessage(message: "Please fill in all fields")

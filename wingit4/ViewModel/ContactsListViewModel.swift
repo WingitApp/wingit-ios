@@ -17,10 +17,6 @@ class ContactsListViewModel: ObservableObject {
 
     @Published var searchText = "" // --> this is for searching for contacts
 
-    init() {
-        self.fetch()
-    }
-
     func fetch() {
         Api.Contacts.getSystemContacts { (contacts, error) in
             guard error == nil else {
