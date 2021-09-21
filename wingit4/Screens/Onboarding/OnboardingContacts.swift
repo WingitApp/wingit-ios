@@ -37,6 +37,9 @@ struct OnboardingContacts: View {
                     .font(.system(size: 16))
                     .padding(.top)
             }
+            .navigationTitle("Invite friends")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarHidden(true)
             .simultaneousGesture(
                 TapGesture().onEnded {
                     shouldShowOnboarding = false
