@@ -65,6 +65,7 @@ struct OnboardingProfilePhoto: View {
         .environmentObject(updatePhotoVM)
         .navigationTitle("Profile Photo")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarHidden(true)
         .sheet(isPresented: $updatePhotoVM.showImagePicker) {
            ImagePicker(
             showImagePicker: self.$updatePhotoVM.showImagePicker,

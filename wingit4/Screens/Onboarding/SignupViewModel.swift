@@ -29,7 +29,7 @@ class SignupViewModel: ObservableObject {
     func signup(onSuccess: @escaping (_ user: User) -> Void) {
         self.ampSignupAttemptEvent()
         
-        if self.isFormComplete() {
+        if checkFieldsAreValid() {
            return AuthService.signupUser(
               firstName: firstName,
               lastName: lastName,
@@ -41,8 +41,23 @@ class SignupViewModel: ObservableObject {
               onError: onSignupError
             )
         }
-        self.showErrorMessage(message: "Please fill in all fields")
   }
+    
+    func checkFieldsAreValid() -> Bool {
+        if (!isFormComplete()) {
+            self.showErrorMessage(message: "Please fill in all fields")
+            return false
+        }
+        if !String.isValidEmailAddress(emailAddress: email) {
+            onSignupError(errorMessage: "Email input is not a valid email address.")
+            return false
+        }
+        if !String.isValidUsername(username: username) {
+            onSignupError(errorMessage: "Username must be alphanumeric or underscores with no whitespaces.")
+            return false
+        }
+        return true
+    }
   
   /// Displays error message through alert (SignInView)
   /// - Parameter message: string of message
