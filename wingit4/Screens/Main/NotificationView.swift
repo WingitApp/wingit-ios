@@ -37,6 +37,8 @@ struct NotificationView: View {
                                       activity: activity,
                                       activityViewModel: self.activityViewModel
                                     )
+                            } else if activity.type == "referred" {
+                                NotificationReferralEntry(activity: activity)
                             } else {
                               NavigationLink (destination: UserProfileView(userId: activity.userId, user: nil)){
 
@@ -150,3 +152,5 @@ struct RespondToConnectRequestRow: View {
         .padding(.top, 5)
     }
 }
+
+
