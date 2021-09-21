@@ -12,10 +12,9 @@ struct SigninView : View {
             HStack{
                 
                 VStack(alignment: .center, spacing: 12) {
-                    
                     Text("Welcome Back")
                         .fontWeight(.bold)
-                    
+                        .font(.system(size: 24))
                 }
                 
       
@@ -47,6 +46,13 @@ struct SigninView : View {
                      dismissButton: .default(Text("OK"))
                  )
              }
+            NavigationLink(destination: OnboardingView()) {
+                Text("Sign Up for Wingit")
+                    .foregroundColor(Color("Color"))
+                    .bold()
+                    .font(.system(size: 16))
+                    .padding(.top)
+            }
         }.onTapGesture(perform: dismissKeyboard)
         .onAppear{
             if (!session.isLoggedIn) {
