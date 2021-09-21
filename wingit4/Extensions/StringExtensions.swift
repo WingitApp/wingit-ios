@@ -2,12 +2,22 @@
 //  StringExtensions.swift
 //  wingit4
 //
-//  Created by (310) 748-1434 on 9/16/21.
+//  Created by Daniel Yee on 9/16/21.
 //
 
 import Foundation
 
 extension String {
+    var isValidURL: Bool {
+            let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+            if let match = detector.firstMatch(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count)) {
+                // it is a link, if the match covers the whole string
+                return match.range.length == self.utf16.count
+            } else {
+                return false
+            }
+    }
+    
     func removingWhitespaces() -> String {
         return components(separatedBy: .whitespaces).joined()
     }

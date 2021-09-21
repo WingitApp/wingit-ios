@@ -92,7 +92,5 @@ struct WingButton: View {
                                                            lineWidth: 1.5)
                 )
         })
-        
-
     }
 }

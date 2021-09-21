@@ -5,6 +5,7 @@
 //  Created by YaeRim Amy Chun on 6/11/21.
 //
 
+import Amplitude
 import Foundation
 import SwiftUI
 import Firebase
@@ -15,14 +16,18 @@ class ActivityViewModel: ObservableObject {
     
     @Published var activityArray: [Activity] = []
     var listener: ListenerRegistration!
+    
+    @Published var isLoading = false
 
     
     func loadActivities() {
         self.activityArray = []
+        isLoading = true
         
         Api.Activity.loadActivities(onSuccess: { (activityArray) in
             if self.activityArray.isEmpty {
                 self.activityArray = activityArray
+              self.isLoading = false
             }
         }, newActivity: { (activity) in
             if !self.activityArray.isEmpty {
@@ -54,6 +59,7 @@ class ActivityViewModel: ObservableObject {
     func addConnectionToUser(userId: String) {
         Ref.FS_DOC_CONNECTION_BETWEEN_USERS(user1Id: Auth.auth().currentUser!.uid, user2Id: userId).setData([:])
         Ref.FS_DOC_CONNECTION_BETWEEN_USERS(user1Id: userId, user2Id: Auth.auth().currentUser!.uid).setData([:])
+        addToUserProperty(property: .connections, value: 1)
     }
     
     func sendConnectAcceptedAcknowledgement(userId: String) {

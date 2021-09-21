@@ -24,7 +24,7 @@ struct UserProfileHeader: View {
                       VStack {
                           Text("\(openCount)")
                             .font(.headline)
-                            .foregroundColor(userProfileViewModel.showOpenPosts ? Color(.systemTeal) : Color("bw"))
+                            .foregroundColor(userProfileViewModel.showOpenPosts ? Color(.systemTeal) : Color.black)
                           Text("Open")
                             .font(.subheadline)
                             .foregroundColor(userProfileViewModel.showOpenPosts ? Color(.systemTeal) : .gray)
@@ -36,7 +36,7 @@ struct UserProfileHeader: View {
                       VStack{
                         Text("\(closedCount)")
                           .font(.headline)
-                          .foregroundColor(userProfileViewModel.showOpenPosts ? Color("bw") : Color(.systemTeal))
+                            .foregroundColor(userProfileViewModel.showOpenPosts ? Color.black : Color(.systemTeal))
                         Text("Closed")
                           .font(.subheadline)
                           .foregroundColor(userProfileViewModel.showOpenPosts ? .gray : Color(.systemTeal))

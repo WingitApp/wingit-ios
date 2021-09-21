@@ -26,8 +26,9 @@ struct InitialView: View {
                 OnboardingView()
             }
 
-        }.onAppear(perform: listen)
-       
+        }
+        .onAppear(perform: listen)
+        .preferredColorScheme(.light)
       //  .environment(\.colorScheme, .dark)
     }
 }

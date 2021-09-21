@@ -33,7 +33,7 @@ struct AcceptedNotification: View {
                 .fixedSize(horizontal: false, vertical: true)
                 Spacer()
 
-                TimeAgoStamp(date: Double(referral.createdAt?.seconds ?? 0))
+                TimeAgoStamp(date: Double(referral.updatedAt?.seconds ?? 0))
 
                 }
 
@@ -71,7 +71,7 @@ struct WingNotification: View {
                 .font(.subheadline)
                 .fixedSize(horizontal: false, vertical: true)
                 Spacer()
-                TimeAgoStamp(date: Double(referral.createdAt?.seconds ?? 0))
+                TimeAgoStamp(date: Double(referral.updatedAt?.seconds ?? 0))
               }
                 
 
@@ -109,7 +109,7 @@ struct ClosedNotification: View {
                 .font(.subheadline)
                 .fixedSize(horizontal: false, vertical: true)
                 Spacer()
-                TimeAgoStamp(date: Double(referral.createdAt?.seconds ?? 0))
+                TimeAgoStamp(date: Double(referral.updatedAt?.seconds ?? 0))
               }
                
 

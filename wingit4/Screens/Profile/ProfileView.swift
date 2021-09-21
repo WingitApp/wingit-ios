@@ -1,16 +1,15 @@
+
 //
 //  ProfileView.swift
 //  wingit4
 //
 //  Created by YaeRim Amy Chun on 6/9/21.
 //
-
 import SwiftUI
 import FirebaseAuth
 
 
 //TODO: Refacor and reorganize
-
 struct ProfileView: View {
   
   @EnvironmentObject var session: SessionStore
@@ -76,11 +75,11 @@ struct ProfileView: View {
             VStack {
               HStack {
                 Button(action: {Api.User.updateField(field: "firstName", user: session.currentUser) }) {
-                  Text(session.currentUser?.firstName ?? "").font(.title).bold().foregroundColor(Color("bw"))
+                    Text(session.currentUser?.firstName ?? "").font(.title).bold().foregroundColor(Color.black)
                 }
                 
                 Button(action: {Api.User.updateField(field: "lastName", user: session.currentUser) }) {
-                  Text(session.currentUser?.lastName ?? "").font(.title).bold().foregroundColor(Color("bw"))
+                    Text(session.currentUser?.lastName ?? "").font(.title).bold().foregroundColor(Color.black)
                 }
               }
               .frame(width: UIScreen.main.bounds.width)
@@ -93,7 +92,6 @@ struct ProfileView: View {
 //              Text(session.currentUser?.bio ?? "")
 //                .font(.subheadline)
 //                .italic()
-
               Connections(
                 user: self.session.currentUser,
                 connectionsCount: $profileViewModel.connectionsCountState

@@ -24,7 +24,6 @@ class ProfileViewModel: ObservableObject {
     
     @Published var isConnected = false
     @Published var showOpenPosts = true
-    @Published var emptyState = false
   
     var openListener: ListenerRegistration!
     var closedListener: ListenerRegistration!
@@ -46,15 +45,16 @@ class ProfileViewModel: ObservableObject {
       
       self.openPosts = []
       isLoading = true
-      emptyState = true
       
       Api.Post.loadOpenPosts(
         userId: userId,
+        onEmpty: {
+          self.isLoading = false
+        },
         onSuccess: { (posts) in
           if self.openPosts.isEmpty {
             self.openPosts = posts
             self.isLoading = false
-            self.emptyState = false
           }
       }, newPost: { (post) in
           if !self.openPosts.isEmpty {
@@ -93,6 +93,9 @@ class ProfileViewModel: ObservableObject {
     
       Api.Post.loadClosedPosts(
         userId: userId,
+        onEmpty: {
+          self.isLoading = false
+        },
         onSuccess: { (posts) in
 
           if self.closedPosts.isEmpty {
@@ -129,7 +132,7 @@ class ProfileViewModel: ObservableObject {
         Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
                       
             if let doc = snapshot?.documents {
-                
+                setUserProperty(property: .connections, value: doc.count)
                 self.connectionsCountState = doc.count
             }
         }

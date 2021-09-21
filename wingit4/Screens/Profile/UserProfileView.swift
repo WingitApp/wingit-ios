@@ -30,8 +30,6 @@ struct UserProfileView: View {
     }
   }
   
-  
-  
   func calculateHeight(minHeight: CGFloat, maxHeight: CGFloat, yOffset: CGFloat) -> CGFloat {
     if maxHeight + yOffset < minHeight {
       return minHeight
@@ -91,13 +89,11 @@ struct UserProfileView: View {
             VStack {
               // user name
               HStack {
-                Button(action: {Api.User.updateField(field: "firstName", user: userProfileViewModel.user ) }) {
-                  Text(userProfileViewModel.user.firstName ?? "").font(.title).bold().foregroundColor(Color("bw"))
-                }
+               
+                Text(userProfileViewModel.user.firstName ?? "").font(.title).bold().foregroundColor(Color.black)
                 
-                Button(action: {Api.User.updateField(field: "lastName", user: userProfileViewModel.user) }) {
-                  Text(userProfileViewModel.user.lastName ?? "").font(.title).bold().foregroundColor(Color("bw"))
-                }
+                Text(userProfileViewModel.user.lastName ?? "").font(.title).bold().foregroundColor(Color.black)
+                
               }
               .frame(width: UIScreen.main.bounds.width)
               .background(
@@ -147,52 +143,66 @@ struct UserProfileView: View {
             .frame(width: UIScreen.main.bounds.width)
             .zIndex(1)
             
-            if userProfileViewModel.showOpenPosts && userProfileViewModel.openPosts.count != 0 {
-              LazyVStack {
-                ForEach(Array(userProfileViewModel.openPosts.enumerated()), id: \.element) { index, post in
-                    AskCard(
-                      post: post,
-                      isProfileView: true,
-                      index: index
-                    )
-                  }
-              }
-            } else if userProfileViewModel.closedPosts.count != 0 {
-              LazyVStack {
-                ForEach(Array(userProfileViewModel.closedPosts.enumerated()), id: \.element) { index, post in
-                    AskCard(
-                      post: post,
-                      isProfileView: true,
-                      index: index
-                    )
-                  }
-              }
-            } else if userProfileViewModel.openPosts.count == 0{
-                Image("logo")
-                   .resizable()
-                   .aspectRatio(contentMode: .fill)
-                   .frame(width: 40, height: 40)
-               Text("No Asks atm.")
-                   .font(.system(size: 12))
-                   .fontWeight(.bold)
-                   .foregroundColor(.gray)
-                   .padding(.top, 25)
+            if userProfileViewModel.showOpenPosts {
+                if !userProfileViewModel.isLoading && userProfileViewModel.openPosts.count == 0{
+                    if userProfileViewModel.closedPosts.count == 0{
+                        EmptyState(
+                          title: "Write your first post!",
+                          description: "Click on the Plus Tab to get started.",
+                          iconName: "pencil.and.outline",
+                          iconColor: Color(.systemTeal),
+                          function: nil
+                        )
+                    } else {
+                        EmptyState(
+                          title: "All done!",
+                          description: "All asks have been closed.",
+                          iconName: "checkmark",
+                          iconColor: Color("Color1"),
+                          function: nil
+                        )
+                      }
+                } else {
+                    LazyVStack {
+                      ForEach(Array(userProfileViewModel.openPosts.enumerated()), id: \.element) { index, post in
+                          AskCard(
+                            post: post,
+                            isProfileView: true,
+                            index: index
+                          )
+                        }
+                    }
+                }
             } else {
-                Image("logo")
-                   .resizable()
-                   .aspectRatio(contentMode: .fill)
-                   .frame(width: 40, height: 40)
-               Text("No Closed Asks atm.")
-                   .font(.system(size: 12))
-                   .fontWeight(.bold)
-                   .foregroundColor(.gray)
-                   .padding(.top, 25)
+                if !userProfileViewModel.isLoading && userProfileViewModel.closedPosts.count == 0 {
+                    EmptyState(
+                      title: "Hm nothing was found...",
+                      description: "No Closed posts to see!",
+                      iconName: "magnifyingglass",
+                      iconColor: Color(.systemBlue),
+                      function: nil
+                    )
+                } else {
+                    LazyVStack {
+                      ForEach(Array(userProfileViewModel.closedPosts.enumerated()), id: \.element) { index, post in
+                          AskCard(
+                            post: post,
+                            isProfileView: true,
+                            index: index
+                          )
+                        }
+                    }.onAppear {
+                        logToAmplitude(event: .viewOtherProfile)
+                        self.userProfileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.userProfileViewModel.user.id ?? self.userProfileViewModel.user.uid)
+                      }
             }
 
           }
+        
+        }
           .zIndex(1)
           .padding(.top, 230)
-        }
+      }
       }
 
     .navigationBarTitle(Text(userProfileViewModel.user.displayName ?? ""), displayMode: .inline)
@@ -205,7 +215,8 @@ struct UserProfileView: View {
     )
     .sheet(
       isPresented: $connectionsViewModel.isConnectionsSheetOpen,
-      content: {  ConnectionsView(user: userProfileViewModel.user).environmentObject(connectionsViewModel) }
+      content: {  ConnectionsView(user: userProfileViewModel.user).environmentObject(connectionsViewModel)
+      }
     )
       .sheet(
         isPresented: $userProfileViewModel.isImageModalOpen,

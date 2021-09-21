@@ -28,7 +28,7 @@ struct HeaderCell: View {
                     )
                    
                   VStack(alignment: .leading){
-                    Text(post.username)
+                    Text(post.username.capitalized)
                       .fontWeight(.semibold)
                       .modifier(UserNameStyle())
                     TimeAgoStamp(date: post.date)

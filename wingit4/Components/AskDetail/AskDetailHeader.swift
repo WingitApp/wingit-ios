@@ -23,7 +23,7 @@ struct AskDetailHeader: View {
               .stroke(Color.gray, lineWidth: 1)
           )
         VStack(alignment: .leading){
-          Text(post.username)
+        Text(post.username.capitalized)
             .font(.title3)
             .fontWeight(.bold)
           TimeAgoStamp(date: post.date)

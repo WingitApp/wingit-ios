@@ -10,6 +10,7 @@ import SwiftUI
 struct BodyCell: View {
   var post: Post
   @EnvironmentObject var askCardViewModel: AskCardViewModel
+    
   
     var body: some View {
       HStack{

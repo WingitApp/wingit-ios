@@ -13,6 +13,15 @@ struct NotificationView: View {
     var body: some View {
        
         NavigationView {
+            if activityViewModel.activityArray.count == 0 && !activityViewModel.isLoading {
+                EmptyState(
+                  title: "No notifications!",
+                  description: "Start interacting with friends to get the party started.",
+                  iconName: "mustache",
+                  iconColor: Color("Color"),
+                  function: nil
+                )
+            } else {
             List {
                 if !activityViewModel.activityArray.isEmpty {
                     ForEach(self.activityViewModel.activityArray, id: \.activityId) { activity in
@@ -28,6 +37,8 @@ struct NotificationView: View {
                                       activity: activity,
                                       activityViewModel: self.activityViewModel
                                     )
+                            } else if activity.type == "referred" {
+                                NotificationReferralEntry(activity: activity)
                             } else {
                               NavigationLink (destination: UserProfileView(userId: activity.userId, user: nil)){
 
@@ -72,7 +83,7 @@ struct NotificationView: View {
                      self.activityViewModel.listener.remove()
                  }
               }
-
+        }
         }
       
     }
@@ -141,3 +152,5 @@ struct RespondToConnectRequestRow: View {
         .padding(.top, 5)
     }
 }
+
+

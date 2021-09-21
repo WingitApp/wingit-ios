@@ -144,6 +144,7 @@ struct Home1 : View {
 struct Login1 : View {
     
     @ObservedObject var signinViewModel = SigninViewModel()
+    @EnvironmentObject var session: SessionStore
     
     var body: some View{
         
@@ -210,7 +211,9 @@ struct Login1 : View {
 //            .padding(.top,25)
         }.onTapGesture(perform: dismissKeyboard)
         .onAppear{
-            logToAmplitude(event: .viewLoginScreen)
+            if (!session.isLoggedIn) {
+                logToAmplitude(event: .viewLoginScreen)
+            }
         }
     }
 }
@@ -224,20 +227,6 @@ struct SignUpForm : View {
     var body: some View{
         
         VStack{
-                
-                VStack(alignment: .center, spacing: 3) {
-
-                    UserAvatar(
-                      image: signupViewModel.image,
-                      height: 65,
-                      width: 65,
-                      onTapGesture: {
-                        self.signupViewModel.isImagePickerShown = true
-                      }
-                    )
-                    Text("Tap to add photo")
-                    .modifier(CaptionStyle()).font(.system(size:10))
-                }.padding(.top, 10)
            
             
             VStack(alignment: .leading, spacing: 15) {
@@ -310,13 +299,7 @@ struct SignUpForm : View {
         }
         .onTapGesture { dismissKeyboard() }
         .onAppear{ logToAmplitude(event: .viewSignupScreen) }
-        .sheet(isPresented: $signupViewModel.isImagePickerShown) {
-           ImagePicker(
-            showImagePicker: self.$signupViewModel.isImagePickerShown,
-            pickedImage: self.$signupViewModel.image,
-            imageData: self.$signupViewModel.imageData
-           )
-        }
+
     }
 }
 
