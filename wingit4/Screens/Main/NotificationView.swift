@@ -28,7 +28,7 @@ struct NotificationView: View {
                       HStack(alignment: .top) {
                             if activity.type == "comment" {
 //                              NavigationLink(destination: AskDetailView)
-                                    NotificationEntry(activity: activity)
+                                AskDetailEntry(activity: activity)
 //                                    NavigationLink(destination: CommentView(postId: activity.postId)) {
 //                                        EmptyView()
 //                                    }
@@ -40,28 +40,7 @@ struct NotificationView: View {
                             } else if activity.type == "referred" {
                                 NotificationReferralEntry(activity: activity)
                             } else {
-                              NavigationLink (destination: UserProfileView(userId: activity.userId, user: nil)){
-
-                                 NotificationUserAvatar(
-                                  imageUrl: activity.userAvatar,
-                                  type: activity.type
-                                 )
-                                  .padding(.trailing, 10)
-
-                              VStack(alignment: .leading) {
-                                HStack(alignment: .center, spacing: 5) {
-                                  Text(activity.username).bold() + Text(" ") + Text(activity.typeDescription)
-                                }
-                                .font(.subheadline)
-                                .fixedSize(horizontal: false, vertical: true)
-
-                                Spacer()
-                                Text(timeAgoSinceDate(Date(timeIntervalSince1970: activity.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
-                              }
-
-                                
-                               
-                            }                          .buttonStyle(PlainButtonStyle())
+                                NotificationEntry(activity: activity)
 
                           }
 
