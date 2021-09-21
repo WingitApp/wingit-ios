@@ -12,24 +12,23 @@ import FirebaseStorage
 import SwiftUI
 
 class SignupViewModel: ObservableObject {
-    
-  @Published var firstName: String = ""
-  @Published var lastName: String = ""
-  @Published var username: String = ""
-  @Published var email: String = ""
-  @Published var password: String = ""
-  @Published var image: Image = Image(IMAGE_USER_PLACEHOLDER)
-  @Published var imageData: Data = Data()
-  @Published var errorString = ""
-  @Published var isAlertShown: Bool = false
-  @Published var showscreen: Bool = false
-  @Environment (\.presentationMode) var presentationMode
-    
+    @Published var firstName: String = ""
+    @Published var lastName: String = ""
+    @Published var username: String = ""
+    @Published var email: String = ""
+    @Published var password: String = ""
+    @Published var image: Image = Image(IMAGE_USER_PLACEHOLDER)
+    @Published var imageData: Data = Data()
+    @Published var errorString = ""
+    @Published var isAlertShown: Bool = false
+    @Published var showscreen: Bool = false
+    @Environment (\.presentationMode) var presentationMode
+    @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
 
     func signup(onSuccess: @escaping (_ user: User) -> Void) {
         self.ampSignupAttemptEvent()
-        
         if checkFieldsAreValid() {
+            
            return AuthService.signupUser(
               firstName: firstName,
               lastName: lastName,
