@@ -19,18 +19,16 @@ struct InitialView: View {
     }
     
     var body: some View {
-        NavigationView {
-            Group {
-                if session.isLoggedIn {
-                    MainView()
-                } else {
-                    SigninView()
-                }
+        Group {
+            if session.isLoggedIn && !shouldShowOnboarding {
+                MainView()
+            } else if !session.isLoggedIn {
+                SigninView()
             }
-            .onAppear(perform: listen)
-            .preferredColorScheme(.light)
-            //  .environment(\.colorScheme, .dark)
         }
+        .onAppear(perform: listen)
+        .preferredColorScheme(.light)
+        //  .environment(\.colorScheme, .dark)
         .fullScreenCover(
             isPresented: $shouldShowOnboarding,
             content: { IntroView().preferredColorScheme(.light)}

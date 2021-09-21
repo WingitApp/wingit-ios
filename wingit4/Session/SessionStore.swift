@@ -9,10 +9,12 @@ import Foundation
 import Combine
 import Firebase
 import FirebaseAuth
+import SwiftUI
 
 class SessionStore: ObservableObject {
     @Published var isLoggedIn = false
     @Published var currentUser: User?
+    @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
     var handle: AuthStateDidChangeListenerHandle?
     
     func listenAuthenticationState() {
@@ -42,6 +44,7 @@ class SessionStore: ObservableObject {
     func logout() {
         do {
             try Auth.auth().signOut()
+            shouldShowOnboarding = true
             logToAmplitude(event: .userLogout, userId: self.currentUser?.id)
         } catch  {
 
