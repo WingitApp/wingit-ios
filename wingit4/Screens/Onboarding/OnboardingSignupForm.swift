@@ -8,13 +8,27 @@
 import SwiftUI
 
 struct OnboardingSignupForm : View {
-    @Binding var tabSelection: Int
+ //   @Binding var tabSelection: Int
+    @AppStorage("currentPage") var currentPage = 1
     @EnvironmentObject var session: SessionStore
     @ObservedObject var signupViewModel = SignupViewModel()
     
     var body: some View{
         VStack {
             VStack(alignment: .leading, spacing: 15) {
+                Button(action: {
+                    withAnimation(.easeInOut){
+                        currentPage -= 1
+                    }
+                }, label: {
+                    
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(.white)
+                        .padding(.vertical,10)
+                        .padding(.horizontal)
+                        .background(Color.black.opacity(0.4))
+                        .cornerRadius(10)
+                })
                 HStack{
                 FirstNameTextField(
                   firstName: $signupViewModel.firstName
@@ -38,7 +52,7 @@ struct OnboardingSignupForm : View {
             SignupButton(
                 action: {
                     signupViewModel.signup() { user in
-                        self.tabSelection = 1
+                     //   self.tabSelection = 1
                         self.session.currentUser = user
                         signupViewModel.onSignupSuccess(user: user)
                     }

@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct OnboardingContacts: View {
-    @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
+//    @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
+    
+    @AppStorage("currentPage") var currentPage = 3
     
     var body: some View {
         VStack(alignment: .center) {
@@ -30,29 +32,24 @@ struct OnboardingContacts: View {
                     )
                     .cornerRadius(8)
             }
-            NavigationLink(destination: MainView()) {
-                Text("Skip Step")
-                    .foregroundColor(Color("Color"))
+            Button(action: {  withAnimation(.easeInOut){
+                currentPage += 1
+            } },
+               label: {
+                Text("Skip Step").foregroundColor(Color("Color"))
                     .bold()
                     .font(.system(size: 16))
                     .padding(.top)
-            }
+            })
             .navigationTitle("Invite friends")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarHidden(true)
-            .simultaneousGesture(
-                TapGesture().onEnded {
-                    shouldShowOnboarding = false
-                }
-            )
+//            .simultaneousGesture(
+//                TapGesture().onEnded {
+//                    shouldShowOnboarding = false
+//                }
+//            )
         }
     }
 }
 
-struct ContactsOnboarding_Previews: PreviewProvider {
-    @State static var shouldShowOnboarding = true
-    
-    static var previews: some View {
-        OnboardingContacts()
-    }
-}

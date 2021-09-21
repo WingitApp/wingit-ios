@@ -11,7 +11,8 @@ import SwiftUI
 import Firebase
 
 struct InitialView: View {
-    @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
+//    @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
+    @AppStorage("currentPage") var currentPage = 1
     @EnvironmentObject var session: SessionStore
     
     func listen() {
@@ -20,7 +21,7 @@ struct InitialView: View {
     
     var body: some View {
         Group {
-            if session.isLoggedIn && !shouldShowOnboarding {
+            if session.isLoggedIn && currentPage > totalPages {
                 MainView()
             } else if !session.isLoggedIn {
                 SigninView()
@@ -29,9 +30,9 @@ struct InitialView: View {
         .onAppear(perform: listen)
         .preferredColorScheme(.light)
         //  .environment(\.colorScheme, .dark)
-        .fullScreenCover(
-            isPresented: $shouldShowOnboarding,
-            content: { IntroView().preferredColorScheme(.light)}
-        )
+//        .fullScreenCover(
+//            isPresented: $shouldShowOnboarding,
+//            content: { IntroView().preferredColorScheme(.light)}
+//        )
     }
 }

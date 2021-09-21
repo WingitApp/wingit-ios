@@ -9,8 +9,9 @@ import FirebaseAuth
 import SwiftUI
 
 struct OnboardingProfilePhoto: View {
-    @Binding var selectedTab: Int
+  //  @Binding var selectedTab: Int
     @StateObject var updatePhotoVM = UpdatePhotoVM()
+    @AppStorage("currentPage") var currentPage = 2
     
     var body: some View {
         VStack(alignment: .center, spacing: 3) {
@@ -54,7 +55,9 @@ struct OnboardingProfilePhoto: View {
                   dismissButton: .default(Text("OK"))
                 )
             }
-            Button(action: { self.selectedTab = 2 },
+            Button(action: {  withAnimation(.easeInOut){
+                currentPage = 3
+            } },
                label: {
                 Text("Skip Step").foregroundColor(Color("Color"))
                     .bold()
@@ -77,7 +80,9 @@ struct OnboardingProfilePhoto: View {
     
     func updateProfilePhoto() {
         updatePhotoVM.updatePhoto(imageData: updatePhotoVM.imageData, completed: {
-            self.selectedTab = 2
+            withAnimation(.easeInOut){
+               currentPage = 3
+           }
         }) { (errorMessage) in
             self.updatePhotoVM.showAlert = true
             self.updatePhotoVM.errorString = errorMessage
@@ -85,10 +90,3 @@ struct OnboardingProfilePhoto: View {
     }
 }
 
-struct ProfilePhotoOnboarding_Previews: PreviewProvider {
-    @State static var selectedTab = 1
-    
-    static var previews: some View {
-        OnboardingProfilePhoto(selectedTab: $selectedTab)
-    }
-}
