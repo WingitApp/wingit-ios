@@ -27,5 +27,8 @@ struct ContactsListView: View {
         }
          .navigationTitle("Invite friends")
          .navigationBarTitleDisplayMode(.inline)
+         .onAppear {
+            viewModel.fetch()
+         }
     }
 }
