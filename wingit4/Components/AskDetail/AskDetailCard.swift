@@ -17,21 +17,17 @@ struct AskDetailCard: View {
   
     var body: some View {
       VStack(alignment: .leading) {
-
         AskDetailBody(post: $post)
         VStack(alignment: .leading) {
           if askCardViewModel.bumpers.count + askCardViewModel.wingers.count > 0 {
             Text("Collaborators")
               .bold()
               .font(.subheadline)
-              .padding(.top, 10)
+            BumperCountSummary(users: askCardViewModel.bumpers + askCardViewModel.wingers)
+              .padding(.bottom, 10)
           }
-          BumperCountSummary(users: askCardViewModel.bumpers + askCardViewModel.wingers)
-            .padding(.bottom, 10)
-
         }
         .padding([.horizontal])
-        .padding(.bottom, 10)
         Divider()
       }
       .environmentObject(referViewModel)

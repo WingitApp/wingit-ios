@@ -16,10 +16,10 @@ struct AskDetailBody: View {
     var body: some View {
       VStack(alignment: .leading) {
 
-        HStack {
+        HStack(alignment: .top) {
           URLImageView(urlString: post.avatar)
             .clipShape(Circle())
-            .frame(width: 30, height: 30)
+            .frame(width: 35, height: 35, alignment: .center)
             .overlay(
               RoundedRectangle(cornerRadius: 100)
                 .stroke(Color.gray, lineWidth: 1)
@@ -32,13 +32,20 @@ struct AskDetailBody: View {
               .font(.caption2)
           }
           Spacer()
+          AskDoneToggle(
+            post: $post,
+            showLabel: true
+          ) // rename later
         }
+        .padding(.bottom, 15)
+        
         HStack{
-            Text(post.caption)
-              .fontWeight(.medium)
-              .modifier(BodyStyle())
-              .fixedSize(horizontal: false, vertical: true)
+          Text(post.caption)
+            .fontWeight(.medium)
+            .modifier(BodyStyle())
+            .fixedSize(horizontal: false, vertical: true)
         }
+        
        
       if post.mediaUrl != "" {
         Button(action: {

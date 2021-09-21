@@ -17,7 +17,7 @@ struct CommentList: View {
             VStack(alignment: .leading){
               ForEach(commentViewModel.comments) { comment in
                 if comment.type == .invitedReferral {
-                  ReferralComment(comment: comment)
+                  EmptyView()
                 } else {
                   UserComment(comment: comment)
                 }

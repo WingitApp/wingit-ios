@@ -9,23 +9,25 @@ import SwiftUI
 
 struct UserComment: View {
   var comment: Comment
+  @State var isNavActive: Bool = false
   
   
     var body: some View {
       HStack(alignment: .top) {
         NavigationLink(
-          destination: UserProfileView(userId: comment.ownerId, user: nil)
+          destination: UserProfileView(userId: comment.ownerId, user: nil),
+          isActive: $isNavActive
         ) {
-          URLImageView(urlString: comment.avatarUrl)
-            .clipShape(Circle())
-            .frame(width: 35, height: 35, alignment: .center)
-            .foregroundColor(Color(.systemTeal))
-            .overlay(
-              RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.gray, lineWidth: 0.5)
-            )
+          EmptyView()
         }
-        .buttonStyle(PlainButtonStyle())
+        URLImageView(urlString: comment.avatarUrl)
+          .clipShape(Circle())
+          .frame(width: 35, height: 35, alignment: .center)
+          .foregroundColor(Color(.systemTeal))
+          .overlay(
+            RoundedRectangle(cornerRadius: 20)
+              .stroke(Color.gray, lineWidth: 0.5)
+          )
         VStack(alignment: .leading) {
           HStack(alignment: .center) {
             Text(comment.username)
@@ -45,13 +47,13 @@ struct UserComment: View {
           }
           
           Text(comment.comment)
-            .font(.caption)
+            .font(.callout)
         }
         .padding(.leading, 5)
 
       }
       .padding(
-        EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
+        EdgeInsets(top: 5, leading: 15, bottom: 5, trailing: 15)
       )
       Divider()
     }

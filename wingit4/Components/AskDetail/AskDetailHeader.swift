@@ -10,26 +10,24 @@ import URLImage
 
 
 struct AskDetailHeader: View {
-  @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
   @Binding var post: Post
+  @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
   
     var body: some View {
       HStack {
         Button(action: {
-          // custom back button
           self.presentationMode.wrappedValue.dismiss()
         }) {
           HStack(alignment: .center) {
             Image(systemName: "chevron.left.circle.fill")
+              .imageScale(.large)
             Text("Back")
-              .font(.callout)
+              .font(.caption)
+              .font(.system(size: 15))
           }
           .foregroundColor(.wingitBlue)
    
         }
-        
-        
-
         Spacer()
         CommentButton(
           isTapDisabled: true
@@ -37,9 +35,6 @@ struct AskDetailHeader: View {
         ReferButton(
           post: $post
         )
-        AskDoneToggle(
-          post: $post
-        ) // rename later
         AskMenu(
           isHorizontal: true
         )

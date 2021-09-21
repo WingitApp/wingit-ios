@@ -36,15 +36,7 @@ struct CommentInput: View {
     
     var body: some View {
       VStack() {
-//        URLImageView(urlString: session.currentUser?.profileImageUrl)
-//
-//              .frame(width: 35, height: 35)
-//              .clipShape(Circle())
-//              .overlay(
-//                RoundedRectangle(cornerRadius: 100)
-//                  .stroke(Color.gray, lineWidth: 1)
-//              )
-//          .padding(.trailing, 10)
+
         Divider()
         HStack(alignment: .bottom){
              TextView("Write a response", text: $composedMessage)
@@ -56,13 +48,10 @@ struct CommentInput: View {
              .padding(.top, 8)
          }
         .padding(
-          EdgeInsets(top: 5, leading: 10, bottom: 10, trailing: 10)
+          EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10)
         )
       }
 
-        
-//      .frame(maxHeight: 200)
- 
      
     }
 }
