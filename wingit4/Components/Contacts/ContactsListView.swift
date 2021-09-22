@@ -11,6 +11,7 @@ import SwiftUI
 
 struct ContactsListView: View {
     @State private var isShowingMessages = false
+    @State private var numberToText: String = ""
     @State private var message = TEXT_SHARE_WINGIT
     @ObservedObject var viewModel = ContactsListViewModel()
 
@@ -23,19 +24,19 @@ struct ContactsListView: View {
                 ForEach(viewModel.contacts.filter { viewModel.contactFilter(contact: $0)}, id:\.id) { contact in // --> We display all filtered contacts
                     Button {
                         self.isShowingMessages.toggle()
+                        self.numberToText = contact.numbers[0].number
                     } label: {
                         ContactItem(contact: contact)
-                    }
-                    .sheet(isPresented: self.$isShowingMessages) {
-                        MessageUIView(recipients: [contact.numbers[0].number], body: $message, completion: handleCompletion(_:))
                     }
                 }
             }
 //            .modifier(ResignKeyboardOnDragGesture())
         }
-//         .navigationBarHidden(true)
-//         .navigationTitle("Invite friends")
-//         .navigationBarTitleDisplayMode(.inline)
+         .sheet(isPresented: self.$isShowingMessages) {
+            MessageUIView(recipients: [$numberToText.wrappedValue], body: $message, completion: handleCompletion(_:))
+         }
+         .navigationTitle("Invite friends")
+         .navigationBarTitleDisplayMode(.inline)
          .onAppear {
             viewModel.fetch()
          }
