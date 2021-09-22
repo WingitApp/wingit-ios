@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct AskDoneToggle: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
@@ -27,7 +28,7 @@ struct AskDoneToggle: View {
                 Image(systemName: "checkmark")
                   .foregroundColor(self.post.status == .closed ? .white : .black.opacity(0.7))
                   .font(.caption2)
-                Text(self.post.status == .closed ? "Completed" : "Mark Complete")
+                Text(self.post.status == .closed ? "Completed" : "Incomplete")
                   .font(.caption2)
                   .padding(.leading, -5)
                   .foregroundColor(self.post.status == .closed ? .white : .black.opacity(0.7))
