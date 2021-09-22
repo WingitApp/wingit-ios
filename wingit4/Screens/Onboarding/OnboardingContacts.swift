@@ -34,14 +34,13 @@ struct OnboardingContacts: View {
                                  .black.opacity(0.5),
                                  .black]),
                     startPoint: .top,
-                                        endPoint: .bottom).ignoresSafeArea(.all, edges: .all)
+                    endPoint: .bottom)
                     )
         
             }
             .ignoresSafeArea()
         VStack(alignment: .center) {
             Text("Invite your friends")
-                .foregroundColor(.white)
                 .fontWeight(.bold)
                 .font(.system(size:30))
                 .padding(.horizontal)
@@ -61,11 +60,12 @@ struct OnboardingContacts: View {
             }
             NavigationLink(destination: MainView()) {
                 Text("Skip Step")
-                    .foregroundColor(Color(.white))
+                    .foregroundColor(Color("Color"))
                     .bold()
                     .font(.system(size: 16))
                     .padding(.top)
             }
+           
             .navigationTitle("Invite friends")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarHidden(true)
@@ -75,7 +75,7 @@ struct OnboardingContacts: View {
                 }
             )
         }
-    }
+        }
     }
 }
 
