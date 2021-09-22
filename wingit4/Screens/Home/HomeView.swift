@@ -51,7 +51,8 @@ struct HomeView: View {
           trailing:
             Button(action: {}) {
               NavigationLink(destination: ContactsListView()) {
-                Image(systemName: "person.3")
+                Image(systemName: "person.fill.badge.plus")
+                  .foregroundColor(.gray)
                   .imageScale(Image.Scale.medium)
                   .foregroundColor(.gray)
               }

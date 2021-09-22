@@ -5,10 +5,11 @@
 //  Created by Daniel Yee on 8/10/21.
 //
 //
+
+import Amplitude
+import FirebaseAuth
 import SwiftUI
 import UIKit
-import FirebaseAuth
-import Amplitude
 
 class ConnectionsViewModel : ObservableObject {
     

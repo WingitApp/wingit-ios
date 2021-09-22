@@ -12,10 +12,14 @@ struct ContactItem: View {
     var contact: Contact
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            HStack(spacing: 5) {
-                Text(contact.firstName)
-                Text(contact.lastName)
+        HStack {
+            VStack(alignment: .leading, spacing: 5) {
+                HStack(spacing: 5) {
+                    Text(contact.firstName)
+                    Text(contact.lastName)
+                    Spacer()
+                    Image(systemName: "person.fill.badge.plus").foregroundColor(.gray)
+                }
             }
         }
     }
