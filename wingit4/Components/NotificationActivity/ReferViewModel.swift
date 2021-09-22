@@ -72,7 +72,7 @@ class ReferViewModel : ObservableObject, Identifiable {
        guard let parentId = parentId else { return }
        Api.Referrals.updateStatus(referralId: parentId, newStatus: .winged)
        for receiver in selectedUsers {
-          let receiverId = receivers.id
+          let receiverId = receiver.id
            Api.Referrals.rewingReferral(
                askId: askId,
                receiverId: receiverId,

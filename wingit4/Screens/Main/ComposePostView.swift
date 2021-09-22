@@ -61,9 +61,9 @@ struct ComposePostView: View {
       case 1:
         return Color.uilightBlue
       case 2:
-        return Color.uilightGreen
-      case 3:
         return Color.uilightOrange
+      case 3:
+        return Color.uilightGreen
       default:
         return Color.white
     }

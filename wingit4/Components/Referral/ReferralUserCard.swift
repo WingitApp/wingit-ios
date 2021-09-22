@@ -33,7 +33,6 @@ struct ReferralUserCard: View {
             VStack(alignment: .leading, spacing: 5) {
                 Text(user.displayName ?? user.username ?? "").font(.headline).bold()
                 Text("@\(user.username ?? "")").font(.subheadline)
-                  .foregroundColor(.wingitBlue)
             }
             .padding(.leading, 5)
             Spacer()

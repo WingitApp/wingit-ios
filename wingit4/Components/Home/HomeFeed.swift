@@ -13,7 +13,7 @@ struct HomeFeed: View {
 
   var body: some View {
 
-    if homeViewModel.posts.count == 0 {
+    if !homeViewModel.isLoading && homeViewModel.posts.count == 0 {
         NavigationLink(destination: UsersView()) {
             EmptyState(
               title: "No posts!",

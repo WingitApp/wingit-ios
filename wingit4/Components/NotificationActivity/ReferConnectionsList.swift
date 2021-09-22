@@ -82,7 +82,7 @@ struct ReferConnectionsList: View {
                       preset: SPAlertIconPreset.done);
                     alertView.present(duration: 2)
                   },
-                  animationSpeed: 5
+                  animationSpeed: 4.5
                 )
                   .transition(.moveAndFade)
                 .offset(y: -50)
@@ -109,9 +109,8 @@ struct ReferConnectionsList: View {
                     }
                 }
                 .padding(.leading, -15)
+                .background(Color.white)
               }
-              .background(Color.white)
-            
         }
         .preferredColorScheme(.light)
         .onAppear(perform: onAppearLoadConnectionsList)
@@ -120,3 +119,4 @@ struct ReferConnectionsList: View {
     }
 }
 
+}

@@ -38,7 +38,7 @@ struct UserBumpCountSummary: View {
               .modifier(
                 UserAvatarStyle(
                   index: index,
-                  color: Color.wingitBlue
+                  color: Color.white
                 )
               )
               

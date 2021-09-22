@@ -44,7 +44,7 @@ struct ConnectionNotifButtonStyle: ViewModifier {
     content
       .padding(.horizontal, 10)
       .frame(
-        width: ((UIScreen.main.bounds.width - 40) / 2) - 30,
+        width: ((UIScreen.main.bounds.width - 50) / 2) - 40,
         height: UIScreen.main.bounds.width / 11
       )
       .cornerRadius(5)

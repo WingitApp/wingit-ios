@@ -18,9 +18,9 @@ struct PostTypeOption: View {
       case "advice":
         return Color.uiblue
       case "assistance":
-        return Color.uigreen
-      case "general":
         return Color.uiorange
+      case "general":
+        return Color.uigreen
       default:
         return Color.uiviolet
     }
