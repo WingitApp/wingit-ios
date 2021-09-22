@@ -22,24 +22,26 @@ struct ContactsListView: View {
             List {
                 // Filtered list of names
                 ForEach(viewModel.contacts.filter { viewModel.contactFilter(contact: $0)}, id:\.id) { contact in // --> We display all filtered contacts
-                    Button {
-                        self.isShowingMessages.toggle()
-                        self.numberToText = contact.numbers[0].number
-                    } label: {
+                    Button(action: {
+                        sendMessage(numberToMessage: contact.numbers[0].number)
+                    }, label: {
                         ContactItem(contact: contact)
-                    }
+                    })
                 }
             }
 //            .modifier(ResignKeyboardOnDragGesture())
         }
-         .sheet(isPresented: self.$isShowingMessages) {
-            MessageUIView(recipients: [$numberToText.wrappedValue], body: $message, completion: handleCompletion(_:))
-         }
          .navigationTitle("Invite friends")
          .navigationBarTitleDisplayMode(.inline)
          .onAppear {
             viewModel.fetch()
          }
+    }
+    
+    func sendMessage(numberToMessage: String) {
+        let sms: String = "sms:\(numberToMessage)&body=\(message)"
+        let strURL: String = sms.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        UIApplication.shared.open(URL.init(string: strURL)!, options: [:], completionHandler: nil)
     }
     
     func handleCompletion(_ result: MessageComposeResult) {
