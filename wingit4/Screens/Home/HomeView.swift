@@ -41,13 +41,26 @@ struct HomeView: View {
           }
         }
         .navigationBarItems(
-          leading: Button(action: {}) {
-            NavigationLink(destination: UsersView()) {
-              Image(systemName: "magnifyingglass")
-                .imageScale(Image.Scale.medium)
-                .foregroundColor(.gray)
-            }
-          })
+            leading: Button(action: {}) {
+                NavigationLink(destination: UsersView()) {
+                  Image(systemName: "magnifyingglass")
+                    .imageScale(Image.Scale.medium)
+                    .foregroundColor(.gray)
+                }
+            },
+            trailing:
+                NavigationLink(destination: ContactsListView()) {
+                    Image(systemName: "person.fill.badge.plus")
+                      .imageScale(Image.Scale.medium)
+                      .foregroundColor(.gray)
+                }
+                .simultaneousGesture(TapGesture().onEnded {
+                    logToAmplitude(
+                        event: .tapInviteFriends,
+                        properties: [.screen: "home"]
+                    )
+                })
+        )
       }.environmentObject(homeViewModel)
     }
 }

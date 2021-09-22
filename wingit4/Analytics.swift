@@ -61,6 +61,7 @@ enum AmplitudeEvent: String {
     case ignoreConnectRequest = "Ignore Connect Request"
     case searchForFriends = "Search For Friends"
     case sendConnectRequest = "Send Connect Request"
+    case tapInviteFriends = "Tap Invite Friends"
     case upvote = "Upvote"
     case viewConnectionsList = "View Connections List"
     case viewOtherProfile = "View Other Profile"
@@ -86,6 +87,7 @@ enum AmplitudeProperty: String {
     case fromUser = "from user"
     case method = "method"
     case platform = "platform"
+    case screen = "screen"
     case toUser = "to user"
     case userId = "user id"
 }
