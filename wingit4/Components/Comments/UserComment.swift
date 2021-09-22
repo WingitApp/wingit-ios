@@ -41,9 +41,11 @@ struct UserComment: View {
         VStack(alignment: .leading) {
           HStack(alignment: .center) {
             Text(comment.username)
-              .font(.system(size:14))
+              .font(.system(size:12))
               .fontWeight(.semibold)
             UserCommentLabel(isOPComment: isOPComment)
+            Circle()
+            .modifier(CircleDotStyle())
             Text(
               timeAgoSinceDate(
                 Date(timeIntervalSince1970: comment.date),
@@ -52,18 +54,19 @@ struct UserComment: View {
               )
             )
               .foregroundColor(.gray)
-              .font(.system(size: 11))
+              .font(.system(size: 10))
           }
-          .padding(.bottom, 5)
           
           Text(comment.comment.trimmingCharacters(in: .whitespacesAndNewlines))
             .font(.system(size:14))
+            .padding(.top, 1)
+
         }
         .padding(.leading, 5)
 
       }
       .padding(
-        EdgeInsets(top: 15, leading: 15, bottom: 15, trailing: 15)
+        EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15)
       )
       .onTapGesture(perform: { isNavActive.toggle() })
       Divider()
