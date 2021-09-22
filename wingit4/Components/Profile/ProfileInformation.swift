@@ -94,13 +94,43 @@ struct UpdateProfilePhoto: View {
           }
           Spacer()
 
-           Text("Change your photo")
-                    updatePhotoVM.image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .clipShape(Circle())
-                        .frame(width: 100, height: 100)
-                        .onTapGesture {self.updatePhotoVM.showImagePicker = true}
+            Text("Change your photo")
+                .bold()
+                .foregroundColor(.gray)
+                .padding(.bottom, 50)
+                   
+            ZStack {
+                updatePhotoVM.image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .clipShape(Circle())
+                    .frame(width: 100, height: 100)
+                    .onTapGesture {self.updatePhotoVM.showImagePicker = true}
+                    .zIndex(0)
+                Image(systemName: "plus.circle")
+                  .font(.system(size: 23))
+                  .foregroundColor(.white)
+                  .padding(5)
+                  .background(
+                    LinearGradient(
+                      gradient: Gradient(
+                        colors: [Color("Color").lighter(by: 10), Color("Color")]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                      )
+                  )
+                  .cornerRadius(100)
+                  .offset(x: 30, y: 30)
+                  .frame(width: 20, height: 20)
+                  .shadow(
+                    color: Color.black.opacity(0.3),
+                    radius: 1, x: 0, y: -1
+                  )
+                  .zIndex(1)
+
+            }
+            
+            
             Button(action: {addAvatar()},
                    label: {
                 Text("Done")
@@ -111,7 +141,7 @@ struct UpdateProfilePhoto: View {
                     .background(Color(.systemTeal))
                     .cornerRadius(8)
             })
-              .padding(.vertical)
+              .padding(.top, 50)
               .padding(.horizontal)
               .alert(isPresented: $updatePhotoVM.showAlert) {
                   Alert(
