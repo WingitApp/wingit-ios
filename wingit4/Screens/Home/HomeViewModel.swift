@@ -47,6 +47,9 @@ class HomeViewModel: ObservableObject {
         
         Api.Post.loadTimeline(
           firstCall: posts.count == 0,
+          onEmpty: {
+            self.isLoading = false
+          },
           onSuccess: { (posts) in
             if self.posts.count < posts.count {
               self.posts = posts

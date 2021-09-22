@@ -72,22 +72,22 @@ struct ReferConnectionsList: View {
                    .frame(width: UIScreen.main.bounds.width)
                    .padding(.bottom, 15)
  
-              if referViewModel.showOnSuccessAnimation {
-                LottieView(
-                  name: Bool.random() ? "socialmedia" : "network",
-                  onAnimationEnd: {
-                    self.referViewModel.toggleReferListScreen()
-                    let alertView = SPAlertView(
-                      title: "Done!",
-                      preset: SPAlertIconPreset.done);
-                    alertView.present(duration: 2)
-                  },
-                  animationSpeed: 4.5
-                )
-                  .transition(.moveAndFade)
-                .offset(y: -50)
-                  .padding(.top, -30)
-              } else {
+//              if referViewModel.showOnSuccessAnimation {
+//                LottieView(
+//                  name: Bool.random() ? "socialmedia" : "network",
+//                  onAnimationEnd: {
+//                    self.referViewModel.toggleReferListScreen()
+//                    let alertView = SPAlertView(
+//                      title: "Done!",
+//                      preset: SPAlertIconPreset.done);
+//                    alertView.present(duration: 2)
+//                  },
+//                  animationSpeed: 4.5
+//                )
+//                  .transition(.moveAndFade)
+//                .offset(y: -50)
+//                  .padding(.top, -30)
+//              } else {
                 Text("Your Connections")
                   .font(.headline)
                   .padding(.leading, 15)
@@ -110,7 +110,7 @@ struct ReferConnectionsList: View {
                 }
                 .padding(.leading, -15)
                 .background(Color.white)
-              }
+//              }
         }
         .preferredColorScheme(.light)
         .onAppear(perform: onAppearLoadConnectionsList)

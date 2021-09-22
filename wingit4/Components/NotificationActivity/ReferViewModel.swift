@@ -65,7 +65,10 @@ class ReferViewModel : ObservableObject, Identifiable {
            )
        }
        
-      self.toggleSuccessAnimation()
+//      self.toggleSuccessAnimation()
+       self.toggleReferListScreen()
+       let alertView = SPAlertView( title: "Sent!", preset: SPAlertIconPreset.done);
+       alertView.present(duration: 2)
     }
     
     func rewingReferral(askId: String, parentId: String?) {
@@ -80,7 +83,10 @@ class ReferViewModel : ObservableObject, Identifiable {
                senderId: Auth.auth().currentUser!.uid
            )
        }
-      self.toggleSuccessAnimation()
+//      self.toggleSuccessAnimation()
+      self.toggleReferListScreen()
+      let alertView = SPAlertView( title: "Sent!", preset: SPAlertIconPreset.done);
+      alertView.present(duration: 2)
     }
     
     func loadConnections(post: Post) {
