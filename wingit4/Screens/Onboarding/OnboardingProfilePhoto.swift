@@ -13,34 +13,7 @@ struct OnboardingProfilePhoto: View {
     @StateObject var updatePhotoVM = UpdatePhotoVM()
     
     var body: some View {
-        ZStack{
-            GeometryReader{proxy in
-                
-                let size = proxy.size
-                
-                // since for opacity animation...
-                Color.black
-       
-                    
-                    Image("Pic2")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: size.width, height: size.height)
-                       
-                
-                
-//                 Linear Gradient...
-                        .background(  LinearGradient(
-                    gradient: Gradient(
-                        colors: [.clear,
-                                 .black.opacity(0.5),
-                                 .black]),
-                    startPoint: .top,
-                    endPoint: .bottom)
-                    )
         
-            }
-            .ignoresSafeArea()
         VStack(alignment: .center, spacing: 3) {
            Text("Add a profile photo")
             .fontWeight(.bold)
@@ -90,7 +63,6 @@ struct OnboardingProfilePhoto: View {
                     .padding(.top)
             })
         }
-    }
         .environmentObject(updatePhotoVM)
         .navigationTitle("Profile Photo")
         .navigationBarTitleDisplayMode(.inline)
