@@ -203,20 +203,38 @@ struct SignUp1 : View {
         
         VStack{
                 
-                VStack(alignment: .center, spacing: 3) {
+            ZStack {
+                UserAvatarSignup(
+                  image: signupViewModel.image,
+                  height: 65,
+                  width: 65,
+                  onTapGesture: {
+                    self.signupViewModel.isImagePickerShown = true
+                  }
+                )
+                .zIndex(0)
+                Image(systemName: "plus.circle")
+                  .font(.system(size: 12))
+                  .foregroundColor(.white)
+                  .padding(5)
+                  .background(
+                    LinearGradient(
+                      gradient: Gradient(
+                        colors: [Color("Color").lighter(by: 10), Color("Color")]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                      )
+                  )
+                  .cornerRadius(100)
+                  .offset(x: 20, y: 20)
+                  .frame(width: 20, height: 20)
+                  .shadow(
+                    color: Color.black.opacity(0.3),
+                    radius: 1, x: 0, y: -1
+                  )
+                  .zIndex(1)
 
-                    UserAvatarSignup(
-                      image: signupViewModel.image,
-                      height: 65,
-                      width: 65,
-                      onTapGesture: {
-                        self.signupViewModel.isImagePickerShown = true
-                      }
-                    )
-                    Text("Tap to add photo")
-                    .modifier(Caption2Style()).font(.system(size:10))
-                }.padding(.top, 10)
-           
+            }
             
             VStack(alignment: .leading, spacing: 15) {
                 
