@@ -84,6 +84,7 @@ class ReferralsApi {
     }
 
     func getPendingReferrals(
+      onEmpty: @escaping () -> Void,
       onSuccess: @escaping(_ referrals: [Referral]) -> Void,
       newReferral: @escaping(Referral) -> Void,
       modifiedReferral: @escaping(Referral) -> Void,
@@ -98,6 +99,10 @@ class ReferralsApi {
           .addSnapshotListener { (snapshot, error) in
             guard let snap = snapshot else { return }
             if let error = error { return print(error) }
+            
+            if snap.documentChanges.count == 0 {
+              return onEmpty()
+            }
             
             snap.documentChanges.forEach { (documentChange) in
                 switch documentChange.type {
@@ -165,6 +170,7 @@ class ReferralsApi {
     }
     
     func getAcceptedReferrals(
+      onEmpty: @escaping() -> Void,
       onSuccess: @escaping(_ referrals: [Referral]) -> Void,
       newReferral: @escaping(Referral) -> Void,
       modifiedReferral: @escaping(Referral) -> Void,
@@ -179,6 +185,10 @@ class ReferralsApi {
           .addSnapshotListener { (snapshot, error) in
             guard let snap = snapshot else { return }
             if let error = error { return print(error) }
+            
+            if snap.documentChanges.count == 0 {
+              return onEmpty()
+            }
             
             snap.documentChanges.forEach { (documentChange) in
                 switch documentChange.type {
@@ -246,6 +256,7 @@ class ReferralsApi {
     }
     
     func getWingedReferrals(
+      onEmpty: @escaping() -> Void,
       onSuccess: @escaping(_ referrals: [Referral]) -> Void,
       newReferral: @escaping(Referral) -> Void,
       modifiedReferral: @escaping(Referral) -> Void,
@@ -260,6 +271,10 @@ class ReferralsApi {
           .addSnapshotListener { (snapshot, error) in
             guard let snap = snapshot else { return }
             if let error = error { return print(error) }
+            
+            if snap.documentChanges.count == 0 {
+              return onEmpty()
+            }
             
             snap.documentChanges.forEach { (documentChange) in
                 switch documentChange.type {
@@ -327,6 +342,7 @@ class ReferralsApi {
     }
     
     func getClosedReferrals(
+      onEmpty: @escaping() -> Void,
       onSuccess: @escaping(_ referrals: [Referral]) -> Void,
       newReferral: @escaping(Referral) -> Void,
       modifiedReferral: @escaping(Referral) -> Void,
@@ -341,6 +357,10 @@ class ReferralsApi {
           .addSnapshotListener { (snapshot, error) in
             guard let snap = snapshot else { return }
             if let error = error { return print(error) }
+            
+            if snap.documentChanges.count == 0 {
+              return onEmpty()
+            }
             
             snap.documentChanges.forEach { (documentChange) in
                 switch documentChange.type {

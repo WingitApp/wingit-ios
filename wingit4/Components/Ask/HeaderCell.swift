@@ -80,7 +80,6 @@ struct HeaderCell: View {
                           .stroke(backgroundColor().darker(by: 4), lineWidth: 1))
                 .clipped()
                 .shadow(color: backgroundColor().darker(by: 4).opacity(0.5), radius: 2, x: 0, y: 0)
-
               Spacer()
               if askCardViewModel.isProfileView {
                 AskDoneToggle(post: $post) // rename later

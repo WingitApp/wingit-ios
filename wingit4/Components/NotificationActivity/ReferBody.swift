@@ -38,36 +38,14 @@ struct ReferBody: View {
                 .environmentObject(footerCellViewModel)
         ) {
           VStack(alignment: .leading) {
-                HStack {
-                    URLImageView(urlString: referral.ask?.avatar)
-                      .clipShape(Circle())
-                      .frame(width: 30, height: 30)
-                      .overlay(
-                        RoundedRectangle(cornerRadius: 100)
-                          .stroke(Color.gray, lineWidth: 1)
-                      )
-                        VStack(alignment: .leading) {
-                          Text(referral.ask?.username ?? "")
-                            .fontWeight(.semibold)
-                            .modifier(UserNameStyle())
-                          TimeAgoStamp(date: post.date)
-                        }.padding(.top, 5)
-                        Spacer()
-                  //  Image(systemName: "ellipsis")
-                    }
-              
-                .padding(.trailing, 15).padding(.leading, 15)
-
-                PostText(ask: referral.ask)
-            }
-            .frame(maxWidth: UIScreen.main.bounds.width - 30)
-            .padding(.top, 15).padding(.bottom, 25)
-            .background(RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 0.3))
+            AskCard(
+              post: post,
+              isProfileView: false,
+              index: 1
+            )
+          }
         }
         .buttonStyle(PlainButtonStyle())
-        .background(Color.lightGray.opacity(0.2))
-        .padding(.bottom, 10)
-        
     }
 }
 

@@ -22,7 +22,13 @@ struct ReferralsView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-              if !referralsViewModel.isLoading && (referralsViewModel.pendingReferrals.count == 0 && referralsViewModel.acceptedReferrals.count == 0 && referralsViewModel.wingedReferrals.count == 0 && referralsViewModel.closedReferrals.count == 0) {
+             if (
+              !referralsViewModel.isLoading &&
+              referralsViewModel.pendingReferrals.count == 0 &&
+              referralsViewModel.acceptedReferrals.count == 0 &&
+              referralsViewModel.wingedReferrals.count == 0 &&
+              referralsViewModel.closedReferrals.count == 0
+             ) {
                 EmptyState(
                   title: "No Referrals!",
                   description: "Tell your friends to wing asks to you.",

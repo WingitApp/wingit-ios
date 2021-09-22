@@ -58,6 +58,7 @@ struct MainView: View {
     .onAppear{
         self.profileViewModel.loadUserPosts()
         self.activityViewModel.loadActivities()
+        self.homeViewModel.loadTimeline()
     }
   }
 }

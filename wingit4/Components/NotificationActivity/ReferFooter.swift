@@ -14,7 +14,7 @@ struct ReferFooter: View {
   
     var body: some View {
         
-        HStack(spacing: 20){
+        HStack(spacing: 10){
             WingButton(referral: $referral)
             AcceptButton(referral: $referral, post: $post)
         }
@@ -42,7 +42,7 @@ struct AcceptButton: View {
                 }
                 .foregroundColor(.white)
                 .padding(.vertical, 10)
-                .frame(width: (UIScreen.main.bounds.width / 2 ) - 25)
+                .frame(width: (UIScreen.main.bounds.width / 2 ) - 20)
                 .background(Color.wingitBlue)
                 .cornerRadius(5)
                 .overlay(
@@ -67,15 +67,19 @@ struct WingButton: View {
         },
                label: {
                 HStack(alignment: .center){
-                     Image(systemName: "paperplane")
-                      .foregroundColor(Color.wingitBlue)
+                    Text(
+                      Image(systemName: "paperplane")
+                    )
+                    .font(.system(size:15))
+                    .foregroundColor(Color.wingitBlue)
+                     
                     Text("Bump")
                       .foregroundColor(Color.wingitBlue)
                       .fontWeight(.semibold)
                 }
                 
                 .padding(.vertical, 10)
-                .frame(width: (UIScreen.main.bounds.width / 2 ) - 25)
+                .frame(width: (UIScreen.main.bounds.width / 2 ) - 20)
                 .background(Color.white)
                 .cornerRadius(5)
                 .overlay(

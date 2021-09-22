@@ -12,7 +12,7 @@ struct HomeFeed: View {
   @State var isInTransition: Bool = true
 
   var body: some View {
-
+    
     if !homeViewModel.isLoading && homeViewModel.posts.count == 0 {
         NavigationLink(destination: UsersView()) {
             EmptyState(
@@ -23,7 +23,6 @@ struct HomeFeed: View {
               function: nil
             )
         }.buttonStyle(PlainButtonStyle())
-       
     } else {
         ScrollView(showsIndicators: false) {
           LazyVStack {
@@ -42,7 +41,6 @@ struct HomeFeed: View {
               }
           }
         }
-        .padding(.top, -25)
     }
 
   }

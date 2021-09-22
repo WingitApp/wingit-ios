@@ -39,8 +39,8 @@ struct ReferHeader: View {
                   }
                   .font(.subheadline)
                   .fixedSize(horizontal: false, vertical: true)
-                    Spacer()
-                    TimeAgoStamp(date: Double(referral.createdAt?.seconds ?? 0))
+                  TimeAgoStamp(date: Double(referral.createdAt?.seconds ?? 0))
+                    .padding(.top, 5)
                 }
                 
                 Spacer()
@@ -56,8 +56,6 @@ struct ReferHeader: View {
            
 
         }
-        .padding(
-          EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
-        )
+      .padding(.top, 10)
     }
 }

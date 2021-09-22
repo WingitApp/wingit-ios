@@ -170,10 +170,10 @@ class BumpersTextDescription {
       
       return (
         Text(names.joined(separator: ", ")).bold() +
-        Text("and ") +
+        Text(" and ") +
         Text("\(remainder) ").bold() +
         Text("\(remainder > 1 ? "others" : "other")").bold() +
-        Text(" have winged this request.")
+        Text(" have bumped this request.")
       )
     }
     

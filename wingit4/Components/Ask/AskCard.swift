@@ -70,6 +70,7 @@ struct AskCard: View {
         ) {
           EmptyView()
         }.hidden()
+        
       }
       .background(
 //        self.askCardViewModel.getColorByIndex(index: index).opacity(1)

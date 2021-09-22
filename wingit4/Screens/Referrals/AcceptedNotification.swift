@@ -43,7 +43,7 @@ struct AcceptedNotification: View {
             HStack {
               VStack(alignment: .leading) {
                 Group {
-                Text("You have accepted ") +
+                Text("You've accepted ") +
                   Text("\(referral.sender?.displayName ?? "")" + "'s").fontWeight(.semibold) +
                 Text(" request to help ") +
                   Text("\(referral.ask?.username ?? "").").fontWeight(.semibold)
@@ -102,7 +102,7 @@ struct WingNotification: View {
             HStack {
               VStack(alignment: .leading) {
                 Group {
-                  Text("You have winged ") +
+                  Text("You've rebumped ") +
                   Text("\(referral.ask?.username ?? "")'s").fontWeight(.semibold) +
                   Text(" ask.")
                 }
@@ -156,7 +156,7 @@ struct ClosedNotification: View {
             HStack {
               VStack(alignment: .leading){
                 Group {
-                Text("You have declined ") +
+                Text("You've declined ") +
                   Text("\(referral.sender?.displayName ?? "")'s").fontWeight(.semibold) +
                   Text(" request to help ") +
                   Text("\(referral.ask?.username ?? "").").fontWeight(.semibold)

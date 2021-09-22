@@ -26,8 +26,15 @@ struct AskDetailView: View {
               Divider()
               CommentList(post: $post)
             }
-          }.background(Color.backgroundGray)
+          }
+          .background(Color.backgroundGray)
+          .onTapGesture(perform: dismissKeyboard)
         CommentInput(post: $post)
+        NavigationLink(destination: EmptyView()) {
+          EmptyView()
+        }
+        .hidden()
+
       }
       .navigationBarTitle("")
       .navigationBarHidden(true)
