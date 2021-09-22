@@ -205,7 +205,7 @@ struct SignUp1 : View {
                 
                 VStack(alignment: .center, spacing: 3) {
 
-                    UserAvatar(
+                    UserAvatarSignup(
                       image: signupViewModel.image,
                       height: 65,
                       width: 65,

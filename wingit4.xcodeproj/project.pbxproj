@@ -200,6 +200,7 @@
 		65A9EF9D26DF0B2500E81CBF /* ConnectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A9EF9A26DF0B2500E81CBF /* ConnectionsView.swift */; };
 		65A9EFA326E0923300E81CBF /* Referral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A9EFA226E0923300E81CBF /* Referral.swift */; };
 		65A9EFA526E0B2EC00E81CBF /* AskApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A9EFA426E0B2EC00E81CBF /* AskApi.swift */; };
+		65C6103926FB16FD007B87FE /* UserAvatarSignup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C6103826FB16FD007B87FE /* UserAvatarSignup.swift */; };
 		65E37A2926FA95720063FB72 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E37A2826FA95720063FB72 /* MessagesViewController.swift */; };
 		65E37A2B26FA975E0063FB72 /* MessageUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E37A2A26FA975E0063FB72 /* MessageUIView.swift */; };
 		65E37A2D26FAF5B90063FB72 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E37A2C26FAF5B90063FB72 /* OnboardingView.swift */; };
@@ -397,6 +398,7 @@
 		65A9EF9A26DF0B2500E81CBF /* ConnectionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionsView.swift; path = ../Main/Connections/ConnectionsView.swift; sourceTree = "<group>"; };
 		65A9EFA226E0923300E81CBF /* Referral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Referral.swift; sourceTree = "<group>"; };
 		65A9EFA426E0B2EC00E81CBF /* AskApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskApi.swift; sourceTree = "<group>"; };
+		65C6103826FB16FD007B87FE /* UserAvatarSignup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarSignup.swift; sourceTree = "<group>"; };
 		65E37A2826FA95720063FB72 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		65E37A2A26FA975E0063FB72 /* MessageUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageUIView.swift; sourceTree = "<group>"; };
 		65E37A2C26FAF5B90063FB72 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -605,6 +607,7 @@
 			children = (
 				15030AA726E805A40076CF14 /* Styles.swift */,
 				151A3C9A26D5BEF000A39FAF /* TimeAgoStamp.swift */,
+				65C6103826FB16FD007B87FE /* UserAvatarSignup.swift */,
 				151A3C8226D1B0D200A39FAF /* UserAvatar.swift */,
 				650216B426E86C2100B42BC6 /* URLImageView.swift */,
 				650216B826E9689300B42BC6 /* RollingNumberView.swift */,
@@ -1247,6 +1250,7 @@
 				15F7E8BF26E8490100E5238F /* ReferralComment.swift in Sources */,
 				1524FCC826D753170000629C /* AskMenu.swift in Sources */,
 				3B7AF0852671C08F003BCCF3 /* SearchBar.swift in Sources */,
+				65C6103926FB16FD007B87FE /* UserAvatarSignup.swift in Sources */,
 				6522122926F5584000A48B07 /* ContactDetailViewModel.swift in Sources */,
 				3B7AF0C32673EEA0003BCCF3 /* ActivityApi.swift in Sources */,
 				15F7E87C26E8436100E5238F /* (null) in Sources */,
