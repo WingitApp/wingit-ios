@@ -374,11 +374,11 @@
 		6502C14226C4FF52007C04C9 /* SecretsDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsDebug.xcconfig; sourceTree = "<group>"; };
 		6502C14326C5024C007C04C9 /* SecretsRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsRelease.xcconfig; sourceTree = "<group>"; };
 		6509E4F926D6C214009CB74D /* Ask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ask.swift; sourceTree = "<group>"; };
-		6522122026F54D6600A48B07 /* ContactsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactsListView.swift; path = "../../../../../wingit/wingit-ios/wingit4/Components/Contacts/ContactsListView.swift"; sourceTree = "<group>"; };
-		6522122226F54E0900A48B07 /* ContactItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactItem.swift; path = "../../../../../wingit/wingit-ios/wingit4/Components/Contacts/ContactItem.swift"; sourceTree = "<group>"; };
-		6522122626F557B400A48B07 /* ContactDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactDetailView.swift; path = "../../../../../wingit/wingit-ios/wingit4/Components/Contacts/ContactDetailView.swift"; sourceTree = "<group>"; };
-		6522122826F5584000A48B07 /* ContactDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactDetailViewModel.swift; path = "../../../../wingit/wingit-ios/wingit4/ViewModel/ContactDetailViewModel.swift"; sourceTree = "<group>"; };
-		6522122A26F558D000A48B07 /* EditContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditContactView.swift; path = "../../../../../wingit/wingit-ios/wingit4/Components/Contacts/EditContactView.swift"; sourceTree = "<group>"; };
+		6522122026F54D6600A48B07 /* ContactsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListView.swift; sourceTree = "<group>"; };
+		6522122226F54E0900A48B07 /* ContactItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactItem.swift; sourceTree = "<group>"; };
+		6522122626F557B400A48B07 /* ContactDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailView.swift; sourceTree = "<group>"; };
+		6522122826F5584000A48B07 /* ContactDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewModel.swift; sourceTree = "<group>"; };
+		6522122A26F558D000A48B07 /* EditContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContactView.swift; sourceTree = "<group>"; };
 		6523D93526DDEB78007546F5 /* ActivityEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityEvent.swift; sourceTree = "<group>"; };
 		6531022F26D4CB0B00EEF041 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6531838226B238AA0006D9E2 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };

@@ -33,8 +33,9 @@ struct ContactsListView: View {
             }
 //            .modifier(ResignKeyboardOnDragGesture())
         }
-         .navigationTitle("Invite friends")
-         .navigationBarTitleDisplayMode(.inline)
+         .navigationBarHidden(true)
+//         .navigationTitle("Invite friends")
+//         .navigationBarTitleDisplayMode(.inline)
          .onAppear {
             viewModel.fetch()
          }

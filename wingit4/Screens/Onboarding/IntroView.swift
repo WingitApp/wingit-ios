@@ -12,8 +12,37 @@ struct IntroView: View {
     
     var body: some View {
         NavigationView {
+            ZStack{
+            GeometryReader{proxy in
+                
+                let size = proxy.size
+                
+                // since for opacity animation...
+                Color.black
+       
+                    
+                    Image("Pic2")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: size.width, height: size.height)
+                       
+                
+                
+//                 Linear Gradient...
+                        .background(  LinearGradient(
+                    gradient: Gradient(
+                        colors: [.clear,
+                                 .black.opacity(0.5),
+                                 .black]),
+                    startPoint: .top,
+                    endPoint: .bottom)
+                    )
+        
+            }
+            .ignoresSafeArea()
             VStack(alignment: .center) {
                 Text(TEXT_WINGIT)
+                    .foregroundColor(.white)
                     .fontWeight(.bold)
                     .font(.system(size: 50))
                     .padding(.horizontal)
@@ -22,6 +51,7 @@ struct IntroView: View {
                     .multilineTextAlignment(.center)
                 Image(IMAGE_LOGO).resizable().aspectRatio(contentMode: .fill).frame(width: 80, height: 80).padding(.bottom, 24)
                 Text(TEXT_INTRO_TAGLINE)
+                    .foregroundColor(.white)
                     .fontWeight(.bold)
                     .font(.system(size: 24))
                     .padding(.horizontal)
@@ -41,12 +71,13 @@ struct IntroView: View {
                 }
                 NavigationLink(destination: SigninView()) {
                     Text("Already have an account? Log In")
-                        .foregroundColor(Color("Color"))
+                        .foregroundColor(Color.white)
                         .bold()
                         .font(.system(size: 16))
                         .padding(.top)
                 }
             }
+        }
         }
     }
 }

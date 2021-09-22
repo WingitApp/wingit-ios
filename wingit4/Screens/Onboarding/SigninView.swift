@@ -7,6 +7,34 @@ struct SigninView : View {
     
     var body: some View{
         NavigationView {
+            ZStack{
+                GeometryReader{proxy in
+                    
+                    let size = proxy.size
+                    
+                    // since for opacity animation...
+                    Color.black
+           
+                        
+                        Image("Pic1")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: size.width, height: size.height)
+                           
+                    
+                    
+    //                 Linear Gradient...
+                            .background(  LinearGradient(
+                        gradient: Gradient(
+                            colors: [.clear,
+                                     .black.opacity(0.5),
+                                     .black]),
+                        startPoint: .top,
+                        endPoint: .bottom)
+                        )
+            
+                }
+                .ignoresSafeArea()
             VStack{
                 
                 HStack{
@@ -48,7 +76,7 @@ struct SigninView : View {
                  }
                 NavigationLink(destination: OnboardingView()) {
                     Text("Sign Up for Wingit")
-                        .foregroundColor(Color("Color"))
+                        .foregroundColor(.black)
                         .bold()
                         .font(.system(size: 16))
                         .padding(.top)
@@ -59,6 +87,7 @@ struct SigninView : View {
                     logToAmplitude(event: .viewLoginScreen)
                 }
             }
+        }
         }
     }
 }
