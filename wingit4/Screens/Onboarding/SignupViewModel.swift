@@ -20,6 +20,7 @@ class SignupViewModel: ObservableObject {
     @Published var image: Image = Image(IMAGE_USER_PLACEHOLDER)
     @Published var imageData: Data = Data()
     @Published var errorString = ""
+    @Published var isImagePickerShown: Bool = false
     @Published var isAlertShown: Bool = false
     @Published var showscreen: Bool = false
     @Environment (\.presentationMode) var presentationMode
