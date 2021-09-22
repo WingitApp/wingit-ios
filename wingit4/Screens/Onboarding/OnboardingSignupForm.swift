@@ -36,16 +36,14 @@ struct OnboardingSignupForm : View {
                                  .black.opacity(0.5),
                                  .black]),
                     startPoint: .top,
-                                        endPoint: .bottom).ignoresSafeArea(.all, edges: .all)
+                    endPoint: .bottom)
                     )
         
             }
             .ignoresSafeArea()
-            
         VStack {
             
             Text("Create a Profile").bold().padding(.bottom, 75)
-                .foregroundColor(.white)
             
             VStack(alignment: .leading, spacing: 15) {
                 HStack{
@@ -92,7 +90,6 @@ struct OnboardingSignupForm : View {
             
             Text("By signing up, you agree to the").padding(.top, 10)
               .modifier(CaptionStyle())
-                .foregroundColor(.white)
             EULA()
         }
     }
