@@ -5,13 +5,12 @@
 //  Created by YaeRim Amy Chun on 6/9/21.
 //
 
-
 import Foundation
 import SwiftUI
 import Firebase
 
 struct InitialView: View {
-    @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
+    
     @EnvironmentObject var session: SessionStore
     
     func listen() {
@@ -20,18 +19,16 @@ struct InitialView: View {
     
     var body: some View {
         Group {
-            if session.isLoggedIn && !shouldShowOnboarding {
+            if session.isLoggedIn {
                 MainView()
-            } else if !session.isLoggedIn {
-                SigninView()
+            } else {
+                OnboardingView()
             }
+
         }
         .onAppear(perform: listen)
         .preferredColorScheme(.light)
-        //  .environment(\.colorScheme, .dark)
-        .fullScreenCover(
-            isPresented: $shouldShowOnboarding,
-            content: { IntroView().preferredColorScheme(.light)}
-        )
+       
+      //  .environment(\.colorScheme, .dark)
     }
 }
