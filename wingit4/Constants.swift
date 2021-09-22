@@ -43,6 +43,13 @@ let APPSTOREID = "1572569005"
 let LOGO_URL = """
                   https://firebasestorage.googleapis.com/v0/b/wingitapp-1fe28.appspot.com/o/Frame%203.png?alt=media&token=a4d069bd-3163-42d9-8981-c1cf046eacf3
                   """
+let POST_TYPE_OPTIONS: [String] = [
+  "recommendations",
+  "advice",
+  "assistance",
+  "general"
+]
+
 
 class Ref {
     // Storage
@@ -210,3 +217,28 @@ class Ref {
         }
 }
 
+
+class Haptic {
+  static func impact(type: String) {
+    var impact: UIImpactFeedbackGenerator
+    
+    switch(type) {
+      case "soft":
+        impact = UIImpactFeedbackGenerator(style: .soft)
+      case "light":
+        impact = UIImpactFeedbackGenerator(style: .light)
+      case "medium":
+        impact = UIImpactFeedbackGenerator(style: .medium)
+      case "heavy":
+        impact = UIImpactFeedbackGenerator(style: .heavy)
+      case "rigid":
+        impact = UIImpactFeedbackGenerator(style: .rigid)
+      default:
+        impact = UIImpactFeedbackGenerator(style: .medium)
+    }
+    
+    impact.impactOccurred()
+  }
+
+
+}

@@ -22,6 +22,7 @@ struct ReferConnectionsList: View {
   //  var postId: String
   
     func onSend() {
+      Haptic.impact(type: "medium")
       referViewModel.sendReferrals(
           askId: post.postId
       )
@@ -73,13 +74,19 @@ struct ReferConnectionsList: View {
  
               if referViewModel.showOnSuccessAnimation {
                 LottieView(
-                  name: "letterPlane",
+                  name: Bool.random() ? "socialmedia" : "network",
                   onAnimationEnd: {
                     self.referViewModel.toggleReferListScreen()
+                    let alertView = SPAlertView(
+                      title: "Done!",
+                      preset: SPAlertIconPreset.done);
+                    alertView.present(duration: 2)
                   },
-                  animationSpeed: 3.5
+                  animationSpeed: 5
                 )
                   .transition(.moveAndFade)
+                .offset(y: -50)
+                  .padding(.top, -30)
               } else {
                 Text("Your Connections")
                   .font(.headline)

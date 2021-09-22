@@ -45,6 +45,7 @@ struct AskDetailBody: View {
             .modifier(BodyStyle())
             .fixedSize(horizontal: false, vertical: true)
         }
+        .padding(.bottom, 5)
         
        
       if post.mediaUrl != "" {

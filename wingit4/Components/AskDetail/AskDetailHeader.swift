@@ -22,8 +22,8 @@ struct AskDetailHeader: View {
             Image(systemName: "chevron.left.circle.fill")
               .imageScale(.large)
             Text("Back")
-              .font(.caption)
-              .font(.system(size: 15))
+//              .font(.caption)
+              .font(.system(size: 16))
           }
           .foregroundColor(.wingitBlue)
    

@@ -31,10 +31,6 @@
 		1524E10726F8418D00D5BDB4 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1524E10626F8418D00D5BDB4 /* LottieView.swift */; };
 		1524E11626F90F5700D5BDB4 /* plane.json in Resources */ = {isa = PBXBuildFile; fileRef = 1524E11526F90F5700D5BDB4 /* plane.json */; };
 		1524E11826F910A000D5BDB4 /* bumpSuccess.json in Resources */ = {isa = PBXBuildFile; fileRef = 1524E11726F910A000D5BDB4 /* bumpSuccess.json */; };
-		1524E11E26F9D08F00D5BDB4 /* letterPlane.json in Resources */ = {isa = PBXBuildFile; fileRef = 1524E11D26F9D08E00D5BDB4 /* letterPlane.json */; };
-		1524E12026F9D41800D5BDB4 /* 30762-social-media-network.json in Resources */ = {isa = PBXBuildFile; fileRef = 1524E11F26F9D41800D5BDB4 /* 30762-social-media-network.json */; };
-		1524E12226F9D49900D5BDB4 /* 74908-girl-chatting-with-online-friends.json in Resources */ = {isa = PBXBuildFile; fileRef = 1524E12126F9D49900D5BDB4 /* 74908-girl-chatting-with-online-friends.json */; };
-		1524E12426F9D4A300D5BDB4 /* 56172-online-meetings.json in Resources */ = {isa = PBXBuildFile; fileRef = 1524E12326F9D4A300D5BDB4 /* 56172-online-meetings.json */; };
 		1524FCC826D753170000629C /* AskMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1524FCC726D753170000629C /* AskMenu.swift */; };
 		1524FCCA26D753240000629C /* AskMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1524FCC926D753240000629C /* AskMenuViewModel.swift */; };
 		1524FCCF26D753320000629C /* FooterCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1524FCCB26D753310000629C /* FooterCellViewModel.swift */; };
@@ -63,6 +59,11 @@
 		15DFD07A26ED2E29002CBE31 /* URLImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DFD07926ED2E29002CBE31 /* URLImageViewModel.swift */; };
 		15DFD07C26ED37A4002CBE31 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DFD07B26ED37A4002CBE31 /* CloseButton.swift */; };
 		15DFD07E26ED9B71002CBE31 /* UserProfileDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DFD07D26ED9B71002CBE31 /* UserProfileDefault.swift */; };
+		15E2F1A426F9DA1B00638115 /* network.json in Resources */ = {isa = PBXBuildFile; fileRef = 15E2F1A326F9DA1B00638115 /* network.json */; };
+		15E2F1A626FA3FE600638115 /* socialmedia.json in Resources */ = {isa = PBXBuildFile; fileRef = 15E2F1A526FA3FE600638115 /* socialmedia.json */; };
+		15E2F1AA26FA4AEE00638115 /* onComplete.json in Resources */ = {isa = PBXBuildFile; fileRef = 15E2F1A926FA4AEE00638115 /* onComplete.json */; };
+		15E2F1AC26FA887500638115 /* UserCommentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E2F1AB26FA887500638115 /* UserCommentLabel.swift */; };
+		15E2F1AE26FAA9EF00638115 /* PostTypeOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E2F1AD26FAA9EF00638115 /* PostTypeOption.swift */; };
 		15E4907426E84A1700B25B56 /* AskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4906D26E84A1700B25B56 /* AskDetailView.swift */; };
 		15E4907526E84A1700B25B56 /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4906F26E84A1700B25B56 /* SignupViewModel.swift */; };
 		15E4907726E84A1700B25B56 /* SigninView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4907126E84A1700B25B56 /* SigninView.swift */; };
@@ -223,10 +224,6 @@
 		1524E10626F8418D00D5BDB4 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		1524E11526F90F5700D5BDB4 /* plane.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = plane.json; sourceTree = "<group>"; };
 		1524E11726F910A000D5BDB4 /* bumpSuccess.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bumpSuccess.json; sourceTree = "<group>"; };
-		1524E11D26F9D08E00D5BDB4 /* letterPlane.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = letterPlane.json; sourceTree = "<group>"; };
-		1524E11F26F9D41800D5BDB4 /* 30762-social-media-network.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "30762-social-media-network.json"; sourceTree = "<group>"; };
-		1524E12126F9D49900D5BDB4 /* 74908-girl-chatting-with-online-friends.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "74908-girl-chatting-with-online-friends.json"; sourceTree = "<group>"; };
-		1524E12326F9D4A300D5BDB4 /* 56172-online-meetings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "56172-online-meetings.json"; sourceTree = "<group>"; };
 		1524FCC726D753170000629C /* AskMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskMenu.swift; sourceTree = "<group>"; };
 		1524FCC926D753240000629C /* AskMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskMenuViewModel.swift; sourceTree = "<group>"; };
 		1524FCCB26D753310000629C /* FooterCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooterCellViewModel.swift; sourceTree = "<group>"; };
@@ -255,6 +252,11 @@
 		15DFD07926ED2E29002CBE31 /* URLImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImageViewModel.swift; sourceTree = "<group>"; };
 		15DFD07B26ED37A4002CBE31 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		15DFD07D26ED9B71002CBE31 /* UserProfileDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileDefault.swift; sourceTree = "<group>"; };
+		15E2F1A326F9DA1B00638115 /* network.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = network.json; sourceTree = "<group>"; };
+		15E2F1A526FA3FE600638115 /* socialmedia.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = socialmedia.json; sourceTree = "<group>"; };
+		15E2F1A926FA4AEE00638115 /* onComplete.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onComplete.json; sourceTree = "<group>"; };
+		15E2F1AB26FA887500638115 /* UserCommentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCommentLabel.swift; sourceTree = "<group>"; };
+		15E2F1AD26FAA9EF00638115 /* PostTypeOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTypeOption.swift; sourceTree = "<group>"; };
 		15E4906D26E84A1700B25B56 /* AskDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskDetailView.swift; sourceTree = "<group>"; };
 		15E4906F26E84A1700B25B56 /* SignupViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		15E4907126E84A1700B25B56 /* SigninView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninView.swift; sourceTree = "<group>"; };
@@ -469,10 +471,9 @@
 		1524E10A26F8562100D5BDB4 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
-				1524E12326F9D4A300D5BDB4 /* 56172-online-meetings.json */,
-				1524E11F26F9D41800D5BDB4 /* 30762-social-media-network.json */,
-				1524E12126F9D49900D5BDB4 /* 74908-girl-chatting-with-online-friends.json */,
-				1524E11D26F9D08E00D5BDB4 /* letterPlane.json */,
+				15E2F1A926FA4AEE00638115 /* onComplete.json */,
+				15E2F1A526FA3FE600638115 /* socialmedia.json */,
+				15E2F1A326F9DA1B00638115 /* network.json */,
 				1524E11726F910A000D5BDB4 /* bumpSuccess.json */,
 			);
 			path = Lottie;
@@ -588,6 +589,7 @@
 				15DFD07326EAE005002CBE31 /* ParallaxImage.swift */,
 				15DFD07926ED2E29002CBE31 /* URLImageViewModel.swift */,
 				15DFD07B26ED37A4002CBE31 /* CloseButton.swift */,
+				15E2F1AD26FAA9EF00638115 /* PostTypeOption.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -624,6 +626,7 @@
 				15F7E8BC26E8490100E5238F /* ReferralComment.swift */,
 				15F7E8BD26E8490100E5238F /* UserComment.swift */,
 				15F7E8BE26E8490100E5238F /* CommentList.swift */,
+				15E2F1AB26FA887500638115 /* UserCommentLabel.swift */,
 			);
 			path = Comments;
 			sourceTree = "<group>";
@@ -1014,14 +1017,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15E2F1A426F9DA1B00638115 /* network.json in Resources */,
 				1524E11826F910A000D5BDB4 /* bumpSuccess.json in Resources */,
-				1524E12226F9D49900D5BDB4 /* 74908-girl-chatting-with-online-friends.json in Resources */,
 				3B75E3C7267153BB002F3108 /* Preview Assets.xcassets in Resources */,
+				15E2F1A626FA3FE600638115 /* socialmedia.json in Resources */,
+				15E2F1AA26FA4AEE00638115 /* onComplete.json in Resources */,
 				3BC155AD26D721600069AFD4 /* GoogleService-Info.plist in Resources */,
-				1524E12426F9D4A300D5BDB4 /* 56172-online-meetings.json in Resources */,
 				3B924C9826CB11B300747233 /* LaunchScreen.storyboard in Resources */,
-				1524E11E26F9D08F00D5BDB4 /* letterPlane.json in Resources */,
-				1524E12026F9D41800D5BDB4 /* 30762-social-media-network.json in Resources */,
 				3B75E3C4267153BB002F3108 /* Assets.xcassets in Resources */,
 				1524E11626F90F5700D5BDB4 /* plane.json in Resources */,
 			);
@@ -1080,6 +1082,8 @@
 				3B75E3D926715CDE002F3108 /* EmailTextField.swift in Sources */,
 				15E4907926E84A1700B25B56 /* SigninViewModel.swift in Sources */,
 				3B7AF06F2671A03A003BCCF3 /* CommentView.swift in Sources */,
+				15E2F1AE26FAA9EF00638115 /* PostTypeOption.swift in Sources */,
+				15E2F1AC26FA887500638115 /* UserCommentLabel.swift in Sources */,
 				1524FCF326D75F1F0000629C /* ShareButtonViewModel.swift in Sources */,
 				3B7AF05026718D42003BCCF3 /* StorageService.swift in Sources */,
 				15F7E87926E8435A00E5238F /* Connections.swift in Sources */,

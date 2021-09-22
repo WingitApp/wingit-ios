@@ -18,7 +18,7 @@ struct Connections: View {
                 Text("\(connectionsCount)")
                 Text("Connections")
             }
-            .font(.subheadline)
+            .font(.headline)
             .foregroundColor(.wingitBlue)
             .padding(.top, 2)
 

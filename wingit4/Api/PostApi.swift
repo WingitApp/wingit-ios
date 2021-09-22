@@ -23,14 +23,36 @@ let TIMELINE_PAGINATION_QUERY = Ref.FS_DOC_TIMELINE_FOR_USERID(
 
 class PostApi {
   
-    func postWithoutMedia(caption: String, imageData: Data, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+    func postWithoutMedia(
+      caption: String,
+      type: String,
+      imageData: Data,
+      onSuccess: @escaping() -> Void,
+      onError: @escaping(_ errorMessage: String) -> Void
+    ) {
         guard let userId = Auth.auth().currentUser?.uid else {
             return
         }
         let postId = Ref.FS_COLLECTION_ALL_POSTS.document().documentID
+        let type = PostType(rawValue: type)
         let firestorePostRef = Ref.FS_COLLECTION_ALL_POSTS.document(postId)
-        let post = Post.init(id: postId, caption: caption, likes: [:], location: "", ownerId: userId, postId: postId, status: .open, username: Auth.auth().currentUser!.displayName!, avatar: Auth.auth().currentUser!.photoURL!.absoluteString, mediaUrl: "", date: Date().timeIntervalSince1970, likeCount: 0, title: "")
-        
+        let post = Post.init(
+          id: postId,
+          caption: caption,
+          likes: [:],
+          location: "",
+          ownerId: userId,
+          postId: postId,
+          status: .open,
+          username: Auth.auth().currentUser!.displayName!,
+          avatar: Auth.auth().currentUser!.photoURL!.absoluteString,
+          mediaUrl: "",
+          date: Date().timeIntervalSince1970,
+          likeCount: 0,
+          title: "",
+          type: PostType(rawValue: type?.rawValue ?? "general")
+        )
+              
         do {
             try firestorePostRef.setData(from: post)
             try Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId).collection("timelinePosts").document(postId).setData(from: post)
@@ -40,7 +62,13 @@ class PostApi {
         }
     }
     
-    func postWithMedia(caption: String, imageData: Data, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+    func postWithMedia(
+      caption: String,
+      type: String,
+      imageData: Data,
+      onSuccess: @escaping() -> Void,
+      onError: @escaping(_ errorMessage: String) -> Void
+    ) {
         guard let userId = Auth.auth().currentUser?.uid else {
             return
         }
@@ -48,7 +76,7 @@ class PostApi {
         let storagePostRef = Ref.STORAGE_POST_ID(postId: postId)
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
-        StorageService.savePostPhoto(userId: userId, caption: caption, postId: postId, imageData: imageData, metadata: metadata, storagePostRef: storagePostRef, onSuccess: onSuccess, onError: onError)
+      StorageService.savePostPhoto(userId: userId, type: type, caption: caption, postId: postId, imageData: imageData, metadata: metadata, storagePostRef: storagePostRef, onSuccess: onSuccess, onError: onError)
         
     }
         
@@ -285,7 +313,6 @@ class PostApi {
                         onSuccess(posts)
                     case .modified:
                       guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
-                      print("closed modified:", decodedPost)
                       modifiedPost(decodedPost)
                     case .removed:
                       guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}

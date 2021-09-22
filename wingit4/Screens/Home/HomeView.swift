@@ -21,7 +21,7 @@ struct HomeView: View {
     var body: some View {
       NavigationView {
  
-        VStack(alignment: .leading, spacing: 15) {
+        VStack(alignment: .leading, spacing: 0) {
           // Header Toggle
 //          HomeFeedHeader()
           HomeFeed()

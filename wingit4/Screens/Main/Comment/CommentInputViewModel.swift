@@ -67,9 +67,8 @@ class CommentInputViewModel: ObservableObject {
                 // log to backend
                 logToAmplitude(event: .commentOnRec)
               
-              onSuccess(comment)
-
             }
+            onSuccess(comment)
       
         }) { (errorMessage) in
             return

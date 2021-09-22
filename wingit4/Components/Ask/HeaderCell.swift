@@ -15,54 +15,47 @@ struct HeaderCell: View {
   @Binding var post: Post
   var index: Int?
   
-  func textByIndex(index: Int) -> String {
-    let modIndex = index % 4
-    
-    switch(modIndex) {
-      case 0:
-        return "Physical"
-      case 1:
-        return "Question"
-      case 2:
-        return "Recommendation"
-      case 3:
-        return "Advice"
-      default:
-        return ""
+  func getStatus() -> String {
+    let status =  post.type?.rawValue ?? ""
+    if status.isEmpty {
+      return "general".uppercased()
     }
+    return post.type!.rawValue.uppercased()
   }
   
-  func primaryColorByIndex(index: Int) -> Color {
-    let modIndex = index % 4
+  func textColor() -> Color {
+    let status = post.type?.rawValue ?? ""
     
-    switch(modIndex) {
-      case 0:
+    switch(status) {
+      case "recommendations":
         return Color.uiviolet
-      case 1:
+      case "advice":
         return Color.uiblue
-      case 2:
-        return Color.uigreen
-      case 3:
+      case "assistance":
         return Color.uiorange
+      case "general":
+        return Color.uigreen
       default:
-        return Color.white
+        return Color.uigreen
     }
   }
   
-  func secondaryColorByIndex(index: Int) -> Color {
-    let modIndex = index % 4
-    
-    switch(modIndex) {
-      case 0:
+  
+  func backgroundColor() -> Color {
+    let status = post.type?.rawValue ?? ""
+
+  
+    switch(status) {
+      case "recommendations":
         return Color.uilightViolet
-      case 1:
+      case "advice":
         return Color.uilightBlue
-      case 2:
-        return Color.uilightGreen
-      case 3:
+      case "assistance":
         return Color.uilightOrange
+      case "general":
+        return Color.uilightGreen
       default:
-        return Color.white
+        return Color.uilightGreen
     }
   }
   
@@ -73,20 +66,21 @@ struct HeaderCell: View {
     var body: some View {
         VStack {
             HStack {
-              Text(textByIndex(index: index!).uppercased())
+              Text(getStatus())
                 .fontWeight(.heavy)
                 .kerning(1)
                 .font(.system(size: 9))
-                .foregroundColor(primaryColorByIndex(index: index!))
+                .foregroundColor(textColor())
                 .padding(
-                  EdgeInsets(top: 3, leading: 8, bottom: 3, trailing: 8)
+                  EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8)
                 )
-                .background(secondaryColorByIndex(index: index!))
+                .background(backgroundColor())
                 .cornerRadius(5)
                 .overlay(RoundedRectangle(cornerRadius: 5)
-                          .stroke(secondaryColorByIndex(index: index!).darker(by: 4), lineWidth: 1))
+                          .stroke(backgroundColor().darker(by: 4), lineWidth: 1))
                 .clipped()
-                .shadow(color: secondaryColorByIndex(index: index!).darker(by: 4).opacity(0.5), radius: 2, x: 0, y: 0)
+                .shadow(color: backgroundColor().darker(by: 4).opacity(0.5), radius: 2, x: 0, y: 0)
+
               Spacer()
               if askCardViewModel.isProfileView {
                 AskDoneToggle(post: $post) // rename later

@@ -30,7 +30,9 @@ class ConnectionsViewModel : ObservableObject {
             isLoading.toggle()
         }
         Api.Connections.getConnections(userId: userId) { (users) in
-            self.users = users
+            self.users = users.sorted(by: {
+              $0.firstName! < $1.firstName!
+            })
             self.connectionsCount = users.count
           if self.isLoading {
             self.isLoading.toggle()

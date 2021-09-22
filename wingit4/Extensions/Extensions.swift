@@ -414,8 +414,8 @@ extension Color {
   static let uigreen: Color = Color(red: 102 / 255, green: 137 / 255, blue: 74 / 255)
   static let uilightGreen: Color = Color(red: 241 / 255, green: 255 / 255, blue: 230 / 255)
   
-  static let uilightOrange: Color = Color(red: 255 / 255, green: 245 / 255, blue: 239 / 255)
-  static let uiorange: Color = Color(red: 175 / 255, green: 130 / 255, blue: 107 / 255)
+  static let uilightOrange: Color = Color(red: 255 / 255, green: 245 / 255, blue: 230 / 255)
+  static let uiorange: Color = Color(red: 255 / 255, green: 179 / 255, blue: 71 / 255)
 
 
 }

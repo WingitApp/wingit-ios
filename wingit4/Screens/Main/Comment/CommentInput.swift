@@ -22,10 +22,13 @@ struct CommentInput: View {
   
     func onCommentSubmit() {
       if !composedMessage.isEmpty {
+        Haptic.impact(type: "medium")
+        let trimmedText = composedMessage.trimmingCharacters(in: .whitespacesAndNewlines) // removes trailing space and new lines
         self.commentInputViewModel.saveComment(
-            text: composedMessage,
+            text: trimmedText,
             post: post
           ) { comment in
+          
             self.composedMessage = ""
           }
       } else {

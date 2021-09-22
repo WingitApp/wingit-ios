@@ -15,13 +15,18 @@ struct AskDetailView: View {
     var body: some View {
  
       VStack(alignment: .leading, spacing: 0) {
-        Divider()
         AskDetailHeader(post: $post)
+          .background(Color.white)
         Divider()
-        ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
-          AskDetailCard(post: $post)
-          CommentList(post: $post)
-        }
+          .foregroundColor(Color.black)
+          ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
+            VStack(spacing: 0) {
+              AskDetailCard(post: $post)
+                .background(Color.white)
+              Divider()
+              CommentList(post: $post)
+            }
+          }.background(Color.backgroundGray)
         CommentInput(post: $post)
       }
       .navigationBarTitle("")

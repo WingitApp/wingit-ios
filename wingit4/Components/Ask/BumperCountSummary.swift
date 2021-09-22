@@ -55,7 +55,7 @@ struct BumperCountSummary: View {
           )
           .overlay(
             RoundedRectangle(cornerRadius: 100)
-              .stroke(Color.gray, lineWidth: 1)
+              .stroke(Color.white, lineWidth: 1)
           )
           .padding(.leading, getPaddingByIndex(index: index))
           

@@ -42,6 +42,7 @@ struct HomeFeed: View {
               }
           }
         }
+        .padding(.top, -25)
     }
 
   }

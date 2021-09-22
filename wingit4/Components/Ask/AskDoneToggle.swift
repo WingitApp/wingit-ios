@@ -16,6 +16,7 @@ struct AskDoneToggle: View {
       
         Button(
           action: {
+            Haptic.impact(type: "medium")
             askCardViewModel.openCloseToggle(post: post) { newStatus in
                 post.status = newStatus
             }
