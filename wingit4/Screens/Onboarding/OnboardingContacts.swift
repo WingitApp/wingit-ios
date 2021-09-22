@@ -11,8 +11,37 @@ struct OnboardingContacts: View {
     @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
     
     var body: some View {
+        ZStack{
+            GeometryReader{proxy in
+                
+                let size = proxy.size
+                
+                // since for opacity animation...
+                Color.black
+       
+                    
+                    Image("Pic2")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: size.width, height: size.height)
+                       
+                
+                
+//                 Linear Gradient...
+                        .background(  LinearGradient(
+                    gradient: Gradient(
+                        colors: [.clear,
+                                 .black.opacity(0.5),
+                                 .black]),
+                    startPoint: .top,
+                                        endPoint: .bottom).ignoresSafeArea(.all, edges: .all)
+                    )
+        
+            }
+            .ignoresSafeArea()
         VStack(alignment: .center) {
             Text("Invite your friends")
+                .foregroundColor(.white)
                 .fontWeight(.bold)
                 .font(.system(size:30))
                 .padding(.horizontal)
@@ -32,7 +61,7 @@ struct OnboardingContacts: View {
             }
             NavigationLink(destination: MainView()) {
                 Text("Skip Step")
-                    .foregroundColor(Color("Color"))
+                    .foregroundColor(Color(.white))
                     .bold()
                     .font(.system(size: 16))
                     .padding(.top)
@@ -46,6 +75,7 @@ struct OnboardingContacts: View {
                 }
             )
         }
+    }
     }
 }
 

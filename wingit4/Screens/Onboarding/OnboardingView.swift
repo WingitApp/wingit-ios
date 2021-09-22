@@ -20,5 +20,6 @@ struct OnboardingView: View {
         }
         .tabViewStyle(PageTabViewStyle())
         .environmentObject(signupViewModel)
+        .navigationBarHidden(true)
     }
 }

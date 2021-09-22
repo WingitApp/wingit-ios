@@ -13,7 +13,40 @@ struct OnboardingSignupForm : View {
     @ObservedObject var signupViewModel = SignupViewModel()
     
     var body: some View{
+        ZStack{
+            GeometryReader{proxy in
+                
+                let size = proxy.size
+                
+                // since for opacity animation...
+                Color.black
+       
+                    
+                    Image("Pic2")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: size.width, height: size.height)
+                       
+                
+                
+//                 Linear Gradient...
+                        .background(  LinearGradient(
+                    gradient: Gradient(
+                        colors: [.clear,
+                                 .black.opacity(0.5),
+                                 .black]),
+                    startPoint: .top,
+                                        endPoint: .bottom).ignoresSafeArea(.all, edges: .all)
+                    )
+        
+            }
+            .ignoresSafeArea()
+            
         VStack {
+            
+            Text("Create a Profile").bold().padding(.bottom, 75)
+                .foregroundColor(.white)
+            
             VStack(alignment: .leading, spacing: 15) {
                 HStack{
                 FirstNameTextField(
@@ -59,12 +92,15 @@ struct OnboardingSignupForm : View {
             
             Text("By signing up, you agree to the").padding(.top, 10)
               .modifier(CaptionStyle())
+                .foregroundColor(.white)
             EULA()
         }
+    }
         .onTapGesture { dismissKeyboard() }
         .onAppear{ logToAmplitude(event: .viewSignupScreen) }
-        .navigationTitle("Create a Profile")
-        .navigationBarTitleDisplayMode(.inline)
+//        .navigationTitle("Create a Profile")
+//        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarHidden(true)
     }
 }
 
