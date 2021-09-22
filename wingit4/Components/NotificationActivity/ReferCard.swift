@@ -11,7 +11,7 @@ struct ReferCard: View {
   
   @State var referral: Referral
   @State var post: Post
-  @StateObject var referViewModel = ReferViewModel()
+  @EnvironmentObject var referViewModel: ReferViewModel
     
   // refferal object
   /**
@@ -35,9 +35,10 @@ struct ReferCard: View {
         .sheet(
           isPresented: $referViewModel.isReferListOpen,
           content: {
-            WingConnectionsList(referral: $referral)
+            ReferConnectionsList(post: $post)
               .environmentObject(referViewModel)
           })
+
         
     }
 }

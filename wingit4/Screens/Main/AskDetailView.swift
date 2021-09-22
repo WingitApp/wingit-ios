@@ -14,15 +14,25 @@ struct AskDetailView: View {
   
     var body: some View {
  
-      VStack(alignment: .leading) {
-        ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
-          AskDetailCard(post: $post)
-          CommentList(post: $post)
-          Spacer()
-        }
+      VStack(alignment: .leading, spacing: 0) {
+        AskDetailHeader(post: $post)
+          .background(Color.white)
+        Divider()
+          .foregroundColor(Color.black)
+          ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
+            VStack(spacing: 0) {
+              AskDetailCard(post: $post)
+                .background(Color.white)
+              Divider()
+              CommentList(post: $post)
+            }
+          }.background(Color.backgroundGray)
         CommentInput(post: $post)
       }
-      .padding(.top, -10)
+      .navigationBarTitle("")
+      .navigationBarHidden(true)
+      .edgesIgnoringSafeArea(.top)
+      .padding(.top, 10)
       .environmentObject(commentViewModel)
       .frame(
         width: UIScreen.main.bounds.size.width

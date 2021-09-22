@@ -147,7 +147,7 @@ struct RespondToConnectRequestRow: View {
                   .font(.system(size: 14))
           }
           .modifier(ConnectionNotifButtonStyle())
-          .background(Color(.systemTeal))
+          .background(Color.wingitBlue)
         }
         .padding(.top, 5)
     }

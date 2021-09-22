@@ -18,24 +18,30 @@ struct AskDetailFooter: View {
       VStack {
         Divider()
         HStack {
-          ReferButton(
-            post: $post,
-            showLabel: true
-          )
-          .padding(.leading, 15)
+//          URLImageView(urlString: post.avatar)
+//            .clipShape(Circle())
+//            .frame(width: 30, height: 30)
+//            .overlay(
+//              RoundedRectangle(cornerRadius: 100)
+//                .stroke(Color.gray, lineWidth: 1)
+//            )
+//          VStack(alignment: .leading){
+//            Text(post.username)
+//              .font(.headline)
+//              .fontWeight(.bold)
+//            TimeAgoStamp(date: post.date)
+//              .font(.caption2)
+//          }
           Spacer()
           CommentButton(
-            showLabel: true,
             isTapDisabled: true
           )
-          Spacer()
-          ShareButton(
-            post: $post,
-            showLabel: true
+          ReferButton(
+            post: $post
           )
         }
         .padding(
-          EdgeInsets(top: 3, leading: 0, bottom: 3, trailing: 15)
+          EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 15)
         )
         Divider()
       }

@@ -12,7 +12,8 @@ import SwiftUI
 struct ComposePostView: View {
     
     @ObservedObject var composePostViewModel = ComposePostViewModel()
-
+    @State private var isPostTypeMenuExpanded: Bool = false
+  
     func sharePost() {
         composePostViewModel.sharePost(completed: {
            self.clean()
@@ -31,14 +32,50 @@ struct ComposePostView: View {
         self.composePostViewModel.image = Image(systemName: IMAGE_PHOTO)
         self.composePostViewModel.imageData = Data()
     }
+  
+  func primaryColorByIndex(index: Int) -> Color {
+    let modIndex = index % 4
+    
+    switch(modIndex) {
+      case 0:
+        return Color.uiviolet
+      case 1:
+        return Color.uiblue
+      case 2:
+        return Color.uiorange
+      case 3:
+        return Color.uigreen
+      default:
+        return Color.uiviolet
+    }
+  }
+  
+  
+
+  func secondaryColorByIndex(index: Int) -> Color {
+    let modIndex = index % 4
+    
+    switch(modIndex) {
+      case 0:
+        return Color.uilightViolet
+      case 1:
+        return Color.uilightBlue
+      case 2:
+        return Color.uilightOrange
+      case 3:
+        return Color.uilightGreen
+      default:
+        return Color.white
+    }
+  }
     
     var body: some View {
         NavigationView {
-          
-          
-          
           VStack(alignment: .leading) {
-            Text("Add a photo")
+            
+            
+            
+            Text("Attach an image")
               .font(.headline)
               .padding(.bottom, 5)
               .foregroundColor(.black)
@@ -67,28 +104,78 @@ struct ComposePostView: View {
                     Image(systemName: "camera.fill")
                       .foregroundColor(Color.white)
 
-                    Text("Add photo")
+                    Text("Add image")
                       .font(.subheadline)
                       .bold()
                       .foregroundColor(Color.white)
                   }
               }
+              .padding(.top, 12)
+              .padding(.bottom, 12)
               .frame(
-                width: UIScreen.main.bounds.width - 30,
-                height: UIScreen.main.bounds.width / 10
+                width: UIScreen.main.bounds.width - 30
               )
-              .background(Color(.systemTeal))
-              .cornerRadius(8)
+              .background(Color.wingitBlue)
+              .cornerRadius(5)
               .overlay(
-                RoundedRectangle(cornerRadius: 8)
+                RoundedRectangle(cornerRadius: 5)
                   .stroke(Color.gray, lineWidth: 0.3)
               )
               .onTapGesture {
                       self.composePostViewModel.showImagePicker = true
               }
               .padding(.bottom, 5)
-
-            
+              
+              Text("Choose a category")
+                .font(.headline)
+                .foregroundColor(.black)
+              DisclosureGroup(
+                isExpanded: $isPostTypeMenuExpanded,
+                content: {
+                  VStack(alignment: .leading){
+                    ForEach(POST_TYPE_OPTIONS.indices, id: \.self) { index in
+                      if composePostViewModel.selectedPostType != index {
+                        HStack {
+                          PostTypeOption(option: POST_TYPE_OPTIONS[index])
+                            .frame(width: UIScreen.main.bounds.width - 55)
+                        }
+                        .background(secondaryColorByIndex(index: index).darker(by: 2))
+                        .cornerRadius(5)
+                        .overlay(
+                          RoundedRectangle(cornerRadius: 5)
+                          .stroke(primaryColorByIndex(index: index), lineWidth: 0.2)
+                        )
+                        .onTapGesture {
+                          self.composePostViewModel.selectedPostType = index
+                          withAnimation {
+                            self.isPostTypeMenuExpanded.toggle()
+                          }
+                        }
+                      }
+                      
+                    }
+                  }
+                  .frame(maxWidth: .infinity, alignment: .leading)
+                },
+                label: {
+                  HStack {
+                    PostTypeOption(option: POST_TYPE_OPTIONS[composePostViewModel.selectedPostType])
+                      .frame(width: UIScreen.main.bounds.width - 55)
+                  }
+                  .background(secondaryColorByIndex(index: composePostViewModel.selectedPostType).darker(by: 2))
+                  .cornerRadius(5)
+                  .overlay(
+                    RoundedRectangle(cornerRadius: 5)
+                      .stroke(primaryColorByIndex(index: composePostViewModel.selectedPostType), lineWidth: 0.2)
+                  )
+                  .padding(.bottom, 5)
+                  .onTapGesture {
+                    withAnimation {
+                      self.isPostTypeMenuExpanded.toggle()
+                    }
+                  }
+                })
+              .padding(.bottom, 5)
       
               Text("Compose a post")
                 .font(.headline)
@@ -96,9 +183,9 @@ struct ComposePostView: View {
                 .foregroundColor(.black)
               TextEditor(text: $composePostViewModel.caption)
                   .padding(10)
-                  .cornerRadius(8)
+                  .cornerRadius(5)
                   .overlay(
-                    RoundedRectangle(cornerRadius: 8)
+                    RoundedRectangle(cornerRadius: 5)
                       .stroke(Color.gray, lineWidth: 0.3)
                   )
                   .onTapGesture { dismissKeyboard() }
@@ -123,7 +210,7 @@ struct ComposePostView: View {
                                     
                 Button(action: sharePost) {
                     Text("Ask")
-                      .foregroundColor(Color(.systemTeal))
+                      .foregroundColor(Color.wingitBlue)
                 }.disabled(composePostViewModel.isDisabled)
                     
              .alert(isPresented: $composePostViewModel.showAlert) {

@@ -13,40 +13,83 @@ struct HeaderCell: View {
   
   @EnvironmentObject var askCardViewModel: AskCardViewModel
   @Binding var post: Post
+  var index: Int?
+  
+  func getStatus() -> String {
+    let status =  post.type?.rawValue ?? ""
+    if status.isEmpty {
+      return "general".uppercased()
+    }
+    return post.type!.rawValue.uppercased()
+  }
+  
+  func textColor() -> Color {
+    let status = post.type?.rawValue ?? ""
+    
+    switch(status) {
+      case "recommendations":
+        return Color.uiviolet
+      case "advice":
+        return Color.uiblue
+      case "assistance":
+        return Color.uiorange
+      case "general":
+        return Color.uigreen
+      default:
+        return Color.uigreen
+    }
+  }
+  
+  
+  func backgroundColor() -> Color {
+    let status = post.type?.rawValue ?? ""
+
+  
+    switch(status) {
+      case "recommendations":
+        return Color.uilightViolet
+      case "advice":
+        return Color.uilightBlue
+      case "assistance":
+        return Color.uilightOrange
+      case "general":
+        return Color.uilightGreen
+      default:
+        return Color.uilightGreen
+    }
+  }
+  
+  
+  
+  
   
     var body: some View {
         VStack {
             HStack {
-              NavigationLink(destination:  UserProfileView(userId: post.ownerId, user: nil)) {
-                HStack {
-                  URLImageView(urlString: post.avatar)
-                    .clipShape(Circle())
-                    .frame(width: 35, height: 35)
-                    .overlay(
-                      RoundedRectangle(cornerRadius: 100)
-                        .stroke(Color.gray, lineWidth: 1)
-                    )
-                   
-                  VStack(alignment: .leading){
-                    Text(post.username.capitalized)
-                      .fontWeight(.semibold)
-                      .modifier(UserNameStyle())
-                    TimeAgoStamp(date: post.date)
-                  }
-                }
-              }
-              .disabled(self.askCardViewModel.isNavLinkDisabled)
-              .buttonStyle(FlatLinkStyle())
-              .buttonStyle(PlainButtonStyle())
+              Text(getStatus())
+                .fontWeight(.heavy)
+                .kerning(1)
+                .font(.system(size: 9))
+                .foregroundColor(textColor())
+                .padding(
+                  EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8)
+                )
+                .background(backgroundColor())
+                .cornerRadius(5)
+                .overlay(RoundedRectangle(cornerRadius: 5)
+                          .stroke(backgroundColor().darker(by: 4), lineWidth: 1))
+                .clipped()
+                .shadow(color: backgroundColor().darker(by: 4).opacity(0.5), radius: 2, x: 0, y: 0)
 
-              
               Spacer()
               if askCardViewModel.isProfileView {
                 AskDoneToggle(post: $post) // rename later
               }
                 AskMenu()
-            }.padding(.trailing, 15).padding(.leading, 15)
+            }
+            .padding(
+              EdgeInsets(top: 5, leading: 15, bottom: 5, trailing: 15)
+            )
         }
-        .padding(.top, 15)
     }
 }

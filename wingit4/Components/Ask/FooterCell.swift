@@ -15,29 +15,64 @@ struct FooterCell: View {
   @StateObject var shareButtonViewModel = ShareButtonViewModel()
     
     var body: some View {
-      VStack(alignment: .leading, spacing: 8) {
+      VStack(alignment: .leading) {
           HStack {
-            ReferButton(
-              post: $post,
-              showLabel: true
-            )
-            .frame(width: (UIScreen.main.bounds.width - 30) / 3)
+            HStack {
+              URLImageView(urlString: post.avatar)
+                .clipShape(Circle())
+                .frame(width: 28, height: 28)
+                .overlay(
+                  RoundedRectangle(cornerRadius: 100)
+                    .stroke(Color.gray, lineWidth: 1)
+                )
+  
+              VStack(alignment: .leading){
+                Text(post.username)
+                  .font(.caption)
+                  .fontWeight(.semibold)
+//                  .modifier(UserNameStyle())
+                TimeAgoStamp(date: post.date)
+              }
+            }
             Spacer()
             CommentButton(
-              showLabel: true
+              
+//              showLabel: true
             )
-            .frame(width: (UIScreen.main.bounds.width - 30) / 3)
-            Spacer()
-            ShareButton(
-              post: $post,
-              showLabel: true
+            ReferButton(
+              post: $post
+//              showLabel: true
             )
-            .frame(width: (UIScreen.main.bounds.width - 30) / 3)
           }
-        }
-        .padding(.leading, 15)
-        .padding(.trailing, 15)
-        .padding(.bottom, 15)
+//        NavigationLink(destination:  UserProfileView(userId: post.ownerId, user: nil)) {
+//          HStack {
+//            URLImageView(urlString: post.avatar)
+//              .clipShape(Circle())
+//              .frame(width: 30, height: 30)
+//              .overlay(
+//                RoundedRectangle(cornerRadius: 100)
+//                  .stroke(Color.gray, lineWidth: 1)
+//              )
+//
+//            VStack(alignment: .leading){
+//              Text(post.username)
+//                .fontWeight(.semibold)
+//                .modifier(UserNameStyle())
+//              TimeAgoStamp(date: post.date)
+//            }
+//          }
+//        }
+//        .disabled(self.askCardViewModel.isNavLinkDisabled)
+//        .buttonStyle(FlatLinkStyle())
+//        .buttonStyle(PlainButtonStyle())
+//        .padding(.top, 5)
+          
+        
+      }
+      .padding(.top, 5)
+      .padding(.leading, 15)
+      .padding(.trailing, 15)
+      .padding(.bottom, 15)
       .frame(maxWidth: UIScreen.main.bounds.width - 30)
     }
 }

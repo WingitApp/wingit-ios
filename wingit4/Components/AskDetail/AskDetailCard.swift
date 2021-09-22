@@ -10,17 +10,28 @@ import SwiftUI
 struct AskDetailCard: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
   @EnvironmentObject var askMenuViewModel: AskMenuViewModel
+  @EnvironmentObject var referViewModel: ReferViewModel
   
+
   @Binding var post: Post
   
     var body: some View {
-      VStack(alignment: .leading) {
-        AskDetailHeader(post: $post)
+      VStack(alignment: .leading, spacing: 0) {
         AskDetailBody(post: $post)
-        // AskDetailRow shows the linear progression on bumps
-//        AskDetailRow(post: $post)
-        AskDetailFooter(post: $post)
+        VStack(alignment: .leading) {
+          if askCardViewModel.bumpers.count + askCardViewModel.wingers.count > 0 {
+            Text("Collaborators")
+              .font(.system(size:14))
+              .fontWeight(.semibold)
+            BumperCountSummary(users: askCardViewModel.bumpers + askCardViewModel.wingers)
+              .padding(.bottom, 15)
+          }
+        }
+        .padding([.horizontal])
       }
+      .environmentObject(referViewModel)
+      .environmentObject(askCardViewModel)
+      .environmentObject(askMenuViewModel)
       .sheet(
         isPresented: $askCardViewModel.isImageModalOpen,
         content: {

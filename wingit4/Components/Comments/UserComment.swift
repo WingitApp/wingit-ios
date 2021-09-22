@@ -6,33 +6,44 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct UserComment: View {
   var comment: Comment
+  var postOwnerId: String
+  var isOPComment: Bool = false
+  @State var isNavActive: Bool = false
   
+  init(comment: Comment, postOwnerId: String) {
+    self.comment = comment
+    self.postOwnerId = postOwnerId
+    if comment.ownerId == postOwnerId {
+      self.isOPComment = true
+    }
+  }
   
     var body: some View {
       HStack(alignment: .top) {
         NavigationLink(
-          destination: UserProfileView(userId: comment.ownerId, user: nil)
+          destination: UserProfileView(userId: comment.ownerId, user: nil),
+          isActive: $isNavActive
         ) {
-          URLImageView(urlString: comment.avatarUrl)
-            .clipShape(Circle())
-            .frame(width: 35, height: 35, alignment: .center)
-            .foregroundColor(Color(.systemTeal))
-            .overlay(
-              RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.gray, lineWidth: 0.5)
-            )
-        }
-        .buttonStyle(PlainButtonStyle())
+          EmptyView()
+        }.hidden()
+        URLImageView(urlString: comment.avatarUrl)
+          .clipShape(Circle())
+          .frame(width: 35, height: 35, alignment: .center)
+          .foregroundColor(Color(.systemTeal))
+          .overlay(
+            RoundedRectangle(cornerRadius: 20)
+              .stroke(Color.gray, lineWidth: 0.5)
+          )
         VStack(alignment: .leading) {
           HStack(alignment: .center) {
             Text(comment.username)
-              .font(.caption)
+              .font(.system(size:14))
               .fontWeight(.semibold)
-            Circle()
-              .modifier(CircleDotStyle())
+            UserCommentLabel(isOPComment: isOPComment)
             Text(
               timeAgoSinceDate(
                 Date(timeIntervalSince1970: comment.date),
@@ -41,18 +52,20 @@ struct UserComment: View {
               )
             )
               .foregroundColor(.gray)
-              .font(.system(size: 10))
+              .font(.system(size: 11))
           }
+          .padding(.bottom, 5)
           
-          Text(comment.comment)
-            .font(.caption)
+          Text(comment.comment.trimmingCharacters(in: .whitespacesAndNewlines))
+            .font(.system(size:14))
         }
-        .padding(.leading, 10)
+        .padding(.leading, 5)
 
       }
       .padding(
-        EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
+        EdgeInsets(top: 15, leading: 15, bottom: 15, trailing: 15)
       )
+      .onTapGesture(perform: { isNavActive.toggle() })
       Divider()
     }
 }

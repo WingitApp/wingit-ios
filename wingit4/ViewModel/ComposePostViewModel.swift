@@ -25,17 +25,31 @@ class ComposePostViewModel: ObservableObject {
     
     @Published var showAlert: Bool = false
     @Published var isDisabled: Bool = false
+    @Published var selectedPostType: Int = 0
+
     
     
     func sharePost(completed: @escaping() -> Void,  onError: @escaping(_ errorMessage: String) -> Void) {
-        
+        print(" POST_TYPE_OPTIONS[selectedPostType],",  POST_TYPE_OPTIONS[selectedPostType])
         if !caption.isEmpty && imageData.count == 0 {
             logToAmplitude(event: .postAsk, properties: [.attachedPhoto: false])
-            Api.Post.postWithoutMedia(caption: caption, imageData: imageData, onSuccess: completed, onError: onError)
+            Api.Post.postWithoutMedia(
+              caption: caption,
+              type: POST_TYPE_OPTIONS[selectedPostType],
+              imageData: imageData,
+              onSuccess: completed,
+              onError: onError
+            )
               isDisabled = true
            } else if !caption.isEmpty && imageData.count != 0{
             logToAmplitude(event: .postAsk, properties: [.attachedPhoto: true])
-            Api.Post.postWithMedia(caption: caption, imageData: imageData, onSuccess: completed, onError: onError)
+            Api.Post.postWithMedia(
+              caption: caption,
+              type: POST_TYPE_OPTIONS[selectedPostType],
+              imageData: imageData,
+              onSuccess: completed,
+              onError: onError
+            )
             isDisabled = true
           } else {
                 showAlert = true

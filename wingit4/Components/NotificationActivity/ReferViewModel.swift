@@ -8,82 +8,124 @@
 import SwiftUI
 import UIKit
 import FirebaseAuth
+import Firebase
 import Amplitude
 import SPAlert
 
 class ReferViewModel : ObservableObject, Identifiable {
     @Published var isLoading = true
-    @Published var selectedUsers: [String?] = []
-    @Published var isChecked = false
     
-    var allReferralRecipientIds: [String?] = []
-    var allUsers: [User] = []
+    @Published var connections: [User] = []
+    @Published var userBumps: [User] = []
+    @Published var selectedUsers: [User] = []
     
     @Published var isReferListOpen: Bool = false
+    @Published var showOnSuccessAnimation: Bool = false
+    
+    @Published var userBumpsListener: ListenerRegistration?
+  
+    func resetToInitialState() {
+      isLoading = true
+      showOnSuccessAnimation = false
+      connections = []
+      userBumps = []
+      selectedUsers = []
+      if userBumpsListener != nil {
+        userBumpsListener!.remove()
+      }
+    }
   
     func toggleReferListScreen() {
         self.isReferListOpen.toggle()
     }
     
-    func toggleCheck() {
+  
+    func toggleSuccessAnimation() {
       withAnimation {
-        self.isChecked.toggle()
+        showOnSuccessAnimation.toggle()
       }
     }
     
-    func handleUserSelect(userId: String?) {
-        guard let userId = userId else { return }
-        if selectedUsers.contains(userId) {
-            self.selectedUsers.removeAll(where: { $0 == userId })
-        } else {
-            self.selectedUsers.append(userId)
-        }
+    func handleUserSelect(user: User) {
+      if selectedUsers.contains(user) {
+        self.selectedUsers.removeAll(where: { $0 == user })
+      } else {
+        self.selectedUsers.append(user)
+      }
 
     }
     
     func sendReferrals(askId: String) {
-        for receiverId in selectedUsers {
-            Api.Referrals.sendReferral(
-                askId: askId,
-                receiverId: receiverId,
-                senderId: Auth.auth().currentUser!.uid
-            )
-        }
-        
-        self.allReferralRecipientIds = Array(Set(self.allReferralRecipientIds + self.selectedUsers))
-        let alertView = SPAlertView(title: "Sent!", message: nil, preset: SPAlertIconPreset.done); alertView.present(duration: 2)
-        self.toggleReferListScreen()
+       for receivers in selectedUsers {
+           let receiverId = receivers.id
+           Api.Referrals.sendReferral(
+               askId: askId,
+               receiverId: receiverId,
+               senderId: Auth.auth().currentUser!.uid
+           )
+       }
+       
+      self.toggleSuccessAnimation()
     }
     
     func rewingReferral(askId: String, parentId: String?) {
-        guard let parentId = parentId else { return }
-        Api.Referrals.updateStatus(referralId: parentId, newStatus: .winged)
-        for receiverId in selectedUsers {
-            Api.Referrals.rewingReferral(
-                askId: askId,
-                receiverId: receiverId,
-                parentId: parentId,
-                senderId: Auth.auth().currentUser!.uid
-            )
-        }
-        
-        self.allReferralRecipientIds = Array(Set(self.allReferralRecipientIds + self.selectedUsers))
-        let alertView = SPAlertView(title: "Sent!", message: nil, preset: SPAlertIconPreset.done); alertView.present(duration: 2)
-        self.toggleReferListScreen()
+       guard let parentId = parentId else { return }
+       Api.Referrals.updateStatus(referralId: parentId, newStatus: .winged)
+       for receiver in selectedUsers {
+          let receiverId = receiver.id
+           Api.Referrals.rewingReferral(
+               askId: askId,
+               receiverId: receiverId,
+               parentId: parentId,
+               senderId: Auth.auth().currentUser!.uid
+           )
+       }
+      self.toggleSuccessAnimation()
     }
     
-    func loadConnections(askId: String) {
+    func loadConnections(post: Post) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        if !self.isLoading {
-            isLoading.toggle()
+        isLoading = true
+      
+        Api.Connections.getConnections(userId: userId) { users in
+          self.connections = users.compactMap { user in
+            if user.id == post.ownerId { return nil }
+            return user
+          }.sorted(by: {
+            $0.firstName! < $1.firstName!
+          })
+          
+          self.loadUserBumpers(post: post)
         }
-        Api.Connections.getConnections(userId: userId) { (users) in
-            self.isLoading.toggle()
-            self.allUsers = users
-            Api.Referrals.getReferralsByAskId(askId: askId) { (recipientIds) in
-                self.allReferralRecipientIds = recipientIds
-            }
+    }
+  
+    func loadUserBumpers(post: Post) {
+      Api.Post.getUserBumpsByPost(
+        askId: post.postId,
+        onSuccess: { bumpers in
+          if bumpers.count > self.userBumps.count {
+            self.userBumps = bumpers
+          }
+          
+        },
+        onAddition: { bumper in
+          if !self.userBumps.contains(bumper) {
+            self.userBumps.append(bumper)
+          }
+        },
+        onRemoval: { bumper in
+          if !self.userBumps.isEmpty {
+              for (index, w) in self.userBumps.enumerated() {
+                  if w.uid == bumper.uid {
+                    self.userBumps.remove(at: index)
+                  }
+              }
+          }
+        },
+        listener: { listener in
+          self.userBumpsListener = listener
         }
+      )
     }
 }
 

@@ -43,6 +43,13 @@ let APPSTOREID = "1572569005"
 let LOGO_URL = """
                   https://firebasestorage.googleapis.com/v0/b/wingitapp-1fe28.appspot.com/o/Frame%203.png?alt=media&token=a4d069bd-3163-42d9-8981-c1cf046eacf3
                   """
+let POST_TYPE_OPTIONS: [String] = [
+  "recommendations",
+  "advice",
+  "assistance",
+  "general"
+]
+
 
 class Ref {
     // Storage
@@ -197,12 +204,41 @@ class Ref {
             return FS_COLLECTION_CONNECTIONS.document(user1Id).collection("userConnections").document(user2Id)
         }
         static func FS_COLLECTION_CONNECTIONS_FOR_USER(userId: String) -> CollectionReference {
-               return FS_COLLECTION_CONNECTIONS.document(userId).collection("userConnections")
+          return FS_COLLECTION_CONNECTIONS.document(userId).collection("userConnections")
         }
     
         static var FS_COLLECTION_ACTIVITY = FS_ROOT.collection("activity")
         static func FS_COLLECTION_ACTIVITY_EVENTS_FOR_USER(userId: String) -> CollectionReference {
                return FS_COLLECTION_CONNECTIONS.document(userId).collection("events")
         }
+  
+        static func FS_COLLECTION_USER_BUMPS_BY_POST(userId: String, postId: String) -> CollectionReference {
+          return FS_COLLECTION_USERS.document(userId).collection("bumpedPosts").document(postId).collection("users")
+        }
 }
 
+
+class Haptic {
+  static func impact(type: String) {
+    var impact: UIImpactFeedbackGenerator
+    
+    switch(type) {
+      case "soft":
+        impact = UIImpactFeedbackGenerator(style: .soft)
+      case "light":
+        impact = UIImpactFeedbackGenerator(style: .light)
+      case "medium":
+        impact = UIImpactFeedbackGenerator(style: .medium)
+      case "heavy":
+        impact = UIImpactFeedbackGenerator(style: .heavy)
+      case "rigid":
+        impact = UIImpactFeedbackGenerator(style: .rigid)
+      default:
+        impact = UIImpactFeedbackGenerator(style: .medium)
+    }
+    
+    impact.impactOccurred()
+  }
+
+
+}

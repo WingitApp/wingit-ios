@@ -8,6 +8,8 @@
 import SwiftUI
 import URLImage
 
+//DEPRECATED 9/20/21
+
 struct CommentView: View {
     @EnvironmentObject var commentViewModel: CommentViewModel
     @Binding var post: Post
@@ -19,7 +21,7 @@ struct CommentView: View {
               AskDetailCard(post: $post)
               VStack(alignment: .leading) {
                 ForEach(self.commentViewModel.comments) { comment in
-                     UserComment(comment: comment)
+                  UserComment(comment: comment, postOwnerId: post.ownerId)
                  }
               }
             }

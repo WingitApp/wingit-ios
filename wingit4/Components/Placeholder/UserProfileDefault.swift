@@ -15,9 +15,9 @@ let USER_PROFILE_DEFAULT_PLACEHOLDER = User(
   canonicalEmail: "anonymous@gmail.com",
   connections: [],
   email: "anonymous@gmail.com",
-  firstName: "Anonymous",
+  firstName: "       ",
   keywords: [],
-  lastName: "Anonymous",
+  lastName: "       ",
   profileImageUrl: DEFAULT_PROFILE_AVATAR,
   tags: [],
   username: "Anonymous"

@@ -38,15 +38,15 @@ struct AcceptButton: View {
                   Image(systemName: "checkmark.circle")
                     .foregroundColor(.white)
                   Text("Accept")
-                    .fontWeight(.bold)
+                    .fontWeight(.semibold)
                 }
                 .foregroundColor(.white)
                 .padding(.vertical, 10)
                 .frame(width: (UIScreen.main.bounds.width / 2 ) - 25)
-                .background(Color(.systemTeal))
+                .background(Color.wingitBlue)
                 .cornerRadius(5)
                 .overlay(
-                  RoundedRectangle(cornerRadius: 5).stroke(Color(.systemTeal),
+                  RoundedRectangle(cornerRadius: 5).stroke(Color.wingitBlue,
                   lineWidth: 1)
                 )
         }).disabled(self.userHasAccepted)
@@ -67,16 +67,11 @@ struct WingButton: View {
         },
                label: {
                 HStack(alignment: .center){
-                  VStack {
-                    Image(IMAGE_LOGO)
-                      .resizable()
-                      .scaledToFit()
-                  }
-                  .frame(width: 30, height: 20)
-                  
-                    Text("Wing")
+                     Image(systemName: "paperplane")
                       .foregroundColor(Color.wingitBlue)
-                      .fontWeight(.bold)
+                    Text("Bump")
+                      .foregroundColor(Color.wingitBlue)
+                      .fontWeight(.semibold)
                 }
                 
                 .padding(.vertical, 10)

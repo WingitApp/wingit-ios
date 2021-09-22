@@ -17,6 +17,7 @@ class ReferralsViewModel: ObservableObject {
     @Published var acceptedReferrals: [Referral] = []
     @Published var wingedReferrals: [Referral] = []
     @Published var closedReferrals: [Referral] = []
+    @Published var isLoading: Bool = false
     @Published var destination: AnyView = AnyView(EmptyView())
     @Published var isLinkActive: Bool = false
     
@@ -26,6 +27,7 @@ class ReferralsViewModel: ObservableObject {
     var closedListener: ListenerRegistration!
     
     func getReferrals() {
+        isLoading = true
         getPendingReferrals()
         getAcceptedReferrals()
         getWingedReferrals()
@@ -161,6 +163,7 @@ class ReferralsViewModel: ObservableObject {
           }
       }) { (listener) in
         self.closedListener = listener
+        self.isLoading = false
       }
     }
     

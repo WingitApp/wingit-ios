@@ -12,18 +12,15 @@ struct CommentList: View {
   @Binding var post: Post
   
     var body: some View {
-      ScrollView {
-          if !commentViewModel.comments.isEmpty {
-            VStack(alignment: .leading){
-              ForEach(commentViewModel.comments) { comment in
-                if comment.type == .invitedReferral {
-                  ReferralComment(comment: comment)
-                } else {
-                  UserComment(comment: comment)
-                }
-             }
+        if !commentViewModel.comments.isEmpty {
+          VStack(alignment: .leading, spacing: 0) {
+            ForEach(commentViewModel.comments) { comment in
+              if comment.type != .invitedReferral {
+                UserComment(comment: comment, postOwnerId: post.ownerId)
+              }
             }
           }
-      }
+          .background(Color.white)
+        }
     }
 }

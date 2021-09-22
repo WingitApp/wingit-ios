@@ -28,30 +28,22 @@ struct ReferralComment: View {
         ) {
           EmptyView()
         }
-        HStack {
-          Image(IMAGE_LOGO)
-            .resizable()
-            .scaledToFit()
-            .frame(width: 23, height: 23)
-        }
-        .background(Color.white)
-          .frame(width: 35, height: 35, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-          .clipShape(Circle())
-          .overlay(
-            RoundedRectangle(cornerRadius: 100)
-              .stroke(Color.wingitBlue, lineWidth: 1)
-          )
-          .padding(.trailing, 10)
+//        HStack {
+//          Image(IMAGE_LOGO)
+//            .resizable()
+//            .scaledToFit()
+//            .frame(width: 23, height: 23)
+//        }
+//        .background(Color.white)
+//          .frame(width: 35, height: 35, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+//          .clipShape(Circle())
+//          .overlay(
+//            RoundedRectangle(cornerRadius: 100)
+//              .stroke(Color.wingitBlue, lineWidth: 1)
+//          )
+//          .padding(.trailing, 10)
         VStack(alignment: .leading) {
-          Text(
-            timeAgoSinceDate(
-              Date(timeIntervalSince1970: comment.date),
-              currentDate: Date(),
-              numericDates: true
-            )
-          )
-          .foregroundColor(.gray)
-          .font(.system(size: 10))
+ 
           Spacer()
           
 
@@ -68,6 +60,16 @@ struct ReferralComment: View {
                   self.pushToOwner.toggle()
                 }
             Text(" to help.")
+            Text(
+              timeAgoSinceDate(
+                Date(timeIntervalSince1970: comment.date),
+                currentDate: Date(),
+                numericDates: true
+              )
+            )
+            .padding(.leading, 10)
+            .foregroundColor(.gray)
+            .font(.system(size: 10))
           }
           .font(.caption)
           .fixedSize(horizontal: false, vertical: true)

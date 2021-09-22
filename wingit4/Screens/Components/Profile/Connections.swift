@@ -18,8 +18,8 @@ struct Connections: View {
                 Text("\(connectionsCount)")
                 Text("Connections")
             }
-            .font(.subheadline)
-            .foregroundColor(Color(.systemTeal))
+            .font(.headline)
+            .foregroundColor(.wingitBlue)
             .padding(.top, 2)
 
               .onTapGesture {

@@ -49,7 +49,7 @@ class StorageService {
     }
     
     
-    static func savePostPhoto(userId: String, caption: String, postId: String, imageData: Data, metadata: StorageMetadata, storagePostRef: StorageReference, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+  static func savePostPhoto(userId: String, type: String, caption: String, postId: String, imageData: Data, metadata: StorageMetadata, storagePostRef: StorageReference, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
                
         storagePostRef.putData(imageData, metadata: metadata) { (storageMetadata, error) in
               if error != nil {
@@ -59,7 +59,23 @@ class StorageService {
             storagePostRef.downloadURL { (url, error) in
                 if let metaImageUrl = url?.absoluteString {
                     let firestorePostRef = Ref.FS_COLLECTION_ALL_POSTS.document(postId)
-                    let post = Post.init(id: postId, caption: caption, likes: [:], location: "", ownerId: userId, postId: postId, status: .open, username: Auth.auth().currentUser!.displayName!, avatar: Auth.auth().currentUser!.photoURL!.absoluteString, mediaUrl: metaImageUrl, date: Date().timeIntervalSince1970, likeCount: 0, title: "")
+                    let post = Post.init(
+                      id: postId,
+                      caption: caption,
+                      likes: [:],
+                      location: "",
+                      ownerId: userId,
+                      postId: postId,
+                      status: .open,
+                      username: Auth.auth().currentUser!.displayName!,
+                      avatar: Auth.auth().currentUser!.photoURL!.absoluteString,
+                      mediaUrl: metaImageUrl,
+                      date: Date().timeIntervalSince1970,
+                      likeCount: 0,
+                      title: "",
+                      type: PostType(rawValue: type)
+                    )
+
             
                     do {
                         try firestorePostRef.setData(from: post)

@@ -88,10 +88,6 @@ struct ProfileView: View {
                  .cornerRadius(20, corners: [.topLeft, .topRight])
                  .padding(.top, -105)
                )
-              
-//              Text(session.currentUser?.bio ?? "")
-//                .font(.subheadline)
-//                .italic()
               Connections(
                 user: self.session.currentUser,
                 connectionsCount: $profileViewModel.connectionsCountState

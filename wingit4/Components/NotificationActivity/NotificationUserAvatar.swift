@@ -102,7 +102,7 @@ struct NotificationUserAvatar: View {
             .frame(width: 20, height: 20)
             .shadow(
               color: Color.black.opacity(0.3),
-              radius: 3, x: 0, y: 0.5
+              radius: 1, x: 0, y: -1
             )
             .zIndex(1)
 

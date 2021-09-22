@@ -23,6 +23,15 @@ struct Post: Codable, Identifiable, Equatable, Hashable {
     var likeCount: Int
     var title: String?
     var wingers: [User]?
+    var type: PostType?
+}
+
+
+enum PostType: String, Codable {
+    case recommendations
+    case advice
+    case assistance
+    case general
 }
 
 enum PostStatus: String, Codable {
