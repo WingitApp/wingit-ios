@@ -26,6 +26,5 @@ enum Selection: Int, CaseIterable, Identifiable {
         case .globe:
             return Text("Recommendations")
         }
-        
     }
 }
