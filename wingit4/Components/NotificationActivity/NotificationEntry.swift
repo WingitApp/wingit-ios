@@ -26,7 +26,7 @@ struct NotificationEntry: View {
             .fixedSize(horizontal: false, vertical: true)
             .lineLimit(3)
               Spacer()
-              TimeAgoStamp(date: activity.date)
+            TimeAgoStamp(date: activity.date)
           }
 
           

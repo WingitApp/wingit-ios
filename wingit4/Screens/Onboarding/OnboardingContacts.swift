@@ -11,34 +11,7 @@ struct OnboardingContacts: View {
     @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
     
     var body: some View {
-        ZStack{
-            GeometryReader{proxy in
-                
-                let size = proxy.size
-                
-                // since for opacity animation...
-                Color.black
-       
-                    
-                    Image("Pic2")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: size.width, height: size.height)
-                       
-                
-                
-//                 Linear Gradient...
-                        .background(  LinearGradient(
-                    gradient: Gradient(
-                        colors: [.clear,
-                                 .black.opacity(0.5),
-                                 .black]),
-                    startPoint: .top,
-                    endPoint: .bottom)
-                    )
-        
-            }
-            .ignoresSafeArea()
+
         VStack(alignment: .center) {
             Text("Invite your friends")
                 .fontWeight(.bold)
@@ -75,14 +48,5 @@ struct OnboardingContacts: View {
                 }
             )
         }
-        }
-    }
-}
-
-struct ContactsOnboarding_Previews: PreviewProvider {
-    @State static var shouldShowOnboarding = true
-    
-    static var previews: some View {
-        OnboardingContacts()
     }
 }
