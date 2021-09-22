@@ -21,7 +21,7 @@ struct ReferralsView: View {
   
     var body: some View {
         NavigationView {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
              if (
               !referralsViewModel.isLoading &&
               referralsViewModel.pendingReferrals.count == 0 &&
