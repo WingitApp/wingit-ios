@@ -23,9 +23,9 @@ struct AskDoneToggle: View {
             }
           },
           label: {
-            if showLabel {
+            if showLabel && Auth.auth().currentUser?.uid != post.ownerId {
               HStack(alignment: .center){
-                Image(systemName: "checkmark")
+                Image(systemName: self.post.status == .closed ? "checkmark" : "")
                   .foregroundColor(self.post.status == .closed ? .white : .black.opacity(0.7))
                   .font(.caption2)
                 Text(self.post.status == .closed ? "Completed" : "Incomplete")
@@ -42,7 +42,26 @@ struct AskDoneToggle: View {
                 RoundedRectangle(cornerRadius: 3)
                   .stroke(self.post.status == .closed ? Color("Color1") : .gray, lineWidth: 1)
               )
-            } else {
+            } else if showLabel && Auth.auth().currentUser?.uid == post.ownerId {
+                HStack(alignment: .center){
+                  Image(systemName: "checkmark")
+                    .foregroundColor(self.post.status == .closed ? .white : .black.opacity(0.7))
+                    .font(.caption2)
+                  Text(self.post.status == .closed ? "Completed" : "Mark Complete")
+                    .font(.caption2)
+                    .padding(.leading, -5)
+                    .foregroundColor(self.post.status == .closed ? .white : .black.opacity(0.7))
+                }
+                .padding(
+                  EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
+                )
+                .background(self.post.status == .closed ? Color("Color1") : .white)
+                .cornerRadius(3)
+                .overlay(
+                  RoundedRectangle(cornerRadius: 3)
+                    .stroke(self.post.status == .closed ? Color("Color1") : .gray, lineWidth: 1)
+                )
+              } else {
               Image(systemName: "checkmark.circle")
                 .foregroundColor(self.post.status == .closed ? Color("Color1") : .gray)
             }
