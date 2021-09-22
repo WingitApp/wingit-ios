@@ -63,7 +63,7 @@ struct LinkStyle: ViewModifier {
 struct CaptionStyle: ViewModifier {
   func body(content: Content) -> some View {
     content
-      .font(.caption2).foregroundColor(.gray)
+      .font(.caption).foregroundColor(.gray)
   }
 }
 
