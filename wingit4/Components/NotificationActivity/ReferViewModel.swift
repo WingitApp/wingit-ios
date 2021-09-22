@@ -56,26 +56,23 @@ class ReferViewModel : ObservableObject, Identifiable {
     }
     
     func sendReferrals(askId: String) {
-      
-        ///askId(postId) & senderId (auth.dude) & senderId(userId of the one selected
-        // ids -> self.selectedUsers
-//        for receivers in selectedUsers {
-//            let receiverId = receivers.id
-//            Api.Referrals.sendReferral(
-//                askId: askId,
-//                receiverId: receiverId,
-//                senderId: Auth.auth().currentUser!.uid
-//            )
-//        }
-//        
-      
+       for receivers in selectedUsers {
+           let receiverId = receivers.id
+           Api.Referrals.sendReferral(
+               askId: askId,
+               receiverId: receiverId,
+               senderId: Auth.auth().currentUser!.uid
+           )
+       }
+       
       self.toggleSuccessAnimation()
     }
     
     func rewingReferral(askId: String, parentId: String?) {
        guard let parentId = parentId else { return }
        Api.Referrals.updateStatus(referralId: parentId, newStatus: .winged)
-       for receiverId in selectedUsers {
+       for receiver in selectedUsers {
+          let receiverId = receivers.id
            Api.Referrals.rewingReferral(
                askId: askId,
                receiverId: receiverId,
@@ -83,10 +80,7 @@ class ReferViewModel : ObservableObject, Identifiable {
                senderId: Auth.auth().currentUser!.uid
            )
        }
-
-       self.allReferralRecipientIds = Array(Set(self.allReferralRecipientIds + self.selectedUsers))
-       let alertView = SPAlertView(title: "Sent!", message: nil, preset: SPAlertIconPreset.done); alertView.present(duration: 2)
-       self.toggleReferListScreen()
+      self.toggleSuccessAnimation()
     }
     
     func loadConnections(post: Post) {
