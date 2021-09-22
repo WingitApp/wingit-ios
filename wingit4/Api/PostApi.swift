@@ -338,6 +338,7 @@ class PostApi {
   
   func loadTimeline(
     firstCall: Bool,
+    onEmpty: @escaping() -> Void,
     onSuccess: @escaping(_ posts: [Post]) -> Void,
     newPost: @escaping(Post) -> Void,
     modifiedPost: @escaping(Post) -> Void,
@@ -346,6 +347,7 @@ class PostApi {
     nextQuery: @escaping(_ next: Query) -> Void
   ) {
           guard let userId = Auth.auth().currentUser?.uid else { return }
+    
     
           let listenerFirestore =  Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId)
             .collection("timelinePosts")
@@ -367,6 +369,10 @@ class PostApi {
                 // construct pagination end
                 
                 nextQuery(next)
+              }
+              
+              if snapshot.documentChanges.count == 0 {
+                return onEmpty()
               }
              
               
