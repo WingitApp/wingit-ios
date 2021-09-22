@@ -26,6 +26,7 @@ class ConnectionsViewModel : ObservableObject {
     @Published var connectionsCountState = 0
     
     func loadConnections(userId: String?) {
+        print("userId", userId)
         guard let userId = userId else { return }
         if !self.isLoading {
             isLoading.toggle()
@@ -35,9 +36,7 @@ class ConnectionsViewModel : ObservableObject {
               $0.firstName! < $1.firstName!
             })
             self.connectionsCount = users.count
-          if self.isLoading {
-            self.isLoading.toggle()
-          }
+            self.isLoading = false
         }
     }
     

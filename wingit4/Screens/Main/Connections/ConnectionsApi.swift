@@ -27,6 +27,7 @@ class ConnectionsApi {
                     onSuccess(users)
                 }
             }
+            onSuccess(users)
         }
     }
 }

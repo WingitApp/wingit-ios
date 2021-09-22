@@ -61,13 +61,28 @@ struct ConnectionsView: View {
   
     var body: some View {
             NavigationView {
-              List {
-                ForEach(self.connectionsViewModel.users, id: \.self) { user in
-                  ConnectionRow(user: user)
+                Group {
+                    if (Auth.auth().currentUser?.uid == user?.id && connectionsViewModel.users.isEmpty && !connectionsViewModel.isLoading) {
+                        NavigationLink(destination: UsersView()) {
+                            EmptyState(
+                              title: "No Connections!",
+                              description: "Tap here to connect with people who you know.",
+                              iconName: "person.badge.plus",
+                              iconColor: Color("Color1"),
+                              function: nil
+                            )
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    } else {
+                      List {
+                          ForEach(self.connectionsViewModel.users, id: \.self) { user in
+                              ConnectionRow(user: user)
+                            }
+                          }
+                    }
                 }
-              }
-              .navigationBarTitle(formatTitle(), displayMode: .inline)
-              .edgesIgnoringSafeArea([.top, .bottom])
+                .navigationBarTitle(formatTitle(), displayMode: .inline)
+                .edgesIgnoringSafeArea([.top, .bottom])
             }
         .onAppear {
             connectionsViewModel.loadConnections(userId: user?.id)
