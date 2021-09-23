@@ -420,8 +420,8 @@
 		150DB46126F3018B00373D26 /* EmptyState */ = {
 			isa = PBXGroup;
 			children = (
-				150DB46226F301AD00373D26 /* PostEmptyState.swift */,
 				65C6103E26FC2064007B87FE /* ConnectionsEmptyState.swift */,
+				150DB46226F301AD00373D26 /* PostEmptyState.swift */,
 			);
 			path = EmptyState;
 			sourceTree = "<group>";
@@ -575,16 +575,16 @@
 		15E4907C26E84BD700B25B56 /* Form */ = {
 			isa = PBXGroup;
 			children = (
+				15DFD07B26ED37A4002CBE31 /* CloseButton.swift */,
+				15DFD07326EAE005002CBE31 /* ParallaxImage.swift */,
+				15E2F1AD26FAA9EF00638115 /* PostTypeOption.swift */,
+				650216B826E9689300B42BC6 /* RollingNumberView.swift */,
 				15030AA726E805A40076CF14 /* Styles.swift */,
 				151A3C9A26D5BEF000A39FAF /* TimeAgoStamp.swift */,
+				650216B426E86C2100B42BC6 /* URLImageView.swift */,
+				15DFD07926ED2E29002CBE31 /* URLImageViewModel.swift */,
 				65C6103826FB16FD007B87FE /* UserAvatarSignup.swift */,
 				151A3C8226D1B0D200A39FAF /* UserAvatar.swift */,
-				650216B426E86C2100B42BC6 /* URLImageView.swift */,
-				650216B826E9689300B42BC6 /* RollingNumberView.swift */,
-				15DFD07326EAE005002CBE31 /* ParallaxImage.swift */,
-				15DFD07926ED2E29002CBE31 /* URLImageViewModel.swift */,
-				15DFD07B26ED37A4002CBE31 /* CloseButton.swift */,
-				15E2F1AD26FAA9EF00638115 /* PostTypeOption.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";
