@@ -14,7 +14,7 @@ struct NotificationView: View {
        
         NavigationView {
             if activityViewModel.activityArray.count == 0 && !activityViewModel.isLoading {
-                EmptyState(
+                PostEmptyState(
                   title: "No notifications!",
                   description: "Start interacting with friends to get the party started.",
                   iconName: "mustache",

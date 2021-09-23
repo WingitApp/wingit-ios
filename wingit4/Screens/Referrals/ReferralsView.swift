@@ -29,7 +29,7 @@ struct ReferralsView: View {
               referralsViewModel.wingedReferrals.count == 0 &&
               referralsViewModel.closedReferrals.count == 0
              ) {
-                EmptyState(
+                PostEmptyState(
                   title: "No Referrals!",
                   description: "Tell your friends to wing asks to you.",
                   iconName: "paperplane",
@@ -111,7 +111,7 @@ struct ReferralsNotificationView: View {
 
             ScrollView {
             if referralsViewModel.pendingReferrals.count == 0 && referralsViewModel.acceptedReferrals.count == 0 && referralsViewModel.wingedReferrals.count == 0 && referralsViewModel.closedReferrals.count == 0 {
-                EmptyState(
+                PostEmptyState(
                   title: "No Referrals!",
                   description: "Tell your friends to wing asks to you.",
                   iconName: "airplane",

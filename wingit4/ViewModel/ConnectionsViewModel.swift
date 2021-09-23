@@ -26,18 +26,23 @@ class ConnectionsViewModel : ObservableObject {
     @Published var connectionsCountState = 0
     
     func loadConnections(userId: String?) {
-        print("userId", userId)
         guard let userId = userId else { return }
         if !self.isLoading {
             isLoading.toggle()
         }
-        Api.Connections.getConnections(userId: userId) { (users) in
-            self.users = users.sorted(by: {
-              $0.firstName! < $1.firstName!
-            })
-            self.connectionsCount = users.count
-            self.isLoading = false
-        }
+        Api.Connections.getConnections(
+            userId: userId,
+            onSuccess: { (users) in
+                self.users = users.sorted(by: {
+                  $0.firstName! < $1.firstName!
+                })
+                self.connectionsCount = users.count
+                self.isLoading.toggle()
+            },
+            onEmpty: {
+              self.isLoading = false
+            }
+        )
     }
     
     func handleUserSelect(userId: String?) {

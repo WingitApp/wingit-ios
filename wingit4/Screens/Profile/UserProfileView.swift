@@ -146,7 +146,7 @@ struct UserProfileView: View {
             if userProfileViewModel.showOpenPosts {
                 if !userProfileViewModel.isLoading && userProfileViewModel.openPosts.count == 0 {
                     if userProfileViewModel.closedPosts.count == 0 {
-                        EmptyState(
+                        PostEmptyState(
                           title: "Hm nothing was found...",
                           description: "\(userProfileViewModel.user.displayName!) has no posts.",
                           iconName: "magnifyingglass",
@@ -154,7 +154,7 @@ struct UserProfileView: View {
                           function: nil
                         )
                     } else {
-                        EmptyState(
+                        PostEmptyState(
                           title: "Hm nothing was found...",
                           description: "\(userProfileViewModel.user.displayName!) has no open posts.",
                           iconName: "checkmark",
@@ -175,7 +175,7 @@ struct UserProfileView: View {
                 }
             } else {
                 if !userProfileViewModel.isLoading && userProfileViewModel.closedPosts.count == 0 {
-                    EmptyState(
+                    PostEmptyState(
                       title: "Hm nothing was found...",
                       description: "\(userProfileViewModel.user.displayName!) has no closed posts.",
                       iconName: "magnifyingglass",

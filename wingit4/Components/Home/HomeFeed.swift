@@ -15,7 +15,7 @@ struct HomeFeed: View {
     
     if !homeViewModel.isLoading && homeViewModel.posts.count == 0 {
         NavigationLink(destination: UsersView()) {
-            EmptyState(
+            PostEmptyState(
               title: "No posts!",
               description: "Tap here and connect with your friends to start the chain.",
               iconName: "person.badge.plus",
