@@ -17,20 +17,25 @@ struct AskDetailBody: View {
       VStack(alignment: .leading) {
 
         HStack(alignment: .top) {
-          URLImageView(urlString: post.avatar)
-            .clipShape(Circle())
-            .frame(width: 35, height: 35, alignment: .center)
-            .overlay(
-              RoundedRectangle(cornerRadius: 100)
-                .stroke(Color.gray, lineWidth: 1)
-            )
-          VStack(alignment: .leading){
-            Text(post.username)
-              .font(.subheadline)
-              .fontWeight(.bold)
-            TimeAgoStamp(date: post.date)
-              .font(.caption2)
-          }
+         NavigationLink(
+            destination: UserProfileView(userId: post.ownerId, user: nil),
+            label: {
+                URLImageView(urlString: post.avatar)
+                  .clipShape(Circle())
+                  .frame(width: 35, height: 35, alignment: .center)
+                  .overlay(
+                    RoundedRectangle(cornerRadius: 100)
+                      .stroke(Color.gray, lineWidth: 1)
+                  )
+                VStack(alignment: .leading){
+                  Text(post.username)
+                    .font(.subheadline)
+                    .fontWeight(.bold)
+                  TimeAgoStamp(date: post.date)
+                    .font(.caption2)
+                }
+            }).buttonStyle(PlainButtonStyle())
+         
           Spacer()
           AskDoneToggle(
             post: $post,

@@ -37,9 +37,9 @@ class HomeViewModel: ObservableObject {
       
       if posts.firstIndex(where: { $0.postId == item.postId }) == thresholdIndex {
         loadTimelineNext()
-      }
-      
+       }
      }
+    
   
   func loadTimeline() {
         self.posts = []
