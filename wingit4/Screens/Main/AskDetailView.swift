@@ -14,11 +14,12 @@ struct AskDetailView: View {
   
     var body: some View {
  
-      VStack(alignment: .leading, spacing: 0) {
-        AskDetailHeader(post: $post)
-          .background(Color.white)
-        Divider()
-          .foregroundColor(Color.black)
+        ScrollViewReader { proxy in
+          VStack(alignment: .leading, spacing: 0) {
+          AskDetailHeader(post: $post)
+            .background(Color.white)
+          Divider()
+            .foregroundColor(Color.black)
           ScrollView(/*@START_MENU_TOKEN@*/.vertical/*@END_MENU_TOKEN@*/, showsIndicators: false){
             VStack(spacing: 0) {
               AskDetailCard(post: $post)
@@ -29,7 +30,8 @@ struct AskDetailView: View {
           }
           .background(Color.backgroundGray)
           .onTapGesture(perform: dismissKeyboard)
-        CommentInput(post: $post)
+          CommentInput(post: $post, scrollProxyValue: proxy)
+        }
       }
       .navigationBarTitle("")
       .navigationBarHidden(true)

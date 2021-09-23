@@ -19,7 +19,7 @@ class HomeViewModel: ObservableObject {
    
     
     private var canLoadMorePages = true
-    private var next: Query? =  TIMELINE_PAGINATION_QUERY
+    private var next: Query?
       
     var listener: ListenerRegistration!
   
@@ -33,7 +33,7 @@ class HomeViewModel: ObservableObject {
          return
        }
    
-      let thresholdIndex = posts.index(posts.endIndex, offsetBy: -1)
+      let thresholdIndex = posts.index(posts.endIndex, offsetBy: -0)
       
       if posts.firstIndex(where: { $0.postId == item.postId }) == thresholdIndex {
         loadTimelineNext()

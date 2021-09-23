@@ -14,8 +14,12 @@ struct CommentList: View {
     var body: some View {
         if !commentViewModel.comments.isEmpty {
           VStack(alignment: .leading, spacing: 0) {
-            ForEach(commentViewModel.comments) { comment in
-                UserComment(comment: comment, postOwnerId: post.ownerId)
+            ForEach(commentViewModel.comments.indices, id: \.self) { index in
+                UserComment(
+                  comment: commentViewModel.comments[index],
+                  postOwnerId: post.ownerId
+                )
+                  .id(index)
             }
           }
           .background(Color.white)

@@ -17,7 +17,9 @@ struct CommentInput: View {
   
   // Props & State
     @Binding var post: Post
+    var scrollProxyValue: ScrollViewProxy?
     @State var composedMessage: String = ""
+    
   
   
     func onCommentSubmit() {
@@ -28,8 +30,14 @@ struct CommentInput: View {
             text: trimmedText,
             post: post
           ) { comment in
-          
+           // clean message
             self.composedMessage = ""
+          
+            //scroll to comment on appear
+            guard let scrollProxy = scrollProxyValue else { return }
+            withAnimation {
+              scrollProxy.scrollTo(commentViewModel.comments.count - 1)
+            }
           }
       } else {
         //TODO: show feedback message

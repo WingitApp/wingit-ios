@@ -14,7 +14,7 @@ import Firebase
 
 // CONSTANTS
 
-let TIMELINE_PAGINATION_PAGE_SIZE = 5
+let TIMELINE_PAGINATION_PAGE_SIZE = 30
 let TIMELINE_PAGINATION_QUERY = Ref.FS_DOC_TIMELINE_FOR_USERID(
   userId: Auth.auth().currentUser!.uid)
   .collection("timelinePosts")
@@ -352,7 +352,7 @@ class PostApi {
           let listenerFirestore =  Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId)
             .collection("timelinePosts")
             .order(by: "date", descending: true) // reversed b/c append method (only for first call)
-            .limit(to: 5)
+            .limit(to: 30)
             .addSnapshotListener({ (querySnapshot, error) in
               guard let snapshot = querySnapshot else { return }
 

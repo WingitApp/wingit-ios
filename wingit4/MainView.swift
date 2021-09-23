@@ -50,7 +50,13 @@ struct MainView: View {
 
     TabView(selection: handler) {
         HomeView()
-          .tabItem({ Image(systemName: selection == 0 ? "house.fill" : "house") })
+          .tabItem({
+            VStack(alignment: .center ){
+              Image(systemName: selection == 0 ? "house.fill" : "house")
+              Text("Home")
+                .font(.caption2)
+            }
+          })
           .tag(0)
           .id(home)
           .onChange(
@@ -62,7 +68,13 @@ struct MainView: View {
               }
           })
         ReferralsView()
-          .tabItem({ Image(systemName: selection == 1 ? "suit.heart.fill" : "suit.heart" ) })
+          .tabItem({
+            VStack(alignment: .center ){
+              Image(systemName: selection == 1 ? "paperplane.fill" : "paperplane" )
+              Text("Inbox")
+                .font(.caption2)
+            }
+          })
           .tag(1)
           .id(referrals)
           .onChange(
@@ -75,7 +87,11 @@ struct MainView: View {
           })
         ComposePostView()
           .tabItem({
-            Image(systemName: "plus.circle.fill")
+            VStack(alignment: .center ){
+              Image(systemName: "plus.circle.fill")
+              Text("Ask")
+                .font(.caption2)
+            }
           })
           .tag(2)
           .id(composePost)
@@ -88,7 +104,14 @@ struct MainView: View {
               }
           })
         NotificationView()
-          .tabItem({ Image(systemName: selection == 3 ? "bell.fill" : "bell") })
+          .tabItem({
+            VStack(alignment: .center ){
+              Image(systemName: selection == 3 ? "bell.fill" : "bell")
+              Text("Notifs")
+                .font(.caption2)
+            }
+            
+          })
           .tag(3)
           .id(notification)
           .onChange(
@@ -101,7 +124,13 @@ struct MainView: View {
           })
         ProfileView()
 //        ProfileDetail2()
-          .tabItem({ Image(systemName: selection == 4 ? "person.fill" : "person") })
+          .tabItem({
+            VStack(alignment: .center ){
+              Image(systemName: selection == 4 ? "person.fill" : "person")
+              Text("You")
+                .font(.caption2)
+            }
+          })
           .tag(4)
           .id(profile)
           .onChange(

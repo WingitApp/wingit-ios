@@ -56,9 +56,10 @@ struct AskCollaborationDetail: View {
                 }
                 
               }
-              .transition(.opacity)
+              .animation(
+                Animation.easeOut(duration: 0.2)
+              )
               .padding(.bottom, 10)
-              .background(Color.white)
             }
           }
         }
