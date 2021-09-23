@@ -12,10 +12,10 @@ struct HomeFeed: View {
   @State var isInTransition: Bool = true
 
   var body: some View {
-
+    
     if !homeViewModel.isLoading && homeViewModel.posts.count == 0 {
         NavigationLink(destination: UsersView()) {
-            EmptyState(
+            PostEmptyState(
               title: "No posts!",
               description: "Tap here and connect with your friends to start the chain.",
               iconName: "person.badge.plus",
@@ -23,7 +23,6 @@ struct HomeFeed: View {
               function: nil
             )
         }.buttonStyle(PlainButtonStyle())
-       
     } else {
         ScrollView(showsIndicators: false) {
           LazyVStack {
@@ -42,7 +41,6 @@ struct HomeFeed: View {
               }
           }
         }
-        .padding(.top, -25)
     }
 
   }

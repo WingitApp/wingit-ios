@@ -26,7 +26,7 @@ struct ProfileFeed: View {
         if !profileViewModel.isLoading && profileViewModel.openPosts.count == 0 {
           if profileViewModel.closedPosts.count == 0 {
             /** State when user has not made any posts yet*/
-            EmptyState(
+            PostEmptyState(
               title: "Write your first post!",
               description: "Click on the Plus Tab to get started.",
               iconName: "pencil.and.outline",
@@ -35,7 +35,7 @@ struct ProfileFeed: View {
             )
           } else {
             /** State when user has closed every ask*/
-            EmptyState(
+            PostEmptyState(
               title: "All done!",
               description: "All your asks have been closed.",
               iconName: "checkmark",
@@ -57,7 +57,7 @@ struct ProfileFeed: View {
         }
       } else {
         if !profileViewModel.isLoading && profileViewModel.closedPosts.count == 0 {
-          EmptyState(
+          PostEmptyState(
             title: "Hm nothing was found...",
             description: "Close your posts to see them here!",
             iconName: "magnifyingglass",

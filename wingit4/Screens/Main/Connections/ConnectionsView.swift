@@ -64,9 +64,9 @@ struct ConnectionsView: View {
                 Group {
                     if (Auth.auth().currentUser?.uid == user?.id && connectionsViewModel.users.isEmpty && !connectionsViewModel.isLoading) {
                         NavigationLink(destination: UsersView()) {
-                            EmptyState(
+                            ConnectionsEmptyState(
                               title: "No Connections!",
-                              description: "Tap here to connect with people who you know.",
+                              description: "Tap here to connect with other users.",
                               iconName: "person.badge.plus",
                               iconColor: Color("Color1"),
                               function: nil

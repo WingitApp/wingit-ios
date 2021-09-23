@@ -14,13 +14,12 @@ struct HomeView: View {
   
   func onAppear() {
     // should move to mainView
-    self.homeViewModel.loadTimeline()
     logToAmplitude(event: .viewHomeAsksFeed)
+
   }
     
     var body: some View {
       NavigationView {
- 
         VStack(alignment: .leading, spacing: 0) {
           // Header Toggle
 //          HomeFeedHeader()

@@ -144,19 +144,19 @@ struct UserProfileView: View {
             .zIndex(1)
             
             if userProfileViewModel.showOpenPosts {
-                if !userProfileViewModel.isLoading && userProfileViewModel.openPosts.count == 0{
-                    if userProfileViewModel.closedPosts.count == 0{
-                        EmptyState(
-                          title: "Write your first post!",
-                          description: "Click on the Plus Tab to get started.",
-                          iconName: "pencil.and.outline",
-                          iconColor: Color(.systemTeal),
+                if !userProfileViewModel.isLoading && userProfileViewModel.openPosts.count == 0 {
+                    if userProfileViewModel.closedPosts.count == 0 {
+                        PostEmptyState(
+                          title: "Hm nothing was found...",
+                          description: "\(userProfileViewModel.user.displayName!) has no posts.",
+                          iconName: "magnifyingglass",
+                          iconColor: Color(.systemBlue),
                           function: nil
                         )
                     } else {
-                        EmptyState(
-                          title: "All done!",
-                          description: "All asks have been closed.",
+                        PostEmptyState(
+                          title: "Hm nothing was found...",
+                          description: "\(userProfileViewModel.user.displayName!) has no open posts.",
                           iconName: "checkmark",
                           iconColor: Color("Color1"),
                           function: nil
@@ -175,9 +175,9 @@ struct UserProfileView: View {
                 }
             } else {
                 if !userProfileViewModel.isLoading && userProfileViewModel.closedPosts.count == 0 {
-                    EmptyState(
+                    PostEmptyState(
                       title: "Hm nothing was found...",
-                      description: "No Closed posts to see!",
+                      description: "\(userProfileViewModel.user.displayName!) has no closed posts.",
                       iconName: "magnifyingglass",
                       iconColor: Color(.systemBlue),
                       function: nil

@@ -1,5 +1,5 @@
 //
-//  EmptyState.swift
+//  PostEmptyState.swift
 //  wingit4
 //
 //  Created by Joshua Lee on 9/15/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EmptyState: View {
+struct PostEmptyState: View {
   
   var title: String
   var description: String
