@@ -124,7 +124,7 @@ class PostApi {
                             onSuccess(post)
                           } else {
                             onSuccess(nil)
-                            print("Post document doesn't exist.")
+                          //  print("Post document doesn't exist.")
                           }
                         case .failure(let error):
                           // A User could not be initialized from the DocumentSnapshot.

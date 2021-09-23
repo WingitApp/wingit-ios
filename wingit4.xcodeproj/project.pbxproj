@@ -88,6 +88,7 @@
 		3B5BDB5A268F98AC0034B18C /* ReportInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BDB59268F98AC0034B18C /* ReportInput.swift */; };
 		3B5BDB5C268F98E70034B18C /* ReportInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BDB5B268F98E70034B18C /* ReportInputViewModel.swift */; };
 		3B5BDB5E268FA1980034B18C /* ReportApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BDB5D268FA1980034B18C /* ReportApi.swift */; };
+		3B74CC7F26FC4ECC00BB39E2 /* NotificationEmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B74CC7E26FC4ECC00BB39E2 /* NotificationEmptyState.swift */; };
 		3B75E3C2267153BA002F3108 /* SigninView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B75E3C1267153BA002F3108 /* SigninView.swift */; };
 		3B75E3C4267153BB002F3108 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B75E3C3267153BB002F3108 /* Assets.xcassets */; };
 		3B75E3C7267153BB002F3108 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B75E3C6267153BB002F3108 /* Preview Assets.xcassets */; };
@@ -285,6 +286,7 @@
 		3B5BDB59268F98AC0034B18C /* ReportInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportInput.swift; sourceTree = "<group>"; };
 		3B5BDB5B268F98E70034B18C /* ReportInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportInputViewModel.swift; sourceTree = "<group>"; };
 		3B5BDB5D268FA1980034B18C /* ReportApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportApi.swift; sourceTree = "<group>"; };
+		3B74CC7E26FC4ECC00BB39E2 /* NotificationEmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationEmptyState.swift; sourceTree = "<group>"; };
 		3B75E3BA267153BA002F3108 /* wingit4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wingit4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B75E3C1267153BA002F3108 /* SigninView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SigninView.swift; path = wingit4/Screens/Onboarding/SigninView.swift; sourceTree = "<group>"; };
 		3B75E3C3267153BB002F3108 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 			children = (
 				65C6103E26FC2064007B87FE /* ConnectionsEmptyState.swift */,
 				150DB46226F301AD00373D26 /* PostEmptyState.swift */,
+				3B74CC7E26FC4ECC00BB39E2 /* NotificationEmptyState.swift */,
 			);
 			path = EmptyState;
 			sourceTree = "<group>";
@@ -1064,6 +1067,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B74CC7F26FC4ECC00BB39E2 /* NotificationEmptyState.swift in Sources */,
 				1500983726F173AA00D31B8C /* NotificationUserAvatar.swift in Sources */,
 				3B7AF09C2671E1DA003BCCF3 /* Selection.swift in Sources */,
 				15E4907426E84A1700B25B56 /* AskDetailView.swift in Sources */,

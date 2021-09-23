@@ -107,7 +107,7 @@ struct MainView: View {
             of: tapCount,
             perform: { tapCount in
               if tapCount == 2 {
-                referrals = UUID()
+                profile = UUID()
                 self.tapCount = 0
               }
           })

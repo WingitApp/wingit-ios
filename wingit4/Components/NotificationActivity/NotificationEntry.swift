@@ -66,3 +66,33 @@ struct NotificationReferralEntry: View {
       
   }
 }
+
+struct NotificationES: View {
+  var activity: Activity
+  
+  var body: some View {
+    
+      HStack(alignment: .top) {
+          NotificationUserAvatar(
+             imageUrl: activity.userAvatar,
+             type: activity.type
+          )
+         .padding(.trailing, 10)
+          VStack(alignment: .leading, spacing: 5) {
+            Group {
+              Text("\(activity.username) ").font(.subheadline).bold() +
+              Text(activity.typeDescription).font(.subheadline)
+            }
+            .fixedSize(horizontal: false, vertical: true)
+            .lineLimit(3)
+              Spacer()
+            TimeAgoStamp(date: activity.date)
+          }
+
+          
+      }
+  
+      
+  }
+}
+
