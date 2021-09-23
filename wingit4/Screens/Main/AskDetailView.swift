@@ -30,11 +30,6 @@ struct AskDetailView: View {
           .background(Color.backgroundGray)
           .onTapGesture(perform: dismissKeyboard)
         CommentInput(post: $post)
-        NavigationLink(destination: EmptyView()) {
-          EmptyView()
-        }
-        .hidden()
-
       }
       .navigationBarTitle("")
       .navigationBarHidden(true)

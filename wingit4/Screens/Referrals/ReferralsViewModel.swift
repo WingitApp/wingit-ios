@@ -40,10 +40,10 @@ class ReferralsViewModel: ObservableObject {
       // initialize call
       isLoading = true
       let referralAPIGroup = DispatchGroup()
-      getPendingReferrals(dispatchGroup: referralAPIGroup)
-      getAcceptedReferrals(dispatchGroup: referralAPIGroup)
-      getWingedReferrals(dispatchGroup: referralAPIGroup)
-      getClosedReferrals(dispatchGroup: referralAPIGroup)
+      getPendingReferrals(dispatch: referralAPIGroup)
+      getAcceptedReferrals(dispatch: referralAPIGroup)
+      getWingedReferrals(dispatch: referralAPIGroup)
+      getClosedReferrals(dispatch: referralAPIGroup)
     
       // on finish
       referralAPIGroup.notify(queue: .main)  {
@@ -54,31 +54,41 @@ class ReferralsViewModel: ObservableObject {
           !self.isFetchingClosed
         )
         
-        if isDoneFetching { self.isLoading = false }
+        if isDoneFetching {
+          self.isLoading = false
+          
+        }
       }
 
     }
     
-  func getPendingReferrals(dispatchGroup: DispatchGroup) {
+  func getPendingReferrals(dispatch: DispatchGroup) {
       isFetchingPending = true
-      dispatchGroup.enter()
+      dispatch.enter()
       Api.Referrals.getPendingReferrals(
         onEmpty: {
-          self.isFetchingPending = false
-          dispatchGroup.leave()
+          if self.isFetchingPending {
+            self.isFetchingPending = false
+            dispatch.leave()
+          }
         },
         onSuccess: { (referrals) in
           if self.pendingReferrals.isEmpty {
               self.pendingReferrals = referrals
-              self.isFetchingPending = false
-              dispatchGroup.leave()
+              if self.isFetchingPending {
+                self.isFetchingPending = false
+                dispatch.leave()
+              }
           }
       }, newReferral: { (referral) in
           if !self.pendingReferrals.isEmpty {
             if !self.pendingReferrals.contains(referral) {
               self.pendingReferrals.insert(referral, at: 0)
               self.isFetchingPending = false
-              dispatchGroup.leave()
+              if self.isFetchingPending {
+                self.isFetchingPending = false
+                dispatch.leave()
+              }
             }
           }
       }, modifiedReferral: { (referral) in
@@ -86,7 +96,10 @@ class ReferralsViewModel: ObservableObject {
               if let index = self.pendingReferrals.firstIndex(where: {$0.id == referral.id}) {
                 self.pendingReferrals[index] = referral
                 self.isFetchingPending = false
-                dispatchGroup.leave()
+                if self.isFetchingPending {
+                  self.isFetchingPending = false
+                  dispatch.leave()
+                }
               }
             }
       }, deleteReferral: { (referral) in
@@ -96,34 +109,44 @@ class ReferralsViewModel: ObservableObject {
                     self.pendingReferrals.remove(at: index)
                   }
               }
-              self.isFetchingPending = false
-              dispatchGroup.leave()
+              if self.isFetchingPending {
+                self.isFetchingPending = false
+                dispatch.leave()
+              }
+
           }
       }) { (listener) in
         self.pendingListener = listener
       }
     }
     
-    func getAcceptedReferrals(dispatchGroup: DispatchGroup) {
+    func getAcceptedReferrals(dispatch: DispatchGroup) {
       isFetchingAccepted = true
-      dispatchGroup.enter()
+      dispatch.enter()
       Api.Referrals.getAcceptedReferrals(
         onEmpty: {
-          self.isFetchingAccepted = false
-          dispatchGroup.leave()
+          if self.isFetchingAccepted {
+            self.isFetchingAccepted = false
+            dispatch.leave()
+          }
         },
         onSuccess: { (referrals) in
           if self.acceptedReferrals.isEmpty {
               self.acceptedReferrals = referrals
-              self.isFetchingAccepted = false
-              dispatchGroup.leave()
+              if self.isFetchingAccepted {
+                self.isFetchingAccepted = false
+                dispatch.leave()
+              }
           }
       }, newReferral: { (referral) in
           if !self.acceptedReferrals.isEmpty {
             if !self.acceptedReferrals.contains(referral) {
               self.acceptedReferrals.insert(referral, at: 0)
               self.isFetchingAccepted = false
-              dispatchGroup.leave()
+              if self.isFetchingAccepted {
+                self.isFetchingAccepted = false
+                dispatch.leave()
+              }
             }
           }
       }, modifiedReferral: { (referral) in
@@ -133,8 +156,10 @@ class ReferralsViewModel: ObservableObject {
               } else {
                 self.acceptedReferrals.insert(referral, at: 0)
               }
-              self.isFetchingAccepted = false
-              dispatchGroup.leave()
+              if self.isFetchingAccepted {
+                self.isFetchingAccepted = false
+                dispatch.leave()
+              }
             }
       }, deleteReferral: { (referral) in
           if !self.acceptedReferrals.isEmpty {
@@ -143,34 +168,43 @@ class ReferralsViewModel: ObservableObject {
                     self.acceptedReferrals.remove(at: index)
                   }
               }
-             self.isFetchingAccepted = false
-              dispatchGroup.leave()
+              if self.isFetchingAccepted {
+                self.isFetchingAccepted = false
+                dispatch.leave()
+              }
           }
       }) { (listener) in
         self.acceptedListener = listener
       }
     }
     
-    func getWingedReferrals(dispatchGroup: DispatchGroup) {
+    func getWingedReferrals(dispatch: DispatchGroup) {
       self.isFetchingWinged = true
-      dispatchGroup.enter()
+      dispatch.enter()
       Api.Referrals.getWingedReferrals(
         onEmpty: {
           self.isFetchingWinged = false
-          dispatchGroup.leave()
+          if self.isFetchingWinged {
+            self.isFetchingWinged = false
+            dispatch.leave()
+          }
         },
         onSuccess: { (referrals) in
           if self.wingedReferrals.isEmpty {
               self.wingedReferrals = referrals
-              self.isFetchingWinged = false
-              dispatchGroup.leave()
+              if self.isFetchingWinged {
+                self.isFetchingWinged = false
+                dispatch.leave()
+              }
           }
       }, newReferral: { (referral) in
           if !self.wingedReferrals.isEmpty {
             if !self.wingedReferrals.contains(referral) {
               self.wingedReferrals.insert(referral, at: 0)
-              self.isFetchingWinged = false
-              dispatchGroup.leave()
+              if self.isFetchingWinged {
+                self.isFetchingWinged = false
+                dispatch.leave()
+              }
             }
           }
       }, modifiedReferral: { (referral) in
@@ -180,8 +214,10 @@ class ReferralsViewModel: ObservableObject {
               } else {
                 self.wingedReferrals.insert(referral, at: 0)
               }
-              self.isFetchingWinged = false
-              dispatchGroup.leave()
+              if self.isFetchingWinged {
+                self.isFetchingWinged = false
+                dispatch.leave()
+              }
             }
       }, deleteReferral: { (referral) in
           if !self.wingedReferrals.isEmpty {
@@ -190,34 +226,43 @@ class ReferralsViewModel: ObservableObject {
                     self.wingedReferrals.remove(at: index)
                   }
               }
-              self.isFetchingWinged = false
-              dispatchGroup.leave()
+              if self.isFetchingWinged {
+                self.isFetchingWinged = false
+                dispatch.leave()
+              }
           }
       }) { (listener) in
         self.wingedListener = listener
       }
     }
     
-    func getClosedReferrals(dispatchGroup: DispatchGroup) {
+    func getClosedReferrals(dispatch: DispatchGroup) {
       isFetchingClosed = true
-      dispatchGroup.enter()
+      dispatch.enter()
       Api.Referrals.getClosedReferrals(
         onEmpty: {
-          self.isFetchingClosed = false
-          dispatchGroup.leave()
+          if self.isFetchingClosed {
+            self.isFetchingClosed = false
+            dispatch.leave()
+          }
         },
         onSuccess: { (referrals) in
           if self.closedReferrals.isEmpty {
               self.closedReferrals = referrals
               self.isFetchingClosed = false
-              dispatchGroup.leave()
+              if self.isFetchingClosed {
+                self.isFetchingClosed = false
+                dispatch.leave()
+              }
           }
       }, newReferral: { (referral) in
           if !self.closedReferrals.isEmpty {
             if !self.closedReferrals.contains(referral) {
               self.closedReferrals.insert(referral, at: 0)
-              self.isFetchingClosed = false
-              dispatchGroup.leave()
+              if self.isFetchingClosed {
+                self.isFetchingClosed = false
+                dispatch.leave()
+              }
             }
           }
       }, modifiedReferral: { (referral) in
@@ -227,8 +272,10 @@ class ReferralsViewModel: ObservableObject {
               } else {
                 self.closedReferrals.insert(referral, at: 0)
               }
-              self.isFetchingClosed = false
-              dispatchGroup.leave()
+              if self.isFetchingClosed {
+                self.isFetchingClosed = false
+                dispatch.leave()
+              }
             }
       }, deleteReferral: { (referral) in
           if !self.closedReferrals.isEmpty {
@@ -237,8 +284,10 @@ class ReferralsViewModel: ObservableObject {
                     self.closedReferrals.remove(at: index)
                   }
               }
-              self.isFetchingClosed = false
-              dispatchGroup.leave()
+              if self.isFetchingClosed {
+                self.isFetchingClosed = false
+                dispatch.leave()
+              }
           }
       }) { (listener) in
         self.closedListener = listener

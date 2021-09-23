@@ -24,10 +24,10 @@ struct ReferralsView: View {
             ScrollView(showsIndicators: false) {
              if (
               !referralsViewModel.isLoading &&
-              referralsViewModel.pendingReferrals.count == 0 &&
-              referralsViewModel.acceptedReferrals.count == 0 &&
-              referralsViewModel.wingedReferrals.count == 0 &&
-              referralsViewModel.closedReferrals.count == 0
+              referralsViewModel.pendingReferrals.isEmpty &&
+              referralsViewModel.acceptedReferrals.isEmpty &&
+              referralsViewModel.wingedReferrals.isEmpty &&
+              referralsViewModel.closedReferrals.isEmpty
              ) {
                 PostEmptyState(
                   title: "No Referrals!",
@@ -37,36 +37,9 @@ struct ReferralsView: View {
                   function: nil
                 ).padding(.top, 285)
             } else {
-                  LazyVStack(alignment: .leading) {
-      //                if !referralsViewModel.pendingReferrals.isEmpty {
-      //                    Text("Pending")
-      //                }
-                      ForEach(Array(self.referralsViewModel.pendingReferrals.enumerated()), id: \.element) { index, referral in
-                          ReferCard(referral: referral, post: referral.ask!)
-                      }
-                    
-      //                if !referralsViewModel.acceptedReferrals.isEmpty {
-      //                    Text("Accepted")
-      //                }
-                      ForEach(Array(self.referralsViewModel.acceptedReferrals.enumerated()), id: \.element) { index, referral in
-                          if (referral.ask != nil) {
-                              AcceptCard(referral: referral, post: referral.ask!)
-                          }
-                      }
-      //                if !referralsViewModel.wingedReferrals.isEmpty {
-      //                    Text("Winged")
-      //                }
-                      ForEach(Array(self.referralsViewModel.wingedReferrals.enumerated()), id: \.element) { index, referral in
-                          WingCard(referral: referral, post: referral.ask!)
-                      }
-      //                if !referralsViewModel.closedReferrals.isEmpty {
-      //                    Text("Closed")
-      //                }
-                      ForEach(Array(self.referralsViewModel.closedReferrals.enumerated()), id: \.element) { index, referral in
-                          ClosedCard(referral: referral, post: referral.ask!)
-                      }
-                    }
-                 }
+              // TODO: fix this implementation (this is quick fix)
+                ReferralFeed()
+            }
                 NavigationLink(
                     destination:
                         self.referralsViewModel.destination

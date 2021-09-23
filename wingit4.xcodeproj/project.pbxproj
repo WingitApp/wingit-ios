@@ -55,6 +55,7 @@
 		1591FD9726FBCE59001492E4 /* boost.json in Resources */ = {isa = PBXBuildFile; fileRef = 1591FD9626FBCE59001492E4 /* boost.json */; };
 		15A1BC7326FC1CE600A1AF27 /* AskActivityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1BC7226FC1CE600A1AF27 /* AskActivityList.swift */; };
 		15A1BC7526FC205F00A1AF27 /* AskCollaborationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1BC7426FC205F00A1AF27 /* AskCollaborationDetail.swift */; };
+		15A1BC7726FC4DCE00A1AF27 /* ReferralFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1BC7626FC4DCE00A1AF27 /* ReferralFeed.swift */; };
 		15DA39B426DC5C620080193E /* AskCardPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA39B326DC5C620080193E /* AskCardPlaceholder.swift */; };
 		15DFD07426EAE005002CBE31 /* ParallaxImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DFD07326EAE005002CBE31 /* ParallaxImage.swift */; };
 		15DFD07626EBE438002CBE31 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DFD07526EBE438002CBE31 /* RoundedCorner.swift */; };
@@ -255,6 +256,7 @@
 		1591FD9626FBCE59001492E4 /* boost.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = boost.json; sourceTree = "<group>"; };
 		15A1BC7226FC1CE600A1AF27 /* AskActivityList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskActivityList.swift; sourceTree = "<group>"; };
 		15A1BC7426FC205F00A1AF27 /* AskCollaborationDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskCollaborationDetail.swift; sourceTree = "<group>"; };
+		15A1BC7626FC4DCE00A1AF27 /* ReferralFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralFeed.swift; sourceTree = "<group>"; };
 		15DA39B326DC5C620080193E /* AskCardPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskCardPlaceholder.swift; sourceTree = "<group>"; };
 		15DFD07326EAE005002CBE31 /* ParallaxImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxImage.swift; sourceTree = "<group>"; };
 		15DFD07526EBE438002CBE31 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
@@ -537,6 +539,7 @@
 				3B9CA04F26E5C98D00BB195F /* WingConnectionsList.swift */,
 				3B3A880C26E0007A003E780F /* ReferViewModel.swift */,
 				1500983626F173A900D31B8C /* NotificationUserAvatar.swift */,
+				15A1BC7626FC4DCE00A1AF27 /* ReferralFeed.swift */,
 			);
 			path = NotificationActivity;
 			sourceTree = "<group>";
@@ -1084,6 +1087,7 @@
 				15A1BC7326FC1CE600A1AF27 /* AskActivityList.swift in Sources */,
 				15DFD07C26ED37A4002CBE31 /* CloseButton.swift in Sources */,
 				3B96DD6A26DF494800015EED /* ReferHeader.swift in Sources */,
+				15A1BC7726FC4DCE00A1AF27 /* ReferralFeed.swift in Sources */,
 				151A3C8326D1B0D200A39FAF /* UserAvatar.swift in Sources */,
 				3BE57FF926D95A34005C242F /* ProfileCard.swift in Sources */,
 				151A3C8526D1E03E00A39FAF /* FeedToggle.swift in Sources */,

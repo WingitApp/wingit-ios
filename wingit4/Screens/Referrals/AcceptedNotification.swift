@@ -102,7 +102,7 @@ struct WingNotification: View {
             HStack {
               VStack(alignment: .leading) {
                 Group {
-                  Text("You've rebumped ") +
+                  Text("You've re-bumped ") +
                   Text("\(referral.ask?.username ?? "")'s").fontWeight(.semibold) +
                   Text(" ask.")
                 }

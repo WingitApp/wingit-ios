@@ -62,13 +62,12 @@ struct ReferralComment: View {
                 self.pushToOwner.toggle()
               }
             Text(" accepted ")
-            Text("\(comment.inviterDisplayName!)")
+            Text("\(comment.inviterDisplayName!)'s")
               .bold()
               .onTapGesture {
                 self.pushToInviter.toggle()
               }
-            Text(" invitation") +
-            Text(" to help.")
+            Text(" referral.")
           }
           .font(.caption2)
           .fixedSize(horizontal: false, vertical: true)

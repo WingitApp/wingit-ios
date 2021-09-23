@@ -97,11 +97,9 @@ struct AskCard: View {
         self.commentViewModel.loadComments(
           postId: post.postId
         )
-        self.footerCellViewModel.checkPostIsLiked(post: post)
+//        self.footerCellViewModel.checkPostIsLiked(post: post)
       }
-//      .onDisapper {
-//        // remove listners
-//      }
+
       .sheet(
         isPresented: $askCardViewModel.isImageModalOpen,
         content: {
