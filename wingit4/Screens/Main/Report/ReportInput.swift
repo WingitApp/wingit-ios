@@ -54,6 +54,7 @@ struct ReportInput: View {
             TextEditor(text: $composedMessage)
                 .cornerRadius(15)
                 .padding(20)
+                .onTapGesture(perform: dismissKeyboard)
              Button(action: reportAction) {
                     Text("Submit")
                         .fontWeight(.bold)
