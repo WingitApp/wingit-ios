@@ -24,28 +24,29 @@ class ActivityViewModel: ObservableObject {
         self.activityArray = []
         isLoading = true
         
-        Api.Activity.loadActivities(onSuccess: { (activityArray) in
+        Api.Activity.loadActivities(
+          onSuccess: { (activityArray) in
             if self.activityArray.isEmpty {
                 self.activityArray = activityArray
-              self.isLoading = false
             }
-        }, newActivity: { (activity) in
-            if !self.activityArray.isEmpty {
-              if !self.activityArray.contains(activity) {
-                self.activityArray.insert(activity, at: 0)
-              }
-            }
-        }, deleteActivity: { (activity) in
-            if !self.activityArray.isEmpty {
-                for (index, a) in self.activityArray.enumerated() {
-                    if a.activityId == activity.activityId {
-                        self.activityArray.remove(at: index)
-                    }
+          }, newActivity: { (activity) in
+              if !self.activityArray.isEmpty {
+                if !self.activityArray.contains(activity) {
+                  self.activityArray.insert(activity, at: 0)
                 }
-            }
-        }) { (listener) in
-            self.listener = listener
-        }
+              }
+          }, deleteActivity: { (activity) in
+              if !self.activityArray.isEmpty {
+                  for (index, a) in self.activityArray.enumerated() {
+                      if a.activityId == activity.activityId {
+                          self.activityArray.remove(at: index)
+                      }
+                  }
+              }
+          }) { (listener) in
+              self.listener = listener
+              self.isLoading = false
+          }
     }
     
     func acceptConnectRequest(fromUserId: String?) {
