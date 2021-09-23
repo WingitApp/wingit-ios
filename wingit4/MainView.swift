@@ -74,7 +74,6 @@ struct MainView: View {
         ComposePostView()
           .tabItem({
             Image(systemName: "plus.circle.fill")
-              .foregroundColor(Color(.systemTeal))
           })
           .tag(2)
           .id(composePost)

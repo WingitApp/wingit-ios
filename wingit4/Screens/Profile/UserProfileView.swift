@@ -295,7 +295,7 @@ struct UserProfileView: View {
             NavigationLink(destination: ChatView(recipientId: user.id ?? "", recipientAvatarUrl: user.profileImageUrl ?? "", recipientUsername: user.username ?? "")) {
                 Image(systemName: "square.and.pencil")
                   .foregroundColor(Color(.white))
-                Text("Message").foregroundColor(Color(.white)).font(.callout).bold().border(Color(.systemTeal)).lineLimit(1)
+                Text("Message").foregroundColor(Color(.white)).font(.callout).bold().border(Color.wingitBlue).lineLimit(1)
                 }
               .frame(
                 width: (UIScreen.main.bounds.width / 2) - 30
@@ -303,7 +303,7 @@ struct UserProfileView: View {
               .padding(.init(top: 10, leading: 0, bottom: 10, trailing: 0))
                 
             }
-            .background(Color(.systemTeal))
+            .background(Color.wingitBlue)
             .cornerRadius(5)
             .overlay(
               RoundedRectangle(cornerRadius: 5).stroke(Color(.lightGray),

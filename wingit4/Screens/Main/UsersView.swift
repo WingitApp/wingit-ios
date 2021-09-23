@@ -39,7 +39,7 @@ struct UsersView: View {
                                               .font(.headline).bold()
                                               Text("@\(user.username ?? "")")
                                                 .font(.subheadline)
-                                                .foregroundColor(Color(.systemTeal))
+                                                .foregroundColor(.wingitBlue)
                                             }
                                         }
                                }

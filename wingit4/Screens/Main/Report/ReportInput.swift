@@ -41,90 +41,39 @@ struct ReportInput: View {
     }
     
     var body: some View {
-        
+        NavigationView{
         VStack(spacing: 0) {
-            HStack{
-                Button(action: {presentationmode.wrappedValue.dismiss()},
-                       label: { Text("Cancel")}).padding()
-                Spacer()
-                Text("Please write down what the issue was").foregroundColor(.gray)
-                Spacer()
-            }
+          
+//                Button(action: {presentationmode.wrappedValue.dismiss()},
+//                       label: { Text("Cancel")}).padding()
+            Group{
+            Text("Help us understand the problem. What is going on with this post?")
+                .foregroundColor(.gray)
+                .padding(.top, 75)
+                .padding(.horizontal)
             TextEditor(text: $composedMessage)
                 .cornerRadius(15)
-                .padding()
+                .padding(20)
              Button(action: reportAction) {
                     Text("Submit")
                         .fontWeight(.bold)
                         .foregroundColor(Color.white)
-                        .padding(.vertical)
+                        .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color(.systemTeal))
+                        .background(Color.wingitBlue)
                         .cornerRadius(8)
              }.padding(.vertical).padding(.horizontal)
-
+            }
+        }
+        .navigationBarTitle("Report an issue", displayMode: .inline)
+        .edgesIgnoringSafeArea([.top, .bottom])
+       
         }
         .preferredColorScheme(.light)
     }
 }
 
-//struct DoneReportInput: View {
-//
-//    @EnvironmentObject var session: SessionStore
-//    @Environment(\.presentationMode) var presentationmode
-//    @ObservedObject var reportInputViewModel = ReportInputViewModel()
-//    var userId = Auth.auth().currentUser?.uid
-//
-//    @State var composedMessage: String = ""
-//
-//    init(donepost: DonePost?, postId: String?) {
-//        if donepost != nil {
-//            reportInputViewModel.donepost = donepost
-//        } else {
-//            handleInputViewModel(postId: postId!)
-//        }
-//    }
-//
-//    func handleInputViewModel(postId: String) {
-//        Api.Post.loadDonePost(postId: postId) { (donepost) in
-//            self.reportInputViewModel.donepost = donepost
-//        }
-//    }
-//
-//    func reportAction() {
-//        if !composedMessage.isEmpty {
-//            reportInputViewModel.addDoneReports(text: composedMessage) {
-//                self.composedMessage = ""
-//            }
-//        }
-//    }
-//
-//    var body: some View {
-//
-//        VStack(spacing: 0) {
-//            HStack{
-//                Button(action: {presentationmode.wrappedValue.dismiss()},
-//                       label: { Text("Cancel")}).padding()
-//                Spacer()
-//                Text("Please write down what the issue was").foregroundColor(.gray)
-//                Spacer()
-//            }
-//            TextEditor(text: $composedMessage)
-//                .cornerRadius(15)
-//                .padding()
-//             Button(action: reportAction) {
-//                    Text("Submit")
-//                        .fontWeight(.bold)
-//                        .foregroundColor(Color.white)
-//                        .padding(.vertical)
-//                        .frame(maxWidth: .infinity)
-//                        .background(Color(.systemTeal))
-//                        .cornerRadius(8)
-//             }.padding(.vertical).padding(.horizontal)
-//
-//        }
-//    }
-//}
+
 
 
 

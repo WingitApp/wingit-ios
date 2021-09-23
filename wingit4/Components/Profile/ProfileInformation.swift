@@ -96,8 +96,9 @@ struct UpdateProfilePhoto: View {
 
             Text("Change your photo")
                 .bold()
-                .foregroundColor(.gray)
+                .foregroundColor(Color.wingitBlue)
                 .padding(.bottom, 50)
+                .font(.headline)
                    
             ZStack {
                 updatePhotoVM.image
@@ -138,7 +139,7 @@ struct UpdateProfilePhoto: View {
                     .foregroundColor(Color.white)
                     .padding(.vertical)
                     .frame(width: 150, height: 50)
-                    .background(Color(.systemTeal))
+                    .background(Color.wingitBlue)
                     .cornerRadius(8)
             })
               .padding(.top, 50)

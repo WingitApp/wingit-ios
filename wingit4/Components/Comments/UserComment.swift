@@ -42,7 +42,7 @@ struct UserComment: View {
         URLImageView(urlString: comment.avatarUrl)
           .clipShape(Circle())
           .frame(width: 35, height: 35, alignment: .center)
-          .foregroundColor(Color(.systemTeal))
+            .foregroundColor(Color.wingitBlue)
           .overlay(
             RoundedRectangle(cornerRadius: 20)
               .stroke(Color.gray, lineWidth: 0.5)

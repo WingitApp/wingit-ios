@@ -82,14 +82,14 @@ struct AskDetailDemo: View {
             
             
             Image(systemName: "message")
-              .foregroundColor(Color(.systemTeal))
+                .foregroundColor(Color.wingitBlue)
               .padding(.leading, 5)
               .font(.system(size: 20))
             Text("21")
               .font(.caption)
             Spacer()
             Image(systemName: "arrowshape.turn.up.right")
-              .foregroundColor(Color(.systemTeal))
+                .foregroundColor(Color.wingitBlue)
 
           }
 //          .padding(.top, 10)
