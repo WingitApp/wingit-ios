@@ -14,8 +14,8 @@ struct NotificationEntry: View {
     NavigationLink (destination: UserProfileView(userId: activity.userId, user: nil)){
       HStack(alignment: .top) {
           NotificationUserAvatar(
-           imageUrl: activity.userAvatar,
-           type: activity.type
+             imageUrl: activity.userAvatar,
+             type: activity.type
           )
          .padding(.trailing, 10)
           VStack(alignment: .leading, spacing: 5) {

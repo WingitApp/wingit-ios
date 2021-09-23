@@ -13,7 +13,7 @@ struct NotificationView: View {
     var body: some View {
        
         NavigationView {
-            if activityViewModel.activityArray.count == 0 && !activityViewModel.isLoading {
+            if activityViewModel.activityArray.isEmpty && !activityViewModel.isLoading {
                 PostEmptyState(
                   title: "No notifications!",
                   description: "Start interacting with friends to get the party started.",
@@ -22,7 +22,7 @@ struct NotificationView: View {
                   function: nil
                 )
             } else {
-            List {
+            List{
                 if !activityViewModel.activityArray.isEmpty {
                     ForEach(self.activityViewModel.activityArray, id: \.activityId) { activity in
                       HStack(alignment: .top) {

@@ -12,7 +12,10 @@ struct UserComment: View {
   var comment: Comment
   var postOwnerId: String
   var isOPComment: Bool = false
+  
   @State var isNavActive: Bool = false
+
+
   
   init(comment: Comment, postOwnerId: String) {
     self.comment = comment
@@ -24,6 +27,12 @@ struct UserComment: View {
   
     var body: some View {
       HStack(alignment: .top) {
+//        NavigationLink(
+//                  destination: UserProfileView(userId: comment.inviterId, user: nil),
+//                  isActive: $pushToInviter
+//                ) {
+//                  EmptyView()
+//                }
         NavigationLink(
           destination: UserProfileView(userId: comment.ownerId, user: nil),
           isActive: $isNavActive
@@ -43,7 +52,7 @@ struct UserComment: View {
             Text(comment.username)
               .font(.system(size:12))
               .fontWeight(.semibold)
-            UserCommentLabel(isOPComment: isOPComment)
+//            UserCommentLabel(isOPComment: isOPComment)
             Circle()
             .modifier(CircleDotStyle())
             Text(
@@ -63,7 +72,6 @@ struct UserComment: View {
 
         }
         .padding(.leading, 5)
-
       }
       .padding(
         EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15)

@@ -11,6 +11,8 @@ struct AskDetailCard: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
   @EnvironmentObject var askMenuViewModel: AskMenuViewModel
   @EnvironmentObject var referViewModel: ReferViewModel
+  @EnvironmentObject var commentViewModel: CommentViewModel
+
   
 
   @Binding var post: Post
@@ -19,19 +21,14 @@ struct AskDetailCard: View {
       VStack(alignment: .leading, spacing: 0) {
         AskDetailBody(post: $post)
         VStack(alignment: .leading) {
-          if askCardViewModel.bumpers.count + askCardViewModel.wingers.count > 0 {
-            Text("Collaborators")
-              .font(.system(size:14))
-              .fontWeight(.semibold)
-            BumperCountSummary(users: askCardViewModel.bumpers + askCardViewModel.wingers)
-              .padding(.bottom, 15)
-          }
+          AskCollaborationDetail()
         }
         .padding([.horizontal])
       }
       .environmentObject(referViewModel)
       .environmentObject(askCardViewModel)
       .environmentObject(askMenuViewModel)
+      .environmentObject(commentViewModel)
       .sheet(
         isPresented: $askCardViewModel.isImageModalOpen,
         content: {

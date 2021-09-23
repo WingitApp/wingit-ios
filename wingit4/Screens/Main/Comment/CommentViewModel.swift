@@ -14,6 +14,8 @@ import Firebase
 class CommentViewModel: ObservableObject {
     
     @Published var comments: [Comment] = []
+    @Published var inviteHistory: [Comment] = []
+  
     @Published var isLoading: Bool = false
     @Published var isCommentSheetShown = false
 
@@ -31,9 +33,20 @@ class CommentViewModel: ObservableObject {
           
       Api.Comment.getComments(
         postId: postId,
-        onSuccess: { (comments) in
+        onSuccess: { (allComments) in
               if self.comments.isEmpty {
-                  self.comments = comments
+                var comments: [Comment] = []
+                var inviteHistory: [Comment] = []
+                
+                for comment in allComments {
+                  if comment.type == .invitedReferral {
+                    inviteHistory.append(comment)
+                  } else {
+                    comments.append(comment)
+                  }
+                }
+                self.comments = comments
+                self.inviteHistory = inviteHistory
               }
           
               if self.isLoading {
@@ -44,13 +57,20 @@ class CommentViewModel: ObservableObject {
               // handle error
           },
         newComment: { (comment) in
-              if !self.comments.contains(comment) {
-                self.comments.append(comment)
-                
-                if self.isLoading {
-                  self.isLoading.toggle()
-                }
-              }
+          if comment.type == .invitedReferral {
+            if !self.inviteHistory.contains(comment) {
+              self.inviteHistory.append(comment)
+            }
+          } else {
+            if !self.comments.contains(comment) {
+              self.comments.append(comment)
+            }
+          }
+            
+          if self.isLoading {
+            self.isLoading.toggle()
+          }
+
           }) { (listener) in
               self.listener = listener
           }

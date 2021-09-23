@@ -11,6 +11,7 @@ import SwiftUI
 
 struct ReferralComment: View {
     var comment: Comment
+  
     @State var pushToInviter: Bool = false
     @State var pushToOwner: Bool = false
   
@@ -28,58 +29,61 @@ struct ReferralComment: View {
         ) {
           EmptyView()
         }
-//        HStack {
-//          Image(IMAGE_LOGO)
-//            .resizable()
-//            .scaledToFit()
-//            .frame(width: 23, height: 23)
-//        }
-//        .background(Color.white)
-//          .frame(width: 35, height: 35, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//          .clipShape(Circle())
-//          .overlay(
-//            RoundedRectangle(cornerRadius: 100)
-//              .stroke(Color.wingitBlue, lineWidth: 1)
-//          )
-//          .padding(.trailing, 10)
-        VStack(alignment: .leading) {
- 
-          Spacer()
-          
-
-          HStack(spacing: 0) {
-              Text("\(comment.inviterDisplayName ?? "Anon")")
-                .bold()
-                .onTapGesture {
-                  self.pushToInviter.toggle()
-                }
-              Text(" invited ")
-              Text("\(comment.username)")
-                .bold()
-                .onTapGesture {
-                  self.pushToOwner.toggle()
-                }
-            Text(" to help.")
-            Text(
-              timeAgoSinceDate(
-                Date(timeIntervalSince1970: comment.date),
-                currentDate: Date(),
-                numericDates: true
-              )
+        ZStack {
+          URLImageView(urlString: comment.avatarUrl)
+            .clipShape(Circle())
+            .frame(width: 30, height: 30, alignment: .center)
+            .overlay(
+              RoundedRectangle(cornerRadius: 100)
+                .stroke(Color.white, lineWidth: 1)
             )
-            .padding(.leading, 10)
-            .foregroundColor(.gray)
-            .font(.system(size: 10))
-          }
-          .font(.caption)
-          .fixedSize(horizontal: false, vertical: true)
-
+            .zIndex(0)
+          URLImageView(urlString: comment.inviterAvatarUrl!)
+            .clipShape(Circle())
+            .frame(width: 20, height: 20, alignment: .center)
+            .overlay(
+              RoundedRectangle(cornerRadius: 100)
+                .stroke(Color.white, lineWidth: 1)
+            )
+//            .shadow(
+//              color: Color.black.opacity(0.3),
+//              radius: 1, x: 0, y: -1
+//            )
+            .offset(x: 15, y: 10)
+            .zIndex(1)
         }
-        
+        .padding(.trailing, 10)
+
+        VStack(alignment: .leading) {
+          HStack(spacing: 0) {
+            Text("\(comment.username)")
+              .bold()
+              .onTapGesture {
+                self.pushToOwner.toggle()
+              }
+            Text(" accepted ")
+            Text("\(comment.inviterDisplayName!)")
+              .bold()
+              .onTapGesture {
+                self.pushToInviter.toggle()
+              }
+            Text(" invitation") +
+            Text(" to help.")
+          }
+          .font(.caption2)
+          .fixedSize(horizontal: false, vertical: true)
+          Text(
+            timeAgoSinceDate(
+              Date(timeIntervalSince1970: comment.date),
+              currentDate: Date(),
+              numericDates: true
+            )
+          )
+          .foregroundColor(.gray)
+          .font(.system(size: 10))
+        }
         Spacer()
       }
-      .padding(.top, 4)
-      .padding(.leading, 10)
-      Divider() //END
+      .padding(.bottom, 10)
     }
 }

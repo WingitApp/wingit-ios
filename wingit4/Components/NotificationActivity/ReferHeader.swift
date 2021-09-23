@@ -35,12 +35,19 @@ struct ReferHeader: View {
                     Text(referral.sender?.displayName ?? "").fontWeight(.semibold) +
                     Text(" has referred you to help with ") +
                       Text(referral.ask?.username ?? "").fontWeight(.semibold) +
-                    Text("'s ask.")
+                    Text("'s ask. ") +
+                    Text(
+                      timeAgoSinceDate(
+                        Date(timeIntervalSince1970: Double(referral.createdAt?.seconds ?? 0)),
+                        currentDate: Date(),
+                        numericDates: true
+                      )
+                    ).font(.caption).foregroundColor(.gray)
+                      
                   }
                   .font(.subheadline)
                   .fixedSize(horizontal: false, vertical: true)
-                  TimeAgoStamp(date: Double(referral.createdAt?.seconds ?? 0))
-                    .padding(.top, 5)
+                 
                 }
                 
                 Spacer()

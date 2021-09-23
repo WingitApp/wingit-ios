@@ -15,9 +15,7 @@ struct CommentList: View {
         if !commentViewModel.comments.isEmpty {
           VStack(alignment: .leading, spacing: 0) {
             ForEach(commentViewModel.comments) { comment in
-              if comment.type != .invitedReferral {
                 UserComment(comment: comment, postOwnerId: post.ownerId)
-              }
             }
           }
           .background(Color.white)

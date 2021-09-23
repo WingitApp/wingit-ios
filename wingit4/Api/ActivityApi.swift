@@ -11,13 +11,21 @@ import Firebase
 
 class ActivityApi {
     
-    func loadActivities(onSuccess: @escaping(_ activityArray: [Activity]) -> Void, newActivity: @escaping(Activity) -> Void, deleteActivity: @escaping(Activity) -> Void, listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void) {
+    func loadActivities(
+      onEmpty: @escaping () -> Void,
+      onSuccess: @escaping(_ activityArray: [Activity]) -> Void,
+      newActivity: @escaping(Activity) -> Void,
+      deleteActivity: @escaping(Activity) -> Void,
+      listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
+    ) {
         guard let userId = Auth.auth().currentUser?.uid else {
                 return
         }
         let listenerFirestore =  Ref.FS_COLLECTION_ACTIVITY.document(userId).collection("feedItems").order(by: "date", descending: false).addSnapshotListener({ (querySnapshot, error) in
-            guard let snapshot = querySnapshot else {
-                   return
+            guard let snapshot = querySnapshot else { return }
+          
+            if snapshot.documentChanges.isEmpty {
+              onEmpty()
             }
             
             snapshot.documentChanges.forEach { (documentChange) in

@@ -17,7 +17,7 @@ class ActivityViewModel: ObservableObject {
     @Published var activityArray: [Activity] = []
     var listener: ListenerRegistration!
     
-    @Published var isLoading = false
+    @Published var isLoading = true
 
     
     func loadActivities() {
@@ -25,14 +25,19 @@ class ActivityViewModel: ObservableObject {
         isLoading = true
         
         Api.Activity.loadActivities(
+          onEmpty: {
+            self.isLoading = false
+          },
           onSuccess: { (activityArray) in
             if self.activityArray.isEmpty {
                 self.activityArray = activityArray
+                self.isLoading = false
             }
           }, newActivity: { (activity) in
               if !self.activityArray.isEmpty {
                 if !self.activityArray.contains(activity) {
                   self.activityArray.insert(activity, at: 0)
+                  self.isLoading = false
                 }
               }
           }, deleteActivity: { (activity) in
@@ -40,12 +45,12 @@ class ActivityViewModel: ObservableObject {
                   for (index, a) in self.activityArray.enumerated() {
                       if a.activityId == activity.activityId {
                           self.activityArray.remove(at: index)
+                          self.isLoading = false
                       }
                   }
               }
           }) { (listener) in
               self.listener = listener
-              self.isLoading = false
           }
     }
     
