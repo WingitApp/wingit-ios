@@ -16,7 +16,7 @@ struct NotificationView: View {
             if activityViewModel.activityArray.isEmpty && !activityViewModel.isLoading {
                 NotificationEmptyState(
                   title: "No notifications!",
-                  description: "Start interacting with friends to get the party started.",
+                  description: "Start interacting with friends to get started.",
                   iconName: "mustache",
                   iconColor: Color("Color"),
                   function: nil

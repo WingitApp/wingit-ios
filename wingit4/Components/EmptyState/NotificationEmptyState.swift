@@ -52,6 +52,7 @@ struct NotificationEmptyState: View {
               Text("\(description)")
                 .font(.callout)
                 .fontWeight(.medium)
+                .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
               if !buttonLabel.isEmpty {
                 Button(action: onTapButton) {
