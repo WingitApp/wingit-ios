@@ -98,32 +98,8 @@ struct ComposePostView: View {
                     }
                 .padding(.bottom, 5)
             }
-              HStack{
-                  Group{
-                    Image(systemName: "camera.fill")
-                      .foregroundColor(Color.white)
-
-                    Text("Add image")
-                      .font(.subheadline)
-                      .bold()
-                      .foregroundColor(Color.white)
-                  }
-              }
-              .padding(.top, 12)
-              .padding(.bottom, 12)
-              .frame(
-                width: UIScreen.main.bounds.width - 30
-              )
-              .background(Color.wingitBlue)
-              .cornerRadius(5)
-              .overlay(
-                RoundedRectangle(cornerRadius: 5)
-                  .stroke(Color.gray, lineWidth: 0.3)
-              )
-              .onTapGesture {
-                      self.composePostViewModel.showImagePicker = true
-              }
-              .padding(.bottom, 5)
+             
+            AddImageButton(composePostViewModel: composePostViewModel)
               
               Text("Choose a category")
                 .font(.headline)
@@ -199,7 +175,7 @@ struct ComposePostView: View {
               Color(.white)
                 .ignoresSafeArea(.all, edges: .all)
             )
-            
+          
             .navigationBarTitle("Wingit!", displayMode: .inline)
             .navigationBarItems(trailing:
             
@@ -213,11 +189,9 @@ struct ComposePostView: View {
                 Alert(title: Text("Error"), message: Text(self.composePostViewModel.errorString), dismissButton: .default(Text("OK")))
             }
             )
-          .sheet(isPresented: $composePostViewModel.showImagePicker) {
-             // ImagePickerController()
-              ImagePicker(showImagePicker: self.$composePostViewModel.showImagePicker, pickedImage: self.$composePostViewModel.image, imageData: self.$composePostViewModel.imageData)
-          }
+         
         }
+       
         //.onTapGesture { dismissKeyboard() }
         
        

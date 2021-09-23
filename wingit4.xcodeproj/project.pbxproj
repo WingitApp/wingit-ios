@@ -89,6 +89,7 @@
 		3B5BDB5C268F98E70034B18C /* ReportInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BDB5B268F98E70034B18C /* ReportInputViewModel.swift */; };
 		3B5BDB5E268FA1980034B18C /* ReportApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BDB5D268FA1980034B18C /* ReportApi.swift */; };
 		3B74CC7F26FC4ECC00BB39E2 /* NotificationEmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B74CC7E26FC4ECC00BB39E2 /* NotificationEmptyState.swift */; };
+		3B74CC8126FC59BC00BB39E2 /* AddImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B74CC8026FC59BC00BB39E2 /* AddImageButton.swift */; };
 		3B75E3C2267153BA002F3108 /* SigninView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B75E3C1267153BA002F3108 /* SigninView.swift */; };
 		3B75E3C4267153BB002F3108 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B75E3C3267153BB002F3108 /* Assets.xcassets */; };
 		3B75E3C7267153BB002F3108 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B75E3C6267153BB002F3108 /* Preview Assets.xcassets */; };
@@ -287,6 +288,7 @@
 		3B5BDB5B268F98E70034B18C /* ReportInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportInputViewModel.swift; sourceTree = "<group>"; };
 		3B5BDB5D268FA1980034B18C /* ReportApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportApi.swift; sourceTree = "<group>"; };
 		3B74CC7E26FC4ECC00BB39E2 /* NotificationEmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationEmptyState.swift; sourceTree = "<group>"; };
+		3B74CC8026FC59BC00BB39E2 /* AddImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImageButton.swift; sourceTree = "<group>"; };
 		3B75E3BA267153BA002F3108 /* wingit4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wingit4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B75E3C1267153BA002F3108 /* SigninView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SigninView.swift; path = wingit4/Screens/Onboarding/SigninView.swift; sourceTree = "<group>"; };
 		3B75E3C3267153BB002F3108 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -855,6 +857,7 @@
 				15E4906D26E84A1700B25B56 /* AskDetailView.swift */,
 				3B7AF0822671BC28003BCCF3 /* ChatView.swift */,
 				65FE040326E9FE3200333609 /* ComposePostView.swift */,
+				3B74CC8026FC59BC00BB39E2 /* AddImageButton.swift */,
 				3B7AF0802671BBD4003BCCF3 /* MessagesView.swift */,
 				3B7AF0762671B962003BCCF3 /* NotificationView.swift */,
 				3B7AF07E2671BBA8003BCCF3 /* UsersView.swift */,
@@ -1134,6 +1137,7 @@
 				151A3C8E26D41B5400A39FAF /* AskCardViewModel.swift in Sources */,
 				3B75E3DB26715D26002F3108 /* Modifiers.swift in Sources */,
 				15E4907D26E84CF400B25B56 /* DynamicHeightTextField.swift in Sources */,
+				3B74CC8126FC59BC00BB39E2 /* AddImageButton.swift in Sources */,
 				15762C6C26E170FA00A8E041 /* ReferralsViewModel.swift in Sources */,
 				3BF143E626819E480093488D /* NotificationsApi.swift in Sources */,
 				156E6AD526D8A0A700690E47 /* NotificationEntry.swift in Sources */,

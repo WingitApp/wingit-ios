@@ -11,6 +11,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     @Binding var showImagePicker: Bool
     @Binding var pickedImage: Image
     @Binding var imageData: Data
+    
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = context.coordinator
