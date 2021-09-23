@@ -21,6 +21,7 @@ class ReferViewModel : ObservableObject, Identifiable {
     
     @Published var isReferListOpen: Bool = false
     @Published var showOnSuccessAnimation: Bool = false
+    @Published var isDisabled: Bool = true
     
     @Published var userBumpsListener: ListenerRegistration?
   
@@ -49,13 +50,15 @@ class ReferViewModel : ObservableObject, Identifiable {
     func handleUserSelect(user: User) {
       if selectedUsers.contains(user) {
         self.selectedUsers.removeAll(where: { $0 == user })
-      } else {
-        self.selectedUsers.append(user)
       }
-
+      else {
+        self.selectedUsers.append(user)
+        isDisabled = false
+      }
     }
     
     func sendReferrals(askId: String) {
+        
        for receivers in selectedUsers {
            let receiverId = receivers.id
            Api.Referrals.sendReferral(

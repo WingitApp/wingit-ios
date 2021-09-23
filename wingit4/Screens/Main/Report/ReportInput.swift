@@ -8,6 +8,7 @@
 import SwiftUI
 import URLImage
 import FirebaseAuth
+import SPAlert
 
 struct ReportInput: View {
     
@@ -36,6 +37,8 @@ struct ReportInput: View {
         if !composedMessage.isEmpty {
             reportInputViewModel.addReports(text: composedMessage) {
                 self.composedMessage = ""
+                let alertView = SPAlertView( title: "Reported.", preset: SPAlertIconPreset.done);
+                alertView.present(duration: 2)
             }
         }
     }

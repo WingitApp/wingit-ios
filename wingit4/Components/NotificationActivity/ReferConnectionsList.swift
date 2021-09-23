@@ -55,7 +55,7 @@ struct ReferConnectionsList: View {
                             .fontWeight(.semibold)
                             .foregroundColor(.wingitBlue)
                            .padding(.trailing, 5)
-                       })
+                         }).disabled(self.referViewModel.isDisabled)
                    }
                    .padding([.horizontal,.top])
                    .padding(.bottom, 15)
