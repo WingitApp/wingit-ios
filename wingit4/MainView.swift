@@ -54,7 +54,7 @@ struct MainView: View {
           .onChange(
             of: tapCount,
             perform: { tapCount in
-              if tapCount == 1 {
+              if tapCount == 2 {
                 home = UUID()
                 self.tapCount = 0
               }
@@ -66,7 +66,7 @@ struct MainView: View {
           .onChange(
             of: tapCount,
             perform: { tapCount in
-              if tapCount == 1 {
+              if tapCount == 2 {
                 referrals = UUID()
                 self.tapCount = 0
               }
@@ -81,7 +81,7 @@ struct MainView: View {
           .onChange(
             of: tapCount,
             perform: { tapCount in
-              if tapCount == 1 {
+              if tapCount == 2 {
                 composePost = UUID()
                 self.tapCount = 0
               }
@@ -93,7 +93,7 @@ struct MainView: View {
           .onChange(
             of: tapCount,
             perform: { tapCount in
-              if tapCount == 1 {
+              if tapCount == 2 {
                 notification = UUID()
                 self.tapCount = 0
               }
@@ -106,7 +106,7 @@ struct MainView: View {
           .onChange(
             of: tapCount,
             perform: { tapCount in
-              if tapCount == 1 {
+              if tapCount == 2 {
                 profile = UUID()
                 self.tapCount = 0
               }

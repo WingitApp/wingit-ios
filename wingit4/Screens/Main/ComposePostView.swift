@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ComposePostView: View {
     
-    @ObservedObject var composePostViewModel = ComposePostViewModel()
+    @StateObject var composePostViewModel = ComposePostViewModel()
     @State private var isPostTypeMenuExpanded: Bool = false
   
     func sharePost() {
@@ -99,7 +99,8 @@ struct ComposePostView: View {
                 .padding(.bottom, 5)
             }
              
-            AddImageButton(composePostViewModel: composePostViewModel)
+            AddImageButton()
+                
               
               Text("Choose a category")
                 .font(.headline)
@@ -168,6 +169,7 @@ struct ComposePostView: View {
                 
               
             }
+         
           .padding(
             EdgeInsets(top: 15, leading: 20, bottom: 15, trailing: 20)
           )
@@ -189,6 +191,7 @@ struct ComposePostView: View {
                 Alert(title: Text("Error"), message: Text(self.composePostViewModel.errorString), dismissButton: .default(Text("OK")))
             }
             )
+          .environmentObject(composePostViewModel)
          
         }
        

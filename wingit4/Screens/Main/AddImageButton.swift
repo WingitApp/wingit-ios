@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct AddImageButton: View {
-    @ObservedObject var composePostViewModel = ComposePostViewModel()
-    @State var showImagePicker: Bool = false
+    
+    @EnvironmentObject var composePostViewModel: ComposePostViewModel
+ 
+    
     var body: some View {
         HStack{
             Group{
@@ -36,11 +38,6 @@ struct AddImageButton: View {
         )
         .onTapGesture {
             self.composePostViewModel.showImagePicker = true
-            if composePostViewModel.showImagePicker == true {
-                print("true")
-            }else {
-                print("false")
-            }
         }
         .padding(.bottom, 5)
         .sheet(isPresented: $composePostViewModel.showImagePicker) {
