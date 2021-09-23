@@ -25,14 +25,12 @@ struct ContactsListView: View {
                     Button(action: {
                         sendMessage(numberToMessage: contact.numbers[0].number)
                     }, label: {
-                        ContactItem(contact: contact)
+                        ContactItem(contact: contact, phoneNumber: contact.numbers[0].number)
                     })
                 }
             }
 //            .modifier(ResignKeyboardOnDragGesture())
         }
-         .navigationTitle("Invite friends")
-         .navigationBarTitleDisplayMode(.inline)
          .onAppear {
             viewModel.fetch()
          }

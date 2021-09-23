@@ -11,6 +11,7 @@ import FirebaseAuth
 struct HomeView: View {
   
   @EnvironmentObject var homeViewModel: HomeViewModel
+  @ObservedObject var contactsListViewModel = ContactsListViewModel()
   
   func onAppear() {
     // should move to mainView
@@ -24,6 +25,12 @@ struct HomeView: View {
           // Header Toggle
 //          HomeFeedHeader()
           HomeFeed()
+        NavigationLink(
+            destination: ContactsListView(),
+            isActive: self.$contactsListViewModel.isLinkActive
+        ) {
+            EmptyView()
+        }
         }
         .onAppear( perform: onAppear )
         .background(Color.backgroundGray.ignoresSafeArea(.all, edges: .all))
@@ -46,20 +53,9 @@ struct HomeView: View {
                     .imageScale(Image.Scale.medium)
                     .foregroundColor(.gray)
                 }
-            },
-            trailing:
-                NavigationLink(destination: ContactsListView()) {
-                    Image(systemName: "person.fill.badge.plus")
-                      .imageScale(Image.Scale.medium)
-                      .foregroundColor(.gray)
-                }
-                .simultaneousGesture(TapGesture().onEnded {
-                    logToAmplitude(
-                        event: .tapInviteFriends,
-                        properties: [.screen: "home"]
-                    )
-                })
-        )
-      }.environmentObject(homeViewModel)
+            })
+      }
+      .environmentObject(homeViewModel)
+      .environmentObject(contactsListViewModel)
     }
 }

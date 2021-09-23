@@ -19,6 +19,8 @@ extension AnyTransition {
 struct ReferConnectionsList: View {
     @EnvironmentObject var referViewModel: ReferViewModel
     @Binding var post: Post
+    @Binding var isContactsOpen: Bool
+
   //  var postId: String
   
     func onSend() {
@@ -88,10 +90,27 @@ struct ReferConnectionsList: View {
 //                .offset(y: -50)
 //                  .padding(.top, -30)
 //              } else {
-                Text("Your Connections")
-                  .font(.headline)
-                  .padding(.leading, 15)
-                  .padding(.bottom, 5)
+                HStack{
+                    Text("Your Connections")
+                      .font(.headline)
+                      .padding(.leading, 15)
+                      .padding(.bottom, 5)
+                    Spacer()
+                    Image(systemName: "person.fill.badge.plus")
+                      .imageScale(Image.Scale.medium)
+                      .foregroundColor(.gray)
+                        .onTapGesture {
+                            referViewModel.isReferListOpen = false
+                            isContactsOpen.toggle()
+                        }
+                    .padding(.trailing, 10)
+                    .simultaneousGesture(TapGesture().onEnded {
+                        logToAmplitude(
+                            event: .tapInviteContacts,
+                            properties: [.screen: "Refer Connections"]
+                        )
+                    })
+                }
                 Divider()
                 List {
                   ForEach(
@@ -109,8 +128,8 @@ struct ReferConnectionsList: View {
                     }
                 }
                 .padding(.leading, -15)
+                .padding(.bottom, 15)
                 .background(Color.white)
-//              }
         }
         .preferredColorScheme(.light)
         .onAppear(perform: onAppearLoadConnectionsList)

@@ -12,9 +12,10 @@ import Foundation
 
 struct Contact {
     @ServerTimestamp var createdAt: Timestamp?
-    var id = UUID()
+    var id = UUID().uuidString
     var firstName: String
     var lastName: String
+    var image: Data?
 
     var numbers: [PhoneNumber]
 
@@ -26,6 +27,7 @@ struct Contact {
     }
 
     init(firstName: String, lastName: String, numbers: [PhoneNumber], systemContact: CNContact) {
+        self.id = systemContact.identifier
         self.firstName = firstName
         self.lastName = lastName
         self.numbers = numbers

@@ -147,7 +147,6 @@ struct MainView: View {
     .environmentObject(activityViewModel)
     .environmentObject(homeViewModel)
     .environmentObject(referViewModel)
-
     .onAppear{
         self.homeViewModel.loadTimeline()
         self.profileViewModel.loadUserPosts()
