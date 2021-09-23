@@ -54,7 +54,9 @@ struct AskCollaborationDetail: View {
                 ForEach(commentViewModel.inviteHistory) { comment in
                     ReferralComment(comment: comment)
                 }
+                
               }
+              .transition(.opacity)
               .padding(.bottom, 10)
               .background(Color.white)
             }

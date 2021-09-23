@@ -34,6 +34,8 @@ struct MainView: View {
         set: {
             if $0 == selection {
                 tapCount += 1
+            } else {
+              tapCount = 0
             }
             selection = $0
         }
@@ -48,25 +50,25 @@ struct MainView: View {
 
     TabView(selection: handler) {
         HomeView()
-          .tabItem({ Image(systemName: "house") })
+          .tabItem({ Image(systemName: selection == 0 ? "house.fill" : "house") })
           .tag(0)
           .id(home)
           .onChange(
             of: tapCount,
             perform: { tapCount in
-              if tapCount == 2 {
+              if tapCount == 1 {
                 home = UUID()
                 self.tapCount = 0
               }
           })
         ReferralsView()
-          .tabItem({ Image(systemName: "suit.heart") })
+          .tabItem({ Image(systemName: selection == 1 ? "suit.heart.fill" : "suit.heart" ) })
           .tag(1)
           .id(referrals)
           .onChange(
             of: tapCount,
             perform: { tapCount in
-              if tapCount == 2 {
+              if tapCount == 1 {
                 referrals = UUID()
                 self.tapCount = 0
               }
@@ -80,32 +82,32 @@ struct MainView: View {
           .onChange(
             of: tapCount,
             perform: { tapCount in
-              if tapCount == 2 {
+              if tapCount == 1 {
                 composePost = UUID()
                 self.tapCount = 0
               }
           })
         NotificationView()
-          .tabItem({ Image(systemName: "bell") })
+          .tabItem({ Image(systemName: selection == 3 ? "bell.fill" : "bell") })
           .tag(3)
           .id(notification)
           .onChange(
             of: tapCount,
             perform: { tapCount in
-              if tapCount == 2 {
+              if tapCount == 1 {
                 notification = UUID()
                 self.tapCount = 0
               }
           })
         ProfileView()
 //        ProfileDetail2()
-          .tabItem({ Image(systemName: "person") })
+          .tabItem({ Image(systemName: selection == 4 ? "person.fill" : "person") })
           .tag(4)
           .id(profile)
           .onChange(
             of: tapCount,
             perform: { tapCount in
-              if tapCount == 2 {
+              if tapCount == 1 {
                 profile = UUID()
                 self.tapCount = 0
               }

@@ -17,7 +17,7 @@ struct NotificationView: View {
                 NotificationEmptyState(
                   title: "No notifications!",
                   description: "Start interacting with friends to get started.",
-                  iconName: "mustache",
+                  iconName: "bell",
                   iconColor: Color("Color"),
                   function: nil
                 )
@@ -75,14 +75,6 @@ struct NotificationView: View {
                   
            
             }.navigationBarTitle(Text("Notifications"), displayMode: .inline)
-            .onAppear {
-                self.activityViewModel.loadActivities()
-            }
-            .onDisappear {
-                 if self.activityViewModel.listener != nil {
-                     self.activityViewModel.listener.remove()
-                 }
-              }
         }
         }
       
