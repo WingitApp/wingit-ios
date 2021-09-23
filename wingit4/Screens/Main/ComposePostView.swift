@@ -71,9 +71,8 @@ struct ComposePostView: View {
     
     var body: some View {
         NavigationView {
+            
           VStack(alignment: .leading) {
-            
-            
             
             Text("Attach an image")
               .font(.headline)
@@ -200,10 +199,7 @@ struct ComposePostView: View {
               Color(.white)
                 .ignoresSafeArea(.all, edges: .all)
             )
-            .sheet(isPresented: $composePostViewModel.showImagePicker) {
-               // ImagePickerController()
-                ImagePicker(showImagePicker: self.$composePostViewModel.showImagePicker, pickedImage: self.$composePostViewModel.image, imageData: self.$composePostViewModel.imageData)
-            }
+            
             .navigationBarTitle("Wingit!", displayMode: .inline)
             .navigationBarItems(trailing:
             
@@ -217,6 +213,10 @@ struct ComposePostView: View {
                 Alert(title: Text("Error"), message: Text(self.composePostViewModel.errorString), dismissButton: .default(Text("OK")))
             }
             )
+          .sheet(isPresented: $composePostViewModel.showImagePicker) {
+             // ImagePickerController()
+              ImagePicker(showImagePicker: self.$composePostViewModel.showImagePicker, pickedImage: self.$composePostViewModel.image, imageData: self.$composePostViewModel.imageData)
+          }
         }
         //.onTapGesture { dismissKeyboard() }
         

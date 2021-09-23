@@ -17,23 +17,28 @@ struct FooterCell: View {
     var body: some View {
       VStack(alignment: .leading) {
           HStack {
-            HStack {
-              URLImageView(urlString: post.avatar)
-                .clipShape(Circle())
-                .frame(width: 28, height: 28)
-                .overlay(
-                  RoundedRectangle(cornerRadius: 100)
-                    .stroke(Color.gray, lineWidth: 1)
-                )
-  
-              VStack(alignment: .leading){
-                Text(post.username)
-                  .font(.caption)
-                  .fontWeight(.semibold)
-//                  .modifier(UserNameStyle())
-                TimeAgoStamp(date: post.date)
-              }
-            }
+               NavigationLink(destination:  UserProfileView(userId: post.ownerId, user: nil)) {
+                      HStack {
+                        URLImageView(urlString: post.avatar)
+                          .clipShape(Circle())
+                          .frame(width: 30, height: 30)
+                          .overlay(
+                            RoundedRectangle(cornerRadius: 100)
+                              .stroke(Color.gray, lineWidth: 1)
+                          )
+            
+                        VStack(alignment: .leading){
+                          Text(post.username)
+                            .fontWeight(.semibold)
+                            .modifier(UserNameStyle())
+                          TimeAgoStamp(date: post.date)
+                        }
+                      }
+                    }
+                    .disabled(self.askCardViewModel.isNavLinkDisabled)
+                    .buttonStyle(FlatLinkStyle())
+                    .buttonStyle(PlainButtonStyle())
+                    .padding(.top, 5)
             Spacer()
             CommentButton(
               
@@ -44,28 +49,6 @@ struct FooterCell: View {
 //              showLabel: true
             )
           }
-//        NavigationLink(destination:  UserProfileView(userId: post.ownerId, user: nil)) {
-//          HStack {
-//            URLImageView(urlString: post.avatar)
-//              .clipShape(Circle())
-//              .frame(width: 30, height: 30)
-//              .overlay(
-//                RoundedRectangle(cornerRadius: 100)
-//                  .stroke(Color.gray, lineWidth: 1)
-//              )
-//
-//            VStack(alignment: .leading){
-//              Text(post.username)
-//                .fontWeight(.semibold)
-//                .modifier(UserNameStyle())
-//              TimeAgoStamp(date: post.date)
-//            }
-//          }
-//        }
-//        .disabled(self.askCardViewModel.isNavLinkDisabled)
-//        .buttonStyle(FlatLinkStyle())
-//        .buttonStyle(PlainButtonStyle())
-//        .padding(.top, 5)
           
         
       }
