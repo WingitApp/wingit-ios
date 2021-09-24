@@ -130,7 +130,7 @@ class StorageService {
             }
     }
     
-    static func updateAvatar(userId: String, imageData: Data, metadata: StorageMetadata, storageAvatarRef: StorageReference, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+    static func updateAvatar(userId: String, imageData: Data, metadata: StorageMetadata, storageAvatarRef: StorageReference, onSuccess: @escaping(_ url: String) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
         
            storageAvatarRef.putData(imageData, metadata: metadata) { (storageMetadata, error) in
                 if error != nil {
@@ -157,7 +157,7 @@ class StorageService {
                                     onError(error!.localizedDescription)
                                     return
                                 } else {
-                                    onSuccess()
+                                    onSuccess(metaImageUrl)
                                 }
                         }
                                                     

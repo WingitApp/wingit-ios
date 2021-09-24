@@ -55,7 +55,7 @@ class UserApi {
         
     }
     
-    func updateImage(imageData: Data, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+    func updateImage(imageData: Data, onSuccess: @escaping(_ url: String) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let storageAvatarUserId = Ref.STORAGE_AVATAR_USERID(userId: userId)
         let metadata = StorageMetadata()

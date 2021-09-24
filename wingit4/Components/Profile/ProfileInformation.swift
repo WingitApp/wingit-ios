@@ -15,6 +15,7 @@ struct ProfileInformation: View {
     var user: User?
     let currentUser = Auth.auth().currentUser
     @State var updatePic : Bool = false
+    @EnvironmentObject var session: SessionStore
     
     var body: some View {
         
@@ -54,6 +55,7 @@ struct ProfileInformation: View {
         }.sheet(isPresented: $updatePic, content: {
             UpdateProfilePhoto(user: user)
         })
+        .environmentObject(session)
     }
 }
 
@@ -61,13 +63,15 @@ struct UpdateProfilePhoto: View {
     var user: User?
     let uid = Auth.auth().currentUser?.uid
     @EnvironmentObject var profileViewModel: ProfileViewModel
+    @EnvironmentObject var session: SessionStore
     @ObservedObject var updatePhotoVM = UpdatePhotoVM()
     
     func addAvatar() {
-        updatePhotoVM.updatePhoto(imageData: updatePhotoVM.imageData, completed: {
+        updatePhotoVM.updatePhoto(imageData: updatePhotoVM.imageData, completed: { url in
             self.closeSheet()
             let alertView = SPAlertView( title: "Photo updated!", preset: SPAlertIconPreset.done);
             alertView.present(duration: 2)
+            session.currentUser?.profileImageUrl = url
             // Switch to the Main App
         }) { (errorMessage) in
             self.updatePhotoVM.showAlert = true

@@ -23,6 +23,7 @@ struct ProfileCard: View {
               user: self.session.currentUser
             )
         }
+        .environmentObject(session)
         .background(Color(.white))
         .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
     }
