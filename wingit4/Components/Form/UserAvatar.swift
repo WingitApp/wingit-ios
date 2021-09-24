@@ -15,6 +15,7 @@ struct UserAvatar: View {
   @State var isTapped: Bool = false
   
   func onUserAvatarTap() {
+    Haptic.impact(type: "soft")
     isTapped = true
   }
   

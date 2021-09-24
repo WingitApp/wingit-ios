@@ -52,6 +52,7 @@ class ReferViewModel : ObservableObject, Identifiable {
         self.selectedUsers.removeAll(where: { $0 == user })
       }
       else {
+        Haptic.impact(type: "soft")
         self.selectedUsers.append(user)
         isDisabled = false
       }

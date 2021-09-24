@@ -21,8 +21,8 @@ struct Connections: View {
             .font(.headline)
             .foregroundColor(.wingitBlue)
             .padding(.top, 2)
-
-              .onTapGesture {
+            .onTapGesture {
+              Haptic.impact(type: "soft")
               self.connectionsViewModel.isConnectionsSheetOpen.toggle()
             }
     }

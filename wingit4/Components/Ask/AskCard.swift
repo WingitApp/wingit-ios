@@ -34,6 +34,7 @@ struct AskCard: View {
   }
   
   func navigateToAskCardDetailView() -> Void {
+    Haptic.impact(type: "soft")
     commentViewModel.toggleCommentScreen()
   }
 

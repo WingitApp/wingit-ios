@@ -85,6 +85,7 @@ struct HeaderCell: View {
                 AskDoneToggle(post: $post) // rename later
               }
                 AskMenu()
+   
             }
             .padding(
               EdgeInsets(top: 5, leading: 15, bottom: 5, trailing: 15)

@@ -208,7 +208,10 @@ struct UserProfileView: View {
     .navigationBarTitle(Text(userProfileViewModel.user.displayName ?? ""), displayMode: .inline)
     .onAppear {
       logToAmplitude(event: .viewOtherProfile)
-      self.userProfileViewModel.checkUserBlocked(userId: Auth.auth().currentUser!.uid, postOwnerId: self.userProfileViewModel.user.id ?? self.userProfileViewModel.user.uid)
+      self.userProfileViewModel.checkUserBlocked(
+        userId: Auth.auth().currentUser!.uid,
+        postOwnerId: self.userProfileViewModel.user.id ?? self.userProfileViewModel.user.uid
+      )
     }
     .background(
       Color.white.ignoresSafeArea(.all, edges: .all)

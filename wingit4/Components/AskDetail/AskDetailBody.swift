@@ -35,6 +35,9 @@ struct AskDetailBody: View {
                     .font(.caption2)
                 }
             }).buttonStyle(PlainButtonStyle())
+          .onTapGesture {
+            Haptic.impact(type: "soft")
+          }
          
           Spacer()
           AskDoneToggle(

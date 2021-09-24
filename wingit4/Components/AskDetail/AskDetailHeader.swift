@@ -16,6 +16,7 @@ struct AskDetailHeader: View {
     var body: some View {
       HStack {
         Button(action: {
+          Haptic.impact(type: "soft")
           self.presentationMode.wrappedValue.dismiss()
         }) {
           HStack(alignment: .center) {

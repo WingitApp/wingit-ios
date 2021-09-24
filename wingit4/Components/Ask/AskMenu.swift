@@ -33,7 +33,7 @@ struct AskMenu: View {
               Text("Block")
           }
         }, label: {
-            EllipsisButton()
+            EllipsisButton(isHorizontal: isHorizontal)
         })
        
       }
@@ -63,12 +63,6 @@ struct EllipsisButton: View {
           .rotationEffect(.degrees(isHorizontal ? 0 : -90))
           .foregroundColor(.wingitBlue)
         }
+      
    }
 }
-
-struct EllipsisButton_Previews: PreviewProvider {
-    static var previews: some View {
-        EllipsisButton()
-    }
-}
-
