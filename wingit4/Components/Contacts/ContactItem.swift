@@ -20,7 +20,7 @@ struct ContactItem: View {
             }
             .padding(.leading, 5)
             Spacer()
-            Image(systemName: "plus.circle.fill").foregroundColor(.gray)
+            Image(systemName: "plus.circle").foregroundColor(.gray)
         }
         .navigationBarHidden(true)
         .padding(
