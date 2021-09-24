@@ -65,7 +65,6 @@ struct UpdateProfilePhoto: View {
     
     func addAvatar() {
         updatePhotoVM.updatePhoto(imageData: updatePhotoVM.imageData, completed: {
-            self.clean()
             self.closeSheet()
             let alertView = SPAlertView( title: "Photo updated!", preset: SPAlertIconPreset.done);
             alertView.present(duration: 2)
@@ -134,7 +133,6 @@ struct UpdateProfilePhoto: View {
                   .zIndex(1)
 
             }
-            
             
             Button(action: {addAvatar()},
                    label: {
