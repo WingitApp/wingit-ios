@@ -34,6 +34,7 @@ struct ConnectionRow: View {
             Spacer()
           }
           .padding(10)
+          Divider()
         }
         .buttonStyle(PlainButtonStyle())
     }
@@ -74,15 +75,18 @@ struct ConnectionsView: View {
                         }
                         .buttonStyle(PlainButtonStyle())
                     } else {
-                      List {
+                      ScrollView {
+                        VStack(alignment: .leading){
                           ForEach(self.connectionsViewModel.users, id: \.self) { user in
                               ConnectionRow(user: user)
+                              Divider()
                             }
-                          }
+                        }
+                        .padding(.top, 5)
+                      }
                     }
                 }
                 .navigationBarTitle(formatTitle(), displayMode: .inline)
-                .edgesIgnoringSafeArea([.top, .bottom])
             }
         .onAppear {
             connectionsViewModel.loadConnections(userId: user?.id)

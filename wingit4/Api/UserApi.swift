@@ -64,6 +64,7 @@ class UserApi {
     }
     
     func updateField(field: String, user: User?) {
+      return
         if let userId = Auth.auth().currentUser?.uid, let user = user {
             alertView(msg: "Update \(field)") { (txt) in
                 if !txt.isEmpty {
