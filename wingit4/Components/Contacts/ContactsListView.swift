@@ -24,6 +24,7 @@ struct ContactsListView: View {
                 ForEach(viewModel.contacts.filter { viewModel.contactFilter(contact: $0)}, id:\.id) { contact in // --> We display all filtered contacts
                     Button(action: {
                         sendMessage(numberToMessage: contact.numbers[0].number)
+                        logToAmplitude(event: .referContact, properties: [.name: contact.fullName(), .medium: "SMS"])
                     }, label: {
                         ContactItem(contact: contact, phoneNumber: contact.numbers[0].number)
                     })
