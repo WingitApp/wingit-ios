@@ -16,7 +16,7 @@ struct ContactItem: View {
         HStack{
             VStack(alignment: .leading, spacing: 5) {
                 Text("\(contact.firstName) \(contact.lastName)").font(.headline).bold()
-                Text("\(phoneNumber)").font(.subheadline)
+                Text("\(phoneNumber)").font(.subheadline).foregroundColor(.gray)
             }
             .padding(.leading, 5)
             Spacer()

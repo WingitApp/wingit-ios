@@ -17,7 +17,7 @@ struct ContactsListView: View {
 
     var body: some View {
          VStack {
-            SearchBar(text: $viewModel.searchText, placeholder: "Search contacts")
+            SearchBar(text: $viewModel.searchText, placeholder: "Search for contacts to invite")
 
             List {
                 // Filtered list of names
