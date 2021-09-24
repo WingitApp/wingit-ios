@@ -36,17 +36,18 @@ struct AskMenu: View {
             EllipsisButton()
         })
        
-      } else {
-        Menu(content: {
-          Button(
-            action: self.askCardViewModel.removePost
-          ) {
-              Text("Delete")
-          }
-        }, label: {
-          EllipsisButton()
-        })
       }
+//      else {
+//        Menu(content: {
+//          Button(
+//            action: self.askCardViewModel.removePost
+//          ) {
+//              Text("Delete")
+//          }
+//        }, label: {
+//          EllipsisButton()
+//        })
+//      }
         }
    }
 }
