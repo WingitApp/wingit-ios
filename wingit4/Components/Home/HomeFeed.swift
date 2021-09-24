@@ -25,7 +25,7 @@ struct HomeFeed: View {
             )
         }.buttonStyle(PlainButtonStyle())
     } else {
-        ScrollView(showsIndicators: false) {
+        ScrollView(showsIndicators: true) {
           LazyVStack {
             ForEach(Array(homeViewModel.posts.enumerated()), id: \.element) { index, post in
                 AskCard(
@@ -41,6 +41,10 @@ struct HomeFeed: View {
                 }
               
               }
+            if homeViewModel.isLoadingNext {
+              AskCardPlaceholder()
+                .padding(.top, 10)
+            }
           }
         }
     }

@@ -416,6 +416,9 @@ extension Color {
   
   static let uilightOrange: Color = Color(red: 255 / 255, green: 245 / 255, blue: 230 / 255)
   static let uiorange: Color = Color(red: 255 / 255, green: 179 / 255, blue: 71 / 255)
+  
+  // complete status
+  static let statusGreen: Color = Color(red: 33 / 255, green: 229 / 255, blue: 192 / 255)
 
 
 }

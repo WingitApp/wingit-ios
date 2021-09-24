@@ -15,7 +15,11 @@ class HomeViewModel: ObservableObject {
     @Published var posts: [Post] = []
     @Published var isLoading = false
     @Published var selection: Selection = .posts
-    @Published var isFetching: Bool = true
+  
+    // Pagination State
+    @Published var isLoadingNext: Bool = true
+  
+    
    
     
     private var canLoadMorePages = true
@@ -28,15 +32,13 @@ class HomeViewModel: ObservableObject {
     }
 
   
-    func loadMoreContentIfNeeded(currentItem item: Post?) {
-       guard let item = item else {
-         return
-       }
-   
-      let thresholdIndex = posts.index(posts.endIndex, offsetBy: -0)
-      
-      if posts.firstIndex(where: { $0.postId == item.postId }) == thresholdIndex {
-        loadTimelineNext()
+    func loadMoreContentIfNeeded(currentItem post: Post?) {
+       guard let post = post else { return }
+         
+      if let index = posts.firstIndex(where: { $0.postId == post.postId }) {
+        if index == self.posts.count - 1 {
+          loadTimelineNext()
+        }
        }
      }
     
@@ -86,12 +88,20 @@ class HomeViewModel: ObservableObject {
         })
     }
   
+  func toggleLoadingNextState(_ state: Bool) {
+    withAnimation {
+      self.isLoadingNext = state
+    }
+  }
+  
   func loadTimelineNext() {
+    toggleLoadingNextState(true)
     Api.Post.loadTimelinePaginated(
       next: self.next!,
       onSuccess: { posts, next in
         self.posts += posts
         self.next = next
+        self.toggleLoadingNextState(false)
       }
     )
   }

@@ -14,12 +14,12 @@ import Firebase
 
 // CONSTANTS
 
-let TIMELINE_PAGINATION_PAGE_SIZE = 30
+let TIMELINE_PAGINATION_PAGE_SIZE = 5
 let TIMELINE_PAGINATION_QUERY = Ref.FS_DOC_TIMELINE_FOR_USERID(
   userId: Auth.auth().currentUser!.uid)
   .collection("timelinePosts")
   .order(by: "date", descending: true)
-  .limit(to: 5)
+  .limit(to: TIMELINE_PAGINATION_PAGE_SIZE)
 
 class PostApi {
   
@@ -352,7 +352,7 @@ class PostApi {
           let listenerFirestore =  Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId)
             .collection("timelinePosts")
             .order(by: "date", descending: true) // reversed b/c append method (only for first call)
-            .limit(to: 30)
+            .limit(to: 10)
             .addSnapshotListener({ (querySnapshot, error) in
               guard let snapshot = querySnapshot else { return }
 
@@ -417,8 +417,8 @@ class PostApi {
             .limit(to: TIMELINE_PAGINATION_PAGE_SIZE)
             .start(afterDocument: lastSnapshot)
           
-          let posts: [Post] = snapshot.documentChanges.compactMap {
-            return try? $0.document.data(as: Post.self)
+          let posts: [Post] = snapshot.documents.compactMap {
+            return try? $0.data(as: Post.self)
           }
     
           onSuccess(posts, next)

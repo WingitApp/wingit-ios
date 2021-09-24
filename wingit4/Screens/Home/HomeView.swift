@@ -38,6 +38,7 @@ struct HomeView: View {
               
               VStack(alignment: .leading, spacing: 0) {
                 HomeFeed()
+                
               }
               .zIndex(1)
             }
