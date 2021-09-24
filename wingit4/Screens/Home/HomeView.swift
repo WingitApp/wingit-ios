@@ -9,18 +9,25 @@ import SwiftUI
 import FirebaseAuth
 
 struct HomeView: View {
-  
   @EnvironmentObject var homeViewModel: HomeViewModel
-  @ObservedObject var contactsListViewModel = ContactsListViewModel()
+  @State var scrollProxy: ScrollViewProxy? = nil
   
   func onAppear() {
     // should move to mainView
     logToAmplitude(event: .viewHomeAsksFeed)
 
   }
-    
+  
+  func passProxyToState(proxy: ScrollViewProxy) -> CGFloat {
+    if scrollProxy == nil {
+      self.scrollProxy = proxy
+    }
+    return 0
+  }
+      
     var body: some View {
       NavigationView {
+<<<<<<< HEAD
         VStack(alignment: .leading, spacing: 0) {
           // Header Toggle
 //          HomeFeedHeader()
@@ -31,7 +38,24 @@ struct HomeView: View {
         ) {
             EmptyView()
         }
+=======
+        ScrollViewReader { proxy in
+            ZStack {
+              HStack {}
+              .frame(
+                height: self.passProxyToState(proxy: proxy)
+              )
+              .allowsHitTesting(false)
+              .zIndex(-1)
+              
+              VStack(alignment: .leading, spacing: 0) {
+                HomeFeed()
+              }
+              .zIndex(1)
+            }
+>>>>>>> 0687804 (allow users to scroll to top when tapping on logo on homefeed)
         }
+        
         .onAppear( perform: onAppear )
         .background(Color.backgroundGray.ignoresSafeArea(.all, edges: .all))
         .toolbar {
@@ -43,6 +67,11 @@ struct HomeView: View {
               Text("Wingit")
                 .bold()
                 .padding(.top, -5)
+            }
+            .onTapGesture {
+                if self.scrollProxy != nil {
+                  self.scrollProxy!.scrollTo(0)
+                }
             }
           }
         }

@@ -11,6 +11,7 @@ struct HomeFeed: View {
   @EnvironmentObject var homeViewModel: HomeViewModel
   @State var isInTransition: Bool = true
 
+
   var body: some View {
     
     if !homeViewModel.isLoading && homeViewModel.posts.count == 0 {
@@ -32,6 +33,7 @@ struct HomeFeed: View {
                   isProfileView: false,
                   index: index
                 )
+                .id(index)
                 .onAppear {
                   homeViewModel.loadMoreContentIfNeeded(
                     currentItem: post
