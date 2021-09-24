@@ -17,25 +17,27 @@ struct ContactsListView: View {
 
     var body: some View {
          VStack {
-            SearchBar(text: $viewModel.searchText, placeholder: "Search contacts")
+            SearchBar(text: $viewModel.searchText, placeholder: "Search for contacts to invite")
 
             List {
                 // Filtered list of names
                 ForEach(viewModel.contacts.filter { viewModel.contactFilter(contact: $0)}, id:\.id) { contact in // --> We display all filtered contacts
                     Button(action: {
                         sendMessage(numberToMessage: contact.numbers[0].number)
+                        logToAmplitude(event: .referContact, properties: [.name: contact.fullName(), .medium: "SMS"])
                     }, label: {
-                        ContactItem(contact: contact)
+                        ContactItem(contact: contact, phoneNumber: contact.numbers[0].number)
                     })
                 }
             }
 //            .modifier(ResignKeyboardOnDragGesture())
         }
-         .navigationTitle("Invite friends")
-         .navigationBarTitleDisplayMode(.inline)
          .onAppear {
             viewModel.fetch()
          }
+         .navigationBarTitle("Invite Contacts")
+         .edgesIgnoringSafeArea(.top)
+
     }
     
     func sendMessage(numberToMessage: String) {

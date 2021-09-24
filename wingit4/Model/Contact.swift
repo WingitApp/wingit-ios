@@ -11,10 +11,10 @@ import FirebaseFirestoreSwift
 import Foundation
 
 struct Contact {
-    @ServerTimestamp var createdAt: Timestamp?
     var id = UUID()
     var firstName: String
     var lastName: String
+    var image: Data?
 
     var numbers: [PhoneNumber]
 

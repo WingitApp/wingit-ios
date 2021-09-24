@@ -19,6 +19,8 @@ extension AnyTransition {
 struct ReferConnectionsList: View {
     @EnvironmentObject var referViewModel: ReferViewModel
     @Binding var post: Post
+    @State var isContactsOpen: Bool = false
+
   //  var postId: String
   
     func onSend() {
@@ -31,12 +33,22 @@ struct ReferConnectionsList: View {
     func onAppearLoadConnectionsList() {
       referViewModel.loadConnections(post: post)
     }
+  
+  func openPhoneContactList() {
+    logToAmplitude(
+        event: .tapInviteContacts,
+        properties: [.screen: "Refer Connections"]
+    )
+    isContactsOpen.toggle()
+  }
     
   
 
     var body: some View {
-
+      NavigationView {
         VStack {
+          NavigationLink(destination: ContactsListView(), isActive: $isContactsOpen) { EmptyView() }.hidden()
+
              Spacer()
              VStack(alignment: .leading, spacing: 0){
                    HStack{
@@ -54,7 +66,7 @@ struct ReferConnectionsList: View {
                             .font(.system(size:20))
                             .fontWeight(.semibold)
                             .foregroundColor(.wingitBlue)
-                           .padding(.trailing, 5)
+                           .padding(.trailing, 7)
                          }).disabled(self.referViewModel.isDisabled)
                    }
                    .padding([.horizontal,.top])
@@ -88,10 +100,22 @@ struct ReferConnectionsList: View {
 //                .offset(y: -50)
 //                  .padding(.top, -30)
 //              } else {
-                Text("Your Connections")
-                  .font(.headline)
-                  .padding(.leading, 15)
-                  .padding(.bottom, 5)
+                HStack{
+                    Text("Your Connections")
+                      .font(.headline)
+                      .padding(.leading, 15)
+                      .padding(.bottom, 5)
+                    Spacer()
+                  HStack {
+                    Image(systemName: "person.badge.plus")
+                      .imageScale(Image.Scale.medium)
+                      .foregroundColor(.gray)
+                      .padding(.trailing, 25)
+                  }
+                  .onTapGesture(perform: openPhoneContactList)
+
+                }
+                .padding(.bottom, 10)
                 Divider()
                 List {
                   ForEach(
@@ -109,13 +133,21 @@ struct ReferConnectionsList: View {
                     }
                 }
                 .padding(.leading, -15)
+                .padding(.bottom, 15)
                 .background(Color.white)
-//              }
         }
         .preferredColorScheme(.light)
         .onAppear(perform: onAppearLoadConnectionsList)
         .environmentObject(referViewModel)
-        .onDisappear(perform: self.referViewModel.resetToInitialState)
+       .onDisappear {
+          if !isContactsOpen {
+            self.referViewModel.resetToInitialState()
+          }
+       }
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
+        .edgesIgnoringSafeArea(.top)
+        }
     }
 }
 

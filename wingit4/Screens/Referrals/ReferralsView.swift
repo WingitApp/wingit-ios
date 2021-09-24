@@ -18,7 +18,9 @@ struct ReferralsView: View {
     @StateObject var commentInputViewModel = CommentInputViewModel()
     // Like
     @StateObject var footerCellViewModel = FooterCellViewModel()
-  
+    @ObservedObject var contactsListViewModel = ContactsListViewModel()
+
+
     var body: some View {
         NavigationView {
             ScrollView(showsIndicators: false) {
@@ -50,6 +52,12 @@ struct ReferralsView: View {
                         .environmentObject(commentInputViewModel)
                         .environmentObject(footerCellViewModel),
                     isActive: self.$referralsViewModel.isLinkActive
+                ) {
+                    EmptyView()
+                }
+                NavigationLink(
+                    destination: ContactsListView(),
+                    isActive: self.$contactsListViewModel.isLinkActive
                 ) {
                     EmptyView()
                 }

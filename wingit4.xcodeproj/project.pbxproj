@@ -204,7 +204,7 @@
 		65C6103F26FC2064007B87FE /* ConnectionsEmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C6103E26FC2064007B87FE /* ConnectionsEmptyState.swift */; };
 		65F7314F26F3C91700A73781 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7314E26F3C91700A73781 /* StringExtensions.swift */; };
 		65F7315426F51FB400A73781 /* ContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315326F51FB400A73781 /* ContactsService.swift */; };
-		65F7315626F5276900A73781 /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315526F5276900A73781 /* Contacts.swift */; };
+		65F7315626F5276900A73781 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315526F5276900A73781 /* Contact.swift */; };
 		65F7315826F5295500A73781 /* ContactsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315726F5295500A73781 /* ContactsListViewModel.swift */; };
 		65FE040426E9FE3200333609 /* ComposePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE040326E9FE3200333609 /* ComposePostView.swift */; };
 /* End PBXBuildFile section */
@@ -399,7 +399,7 @@
 		65C6103E26FC2064007B87FE /* ConnectionsEmptyState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionsEmptyState.swift; sourceTree = "<group>"; };
 		65F7314E26F3C91700A73781 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		65F7315326F51FB400A73781 /* ContactsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsService.swift; sourceTree = "<group>"; };
-		65F7315526F5276900A73781 /* Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
+		65F7315526F5276900A73781 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		65F7315726F5295500A73781 /* ContactsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewModel.swift; sourceTree = "<group>"; };
 		65FE040326E9FE3200333609 /* ComposePostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposePostView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -795,7 +795,7 @@
 				3B7AF0B62672C21E003BCCF3 /* Chat.swift */,
 				3B7AF0AE2672A053003BCCF3 /* Comment.swift */,
 				657F35D526DE1D8D0092A1B2 /* Comment_v2.swift */,
-				65F7315526F5276900A73781 /* Contacts.swift */,
+				65F7315526F5276900A73781 /* Contact.swift */,
 				657F35DA26DEA0C00092A1B2 /* Device.swift */,
 				3B7AF0B82672C29D003BCCF3 /* InboxMessage.swift */,
 				3B7AF0962671D98E003BCCF3 /* Post.swift */,
@@ -1239,7 +1239,7 @@
 				15DFD07A26ED2E29002CBE31 /* URLImageViewModel.swift in Sources */,
 				65F7315426F51FB400A73781 /* ContactsService.swift in Sources */,
 				65F7314F26F3C91700A73781 /* StringExtensions.swift in Sources */,
-				65F7315626F5276900A73781 /* Contacts.swift in Sources */,
+				65F7315626F5276900A73781 /* Contact.swift in Sources */,
 				6522122726F557B400A48B07 /* ContactDetailView.swift in Sources */,
 				151A3C9426D5679800A39FAF /* AskDoneToggle.swift in Sources */,
 				3B7AF06D2671A01B003BCCF3 /* CommentRow.swift in Sources */,
