@@ -48,6 +48,12 @@ struct AskDetailCard: View {
             .environmentObject(askCardViewModel)
             .environmentObject(askMenuViewModel)
       })
+      .sheet(
+        isPresented: $referViewModel.isReferListOpen,
+        content: {
+          ReferConnectionsList(post: $post)
+            .environmentObject(referViewModel)
+        })
     }
   
 }
