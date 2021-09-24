@@ -35,7 +35,8 @@ struct ContactsListView: View {
          .onAppear {
             viewModel.fetch()
          }
-         .navigationBarTitle("Invite Contacts")
+         .navigationBarTitle("")
+         .navigationBarHidden(true)
          .edgesIgnoringSafeArea(.top)
 
     }
