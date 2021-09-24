@@ -125,11 +125,11 @@ struct ReferConnectionsList: View {
                         ReferralUserCard(
                           user: user,
                           isChecked: (
-                            self.referViewModel.userBumps.contains(user) ||
-                            self.referViewModel.selectedUsers.contains(user)
+                            !referViewModel.userBumps.filter { $0.id == user.id }.isEmpty ||
+                              !referViewModel.selectedUsers.filter {$0.id == user.id}.isEmpty
                           )
                         )
-                        .opacity(self.referViewModel.userBumps.contains(user) ? 0.6 : 1)
+                        .opacity(!referViewModel.userBumps.filter { $0.id == user.id }.isEmpty ? 0.6 : 1)
                     }
                 }
                 .padding(.leading, -15)

@@ -14,7 +14,8 @@ struct ReferralUserCard: View {
     var isChecked: Bool = false
   
     func onTapGesture() {
-      if self.referViewModel.userBumps.contains(user) {
+      
+      if  !referViewModel.userBumps.filter { $0.id == user.id }.isEmpty {
         // we don't need to add users who are already bumped
         return
       }
@@ -52,6 +53,9 @@ struct ReferralUserCard: View {
                     .foregroundColor(.wingitBlue)
               }
             }
+        }
+        .onAppear {
+          print(isChecked)
         }
         .padding(
           EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)

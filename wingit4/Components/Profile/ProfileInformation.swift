@@ -106,7 +106,7 @@ struct UpdateProfilePhoto: View {
                 .foregroundColor(Color.wingitBlue)
                 .padding(.bottom, 100)
                 .font(.title)
-                   
+          HStack {
             ZStack {
                 updatePhotoVM.image
                     .resizable()
@@ -137,6 +137,8 @@ struct UpdateProfilePhoto: View {
                   .zIndex(1)
 
             }
+          }
+            
             
             Button(action: {addAvatar()},
                    label: {
