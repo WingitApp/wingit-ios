@@ -34,9 +34,6 @@ struct FooterCell: View {
                           TimeAgoStamp(date: post.date)
                         }
                       }
-                      .onTapGesture {
-                        Haptic.impact(type: "soft")
-                      }
                     }
                     .disabled(self.askCardViewModel.isNavLinkDisabled)
                     .buttonStyle(FlatLinkStyle())
