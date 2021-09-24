@@ -11,7 +11,6 @@ import FirebaseFirestoreSwift
 import Foundation
 
 struct Contact {
-    @ServerTimestamp var createdAt: Timestamp?
     var id = UUID().uuidString
     var firstName: String
     var lastName: String
