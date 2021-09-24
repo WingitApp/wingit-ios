@@ -89,10 +89,8 @@ struct NotificationES: View {
             TimeAgoStamp(date: activity.date)
           }
 
-          
       }
   
-      
   }
 }
 

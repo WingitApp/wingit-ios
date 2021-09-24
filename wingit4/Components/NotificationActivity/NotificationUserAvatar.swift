@@ -59,7 +59,7 @@ struct NotificationUserAvatar: View {
     case "connectRequestAccepted":
       return Color("Color1")
     case "referred":
-      return Color(.systemBlue)
+        return Color.wingitBlue
     // referral
     case "accepted":
       return Color("Color1")
