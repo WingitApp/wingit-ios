@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 import Foundation
 
 struct Contact {
-    var id = UUID().uuidString
+    var id = UUID()
     var firstName: String
     var lastName: String
     var image: Data?
@@ -26,7 +26,6 @@ struct Contact {
     }
 
     init(firstName: String, lastName: String, numbers: [PhoneNumber], systemContact: CNContact) {
-        self.id = systemContact.identifier
         self.firstName = firstName
         self.lastName = lastName
         self.numbers = numbers
