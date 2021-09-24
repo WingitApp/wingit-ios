@@ -110,7 +110,7 @@ struct ReferConnectionsList: View {
                     Image(systemName: "person.badge.plus")
                       .imageScale(Image.Scale.medium)
                       .foregroundColor(.gray)
-                      .padding(.trailing, 25)
+                      .padding(.trailing, 20)
                   }
                   .onTapGesture(perform: openPhoneContactList)
 

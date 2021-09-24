@@ -24,7 +24,7 @@ struct ContactItem: View {
         }
         .navigationBarHidden(true)
         .padding(
-          EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0)
+          EdgeInsets(top: 10, leading: 15, bottom: 0, trailing: 15)
         )
         .contentShape(Rectangle())
       }

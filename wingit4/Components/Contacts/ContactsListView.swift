@@ -19,8 +19,9 @@ struct ContactsListView: View {
          VStack {
             SearchBar(text: $viewModel.searchText, placeholder: "Search for contacts to invite")
 
-            List {
+            ScrollView(){
                 // Filtered list of names
+              VStack(alignment: .leading) {
                 ForEach(viewModel.contacts.filter { viewModel.contactFilter(contact: $0)}, id:\.id) { contact in // --> We display all filtered contacts
                     Button(action: {
                         sendMessage(numberToMessage: contact.numbers[0].number)
@@ -28,7 +29,12 @@ struct ContactsListView: View {
                     }, label: {
                         ContactItem(contact: contact, phoneNumber: contact.numbers[0].number)
                     })
-                }
+                    
+                    .buttonStyle(PlainButtonStyle())
+                    Divider()
+                  }
+       
+              }
             }
 //            .modifier(ResignKeyboardOnDragGesture())
         }
