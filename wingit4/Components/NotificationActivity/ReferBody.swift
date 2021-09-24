@@ -44,6 +44,9 @@ struct ReferBody: View {
               index: 1
             )
           }
+          .navigationBarTitle("")
+          .navigationBarHidden(true)
+          .edgesIgnoringSafeArea(.top)
         }
         .buttonStyle(PlainButtonStyle())
     }

@@ -13,10 +13,10 @@ struct ReferButton: View {
 
     @Binding var post: Post
     var showLabel: Bool = false
-  //  @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
-//    @EnvironmentObject var session: SessionStore
+
     var body: some View {
         Button(action: {
+            Haptic.impact(type: "soft")
             referViewModel.isReferListOpen.toggle()
         },
         label: {

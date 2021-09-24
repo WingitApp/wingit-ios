@@ -10,12 +10,13 @@ import SwiftUI
 struct AskCollaborationDetail: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
   @EnvironmentObject var commentViewModel : CommentViewModel
+  
 
   @State private var showDetail: Bool = false
   
   
     var body: some View {
-      if !Array(Set(askCardViewModel.bumpers + askCardViewModel.wingers)).isEmpty {
+      if !askCardViewModel.bumpers.isEmpty && !askCardViewModel.wingers.isEmpty {
 
         VStack {
           VStack(alignment: .leading) {
@@ -25,7 +26,10 @@ struct AskCollaborationDetail: View {
                   .fontWeight(.semibold)
                 Spacer()
                 if !askCardViewModel.wingers.isEmpty {
-                  Button( action: { withAnimation { self.showDetail.toggle() } }) {
+                  Button( action: {
+                    Haptic.impact(type: "soft")
+                    withAnimation { self.showDetail.toggle() }
+                  }) {
                       Text(
                         Image(systemName: "chevron.right")
                       )

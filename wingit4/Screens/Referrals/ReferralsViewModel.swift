@@ -26,7 +26,7 @@ class ReferralsViewModel: ObservableObject {
     @Published var isFetchingClosed: Bool = true
   
     // Programatically Navigate
-    @Published var destination: AnyView = AnyView(EmptyView())
+    @Published var destination: AskDetailView?
     @Published var isLinkActive: Bool = false
     
     var pendingListener: ListenerRegistration!
@@ -296,11 +296,14 @@ class ReferralsViewModel: ObservableObject {
     
     func acceptReferral(referral: Referral, post: Binding<Post>) {
         guard let referralId = referral.id, let currentUser = Auth.auth().currentUser else { return }
-        Api.Referrals.updateStatus(referralId: referralId, newStatus: .accepted)
+        Api.Referrals.updateStatus(
+          referralId: referralId,
+          newStatus: .accepted
+        )
         let text = "\(referral.sender?.displayName ?? "") invited \(currentUser.displayName ?? "") to help."
         postInvitedReferralComment(text: text, referral: referral) {
-        self.destination = AnyView(AskDetailView(post: post))
-        self.isLinkActive = true
+          self.destination = AskDetailView(post: post)
+          self.isLinkActive = true
         }
     }
     

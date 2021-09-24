@@ -22,7 +22,8 @@ struct NotificationView: View {
                   function: nil
                 )
             } else {
-            List{
+              ScrollView(showsIndicators: false) {
+              LazyVStack(alignment: .leading) {
                 if !activityViewModel.activityArray.isEmpty {
                     ForEach(self.activityViewModel.activityArray, id: \.activityId) { activity in
                       HStack(alignment: .top) {
@@ -67,14 +68,14 @@ struct NotificationView: View {
 
 
                         }
-                        .padding(
-                          EdgeInsets(top: 15, leading: 0, bottom: 15, trailing: 0)
-                        )
+                        .padding(15)
+                        Divider()
                     }
                 }
                   
            
             }.navigationBarTitle(Text("Notifications"), displayMode: .inline)
+            }
         }
         }
       

@@ -25,6 +25,11 @@ struct AskDetailCard: View {
         }
         .padding([.horizontal])
       }
+      .onAppear {
+        if askCardViewModel.wingers.isEmpty && askCardViewModel.bumpers.isEmpty {
+          askCardViewModel.initVM(post: post, isProfileView: false)
+        }
+      }
       .environmentObject(referViewModel)
       .environmentObject(askCardViewModel)
       .environmentObject(askMenuViewModel)

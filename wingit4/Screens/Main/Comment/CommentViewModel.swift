@@ -30,7 +30,7 @@ class CommentViewModel: ObservableObject {
       if !self.isLoading {
         self.isLoading.toggle()
       }
-          
+      
       Api.Comment.getComments(
         postId: postId,
         onSuccess: { (allComments) in

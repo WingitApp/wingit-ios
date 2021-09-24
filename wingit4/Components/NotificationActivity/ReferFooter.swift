@@ -31,6 +31,7 @@ struct AcceptButton: View {
     
     var body: some View {
         Button(action: {
+            Haptic.impact(type: "soft")
             referralsViewModel.acceptReferral(referral: referral, post: $post)
         },
                label: {
@@ -63,6 +64,7 @@ struct WingButton: View {
         
         Button(action: {
             logToAmplitude(event: .tapWingReferralButton)
+            Haptic.impact(type: "soft")
             referViewModel.isReferListOpen.toggle()
         },
                label: {

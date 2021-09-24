@@ -82,7 +82,6 @@ class WingerTextDescription {
       return Text("Be the first to wing this request!")
       
     } else if wingers.count == 1 {
-      print("wingers[0]:",wingers[0])
       return (
         Text(wingers[0].displayName!.capitalized).bold() +
         Text(" has winged this request.")

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AskDetailView: View {
     @StateObject var commentViewModel = CommentViewModel()
+    
     @Binding var post: Post
     
   
@@ -40,7 +41,6 @@ struct AskDetailView: View {
       .environmentObject(commentViewModel)
       .frame(
         width: UIScreen.main.bounds.size.width
-//        height: UIScreen.main.bounds.size.height
       )
       .onAppear {
         self.commentViewModel.loadComments(postId: post.postId)

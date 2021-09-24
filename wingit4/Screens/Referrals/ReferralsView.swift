@@ -62,7 +62,7 @@ struct ReferralsView: View {
                 .onAppear {
                   self.referralsViewModel.getReferrals()
                 }
-                .navigationBarTitle("Referrals", displayMode: .inline)
+                .navigationBarTitle("Referrals Inbox", displayMode: .inline)
             }
  
       }
@@ -82,8 +82,13 @@ struct ReferralsNotificationView: View {
   
     var body: some View {
 
-            ScrollView {
-            if referralsViewModel.pendingReferrals.count == 0 && referralsViewModel.acceptedReferrals.count == 0 && referralsViewModel.wingedReferrals.count == 0 && referralsViewModel.closedReferrals.count == 0 {
+            ScrollView (showsIndicators: false){
+            if !referralsViewModel.isLoading &&
+                referralsViewModel.pendingReferrals.count == 0 &&
+                referralsViewModel.acceptedReferrals.count == 0 &&
+                referralsViewModel.wingedReferrals.count == 0 &&
+                referralsViewModel.closedReferrals.count == 0
+            {
                 PostEmptyState(
                   title: "No Referrals!",
                   description: "Tell your friends to wing asks to you.",
@@ -92,36 +97,8 @@ struct ReferralsNotificationView: View {
                   function: nil
                 ).padding(.top, 285)
             } else {
-                  LazyVStack(alignment: .leading) {
-      //                if !referralsViewModel.pendingReferrals.isEmpty {
-      //                    Text("Pending")
-      //                }
-                      ForEach(Array(self.referralsViewModel.pendingReferrals.enumerated()), id: \.element) { index, referral in
-                          ReferCard(referral: referral, post: referral.ask!)
-                      }
-                    
-      //                if !referralsViewModel.acceptedReferrals.isEmpty {
-      //                    Text("Accepted")
-      //                }
-                      ForEach(Array(self.referralsViewModel.acceptedReferrals.enumerated()), id: \.element) { index, referral in
-                          if (referral.ask != nil) {
-                              AcceptCard(referral: referral, post: referral.ask!)
-                          }
-                      }
-      //                if !referralsViewModel.wingedReferrals.isEmpty {
-      //                    Text("Winged")
-      //                }
-                      ForEach(Array(self.referralsViewModel.wingedReferrals.enumerated()), id: \.element) { index, referral in
-                          WingCard(referral: referral, post: referral.ask!)
-                      }
-      //                if !referralsViewModel.closedReferrals.isEmpty {
-      //                    Text("Closed")
-      //                }
-                      ForEach(Array(self.referralsViewModel.closedReferrals.enumerated()), id: \.element) { index, referral in
-                          ClosedCard(referral: referral, post: referral.ask!)
-                      }
-                    }
-                 }
+              ReferralFeed()
+            }
                 NavigationLink(
                     destination:
                         self.referralsViewModel.destination
@@ -144,6 +121,6 @@ struct ReferralsNotificationView: View {
                 .onAppear {
                   self.referralsViewModel.getReferrals()
                 }
-                .navigationBarTitle("Referrals", displayMode: .inline)
+                .navigationBarTitle("Referrals Inbox", displayMode: .inline)
       }
 }
