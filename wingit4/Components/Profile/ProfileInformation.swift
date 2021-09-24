@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseAuth
 import URLImage
+import SPAlert
 
 struct ProfileInformation: View {
     
@@ -65,6 +66,9 @@ struct UpdateProfilePhoto: View {
     func addAvatar() {
         updatePhotoVM.updatePhoto(imageData: updatePhotoVM.imageData, completed: {
             self.clean()
+            self.closeSheet()
+            let alertView = SPAlertView( title: "Photo updated!", preset: SPAlertIconPreset.done);
+            alertView.present(duration: 2)
             // Switch to the Main App
         }) { (errorMessage) in
             self.updatePhotoVM.showAlert = true
@@ -97,8 +101,8 @@ struct UpdateProfilePhoto: View {
             Text("Change your photo")
                 .bold()
                 .foregroundColor(Color.wingitBlue)
-                .padding(.bottom, 50)
-                .font(.headline)
+                .padding(.bottom, 100)
+                .font(.title)
                    
             ZStack {
                 updatePhotoVM.image
