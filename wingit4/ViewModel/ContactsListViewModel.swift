@@ -27,6 +27,7 @@ class ContactsListViewModel: ObservableObject {
                 return
             }
             self.contacts = contacts
+          print("self.contacts", self.contacts)
         }
     }
     

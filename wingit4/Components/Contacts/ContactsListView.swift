@@ -34,6 +34,9 @@ struct ContactsListView: View {
          .onAppear {
             viewModel.fetch()
          }
+         .navigationBarTitle("Invite Contacts")
+         .edgesIgnoringSafeArea(.top)
+
     }
     
     func sendMessage(numberToMessage: String) {

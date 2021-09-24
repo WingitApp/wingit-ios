@@ -22,7 +22,6 @@ struct ContactItem: View {
             Spacer()
             Image(systemName: "plus.circle").foregroundColor(.gray)
         }
-        .navigationBarHidden(true)
         .padding(
           EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0)
         )

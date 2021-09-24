@@ -19,7 +19,7 @@ extension AnyTransition {
 struct ReferConnectionsList: View {
     @EnvironmentObject var referViewModel: ReferViewModel
     @Binding var post: Post
-    @Binding var isContactsOpen: Bool
+    @State var isContactsOpen: Bool = false
 
   //  var postId: String
   
@@ -33,12 +33,22 @@ struct ReferConnectionsList: View {
     func onAppearLoadConnectionsList() {
       referViewModel.loadConnections(post: post)
     }
+  
+  func openPhoneContactList() {
+    logToAmplitude(
+        event: .tapInviteContacts,
+        properties: [.screen: "Refer Connections"]
+    )
+    isContactsOpen.toggle()
+  }
     
   
 
     var body: some View {
-
+      NavigationView {
         VStack {
+          NavigationLink(destination: ContactsListView(), isActive: $isContactsOpen) { EmptyView() }.hidden()
+
              Spacer()
              VStack(alignment: .leading, spacing: 0){
                    HStack{
@@ -56,7 +66,7 @@ struct ReferConnectionsList: View {
                             .font(.system(size:20))
                             .fontWeight(.semibold)
                             .foregroundColor(.wingitBlue)
-                           .padding(.trailing, 5)
+                           .padding(.trailing, 7)
                          }).disabled(self.referViewModel.isDisabled)
                    }
                    .padding([.horizontal,.top])
@@ -96,21 +106,16 @@ struct ReferConnectionsList: View {
                       .padding(.leading, 15)
                       .padding(.bottom, 5)
                     Spacer()
-                    Image(systemName: "person.fill.badge.plus")
+                  HStack {
+                    Image(systemName: "person.badge.plus")
                       .imageScale(Image.Scale.medium)
                       .foregroundColor(.gray)
-                        .onTapGesture {
-                            referViewModel.isReferListOpen = false
-                            isContactsOpen.toggle()
-                        }
-                    .padding(.trailing, 10)
-                    .simultaneousGesture(TapGesture().onEnded {
-                        logToAmplitude(
-                            event: .tapInviteContacts,
-                            properties: [.screen: "Refer Connections"]
-                        )
-                    })
+                      .padding(.trailing, 25)
+                  }
+                  .onTapGesture(perform: openPhoneContactList)
+
                 }
+                .padding(.bottom, 10)
                 Divider()
                 List {
                   ForEach(
@@ -134,7 +139,15 @@ struct ReferConnectionsList: View {
         .preferredColorScheme(.light)
         .onAppear(perform: onAppearLoadConnectionsList)
         .environmentObject(referViewModel)
-        .onDisappear(perform: self.referViewModel.resetToInitialState)
+       .onDisappear {
+          if !isContactsOpen {
+            self.referViewModel.resetToInitialState()
+          }
+       }
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
+        .edgesIgnoringSafeArea(.top)
+        }
     }
 }
 
