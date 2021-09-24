@@ -27,18 +27,6 @@ struct HomeView: View {
       
     var body: some View {
       NavigationView {
-<<<<<<< HEAD
-        VStack(alignment: .leading, spacing: 0) {
-          // Header Toggle
-//          HomeFeedHeader()
-          HomeFeed()
-        NavigationLink(
-            destination: ContactsListView(),
-            isActive: self.$contactsListViewModel.isLinkActive
-        ) {
-            EmptyView()
-        }
-=======
         ScrollViewReader { proxy in
             ZStack {
               HStack {}
@@ -53,9 +41,7 @@ struct HomeView: View {
               }
               .zIndex(1)
             }
->>>>>>> 0687804 (allow users to scroll to top when tapping on logo on homefeed)
         }
-        
         .onAppear( perform: onAppear )
         .background(Color.backgroundGray.ignoresSafeArea(.all, edges: .all))
         .toolbar {
@@ -85,6 +71,5 @@ struct HomeView: View {
             })
       }
       .environmentObject(homeViewModel)
-      .environmentObject(contactsListViewModel)
     }
 }
