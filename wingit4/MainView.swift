@@ -110,8 +110,7 @@ struct MainView: View {
                 self.mainViewModel.tapCount = 0
               }
           })
-          .animation(.easeInOut) // 2
-          .transition(.slide)
+          .animation(.easeInOut)
         ProfileView()
 //        ProfileDetail2()
           .tabItem({

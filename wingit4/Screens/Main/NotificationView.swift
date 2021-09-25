@@ -14,6 +14,12 @@ struct NotificationView: View {
     var body: some View {
        
         NavigationView {
+            if activityViewModel.isLoading {
+              // looks similar to notification card
+              ReferralPlaceholder(type: "accepted")
+              ReferralPlaceholder(type: "accepted")
+              ReferralPlaceholder(type: "accepted")
+            } else
             if activityViewModel.activityArray.isEmpty && !activityViewModel.isLoading {
                 NotificationEmptyState(
                   title: "No notifications!",

@@ -52,7 +52,7 @@ struct ReferralComment: View {
             .offset(x: 15, y: 10)
             .zIndex(1)
         }
-        .padding(.trailing, 10)
+        .padding(.trailing, 20)
 
         VStack(alignment: .leading) {
           HStack(spacing: 0) {

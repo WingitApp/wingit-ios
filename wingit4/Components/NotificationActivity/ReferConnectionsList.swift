@@ -10,11 +10,6 @@ import Firebase
 import URLImage
 import SPAlert
 
-extension AnyTransition {
-    static var moveAndFade: AnyTransition {
-        AnyTransition.slide
-    }
-}
 
 struct ReferConnectionsList: View {
     @EnvironmentObject var referViewModel: ReferViewModel

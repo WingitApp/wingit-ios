@@ -60,9 +60,8 @@ struct AskCollaborationDetail: View {
                 }
                 
               }
-              .animation(
-                Animation.easeOut(duration: 0.2)
-              )
+              .animation(.easeInOut) // 2
+              .transition(.enterLeftAndFade)
               .padding(.bottom, 10)
             }
           }
