@@ -10,6 +10,7 @@ import MessageUI
 import SwiftUI
 
 struct ContactsListView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var isShowingMessages = false
     @State private var numberToText: String = ""
     @State private var message = TEXT_SHARE_WINGIT
@@ -42,6 +43,14 @@ struct ContactsListView: View {
             viewModel.fetch()
          }
          .navigationBarTitle("Invite Contacts")
+         .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+           .onEnded({ value in
+               if value.translation.width > 0 {
+                   // right
+                 Haptic.impact(type: "soft")
+                 self.presentationMode.wrappedValue.dismiss()
+               }
+           }))
 
     }
     

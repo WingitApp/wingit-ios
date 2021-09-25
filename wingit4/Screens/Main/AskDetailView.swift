@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AskDetailView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject var commentViewModel = CommentViewModel()
     
     @Binding var post: Post
@@ -33,6 +34,14 @@ struct AskDetailView: View {
           .onTapGesture(perform: dismissKeyboard)
           CommentInput(post: $post, scrollProxyValue: proxy)
         }
+          .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+            .onEnded({ value in
+                if value.translation.width > 0 {
+                    // right
+                  Haptic.impact(type: "soft")
+                  self.presentationMode.wrappedValue.dismiss()
+                }
+            }))
       }
       .navigationBarTitle("")
       .navigationBarHidden(true)

@@ -60,9 +60,9 @@ struct ReferConnectionsList: View {
                            )
                             .font(.system(size:20))
                             .fontWeight(.semibold)
-                            .foregroundColor(.wingitBlue)
+                           .foregroundColor(self.referViewModel.selectedUsers.isEmpty ? .gray : .wingitBlue)
                            .padding(.trailing, 7)
-                         }).disabled(self.referViewModel.isDisabled)
+                         }).disabled(self.referViewModel.isDisabled || self.referViewModel.selectedUsers.isEmpty)
                    }
                    .padding([.horizontal,.top])
                    .padding(.bottom, 15)
@@ -101,14 +101,13 @@ struct ReferConnectionsList: View {
                       .padding(.leading, 15)
                       .padding(.bottom, 5)
                     Spacer()
-                  HStack {
-                    Image(systemName: "person.badge.plus")
-                      .imageScale(Image.Scale.medium)
-                      .foregroundColor(.gray)
-                      .padding(.trailing, 20)
-                  }
-                  .onTapGesture(perform: openPhoneContactList)
-
+                    Text(
+                      Image(systemName: "person.badge.plus")
+                    )
+                    .font(.system(size:20))
+                    .foregroundColor(.gray)
+                    .padding(.trailing, 20)
+                    .onTapGesture(perform: openPhoneContactList)
                 }
                 .padding(.bottom, 10)
                 Divider()

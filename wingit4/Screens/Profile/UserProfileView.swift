@@ -14,10 +14,12 @@ import URLImage
 //TODO: Refacor and reorganize
 
 struct UserProfileView: View {
+  @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     // props
-    @EnvironmentObject var session: SessionStore
-    @ObservedObject var userProfileViewModel = UserProfileViewModel()
-    @StateObject var connectionsViewModel = ConnectionsViewModel()
+  @EnvironmentObject var session: SessionStore
+  @ObservedObject var userProfileViewModel = UserProfileViewModel()
+  @StateObject var connectionsViewModel = ConnectionsViewModel()
   
     // state
    // @State var isImageSheetOpen: Bool = false
@@ -204,7 +206,14 @@ struct UserProfileView: View {
           .padding(.top, 230)
       }
       }
-
+      .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+        .onEnded({ value in
+            if value.translation.width > 0 {
+                // right
+              Haptic.impact(type: "soft")
+              self.presentationMode.wrappedValue.dismiss()
+            }
+        }))
     .navigationBarTitle(Text(userProfileViewModel.user.displayName ?? ""), displayMode: .inline)
     .onAppear {
       logToAmplitude(event: .viewOtherProfile)

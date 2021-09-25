@@ -10,6 +10,7 @@ import FirebaseAuth
 
 struct HomeView: View {
   @EnvironmentObject var homeViewModel: HomeViewModel
+//  @State var isAutoScrollDisabled: Bool = false
   @State var scrollProxy: ScrollViewProxy? = nil
   
   func onAppear() {
@@ -37,14 +38,18 @@ struct HomeView: View {
               .zIndex(-1)
               
               VStack(alignment: .leading, spacing: 0) {
+//                HomeFeedHeader()
                 HomeFeed()
                 
               }
+           
               .zIndex(1)
             }
         }
+        
         .onAppear( perform: onAppear )
         .background(Color.backgroundGray.ignoresSafeArea(.all, edges: .all))
+//        .ignoresSafeArea()
         .toolbar {
           ToolbarItem(placement: .principal) {
             VStack {
@@ -56,8 +61,8 @@ struct HomeView: View {
                 .padding(.top, -5)
             }
             .onTapGesture {
-                if self.scrollProxy != nil {
-                  self.scrollProxy!.scrollTo(0)
+              if self.scrollProxy != nil {
+                    self.scrollProxy!.scrollTo(0)
                 }
             }
           }

@@ -29,7 +29,7 @@ struct HomeFeedHeader: View {
           .foregroundColor(.gray)
       }
       .padding(
-        EdgeInsets(top: 20, leading: 15, bottom: 10, trailing: 15)
+        EdgeInsets(top: 0, leading: 15, bottom: 10, trailing: 15)
       )
     }
 }
