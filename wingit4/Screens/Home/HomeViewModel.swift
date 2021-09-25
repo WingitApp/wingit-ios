@@ -18,10 +18,7 @@ class HomeViewModel: ObservableObject {
   
     // Pagination State
     @Published var isLoadingNext: Bool = true
-  
-    
-   
-    
+      
     private var canLoadMorePages = true
     private var next: Query?
       
@@ -101,6 +98,9 @@ class HomeViewModel: ObservableObject {
       onSuccess: { posts, next in
         self.posts += posts
         self.next = next
+        self.toggleLoadingNextState(false)
+      },
+      onEmpty: {
         self.toggleLoadingNextState(false)
       }
     )

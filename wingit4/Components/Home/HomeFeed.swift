@@ -25,7 +25,7 @@ struct HomeFeed: View {
             )
         }.buttonStyle(PlainButtonStyle())
     } else {
-        ScrollView(showsIndicators: true) {
+        ScrollView(showsIndicators: false) {
           LazyVStack {
             ForEach(Array(homeViewModel.posts.enumerated()), id: \.element) { index, post in
                 AskCard(

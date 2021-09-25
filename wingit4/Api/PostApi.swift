@@ -387,7 +387,6 @@ class PostApi {
                         onSuccess(posts)
                     case .modified:
                       guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
-                      print("modified post:", decodedPost)
                       modifiedPost(decodedPost)
                     case .removed:
                       guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
@@ -401,13 +400,18 @@ class PostApi {
   
   func loadTimelinePaginated(
     next: Query,
-    onSuccess: @escaping(_ posts: [Post], _ next: Query) -> Void
+    onSuccess: @escaping (_ posts: [Post], _ next: Query) -> Void,
+    onEmpty: @escaping () -> Void
   ) -> Void {
       guard let userId = Auth.auth().currentUser?.uid else {return}
     next.getDocuments(completion: { (querySnapshot, error) in
           guard let snapshot = querySnapshot else {
             print("Error fetching next timeline")
             return
+          }
+      
+          if snapshot.documents.isEmpty {
+            return onEmpty()
           }
           guard let lastSnapshot = snapshot.documents.last else { return }
         

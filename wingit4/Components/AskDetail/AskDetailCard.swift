@@ -20,10 +20,8 @@ struct AskDetailCard: View {
     var body: some View {
       VStack(alignment: .leading, spacing: 0) {
         AskDetailBody(post: $post)
-        VStack(alignment: .leading) {
-          AskCollaborationDetail()
-        }
-        .padding([.horizontal])
+        AskCollaborationDetail()
+          .padding([.horizontal])
       }
       .onAppear {
         if askCardViewModel.wingers.isEmpty && askCardViewModel.bumpers.isEmpty {

@@ -35,7 +35,7 @@ struct MainView: View {
             if $0 == selection {
                 tapCount += 1
             }
-            Haptic.impact(type: "medium")
+            Haptic.impact(type: "soft")
             selection = $0
         }
 )}
