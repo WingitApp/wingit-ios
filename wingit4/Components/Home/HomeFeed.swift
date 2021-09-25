@@ -13,7 +13,11 @@ struct HomeFeed: View {
 
 
   var body: some View {
-    
+      
+    if homeViewModel.isLoading {
+      AskCardPlaceholder()
+      AskCardPlaceholder()
+    } else
     if !homeViewModel.isLoading && homeViewModel.posts.count == 0 {
         NavigationLink(destination: UsersView()) {
             PostEmptyState(

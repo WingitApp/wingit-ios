@@ -14,7 +14,7 @@ import Combine   // << needed for Just publisher below
 struct MainView: View {
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
   @EnvironmentObject var session: SessionStore
-  @ObservedObject var model: MainViewModel = MainViewModel()
+  @StateObject var mainViewModel = MainViewModel()
   @StateObject var profileViewModel = ProfileViewModel()
   @StateObject var activityViewModel = ActivityViewModel()
   @StateObject var homeViewModel = HomeViewModel()
@@ -26,19 +26,7 @@ struct MainView: View {
   @State private var notification = UUID()
   @State private var profile = UUID()
   
-  @State private var tapCount = 0
-  @State private var selection: Int = 0
-
-  var handler: Binding<Int> { Binding(
-        get: { selection},
-        set: {
-            if $0 == selection {
-                tapCount += 1
-            }
-            Haptic.impact(type: "soft")
-            selection = $0
-        }
-)}
+  
   
   func logout() {
     session.logout()
@@ -47,11 +35,11 @@ struct MainView: View {
   var body: some View {
     
 
-    TabView(selection: handler) {
+    TabView(selection: mainViewModel.tabHandler) {
         HomeView()
           .tabItem({
             VStack(alignment: .center ){
-              Image(systemName: selection == 0 ? "house.fill" : "house")
+              Image(systemName: mainViewModel.selection == 0 ? "house.fill" : "house")
               Text("Home")
                 .font(.caption2)
             }
@@ -59,17 +47,18 @@ struct MainView: View {
           .tag(0)
           .id(home)
           .onChange(
-            of: tapCount,
+            of: mainViewModel.tapCount,
             perform: { tapCount in
               if tapCount == 1 {
                 home = UUID()
-                self.tapCount = 0
+                mainViewModel.tapCount = 0
               }
           })
+          .transition(.slide) // 3
         ReferralsView()
           .tabItem({
             VStack(alignment: .center ){
-              Image(systemName: selection == 1 ? "paperplane.fill" : "paperplane" )
+              Image(systemName: mainViewModel.selection == 1 ? "paperplane.fill" : "paperplane" )
               Text("Inbox")
                 .font(.caption2)
             }
@@ -77,11 +66,11 @@ struct MainView: View {
           .tag(1)
           .id(referrals)
           .onChange(
-            of: tapCount,
+            of: mainViewModel.tapCount,
             perform: { tapCount in
               if tapCount == 1 {
                 referrals = UUID()
-                self.tapCount = 0
+                self.mainViewModel.tapCount = 0
               }
           })
         ComposePostView()
@@ -95,17 +84,17 @@ struct MainView: View {
           .tag(2)
           .id(composePost)
           .onChange(
-            of: tapCount,
+            of: mainViewModel.tapCount,
             perform: { tapCount in
               if tapCount == 1 {
                 composePost = UUID()
-                self.tapCount = 0
+                self.mainViewModel.tapCount = 0
               }
           })
         NotificationView()
           .tabItem({
             VStack(alignment: .center ){
-              Image(systemName: selection == 3 ? "bell.fill" : "bell")
+              Image(systemName: mainViewModel.selection == 3 ? "bell.fill" : "bell")
               Text("Notifs")
                 .font(.caption2)
             }
@@ -114,18 +103,20 @@ struct MainView: View {
           .tag(3)
           .id(notification)
           .onChange(
-            of: tapCount,
+            of: mainViewModel.tapCount,
             perform: { tapCount in
               if tapCount == 1 {
                 notification = UUID()
-                self.tapCount = 0
+                self.mainViewModel.tapCount = 0
               }
           })
+          .animation(.easeInOut) // 2
+          .transition(.slide)
         ProfileView()
 //        ProfileDetail2()
           .tabItem({
             VStack(alignment: .center ){
-              Image(systemName: selection == 4 ? "person.fill" : "person")
+              Image(systemName: mainViewModel.selection == 4 ? "person.fill" : "person")
               Text("You")
                 .font(.caption2)
             }
@@ -133,19 +124,21 @@ struct MainView: View {
           .tag(4)
           .id(profile)
           .onChange(
-            of: tapCount,
+            of: mainViewModel.tapCount,
             perform: { tapCount in
               if tapCount == 1 {
                 profile = UUID()
-                self.tapCount = 0
+                self.mainViewModel.tapCount = 0
               }
           })
      }
+
     .accentColor(.wingitBlue)
     .environmentObject(profileViewModel)
     .environmentObject(activityViewModel)
     .environmentObject(homeViewModel)
     .environmentObject(referViewModel)
+    .environmentObject(mainViewModel)
     .onAppear{
         self.homeViewModel.loadTimeline()
         self.profileViewModel.loadUserPosts()

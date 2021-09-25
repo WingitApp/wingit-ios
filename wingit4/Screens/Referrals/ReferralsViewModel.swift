@@ -19,7 +19,7 @@ class ReferralsViewModel: ObservableObject {
     @Published var wingedReferrals: [Referral] = []
     @Published var closedReferrals: [Referral] = []
     // Loading State
-    @Published var isLoading: Bool = false
+    @Published var isLoading: Bool = true
     @Published var isFetchingPending: Bool = true
     @Published var isFetchingAccepted: Bool = true
     @Published var isFetchingWinged: Bool = true
@@ -34,16 +34,14 @@ class ReferralsViewModel: ObservableObject {
     var wingedListener: ListenerRegistration!
     var closedListener: ListenerRegistration!
     
-    func getReferrals() {
-      if (isLoading) { return }
-      
+    func getReferrals() {      
       // initialize call
       isLoading = true
       let referralAPIGroup = DispatchGroup()
-      getPendingReferrals(dispatch: referralAPIGroup)
-      getAcceptedReferrals(dispatch: referralAPIGroup)
-      getWingedReferrals(dispatch: referralAPIGroup)
-      getClosedReferrals(dispatch: referralAPIGroup)
+      getPendingReferrals(dispatchGroup: referralAPIGroup)
+      getAcceptedReferrals(dispatchGroup: referralAPIGroup)
+      getWingedReferrals(dispatchGroup: referralAPIGroup)
+      getClosedReferrals(dispatchGroup: referralAPIGroup)
     
       // on finish
       referralAPIGroup.notify(queue: .main)  {
@@ -53,22 +51,23 @@ class ReferralsViewModel: ObservableObject {
           !self.isFetchingWinged &&
           !self.isFetchingClosed
         )
-        
+                
         if isDoneFetching {
           self.isLoading = false
-          
         }
       }
 
     }
     
-  func getPendingReferrals(dispatch: DispatchGroup) {
+  func getPendingReferrals(dispatchGroup: DispatchGroup?) {
       isFetchingPending = true
+      guard let dispatch = dispatchGroup else { return }
       dispatch.enter()
       Api.Referrals.getPendingReferrals(
         onEmpty: {
           if self.isFetchingPending {
             self.isFetchingPending = false
+            guard let dispatch = dispatchGroup else { return }
             dispatch.leave()
           }
         },
@@ -77,6 +76,7 @@ class ReferralsViewModel: ObservableObject {
               self.pendingReferrals = referrals
               if self.isFetchingPending {
                 self.isFetchingPending = false
+                guard let dispatch = dispatchGroup else { return }
                 dispatch.leave()
               }
           }
@@ -84,9 +84,9 @@ class ReferralsViewModel: ObservableObject {
           if !self.pendingReferrals.isEmpty {
             if !self.pendingReferrals.contains(referral) {
               self.pendingReferrals.insert(referral, at: 0)
-              self.isFetchingPending = false
               if self.isFetchingPending {
                 self.isFetchingPending = false
+                guard let dispatch = dispatchGroup else { return }
                 dispatch.leave()
               }
             }
@@ -95,9 +95,9 @@ class ReferralsViewModel: ObservableObject {
             if !self.pendingReferrals.isEmpty {
               if let index = self.pendingReferrals.firstIndex(where: {$0.id == referral.id}) {
                 self.pendingReferrals[index] = referral
-                self.isFetchingPending = false
                 if self.isFetchingPending {
                   self.isFetchingPending = false
+                  guard let dispatch = dispatchGroup else { return }
                   dispatch.leave()
                 }
               }
@@ -111,6 +111,7 @@ class ReferralsViewModel: ObservableObject {
               }
               if self.isFetchingPending {
                 self.isFetchingPending = false
+                guard let dispatch = dispatchGroup else { return }
                 dispatch.leave()
               }
 
@@ -120,13 +121,15 @@ class ReferralsViewModel: ObservableObject {
       }
     }
     
-    func getAcceptedReferrals(dispatch: DispatchGroup) {
+    func getAcceptedReferrals(dispatchGroup: DispatchGroup?) {
       isFetchingAccepted = true
+      guard let dispatch = dispatchGroup else { return }
       dispatch.enter()
       Api.Referrals.getAcceptedReferrals(
         onEmpty: {
           if self.isFetchingAccepted {
             self.isFetchingAccepted = false
+            guard let dispatch = dispatchGroup else { return }
             dispatch.leave()
           }
         },
@@ -135,6 +138,7 @@ class ReferralsViewModel: ObservableObject {
               self.acceptedReferrals = referrals
               if self.isFetchingAccepted {
                 self.isFetchingAccepted = false
+                guard let dispatch = dispatchGroup else { return }
                 dispatch.leave()
               }
           }
@@ -142,9 +146,9 @@ class ReferralsViewModel: ObservableObject {
           if !self.acceptedReferrals.isEmpty {
             if !self.acceptedReferrals.contains(referral) {
               self.acceptedReferrals.insert(referral, at: 0)
-              self.isFetchingAccepted = false
               if self.isFetchingAccepted {
                 self.isFetchingAccepted = false
+                guard let dispatch = dispatchGroup else { return }
                 dispatch.leave()
               }
             }
@@ -158,6 +162,7 @@ class ReferralsViewModel: ObservableObject {
               }
               if self.isFetchingAccepted {
                 self.isFetchingAccepted = false
+                guard let dispatch = dispatchGroup else { return }
                 dispatch.leave()
               }
             }
@@ -170,6 +175,7 @@ class ReferralsViewModel: ObservableObject {
               }
               if self.isFetchingAccepted {
                 self.isFetchingAccepted = false
+                guard let dispatch = dispatchGroup else { return }
                 dispatch.leave()
               }
           }
@@ -178,14 +184,16 @@ class ReferralsViewModel: ObservableObject {
       }
     }
     
-    func getWingedReferrals(dispatch: DispatchGroup) {
+    func getWingedReferrals(dispatchGroup: DispatchGroup?) {
       self.isFetchingWinged = true
+      guard let dispatch = dispatchGroup else { return }
       dispatch.enter()
       Api.Referrals.getWingedReferrals(
         onEmpty: {
-          self.isFetchingWinged = false
           if self.isFetchingWinged {
             self.isFetchingWinged = false
+            guard let dispatch = dispatchGroup else { return }
+
             dispatch.leave()
           }
         },
@@ -194,6 +202,7 @@ class ReferralsViewModel: ObservableObject {
               self.wingedReferrals = referrals
               if self.isFetchingWinged {
                 self.isFetchingWinged = false
+                guard let dispatch = dispatchGroup else { return }
                 dispatch.leave()
               }
           }
@@ -203,6 +212,7 @@ class ReferralsViewModel: ObservableObject {
               self.wingedReferrals.insert(referral, at: 0)
               if self.isFetchingWinged {
                 self.isFetchingWinged = false
+                guard let dispatch = dispatchGroup else { return }
                 dispatch.leave()
               }
             }
@@ -216,6 +226,7 @@ class ReferralsViewModel: ObservableObject {
               }
               if self.isFetchingWinged {
                 self.isFetchingWinged = false
+                guard let dispatch = dispatchGroup else { return }
                 dispatch.leave()
               }
             }
@@ -228,6 +239,7 @@ class ReferralsViewModel: ObservableObject {
               }
               if self.isFetchingWinged {
                 self.isFetchingWinged = false
+                guard let dispatch = dispatchGroup else { return }
                 dispatch.leave()
               }
           }
@@ -236,22 +248,24 @@ class ReferralsViewModel: ObservableObject {
       }
     }
     
-    func getClosedReferrals(dispatch: DispatchGroup) {
+    func getClosedReferrals(dispatchGroup: DispatchGroup?) {
       isFetchingClosed = true
+      guard let dispatch = dispatchGroup else { return }
       dispatch.enter()
       Api.Referrals.getClosedReferrals(
         onEmpty: {
           if self.isFetchingClosed {
             self.isFetchingClosed = false
+            guard let dispatch = dispatchGroup else { return }
             dispatch.leave()
           }
         },
         onSuccess: { (referrals) in
           if self.closedReferrals.isEmpty {
               self.closedReferrals = referrals
-              self.isFetchingClosed = false
               if self.isFetchingClosed {
                 self.isFetchingClosed = false
+                guard let dispatch = dispatchGroup else { return }
                 dispatch.leave()
               }
           }
@@ -261,6 +275,7 @@ class ReferralsViewModel: ObservableObject {
               self.closedReferrals.insert(referral, at: 0)
               if self.isFetchingClosed {
                 self.isFetchingClosed = false
+                guard let dispatch = dispatchGroup else { return }
                 dispatch.leave()
               }
             }
@@ -274,6 +289,7 @@ class ReferralsViewModel: ObservableObject {
               }
               if self.isFetchingClosed {
                 self.isFetchingClosed = false
+                guard let dispatch = dispatchGroup else { return }
                 dispatch.leave()
               }
             }
@@ -286,6 +302,7 @@ class ReferralsViewModel: ObservableObject {
               }
               if self.isFetchingClosed {
                 self.isFetchingClosed = false
+                guard let dispatch = dispatchGroup else { return }
                 dispatch.leave()
               }
           }

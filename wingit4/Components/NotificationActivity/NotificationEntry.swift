@@ -39,10 +39,11 @@ struct NotificationEntry: View {
 
 struct NotificationReferralEntry: View {
   var activity: Activity
+  @EnvironmentObject var mainViewModel: MainViewModel
+
   
   var body: some View {
-    
-    NavigationLink (destination: ReferralsNotificationView()){
+
       HStack(alignment: .top) {
           NotificationUserAvatar(
            imageUrl: activity.userAvatar,
@@ -59,11 +60,12 @@ struct NotificationReferralEntry: View {
               Spacer()
               TimeAgoStamp(date: activity.date)
           }
-
       }
-    }
-    .buttonStyle(PlainButtonStyle())
-      
+      .onTapGesture {
+        // we want to open referral tab on tap
+        mainViewModel.setTab(tabId: 1)
+      }
+    
   }
 }
 

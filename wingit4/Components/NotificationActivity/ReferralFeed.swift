@@ -36,5 +36,7 @@ struct ReferralFeed: View {
       }
       
     }
+    .animation(.easeInOut) // 2
+    .transition(.slide) // 3
   }
 }

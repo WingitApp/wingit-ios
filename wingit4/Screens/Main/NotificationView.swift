@@ -8,8 +8,9 @@ import SwiftUI
 
 struct NotificationView: View {
     
-    @EnvironmentObject var activityViewModel: ActivityViewModel
-
+  @EnvironmentObject var activityViewModel: ActivityViewModel
+  @EnvironmentObject var mainViewModel: MainViewModel
+  
     var body: some View {
        
         NavigationView {
@@ -39,7 +40,9 @@ struct NotificationView: View {
                                       activityViewModel: self.activityViewModel
                                     )
                             } else if activity.type == "referred" {
-                                NotificationReferralEntry(activity: activity)
+                                NotificationReferralEntry(
+                                  activity: activity
+                                )
                             } else {
                               NavigationLink (destination: UserProfileView(userId: activity.userId, user: nil)){
 
@@ -62,7 +65,7 @@ struct NotificationView: View {
 
                                 
                                
-                            }                          .buttonStyle(PlainButtonStyle())
+                            }.buttonStyle(PlainButtonStyle())
 
                           }
 
@@ -74,7 +77,9 @@ struct NotificationView: View {
                 }
                   
            
-            }.navigationBarTitle(Text("Notifications"), displayMode: .inline)
+            }
+              .navigationBarTitle(Text("Notifications"), displayMode: .inline)
+              .environmentObject(mainViewModel)
             }
         }
         }

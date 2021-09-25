@@ -11,29 +11,23 @@ import Combine
 import SwiftUI
 
 final class MainViewModel: ObservableObject {
-
-    var savedSelectedMainTabIndex: Int = 0
-    @Published var selectedIndex: Int = 0 {
-        didSet {
-            savedSelectedMainTabIndex = selectedIndex
-            switch selectedIndex {
-            case 0:
-                logToAmplitude(event: .viewHomeScreen)
-            case 1:
-                logToAmplitude(event: .viewReferralsScreen)
-            case 2:
-                logToAmplitude(event: .viewComposePostScreen)
-            case 3:
-                logToAmplitude(event: .viewNotifications)
-            case 4:
-                logToAmplitude(event: .viewOwnProfile)
-            default:
-                break
-            }
+    @Published var tapCount: Int = 0
+    @Published var selection: Int = 0
+  
+  var tabHandler: Binding<Int> { Binding(
+    get: { self.selection },
+    set: {
+      if $0 == self.selection {
+        self.tapCount += 1
         }
+      Haptic.impact(type: "soft")
+      self.selection = $0
     }
+  )}
+  
+  func setTab(tabId: Int) -> Void {
+    self.selection = tabId
+  }
+  
     
-    init() {
-        selectedIndex = savedSelectedMainTabIndex
-    }
 }

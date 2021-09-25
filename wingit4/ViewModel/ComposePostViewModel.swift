@@ -30,7 +30,6 @@ class ComposePostViewModel: ObservableObject {
     
     
     func sharePost(completed: @escaping() -> Void,  onError: @escaping(_ errorMessage: String) -> Void) {
-        print(" POST_TYPE_OPTIONS[selectedPostType],",  POST_TYPE_OPTIONS[selectedPostType])
         if !caption.isEmpty && imageData.count == 0 {
             logToAmplitude(event: .postAsk, properties: [.attachedPhoto: false])
             Api.Post.postWithoutMedia(
