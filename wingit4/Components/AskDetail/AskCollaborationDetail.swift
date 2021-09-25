@@ -10,7 +10,7 @@ import SwiftUI
 struct AskCollaborationDetail: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
   @EnvironmentObject var commentViewModel : CommentViewModel
-  
+  @State private var collaborators: [User] = []
 
   @State private var showDetail: Bool = false
   
@@ -36,14 +36,14 @@ struct AskCollaborationDetail: View {
                         .font(.system(size: 15))
                         .foregroundColor(showDetail ? .wingitBlue : .gray)
                         .rotationEffect(.degrees(showDetail ? 90 : 0))
-                        .scaleEffect(showDetail ? 1.1 : 1)
+                      .padding(.bottom, 5)
                   }
                 }
               }
             HStack {
               BumperCountSummary(
                 users: Array(Set(askCardViewModel.bumpers + askCardViewModel.wingers)).sorted(by: {
-                  $0.firstName! < $1.firstName!
+                  $0.id! < $1.id!
                 })
               )
               Spacer()

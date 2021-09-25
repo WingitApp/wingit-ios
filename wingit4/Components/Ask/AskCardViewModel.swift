@@ -26,7 +26,7 @@ class AskCardViewModel: ObservableObject {
   @Published var wingers: [User] = []
   @Published var isLoadingWingers: Bool = false
   @Published var listenerWingers: ListenerRegistration?
-
+  
   @Published var postOwner: User!
   @Published var isOwnPost: Bool = false
   @Published var isNavLinkDisabled: Bool = true

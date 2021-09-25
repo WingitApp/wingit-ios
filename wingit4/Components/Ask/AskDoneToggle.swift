@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import SPAlert
 
 struct AskDoneToggle: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
@@ -19,7 +20,9 @@ struct AskDoneToggle: View {
           action: {
             Haptic.impact(type: "hard")
             askCardViewModel.openCloseToggle(post: post) { newStatus in
-                post.status = newStatus
+              post.status = newStatus
+              let alertView = SPAlertView( title: "", preset: SPAlertIconPreset.done)
+              alertView.present(duration: 1)
             }
           },
           label: {
@@ -50,6 +53,7 @@ struct AskDoneToggle: View {
                     .font(.caption2)
                   Text(self.post.status == .closed ? "Completed" : "Mark Complete")
                     .font(.caption2)
+                    .fontWeight(.semibold)
                     .padding(.leading, -5)
                     .foregroundColor(self.post.status == .closed ? .white : .black.opacity(0.7))
                 }

@@ -84,5 +84,8 @@ struct ReferralComment: View {
         Spacer()
       }
       .padding(.bottom, 10)
+      .frame(
+        maxWidth: UIScreen.main.bounds.width - 30
+      )
     }
 }
