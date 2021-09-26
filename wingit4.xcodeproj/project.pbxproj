@@ -92,6 +92,10 @@
 		15E2F1AE26FAA9EF00638115 /* PostTypeOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E2F1AD26FAA9EF00638115 /* PostTypeOption.swift */; };
 		15E4907426E84A1700B25B56 /* AskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4906D26E84A1700B25B56 /* AskDetailView.swift */; };
 		15E4907D26E84CF400B25B56 /* DynamicHeightTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E4907A26E84BD700B25B56 /* DynamicHeightTextField.swift */; };
+		15EBCFC02700215F009F2E55 /* ReactionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EBCFBF2700215F009F2E55 /* ReactionBar.swift */; };
+		15EBCFC22700296F009F2E55 /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EBCFC12700296F009F2E55 /* BottomSheet.swift */; };
+		15EBCFC427002B13009F2E55 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EBCFC327002B13009F2E55 /* BlurView.swift */; };
+		15EBCFC627002C28009F2E55 /* CustomCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EBCFC527002C28009F2E55 /* CustomCorner.swift */; };
 		15F7E87926E8435A00E5238F /* Connections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F7E87726E8435A00E5238F /* Connections.swift */; };
 		15F7E87A26E8435A00E5238F /* PersonalProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F7E87826E8435A00E5238F /* PersonalProfileHeader.swift */; };
 		15F7E87C26E8436100E5238F /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -727,6 +731,7 @@
 				15F7E8BD26E8490100E5238F /* UserComment.swift */,
 				15F7E8BE26E8490100E5238F /* CommentList.swift */,
 				15E2F1AB26FA887500638115 /* UserCommentLabel.swift */,
+				15EBCFBF2700215F009F2E55 /* ReactionBar.swift */,
 			);
 			path = Comments;
 			sourceTree = "<group>";
@@ -939,10 +944,12 @@
 		3B7AF06926719EF1003BCCF3 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				15EBCFC327002B13009F2E55 /* BlurView.swift */,
 				3B75E3F326716E41002F3108 /* ImagePicker.swift */,
 				3B7AF0842671C08F003BCCF3 /* SearchBar.swift */,
 				1594EE74270658F500D5C9E9 /* BackgroundBlurView.swift */,
 				1594EE7827065F9E00D5C9E9 /* VerticalLine.swift */,
+				15EBCFC527002C28009F2E55 /* CustomCorner.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1210,6 +1217,7 @@
 				3B7AF05226719610003BCCF3 /* SigninViewModel.swift in Sources */,
 				1524FCD026D753320000629C /* HeaderCellViewModel.swift in Sources */,
 				65A7DC0E26EDA9E00032C739 /* UserProfileClosedPostsView.swift in Sources */,
+				15EBCFC427002B13009F2E55 /* BlurView.swift in Sources */,
 				3B75E3D926715CDE002F3108 /* EmailTextField.swift in Sources */,
 				3B7AF06F2671A03A003BCCF3 /* CommentView.swift in Sources */,
 				15E2F1AE26FAA9EF00638115 /* PostTypeOption.swift in Sources */,
@@ -1249,6 +1257,7 @@
 				151A3C8826D3256F00A39FAF /* HomeFeed.swift in Sources */,
 				3B7AF0872671CA69003BCCF3 /* UsersViewModel.swift in Sources */,
 				156E6AE626D8A13400690E47 /* UserProfileViewModel.swift in Sources */,
+				15EBCFC627002C28009F2E55 /* CustomCorner.swift in Sources */,
 				3BD12F1526C9CA1500E26A87 /* AppDel.swift in Sources */,
 				1524FCF826D812E70000629C /* CircleLoader.swift in Sources */,
 				FBDFDB55270E4BC400EDE22F /* BoardingScreen.swift in Sources */,
@@ -1282,6 +1291,7 @@
 				151A3C9626D567A800A39FAF /* AskDoneToggleViewModel.swift in Sources */,
 				3B7AF054267197BA003BCCF3 /* InitialView.swift in Sources */,
 				157F9972270BA7A1001A4031 /* UserProfileFeed.swift in Sources */,
+				15EBCFC22700296F009F2E55 /* BottomSheet.swift in Sources */,
 				654DA41926BC7BD3002864B8 /* MainViewModel.swift in Sources */,
 				3BFE30EC26E94437005543A0 /* AcceptedNotification.swift in Sources */,
 				65A9EF9D26DF0B2500E81CBF /* ConnectionsView.swift in Sources */,
@@ -1383,6 +1393,7 @@
 				3B75E3E32671657F002F3108 /* NamesTextField.swift in Sources */,
 				151A3C9B26D5BEF000A39FAF /* TimeAgoStamp.swift in Sources */,
 				15F7E8B826E848ED00E5238F /* AskDetailFooter.swift in Sources */,
+				15EBCFC02700215F009F2E55 /* ReactionBar.swift in Sources */,
 				15F7E8B626E848ED00E5238F /* AskDetailCard.swift in Sources */,
 				1524E0FD26F66FD600D5BDB4 /* BumpersRow.swift in Sources */,
 				15685B4126F40DD000FC84D8 /* ReferralUserCard.swift in Sources */,

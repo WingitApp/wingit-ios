@@ -13,9 +13,7 @@ struct UserComment: View {
   var postOwnerId: String?
   var isOPComment: Bool = false
   
-  // emoji
-  @State var text: String = ""
-  var emojiList: [String] = ["😀", "🦄"]
+
   
   @State var isNavActive: Bool = false
 
@@ -50,7 +48,7 @@ struct UserComment: View {
         VStack(alignment: .leading) {
           HStack(alignment: .center) {
               Text(comment.username ?? "")
-              .font(.system(size:12))
+              .font(.system(size:13))
               .fontWeight(.semibold)
 //            UserCommentLabel(isOPComment: isOPComment)
             Circle()
@@ -73,38 +71,13 @@ struct UserComment: View {
 
           
             Text(comment.comment?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
-            .font(.system(size:14))
+            .font(.system(size:15))
             .padding(.top, 1)
           
           
           // Emoji Bar
           
-          HStack {
-            ForEach(self.emojiList.indices, id: \.self) { index in
-              HStack(alignment: .center){
-                Text("\(self.emojiList[index])")
-                  .font(.system(size: 10))
-
-                Text("3")
-                  .font(.caption)
-                  .font(.system(size: 10))
-              }
-              .padding(3)
-              .background(Color.lightGray)
-              .cornerRadius(5)
-
-            }
-            
-            Image(systemName: "plus")
-              .padding(3)
-              .background(Color.lightGray)
-              .cornerRadius(100)
-              .font(.system(size: 10))
-            
-//            EmojiTextField(text: $text, placeholder: "Enter emoji")
-
-
-          }
+        
           
 
         }
@@ -113,14 +86,10 @@ struct UserComment: View {
         
         
       }
-<<<<<<< HEAD
-      .padding(15)
       .onTapGesture(perform: { isNavActive.toggle() })
-=======
       .padding(
         EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15)
       )
->>>>>>> 4b8918d (add mock reactions comment bar)
       Divider()
     }
 }
