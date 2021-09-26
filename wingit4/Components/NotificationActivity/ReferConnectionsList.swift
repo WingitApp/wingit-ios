@@ -34,6 +34,7 @@ struct ReferConnectionsList: View {
         event: .tapInviteContacts,
         properties: [.screen: "Refer Connections"]
     )
+    Haptic.impact(type: "soft")
     isContactsOpen.toggle()
   }
     
@@ -42,8 +43,12 @@ struct ReferConnectionsList: View {
     var body: some View {
       NavigationView {
         VStack {
+          
           NavigationLink(destination: ContactsListView(), isActive: $isContactsOpen) { EmptyView() }.hidden()
-
+             Capsule()
+              .fill(Color.gray)
+              .frame(width: 60, height: 4)
+              .padding(.top, 15)
              Spacer()
              VStack(alignment: .leading, spacing: 0){
                    HStack{

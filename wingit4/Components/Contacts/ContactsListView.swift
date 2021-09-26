@@ -18,6 +18,30 @@ struct ContactsListView: View {
 
     var body: some View {
          VStack {
+          HStack(alignment: .center) {
+            Text(
+              Image(systemName: "chevron.left")
+            )
+              .fontWeight(.semibold)
+              .font(.system(size: 25))
+              .foregroundColor(.wingitBlue)
+              .onTapGesture {
+                Haptic.impact(type: "soft")
+                self.presentationMode.wrappedValue.dismiss()
+              }
+            .padding(.top, 15)
+            
+            Spacer()
+            Capsule()
+             .fill(Color.gray)
+             .frame(width: 60, height: 4)
+              .offset(x: -10)
+              .padding(.leading, 10)
+            Spacer()
+          }
+          .padding(.leading, 10)
+          .padding(.trailing, 10)
+         
             SearchBar(text: $viewModel.searchText, placeholder: "Search for contacts to invite")
 
             ScrollView(){
@@ -42,7 +66,8 @@ struct ContactsListView: View {
          .onAppear {
             viewModel.fetch()
          }
-         .navigationBarTitle("Invite Contacts")
+         .navigationBarTitle("")
+         .navigationBarHidden(true)
          .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
            .onEnded({ value in
                if value.translation.width > 0 {
