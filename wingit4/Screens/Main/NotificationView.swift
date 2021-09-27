@@ -14,12 +14,7 @@ struct NotificationView: View {
     var body: some View {
        
         NavigationView {
-            if activityViewModel.isLoading {
-              // looks similar to notification card
-              ReferralPlaceholder(type: "accepted")
-              ReferralPlaceholder(type: "accepted")
-              ReferralPlaceholder(type: "accepted")
-            } else
+
             if activityViewModel.activityArray.isEmpty && !activityViewModel.isLoading {
                 NotificationEmptyState(
                   title: "No notifications!",
@@ -30,6 +25,12 @@ struct NotificationView: View {
                 )
             } else {
               ScrollView(showsIndicators: false) {
+                if activityViewModel.isLoading {
+                  ReferralPlaceholder(type: "accepted")
+                  ReferralPlaceholder(type: "accepted")
+                  ReferralPlaceholder(type: "accepted")
+                }
+                
               LazyVStack(alignment: .leading) {
                 if !activityViewModel.activityArray.isEmpty {
                     ForEach(self.activityViewModel.activityArray, id: \.activityId) { activity in

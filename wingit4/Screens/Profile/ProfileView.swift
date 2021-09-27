@@ -103,6 +103,7 @@ struct ProfileView: View {
             .frame(width: UIScreen.main.bounds.width)
             
             ProfileFeed()
+              
 
           }
           .zIndex(1)
@@ -142,7 +143,10 @@ struct ProfileView: View {
             
           }) {
           Label(
-            title: { Text("Logout").font(.subheadline)},
+            title: {
+              Text("Logout").font(.subheadline)
+                .foregroundColor(.gray)
+            },
             icon: {
               Image(systemName: "arrow.right.circle")})
                 .imageScale(Image.Scale.medium)

@@ -559,4 +559,22 @@ extension AnyTransition {
             .combined(with: .opacity)
         return .asymmetric(insertion: insertion, removal: removal)
     }
+  
+    static var enterAndExitLeft: AnyTransition {
+      let insertion = AnyTransition.move(edge: .leading)
+//          .combined(with: .opacity)
+      let removal = AnyTransition.move(edge: .leading)
+          .combined(with: .opacity)
+      return .asymmetric(insertion: insertion, removal: removal)
+    }
+  
+    static var enterAndExitRight: AnyTransition {
+      let insertion = AnyTransition.move(edge: .trailing)
+//          .combined(with: .opacity)
+      let removal = AnyTransition.move(edge: .trailing)
+          .combined(with: .opacity)
+      return .asymmetric(insertion: insertion, removal: removal)
+    }
+  
+    
 }

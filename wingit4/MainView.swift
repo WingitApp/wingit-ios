@@ -110,7 +110,6 @@ struct MainView: View {
                 self.mainViewModel.tapCount = 0
               }
           })
-          .animation(.easeInOut)
         ProfileView()
 //        ProfileDetail2()
           .tabItem({
@@ -130,6 +129,7 @@ struct MainView: View {
                 self.mainViewModel.tapCount = 0
               }
           })
+      
      }
 
     .accentColor(.wingitBlue)

@@ -117,6 +117,7 @@ class PostApi {
             if let error = error {
                 print(error)
             } else if let snapshot = snapshot {
+              
                 let result = Result { try snapshot.data(as: Post.self) }
                     switch result {
                         case .success(let post):
@@ -127,7 +128,7 @@ class PostApi {
                           //  print("Post document doesn't exist.")
                           }
                         case .failure(let error):
-                          // A User could not be initialized from the DocumentSnapshot.
+                          // A Post could not be initialized from the DocumentSnapshot.
                             printDecodingError(error: error)
                         }
             }
