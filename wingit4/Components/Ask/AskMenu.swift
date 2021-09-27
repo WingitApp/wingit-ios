@@ -57,12 +57,9 @@ struct EllipsisButton: View {
     var isHorizontal: Bool = false
     var body: some View {
         ZStack{
-            Image(systemName: "circle.fill")
-                .foregroundColor(.clear)
-        Image(systemName: "ellipsis")
-          .rotationEffect(.degrees(isHorizontal ? 0 : -90))
-          .foregroundColor(.wingitBlue)
-        }
-      
-   }
+          Image(systemName: "ellipsis")
+            .rotationEffect(.degrees(isHorizontal ? 0 : -90))
+            .foregroundColor(.wingitBlue)
+          }
+      }
 }

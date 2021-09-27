@@ -34,7 +34,9 @@ struct BodyCell: View {
                 })
             }
 
-          }.padding(.horizontal)
+          }
+          .padding(.top, 5)
+          .padding(.horizontal)
           .padding(.bottom, 2)
         
           Spacer(minLength: 0)

@@ -116,17 +116,6 @@ struct AskCard: View {
             .environmentObject(askCardViewModel)
             .environmentObject(askMenuViewModel)
       })
-//      .sheet(
-//        isPresented: $commentViewModel.isCommentSheetShown,
-//        content: {
-//          CommentView(post: $post)
-//            .environmentObject(askCardViewModel)
-//            .environmentObject(askMenuViewModel)
-//            .environmentObject(commentViewModel)
-//            .environmentObject(commentInputViewModel)
-//            .environmentObject(footerCellViewModel)
-//            .environmentObject(referViewModel)
-//        })
       .sheet(
         isPresented: $referViewModel.isReferListOpen,
         content: {

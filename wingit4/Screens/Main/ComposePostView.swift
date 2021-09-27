@@ -8,11 +8,11 @@
 import SPAlert
 import SwiftUI
 
-
-struct ComposePostView: View {
+struct ComposePostView: View, KeyboardReadable {
     
     @StateObject var composePostViewModel = ComposePostViewModel()
     @State private var isPostTypeMenuExpanded: Bool = false
+    @State private var isTextEditorOpen: Bool = false
   
     func sharePost() {
         composePostViewModel.sharePost(completed: {
@@ -74,7 +74,7 @@ struct ComposePostView: View {
         NavigationView {
             
           VStack(alignment: .leading) {
-            
+            if !isTextEditorOpen {
             Text("Attach an image")
               .font(.headline)
               .padding(.bottom, 5)
@@ -86,7 +86,7 @@ struct ComposePostView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: UIScreen.main.bounds.width / 2, height: 150)
-                            .cornerRadius(15)
+                            .cornerRadius(5)
                                 // Cancel Button...
                         Button(action: {composePostViewModel.imageData = Data(count: 0)}) {
                             
@@ -133,6 +133,7 @@ struct ComposePostView: View {
                     }
                   }
                   .frame(maxWidth: .infinity, alignment: .leading)
+                  .transition(.enterLeftAndFade)
                 },
                 label: {
                   HStack {
@@ -153,6 +154,7 @@ struct ComposePostView: View {
                   }
                 })
               .padding(.bottom, 5)
+          }
       
               Text("Compose a post")
                 .font(.headline)
@@ -166,7 +168,6 @@ struct ComposePostView: View {
                       .stroke(Color.gray, lineWidth: 0.3)
                   )
             }
-         
           .padding(
             EdgeInsets(top: 15, leading: 20, bottom: 15, trailing: 20)
           )
@@ -191,7 +192,14 @@ struct ComposePostView: View {
           .environmentObject(composePostViewModel)
          
         }
-        .onTapGesture { dismissKeyboard() }
+        .onReceive(keyboardPublisher) { isKeyboardVisible in
+            isTextEditorOpen = isKeyboardVisible
+       }
+        .onTapGesture {
+          dismissKeyboard()
+        }
+        
+       
     }
 }
 
