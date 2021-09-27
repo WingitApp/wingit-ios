@@ -26,7 +26,6 @@ class PostApi {
     func postWithoutMedia(
       caption: String,
       type: String,
-      imageData: Data,
       onSuccess: @escaping() -> Void,
       onError: @escaping(_ errorMessage: String) -> Void
     ) {

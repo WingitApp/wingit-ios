@@ -35,7 +35,6 @@ class ComposePostViewModel: ObservableObject {
             Api.Post.postWithoutMedia(
               caption: caption,
               type: POST_TYPE_OPTIONS[selectedPostType],
-              imageData: imageData,
               onSuccess: completed,
               onError: onError
             )
