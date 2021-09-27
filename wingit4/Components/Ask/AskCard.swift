@@ -13,6 +13,7 @@ struct AskCard: View {
   @State var post: Post
   var isProfileView: Bool
   var index: Int = 0
+  var referral: Referral?
   
   
   // Observable Objects
@@ -129,8 +130,14 @@ struct AskCard: View {
       .sheet(
         isPresented: $referViewModel.isReferListOpen,
         content: {
-          ReferConnectionsList(post: $post)
-            .environmentObject(referViewModel)
+          if let ref = referral {
+            ReferConnectionsList(post: $post, referral: ref)
+              .environmentObject(referViewModel)
+          } else {
+            ReferConnectionsList(post: $post)
+              .environmentObject(referViewModel)
+          }
+
         })
     }
   }

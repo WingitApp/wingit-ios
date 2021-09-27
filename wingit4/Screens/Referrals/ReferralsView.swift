@@ -59,12 +59,6 @@ struct ReferralsView: View {
                 ) {
                     EmptyView()
                 }
-                NavigationLink(
-                    destination: ContactsListView(),
-                    isActive: self.$contactsListViewModel.isLinkActive
-                ) {
-                    EmptyView()
-                }
              }
                 .padding(.top, 5)
                 .background(

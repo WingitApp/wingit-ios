@@ -212,5 +212,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D20B490D-DDAB-421D-ADA2-04E5A1023927"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wingit4/Analytics.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "AmplitudeEvent"
+            landmarkType = "13">
+            <Locations>
+               <Location
+                  uuid = "D20B490D-DDAB-421D-ADA2-04E5A1023927 - 83b1bec3c07703d2"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "wingit4.AmplitudeEvent.init(rawValue: Swift.String) -&gt; Swift.Optional&lt;wingit4.AmplitudeEvent&gt;"
+                  moduleName = "wingit4"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/joshslee/Documents/wingit-ios/wingit4/Analytics.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "1235">
+               </Location>
+               <Location
+                  uuid = "D20B490D-DDAB-421D-ADA2-04E5A1023927 - 93be18e8f304bf47"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "wingit4.AmplitudeEvent.rawValue.getter : Swift.String"
+                  moduleName = "wingit4"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/joshslee/Documents/wingit-ios/wingit4/Analytics.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "923">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

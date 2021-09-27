@@ -44,7 +44,7 @@ class ReferralsApi {
     }
     
     func updateStatus(referralId: String, newStatus: ReferralStatus) {
-        Ref.FS_COLLECTION_REFERRALS.document(referralId).updateData(["status": newStatus.rawValue, "updatedAt": FieldValue.serverTimestamp()])
+      Ref.FS_COLLECTION_REFERRALS.document(referralId).updateData(["status": newStatus.rawValue, "updatedAt": FieldValue.serverTimestamp()])
     }
   
     /**Used to get list of users who have winged (no listener attached)*/

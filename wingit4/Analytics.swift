@@ -37,6 +37,7 @@ enum AmplitudeEvent: String {
     case viewOwnOpenAsks = "View Own Open Asks"
     case viewOtherUsersClosedAsks = "View Other User's Closed Asks"
     case viewOwnClosedAsks = "View Own Closed Asks"
+    case wingAsk = "Wing Ask"
     
     // Referrals
     case ignoreReferral = "Ignore Referral"

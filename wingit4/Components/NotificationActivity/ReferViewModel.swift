@@ -113,7 +113,6 @@ class ReferViewModel : ObservableObject, Identifiable {
       Api.Post.getUserBumpsByPost(
         askId: post.postId,
         onSuccess: { bumpers in
-          print("bumper", bumpers)
           if bumpers.count > self.userBumps.count {
             self.userBumps = bumpers
           }

@@ -12,14 +12,14 @@ import FirebaseAuth
 
 
 struct ReferBody: View {
-    
+@EnvironmentObject var referViewModel: ReferViewModel
+
 // Menu
 @StateObject var askCardViewModel = AskCardViewModel()
 @StateObject var askMenuViewModel = AskMenuViewModel()
 @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
 // Comment
 @StateObject var commentViewModel = CommentViewModel()
-@StateObject var referViewModel = ReferViewModel()
 @StateObject var commentInputViewModel = CommentInputViewModel()
 // Like
 @StateObject var footerCellViewModel = FooterCellViewModel()
@@ -42,6 +42,7 @@ struct ReferBody: View {
               post: post,
               isProfileView: false,
               index: 1
+              
             )
           }
           .navigationBarTitle("")

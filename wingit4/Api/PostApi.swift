@@ -267,7 +267,6 @@ class PostApi {
                         onSuccess(posts)
                     case .modified:
                       guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}
-                      print("open modified:", decodedPost)
                       modifiedPost(decodedPost)
                     case .removed:
                       guard let decodedPost = try? documentChange.document.data(as: Post.self) else {return}

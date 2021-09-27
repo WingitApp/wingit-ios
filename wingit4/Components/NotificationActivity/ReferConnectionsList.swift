@@ -15,14 +15,30 @@ struct ReferConnectionsList: View {
     @EnvironmentObject var referViewModel: ReferViewModel
     @Binding var post: Post
     @State var isContactsOpen: Bool = false
+  var referral: Referral?
 
   //  var postId: String
   
     func onSend() {
       Haptic.impact(type: "medium")
-      referViewModel.sendReferrals(
+      if let ref = referral {
+        logToAmplitude(
+          event: .rewingReferral,
+          properties: [.askId : ref.askId]
+        )
+        referViewModel.rewingReferral(
+          askId: ref.askId,
+          parentId: ref.id
+        )
+      } else {
+        logToAmplitude(
+          event: .wingAsk,
+          properties: [.askId: post.postId]
+        )
+        referViewModel.sendReferrals(
           askId: post.postId
-      )
+        )
+      }
     }
   
     func onAppearLoadConnectionsList() {

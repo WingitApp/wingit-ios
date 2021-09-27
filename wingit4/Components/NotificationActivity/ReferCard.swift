@@ -37,7 +37,10 @@ struct ReferCard: View {
         .sheet(
           isPresented: $referViewModel.isReferListOpen,
           content: {
-            ReferConnectionsList(post: $post)
+            ReferConnectionsList(
+              post: $post,
+              referral: referral
+            )
               .environmentObject(referViewModel)
           })
 
