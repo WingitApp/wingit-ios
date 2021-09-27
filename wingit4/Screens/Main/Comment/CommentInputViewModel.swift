@@ -46,7 +46,7 @@ class CommentInputViewModel: ObservableObject {
                   .document()
                   .documentID
               
-                let activityDict: [String: Any] = [
+                let notificationDict: [String: Any] = [
                   "activityId": activityId,
                   "type": "comment",
                   "username": currentUser.displayName ?? "",
@@ -62,7 +62,7 @@ class CommentInputViewModel: ObservableObject {
                 Ref.FS_COLLECTION_ACTIVITY.document(post.ownerId)
                   .collection("feedItems")
                   .document(activityId)
-                  .setData(activityDict)
+                  .setData(notificationDict)
               
                 // log to backend
                 logToAmplitude(event: .commentOnRec)

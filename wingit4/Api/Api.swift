@@ -8,13 +8,13 @@
 import Foundation
 
 class Api {
-    static var Activity = ActivityApi()
     static var Ask = AskApi()
     static var Chat = ChatApi()
     static var Comment = CommentApi()
     static var Connections = ConnectionsApi()
     static var Contacts = ContactsService()
     static var Device = DeviceApi()
+    static var Notifications = NotificationsApi()
     static var Post = PostApi()
     static var Referrals = ReferralsApi()
     static var Report = ReportApi()

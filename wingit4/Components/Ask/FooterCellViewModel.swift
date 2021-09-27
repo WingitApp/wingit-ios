@@ -63,7 +63,7 @@ class FooterCellViewModel: ObservableObject {
     
         // find connections and update posts in their timeline using Cloud Function
         if Auth.auth().currentUser!.uid != post.ownerId {
-          self.createActivityNotification(post: post)
+          self.createNotification(post: post)
         }
     
 
@@ -107,7 +107,7 @@ class FooterCellViewModel: ObservableObject {
     
         if Auth.auth().currentUser!.uid != post.ownerId {
           
-          // does this remove the notification from the user's activity feed?
+          // does this remove the notification from the user's notification feed?
             Ref.FS_COLLECTION_ACTIVITY.document(post.ownerId)
               .collection("feedItems")
               .whereField("type", isEqualTo: "like")
@@ -124,7 +124,7 @@ class FooterCellViewModel: ObservableObject {
     }
   
   
-  func createActivityNotification(post: Post) {
+  func createNotification(post: Post) {
     guard let uid = Auth.auth().currentUser?.uid else { return }
     let activityId = Ref.FS_COLLECTION_ACTIVITY
       .document(post.ownerId)
@@ -132,7 +132,7 @@ class FooterCellViewModel: ObservableObject {
       .document()
       .documentID
   
-    let activityObject = Activity(
+    let notificationObject = Notification(
       activityId: activityId,
       type: "like",
       username: Auth.auth().currentUser!.displayName!,
@@ -144,12 +144,12 @@ class FooterCellViewModel: ObservableObject {
       date: Date().timeIntervalSince1970
     )
   
-    guard let activityDict = try? activityObject.toDictionary() else { return }
+    guard let notificationDict = try? notificationObject.toDictionary() else { return }
 
     Ref.FS_COLLECTION_ACTIVITY.document(post.ownerId)
       .collection("feedItems")
       .document(activityId)
-      .setData(activityDict)
+      .setData(notificationDict)
   }
 
         

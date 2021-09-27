@@ -2,24 +2,53 @@
 //  NotificationsApi.swift
 //  wingit4
 //
-//  Created by YaeRim Amy Chun on 6/21/21.
+//  Created by YaeRim Amy Chun on 6/11/21.
 //
+import Foundation
+import FirebaseAuth
+import FirebaseStorage
+import Firebase
 
-//import Foundation
-//
-//class NotificationsApi {
-//
-//func loadNotifications() {
-//
-//
-//    let ref = Database.database().reference()
-//    ref.child("users").child(self.loggedInUser.id).child("notifications").observeSingleEvent(of: .value, with: {
-//        snapshot in
-//        for snap in snapshot.children.allObjects as! [DataSnapshot] {
-//            guard let dict = snap.value as? [String : AnyObject] else { return }
-//            self.notifications.append(handleNotificationDict(notificationID: snap.key, dict))
-//        }
-//    })
-//}
-//
-//}
+class NotificationsApi {
+    
+    func loadNotifications(
+      onEmpty: @escaping () -> Void,
+      onSuccess: @escaping(_ notificationsArray: [Notification]) -> Void,
+      newNotification: @escaping(Notification) -> Void,
+      deleteNotification: @escaping(Notification) -> Void,
+      listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
+    ) {
+        guard let userId = Auth.auth().currentUser?.uid else {
+                return
+        }
+        let listenerFirestore =  Ref.FS_COLLECTION_ACTIVITY.document(userId).collection("feedItems").order(by: "date", descending: false).addSnapshotListener({ (querySnapshot, error) in
+            guard let snapshot = querySnapshot else { return }
+          
+            if snapshot.documentChanges.isEmpty {
+              onEmpty()
+            }
+            
+            snapshot.documentChanges.forEach { (documentChange) in
+                  switch documentChange.type {
+                  case .added:
+                    var notificationsArray = [Notification]()
+                      let dict = documentChange.document.data()
+                      guard let decodedNotification = try? Notification.init(fromDictionary: dict) else {return}
+                      newNotification(decodedNotification)
+                      notificationsArray.append(decodedNotification)
+                      onSuccess(notificationsArray)
+                  case .modified:
+                    break
+                  case .removed:
+                      let dict = documentChange.document.data()
+                       guard let decodedNotification = try? Notification.init(fromDictionary: dict) else {return}
+                       deleteNotification(decodedNotification)
+                  }
+            }
+            
+        })
+        
+        listener(listenerFirestore)
+        
+    }
+}

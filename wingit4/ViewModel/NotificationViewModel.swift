@@ -12,39 +12,39 @@ import Firebase
 import FirebaseFirestoreSwift
 
 
-class ActivityViewModel: ObservableObject {
+class NotificationViewModel: ObservableObject {
     
-    @Published var activityArray: [Activity] = []
+    @Published var notificationsArray: [Notification] = []
     var listener: ListenerRegistration!
     
     @Published var isLoading = true
 
     
-    func loadActivities() {
-        self.activityArray = []
+    func loadNotifications() {
+        self.notificationsArray = []
         isLoading = true
         
-        Api.Activity.loadActivities(
+        Api.Notifications.loadNotifications(
           onEmpty: {
             self.isLoading = false
           },
-          onSuccess: { (activityArray) in
-            if self.activityArray.isEmpty {
-                self.activityArray = activityArray
+          onSuccess: { (notificationsArray) in
+            if self.notificationsArray.isEmpty {
+                self.notificationsArray = notificationsArray
                 self.isLoading = false
             }
-          }, newActivity: { (activity) in
-              if !self.activityArray.isEmpty {
-                if !self.activityArray.contains(activity) {
-                  self.activityArray.insert(activity, at: 0)
+          }, newNotification: { (notification) in
+              if !self.notificationsArray.isEmpty {
+                if !self.notificationsArray.contains(notification) {
+                  self.notificationsArray.insert(notification, at: 0)
                   self.isLoading = false
                 }
               }
-          }, deleteActivity: { (activity) in
-              if !self.activityArray.isEmpty {
-                  for (index, a) in self.activityArray.enumerated() {
-                      if a.activityId == activity.activityId {
-                          self.activityArray.remove(at: index)
+          }, deleteNotification: { (notification) in
+              if !self.notificationsArray.isEmpty {
+                  for (index, n) in self.notificationsArray.enumerated() {
+                      if n.activityId == notification.activityId {
+                          self.notificationsArray.remove(at: index)
                           self.isLoading = false
                       }
                   }
@@ -70,7 +70,7 @@ class ActivityViewModel: ObservableObject {
     
     func sendConnectAcceptedAcknowledgement(userId: String) {
         let activityId = Ref.FS_COLLECTION_ACTIVITY.document(userId).collection("feedItems").document().documentID
-                 let activityObject = Activity(activityId: activityId, type: "connectRequestAccepted", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: "", mediaUrl: "", comment: "", date: Date().timeIntervalSince1970)
+                 let activityObject = Notification(activityId: activityId, type: "connectRequestAccepted", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: "", mediaUrl: "", comment: "", date: Date().timeIntervalSince1970)
                 guard let activityDict = try? activityObject.toDictionary() else { return }
 
                 Ref.FS_COLLECTION_ACTIVITY.document(userId).collection("feedItems").document(activityId).setData(activityDict)

@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Activity: Encodable, Decodable, Equatable {
+struct Notification: Encodable, Decodable, Equatable {
     
     var activityId: String
     var type: String

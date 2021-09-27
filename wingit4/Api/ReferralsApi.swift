@@ -19,7 +19,7 @@ class ReferralsApi {
         do {
             let _ = try Ref.FS_COLLECTION_REFERRALS.addDocument(from: referral)
             let activityId = Ref.FS_COLLECTION_ACTIVITY.document(recipientId).collection("feedItems").document().documentID
-             let activityObject = Activity(activityId: activityId, type: "referred", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: askId, mediaUrl: "", comment: "", date: Date().timeIntervalSince1970)
+             let activityObject = Notification(activityId: activityId, type: "referred", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: askId, mediaUrl: "", comment: "", date: Date().timeIntervalSince1970)
             guard let activityDict = try? activityObject.toDictionary() else { return }
 
             Ref.FS_COLLECTION_ACTIVITY.document(recipientId).collection("feedItems").document(activityId).setData(activityDict)
@@ -34,7 +34,7 @@ class ReferralsApi {
         do {
             let _ = try Ref.FS_COLLECTION_REFERRALS.addDocument(from: referral)
             let activityId = Ref.FS_COLLECTION_ACTIVITY.document(recipientId).collection("feedItems").document().documentID
-             let activityObject = Activity(activityId: activityId, type: "referred", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: askId, mediaUrl: "", comment: "", date: Date().timeIntervalSince1970)
+             let activityObject = Notification(activityId: activityId, type: "referred", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: askId, mediaUrl: "", comment: "", date: Date().timeIntervalSince1970)
             guard let activityDict = try? activityObject.toDictionary() else { return }
 
             Ref.FS_COLLECTION_ACTIVITY.document(recipientId).collection("feedItems").document(activityId).setData(activityDict)
@@ -59,7 +59,6 @@ class ReferralsApi {
         onSuccess(wingers)
       }
     }
-    
     
     func getReferralsByAskId(askId: String, onSuccess: @escaping(_ recipientIds: [String]) -> Void) {
         

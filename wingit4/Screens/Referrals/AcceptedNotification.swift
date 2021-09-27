@@ -62,7 +62,7 @@ struct AcceptedNotification: View {
             }
 
           
-            //TimeAgoStamp(date: activity.date)
+            //TimeAgoStamp(date: notification.date)
         }.padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
         }.buttonStyle(PlainButtonStyle())
     }
@@ -118,7 +118,7 @@ struct WingNotification: View {
                     .font(.system(size: 10))
             }
         
-            //TimeAgoStamp(date: activity.date)
+            //TimeAgoStamp(date: notification.date)
         }.padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
         }.buttonStyle(PlainButtonStyle())
     }
@@ -173,7 +173,7 @@ struct ClosedNotification: View {
                     .font(.system(size: 10))
             }
      
-            //TimeAgoStamp(date: activity.date)
+            //TimeAgoStamp(date: notification.date)
         }.padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
         }.buttonStyle(PlainButtonStyle())
     }
