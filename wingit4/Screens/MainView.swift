@@ -16,7 +16,7 @@ struct MainView: View {
   @EnvironmentObject var session: SessionStore
   @StateObject var mainViewModel = MainViewModel()
   @StateObject var profileViewModel = ProfileViewModel()
-  @StateObject var activityViewModel = ActivityViewModel()
+  @StateObject var notificationViewModel = NotificationViewModel()
   @StateObject var homeViewModel = HomeViewModel()
   @StateObject var referViewModel = ReferViewModel()
   
@@ -139,14 +139,14 @@ struct MainView: View {
 
     .accentColor(.wingitBlue)
     .environmentObject(profileViewModel)
-    .environmentObject(activityViewModel)
+    .environmentObject(notificationViewModel)
     .environmentObject(homeViewModel)
     .environmentObject(referViewModel)
     .environmentObject(mainViewModel)
     .onAppear{
         self.homeViewModel.loadTimeline()
         self.profileViewModel.loadUserPosts()
-        self.activityViewModel.loadActivities()
+        self.notificationViewModel.loadNotifications()
     }
   }
 }

@@ -8,14 +8,14 @@ import SwiftUI
 
 struct NotificationView: View {
     
-  @EnvironmentObject var activityViewModel: ActivityViewModel
+  @EnvironmentObject var notificationViewModel: NotificationViewModel
   @EnvironmentObject var mainViewModel: MainViewModel
   
     var body: some View {
        
         NavigationView {
 
-            if activityViewModel.activityArray.isEmpty && !activityViewModel.isLoading {
+            if notificationViewModel.notificationsArray.isEmpty && !notificationViewModel.isLoading {
                 NotificationEmptyState(
                   title: "No notifications!",
                   description: "Start interacting with friends to get started.",
@@ -25,49 +25,49 @@ struct NotificationView: View {
                 )
             } else {
               ScrollView(showsIndicators: false) {
-                if activityViewModel.isLoading {
+                if notificationViewModel.isLoading {
                   ReferralPlaceholder(type: "accepted")
                   ReferralPlaceholder(type: "accepted")
                   ReferralPlaceholder(type: "accepted")
                 }
                 
               LazyVStack(alignment: .leading) {
-                if !activityViewModel.activityArray.isEmpty {
-                    ForEach(self.activityViewModel.activityArray, id: \.activityId) { activity in
+                if !notificationViewModel.notificationsArray.isEmpty {
+                    ForEach(self.notificationViewModel.notificationsArray, id: \.activityId) { notification in
                       HStack(alignment: .top) {
-                            if activity.type == "comment" {
+                            if notification.type == "comment" {
 //                              NavigationLink(destination: AskDetailView)
-                                    NotificationEntry(activity: activity)
+                                    NotificationEntry(notification: notification)
 //                                    NavigationLink(destination: CommentView(postId: activity.postId)) {
 //                                        EmptyView()
 //                                    }
-                            } else if activity.type == "connectRequest" {
-                                    CommentActivityRow(
-                                      activity: activity,
-                                      activityViewModel: self.activityViewModel
+                            } else if notification.type == "connectRequest" {
+                                    CommentNotificationRow(
+                                      notification: notification,
+                                      notificationViewModel: self.notificationViewModel
                                     )
-                            } else if activity.type == "referred" {
+                            } else if notification.type == "referred" {
                                 NotificationReferralEntry(
-                                  activity: activity
+                                  notification: notification
                                 )
                             } else {
-                              NavigationLink (destination: UserProfileView(userId: activity.userId, user: nil)){
+                              NavigationLink (destination: UserProfileView(userId: notification.userId, user: nil)){
 
                                  NotificationUserAvatar(
-                                  imageUrl: activity.userAvatar,
-                                  type: activity.type
+                                  imageUrl: notification.userAvatar,
+                                  type: notification.type
                                  )
                                   .padding(.trailing, 10)
 
                               VStack(alignment: .leading) {
                                 HStack(alignment: .center, spacing: 5) {
-                                  Text(activity.username).bold() + Text(" ") + Text(activity.typeDescription)
+                                  Text(notification.username).bold() + Text(" ") + Text(notification.typeDescription)
                                 }
                                 .font(.subheadline)
                                 .fixedSize(horizontal: false, vertical: true)
 
                                 Spacer()
-                                Text(timeAgoSinceDate(Date(timeIntervalSince1970: activity.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
+                                Text(timeAgoSinceDate(Date(timeIntervalSince1970: notification.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
                               }
 
                                 
@@ -94,27 +94,27 @@ struct NotificationView: View {
     }
 }
 
-struct CommentActivityRow: View {
-    var activity: Activity
-    var activityViewModel: ActivityViewModel
+struct CommentNotificationRow: View {
+    var notification: Notification
+    var notificationViewModel: NotificationViewModel
     var body: some View {
 
         HStack(alignment: .top) {
           NotificationUserAvatar(
-           imageUrl: activity.userAvatar,
-           type: activity.type
+           imageUrl: notification.userAvatar,
+           type: notification.type
           )
            .padding(.trailing, 10)
             .padding(.trailing, 10)
 
           HStack{
               VStack(alignment: .leading) {
-                  Text(activity.username).bold() + Text(" ") + Text(activity.typeDescription)
+                  Text(notification.username).bold() + Text(" ") + Text(notification.typeDescription)
                 
                 VStack(alignment: .leading) {
-                    Text(timeAgoSinceDate(Date(timeIntervalSince1970: activity.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
+                    Text(timeAgoSinceDate(Date(timeIntervalSince1970: notification.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
                     Spacer()
-                      RespondToConnectRequestRow(activity: activity)
+                      RespondToConnectRequestRow(notification: notification)
                   }
                   .padding(.top, 3)
               }
@@ -129,13 +129,13 @@ struct CommentActivityRow: View {
 
 // Move to different file
 struct RespondToConnectRequestRow: View {
-    var activity: Activity
-    @EnvironmentObject var activityViewModel: ActivityViewModel
+    var notification: Notification
+    @EnvironmentObject var activityViewModel: NotificationViewModel
     var body: some View {
         
         HStack {
           // Ignore Button (todo: put in own file)
-          Button( action: { activityViewModel.deleteConnectRequest(fromUserId: activity.userId) }) {
+          Button( action: { activityViewModel.deleteConnectRequest(fromUserId: notification.userId) }) {
             Text("Ignore")
                 .fontWeight(.bold).foregroundColor(Color.black)
                 .font(.system(size: 14))
@@ -145,8 +145,8 @@ struct RespondToConnectRequestRow: View {
 
           // Accept Button (todo: put in own file)
           Button(action: {
-                    logToAmplitude(event: .acceptConnectRequest, properties: [.userId: activity.userId])
-                    activityViewModel.acceptConnectRequest(fromUserId: activity.userId) }) {
+                    logToAmplitude(event: .acceptConnectRequest, properties: [.userId: notification.userId])
+                    activityViewModel.acceptConnectRequest(fromUserId: notification.userId) }) {
               Text("Accept")
                   .fontWeight(.bold).foregroundColor(Color.white)
                   .font(.system(size: 14))

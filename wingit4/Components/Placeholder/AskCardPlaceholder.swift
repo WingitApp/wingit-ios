@@ -38,7 +38,7 @@ struct AskCardPlaceholder: View {
 
 
 //struct NotificationPlaceholder: View {
-//  let notificationPlaceholder = Activity(
+//  let notificationPlaceholder = Notification(
 //    activityId: "001",
 //    type: "comment",
 //    username: "zoey",

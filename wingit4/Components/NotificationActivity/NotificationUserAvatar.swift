@@ -14,7 +14,7 @@ struct NotificationUserAvatar: View {
   
     func getIconByType() -> String {
       switch type {
-      // activity
+      // notification
       case "comment":
         return "bubble.right.fill"
       case "follow":
