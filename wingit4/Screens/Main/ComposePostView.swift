@@ -19,16 +19,17 @@ struct ComposePostView: View {
            self.clean()
             let alertView = SPAlertView(title: "Your ask was successfully posted.", message: nil, preset: SPAlertIconPreset.done)
             alertView.present(duration: 2)
-            
+            composePostViewModel.isDisabled = false
         }) { (errorMessage) in
             //   print("Error: \(errorMessage)")
            self.composePostViewModel.showAlert = true
            self.composePostViewModel.errorString = errorMessage
+           composePostViewModel.isDisabled = false
         }
     }
         
     func clean() {
-      self.composePostViewModel.caption = ""
+        self.composePostViewModel.caption = ""
         self.composePostViewModel.image = Image(systemName: IMAGE_PHOTO)
         self.composePostViewModel.imageData = Data()
     }
