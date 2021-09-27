@@ -164,10 +164,6 @@ struct ComposePostView: View {
                     RoundedRectangle(cornerRadius: 5)
                       .stroke(Color.gray, lineWidth: 0.3)
                   )
-                  .onTapGesture { dismissKeyboard() }
-                  
-                
-              
             }
          
           .padding(
@@ -194,10 +190,7 @@ struct ComposePostView: View {
           .environmentObject(composePostViewModel)
          
         }
-       
-        //.onTapGesture { dismissKeyboard() }
-        
-       
+        .onTapGesture { dismissKeyboard() }
     }
 }
 
