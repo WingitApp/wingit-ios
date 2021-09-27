@@ -48,6 +48,7 @@ struct AskCard: View {
             users: self.askCardViewModel.bumpers,
             showDescription: true
           )
+          .redacted(reason: askCardViewModel.isLoadingBumpers ? .placeholder : [])
           Spacer()
         }
         .padding(EdgeInsets(top: 10, leading: 15, bottom: 5, trailing: 15))

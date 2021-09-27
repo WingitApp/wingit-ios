@@ -71,12 +71,14 @@ struct AskDetailBody: View {
             })
             
             .frame(width: UIScreen.main.bounds.width - 37, height: 275)
-            .cornerRadius(15)
+            .cornerRadius(8)
             .overlay(
-              RoundedRectangle(cornerRadius: 15)
+              RoundedRectangle(cornerRadius: 8)
                 .stroke(Color.gray, lineWidth: 0.2)
                 )
             })
+          .padding(.top, 10)
+          .padding(.bottom, 10)
          }
       }
       .padding(15)

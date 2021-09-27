@@ -29,6 +29,9 @@ struct CommentButton: View {
           )
           .fontWeight(.light)
           .modifier(IconButtonStyle())
+//          if self.commentViewModel.isLoading {
+//            CircleLoader()
+//          }
           if self.commentViewModel.comments.count > 0 {
             Text("\(commentViewModel.comments.count.formatUsingAbbrevation())")
               .foregroundColor(Color.wingitBlue)
@@ -41,7 +44,7 @@ struct CommentButton: View {
         }
       })
       .buttonStyle(PlainButtonStyle())
-     
+      .redacted(reason: self.commentViewModel.isLoading ? /*@START_MENU_TOKEN@*/.placeholder/*@END_MENU_TOKEN@*/ : [])
   }
     
 }

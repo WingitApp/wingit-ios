@@ -32,6 +32,8 @@ struct BodyCell: View {
                         .stroke(Color.gray, lineWidth: 0.3)
                     )
                 })
+                .padding(.top, 10)
+                .padding(.bottom, 10)
             }
 
           }

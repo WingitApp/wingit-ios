@@ -15,26 +15,20 @@ struct HeaderCell: View {
   @Binding var post: Post
   var index: Int?
   
-
-  
-  
-  
-  
-  
-    var body: some View {
-        VStack {
-            HStack {
-              AskCardTag(post: post)
-              Spacer()
-              if askCardViewModel.isProfileView {
-                AskDoneToggle(post: $post) // rename later
-              }
-                AskMenu()
-   
+  var body: some View {
+      VStack {
+          HStack {
+            AskCardTag(post: post)
+            Spacer()
+            if askCardViewModel.isProfileView {
+              AskDoneToggle(post: $post) // rename later
             }
-            .padding(
-              EdgeInsets(top: 5, leading: 15, bottom: 5, trailing: 15)
-            )
-        }
-    }
+              AskMenu()
+ 
+          }
+          .padding(
+            EdgeInsets(top: 5, leading: 15, bottom: 5, trailing: 15)
+          )
+      }
+  }
 }

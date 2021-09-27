@@ -170,6 +170,7 @@ class PostApi {
     
     func loadBumpers(
       postId: String,
+      onEmpty: @escaping () -> Void,
       onSuccess: @escaping(_ users: [User]) -> Void,
       onAddition: @escaping(_ user: User) -> Void,
       onRemoval: @escaping(_ user: User) -> Void,
@@ -180,6 +181,10 @@ class PostApi {
           .addSnapshotListener({ (snapshot, error) in
 
           guard let snap = snapshot else { return }
+            
+            if snap.documents.isEmpty {
+              onEmpty()
+            }
           
           snap.documentChanges.forEach { (documentChange) in
                 switch documentChange.type {

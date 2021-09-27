@@ -98,7 +98,7 @@ class BumpersTextDescription {
         )
       default:
         var names: [String] = []
-
+        
         if users.count <= limit {
           
           for index in users.indices {

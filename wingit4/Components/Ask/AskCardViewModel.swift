@@ -40,6 +40,7 @@ class AskCardViewModel: ObservableObject {
   
   
   func initVM(post: Post, isProfileView: Bool) -> Void {
+//    self.isLoading = true
     self.post = post
     self.isProfileView = isProfileView
     self.isOwnPost = Auth.auth().currentUser?.uid == post.ownerId
@@ -52,8 +53,8 @@ class AskCardViewModel: ObservableObject {
       }
     }
     self.isMarkedAsDone = isPostClosed
-    self.getBumpersByPostId(postId: post.postId)
-    self.getWingersByPostId(postId: post.postId)
+    self.getBumpersByPostId(postId: post.postId) // bumps (now wings)
+    self.getWingersByPostId(postId: post.postId) // accepters
   }
   
   func getBumpersByPostId(postId: String) {
@@ -62,6 +63,9 @@ class AskCardViewModel: ObservableObject {
     
     Api.Post.loadBumpers(
       postId: postId,
+      onEmpty: {
+        self.isLoadingBumpers = false
+      },
       onSuccess: { (bumpers) in
         if self.bumpers.count < bumpers.count {
           self.bumpers = bumpers
