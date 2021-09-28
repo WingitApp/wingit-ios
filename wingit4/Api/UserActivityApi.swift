@@ -14,7 +14,6 @@ class UserActivityApi {
     
     func loadActivity(
       onEmpty: @escaping () -> Void,
-      onSuccess: @escaping(_ activityArray: [UserActivity]) -> Void,
       newActivity: @escaping(UserActivity) -> Void,
       deleteActivity: @escaping(UserActivity) -> Void,
       listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
@@ -32,11 +31,8 @@ class UserActivityApi {
             snapshot.documentChanges.forEach { (documentChange) in
                   switch documentChange.type {
                   case .added:
-                    var activityArray = [UserActivity]()
                       guard let decodedActivity = try? documentChange.document.data(as: UserActivity.self) else { return }
                       newActivity(decodedActivity)
-                      activityArray.append(decodedActivity)
-                      onSuccess(activityArray)
                   case .modified:
                     break
                   case .removed:

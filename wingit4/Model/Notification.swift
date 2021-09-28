@@ -8,8 +8,9 @@
 import Foundation
 
 
-struct Notification: Encodable, Decodable, Equatable {
+struct Notification: Codable, Equatable {
     
+    // legacy fields
     var activityId: String
     var type: String
     var username: String

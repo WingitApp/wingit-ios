@@ -20,6 +20,7 @@ class NotificationsApi {
         guard let userId = Auth.auth().currentUser?.uid else {
                 return
         }
+        
         let listenerFirestore =  Ref.FS_COLLECTION_ACTIVITY.document(userId).collection("feedItems").order(by: "date", descending: false).addSnapshotListener({ (querySnapshot, error) in
             guard let snapshot = querySnapshot else { return }
           
@@ -30,15 +31,13 @@ class NotificationsApi {
             snapshot.documentChanges.forEach { (documentChange) in
                   switch documentChange.type {
                   case .added:
-                      let dict = documentChange.document.data()
-                      guard let decodedNotification = try? Notification.init(fromDictionary: dict) else {return}
+                      guard let decodedNotification = try? documentChange.document.data(as: Notification.self) else { return }
                       newNotification(decodedNotification)
                   case .modified:
                       break
                   case .removed:
-                      let dict = documentChange.document.data()
-                       guard let decodedNotification = try? Notification.init(fromDictionary: dict) else {return}
-                       deleteNotification(decodedNotification)
+                      guard let decodedNotification = try? documentChange.document.data(as: Notification.self) else { return }
+                    deleteNotification(decodedNotification)
                   }
             }
             
