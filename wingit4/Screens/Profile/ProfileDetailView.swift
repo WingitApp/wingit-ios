@@ -50,9 +50,14 @@ struct ProfileDetailView: View {
                  LinkCard()
                 Spacer(minLength: 0)
             }.padding()
-          
-            Image(systemName: "books.vertical.fill").padding().foregroundColor(Color.downeyGreen)
-            
+            HStack{
+                Image(systemName: "books.vertical.fill").padding(.leading).foregroundColor(Color.downeyGreen)
+            Image(systemName: self.toggle ?  "arrowtriangle.down.fill" : "arrowtriangle.forward.fill").foregroundColor(.gray).font(.caption2)
+                .onTapGesture{toggle.toggle()}
+            }
+            if toggle == true {
+                Text("bookTitles").padding()
+            }
         }
     }
 }
@@ -66,7 +71,7 @@ struct ProfileDetailView_Previews: PreviewProvider {
 struct ProfDetailCard: View {
     
     var body: some View {
-
+//Just one card but just to see how it looks like added more than one card.
     VStack{
         
         Image("Pic2").resizable().frame(width: 150, height: 100)
@@ -112,6 +117,7 @@ struct ProfDetailCard: View {
 struct LinkCard: View {
   
     var body: some View {
+      
         VStack{
             HStack(alignment: .center, spacing: 25){
                 LinkButton(linkIcon: "airbnb")
@@ -142,7 +148,10 @@ struct LinkCard: View {
 struct LinkButton: View {
     var linkIcon: String
     var body: some View {
-
+        Button(action:{
+          //  Api.User.addLink(field: <#T##String#>, user: <#T##User?#>)
+        })
+        {
                 Image(linkIcon)
                     .resizable()
                     .scaledToFit()
@@ -152,6 +161,6 @@ struct LinkButton: View {
         .cornerRadius(30)
         .clipped()
         .shadow(color: Color.gray.opacity(0.3), radius: 3, x: 0, y: 0)
-
+        }
     }
 }
