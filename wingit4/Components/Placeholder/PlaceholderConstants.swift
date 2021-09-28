@@ -24,7 +24,7 @@ class Placeholders {
   
     static let referral = Referral(
       askId: "placeholder-referral-askid",
-      receiverId: "placehodler-referral-receiverid",
+      recipientId: "placehodler-referral-recipientId",
       senderId:  "placeholder-referral-senderid",
       status: ReferralStatus.pending,
       text: "palceholder text"

@@ -61,10 +61,10 @@ class ReferViewModel : ObservableObject, Identifiable {
     func sendReferrals(askId: String) {
         
        for receivers in selectedUsers {
-           let receiverId = receivers.id
+           let recipientId = receivers.id
            Api.Referrals.sendReferral(
                askId: askId,
-               receiverId: receiverId,
+               recipientId: recipientId,
                senderId: Auth.auth().currentUser!.uid
            )
        }
@@ -79,10 +79,10 @@ class ReferViewModel : ObservableObject, Identifiable {
        guard let parentId = parentId else { return }
        Api.Referrals.updateStatus(referralId: parentId, newStatus: .winged)
        for receiver in selectedUsers {
-          let receiverId = receiver.id
+          let recipientId = receiver.id
            Api.Referrals.rewingReferral(
                askId: askId,
-               receiverId: receiverId,
+               recipientId: recipientId,
                parentId: parentId,
                senderId: Auth.auth().currentUser!.uid
            )

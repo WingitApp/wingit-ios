@@ -21,7 +21,7 @@ struct ReferHeader: View {
     //askId --> postId (body)
     //mediaUrl --> avatar of the asker. (body)
    
-    //receiverId --> current user.
+    //recipientId --> current user.
 
   
     var body: some View {

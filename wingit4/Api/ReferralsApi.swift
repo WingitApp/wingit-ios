@@ -13,31 +13,31 @@ import Foundation
 
 class ReferralsApi {
     
-    func sendReferral(askId: String, receiverId: String?, senderId: String?) {
-        guard let id = senderId, let receiverId = receiverId else { return }
-        let referral = Referral(id: nil, createdAt: nil, askId: askId, children: nil, closedAt: nil, receiverId: receiverId, parentId: nil, senderId: id, status: .pending, text: nil, updatedAt: nil)
+    func sendReferral(askId: String, recipientId: String?, senderId: String?) {
+        guard let id = senderId, let recipientId = recipientId else { return }
+        let referral = Referral(id: nil, createdAt: nil, askId: askId, children: nil, closedAt: nil, recipientId: recipientId, parentId: nil, senderId: id, status: .pending, text: nil, updatedAt: nil)
         do {
             let _ = try Ref.FS_COLLECTION_REFERRALS.addDocument(from: referral)
-            let activityId = Ref.FS_COLLECTION_ACTIVITY.document(receiverId).collection("feedItems").document().documentID
+            let activityId = Ref.FS_COLLECTION_ACTIVITY.document(recipientId).collection("feedItems").document().documentID
              let activityObject = Activity(activityId: activityId, type: "referred", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: askId, mediaUrl: "", comment: "", date: Date().timeIntervalSince1970)
             guard let activityDict = try? activityObject.toDictionary() else { return }
 
-            Ref.FS_COLLECTION_ACTIVITY.document(receiverId).collection("feedItems").document(activityId).setData(activityDict)
+            Ref.FS_COLLECTION_ACTIVITY.document(recipientId).collection("feedItems").document(activityId).setData(activityDict)
         } catch {
             print(error)
         }
     }
     
-    func rewingReferral(askId: String, receiverId: String?, parentId: String?, senderId: String?) {
-        guard let id = senderId, let receiverId = receiverId else { return }
-        let referral = Referral(id: nil, createdAt: nil, askId: askId, children: nil, closedAt: nil, receiverId: receiverId, parentId: parentId, senderId: id, status: .pending, text: nil, updatedAt: nil)
+    func rewingReferral(askId: String, recipientId: String?, parentId: String?, senderId: String?) {
+        guard let id = senderId, let recipientId = recipientId else { return }
+        let referral = Referral(id: nil, createdAt: nil, askId: askId, children: nil, closedAt: nil, recipientId: recipientId, parentId: parentId, senderId: id, status: .pending, text: nil, updatedAt: nil)
         do {
             let _ = try Ref.FS_COLLECTION_REFERRALS.addDocument(from: referral)
-            let activityId = Ref.FS_COLLECTION_ACTIVITY.document(receiverId).collection("feedItems").document().documentID
+            let activityId = Ref.FS_COLLECTION_ACTIVITY.document(recipientId).collection("feedItems").document().documentID
              let activityObject = Activity(activityId: activityId, type: "referred", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: askId, mediaUrl: "", comment: "", date: Date().timeIntervalSince1970)
             guard let activityDict = try? activityObject.toDictionary() else { return }
 
-            Ref.FS_COLLECTION_ACTIVITY.document(receiverId).collection("feedItems").document(activityId).setData(activityDict)
+            Ref.FS_COLLECTION_ACTIVITY.document(recipientId).collection("feedItems").document(activityId).setData(activityDict)
         } catch {
             print(error)
         }
@@ -75,7 +75,7 @@ class ReferralsApi {
                     var recipientIds: [String] = []
 
                     for referral in referrals {
-                        recipientIds.append(referral.receiverId)
+                        recipientIds.append(referral.recipientId)
                     }
                     
                     onSuccess(recipientIds)
@@ -93,7 +93,7 @@ class ReferralsApi {
     ) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let listenerFirestore = Ref.FS_COLLECTION_REFERRALS
-          .whereField("receiverId", isEqualTo: userId)
+          .whereField("recipientId", isEqualTo: userId)
           .whereField("status", isEqualTo: "pending")
           .order(by: "createdAt", descending: true)
           .addSnapshotListener { (snapshot, error) in
@@ -179,7 +179,7 @@ class ReferralsApi {
     ) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let listenerFirestore = Ref.FS_COLLECTION_REFERRALS
-          .whereField("receiverId", isEqualTo: userId)
+          .whereField("recipientId", isEqualTo: userId)
           .whereField("status", isEqualTo: ReferralStatus.accepted.rawValue)
           .order(by: "updatedAt", descending: true)
           .addSnapshotListener { (snapshot, error) in
@@ -265,7 +265,7 @@ class ReferralsApi {
     ) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let listenerFirestore = Ref.FS_COLLECTION_REFERRALS
-          .whereField("receiverId", isEqualTo: userId)
+          .whereField("recipientId", isEqualTo: userId)
           .whereField("status", isEqualTo: ReferralStatus.winged.rawValue)
           .order(by: "updatedAt", descending: true)
           .addSnapshotListener { (snapshot, error) in
@@ -351,7 +351,7 @@ class ReferralsApi {
     ) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         let listenerFirestore = Ref.FS_COLLECTION_REFERRALS
-          .whereField("receiverId", isEqualTo: userId)
+          .whereField("recipientId", isEqualTo: userId)
           .whereField("status", isEqualTo: ReferralStatus.closed.rawValue)
           .order(by: "updatedAt", descending: true)
           .addSnapshotListener { (snapshot, error) in
