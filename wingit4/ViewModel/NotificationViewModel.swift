@@ -27,19 +27,11 @@ class NotificationViewModel: ObservableObject {
         Api.Notifications.loadNotifications(
           onEmpty: {
             self.isLoading = false
-          },
-          onSuccess: { (notificationsArray) in
-            if self.notificationsArray.isEmpty {
-                self.notificationsArray = notificationsArray
-                self.isLoading = false
-            }
           }, newNotification: { (notification) in
-              if !self.notificationsArray.isEmpty {
-                if !self.notificationsArray.contains(notification) {
-                  self.notificationsArray.insert(notification, at: 0)
-                  self.isLoading = false
-                }
-              }
+            if !self.notificationsArray.contains(notification) {
+              self.notificationsArray.insert(notification, at: 0)
+              self.isLoading = false
+            }
           }, deleteNotification: { (notification) in
               if !self.notificationsArray.isEmpty {
                   for (index, n) in self.notificationsArray.enumerated() {

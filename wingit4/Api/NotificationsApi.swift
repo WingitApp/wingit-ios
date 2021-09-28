@@ -13,7 +13,6 @@ class NotificationsApi {
     
     func loadNotifications(
       onEmpty: @escaping () -> Void,
-      onSuccess: @escaping(_ notificationsArray: [Notification]) -> Void,
       newNotification: @escaping(Notification) -> Void,
       deleteNotification: @escaping(Notification) -> Void,
       listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
@@ -31,14 +30,11 @@ class NotificationsApi {
             snapshot.documentChanges.forEach { (documentChange) in
                   switch documentChange.type {
                   case .added:
-                    var notificationsArray = [Notification]()
                       let dict = documentChange.document.data()
                       guard let decodedNotification = try? Notification.init(fromDictionary: dict) else {return}
                       newNotification(decodedNotification)
-                      notificationsArray.append(decodedNotification)
-                      onSuccess(notificationsArray)
                   case .modified:
-                    break
+                      break
                   case .removed:
                       let dict = documentChange.document.data()
                        guard let decodedNotification = try? Notification.init(fromDictionary: dict) else {return}
