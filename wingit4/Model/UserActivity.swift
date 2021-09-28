@@ -15,9 +15,10 @@ struct UserActivity: Codable, Identifiable {
     var commentId: String?
     var commentOwnerId: String? // id of the user who owns the comment
     var connectionId: String? // id of the user related to this connect request or connection activity
+    var currentUserDisplayName: String? // display name of the currentUser performing the activity
     var currentUserId: String? // id of the currentUser performing the activity
-    var displayName: String? // displayName of the primary user whom the currentUser is interacting with
     var mediaUrl: String?
+    var otherUsersDisplayName: String? // displayName of the user whom the currentUser is interacting with
     var postOwnerId: String? // id of the user who owns the post related to this activity
     var postId: String?
     var recipientId: String?
