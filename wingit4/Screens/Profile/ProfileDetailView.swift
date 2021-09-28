@@ -38,41 +38,19 @@ struct ProfileDetailView: View {
             Text("Design, Food, Tech, Drawing, Whiskey, Wine").font(.caption2).foregroundColor(.gray)
             }.padding(.bottom)
         }
-            Text("Winged Posts").bold().font(.title2).padding(.leading)
+            Text("Winged Posts").bold().font(.title2).padding()
             ScrollView(.horizontal, showsIndicators: false){
                 HStack{
                     ProfDetailCard()
                     ProfDetailCard()
                 }
             }
-            Divider().padding()
-    //        Text("Reviews?").padding()
-//            HStack{
-//                Image(systemName: "link").foregroundColor(.gray).padding(.leading).padding(.top, 10)
-//
-//                Image(systemName: self.toggle ?  "arrowtriangle.down.fill" : "arrowtriangle.forward.fill").foregroundColor(.gray).padding(.top, 10).font(.caption2)
-//                    .onTapGesture{toggle.toggle()}
-//            }
-            
-           // if toggle == true {
-        
+            HStack{
+                Spacer(minLength: 0)
                  LinkCard()
-                
-           // }
-//         TODO: save links in a dictionary upon edit( [.website : link]
-//            if link.isValidURL
-//              Link(link, destination: URL(string: link)!)
-//            else {
-//              Text(link)
-//            }
-            Image("fb")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 20, height: 20).padding()
-            Image("twitter")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 20, height: 20).padding(.horizontal)
+                Spacer(minLength: 0)
+            }.padding()
+          
             Image(systemName: "books.vertical.fill").padding().foregroundColor(Color.downeyGreen)
             
         }
@@ -132,53 +110,46 @@ struct ProfDetailCard: View {
 }
 
 struct LinkCard: View {
-    
+  
+    var body: some View {
+        VStack{
+            HStack(alignment: .center, spacing: 25){
+                LinkButton(linkIcon: "airbnb")
+                LinkButton(linkIcon: "spotify")
+                LinkButton(linkIcon: "twitter")
+            }
+            HStack(alignment: .center, spacing: 25){
+                LinkButton(linkIcon: "instagram")
+                LinkButton(linkIcon: "vsco")
+                LinkButton(linkIcon: "googleDrive")
+                Image(systemName: "plus.circle.fill")
+                    .font(.system(size: 30))
+                    .foregroundColor(.wingitBlue)
+                    .frame(width: 30, height: 30)
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(30)
+                    .clipped()
+                    .shadow(color: Color.gray.opacity(0.3), radius: 3, x: 0, y: 0)
+            }
+        }
+     
+
+    }
+}
+
+
+struct LinkButton: View {
+    var linkIcon: String
     var body: some View {
 
-        
-        HStack{
-                Image("airbnb")
+                Image(linkIcon)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 30, height: 30)
                     .padding()
-            Text("My airbnb")
-                .foregroundColor(.pink)
-                .bold()
-                .padding(.trailing)
-        }
         .background(Color.white)
-        .cornerRadius(8)
-        .overlay(
-          RoundedRectangle(cornerRadius: 8)
-            .stroke(Color.borderGray, lineWidth: 1)
-        )
-        .padding(
-          EdgeInsets(top: 5, leading: 15, bottom: 5, trailing: 0)
-        )
-        .clipped()
-        .shadow(color: Color.gray.opacity(0.3), radius: 3, x: 0, y: 0)
-        
-        HStack{
-                Image("spotify")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-                    .padding()
-            Text("My spotify")
-                .foregroundColor(.green)
-                .bold()
-                .padding(.trailing)
-        }
-        .background(Color.white)
-        .cornerRadius(8)
-        .overlay(
-          RoundedRectangle(cornerRadius: 8)
-            .stroke(Color.borderGray, lineWidth: 1)
-        )
-        .padding(
-          EdgeInsets(top: 5, leading: 15, bottom: 5, trailing: 0)
-        )
+        .cornerRadius(30)
         .clipped()
         .shadow(color: Color.gray.opacity(0.3), radius: 3, x: 0, y: 0)
 
