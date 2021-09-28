@@ -209,8 +209,9 @@ class Ref {
         }
     
         static var FS_COLLECTION_ACTIVITY = FS_ROOT.collection("activity")
-        static func FS_COLLECTION_ACTIVITY_EVENTS_FOR_USER(userId: String) -> CollectionReference {
-               return FS_COLLECTION_CONNECTIONS.document(userId).collection("events")
+        static var FS_COLLECTION_USER_ACTIVITY = FS_ROOT.collection("userActivity")
+        static func FS_COLLECTION_ACTIVITY_FOR_USER(userId: String) -> CollectionReference {
+            return FS_COLLECTION_USER_ACTIVITY.document(userId).collection("activity")
         }
   
         static func FS_COLLECTION_USER_BUMPS_BY_POST(userId: String, postId: String) -> CollectionReference {

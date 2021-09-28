@@ -11,17 +11,19 @@ import Foundation
 
 struct UserActivity: Codable, Identifiable {
     @DocumentID var id: String?
+    @ServerTimestamp var createdAt: Timestamp?
     var commentId: String?
     var commentOwnerId: String? // id of the user who owns the comment
     var connectionId: String? // id of the user related to this connect request or connection activity
+    var currentUserId: String? // id of the currentUser performing the activity
     var displayName: String? // displayName of the primary user whom the currentUser is interacting with
     var mediaUrl: String?
     var postOwnerId: String? // id of the user who owns the post related to this activity
     var postId: String?
+    var recipientId: String?
     var senderId: String? // id of the user winging the ask or sending the message
-    var text: String? // text found in the comment referral, post, etc.
+    var text: String? // text found in the comment, message, referral, post, etc.
     var type: ActivityType
-    var userId: String? // id of the currentUser performing the activity
     
     enum ActivityType: String, Codable {
         case acceptConnectRequest

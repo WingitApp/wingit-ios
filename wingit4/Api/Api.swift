@@ -19,4 +19,5 @@ class Api {
     static var Referrals = ReferralsApi()
     static var Report = ReportApi()
     static var User = UserApi()
+    static var UserActivity = UserActivityApi()
 }
