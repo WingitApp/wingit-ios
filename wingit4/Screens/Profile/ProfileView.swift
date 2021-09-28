@@ -144,7 +144,8 @@ struct ProfileView: View {
           }) {
           Label(
             title: {
-              Text("Logout").font(.subheadline)
+              Text("Logout")
+                .font(.subheadline)
                 .foregroundColor(.gray)
             },
             icon: {

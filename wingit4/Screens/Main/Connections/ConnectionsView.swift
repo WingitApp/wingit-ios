@@ -90,10 +90,11 @@ struct ConnectionsView: View {
                 }
                 .navigationBarTitle(formatTitle(), displayMode: .inline)
             }
-        .onAppear {
-            connectionsViewModel.loadConnections(userId: user?.id)
-           
-        }
+            .onAppear {
+              if connectionsViewModel.users.isEmpty {
+                connectionsViewModel.loadConnections(userId: user?.id)
+              }
+            }
             .preferredColorScheme(.light)
     }
 }

@@ -61,6 +61,14 @@ struct ContactsListView: View {
        
               }
             }
+            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+              .onEnded({ value in
+                  if value.translation.width > 0 {
+                      // right
+                    Haptic.impact(type: "soft")
+                    self.presentationMode.wrappedValue.dismiss()
+                  }
+              }))
 //            .modifier(ResignKeyboardOnDragGesture())
         }
          .onAppear {
@@ -68,14 +76,7 @@ struct ContactsListView: View {
          }
          .navigationBarTitle("")
          .navigationBarHidden(true)
-         .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-           .onEnded({ value in
-               if value.translation.width > 0 {
-                   // right
-                 Haptic.impact(type: "soft")
-                 self.presentationMode.wrappedValue.dismiss()
-               }
-           }))
+        
 
     }
     

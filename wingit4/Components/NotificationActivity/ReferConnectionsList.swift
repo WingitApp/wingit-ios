@@ -42,6 +42,7 @@ struct ReferConnectionsList: View {
     }
   
     func onAppearLoadConnectionsList() {
+      referViewModel.resetToInitialState()
       referViewModel.loadConnections(post: post)
     }
   
@@ -154,11 +155,6 @@ struct ReferConnectionsList: View {
         .preferredColorScheme(.light)
         .onAppear(perform: onAppearLoadConnectionsList)
         .environmentObject(referViewModel)
-       .onDisappear {
-          if !isContactsOpen {
-            self.referViewModel.resetToInitialState()
-          }
-       }
         .navigationBarTitle("")
         .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.top)
