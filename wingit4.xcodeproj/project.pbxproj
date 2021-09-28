@@ -816,20 +816,20 @@
 		3B7AF06526719EB7003BCCF3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3B7AF0BE2673EAFB003BCCF3 /* Notification.swift */,
-				6523D93526DDEB78007546F5 /* UserActivity.swift */,
 				6509E4F926D6C214009CB74D /* Ask.swift */,
+				15DFD07726EC39E2002CBE31 /* Button.swift */,
 				3B7AF0B62672C21E003BCCF3 /* Chat.swift */,
 				3B7AF0AE2672A053003BCCF3 /* Comment.swift */,
 				657F35D526DE1D8D0092A1B2 /* Comment_v2.swift */,
 				65F7315526F5276900A73781 /* Contact.swift */,
 				657F35DA26DEA0C00092A1B2 /* Device.swift */,
 				3B7AF0B82672C29D003BCCF3 /* InboxMessage.swift */,
+				3B7AF0BE2673EAFB003BCCF3 /* Notification.swift */,
 				3B7AF0962671D98E003BCCF3 /* Post.swift */,
 				65A9EFA226E0923300E81CBF /* Referral.swift */,
-				3B7AF02D2671816A003BCCF3 /* User.swift */,
 				15DFD07526EBE438002CBE31 /* RoundedCorner.swift */,
-				15DFD07726EC39E2002CBE31 /* Button.swift */,
+				3B7AF02D2671816A003BCCF3 /* User.swift */,
+				6523D93526DDEB78007546F5 /* UserActivity.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
