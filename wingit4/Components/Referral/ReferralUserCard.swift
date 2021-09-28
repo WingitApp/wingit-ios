@@ -30,6 +30,7 @@ struct ReferralUserCard: View {
               height: 40,
               width: 40
             )
+           
           
             VStack(alignment: .leading, spacing: 5) {
                 Text(user.displayName ?? user.username ?? "").font(.headline).bold()
