@@ -36,7 +36,7 @@ struct AskCollaborationDetail: View {
                         .font(.system(size: 15))
                         .foregroundColor(showDetail ? .wingitBlue : .gray)
                         .rotationEffect(.degrees(showDetail ? 90 : 0))
-                      .padding(.bottom, 5)
+                      .padding(.bottom, 10)
                   }
                 }
               }

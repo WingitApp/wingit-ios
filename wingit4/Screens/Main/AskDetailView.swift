@@ -58,7 +58,6 @@ struct AskDetailView: View {
         if self.commentViewModel.listener != nil {
             self.commentViewModel.listener.remove()
         }
-        self.isNavBarHidden = false
       }
     }
     
