@@ -9,6 +9,7 @@ import Foundation
 import FirebaseAuth
 import FirebaseStorage
 import Firebase
+
 class CommentApi {
     
   func sendComment(
@@ -43,14 +44,6 @@ class CommentApi {
             }
             
             var comments = [Comment]()
-//            for document in snapshot.documents {
-//                let dict = document.data()
-//                guard let decoderComment = try? Comment.init(fromDictionary: dict) else {return}
-//                comments.append(decoderComment)
-//                print("comment data")
-//                print(decoderComment.comment)
-//            }
-            
             snapshot.documentChanges.forEach { (documentChange) in
                 switch documentChange.type {
                 case .added:
@@ -66,7 +59,6 @@ class CommentApi {
             }
             
             onSuccess(comments)
-           
         }
         
          listener(listenerFirestore)
