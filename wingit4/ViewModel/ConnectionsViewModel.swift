@@ -69,15 +69,8 @@ class ConnectionsViewModel : ObservableObject {
                 
             }
         }
-        
-        let activityId = Ref.FS_COLLECTION_USER_ACTIVITY.document(userId).collection("activity").document().documentID
-        let userActivity = UserActivity(id: activityId, connectionId: userId, currentUserId: currentUserId, type: .sendConnectRequest)
-        
-        let activityObject = Notification(activityId: activityId, type: "connectRequest", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: "", mediaUrl: "", comment: "", date: Date().timeIntervalSince1970)
-        guard let activityDict = try? activityObject.toDictionary() else { return }
-
-       Ref.FS_COLLECTION_ACTIVITY.document(userId).collection("feedItems").document(activityId).setData(activityDict)
-        
+        let userActivity = UserActivity(activityType: .sendConnectRequest, correspondingUserId: userId, currentUserId: currentUserId)
+        Api.UserActivity.logActivity(activity: userActivity)
     }
     
     
