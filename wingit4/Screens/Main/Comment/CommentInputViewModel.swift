@@ -34,7 +34,7 @@ class CommentInputViewModel: ObservableObject {
     guard let commentDict = try? comment.toDictionary() else {return}
     
 
-    Api.Comment.sendComment(
+    Api.Comment.postComment(
       commentDict: commentDict,
       postId: post.postId,
       onSuccess: {
