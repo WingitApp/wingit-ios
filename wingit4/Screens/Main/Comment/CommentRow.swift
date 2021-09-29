@@ -14,21 +14,18 @@ struct CommentRow: View {
     
     var body: some View {
         HStack {
-            URLImage(URL(string: comment.avatarUrl)!,
-                                          content: {
-                                              $0.image
-                                                  .resizable()
-                                                  .aspectRatio(contentMode: .fill)
-                                                  .clipShape(Circle())
-                                          }).frame(width: 35, height: 35)
+            URLImageView(urlString: comment.avatarUrl)
+              .aspectRatio(contentMode: .fill)
+              .clipShape(Circle())
+              .frame(width: 35, height: 35)
             
             
              VStack(alignment: .leading) {
-                Text(comment.username).font(.subheadline).bold()
-                Text(comment.comment).font(.caption).padding(.top, 5)
+                 Text(comment.username ?? "").font(.subheadline).bold()
+                Text(comment.comment ?? "").font(.caption).padding(.top, 5)
              }
              Spacer()
-            Text(timeAgoSinceDate(Date(timeIntervalSince1970: comment.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
+            Text(timeAgoSinceDate(Date(timeIntervalSince1970: comment.date ?? 0), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
          }.padding(.trailing, 15).padding(.leading, 15)
     }
 }

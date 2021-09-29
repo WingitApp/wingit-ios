@@ -9,6 +9,7 @@ import Foundation
 import FirebaseAuth
 import FirebaseStorage
 import Firebase
+import FirebaseFirestoreSwift
 
 class CommentApi {
     
@@ -47,10 +48,9 @@ class CommentApi {
             snapshot.documentChanges.forEach { (documentChange) in
                 switch documentChange.type {
                 case .added:
-                    let dict = documentChange.document.data()
-                    guard let decoderComment = try? Comment.init(fromDictionary: dict) else {return}
-                    newComment(decoderComment)
-                    comments.append(decoderComment)
+                    guard let decodedComment = try? documentChange.document.data(as: Comment.self) else { return }
+                    newComment(decodedComment)
+                    comments.append(decodedComment)
                 case .modified:
                     print("type: modified")
                 case .removed:
