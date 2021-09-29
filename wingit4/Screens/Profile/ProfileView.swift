@@ -142,14 +142,10 @@ struct ProfileView: View {
             self.session.logout()
             
           }) {
-          Label(
-            title: {
               Text("Logout")
                 .font(.subheadline)
                 .foregroundColor(.gray)
-            },
-            icon: {
-              Image(systemName: "arrow.right.circle")})
+              Image(systemName: "arrow.right.circle")
                 .imageScale(Image.Scale.medium)
             .foregroundColor(.gray)
         })

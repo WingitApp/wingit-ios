@@ -74,7 +74,6 @@ struct ProfileFeed: View {
                 )
               }
           }.onAppear {
-            sortOpenPosts()
             sortClosedPosts()
           }
         }

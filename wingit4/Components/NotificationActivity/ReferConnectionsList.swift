@@ -83,7 +83,6 @@ struct ReferConnectionsList: View {
                             .font(.system(size:20))
                             .fontWeight(.semibold)
                            .foregroundColor(self.referViewModel.selectedUsers.isEmpty ? .gray : .wingitBlue)
-                           .padding(.trailing, 7)
                          }).disabled(self.referViewModel.isDisabled || self.referViewModel.selectedUsers.isEmpty)
                    }
                    .padding([.horizontal,.top])
@@ -94,7 +93,9 @@ struct ReferConnectionsList: View {
                      UserBumpCountSummary(
                        users:
                          self.referViewModel.userBumps +
-                         self.referViewModel.selectedUsers
+                         self.referViewModel.selectedUsers,
+                       limit: 3,
+                       size: 30
                      )
                      Spacer()
                    }
@@ -128,29 +129,33 @@ struct ReferConnectionsList: View {
                     )
                     .font(.system(size:20))
                     .foregroundColor(.gray)
-                    .padding(.trailing, 20)
+                    .padding(.trailing, 17)
                     .onTapGesture(perform: openPhoneContactList)
                 }
                 .padding(.bottom, 10)
                 Divider()
-                List {
-                  ForEach(
-                    Array(self.referViewModel.connections.enumerated()),
-                    id: \.element
-                  ) { index, user in
-                        ReferralUserCard(
-                          user: user,
-                          isChecked: (
-                            !referViewModel.userBumps.filter { $0.id == user.id }.isEmpty ||
-                              !referViewModel.selectedUsers.filter {$0.id == user.id}.isEmpty
-                          )
-                        )
-                        .opacity(!referViewModel.userBumps.filter { $0.id == user.id }.isEmpty ? 0.6 : 1)
-                    }
-                }
-                .padding(.leading, -15)
-                .padding(.bottom, 15)
-                .background(Color.white)
+               ScrollView(showsIndicators: false){
+                 LazyVStack(alignment: .leading){
+                   ForEach(
+                     Array(self.referViewModel.connections.enumerated()),
+                     id: \.element
+                   ) { index, user in
+                         ReferralUserCard(
+                           user: user,
+                           isChecked: (
+                             !referViewModel.userBumps.filter { $0.id == user.id }.isEmpty ||
+                               !referViewModel.selectedUsers.filter {$0.id == user.id}.isEmpty
+                           )
+                         )
+                         .opacity(!referViewModel.userBumps.filter { $0.id == user.id }.isEmpty ? 0.6 : 1)
+                         .padding([.horizontal])
+                      Divider()
+                     }
+                 }
+                 .background(Color.white)
+               }
+               .background(Color.white)
+ 
         }
         .preferredColorScheme(.light)
         .onAppear(perform: onAppearLoadConnectionsList)

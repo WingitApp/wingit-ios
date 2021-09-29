@@ -117,7 +117,18 @@ class BumpersTextDescription {
           
         } else {
           let remainder = users.count - limit
-          return Text("+ \(remainder)")
+          
+          for index in users.prefix(limit).indices {
+            let user = users[index]
+            
+            if (index == users.count - 1) {
+              names.append(user.displayName!.capitalized)
+            } else {
+              names.append(user.displayName!.capitalized + ", ")
+            }
+          }
+          
+          return Text(names.joined(separator: "")).bold() + Text("and \(remainder) \(remainder > 1 ? "others" : "other")").bold()
         }
     }
   }

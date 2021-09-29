@@ -26,22 +26,23 @@ struct UserBumpCountSummary: View {
         VStack(alignment: .leading) {
           Text("Bumped Connections")
             .font(.headline)
-            .padding(.top, 10)
             .padding(.bottom, 10)
           HStack(alignment: .center) {
-            ForEach(Array(users.prefix(limit).enumerated()), id: \.element) { index, user in
-              UserAvatar(
-                user: user,
-                height: size,
-                width: size
-              )
-              .modifier(
-                UserAvatarStyle(
-                  index: index,
-                  color: Color.white
+            HStack(spacing: 0){
+              ForEach(Array(users.prefix(limit).enumerated()), id: \.element) { index, user in
+                UserAvatar(
+                  user: user,
+                  height: size,
+                  width: size
                 )
-              )
-              
+                .modifier(
+                  UserAvatarStyle(
+                    index: index,
+                    color: Color.white,
+                    size: size
+                  )
+                )
+              }
             }
             BumpersTextDescription.getFormattedCount(
               users: users,
@@ -49,12 +50,17 @@ struct UserBumpCountSummary: View {
               emptyMessage: "You haven't bumped this request to any friends."
             )
             .font(.caption2)
-            .frame(height: 17)
             .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.1)))
             .id(UUID().uuidString)
           }
+          .frame(minHeight: size + 2)
+          .fixedSize(horizontal: false, vertical: true)
+
+
         }
+        .padding(.top, 10)
         .padding(.leading, 15)
+        .padding(.trailing, 15)
         .padding(.bottom, 10)
        
     }

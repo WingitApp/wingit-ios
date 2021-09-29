@@ -23,8 +23,9 @@ struct ReferralUserCard: View {
     }
     
     var body: some View {
+      
         
-        HStack{
+        HStack(spacing: 0) {
             UserAvatar(
               user: user,
               height: 40,
@@ -37,7 +38,7 @@ struct ReferralUserCard: View {
                 Text("@\(user.username ?? "")").font(.subheadline)
                   .foregroundColor(.wingitBlue)
             }
-            .padding(.leading, 5)
+            .padding(.leading, 15)
             Spacer()
             ZStack{
                 Circle()
@@ -52,6 +53,7 @@ struct ReferralUserCard: View {
                   Image(systemName: "checkmark.circle.fill")
                       .font(.system(size:25))
                     .foregroundColor(.wingitBlue)
+                    .padding(.trailing, -1)
               }
             }
         }
@@ -60,6 +62,7 @@ struct ReferralUserCard: View {
         )
         .contentShape(Rectangle())
         .onTapGesture(perform: onTapGesture)
+      
       }
 
 }

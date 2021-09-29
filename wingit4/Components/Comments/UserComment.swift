@@ -68,14 +68,11 @@ struct UserComment: View {
           
           Text(comment.comment.trimmingCharacters(in: .whitespacesAndNewlines))
             .font(.system(size:14))
-            .padding(.top, 1)
 
         }
         .padding(.leading, 5)
       }
-      .padding(
-        EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15)
-      )
+      .padding(15)
       .onTapGesture(perform: { isNavActive.toggle() })
       Divider()
     }

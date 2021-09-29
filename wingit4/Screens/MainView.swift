@@ -40,6 +40,7 @@ struct MainView: View {
           .tabItem({
             VStack(alignment: .center ){
               Image(systemName: mainViewModel.selection == 0 ? "house.fill" : "house")
+                .imageScale(.small)
               Text("Home")
                 .font(.caption2)
             }
@@ -59,6 +60,7 @@ struct MainView: View {
           .tabItem({
             VStack(alignment: .center ){
               Image(systemName: mainViewModel.selection == 1 ? "paperplane.fill" : "paperplane" )
+                .imageScale(.small)
               Text("Inbox")
                 .font(.caption2)
             }
@@ -77,6 +79,7 @@ struct MainView: View {
           .tabItem({
             VStack(alignment: .center ){
               Image(systemName: "plus.circle.fill")
+                .imageScale(.large)
               Text("Ask")
                 .font(.caption2)
             }
@@ -95,6 +98,7 @@ struct MainView: View {
           .tabItem({
             VStack(alignment: .center ){
               Image(systemName: mainViewModel.selection == 3 ? "bell.fill" : "bell")
+                .imageScale(.small)
               Text("Notifs")
                 .font(.caption2)
             }
@@ -115,6 +119,7 @@ struct MainView: View {
           .tabItem({
             VStack(alignment: .center ){
               Image(systemName: mainViewModel.selection == 4 ? "person.fill" : "person")
+                .imageScale(.small)
               Text("You")
                 .font(.caption2)
             }
