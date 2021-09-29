@@ -58,7 +58,6 @@ class CommentInputViewModel: ObservableObject {
                   "date": Date().timeIntervalSince1970
                 ]
               
-                
                 Ref.FS_COLLECTION_ACTIVITY.document(post.ownerId)
                   .collection("feedItems")
                   .document(activityId)

@@ -17,16 +17,21 @@ class CommentApi {
     onSuccess: @escaping() -> Void,
     onError: @escaping(_ errorMessage: String) -> Void
   ) {
-    
-    Ref.FS_DOC_COMMENTS_FOR_POSTID(postId: postId)
+    var ref: DocumentReference? = nil
+    ref = Ref.FS_DOC_COMMENTS_FOR_POSTID(postId: postId)
       .collection("postComments")
       .addDocument(data: commentDict) { (error) in
         if let error = error {
             print("error: \(error)")
             onError(error.localizedDescription)
             return
+        } else {
+            let activity = UserActivity(activityType: .postComment, commentId: ref?.documentID)
+      
+            Api.UserActivity.logActivity(activity: activity)
         }
-        onSuccess()
+    
+    onSuccess()
     }
   }
     
