@@ -212,6 +212,7 @@
 		65F7315826F5295500A73781 /* ContactsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315726F5295500A73781 /* ContactsListViewModel.swift */; };
 		65FE040426E9FE3200333609 /* ComposePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE040326E9FE3200333609 /* ComposePostView.swift */; };
 		FB150EE92703DE9200B0D073 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB150EE82703DE9200B0D073 /* EditProfileView.swift */; };
+		FBD25F7E27043C4E0002C5B2 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD25F7D27043C4E0002C5B2 /* PopUp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -413,6 +414,7 @@
 		65F7315726F5295500A73781 /* ContactsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewModel.swift; sourceTree = "<group>"; };
 		65FE040326E9FE3200333609 /* ComposePostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposePostView.swift; sourceTree = "<group>"; };
 		FB150EE82703DE9200B0D073 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		FBD25F7D27043C4E0002C5B2 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -563,6 +565,7 @@
 				65A9EF9A26DF0B2500E81CBF /* ConnectionsView.swift */,
 				3BE57FF626D89994005C242F /* ProfileNavigation.swift */,
 				3BFBE7F426F3C75100B0DFE2 /* ProfileDetailView.swift */,
+				FBD25F7D27043C4E0002C5B2 /* PopUp.swift */,
 				FB150EE82703DE9200B0D073 /* EditProfileView.swift */,
 				3BFBE7F626F3D42800B0DFE2 /* ProfileDetail2.swift */,
 				65739ECA26F71D4400A0A8B9 /* ProfileView.swift */,
@@ -1178,6 +1181,7 @@
 				1524FCD226D753320000629C /* HeaderCell.swift in Sources */,
 				15030AA826E805A50076CF14 /* Styles.swift in Sources */,
 				65A9EF9C26DF0B2500E81CBF /* ConnectionsApi.swift in Sources */,
+				FBD25F7E27043C4E0002C5B2 /* PopUp.swift in Sources */,
 				151A3C8126CE134A00A39FAF /* FontStyles.swift in Sources */,
 				1524E10126F8136800D5BDB4 /* UserBumpCountSummary.swift in Sources */,
 				3B7AF0A02671E404003BCCF3 /* ProfileInformation.swift in Sources */,

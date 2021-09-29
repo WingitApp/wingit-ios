@@ -82,17 +82,51 @@ class UserApi {
         }
     }
     
-    func addLink(field: String) {
+//    func addLink(field: String) {
+//        guard let userId = Auth.auth().currentUser?.uid else {return}
+//
+//            alertView(msg: "Add \(field)") { (url) in
+//                if !url.isEmpty {
+//                    if field == "airbnb" || field == "spotify" || field == "twitter" || field == "instagram" || field == "vsco" || field == "googleDrive" {
+//
+//                        Ref.FS_DOC_USERID(userId: userId).setData(["profileLinks" : [field: url]], merge: true)
+//                    }
+//                }
+//            }
+//
+//    }
+    
+    func addLink2(field: String, url: String
+//                  , onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void
+    ) {
         guard let userId = Auth.auth().currentUser?.uid else {return}
-        
-            alertView(msg: "Add \(field)") { (url) in
-                if !url.isEmpty {
-                    if field == "airbnb" || field == "spotify" || field == "twitter" || field == "instagram" || field == "vsco" || field == "googleDrive" {
-                        
-                        Ref.FS_DOC_USERID(userId: userId).setData(["profileLinks" : [field: url]], merge: true)
-                    }
-                }
+//        let profileLinks = ProfileLinks(airbnb: airbnb, spotify: spotify, twitter: twitter, instagram: instagram, vsco: vsco, googleDrive: googleDrive)
+//        guard let dict = try? profileLinks.toDictionary() else {return}
+        if field == "airbnb" || field == "spotify" || field == "twitter" || field == "instagram" || field == "vsco" || field == "googleDrive" {
+        Ref.FS_DOC_USERID(userId: userId).setData(["profileLinks" : [field: url]], merge: true) { (error) in
+            if let error = error {
+                onError(error.localizedDescription)
+                return
             }
-        
+            onSuccess()
+          }
+        }
     }
+
+    
+//    func addLink2(airbnb: String, spotify: String, twitter: String, instagram: String, vsco: String, googleDrive: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+//        guard let userId = Auth.auth().currentUser?.uid else {return}
+////        let profileLinks = ProfileLinks(airbnb: airbnb, spotify: spotify, twitter: twitter, instagram: instagram, vsco: vsco, googleDrive: googleDrive)
+////        guard let dict = try? profileLinks.toDictionary() else {return}
+//        if !
+//        Ref.FS_DOC_USERID(userId: userId).set.setData(["profileLinks" : [field: ]], merge: true) { (error) in
+//            if let error = error {
+//                onError(error.localizedDescription)
+//                return
+//            }
+//            onSuccess()
+//        }
+//
+//    }
+    
 }

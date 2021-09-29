@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import SPAlert
 
 struct ProfileDetailView: View {
     
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @State var toggle: Bool = false
+    @State var isPresented = false
+    @Binding var linkIcon: String
     
     func calculateHeight(minHeight: CGFloat, maxHeight: CGFloat, yOffset: CGFloat) -> CGFloat {
       // If scrolling up, yOffset will be a negative number
@@ -24,10 +27,11 @@ struct ProfileDetailView: View {
       // SCROLLING DOWN
       return maxHeight + yOffset
     }
-    
+   
+
         var body: some View {
             
-            
+            ZStack{
         VStack(alignment: .leading, spacing: 5){
         VStack(alignment: .center, spacing: 10){
            
@@ -47,7 +51,7 @@ struct ProfileDetailView: View {
             }
             HStack{
                 Spacer(minLength: 0)
-                 LinkCard()
+                LinkCard(isPresented: $isPresented)
                 Spacer(minLength: 0)
             }.padding()
             HStack{
@@ -59,13 +63,21 @@ struct ProfileDetailView: View {
                 Text("bookTitles").padding()
             }
         }
+        }
+            .modifier(Popup(isPresented: isPresented,
+                            alignment: .center,
+                            direction: .bottom,
+                            content: { LinkUpdatePopUp(linkIcon: $linkIcon)
+                                            .environmentObject(profileViewModel)
+            }))
     }
 }
-struct ProfileDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileDetailView()
-    }
-}
+//struct ProfileDetailView_Previews: PreviewProvider {
+//    @Binding var linkIconlink: String
+//    static var previews: some View {
+//        ProfileDetailView(linkIconlink: $linkIconlink)
+//    }
+//}
 
 
 struct ProfDetailCard: View {
@@ -115,19 +127,20 @@ struct ProfDetailCard: View {
 }
 
 struct LinkCard: View {
-  
+    @Binding var isPresented: Bool
     var body: some View {
       
         VStack{
             HStack(alignment: .center, spacing: 25){
-                LinkButton(linkIcon: "airbnb")
-                LinkButton(linkIcon: "spotify")
-                LinkButton(linkIcon: "twitter")
+                LinkButton(linkIcon: "airbnb", isPresented: $isPresented)
+                LinkButton(linkIcon: "spotify",  isPresented: $isPresented)
+                LinkButton(linkIcon: "twitter",  isPresented: $isPresented)
             }
+            
             HStack(alignment: .center, spacing: 25){
-                LinkButton(linkIcon: "instagram")
-                LinkButton(linkIcon: "vsco")
-                LinkButton(linkIcon: "googleDrive")
+                LinkButton(linkIcon: "instagram",  isPresented: $isPresented)
+                LinkButton(linkIcon: "vsco",  isPresented: $isPresented)
+                LinkButton(linkIcon: "googleDrive", isPresented: $isPresented)
                 Image(systemName: "plus.circle.fill")
                     .font(.system(size: 30))
                     .foregroundColor(.wingitBlue)
@@ -139,22 +152,22 @@ struct LinkCard: View {
                     .shadow(color: Color.gray.opacity(0.3), radius: 3, x: 0, y: 0)
             }
         }
-     
-
     }
 }
 
 
 struct LinkButton: View {
-    var linkIcon: String
+    @State var linkIcon: String
+    @Binding var isPresented: Bool
+    @EnvironmentObject var profileViewModel: ProfileViewModel
     var body: some View {
         
         Button(action:{
-            Api.User.addLink(field: linkIcon)
-          //  Api.User.addLink(field: <#T##String#>, user: <#T##User?#>)
+            //Api.User.addLink(field: linkIcon)
+            isPresented.toggle()
         })
         {
-                Image(linkIcon)
+            Image(linkIcon)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 30, height: 30)
@@ -166,3 +179,49 @@ struct LinkButton: View {
         }
     }
 }
+
+struct LinkUpdatePopUp: View {
+ 
+    @Binding var linkIcon: String
+    @EnvironmentObject var profileViewModel: ProfileViewModel
+    
+//    @State var airbnb: String = ""
+//    @State var spotify: String = ""
+//    @State var twitter: String = ""
+//    @State var instagram: String = ""
+//    @State var vsco: String = ""
+//    @State var googleDrive: String = ""
+    
+//    func addLink() {
+//        if !airbnb.isEmpty || !spotify.isEmpty || !twitter.isEmpty || !instagram.isEmpty || !vsco.isEmpty || !googleDrive.isEmpty {
+//            profileViewModel.addLinks(airbnb: airbnb, spotify: spotify, twitter: twitter, instagram: instagram, vsco: vsco, googleDrive: googleDrive) {
+////                self.airbnb = ""
+////                self.spotify = ""
+////                self.twitter = ""
+////                self.instagram = ""
+////                self.vsco = ""
+////                self.googleDrive = ""
+//
+//            }
+//        }
+//    }
+    
+    var body: some View {
+        VStack{
+            Text("Add links")
+            TextField("", text: $profileViewModel.url)
+                .modifier(TextFieldModifier())
+                .disableAutocorrection(true)
+            
+            Button(action: {profileViewModel.addLinks(field: linkIcon)})
+            {
+                Text("Save")
+            }
+        }
+        .background(Color.white)
+        .cornerRadius(30)
+        .clipped()
+        .shadow(color: Color.gray.opacity(0.3), radius: 3, x: 0, y: 0)
+    }
+}
+

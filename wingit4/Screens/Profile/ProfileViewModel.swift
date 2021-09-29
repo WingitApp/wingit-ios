@@ -24,6 +24,8 @@ class ProfileViewModel: ObservableObject {
     
     @Published var isConnected = false
     @Published var showOpenPosts = true
+    
+    @Published var url: String = ""
   
     var openListener: ListenerRegistration!
     var closedListener: ListenerRegistration!
@@ -137,4 +139,18 @@ class ProfileViewModel: ObservableObject {
             }
         }
     }
+    
+    func addLinks(field: String) {
+        Api.User.addLink2(field: field, url: url)
+    }
+   
+    
+//    func addLinks(airbnb: String, spotify: String, twitter: String, instagram: String, vsco: String, googleDrive: String, onSuccess: @escaping() -> Void) {
+//
+//        Api.User.addLink2(airbnb: airbnb, spotify: spotify, twitter: twitter, instagram: instagram, vsco: vsco, googleDrive: googleDrive, onSuccess: {
+//            onSuccess()
+//        }) { (errorMessage) in
+//           // print(errorMessage)
+//        }
+//    }
 }

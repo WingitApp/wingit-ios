@@ -166,7 +166,6 @@ struct Login1 : View {
             
                 EmailTextField(email: $signinViewModel.email)
                 PasswordTextField(password: $signinViewModel.password)
-                
             }
             .padding(.horizontal,25)
             .padding(.top,25)
