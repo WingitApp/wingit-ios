@@ -32,7 +32,7 @@ struct BumperCountSummary: View {
   }
   
   func getPaddingByIndex(index: Int) -> CGFloat {
-    return index > 0 ? -15 : 0
+    return index > 0 ? -8 : 0
   }
   
   func formatDescription() -> Text? {
@@ -47,19 +47,22 @@ struct BumperCountSummary: View {
   
     var body: some View {
       HStack {
-        ForEach(Array(users.prefix(limit).enumerated()), id: \.element) { index, bumper in
-          UserAvatar(
-            user: bumper,
-            height: size,
-            width: size
-          )
-          .overlay(
-            RoundedRectangle(cornerRadius: 100)
-              .stroke(Color.white, lineWidth: 1)
-          )
-          .padding(.leading, getPaddingByIndex(index: index))
-          
+        HStack(spacing: 0) {
+          ForEach(Array(users.prefix(limit).enumerated()), id: \.element) { index, bumper in
+            UserAvatar(
+              user: bumper,
+              height: size,
+              width: size
+            )
+            .overlay(
+              RoundedRectangle(cornerRadius: 100)
+                .stroke(Color.white, lineWidth: 1)
+            )
+            .padding(.leading, getPaddingByIndex(index: index))
+            
+          }
         }
+       
         if showDescription {
           BumpersTextDescription.getFormattedString(
             bumpers: users,

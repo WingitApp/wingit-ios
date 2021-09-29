@@ -11,7 +11,7 @@ struct AskDetailView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject var commentViewModel = CommentViewModel()
     @Binding var post: Post
-    @State private var isNavBarHidden: Bool = false
+    @State private var isNavBarHidden: Bool = true
     
   
     var body: some View {

@@ -41,7 +41,7 @@ struct AskCard: View {
 
   var body: some View {
     if !self.askCardViewModel.isHidden {
-      VStack {
+      VStack(alignment: .leading) {
         // need to place above to prevent event propagation
         HStack {
           BumperCountSummary(
