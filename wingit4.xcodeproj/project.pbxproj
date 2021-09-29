@@ -596,13 +596,6 @@
 			path = Carousel;
 			sourceTree = "<group>";
 		};
-		159A3DD52703CD6F00C5573C /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		15DA39B026DC5C3B0080193E /* Placeholder */ = {
 			isa = PBXGroup;
 			children = (
@@ -792,7 +785,6 @@
 				3B7AF053267197BA003BCCF3 /* InitialView.swift */,
 				3B7AF05726719885003BCCF3 /* MainView.swift */,
 				3B9C43BE26FB1A77008B01D2 /* OnboardingView.swift */,
-				159A3DD52703CD6F00C5573C /* New Group */,
 				3B7AF06126719E46003BCCF3 /* Home */,
 				3B7AF06B26719F24003BCCF3 /* Main */,
 				156E6ADF26D8A13400690E47 /* Profile */,
