@@ -12,7 +12,7 @@ import Firebase
 
 class CommentApi {
     
-  func sendComment(
+  func postComment(
     commentDict: Dictionary<String, Any>,
     postId: String,
     onSuccess: @escaping() -> Void,
