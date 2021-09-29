@@ -31,8 +31,8 @@ class SignupViewModel: ObservableObject {
         if checkFieldsAreValid() {
             
            return AuthService.signupUser(
-              firstName: firstName,
-              lastName: lastName,
+              firstName: firstName.capitalized,
+              lastName: lastName.capitalized,
               username: username,
               email: email,
               password: password,
