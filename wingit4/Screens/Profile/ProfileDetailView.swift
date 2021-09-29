@@ -64,11 +64,11 @@ struct ProfileDetailView: View {
             }
         }
         }
-            .modifier(Popup(isPresented: isPresented,
-                            alignment: .center,
-                            direction: .bottom,
-                            content: { LinkUpdatePopUp(linkIcon: $linkIcon)
-                                            .environmentObject(profileViewModel)
+        .modifier(Popup(isPresented: isPresented,
+                        alignment: .center,
+                        direction: .bottom,
+                        content: { LinkUpdatePopUp(linkIcon: $linkIcon)
+                                        .environmentObject(profileViewModel)
             }))
     }
 }
