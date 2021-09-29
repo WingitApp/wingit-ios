@@ -14,7 +14,7 @@ struct ProfileDetailView: View {
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @State var toggle: Bool = false
     @State var isPresented = false
-    @Binding var linkIcon: String
+  //  @Binding var linkIcon: String
     
     func calculateHeight(minHeight: CGFloat, maxHeight: CGFloat, yOffset: CGFloat) -> CGFloat {
       // If scrolling up, yOffset will be a negative number
@@ -67,7 +67,7 @@ struct ProfileDetailView: View {
         .modifier(Popup(isPresented: isPresented,
                         alignment: .center,
                         direction: .bottom,
-                        content: { LinkUpdatePopUp(linkIcon: $linkIcon)
+                        content: { LinkUpdatePopUp()
                                         .environmentObject(profileViewModel)
             }))
     }
@@ -157,9 +157,10 @@ struct LinkCard: View {
 
 
 struct LinkButton: View {
-    @State var linkIcon: String
+    var linkIcon: String
     @Binding var isPresented: Bool
     @EnvironmentObject var profileViewModel: ProfileViewModel
+   
     var body: some View {
         
         Button(action:{
@@ -182,7 +183,7 @@ struct LinkButton: View {
 
 struct LinkUpdatePopUp: View {
  
-    @Binding var linkIcon: String
+  //  @Binding var linkIcon: String
     @EnvironmentObject var profileViewModel: ProfileViewModel
     
 //    @State var airbnb: String = ""
@@ -213,7 +214,7 @@ struct LinkUpdatePopUp: View {
                 .modifier(TextFieldModifier())
                 .disableAutocorrection(true)
             
-            Button(action: {profileViewModel.addLinks(field: linkIcon)})
+            Button(action: {})
             {
                 Text("Save")
             }

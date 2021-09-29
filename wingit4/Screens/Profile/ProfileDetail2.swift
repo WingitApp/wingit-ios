@@ -11,7 +11,7 @@ struct ProfileDetail2: View {
     
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var profileViewModel: ProfileViewModel
-    @Binding var linkIcon: String
+   // @Binding var linkIcon: String
     
     func calculateHeight(minHeight: CGFloat, maxHeight: CGFloat, yOffset: CGFloat) -> CGFloat {
       // If scrolling up, yOffset will be a negative number
@@ -90,7 +90,7 @@ struct ProfileDetail2: View {
               .background(Color.white)
               .frame(width: UIScreen.main.bounds.width)
               
-                ProfileDetailView(linkIcon: $linkIcon)
+                ProfileDetailView()
                     .environmentObject(profileViewModel)
 
             }

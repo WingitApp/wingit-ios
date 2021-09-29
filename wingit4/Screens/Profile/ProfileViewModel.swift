@@ -140,10 +140,10 @@ class ProfileViewModel: ObservableObject {
         }
     }
     
-    func addLinks(field: String) {
-        Api.User.addLink2(field: field, url: url)
-    }
-   
+//    func addLinks(field: String) {
+//        Api.User.addLink2(field: field, url: url)
+//    }
+//   
     
 //    func addLinks(airbnb: String, spotify: String, twitter: String, instagram: String, vsco: String, googleDrive: String, onSuccess: @escaping() -> Void) {
 //
