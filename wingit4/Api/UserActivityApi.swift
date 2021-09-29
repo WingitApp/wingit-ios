@@ -46,4 +46,9 @@ class UserActivityApi {
         listener(listenerFirestore)
         
     }
+    
+    func logActivity(activity: UserActivity) {
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        try? Ref.FS_COLLECTION_ACTIVITY_FOR_USER(userId: currentUserId).document().setData(from: activity)
+    }
 }

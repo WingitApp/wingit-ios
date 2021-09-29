@@ -16,6 +16,7 @@ struct UserActivity: Codable, Identifiable {
     var commentId: String?
     var correspondingUserDisplayName: String?
     var correspondingUserId: String?
+    var currentUserAvatarUrl: URL?
     var currentUserDisplayName: String? // display name of the currentUser performing the activity
     var currentUserId: String? // id of the currentUser performing the activity
     var mediaUrl: String?
