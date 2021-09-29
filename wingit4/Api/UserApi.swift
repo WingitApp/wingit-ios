@@ -82,22 +82,18 @@ class UserApi {
         }
     }
     
-    func addLink(field: String, user: User?) {
-      return
-        if let userId = Auth.auth().currentUser?.uid, let user = user {
+    func addLink(field: String, url: String?) {
+        guard let userId = Auth.auth().currentUser?.uid else {return}
+        
             alertView(msg: "Add \(field)") { (txt) in
                 if !txt.isEmpty {
-                    let capitalized = txt.capitalized
-                    if field == "firstName" || field == "lastName" {
-                        let displayName = (field == "firstName") ? "\(capitalized) \(user.lastName ?? "")" : "\(user.firstName ?? "") \(capitalized)"
-                        StorageService.updateDisplayName(userId: userId, displayName: displayName, onSuccess: { print($0) }, onError: { print($0) })
-                        Ref.FS_DOC_USERID(userId: userId).updateData(["keywords": displayName.splitStringToArray()])
-                        Ref.FS_DOC_USERID(userId: userId).updateData([field: capitalized, "updatedAt": FieldValue.serverTimestamp()])
-                    } else {
-                        Ref.FS_DOC_USERID(userId: userId).updateData([field: txt, "updatedAt": FieldValue.serverTimestamp()])
+                    if field == "airbnb" || field == "spotify" || field == "twitter" || field == "instagram" || field == "vsco" || field == "googleDrive" {
+                        
+                        Ref.FS_DOC_USERID(userId: userId).setData(["profileLinks.\(field)" : url ?? ""], merge: true)
                     }
+                    
                 }
             }
-        }
+        
     }
 }

@@ -27,3 +27,4 @@ enum CommentType: String, Codable {
     case askPost
     case invitedReferral
 }
+

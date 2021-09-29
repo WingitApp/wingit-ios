@@ -148,7 +148,9 @@ struct LinkCard: View {
 struct LinkButton: View {
     var linkIcon: String
     var body: some View {
+        
         Button(action:{
+            Api.User.addLink(field: linkIcon, url: "")
           //  Api.User.addLink(field: <#T##String#>, user: <#T##User?#>)
         })
         {

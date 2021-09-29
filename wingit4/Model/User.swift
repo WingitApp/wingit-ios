@@ -10,6 +10,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 struct User: Identifiable, Codable, Equatable, Hashable {
+
     @DocumentID var id: String?
     @ServerTimestamp var createdAt: Timestamp?
     var uid: String?
@@ -23,7 +24,8 @@ struct User: Identifiable, Codable, Equatable, Hashable {
     var profileImageUrl: String?
     var tags: [String]?
     var username: String?
-    
+    var profileLinks: ProfileLinks?
+
     var displayName: String? {
       return "\(self.firstName ?? "") \(self.lastName ?? "")".trimmingCharacters(in: .whitespacesAndNewlines).capitalized
     }
@@ -40,5 +42,17 @@ struct User: Identifiable, Codable, Equatable, Hashable {
         case profileImageUrl
         case tags
         case username
+        case profileLinks
     }
+}
+
+ 
+struct ProfileLinks: Codable, Equatable, Hashable {
+      var airbnb: URL?
+      var spotify: URL?
+      var twitter: URL?
+      var instagram: URL?
+      var vsco: URL?
+      var googleDrive: URL?
+      var more: [String]?
 }
