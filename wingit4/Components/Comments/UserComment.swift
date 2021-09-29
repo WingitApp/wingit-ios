@@ -49,7 +49,7 @@ struct UserComment: View {
           )
         VStack(alignment: .leading) {
           HStack(alignment: .center) {
-            Text(comment.username)
+              Text(comment.username ?? "")
               .font(.system(size:12))
               .fontWeight(.semibold)
 //            UserCommentLabel(isOPComment: isOPComment)
@@ -57,7 +57,7 @@ struct UserComment: View {
             .modifier(CircleDotStyle())
             Text(
               timeAgoSinceDate(
-                Date(timeIntervalSince1970: comment.date),
+                Date(timeIntervalSince1970: comment.date ?? 0),
                 currentDate: Date(),
                 numericDates: true
               )
@@ -66,7 +66,7 @@ struct UserComment: View {
               .font(.system(size: 10))
           }
           
-          Text(comment.comment.trimmingCharacters(in: .whitespacesAndNewlines))
+            Text(comment.comment?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
             .font(.system(size:14))
 
         }

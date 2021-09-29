@@ -21,7 +21,6 @@ class CommentInputViewModel: ObservableObject {
 
       
     let comment: Comment = Comment(
-      id: UUID(),
       comment: text,
       avatarUrl: currentUser.photoURL!.absoluteString,
       ownerId: currentUser.uid,

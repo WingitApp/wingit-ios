@@ -56,7 +56,7 @@ struct ReferralComment: View {
 
         VStack(alignment: .leading) {
           HStack(spacing: 0) {
-            Text("\(comment.username)")
+            Text("\(comment.username ?? "")")
               .bold()
               .onTapGesture {
                 self.pushToOwner.toggle()
@@ -73,7 +73,7 @@ struct ReferralComment: View {
           .fixedSize(horizontal: false, vertical: true)
           Text(
             timeAgoSinceDate(
-              Date(timeIntervalSince1970: comment.date),
+              Date(timeIntervalSince1970: comment.date ?? 0),
               currentDate: Date(),
               numericDates: true
             )

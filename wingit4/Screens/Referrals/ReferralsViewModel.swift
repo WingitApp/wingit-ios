@@ -332,7 +332,6 @@ class ReferralsViewModel: ObservableObject {
       guard let currentUser = Auth.auth().currentUser else { return }
         
       let comment: Comment = Comment(
-        id: UUID(),
         comment: text,
         avatarUrl: currentUser.photoURL!.absoluteString,
         inviterAvatarUrl: referral.sender?.profileImageUrl,
