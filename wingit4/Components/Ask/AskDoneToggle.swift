@@ -21,8 +21,8 @@ struct AskDoneToggle: View {
             Haptic.impact(type: "hard")
             askCardViewModel.openCloseToggle(post: post) { newStatus in
               post.status = newStatus
-              let alertView = SPAlertView( title: "", preset: SPAlertIconPreset.done)
-              alertView.present(duration: 1)
+//              let alertView = SPAlertView( title: "", preset: SPAlertIconPreset.done)
+//              alertView.present(duration: 1)
             }
           },
           label: {
