@@ -150,7 +150,7 @@ struct LinkButton: View {
     var body: some View {
         
         Button(action:{
-            Api.User.addLink(field: linkIcon, url: "")
+            Api.User.addLink(field: linkIcon)
           //  Api.User.addLink(field: <#T##String#>, user: <#T##User?#>)
         })
         {

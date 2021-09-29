@@ -82,16 +82,15 @@ class UserApi {
         }
     }
     
-    func addLink(field: String, url: String?) {
+    func addLink(field: String) {
         guard let userId = Auth.auth().currentUser?.uid else {return}
         
-            alertView(msg: "Add \(field)") { (txt) in
-                if !txt.isEmpty {
+            alertView(msg: "Add \(field)") { (url) in
+                if !url.isEmpty {
                     if field == "airbnb" || field == "spotify" || field == "twitter" || field == "instagram" || field == "vsco" || field == "googleDrive" {
                         
-                        Ref.FS_DOC_USERID(userId: userId).setData(["profileLinks.\(field)" : url ?? ""], merge: true)
+                        Ref.FS_DOC_USERID(userId: userId).setData(["profileLinks" : [field: url]], merge: true)
                     }
-                    
                 }
             }
         

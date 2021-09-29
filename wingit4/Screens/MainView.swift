@@ -110,8 +110,8 @@ struct MainView: View {
                 self.mainViewModel.tapCount = 0
               }
           })
-        ProfileView()
-//        ProfileDetail2()
+//        ProfileView()
+        ProfileDetail2()
           .tabItem({
             VStack(alignment: .center ){
               Image(systemName: mainViewModel.selection == 4 ? "person.fill" : "person")

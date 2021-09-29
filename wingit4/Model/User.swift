@@ -54,5 +54,5 @@ struct ProfileLinks: Codable, Equatable, Hashable {
       var instagram: URL?
       var vsco: URL?
       var googleDrive: URL?
-      var more: [String]?
+    //  var more: [String]?
 }
