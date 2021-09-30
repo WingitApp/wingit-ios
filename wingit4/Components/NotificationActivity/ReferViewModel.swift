@@ -24,6 +24,19 @@ class ReferViewModel : ObservableObject, Identifiable {
     @Published var isDisabled: Bool = true
     
     @Published var userBumpsListener: ListenerRegistration?
+    
+    var searchText: String = ""
+    @Published var users: [User] = []
+    
+    
+    func searchTextDidChange() {
+        isLoading = true
+        //Api.User.searchUsers(text: searchText)
+        Api.User.searchConnections(text: searchText) { (users) in
+            self.isLoading = false
+            self.users = users
+        }
+    }
   
     func resetToInitialState() {
       isLoading = true

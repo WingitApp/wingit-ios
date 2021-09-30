@@ -22,6 +22,30 @@ class UserApi {
         }
     }
     
+    func searchConnections(text: String, onSuccess: @escaping(_ users: [User]) -> Void) {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
+              guard let snap = snapshot else {
+                  return
+              }
+              var users = [User]()
+
+              for connection in snap.documents {
+                  let connectionId = connection.documentID
+                  Ref.FS_COLLECTION_USERS.whereField("uid", isEqualTo: connectionId).whereField("keywords", arrayContains: text.lowercased().removingWhitespaces()).getDocuments{ (snapshot, error) in
+                      if let snap = snapshot {
+                          let users: [User] = snap.documents.compactMap {
+                            return try? $0.data(as: User.self)
+                          }
+                            onSuccess(users)
+                      }
+                  }
+              }
+            
+          }
+        
+    }
+    
     func loadUser(
         userId: String,
         onSuccess: @escaping(_ user: User) -> Void,

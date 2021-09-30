@@ -119,21 +119,23 @@ struct ReferConnectionsList: View {
 //                  .padding(.top, -30)
 //              } else {
                 HStack{
-                    Text("Your Connections")
+                    Text("Ask through Contacts")
                       .font(.headline)
                       .padding(.leading, 15)
                       .padding(.bottom, 5)
                     Spacer()
-                    Text(
-                      Image(systemName: "person.badge.plus")
-                    )
-                    .font(.system(size:20))
-                    .foregroundColor(.gray)
-                    .padding(.trailing, 17)
+                 
+                Image(systemName: "chevron.right").foregroundColor(.gray).padding(10)
+                    .font(.system(size: 10))
                     .onTapGesture(perform: openPhoneContactList)
                 }
                 .padding(.bottom, 10)
-                Divider()
+//                Divider()
+                 SearchBar(
+                     text: $referViewModel.searchText,
+                     placeholder: "Search Connections",
+                     onSearchButtonChanged: referViewModel.searchTextDidChange)
+                 
                ScrollView(showsIndicators: false){
                  LazyVStack(alignment: .leading){
                    ForEach(

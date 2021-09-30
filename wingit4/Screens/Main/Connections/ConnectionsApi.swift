@@ -12,6 +12,7 @@ import Firebase
 
 
 class ConnectionsApi {
+    
     func getConnections(userId: String, onSuccess: @escaping(_ users: [User]) -> Void, onEmpty: @escaping() -> Void) {
       Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
             guard let snap = snapshot else {
@@ -53,4 +54,5 @@ class ConnectionsApi {
             }
         }
     }
+    
 }
