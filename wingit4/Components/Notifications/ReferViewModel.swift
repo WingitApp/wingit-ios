@@ -60,6 +60,10 @@ class ReferViewModel : ObservableObject, Identifiable {
     
     func sendReferrals(askId: String?) {
         guard let askId = askId else { return }
+        logToAmplitude(
+          event: .wingAsk,
+          properties: [.askId: askId, .recipients: selectedUsers]
+        )
        for recipients in selectedUsers {
            let recipientId = recipients.id
            Api.Referrals.sendReferral(

@@ -31,10 +31,6 @@ struct ReferConnectionsList: View {
           parentId: ref.id
         )
       } else {
-        logToAmplitude(
-          event: .wingAsk,
-          properties: [.askId: post?.postId]
-        )
         referViewModel.sendReferrals(
           askId: post?.postId
         )
