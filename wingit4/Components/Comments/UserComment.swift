@@ -10,14 +10,14 @@ import FirebaseAuth
 
 struct UserComment: View {
   var comment: Comment
-  var postOwnerId: String
+  var postOwnerId: String?
   var isOPComment: Bool = false
   
   @State var isNavActive: Bool = false
 
 
   
-  init(comment: Comment, postOwnerId: String) {
+  init(comment: Comment, postOwnerId: String?) {
     self.comment = comment
     self.postOwnerId = postOwnerId
     if comment.ownerId == postOwnerId {

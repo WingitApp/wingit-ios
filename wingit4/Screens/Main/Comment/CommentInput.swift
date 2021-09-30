@@ -16,7 +16,7 @@ struct CommentInput: View {
     @EnvironmentObject var commentInputViewModel: CommentInputViewModel
   
   // Props & State
-    @Binding var post: Post
+    @Binding var post: Post?
     var scrollProxyValue: ScrollViewProxy?
     @State var composedMessage: String = ""
     

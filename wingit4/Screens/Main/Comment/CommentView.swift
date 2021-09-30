@@ -12,7 +12,7 @@ import URLImage
 
 struct CommentView: View {
     @EnvironmentObject var commentViewModel: CommentViewModel
-    @Binding var post: Post
+    @Binding var post: Post?
     
     var body: some View {
       NavigationView {
@@ -21,7 +21,7 @@ struct CommentView: View {
               AskDetailCard(post: $post)
               VStack(alignment: .leading) {
                 ForEach(self.commentViewModel.comments) { comment in
-                  UserComment(comment: comment, postOwnerId: post.ownerId)
+                  UserComment(comment: comment, postOwnerId: post?.ownerId)
                  }
               }
             }
@@ -32,7 +32,7 @@ struct CommentView: View {
         .navigationBarTitle("Comments", displayMode: .inline)
       }
         .onAppear {
-          self.commentViewModel.loadComments(postId: post.postId)
+          self.commentViewModel.loadComments(postId: post?.postId)
         }.onDisappear {
             if self.commentViewModel.listener != nil {
                 self.commentViewModel.listener.remove()

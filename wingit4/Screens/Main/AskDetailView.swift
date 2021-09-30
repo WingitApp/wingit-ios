@@ -10,7 +10,7 @@ import SwiftUI
 struct AskDetailView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject var commentViewModel = CommentViewModel()
-    @Binding var post: Post
+    @Binding var post: Post?
     @State private var isNavBarHidden: Bool = true
     
   
@@ -54,7 +54,7 @@ struct AskDetailView: View {
         width: UIScreen.main.bounds.size.width
       )
       .onAppear {
-        self.commentViewModel.loadComments(postId: post.postId)
+        self.commentViewModel.loadComments(postId: post?.postId)
         self.isNavBarHidden = true
       }
       .onDisappear {

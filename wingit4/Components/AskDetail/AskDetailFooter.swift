@@ -36,9 +36,7 @@ struct AskDetailFooter: View {
           CommentButton(
             isTapDisabled: true
           )
-          ReferButton(
-            post: $post
-          )
+          ReferButton()
         }
         .padding(
           EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 15)

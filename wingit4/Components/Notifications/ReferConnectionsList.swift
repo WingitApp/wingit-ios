@@ -13,7 +13,7 @@ import SPAlert
 
 struct ReferConnectionsList: View {
     @EnvironmentObject var referViewModel: ReferViewModel
-    @Binding var post: Post
+    @Binding var post: Post?
     @State var isContactsOpen: Bool = false
   var referral: Referral?
 
@@ -33,10 +33,10 @@ struct ReferConnectionsList: View {
       } else {
         logToAmplitude(
           event: .wingAsk,
-          properties: [.askId: post.postId]
+          properties: [.askId: post?.postId]
         )
         referViewModel.sendReferrals(
-          askId: post.postId
+          askId: post?.postId
         )
       }
     }

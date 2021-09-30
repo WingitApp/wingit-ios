@@ -58,8 +58,8 @@ class ReferViewModel : ObservableObject, Identifiable {
       }
     }
     
-    func sendReferrals(askId: String) {
-        
+    func sendReferrals(askId: String?) {
+        guard let askId = askId else { return }
        for receivers in selectedUsers {
            let recipientId = receivers.id
            Api.Referrals.sendReferral(
@@ -93,8 +93,9 @@ class ReferViewModel : ObservableObject, Identifiable {
       alertView.present(duration: 2)
     }
     
-    func loadConnections(post: Post) {
-        guard let userId = Auth.auth().currentUser?.uid else { return }
+    func loadConnections(post: Post?) {
+        guard let userId = Auth.auth().currentUser?.uid,
+              let post = post else { return }
         isLoading = true
       
         Api.Connections.getConnections(userId: userId) { users in

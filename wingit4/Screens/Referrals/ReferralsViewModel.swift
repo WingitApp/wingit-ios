@@ -311,7 +311,7 @@ class ReferralsViewModel: ObservableObject {
       }
     }
     
-    func acceptReferral(referral: Referral, post: Binding<Post>) {
+    func acceptReferral(referral: Referral, post: Binding<Post?>) {
         guard let referralId = referral.id, let currentUser = Auth.auth().currentUser else { return }
         Api.Referrals.updateStatus(
           referralId: referralId,
@@ -332,6 +332,7 @@ class ReferralsViewModel: ObservableObject {
       guard let currentUser = Auth.auth().currentUser else { return }
         
       let comment: Comment = Comment(
+        id: UUID(),
         comment: text,
         avatarUrl: currentUser.photoURL!.absoluteString,
         inviterAvatarUrl: referral.sender?.profileImageUrl,

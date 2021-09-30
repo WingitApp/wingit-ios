@@ -61,11 +61,7 @@ class NotificationViewModel: ObservableObject {
     }
     
     func sendConnectAcceptedAcknowledgement(userId: String) {
-        let activityId = Ref.FS_COLLECTION_ACTIVITY.document(userId).collection("feedItems").document().documentID
-                 let activityObject = Notification(activityId: activityId, type: "connectRequestAccepted", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: "", mediaUrl: "", comment: "", date: Date().timeIntervalSince1970)
-                guard let activityDict = try? activityObject.toDictionary() else { return }
-
-                Ref.FS_COLLECTION_ACTIVITY.document(userId).collection("feedItems").document(activityId).setData(activityDict)
+        // add connect request accepted UserActivity
     }
     
     func deleteConnectRequest(fromUserId: String?) {

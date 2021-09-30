@@ -11,7 +11,7 @@ import URLImage
 struct AcceptedNotification: View {
 
     @Binding var referral: Referral
-    @Binding var post: Post
+    @Binding var post: Post?
 
     // Menu
     @StateObject var askCardViewModel = AskCardViewModel()
@@ -71,7 +71,7 @@ struct AcceptedNotification: View {
 struct WingNotification: View {
     
     @Binding var referral: Referral
-    @Binding var post: Post
+    @Binding var post: Post?
     // Menu
     @StateObject var askCardViewModel = AskCardViewModel()
     @StateObject var askMenuViewModel = AskMenuViewModel()
@@ -127,7 +127,7 @@ struct WingNotification: View {
 struct ClosedNotification: View {
     
     @Binding var referral: Referral
-    @Binding var post: Post
+    @Binding var post: Post?
     // Menu
     @StateObject var askCardViewModel = AskCardViewModel()
     @StateObject var askMenuViewModel = AskMenuViewModel()

@@ -60,13 +60,7 @@ class FooterCellViewModel: ObservableObject {
             .updateData(["likeCount": post.likeCount]) { error in
                 print(error ?? "")
             }
-    
-        // find connections and update posts in their timeline using Cloud Function
-        if Auth.auth().currentUser!.uid != post.ownerId {
-          self.createNotification(post: post)
-        }
-    
-
+      // if we reimplement likes, we need to set up cloud functions better
     }
   
     
@@ -122,36 +116,4 @@ class FooterCellViewModel: ObservableObject {
             }
          }
     }
-  
-  
-  func createNotification(post: Post) {
-    guard let uid = Auth.auth().currentUser?.uid else { return }
-    let activityId = Ref.FS_COLLECTION_ACTIVITY
-      .document(post.ownerId)
-      .collection("feedItems")
-      .document()
-      .documentID
-  
-    let notificationObject = Notification(
-      activityId: activityId,
-      type: "like",
-      username: Auth.auth().currentUser!.displayName!,
-      userId: uid,
-      userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString,
-      postId: post.postId,
-      mediaUrl: post.mediaUrl,
-      comment: "",
-      date: Date().timeIntervalSince1970
-    )
-  
-    guard let notificationDict = try? notificationObject.toDictionary() else { return }
-
-    Ref.FS_COLLECTION_ACTIVITY.document(post.ownerId)
-      .collection("feedItems")
-      .document(activityId)
-      .setData(notificationDict)
-  }
-
-        
 }
-

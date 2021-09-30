@@ -21,7 +21,7 @@ struct NotificationEntry: View {
           VStack(alignment: .leading, spacing: 5) {
             Group {
               Text("\(notification.username) ").font(.subheadline).bold() +
-              Text(notification.typeDescription).font(.subheadline)
+              Text(notification.typeDescription ?? "").font(.subheadline)
             }
             .fixedSize(horizontal: false, vertical: true)
             .lineLimit(3)
@@ -53,7 +53,7 @@ struct NotificationReferralEntry: View {
           VStack(alignment: .leading, spacing: 5) {
             Group {
               Text("\(notification.username) ").font(.subheadline).bold() +
-              Text(notification.typeDescription).font(.subheadline)
+              Text(notification.typeDescription ?? "").font(.subheadline)
             }
             .fixedSize(horizontal: false, vertical: true)
             .lineLimit(3)
@@ -83,7 +83,7 @@ struct NotificationES: View {
           VStack(alignment: .leading, spacing: 5) {
             Group {
               Text("\(notification.username) ").font(.subheadline).bold() +
-              Text(notification.typeDescription).font(.subheadline)
+              Text(notification.typeDescription ?? "").font(.subheadline)
             }
             .fixedSize(horizontal: false, vertical: true)
             .lineLimit(3)

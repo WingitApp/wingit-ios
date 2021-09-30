@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct AskCardTag: View {
-  var post: Post
+  var post: Post?
   
   func getStatus() -> String {
+      guard let post = post else { return "" }
     let status =  post.type?.rawValue ?? ""
     if status.isEmpty {
       return "general".uppercased()
@@ -19,7 +20,7 @@ struct AskCardTag: View {
   }
   
   func textColor() -> Color {
-    let status = post.type?.rawValue ?? ""
+    let status = post?.type?.rawValue ?? ""
     
     switch(status) {
       case "recommendations":
@@ -37,7 +38,7 @@ struct AskCardTag: View {
   
   
   func backgroundColor() -> Color {
-    let status = post.type?.rawValue ?? ""
+    let status = post?.type?.rawValue ?? ""
 
   
     switch(status) {

@@ -10,7 +10,7 @@ import SwiftUI
 struct ReferCard: View {
   
   @State var referral: Referral
-  @State var post: Post
+  @State var post: Post?
   @EnvironmentObject var referViewModel: ReferViewModel
     
   // refferal object
@@ -23,7 +23,7 @@ struct ReferCard: View {
     var body: some View {
        
         VStack{
-            ReferHeader(referral: $referral, post: $post)
+            ReferHeader(referral: $referral)
               .padding([.horizontal])
             ReferBody(referral: $referral, post: $post)
               .padding([.vertical])
@@ -51,7 +51,7 @@ struct ReferCard: View {
 struct WingCard: View {
   
   @State var referral: Referral
-  @State var post: Post
+  @State var post: Post?
  
     
   // refferal object
@@ -74,7 +74,7 @@ struct WingCard: View {
 struct AcceptCard: View {
   
   @State var referral: Referral
-  @State var post: Post
+  @State var post: Post?
  
     
   // refferal object
@@ -97,7 +97,7 @@ struct AcceptCard: View {
 struct ClosedCard: View {
   
   @State var referral: Referral
-  @State var post: Post
+  @State var post: Post?
  
     
   // refferal object

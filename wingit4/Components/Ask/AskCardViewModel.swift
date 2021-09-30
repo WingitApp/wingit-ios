@@ -39,25 +39,26 @@ class AskCardViewModel: ObservableObject {
   @Published var isHidden: Bool = false
   
   
-  func initVM(post: Post, isProfileView: Bool) -> Void {
+  func initVM(post: Post?, isProfileView: Bool) -> Void {
 //    self.isLoading = true
     self.post = post
     self.isProfileView = isProfileView
-    self.isOwnPost = Auth.auth().currentUser?.uid == post.ownerId
+    self.isOwnPost = Auth.auth().currentUser?.uid == post?.ownerId
     self.isNavLinkDisabled = self.isProfileView || self.isOwnPost
     var isPostClosed: Bool {
-      if post.status == .open {
+      if post?.status == .open {
         return false
       } else {
         return true
       }
     }
     self.isMarkedAsDone = isPostClosed
-    self.getBumpersByPostId(postId: post.postId) // bumps (now wings)
-    self.getWingersByPostId(postId: post.postId) // accepters
+    self.getBumpersByPostId(postId: post?.postId) // bumps (now wings)
+    self.getWingersByPostId(postId: post?.postId) // accepters
   }
   
-  func getBumpersByPostId(postId: String) {
+  func getBumpersByPostId(postId: String?) {
+    guard let postId = postId else { return }
     self.bumpers = []
     isLoadingBumpers =  true
     
@@ -93,7 +94,8 @@ class AskCardViewModel: ObservableObject {
     })
   }
   
-  func getWingersByPostId(postId: String) {
+  func getWingersByPostId(postId: String?) {
+    guard let postId = postId else { return }
     self.wingers = []
     isLoadingWingers =  true
     
@@ -184,12 +186,12 @@ class AskCardViewModel: ObservableObject {
   }
   
   func openCloseToggle(
-    post: Post,
+    post: Post?,
     onSuccess: @escaping(_ newStatus: PostStatus) -> Void
   ) {
-    guard let postId = post.id else { return }
+    guard let postId = post?.id else { return }
     var newStatus: PostStatus  {
-      if post.status == .closed {
+      if post?.status == .closed {
         logToAmplitude(event: .reopenAsk)
         return .open
       } else {

@@ -8,7 +8,7 @@ import SwiftUI
 import URLImage
 
 struct FooterCell: View {
-  @Binding var post: Post
+  @Binding var post: Post?
   @EnvironmentObject var askCardViewModel: AskCardViewModel
   @EnvironmentObject var footerCellViewModel: FooterCellViewModel
   
@@ -17,9 +17,9 @@ struct FooterCell: View {
     var body: some View {
       VStack(alignment: .leading) {
           HStack {
-               NavigationLink(destination:  UserProfileView(userId: post.ownerId, user: nil)) {
+               NavigationLink(destination:  UserProfileView(userId: post?.ownerId, user: nil)) {
                       HStack {
-                        URLImageView(urlString: post.avatar)
+                        URLImageView(urlString: post?.avatar)
                           .clipShape(Circle())
                           .frame(width: 30, height: 30)
                           .overlay(
@@ -28,10 +28,10 @@ struct FooterCell: View {
                           )
             
                         VStack(alignment: .leading){
-                          Text(post.username)
+                          Text(post?.username ?? "")
                             .fontWeight(.semibold)
                             .modifier(UserNameStyle())
-                          TimeAgoStamp(date: post.date)
+                          TimeAgoStamp(date: post?.date ?? 0)
                         }
                       }
                     }
@@ -44,10 +44,7 @@ struct FooterCell: View {
               
 //              showLabel: true
             )
-            ReferButton(
-              post: $post
-//              showLabel: true
-            )
+            ReferButton()
           }
           
         
