@@ -60,8 +60,8 @@ class ReferViewModel : ObservableObject, Identifiable {
     
     func sendReferrals(askId: String?) {
         guard let askId = askId else { return }
-       for receivers in selectedUsers {
-           let recipientId = receivers.id
+       for recipients in selectedUsers {
+           let recipientId = recipients.id
            Api.Referrals.sendReferral(
                askId: askId,
                recipientId: recipientId,
