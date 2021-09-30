@@ -19,15 +19,29 @@ struct EmojiKeyboard: View {
           GridItem(.flexible())
       ]
   
+//  func getEmojiList() -> [Int] {
+//    var emojis: [Int] = []
+//
+//    for i in Emojis.orderedEmojiHexList {
+//          if (UnicodeScalar(i)?.properties.isEmoji)! {
+//            emojis.append(i)
+//          }
+//      }
+//
+//    return emojis
+//  }
+  
     var body: some View {
       ScrollView(showsIndicators: false) {
         LazyVGrid(columns: columns, spacing: 10) {
           ForEach(Emojis.orderedEmojiHexList, id: \.self) { i in
             Button(action: {}) {
-              VStack {
+//              VStack {
                 Text(String(UnicodeScalar(i)!))
                   .font(.system(size: 30))
-              }
+                
+//                Text((UnicodeScalar(i)?.properties.name ?? ""))
+//              }
 
             }
           }
