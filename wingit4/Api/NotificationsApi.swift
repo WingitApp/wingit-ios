@@ -31,8 +31,17 @@ class NotificationsApi {
             snapshot.documentChanges.forEach { (documentChange) in
                   switch documentChange.type {
                   case .added:
-                      guard let decodedNotification = try? documentChange.document.data(as: Notification.self) else { return }
-                      newNotification(decodedNotification)
+                      var decodedNotification = try? documentChange.document.data(as: Notification.self)
+                      if (decodedNotification != nil && decodedNotification?.type == "comment") {
+                          Api.Post.loadPost(postId: decodedNotification?.postId) { (post) in
+                              decodedNotification?.post = post
+                              guard let notification = decodedNotification else { return }
+                              newNotification(notification)
+                          }
+                      } else {
+                          guard let notification = decodedNotification else { return }
+                          newNotification(notification)
+                      }
                   case .modified:
                       break
                   case .removed:

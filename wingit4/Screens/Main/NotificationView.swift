@@ -36,8 +36,8 @@ struct NotificationView: View {
                     ForEach(self.notificationViewModel.notificationsArray, id: \.activityId) { notification in
                       HStack(alignment: .top) {
                             if notification.type == "comment" {
-                                NotificationEntry(notification: notification)
-//                                    CommentNotification(notification: notification)
+//                                NotificationEntry(notification: notification)
+                                    CommentNotification(notification: notification)
                             } else if notification.type == "connectRequest" {
                                     CommentNotificationRow(
                                       notification: notification,
