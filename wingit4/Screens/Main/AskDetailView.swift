@@ -30,7 +30,10 @@ struct AskDetailView: View {
             }
           }
           .background(Color.backgroundGray)
-          .onTapGesture(perform: dismissKeyboard)
+          .onTapGesture{
+            self.commentViewModel.isTextFieldFocused = false
+            dismissKeyboard()
+          }
           .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
             .onEnded({ value in
                 // onSwipeRight -> go back

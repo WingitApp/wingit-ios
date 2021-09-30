@@ -17,6 +17,9 @@ struct CommentButton: View {
       logToAmplitude(event: .viewComments)
       Haptic.impact(type: "soft")
       self.commentViewModel.toggleCommentScreen()
+    } else {
+      self.commentViewModel.isTextFieldFocused = true
+//      .becomeFirstResponder()
     }
   }
   

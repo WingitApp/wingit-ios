@@ -24,6 +24,7 @@ struct TextView: View {
 
     @Environment(\.layoutDirection) private var layoutDirection
     @Binding private var text: String
+    @Binding private var isFocused: Bool
     @State private var calculatedHeight: CGFloat = 44
     @State private var isEmpty: Bool = false
 
@@ -58,12 +59,14 @@ struct TextView: View {
 
     init(_ title: String,
          text: Binding<String>,
+         isFocused: Binding<Bool>,
          shouldEditInRange: ((Range<String.Index>, String) -> Bool)? = nil,
          onEditingChanged: (() -> Void)? = nil,
          onCommit: (() -> Void)? = nil) {
         self.title = title
 
         _text = text
+        _isFocused = isFocused
         _isEmpty = State(initialValue: self.text.isEmpty)
 
         self.onCommit = onCommit
@@ -73,6 +76,7 @@ struct TextView: View {
 
     var body: some View {
         SwiftUITextView(internalText,
+                        isFocused: $isFocused,
                         foregroundColor: foregroundColor,
                         font: font,
                         multilineTextAlignment: multilineTextAlignment,
@@ -231,6 +235,7 @@ extension TextView {
 private struct SwiftUITextView: UIViewRepresentable {
 
     @Binding private var text: String
+    @Binding var isFocused: Bool
     @Binding private var calculatedHeight: CGFloat
 
     private var onEditingChanged: (() -> Void)?
@@ -253,6 +258,7 @@ private struct SwiftUITextView: UIViewRepresentable {
     private var autoDetectionTypes: UIDataDetectorTypes = []
 
     init(_ text: Binding<String>,
+         isFocused: Binding<Bool>,
          foregroundColor: UIColor,
          font: UIFont,
          multilineTextAlignment: NSTextAlignment,
@@ -273,6 +279,7 @@ private struct SwiftUITextView: UIViewRepresentable {
          onCommit: (() -> Void)?) {
         _text = text
         _calculatedHeight = calculatedHeight
+        _isFocused = isFocused
 
         self.onCommit = onCommit
         self.shouldEditInRange = shouldEditInRange
@@ -330,6 +337,11 @@ private struct SwiftUITextView: UIViewRepresentable {
         } else {
             view.returnKeyType = onCommit == nil ? .default : .done
         }
+        
+        switch isFocused {
+          case true: view.becomeFirstResponder()
+          case false: view.resignFirstResponder()
+        }
 
         SwiftUITextView.recalculateHeight(view: view, result: $calculatedHeight)
     }
@@ -337,6 +349,7 @@ private struct SwiftUITextView: UIViewRepresentable {
     @discardableResult func makeCoordinator() -> Coordinator {
         return Coordinator(
             text: $text,
+            isFocused: $isFocused,
             calculatedHeight: $calculatedHeight,
             shouldEditInRange: shouldEditInRange,
             onEditingChanged: onEditingChanged,
@@ -361,6 +374,7 @@ private extension SwiftUITextView {
 
         private var originalText: String = ""
         private var text: Binding<String>
+        var isFocused: Binding<Bool>
         private var calculatedHeight: Binding<CGFloat>
 
         var onCommit: (() -> Void)?
@@ -368,12 +382,14 @@ private extension SwiftUITextView {
         var shouldEditInRange: ((Range<String.Index>, String) -> Bool)?
 
         init(text: Binding<String>,
+             isFocused: Binding<Bool>,
              calculatedHeight: Binding<CGFloat>,
              shouldEditInRange: ((Range<String.Index>, String) -> Bool)?,
              onEditingChanged: (() -> Void)?,
              onCommit: (() -> Void)?) {
             self.text = text
             self.calculatedHeight = calculatedHeight
+            self.isFocused = isFocused
             self.shouldEditInRange = shouldEditInRange
             self.onEditingChanged = onEditingChanged
             self.onCommit = onCommit
@@ -381,6 +397,7 @@ private extension SwiftUITextView {
 
         func textViewDidBeginEditing(_ textView: UITextView) {
             originalText = text.wrappedValue
+            self.isFocused.wrappedValue = true
         }
 
         func textViewDidChange(_ textView: UITextView) {
@@ -405,6 +422,7 @@ private extension SwiftUITextView {
             if onCommit != nil {
                 text.wrappedValue = originalText
             }
+            self.isFocused.wrappedValue = false
         }
 
     }

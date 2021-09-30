@@ -16,6 +16,8 @@ class CommentViewModel: ObservableObject {
     @Published var comments: [Comment] = []
     @Published var inviteHistory: [Comment] = []
   
+    @Published var isTextFieldFocused: Bool = false
+  
     @Published var isLoading: Bool = false
     @Published var isCommentSheetShown = false
 

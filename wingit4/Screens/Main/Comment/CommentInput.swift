@@ -50,7 +50,7 @@ struct CommentInput: View {
 
         Divider()
         HStack(alignment: .bottom){
-          TextView("Write a response", text: $composedMessage)
+          TextView("Write a response", text: $composedMessage, isFocused: $commentViewModel.isTextFieldFocused)
              Button(action: onCommentSubmit) {
                  Image(systemName: "arrow.up.circle.fill")
                   .font(.system(size:23))
