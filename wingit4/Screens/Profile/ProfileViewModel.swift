@@ -26,15 +26,26 @@ class ProfileViewModel: ObservableObject {
     @Published var isConnected = false
     @Published var showOpenPosts = true
     
-    @Published var first: String = ""
+    @Published var first: String = "" // needs to be preset
     @Published var last: String = ""
     @Published var username: String = ""
     @Published var bio: String = ""
+  
+    @Published var userProfile = [
+      "firstName": String,
+      "lastName": String,
+      "username": String,
+      "bio": String
+    ]
 
     var openListener: ListenerRegistration!
     var closedListener: ListenerRegistration!
   
 
+    func initUserMetadata(user: User) {
+      // pass metadata to fields
+      
+    }
     
     func updateIsConnected(userId: String) {
         Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: Auth.auth().currentUser!.uid).document(userId).getDocument { (document, error) in
@@ -145,7 +156,6 @@ class ProfileViewModel: ObservableObject {
     }
     
     func editProfile(completed: @escaping() -> Void){
-        if !first.isEmpty || !last.isEmpty || !username.isEmpty || !bio.isEmpty {
             Api.User.editProfile(
                 first: first,
                 last: last,
@@ -153,8 +163,6 @@ class ProfileViewModel: ObservableObject {
                 bio: bio,  
                 onSuccess: completed
             )
-        } else {
-            return
-        }
+
     }
 }

@@ -52,6 +52,7 @@
 		15762C6A26E170ED00A8E041 /* ReferralsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15762C6926E170ED00A8E041 /* ReferralsView.swift */; };
 		15762C6C26E170FA00A8E041 /* ReferralsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15762C6B26E170FA00A8E041 /* ReferralsViewModel.swift */; };
 		1591FD9726FBCE59001492E4 /* boost.json in Resources */ = {isa = PBXBuildFile; fileRef = 1591FD9626FBCE59001492E4 /* boost.json */; };
+		1594EE73270630F800D5C9E9 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1594EE72270630F800D5C9E9 /* EditProfileView.swift */; };
 		159A3DD42703CACB00C5573C /* CarouselWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159A3DD32703CACB00C5573C /* CarouselWrapper.swift */; };
 		159A3DD72703CEB600C5573C /* OnboardingCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159A3DD62703CEB600C5573C /* OnboardingCarousel.swift */; };
 		15A1BC7326FC1CE600A1AF27 /* AskActivityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1BC7226FC1CE600A1AF27 /* AskActivityList.swift */; };
@@ -210,7 +211,6 @@
 		65F7315626F5276900A73781 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315526F5276900A73781 /* Contact.swift */; };
 		65F7315826F5295500A73781 /* ContactsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315726F5295500A73781 /* ContactsListViewModel.swift */; };
 		65FE040426E9FE3200333609 /* ComposePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE040326E9FE3200333609 /* ComposePostView.swift */; };
-		FB150EE92703DE9200B0D073 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB150EE82703DE9200B0D073 /* EditProfileView.swift */; };
 		FBD25F7E27043C4E0002C5B2 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD25F7D27043C4E0002C5B2 /* PopUp.swift */; };
 /* End PBXBuildFile section */
 
@@ -258,6 +258,7 @@
 		15762C6926E170ED00A8E041 /* ReferralsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralsView.swift; sourceTree = "<group>"; };
 		15762C6B26E170FA00A8E041 /* ReferralsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralsViewModel.swift; sourceTree = "<group>"; };
 		1591FD9626FBCE59001492E4 /* boost.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = boost.json; sourceTree = "<group>"; };
+		1594EE72270630F800D5C9E9 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		159A3DD32703CACB00C5573C /* CarouselWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselWrapper.swift; sourceTree = "<group>"; };
 		159A3DD62703CEB600C5573C /* OnboardingCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCarousel.swift; sourceTree = "<group>"; };
 		15A1BC7226FC1CE600A1AF27 /* AskActivityList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskActivityList.swift; sourceTree = "<group>"; };
@@ -412,7 +413,6 @@
 		65F7315526F5276900A73781 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		65F7315726F5295500A73781 /* ContactsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewModel.swift; sourceTree = "<group>"; };
 		65FE040326E9FE3200333609 /* ComposePostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposePostView.swift; sourceTree = "<group>"; };
-		FB150EE82703DE9200B0D073 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileView.swift; path = "../../../../../Library/Mobile Documents/com~apple~CloudDocs/Desktop/wingIt/Shared/Views/Tabs/EditProfileView.swift"; sourceTree = "<group>"; };
 		FBD25F7D27043C4E0002C5B2 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -565,7 +565,6 @@
 				3BE57FF626D89994005C242F /* ProfileNavigation.swift */,
 				3BFBE7F426F3C75100B0DFE2 /* ProfileDetailView.swift */,
 				FBD25F7D27043C4E0002C5B2 /* PopUp.swift */,
-				FB150EE82703DE9200B0D073 /* EditProfileView.swift */,
 				3BFBE7F626F3D42800B0DFE2 /* ProfileDetail2.swift */,
 				65739ECA26F71D4400A0A8B9 /* ProfileView.swift */,
 				65A7DC0B26EDA9430032C739 /* UserProfileHeader.swift */,
@@ -576,6 +575,7 @@
 				65A7DC0926ED9F2E0032C739 /* PersonalClosedPostsView.swift */,
 				15F7E87826E8435A00E5238F /* PersonalProfileHeader.swift */,
 				1500983426EFE45B00D31B8C /* ProfileFeed.swift */,
+				1594EE72270630F800D5C9E9 /* EditProfileView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1205,6 +1205,7 @@
 				3B7AF0712671A1FC003BCCF3 /* CommentInput.swift in Sources */,
 				15F7E8B926E848ED00E5238F /* AskDetailBody.swift in Sources */,
 				65A9EFA526E0B2EC00E81CBF /* AskApi.swift in Sources */,
+				1594EE73270630F800D5C9E9 /* EditProfileView.swift in Sources */,
 				150DB46326F301AD00373D26 /* PostEmptyState.swift in Sources */,
 				151A3C7F26CE049000A39FAF /* NavigationTab.swift in Sources */,
 				3B9774252694FE0000F1EF14 /* alertView.swift in Sources */,
@@ -1261,7 +1262,6 @@
 				1524E10726F8418D00D5BDB4 /* LottieView.swift in Sources */,
 				1500983526EFE45B00D31B8C /* ProfileFeed.swift in Sources */,
 				15F7E8C126E8490100E5238F /* CommentList.swift in Sources */,
-				FB150EE92703DE9200B0D073 /* EditProfileView.swift in Sources */,
 				15DA39B426DC5C620080193E /* AskCardPlaceholder.swift in Sources */,
 				3B7AF0B72672C21F003BCCF3 /* Chat.swift in Sources */,
 				65C0F9D3270BB0F500F69592 /* NotificationViewNavigationOption.swift in Sources */,
