@@ -73,14 +73,17 @@ class UserApi {
           guard let userId = Auth.auth().currentUser?.uid else {
               return
           }
-          
-          Ref.FS_DOC_USERID(userId: userId).updateData([
-            "firstName" :  first,
-            "lastName"  :  last,
-            "username"  :  username,
-            "bio"       :  bio
-          ])
-        
+          if first != "" {
+              Ref.FS_DOC_USERID(userId: userId).updateData([ "firstName" :  first])
+          } else if last != "" {
+              Ref.FS_DOC_USERID(userId: userId).updateData([ "lastName" :  last])
+          } else if username != "" {
+              Ref.FS_DOC_USERID(userId: userId).updateData([ "username" :  username])
+          } else if bio != "" {
+              Ref.FS_DOC_USERID(userId: userId).updateData([ "bio" :  first])
+          } else {
+              return
+          }
           }
     
     func addLink(field: String) {
