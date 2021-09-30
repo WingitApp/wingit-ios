@@ -24,6 +24,13 @@ class ProfileViewModel: ObservableObject {
     
     @Published var isConnected = false
     @Published var showOpenPosts = true
+    
+    @Published var first: String = ""
+    @Published var last: String = ""
+    @Published var username: String = ""
+    @Published var bio: String = ""
+    @Published var title: String = ""
+
   
     var openListener: ListenerRegistration!
     var closedListener: ListenerRegistration!
@@ -135,6 +142,19 @@ class ProfileViewModel: ObservableObject {
                 setUserProperty(property: .connections, value: doc.count)
                 self.connectionsCountState = doc.count
             }
+        }
+    }
+    
+    func editProfile(completed: @escaping() -> Void){
+        if !first.isEmpty || !last.isEmpty || !username.isEmpty || !bio.isEmpty || !title.isEmpty {
+            Api.User.editProfile(
+                first: first,
+                last: last,
+                username: username,
+                bio: bio,
+                title: title,
+                onSuccess: completed
+            )
         }
     }
 }

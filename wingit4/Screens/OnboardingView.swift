@@ -30,8 +30,8 @@ struct OnboardingView: View {
 
 struct NewOnboardingUI_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView()
-       // SignUp1()
+//        OnboardingView()
+        SignUp1()
     }
 }
 

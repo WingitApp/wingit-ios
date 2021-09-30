@@ -75,7 +75,8 @@ struct MainView: View {
                 self.mainViewModel.tapCount = 0
               }
           })
-        ComposePostView()
+       // ComposePostView()
+        EditProfileView()
           .tabItem({
             VStack(alignment: .center ){
               Image(systemName: "plus.circle.fill")

@@ -63,6 +63,44 @@ class UserApi {
         StorageService.updateAvatar(userId: userId, imageData: imageData, metadata: metadata, storageAvatarRef: storageAvatarUserId, onSuccess: onSuccess, onError: onError)
     }
     
+    func editProfile(
+        first: String,
+        last: String,
+        username: String,
+        bio: String,
+        title: String, 
+        onSuccess: @escaping() -> Void
+      ) {
+          guard let userId = Auth.auth().currentUser?.uid else {
+              return
+          }
+          let firestoreUserRef = Ref.FS_DOC_USERID(userId: userId)
+          let user = User.init(
+            id: userId,
+            createdAt: nil,
+            uid: userId,
+            bio: bio,
+            canonicalEmail: "",
+            connections: [],
+            email: "",
+            firstName: first,
+            keywords: [],
+            lastName: last,
+            profileImageUrl: "",
+            tags: [],
+            username: username
+           )
+          do {
+              try firestoreUserRef.setData(from: user, merge: true)
+//              let displayName = (field == "firstName") ? "\(capitalized) \(user.lastName ?? "")" : "\(user.firstName ?? "") \(capitalized)"
+              StorageService.updateDisplayName(userId: userId, displayName: displayName, onSuccess: { print($0) }, onError: { print($0) })
+              Ref.FS_DOC_USERID(userId: userId).updateData(["keywords": displayName.splitStringToArray()])
+              onSuccess()
+          }catch{
+              print(error)
+          }
+    }
+    
     func updateField(field: String, user: User?) {
       return
         // temporarily disabled

@@ -21,7 +21,7 @@ struct User: Identifiable, Codable, Equatable, Hashable {
     var keywords: [String]?
     var lastName: String?
     var profileImageUrl: String?
-    var tags: [String]?
+    var tags: [String]? //attributes of the user
     var username: String?
     
     var displayName: String? {
