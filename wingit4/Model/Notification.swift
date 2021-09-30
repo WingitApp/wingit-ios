@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Notification: Codable {
+struct Notification: Codable, Equatable {
     var post: Post?
     
     // legacy fields
