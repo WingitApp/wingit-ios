@@ -14,7 +14,8 @@ class ProfileViewModel: ObservableObject {
     @Published var openPosts: [Post] = []
     @Published var closedPosts: [Post] = []
     var user: User!
-
+    
+    @Published var isPresented: Bool = false
     @Published var isLoading = false
     @Published var userBlocked = false
     @Published var showImagePicker: Bool = false
@@ -29,9 +30,7 @@ class ProfileViewModel: ObservableObject {
     @Published var last: String = ""
     @Published var username: String = ""
     @Published var bio: String = ""
-    @Published var title: String = ""
 
-  
     var openListener: ListenerRegistration!
     var closedListener: ListenerRegistration!
   
@@ -146,15 +145,16 @@ class ProfileViewModel: ObservableObject {
     }
     
     func editProfile(completed: @escaping() -> Void){
-        if !first.isEmpty || !last.isEmpty || !username.isEmpty || !bio.isEmpty || !title.isEmpty {
+        if !first.isEmpty || !last.isEmpty || !username.isEmpty || !bio.isEmpty {
             Api.User.editProfile(
                 first: first,
                 last: last,
                 username: username,
-                bio: bio,
-                title: title,
+                bio: bio,  
                 onSuccess: completed
             )
+        } else {
+            return
         }
     }
 }

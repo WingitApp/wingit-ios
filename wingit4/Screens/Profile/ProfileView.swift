@@ -57,7 +57,6 @@ struct ProfileView: View {
           }
           .onTapGesture(perform: self.openUpdatePicSheet)
           .zIndex(0)
-        
           
           VStack {
             HStack {
@@ -88,6 +87,9 @@ struct ProfileView: View {
                  .cornerRadius(20, corners: [.topLeft, .topRight])
                  .padding(.top, -105)
                )
+                Button(action: {profileViewModel.isPresented.toggle()}){
+                    Text("Edit Profile")
+                }
               Connections(
                 user: self.session.currentUser,
                 connectionsCount: $profileViewModel.connectionsCountState
@@ -110,7 +112,8 @@ struct ProfileView: View {
           .padding(.top, 230)
           
         }
-      }
+       
+        }
       .background(
         Color.white.ignoresSafeArea(.all, edges: .all)
       )
@@ -150,5 +153,9 @@ struct ProfileView: View {
             .foregroundColor(.gray)
         })
     }
+    .modifier(Popup(isPresented: profileViewModel.isPresented,
+                    alignment: .center,
+                    direction: .bottom,
+                    content: { EditProfileView().environmentObject(profileViewModel)}))
   }
 }
