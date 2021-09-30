@@ -10,7 +10,10 @@ struct NotificationView: View {
     
   @EnvironmentObject var notificationViewModel: NotificationViewModel
   @EnvironmentObject var mainViewModel: MainViewModel
-  
+  func sortNotifications() -> Void {
+    self.notificationViewModel.notificationsArray.sort { $0.date > $1.date }
+  }
+    
     var body: some View {
        
         NavigationView {
@@ -36,7 +39,6 @@ struct NotificationView: View {
                     ForEach(self.notificationViewModel.notificationsArray, id: \.activityId) { notification in
                       HStack(alignment: .top) {
                             if notification.type == "comment" {
-//                                NotificationEntry(notification: notification)
                                     CommentNotification(notification: notification)
                             } else if notification.type == "connectRequest" {
                                     CommentNotificationRow(
@@ -86,8 +88,9 @@ struct NotificationView: View {
               .environmentObject(mainViewModel)
             }
         }
+        } .onAppear {
+            sortNotifications()
         }
-      
     }
 }
 
