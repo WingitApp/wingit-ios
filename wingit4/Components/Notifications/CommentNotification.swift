@@ -8,10 +8,26 @@ import SwiftUI
 import URLImage
 
 struct CommentNotification: View {
-  @State var notification: Notification
+    @State var notification: Notification
+    // Menu
+    @StateObject var askCardViewModel = AskCardViewModel()
+    @StateObject var askMenuViewModel = AskMenuViewModel()
+    @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
+    // Comment
+    @StateObject var commentViewModel = CommentViewModel()
+    @StateObject var referViewModel = ReferViewModel()
+    @StateObject var commentInputViewModel = CommentInputViewModel()
+    // Like
+    @StateObject var footerCellViewModel = FooterCellViewModel()
   
   var body: some View {
-      NavigationLink(destination: AskDetailView(post: $notification.post)) {
+      NavigationLink(destination: AskDetailView(post: $notification.post)
+          .environmentObject(askCardViewModel)
+          .environmentObject(askMenuViewModel)
+          .environmentObject(askDoneToggleViewModel)
+          .environmentObject(commentViewModel)
+          .environmentObject(commentInputViewModel)
+          .environmentObject(footerCellViewModel)) {
       HStack(alignment: .top) {
           NotificationUserAvatar(
              imageUrl: notification.userAvatar,
