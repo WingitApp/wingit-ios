@@ -18,7 +18,6 @@ class NotificationViewModel: ObservableObject {
     var listener: ListenerRegistration!
     
     @Published var isLoading = true
-
     
     func loadNotifications() {
         self.notificationsArray = []
@@ -29,6 +28,11 @@ class NotificationViewModel: ObservableObject {
             self.isLoading = false
           }, newNotification: { (notification) in
             if !self.notificationsArray.contains(notification) {
+                if notification.type == "comment" {
+                    Api.Post.getPost(postId: notification.postId) { post in
+                        notification.post = post
+                    }
+                }
               self.notificationsArray.insert(notification, at: 0)
               self.isLoading = false
             }
