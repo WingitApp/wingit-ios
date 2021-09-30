@@ -58,30 +58,29 @@ struct Notification: Codable {
         case username
     }
     
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        activityId = try container.decode(String.self, forKey: .activityId)
-        comment = try container.decode(String.self, forKey: .comment)
-        date = try container.decode(Double.self, forKey: .date)
-        mediaUrl = try container.decode(String.self, forKey: .mediaUrl)
-        postId = try container.decode(String.self, forKey: .postId)
-        type = try container.decode(String.self, forKey: .type)
-        userAvatar = try container.decode(String.self, forKey: .userAvatar)
-        userId = try container.decode(String.self, forKey: .userId)
-        username = try container.decode(String.self, forKey: .username)
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(activityId, forKey: .activityId)
-        try container.encode(comment, forKey: .comment)
-        try container.encode(date, forKey: .date)
-        try container.encode(mediaUrl, forKey: .mediaUrl)
-        try container.encode(postId, forKey: .postId)
-        try container.encode(type, forKey: .type)
-        try container.encode(userAvatar, forKey: .userAvatar)
-        try container.encode(userId, forKey: .userId)
-        try container.encode(username, forKey: .username)
-    }
+//    init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        activityId = try container.decode(String.self, forKey: .activityId)
+//        comment = try container.decode(String.self, forKey: .comment)
+//        date = try container.decode(Double.self, forKey: .date)
+//        mediaUrl = try container.decode(String.self, forKey: .mediaUrl)
+//        postId = try container.decode(String.self, forKey: .postId)
+//        type = try container.decode(String.self, forKey: .type)
+//        userAvatar = try container.decode(String.self, forKey: .userAvatar)
+//        userId = try container.decode(String.self, forKey: .userId)
+//        username = try container.decode(String.self, forKey: .username)
+//    }
+//
+//    func encode(to encoder: Encoder) throws {
+//        var container = encoder.container(keyedBy: CodingKeys.self)
+//        try container.encode(activityId, forKey: .activityId)
+//        try container.encode(comment, forKey: .comment)
+//        try container.encode(date, forKey: .date)
+//        try container.encode(mediaUrl, forKey: .mediaUrl)
+//        try container.encode(postId, forKey: .postId)
+//        try container.encode(type, forKey: .type)
+//        try container.encode(userAvatar, forKey: .userAvatar)
+//        try container.encode(userId, forKey: .userId)
+//        try container.encode(username, forKey: .username)
+//    }
 }
-
