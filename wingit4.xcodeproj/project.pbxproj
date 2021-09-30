@@ -536,7 +536,7 @@
 			path = Referral;
 			sourceTree = "<group>";
 		};
-		156E6AD326D8A0A700690E47 /* NotificationActivity */ = {
+		156E6AD326D8A0A700690E47 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
 				156E6AD426D8A0A700690E47 /* NotificationEntry.swift */,
@@ -551,7 +551,7 @@
 				1500983626F173A900D31B8C /* NotificationUserAvatar.swift */,
 				15A1BC7626FC4DCE00A1AF27 /* ReferralFeed.swift */,
 			);
-			path = NotificationActivity;
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		156E6ADF26D8A13400690E47 /* Profile */ = {
@@ -750,7 +750,7 @@
 				15E4907C26E84BD700B25B56 /* Form */,
 				15F7E8BB26E8490100E5238F /* Comments */,
 				15DA39B026DC5C3B0080193E /* Placeholder */,
-				156E6AD326D8A0A700690E47 /* NotificationActivity */,
+				156E6AD326D8A0A700690E47 /* Notifications */,
 				1524FCF626D812D70000629C /* Loader */,
 				151A3C8626D3255C00A39FAF /* Home */,
 				151A3C7D26CE047A00A39FAF /* Navigation */,
