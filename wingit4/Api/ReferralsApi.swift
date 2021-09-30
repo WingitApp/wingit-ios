@@ -18,11 +18,7 @@ class ReferralsApi {
         let referral = Referral(id: nil, createdAt: nil, askId: askId, children: nil, closedAt: nil, recipientId: recipientId, parentId: nil, senderId: id, status: .pending, text: nil, updatedAt: nil)
         do {
             let _ = try Ref.FS_COLLECTION_REFERRALS.addDocument(from: referral)
-            let activityId = Ref.FS_COLLECTION_ACTIVITY.document(recipientId).collection("feedItems").document().documentID
-             let activityObject = Notification(activityId: activityId, type: "referred", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: askId, mediaUrl: "", comment: "", date: Date().timeIntervalSince1970)
-            guard let activityDict = try? activityObject.toDictionary() else { return }
-
-            Ref.FS_COLLECTION_ACTIVITY.document(recipientId).collection("feedItems").document(activityId).setData(activityDict)
+            // create referConnection UserActivity
         } catch {
             print(error)
         }
@@ -34,10 +30,7 @@ class ReferralsApi {
         do {
             let _ = try Ref.FS_COLLECTION_REFERRALS.addDocument(from: referral)
             let activityId = Ref.FS_COLLECTION_ACTIVITY.document(recipientId).collection("feedItems").document().documentID
-             let activityObject = Notification(activityId: activityId, type: "referred", username: Auth.auth().currentUser!.displayName!, userId: Auth.auth().currentUser!.uid, userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, postId: askId, mediaUrl: "", comment: "", date: Date().timeIntervalSince1970)
-            guard let activityDict = try? activityObject.toDictionary() else { return }
-
-            Ref.FS_COLLECTION_ACTIVITY.document(recipientId).collection("feedItems").document(activityId).setData(activityDict)
+             // add rewing activity
         } catch {
             print(error)
         }

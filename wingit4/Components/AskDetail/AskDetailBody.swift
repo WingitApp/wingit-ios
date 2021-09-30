@@ -11,16 +11,16 @@ import URLImage
 
 struct AskDetailBody: View {
   @EnvironmentObject var askCardViewModel: AskCardViewModel
-  @Binding var post: Post
+  @Binding var post: Post?
 
     var body: some View {
       VStack(alignment: .leading) {
 
         HStack(alignment: .top) {
          NavigationLink(
-            destination: UserProfileView(userId: post.ownerId, user: nil),
+            destination: UserProfileView(userId: post?.ownerId, user: nil),
             label: {
-                URLImageView(urlString: post.avatar)
+                URLImageView(urlString: post?.avatar ?? "")
                   .clipShape(Circle())
                   .frame(width: 35, height: 35, alignment: .center)
                   .overlay(
@@ -28,10 +28,10 @@ struct AskDetailBody: View {
                       .stroke(Color.gray, lineWidth: 1)
                   )
                 VStack(alignment: .leading){
-                  Text(post.username)
+                  Text(post?.username ?? "")
                     .font(.subheadline)
                     .fontWeight(.bold)
-                  TimeAgoStamp(date: post.date)
+                  TimeAgoStamp(date: post?.date ?? 0)
                     .font(.caption2)
                 }
             }).buttonStyle(PlainButtonStyle())
@@ -48,7 +48,7 @@ struct AskDetailBody: View {
         .padding(.bottom, 15)
         
         HStack{
-          Text(post.caption)
+          Text(post?.caption ?? "")
             .fontWeight(.medium)
             .modifier(BodyStyle())
             .fixedSize(horizontal: false, vertical: true)
@@ -56,20 +56,14 @@ struct AskDetailBody: View {
         .padding(.bottom, 5)
         
        
-      if post.mediaUrl != "" {
+      if post?.mediaUrl != "" {
         Button(action: {
             withAnimation(.easeInOut){
               askCardViewModel.isImageModalOpen.toggle()
             }
         }, label: {
-          URLImage(URL(string: post.mediaUrl)!,
-            content: {
-                $0.image
-                    .resizable()
-                    .scaledToFit()
-                    .aspectRatio(contentMode: .fill)
-            })
-            
+          URLImageView(urlString: post?.mediaUrl)
+            .scaledToFit()
             .frame(width: UIScreen.main.bounds.width - 37, height: 275)
             .cornerRadius(8)
             .overlay(

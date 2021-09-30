@@ -23,11 +23,12 @@ struct ReportInput: View {
         if post != nil {
             reportInputViewModel.post = post
         } else {
-            handleInputViewModel(postId: postId!)
+            handleInputViewModel(postId: postId)
         }
     }
     
-    func handleInputViewModel(postId: String) {
+    func handleInputViewModel(postId: String?) {
+        guard let postId = postId else { return }
         Api.Post.loadPost(postId: postId) { (post) in
             self.reportInputViewModel.post = post
         }

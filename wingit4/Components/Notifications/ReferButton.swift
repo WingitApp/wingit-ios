@@ -11,7 +11,6 @@ struct ReferButton: View {
     @EnvironmentObject var referViewModel: ReferViewModel
     @EnvironmentObject var askCardViewModel: AskCardViewModel
 
-    @Binding var post: Post
     var showLabel: Bool = false
 
     var body: some View {

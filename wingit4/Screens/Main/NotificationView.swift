@@ -37,7 +37,7 @@ struct NotificationView: View {
                       HStack(alignment: .top) {
                             if notification.type == "comment" {
 //                              NavigationLink(destination: AskDetailView)
-                                    NotificationEntry(notification: notification)
+                                    CommentNotification(notification: notification)
 //                                    NavigationLink(destination: CommentView(postId: activity.postId)) {
 //                                        EmptyView()
 //                                    }
@@ -61,7 +61,7 @@ struct NotificationView: View {
 
                               VStack(alignment: .leading) {
                                 HStack(alignment: .center, spacing: 5) {
-                                  Text(notification.username).bold() + Text(" ") + Text(notification.typeDescription)
+                                  Text(notification.username).bold() + Text(" ") + Text(notification.typeDescription ?? "")
                                 }
                                 .font(.subheadline)
                                 .fixedSize(horizontal: false, vertical: true)
@@ -109,7 +109,7 @@ struct CommentNotificationRow: View {
 
           HStack{
               VStack(alignment: .leading) {
-                  Text(notification.username).bold() + Text(" ") + Text(notification.typeDescription)
+                  Text(notification.username).bold() + Text(" ") + Text(notification.typeDescription ?? "")
                 
                 VStack(alignment: .leading) {
                     Text(timeAgoSinceDate(Date(timeIntervalSince1970: notification.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)

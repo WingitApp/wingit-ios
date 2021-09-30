@@ -12,7 +12,6 @@ struct ReferHeader: View {
     
     @EnvironmentObject var referralsViewModel: ReferralsViewModel
     @Binding var referral: Referral
-    @Binding var post: Post
     
    // @Binding var post: Post
     

@@ -15,7 +15,7 @@ struct AskDetailCard: View {
 
   
 
-  @Binding var post: Post
+  @Binding var post: Post?
   
     var body: some View {
       VStack(alignment: .leading, spacing: 0) {
@@ -42,7 +42,7 @@ struct AskDetailCard: View {
       .sheet(
         isPresented: $askMenuViewModel.isReportModalOpen,
         content: {
-          ReportInput(post: post, postId: post.postId)
+          ReportInput(post: post, postId: post?.postId)
             .environmentObject(askCardViewModel)
             .environmentObject(askMenuViewModel)
       })

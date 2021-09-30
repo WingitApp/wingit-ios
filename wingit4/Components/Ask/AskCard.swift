@@ -10,7 +10,7 @@ import FirebaseAuth
 
 struct AskCard: View {
   // Props (passed from parents)
-  @State var post: Post
+  @State var post: Post?
   var isProfileView: Bool
   var index: Int = 0
   var referral: Referral?
@@ -98,7 +98,7 @@ struct AskCard: View {
           isProfileView: isProfileView
         )
         self.commentViewModel.loadComments(
-          postId: post.postId
+          postId: post?.postId
         )
 //        self.footerCellViewModel.checkPostIsLiked(post: post)
       }
@@ -113,7 +113,7 @@ struct AskCard: View {
       .sheet(
         isPresented: $askMenuViewModel.isReportModalOpen,
         content: {
-          ReportInput(post: post, postId: post.postId)
+          ReportInput(post: post, postId: post?.postId)
             .environmentObject(askCardViewModel)
             .environmentObject(askMenuViewModel)
       })

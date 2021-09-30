@@ -25,7 +25,7 @@ struct ReferBody: View {
 @StateObject var footerCellViewModel = FooterCellViewModel()
     
   @Binding var referral: Referral
-  @Binding var post: Post
+  @Binding var post: Post?
 
     var body: some View {
         NavigationLink(

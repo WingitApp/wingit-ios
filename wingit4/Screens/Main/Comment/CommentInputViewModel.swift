@@ -14,10 +14,10 @@ class CommentInputViewModel: ObservableObject {
     
   func saveComment(
     text: String,
-    post: Post,
+    post: Post?,
     onSuccess: @escaping(_ comment: Comment) -> Void
   ) {
-    guard let currentUser = Auth.auth().currentUser else { return }
+    guard let currentUser = Auth.auth().currentUser, let post = post else { return }
 
       
     let comment: Comment = Comment(

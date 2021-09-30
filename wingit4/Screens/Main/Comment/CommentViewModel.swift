@@ -26,7 +26,8 @@ class CommentViewModel: ObservableObject {
       self.isCommentSheetShown.toggle()
     }
     
-    func loadComments(postId: String) {
+    func loadComments(postId: String?) {
+      guard let postId = postId else { return }
       if !self.isLoading {
         self.isLoading.toggle()
       }

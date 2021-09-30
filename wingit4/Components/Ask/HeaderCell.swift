@@ -12,7 +12,7 @@ import FirebaseAuth
 struct HeaderCell: View {
   
   @EnvironmentObject var askCardViewModel: AskCardViewModel
-  @Binding var post: Post
+  @Binding var post: Post?
   var index: Int?
   
   var body: some View {

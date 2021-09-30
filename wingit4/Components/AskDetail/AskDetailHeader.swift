@@ -10,7 +10,7 @@ import URLImage
 
 
 struct AskDetailHeader: View {
-  @Binding var post: Post
+  @Binding var post: Post?
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
   
     var body: some View {
@@ -33,9 +33,7 @@ struct AskDetailHeader: View {
         CommentButton(
           isTapDisabled: true
         )
-        ReferButton(
-          post: $post
-        )
+        ReferButton()
         AskMenu(
           isHorizontal: true
         )

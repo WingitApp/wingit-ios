@@ -10,7 +10,7 @@ import SwiftUI
 struct ReferFooter: View {
     
   @Binding var referral: Referral
-  @Binding var post: Post
+  @Binding var post: Post?
   
     var body: some View {
         
@@ -26,7 +26,7 @@ struct AcceptButton: View {
     
     @EnvironmentObject var referralsViewModel: ReferralsViewModel
     @Binding var referral: Referral
-    @Binding var post: Post
+    @Binding var post: Post?
     @State var userHasAccepted: Bool = false
     
     var body: some View {

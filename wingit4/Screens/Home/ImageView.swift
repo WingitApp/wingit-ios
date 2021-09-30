@@ -9,7 +9,7 @@ import SwiftUI
 import URLImage
 
 struct ImageView: View {
-  @Binding var post: Post
+  @Binding var post: Post?
   @Environment(\.presentationMode) var presentationmode
     
     var body: some View {
@@ -22,12 +22,8 @@ struct ImageView: View {
             Color.black
                 .ignoresSafeArea()
             
-            URLImage(URL(string: post.mediaUrl)!,
-                  content: {
-                      $0.image
-                          .resizable()
-                          .aspectRatio(contentMode: .fit)
-                  })
+            URLImageView(urlString: post?.mediaUrl)
+              .aspectRatio(contentMode: .fit)
         }
 
     }
