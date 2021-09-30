@@ -21,7 +21,7 @@ class UserApi {
             }
         }
     }
-    
+  
     func loadUser(
         userId: String,
         onSuccess: @escaping(_ user: User) -> Void,

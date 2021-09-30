@@ -65,6 +65,11 @@
 		1594EE7927065F9E00D5C9E9 /* VerticalLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1594EE7827065F9E00D5C9E9 /* VerticalLine.swift */; };
 		1594EE642704E5DA00D5C9E9 /* ReactionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1594EE632704E5DA00D5C9E9 /* ReactionBar.swift */; };
 		1594EE662704E60000D5C9E9 /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1594EE652704E60000D5C9E9 /* BottomSheet.swift */; };
+		1594EE692704E6A100D5C9E9 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1594EE672704E6A100D5C9E9 /* BlurView.swift */; };
+		1594EE6A2704E6A100D5C9E9 /* CustomCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1594EE682704E6A100D5C9E9 /* CustomCorner.swift */; };
+		1594EE6C2704E7F900D5C9E9 /* Reaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1594EE6B2704E7F900D5C9E9 /* Reaction.swift */; };
+		1594EE6F2704EC3200D5C9E9 /* EmojiKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1594EE6E2704EC3200D5C9E9 /* EmojiKeyboard.swift */; };
+		1594EE7127054EC200D5C9E9 /* OrderedEmojiList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1594EE7027054EC200D5C9E9 /* OrderedEmojiList.swift */; };
 		159A3DD42703CACB00C5573C /* CarouselWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159A3DD32703CACB00C5573C /* CarouselWrapper.swift */; };
 		159A3DD72703CEB600C5573C /* OnboardingCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159A3DD62703CEB600C5573C /* OnboardingCarousel.swift */; };
 		15A1BC7326FC1CE600A1AF27 /* AskActivityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A1BC7226FC1CE600A1AF27 /* AskActivityList.swift */; };
@@ -297,6 +302,11 @@
 		1594EE7827065F9E00D5C9E9 /* VerticalLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalLine.swift; sourceTree = "<group>"; };
 		1594EE632704E5DA00D5C9E9 /* ReactionBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactionBar.swift; sourceTree = "<group>"; };
 		1594EE652704E60000D5C9E9 /* BottomSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
+		1594EE672704E6A100D5C9E9 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		1594EE682704E6A100D5C9E9 /* CustomCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCorner.swift; sourceTree = "<group>"; };
+		1594EE6B2704E7F900D5C9E9 /* Reaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
+		1594EE6E2704EC3200D5C9E9 /* EmojiKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiKeyboard.swift; sourceTree = "<group>"; };
+		1594EE7027054EC200D5C9E9 /* OrderedEmojiList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedEmojiList.swift; sourceTree = "<group>"; };
 		159A3DD32703CACB00C5573C /* CarouselWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselWrapper.swift; sourceTree = "<group>"; };
 		159A3DD62703CEB600C5573C /* OnboardingCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCarousel.swift; sourceTree = "<group>"; };
 		15A1BC7226FC1CE600A1AF27 /* AskActivityList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskActivityList.swift; sourceTree = "<group>"; };
@@ -654,12 +664,12 @@
 			path = Referrals;
 			sourceTree = "<group>";
 		};
-		159A3DD22703CAB900C5573C /* Carousel */ = {
+		1594EE6D2704EC0000D5C9E9 /* Reaction */ = {
 			isa = PBXGroup;
 			children = (
-				159A3DD32703CACB00C5573C /* CarouselWrapper.swift */,
+				1594EE6E2704EC3200D5C9E9 /* EmojiKeyboard.swift */,
 			);
-			path = Carousel;
+			path = Reaction;
 			sourceTree = "<group>";
 		};
 		15A6A4402708E94100D65616 /* Links */ = {
@@ -812,6 +822,7 @@
 		3B75E3D126715C3A002F3108 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				1594EE6D2704EC0000D5C9E9 /* Reaction */,
 				159A3DD22703CAB900C5573C /* Carousel */,
 				1524E10526F8417300D5BDB4 /* Animation */,
 				15685B3F26F40DA800FC84D8 /* Referral */,
@@ -905,6 +916,7 @@
 				6523D93526DDEB78007546F5 /* UserActivity.swift */,
 				15DFD07726EC39E2002CBE31 /* Button.swift */,
 				15A6A4432708F13C00D65616 /* UserSocial.swift */,
+				1594EE6B2704E7F900D5C9E9 /* Reaction.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -949,6 +961,8 @@
 		3B7AF06926719EF1003BCCF3 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				1594EE672704E6A100D5C9E9 /* BlurView.swift */,
+				1594EE682704E6A100D5C9E9 /* CustomCorner.swift */,
 				3B75E3F326716E41002F3108 /* ImagePicker.swift */,
 				3B7AF0842671C08F003BCCF3 /* SearchBar.swift */,
 				1594EE74270658F500D5C9E9 /* BackgroundBlurView.swift */,
@@ -1068,6 +1082,7 @@
 				3B7AF02F26718263003BCCF3 /* Extensions.swift */,
 				65F7314E26F3C91700A73781 /* StringExtensions.swift */,
 				1594EE7627065D5F00D5C9E9 /* ArcShape.swift */,
+				1594EE7027054EC200D5C9E9 /* OrderedEmojiList.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1220,6 +1235,7 @@
 				3B7AF08B2671CB68003BCCF3 /* UserApi.swift in Sources */,
 				3B7AF05226719610003BCCF3 /* SigninViewModel.swift in Sources */,
 				1524FCD026D753320000629C /* HeaderCellViewModel.swift in Sources */,
+				1594EE7127054EC200D5C9E9 /* OrderedEmojiList.swift in Sources */,
 				65A7DC0E26EDA9E00032C739 /* UserProfileClosedPostsView.swift in Sources */,
 				15EBCFC427002B13009F2E55 /* (null) in Sources */,
 				3B75E3D926715CDE002F3108 /* EmailTextField.swift in Sources */,
@@ -1297,6 +1313,8 @@
 				157F9972270BA7A1001A4031 /* UserProfileFeed.swift in Sources */,
 				15EBCFC22700296F009F2E55 /* BottomSheet.swift in Sources */,
 				15EBCFC22700296F009F2E55 /* (null) in Sources */,
+				1594EE6C2704E7F900D5C9E9 /* Reaction.swift in Sources */,
+				1594EE6F2704EC3200D5C9E9 /* EmojiKeyboard.swift in Sources */,
 				654DA41926BC7BD3002864B8 /* MainViewModel.swift in Sources */,
 				3BFE30EC26E94437005543A0 /* AcceptedNotification.swift in Sources */,
 				65A9EF9D26DF0B2500E81CBF /* ConnectionsView.swift in Sources */,
@@ -1370,6 +1388,7 @@
 				15127A5226FFC009006F975E /* PlaceholderConstants.swift in Sources */,
 				1524E10726F8418D00D5BDB4 /* LottieView.swift in Sources */,
 				1500983526EFE45B00D31B8C /* ProfileFeed.swift in Sources */,
+				1594EE6A2704E6A100D5C9E9 /* CustomCorner.swift in Sources */,
 				15F7E8C126E8490100E5238F /* CommentList.swift in Sources */,
 				15DA39B426DC5C620080193E /* AskCardPlaceholder.swift in Sources */,
 				3B7AF0B72672C21F003BCCF3 /* Chat.swift in Sources */,
@@ -1403,6 +1422,7 @@
 				15EBCFC02700215F009F2E55 /* (null) in Sources */,
 				15F7E8B626E848ED00E5238F /* AskDetailCard.swift in Sources */,
 				1524E0FD26F66FD600D5BDB4 /* BumpersRow.swift in Sources */,
+				1594EE692704E6A100D5C9E9 /* BlurView.swift in Sources */,
 				15685B4126F40DD000FC84D8 /* ReferralUserCard.swift in Sources */,
 				15030AAA26E807C10076CF14 /* HomeFeedHeader.swift in Sources */,
 			);

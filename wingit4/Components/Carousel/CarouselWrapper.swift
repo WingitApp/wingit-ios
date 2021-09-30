@@ -23,7 +23,7 @@ struct CarouselWrapper<Content: View>: UIViewRepresentable{
     let total = width * CGFloat(3)
     let view = UIScrollView()
     view.isPagingEnabled = true
-//    view.contentSize = CGSize(width: total, height: 1.0)
+    view.contentSize = CGSize(width: total, height: 1.0)
     view.bounces = true
     view.showsVerticalScrollIndicator = false
     view.showsHorizontalScrollIndicator = false

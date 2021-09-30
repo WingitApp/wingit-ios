@@ -76,7 +76,7 @@ struct UserComment: View {
           
           
           // Emoji Bar
-          
+          ReactionBar()
         
           
 
@@ -87,8 +87,6 @@ struct UserComment: View {
         
       }
       .padding(15)
-      .onTapGesture(perform: { isNavActive.toggle() })
-
       Divider()
     }
 }
