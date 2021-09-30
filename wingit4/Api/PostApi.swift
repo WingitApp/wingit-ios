@@ -111,7 +111,8 @@ class PostApi {
         }
     }
     
-    func loadPost(postId: String, onSuccess: @escaping(_ post: Post?) -> Void) {
+    func loadPost(postId: String?, onSuccess: @escaping(_ post: Post?) -> Void) {
+        guard let postId = postId else { return }
         Ref.FS_COLLECTION_ALL_POSTS.document(postId).getDocument { (snapshot, error) in
             if let error = error {
                 print(error)
