@@ -27,7 +27,6 @@ class UserProfileViewModel: ObservableObject {
     
     @Published var isConnected = false
     @Published var sentPendingRequest = false
-    @Published var receivedPendingRequest = false
     
     @Published var user: User = USER_PROFILE_DEFAULT_PLACEHOLDER
     @Published var showOpenPosts = true
@@ -127,10 +126,6 @@ class UserProfileViewModel: ObservableObject {
         }) { (listener) in
           self.openListener = listener
         }
-      
-        updateIsConnected(userId: userId)
-        updateSentPendingRequest(userId: userId)
-        updateConnectionsCount(userId: userId)
         self.loadClosedPosts(userId: userId)
     }
     
@@ -197,6 +192,7 @@ class UserProfileViewModel: ObservableObject {
                     self.userBlocked = true
                     return
                 } else {
+                self.updateConnections(userId: postOwnerId)
                 self.loadUserPosts(userId: postOwnerId)
                 self.loadClosedPosts(userId: postOwnerId)
             }
