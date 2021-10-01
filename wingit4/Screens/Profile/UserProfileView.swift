@@ -305,7 +305,7 @@ struct UserProfileView: View {
                 logToAmplitude(event: .tapMessageButton)
             }) {
             NavigationLink(destination: ChatView(recipientId: user.id ?? "", recipientAvatarUrl: user.profileImageUrl ?? "", recipientUsername: user.username ?? "")) {
-                Image(systemName: "square.and.pencil")
+                Image(systemName: "square.and.pencil")        
                   .foregroundColor(Color(.white))
                 Text("Message").foregroundColor(Color(.white)).font(.callout).bold().border(Color.wingitBlue).lineLimit(1)
                 }
