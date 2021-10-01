@@ -23,6 +23,10 @@ struct CommentNotification: View {
     @EnvironmentObject var notificationViewModel: NotificationViewModel
    // @State var wasOpened: Bool = false
   
+    func TapGesture(){
+            self.notificationViewModel.updateWasOpened(notificationId: notification.activityId)
+            notification.wasOpened = true
+    }
   var body: some View {
       NavigationLink(
         destination: AskDetailView(post: $notification.post)
@@ -31,8 +35,10 @@ struct CommentNotification: View {
           .environmentObject(askDoneToggleViewModel)
           .environmentObject(commentViewModel)
           .environmentObject(commentInputViewModel)
-          .environmentObject(footerCellViewModel),
-  label:{
+            .environmentObject(footerCellViewModel)
+            .onAppear {
+                self.TapGesture()
+            }) {
       HStack(alignment: .top) {
           NotificationUserAvatar(
              imageUrl: notification.userAvatar,
@@ -51,12 +57,9 @@ struct CommentNotification: View {
           }
           
       }
-      .onTapGesture{
-          self.notificationViewModel.updateWasOpened(notificationId: notification.activityId)
-          notification.wasOpened = true
-      }
+      
          
-    })
+    }
         
     .buttonStyle(PlainButtonStyle())
     .opacity(self.notification.wasOpened ?? false ?
