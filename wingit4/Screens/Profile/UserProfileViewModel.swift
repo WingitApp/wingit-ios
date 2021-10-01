@@ -27,6 +27,7 @@ class UserProfileViewModel: ObservableObject {
     
     @Published var isConnected = false
     @Published var sentPendingRequest = false
+    @Published var receivedPendingRequest = false
     
     @Published var user: User = USER_PROFILE_DEFAULT_PLACEHOLDER
     @Published var showOpenPosts = true
@@ -74,7 +75,19 @@ class UserProfileViewModel: ObservableObject {
     }
     
     func updateSentPendingRequest(userId: String) {
-        Ref.FS_DOC_CONNECT_REQUEST_SENT(sentByUserId: Auth.auth().currentUser!.uid, receivedByUserId: userId).getDocument { (document, error) in
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        Ref.FS_DOC_CONNECT_REQUEST_SENT(sentByUserId: currentUserId, receivedByUserId: userId).getDocument { (document, error) in
+            if let doc = document, doc.exists {
+                self.sentPendingRequest = true
+            } else {
+                self.sentPendingRequest = false
+            }
+        }
+    }
+    
+    func updateReceivedPendingRequest(userId: String) {
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        Ref.FS_DOC_CONNECT_REQUEST_RECEIVED(receivedByUserId: currentUserId, sentFromUserId: userId).getDocument { (document, error) in
             if let doc = document, doc.exists {
                 self.sentPendingRequest = true
             } else {
@@ -173,7 +186,8 @@ class UserProfileViewModel: ObservableObject {
     }
     
     
-    func updateConnectionsCount(userId: String) {
+    func updateConnectionsCount(userId: String?) {
+        guard let userId = userId else { return }
         Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
             
             if let doc = snapshot?.documents {
