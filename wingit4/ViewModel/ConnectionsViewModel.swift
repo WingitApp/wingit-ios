@@ -17,13 +17,8 @@ class ConnectionsViewModel : ObservableObject {
     @Published var users: [User] = []
     @Published var connectionsCount = 0
     @Published var isConnectionsSheetOpen: Bool = false
-    
     @Published var selectedUsers: [String?] = []
     var allConnectRecipientIds: [String?] = []
-    
-    @Published var isConnected = false
-    @Published var sentPendingRequest = false
-    @Published var connectionsCountState = 0
     
     func loadConnections(userId: String?) {
         guard let userId = userId else { return }

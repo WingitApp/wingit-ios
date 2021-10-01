@@ -27,6 +27,7 @@ class UserProfileViewModel: ObservableObject {
     
     @Published var isConnected = false
     @Published var sentPendingRequest = false
+    @Published var receivedPendingRequest = false
     
     @Published var user: User = USER_PROFILE_DEFAULT_PLACEHOLDER
     @Published var showOpenPosts = true
