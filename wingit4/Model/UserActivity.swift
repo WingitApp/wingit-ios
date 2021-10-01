@@ -24,6 +24,7 @@ struct UserActivity: Codable, Identifiable {
     var postId: String? // id of the post IF this activity relates to a post
     var postTitle: String?
     var postType: PostType?
+    var referralId: String?
     var text: String? // text found in the comment, message, referral, post, etc.
     
     enum ActivityType: String, Codable {
