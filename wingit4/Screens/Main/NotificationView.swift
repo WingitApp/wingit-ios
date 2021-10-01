@@ -10,6 +10,8 @@ struct NotificationView: View {
     
   @EnvironmentObject var notificationViewModel: NotificationViewModel
   @EnvironmentObject var mainViewModel: MainViewModel
+    
+    
   func sortNotifications() -> Void {
     self.notificationViewModel.notificationsArray.sort { $0.date > $1.date }
   }
@@ -39,41 +41,45 @@ struct NotificationView: View {
                     ForEach(self.notificationViewModel.notificationsArray, id: \.activityId) { notification in
                       HStack(alignment: .top) {
                             if notification.type == "comment" {
+        
                                     CommentNotification(notification: notification)
-                            } else if notification.type == "connectRequest" {
-                                    CommentNotificationRow(
-                                      notification: notification,
-                                      notificationViewModel: self.notificationViewModel
-                                    )
-                            } else if notification.type == "referred" {
-                                NotificationReferralEntry(
-                                  notification: notification
-                                )
-                            } else {
-                              NavigationLink (destination: UserProfileView(userId: notification.userId, user: nil)){
-
-                                 NotificationUserAvatar(
-                                  imageUrl: notification.userAvatar,
-                                  type: notification.type
-                                 )
-                                  .padding(.trailing, 10)
-
-                              VStack(alignment: .leading) {
-                                HStack(alignment: .center, spacing: 5) {
-                                  Text(notification.username).bold() + Text(" ") + Text(notification.typeDescription ?? "")
-                                }
-                                .font(.subheadline)
-                                .fixedSize(horizontal: false, vertical: true)
-
-                                Spacer()
-                                Text(timeAgoSinceDate(Date(timeIntervalSince1970: notification.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
-                              }
-
-                                
-                               
-                            }.buttonStyle(PlainButtonStyle())
-
-                          }
+                                    .buttonStyle(PlainButtonStyle())
+                            }
+//                                else if notification.type == "connectRequest" {
+//                                    CommentNotificationRow(
+//                                      notification: notification,
+//                                      notificationViewModel: self.notificationViewModel
+//                                    )
+//
+//                            } else if notification.type == "referred" {
+//                                NotificationReferralEntry(
+//                                  notification: notification
+//                                )
+//                            } else {
+//                              NavigationLink (destination: UserProfileView(userId: notification.userId, user: nil)){
+//
+//                                 NotificationUserAvatar(
+//                                  imageUrl: notification.userAvatar,
+//                                  type: notification.type
+//                                 )
+//                                  .padding(.trailing, 10)
+//
+//                              VStack(alignment: .leading) {
+//                                HStack(alignment: .center, spacing: 5) {
+//                                  Text(notification.username).bold() + Text(" ") + Text(notification.typeDescription ?? "")
+//                                }
+//                                .font(.subheadline)
+//                                .fixedSize(horizontal: false, vertical: true)
+//
+//                                Spacer()
+//                                Text(timeAgoSinceDate(Date(timeIntervalSince1970: notification.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
+//                              }
+//
+//
+//
+//                            }.buttonStyle(PlainButtonStyle())
+//
+//                          }
 
 
                         }

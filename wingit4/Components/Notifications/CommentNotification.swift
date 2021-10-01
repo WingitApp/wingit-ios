@@ -19,15 +19,20 @@ struct CommentNotification: View {
     @StateObject var commentInputViewModel = CommentInputViewModel()
     // Like
     @StateObject var footerCellViewModel = FooterCellViewModel()
+    
+    @EnvironmentObject var notificationViewModel: NotificationViewModel
+   // @State var wasOpened: Bool = false
   
   var body: some View {
-      NavigationLink(destination: AskDetailView(post: $notification.post)
+      NavigationLink(
+        destination: AskDetailView(post: $notification.post)
           .environmentObject(askCardViewModel)
           .environmentObject(askMenuViewModel)
           .environmentObject(askDoneToggleViewModel)
           .environmentObject(commentViewModel)
           .environmentObject(commentInputViewModel)
-          .environmentObject(footerCellViewModel)) {
+          .environmentObject(footerCellViewModel),
+  label:{
       HStack(alignment: .top) {
           NotificationUserAvatar(
              imageUrl: notification.userAvatar,
@@ -44,11 +49,19 @@ struct CommentNotification: View {
               Spacer()
             TimeAgoStamp(date: notification.date)
           }
-
           
       }
-    }
+      .onTapGesture{
+          self.notificationViewModel.updateWasOpened(notificationId: notification.activityId)
+          notification.wasOpened = true
+      }
+         
+    })
+        
     .buttonStyle(PlainButtonStyle())
+    .opacity(self.notification.wasOpened ?? false ?
+             0.6 : 1)
+      
       
   }
 }

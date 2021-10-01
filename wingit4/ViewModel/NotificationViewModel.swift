@@ -18,6 +18,13 @@ class NotificationViewModel: ObservableObject {
     var listener: ListenerRegistration!
     
     @Published var isLoading = true
+//    @Published var destination: AskDetailView?
+   
+    func updateWasOpened(notificationId: String){
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        Ref.FS_COLLECTION_ACTIVITY .document(userId).collection("feedItems") .document(notificationId).setData(["wasOpened": true], merge: true)
+    
+    }
     
     func loadNotifications() {
         self.notificationsArray = []
