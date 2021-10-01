@@ -10,6 +10,7 @@ import SwiftUI
 
 struct Notification: Codable, Equatable {
     var post: Post?
+    var wasOpened: Bool? = false
     
     // legacy fields
     var activityId: String
@@ -56,5 +57,6 @@ struct Notification: Codable, Equatable {
         case userAvatar
         case userId
         case username
+        case wasOpened
     }
 }
