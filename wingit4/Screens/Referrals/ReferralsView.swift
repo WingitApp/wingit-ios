@@ -16,8 +16,6 @@ struct ReferralsView: View {
     @StateObject var commentViewModel = CommentViewModel()
     @StateObject var referViewModel = ReferViewModel()
     @StateObject var commentInputViewModel = CommentInputViewModel()
-    // Like
-    @StateObject var footerCellViewModel = FooterCellViewModel()
     @ObservedObject var contactsListViewModel = ContactsListViewModel()
 
 
@@ -53,8 +51,7 @@ struct ReferralsView: View {
                         .environmentObject(askMenuViewModel)
                         .environmentObject(askDoneToggleViewModel)
                         .environmentObject(commentViewModel)
-                        .environmentObject(commentInputViewModel)
-                        .environmentObject(footerCellViewModel),
+                        .environmentObject(commentInputViewModel),
                     isActive: self.$referralsViewModel.isLinkActive
                 ) {
                     EmptyView()

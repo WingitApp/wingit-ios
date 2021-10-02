@@ -62,7 +62,6 @@ class StorageService {
                     let post = Post.init(
                       id: postId,
                       caption: caption,
-                      likes: [:],
                       location: "",
                       ownerId: userId,
                       postId: postId,
@@ -71,7 +70,6 @@ class StorageService {
                       avatar: Auth.auth().currentUser!.photoURL!.absoluteString,
                       mediaUrl: metaImageUrl,
                       date: Date().timeIntervalSince1970,
-                      likeCount: 0,
                       title: "",
                       type: PostType(rawValue: type)
                     )

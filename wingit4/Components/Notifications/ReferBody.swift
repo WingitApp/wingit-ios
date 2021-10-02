@@ -21,8 +21,6 @@ struct ReferBody: View {
 // Comment
 @StateObject var commentViewModel = CommentViewModel()
 @StateObject var commentInputViewModel = CommentInputViewModel()
-// Like
-@StateObject var footerCellViewModel = FooterCellViewModel()
     
   @Binding var referral: Referral
   @Binding var post: Post?
@@ -35,7 +33,6 @@ struct ReferBody: View {
                 .environmentObject(askDoneToggleViewModel)
                 .environmentObject(commentViewModel)
                 .environmentObject(commentInputViewModel)
-                .environmentObject(footerCellViewModel)
         ) {
           VStack(alignment: .leading) {
             AskCard(

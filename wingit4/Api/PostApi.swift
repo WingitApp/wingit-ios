@@ -38,7 +38,6 @@ class PostApi {
         let post = Post.init(
           id: postId,
           caption: caption,
-          likes: [:],
           location: "",
           ownerId: userId,
           postId: postId,
@@ -47,7 +46,6 @@ class PostApi {
           avatar: Auth.auth().currentUser!.photoURL!.absoluteString,
           mediaUrl: "",
           date: Date().timeIntervalSince1970,
-          likeCount: 0,
           title: "",
           type: PostType(rawValue: type?.rawValue ?? "general")
         )

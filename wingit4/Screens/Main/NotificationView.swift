@@ -18,8 +18,6 @@ struct NotificationView: View {
     @StateObject var commentViewModel = CommentViewModel()
     @StateObject var referViewModel = ReferViewModel()
     @StateObject var commentInputViewModel = CommentInputViewModel()
-    // Like
-    @StateObject var footerCellViewModel = FooterCellViewModel()
     
   func sortNotifications() -> Void {
     self.notificationViewModel.notificationsArray.sort { $0.date > $1.date }
@@ -53,8 +51,7 @@ struct NotificationView: View {
                                         .environmentObject(askMenuViewModel)
                                         .environmentObject(askDoneToggleViewModel)
                                         .environmentObject(commentViewModel)
-                                        .environmentObject(commentInputViewModel)
-                                        .environmentObject(footerCellViewModel),
+                                        .environmentObject(commentInputViewModel),
                                     isActive: self.$notificationViewModel.isPostLinkActive
                                 ) {
                                     CommentNotification(notification: $notification)

@@ -11,7 +11,6 @@ import FirebaseFirestoreSwift
 struct Post: Codable, Identifiable, Equatable, Hashable {
     @DocumentID var id: String?
     var caption: String?
-    var likes: [String: Bool]
     var location: String
     var ownerId: String
     var postId: String
@@ -20,12 +19,10 @@ struct Post: Codable, Identifiable, Equatable, Hashable {
     var avatar: String
     var mediaUrl: String
     var date: Double
-    var likeCount: Int
     var title: String?
     var wingers: [User]?
     var type: PostType?
 }
-
 
 enum PostType: String, Codable {
     case recommendations
@@ -38,18 +35,3 @@ enum PostStatus: String, Codable {
     case open
     case closed
 }
-
-struct DonePost: Encodable, Decodable {
-    var caption: String
-    var doneMediaUrl: String
-    var ownerId: String
-    var postId: String
-    var username: String
-    var avatar: String
-    var donedate: Double
-    var askcaption: String
-    var mediaUrl: String
-    var asklocation: String
-    var askdate: Double
-}
-

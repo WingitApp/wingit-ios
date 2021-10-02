@@ -27,8 +27,6 @@ struct AskCard: View {
   @StateObject var commentViewModel = CommentViewModel()
   @StateObject var referViewModel = ReferViewModel()
   @StateObject var commentInputViewModel = CommentInputViewModel()
-  // Like
-  @StateObject var footerCellViewModel = FooterCellViewModel()
 
   func openReferConnectionsList() -> Void{
     referViewModel.toggleReferListScreen()
@@ -67,7 +65,6 @@ struct AskCard: View {
             .environmentObject(askDoneToggleViewModel)
             .environmentObject(commentViewModel)
             .environmentObject(commentInputViewModel)
-            .environmentObject(footerCellViewModel)
             .environmentObject(referViewModel),
           isActive: $commentViewModel.isCommentSheetShown
         ) {
@@ -87,7 +84,6 @@ struct AskCard: View {
       .environmentObject(commentViewModel)
       .environmentObject(referViewModel)
       .environmentObject(commentInputViewModel)
-      .environmentObject(footerCellViewModel)
       // [START] Animates on Hide
       .opacity(!self.askCardViewModel.isHidden ? 1 : 0)
       .transition(.asymmetric(insertion: .scale, removal: .opacity))

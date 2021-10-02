@@ -21,8 +21,6 @@ struct AcceptedNotification: View {
     @StateObject var commentViewModel = CommentViewModel()
     @StateObject var referViewModel = ReferViewModel()
     @StateObject var commentInputViewModel = CommentInputViewModel()
-    // Like
-    @StateObject var footerCellViewModel = FooterCellViewModel()
 
     var body: some View {
         
@@ -33,7 +31,6 @@ struct AcceptedNotification: View {
                 .environmentObject(askDoneToggleViewModel)
                 .environmentObject(commentViewModel)
                 .environmentObject(commentInputViewModel)
-                .environmentObject(footerCellViewModel)
         )
         {
         HStack {
@@ -80,8 +77,6 @@ struct WingNotification: View {
     @StateObject var commentViewModel = CommentViewModel()
     @StateObject var referViewModel = ReferViewModel()
     @StateObject var commentInputViewModel = CommentInputViewModel()
-    // Like
-    @StateObject var footerCellViewModel = FooterCellViewModel()
     
     var body: some View {
  
@@ -92,7 +87,6 @@ struct WingNotification: View {
                     .environmentObject(askDoneToggleViewModel)
                     .environmentObject(commentViewModel)
                     .environmentObject(commentInputViewModel)
-                    .environmentObject(footerCellViewModel)
             )
             {
         HStack {
@@ -136,8 +130,6 @@ struct ClosedNotification: View {
     @StateObject var commentViewModel = CommentViewModel()
     @StateObject var referViewModel = ReferViewModel()
     @StateObject var commentInputViewModel = CommentInputViewModel()
-    // Like
-    @StateObject var footerCellViewModel = FooterCellViewModel()
     
     var body: some View {
         NavigationLink(
@@ -147,7 +139,6 @@ struct ClosedNotification: View {
                 .environmentObject(askDoneToggleViewModel)
                 .environmentObject(commentViewModel)
                 .environmentObject(commentInputViewModel)
-                .environmentObject(footerCellViewModel)
         )
         {
         HStack {

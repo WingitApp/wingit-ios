@@ -10,7 +10,6 @@ import URLImage
 struct FooterCell: View {
   @Binding var post: Post?
   @EnvironmentObject var askCardViewModel: AskCardViewModel
-  @EnvironmentObject var footerCellViewModel: FooterCellViewModel
   
   @StateObject var shareButtonViewModel = ShareButtonViewModel()
     
