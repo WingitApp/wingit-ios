@@ -20,7 +20,7 @@ struct TextCell: View {
         
         VStack{
             VStack(alignment: .leading, spacing: 10){
-                Text(headerCellViewModel.post.caption).font(.subheadline).padding(.bottom, 2).multilineTextAlignment(.leading).fixedSize(horizontal: false, vertical: true)
+                Text(headerCellViewModel.post.caption ?? "").font(.subheadline).padding(.bottom, 2).multilineTextAlignment(.leading).fixedSize(horizontal: false, vertical: true)
                 Text(timeAgoSinceDate(Date(timeIntervalSince1970: headerCellViewModel.post.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
             }.padding(.horizontal).padding(.bottom, 2)
             
