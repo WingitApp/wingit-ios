@@ -42,7 +42,7 @@ struct NotificationView: View {
                             if notification.type == "comment" {
                                 CommentNotification(notification: $notification)
                                 .if(notification.openedAt == nil) { view in
-                                    view.background(Color.uilightBlue)
+                                    view.background(Color.skyBlue)
                                       //  .frame(width: UIScreen.main.bounds.width)
                                 }
                                 .buttonStyle(PlainButtonStyle())
@@ -52,7 +52,7 @@ struct NotificationView: View {
                                   notificationViewModel: self.notificationViewModel
                                 )
                                 .if(notification.openedAt == nil) { view in
-                                    view.background(Color.uilightBlue)
+                                    view.background(Color.skyBlue)
                                       //  .frame(width: UIScreen.main.bounds.width)
                                 }
                             } else if notification.type == "referred" {
@@ -60,7 +60,7 @@ struct NotificationView: View {
                                   notification: $notification
                                 )
                                 .if(notification.openedAt == nil) { view in
-                                    view.background(Color.uilightBlue)
+                                    view.background(Color.skyBlue)
                                       //  .frame(width: UIScreen.main.bounds.width)
                                 }
                             } else {
@@ -95,7 +95,8 @@ struct NotificationView: View {
                             .padding()
                             .buttonStyle(PlainButtonStyle())
                             .if(notification.openedAt == nil) { view in
-                                view.background(Color.uiviolet)
+                                view.background(Color.skyBlue)
+                                   
                                     //.frame(width: UIScreen.main.bounds.width)
                             }
                           }

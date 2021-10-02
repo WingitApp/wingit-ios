@@ -410,6 +410,8 @@ extension Color {
   static let backgroundBlueGray: Color = Color(red: 240 / 255, green: 247 / 255, blue: 251 / 255)
   
   static let borderGray: Color = Color(red: 216 / 255, green: 216 / 255, blue: 217 / 255)
+    
+  static let skyBlue: Color = Color(red: 232 / 255, green: 246 / 255, blue: 254 / 255)
   
   
   // TAG Color
