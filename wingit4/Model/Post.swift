@@ -11,13 +11,13 @@ import FirebaseFirestoreSwift
 struct Post: Codable, Identifiable, Equatable, Hashable {
     @DocumentID var id: String?
     var caption: String?
-    var location: String
+    var location: String?
     var ownerId: String
     var postId: String
     var status: PostStatus?
     var username: String
-    var avatar: String
-    var mediaUrl: String
+    var avatar: String?
+    var mediaUrl: String?
     var date: Double
     var title: String?
     var wingers: [User]?
