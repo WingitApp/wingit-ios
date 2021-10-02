@@ -61,7 +61,9 @@ struct NotificationReferralEntry: View {
               Spacer()
               TimeAgoStamp(date: notification.date)
           }
+          Spacer()
       }
+      .padding()
       .onTapGesture {
         // we want to open referral tab on tap
         mainViewModel.setTab(tabId: 1)

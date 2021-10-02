@@ -35,15 +35,15 @@ struct NotificationView: View {
                   ReferralPlaceholder(type: "accepted")
                 }
                 
-              LazyVStack(alignment: .leading) {
+                  LazyVStack(alignment: .leading, spacing: 0) {
                 if !notificationViewModel.notificationsArray.isEmpty {
                     ForEach($notificationViewModel.notificationsArray, id: \.activityId) { $notification in
-                      HStack(alignment: .top) {
+//                      HStack(alignment: .top) {
                             if notification.type == "comment" {
                                 CommentNotification(notification: $notification)
                                 .if(notification.openedAt == nil) { view in
                                     view.background(Color.uilightBlue)
-                                        .frame(width: UIScreen.main.bounds.width)
+                                      //  .frame(width: UIScreen.main.bounds.width)
                                 }
                                 .buttonStyle(PlainButtonStyle())
                             }else if notification.type == "connectRequest" {
@@ -53,7 +53,7 @@ struct NotificationView: View {
                                 )
                                 .if(notification.openedAt == nil) { view in
                                     view.background(Color.uilightBlue)
-                                        .frame(width: UIScreen.main.bounds.width)
+                                      //  .frame(width: UIScreen.main.bounds.width)
                                 }
                             } else if notification.type == "referred" {
                                 NotificationReferralEntry(
@@ -61,7 +61,7 @@ struct NotificationView: View {
                                 )
                                 .if(notification.openedAt == nil) { view in
                                     view.background(Color.uilightBlue)
-                                        .frame(width: UIScreen.main.bounds.width)
+                                      //  .frame(width: UIScreen.main.bounds.width)
                                 }
                             } else {
                               NavigationLink (
@@ -72,7 +72,7 @@ struct NotificationView: View {
                                     }
                               )
                                 {
-
+                                    HStack(alignment: .top){
                                  NotificationUserAvatar(
                                   imageUrl: notification.userAvatar,
                                   type: notification.type
@@ -88,16 +88,21 @@ struct NotificationView: View {
                                 Spacer()
                                 Text(timeAgoSinceDate(Date(timeIntervalSince1970: notification.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
                               }
+                                    
                             }
+                                    Spacer()
+                            }
+                            .padding()
                             .buttonStyle(PlainButtonStyle())
                             .if(notification.openedAt == nil) { view in
                                 view.background(Color.uiviolet)
-                                    .frame(width: UIScreen.main.bounds.width)
+                                    //.frame(width: UIScreen.main.bounds.width)
                             }
                           }
-                        }
-                        Divider()
-                        .contentShape(Rectangle())
+//                        }
+//                      .padding(15)
+                  
+//                        .contentShape(Rectangle())
                     }
                 }
             }
@@ -139,8 +144,8 @@ struct ConnectRequestNotification: View {
               .font(.subheadline)
               .fixedSize(horizontal: false, vertical: true)
           }
-          .frame(maxWidth: UIScreen.main.bounds.width)
-          }
+//            Spacer()
+        }.padding()
 
     }
 }
@@ -173,9 +178,9 @@ struct RespondToConnectRequestRow: View {
                   .font(.system(size: 14))
           }
           .modifier(ConnectionNotifButtonStyle())
-          .background(Color.wingitBlue)
+         // .background(Color.wingitBlue)
         }
-        .padding(.top, 5)
+        
     }
 }
 

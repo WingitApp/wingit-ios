@@ -53,11 +53,14 @@ struct CommentNotification: View {
               Spacer()
             TimeAgoStamp(date: notification.date)
           }
-          
+          Spacer()
       }
       
          
     }
     .buttonStyle(PlainButtonStyle())
+    .padding()
+//    .background(Color.uilightBlue)
+//                    .ignoresSafeArea(.all, edges: .all))
   }
 }
