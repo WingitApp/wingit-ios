@@ -13,42 +13,14 @@ import UIKit
 
 class ConnectionsViewModel : ObservableObject {
     
-    @Published var isLoading = true
-    @Published var users: [User] = []
-    @Published var connectionsCount = 0
     @Published var isConnectionsSheetOpen: Bool = false
     @Published var selectedUsers: [String?] = []
     var allConnectRecipientIds: [String?] = []
     
-    func loadConnections(userId: String?) {
-        guard let userId = userId else { return }
-        if !self.isLoading {
-            isLoading.toggle()
-        }
-        Api.Connections.getConnections(
-            userId: userId,
-            onSuccess: { (users) in
-                self.users = users.sorted(by: {
-                  $0.firstName! < $1.firstName!
-                })
-                self.connectionsCount = users.count
-                self.isLoading.toggle()
-            },
-            onEmpty: {
-              self.isLoading = false
-            }
-        )
-    }
+    @Published var isConnected = false
+    @Published var sentPendingRequest = false
+    @Published var connectionsCountState = 0
     
-    func handleUserSelect(userId: String?) {
-        guard let userId = userId else { return }
-        if selectedUsers.contains(userId) {
-            self.selectedUsers.removeAll(where: { $0 == userId })
-           // self.sendConnectRequest(userId: userId)
-        } else {
-            self.selectedUsers.append(userId)
-        }
-    }
     
     func sendConnectRequest(userId: String?) {
         guard let userId = userId, let currentUserId = Auth.auth().currentUser?.uid else { return }

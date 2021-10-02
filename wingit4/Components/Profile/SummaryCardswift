@@ -1,0 +1,57 @@
+//
+//  SwiftUIView.swift
+//  wingit4
+//
+//  Created by Joshua Lee on 10/2/21.
+//
+
+import SwiftUI
+
+
+// added by Amy on initial draft of new profile detail screen
+struct ProfDetailCard: View {
+
+    var body: some View {
+
+    VStack{
+
+        Image("Pic2").resizable().frame(width: 150, height: 100)
+
+        Text("My Rec").font(.body).foregroundColor(.black).padding(.bottom)
+
+    }
+    .background(Color.white)
+    .cornerRadius(8)
+    .overlay(
+      RoundedRectangle(cornerRadius: 8)
+        .stroke(Color.borderGray, lineWidth: 1)
+    )
+    .padding(
+      EdgeInsets(top: 0, leading: 15, bottom: 10, trailing: 0)
+    )
+    .clipped()
+    .shadow(color: Color.gray.opacity(0.3), radius: 3, x: 0, y: 0)
+
+        VStack{
+
+            Image("Pic2").resizable().frame(width: 150, height: 100)
+
+            Text("title").font(.body).foregroundColor(.black).padding(.bottom)
+
+        }
+        .background(Color.white)
+        .cornerRadius(8)
+        .overlay(
+          RoundedRectangle(cornerRadius: 8)
+            .stroke(Color.borderGray, lineWidth: 1)
+        )
+        .padding(
+          EdgeInsets(top: 0, leading: 15, bottom: 10, trailing: 15)
+        )
+        .clipped()
+        .shadow(color: Color.gray.opacity(0.3), radius: 3, x: 0, y: 0)
+
+
+    }
+}
+

@@ -31,7 +31,7 @@ struct UserProfileClosedPostsView: View {
         .padding(.top, 10)
         .onAppear {
             logToAmplitude(event: .viewOtherUsersClosedAsks, properties: [.userId: user.id])
-            self.userProfileViewModel.loadClosedPosts(userId: user.id)
+            self.userProfileViewModel.loadClosedPosts(userId: user.id!)
         }
     }
 }

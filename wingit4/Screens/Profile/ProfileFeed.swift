@@ -23,7 +23,10 @@ struct ProfileFeed: View {
     var body: some View {
       
       if profileViewModel.showOpenPosts {
-        if !profileViewModel.isLoading && profileViewModel.openPosts.count == 0 {
+        if !profileViewModel.isFetchingUserOpenPosts,
+          !profileViewModel.isFetchingUserClosedPosts,
+          profileViewModel.openPosts.count == 0
+        {
           if profileViewModel.closedPosts.count == 0 {
             /** State when user has not made any posts yet*/
             PostEmptyState(
@@ -52,11 +55,17 @@ struct ProfileFeed: View {
                   isProfileView: true,
                   index: index
                 )
+
               }
-          }.onAppear(perform: sortOpenPosts)
+          }
+          .onAppear(perform: sortOpenPosts)
+          .transition(.enterLeftAndFade)
         }
       } else {
-        if !profileViewModel.isLoading && profileViewModel.closedPosts.count == 0 {
+        if !profileViewModel.isFetchingUserOpenPosts,
+          !profileViewModel.isFetchingUserClosedPosts,
+          profileViewModel.closedPosts.count == 0
+        {
           PostEmptyState(
             title: "Hm nothing was found...",
             description: "Close your posts to see them here!",
@@ -76,6 +85,8 @@ struct ProfileFeed: View {
           }.onAppear {
             sortClosedPosts()
           }
+          .transition(.enterRightAndFade)
+
         }
           
       }

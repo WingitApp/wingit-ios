@@ -429,7 +429,13 @@ extension Color {
   
   // complete status
   static let statusGreen: Color = Color(red: 33 / 255, green: 229 / 255, blue: 192 / 255)
-
+  
+  // social media icon
+  static let fbBlueBackground: Color = Color(red: 229 / 255, green: 239 / 255, blue: 254 / 255)
+  static let twitterBlueBackground: Color = Color(red: 229 / 255, green: 245 / 255, blue: 254 / 255)
+  static let redditRedBackground: Color = Color(red: 255 / 255, green: 233 / 255, blue: 226 / 255)
+  static let linkedinBlueBackground: Color = Color(red: 226 / 255, green: 242 / 255, blue: 255 / 255)
+  static let spotifyGreenBackground: Color = Color(red: 240 / 255, green: 246 / 255, blue: 231 / 255)
 
 }
 // bottom only corners....
@@ -554,8 +560,16 @@ extension AnyTransition {
         return .asymmetric(insertion: insertion, removal: removal)
     }
   
+    static var enterRightAndFade: AnyTransition {
+        let insertion = AnyTransition.move(edge: .trailing)
+            .combined(with: .opacity)
+        let removal = AnyTransition.scale
+            .combined(with: .opacity)
+        return .asymmetric(insertion: insertion, removal: removal)
+    }
+  
     static var enterTopAndFade: AnyTransition {
-        let insertion = AnyTransition.move(edge: .top)
+      let insertion = AnyTransition.move(edge: .top)
             .combined(with: .opacity)
         let removal = AnyTransition.scale
             .combined(with: .opacity)

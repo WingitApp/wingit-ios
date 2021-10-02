@@ -111,15 +111,17 @@ struct UserProfileView: View {
 
               Connections(
                 user: userProfileViewModel.user,
-                connectionsCount: $userProfileViewModel.connectionsCountState
+                connectionsCount: userProfileViewModel.connections.count
               ).redacted(reason: self.userProfileViewModel.isLoadingUser ? .placeholder : [])
               
               HStack(spacing: 15) {
                 if userProfileViewModel.userBlocked == false && userProfileViewModel.user.uid != Auth.auth().currentUser?.uid {
                   ConnectButton(
                     user: userProfileViewModel.user,
-                    isConnected: $userProfileViewModel.isConnected, sentPendingRequest: $userProfileViewModel.sentPendingRequest,
-                    connectionsCount: $userProfileViewModel.connectionsCountState, receivedPendingRequest: $userProfileViewModel.receivedPendingRequest
+                    isConnected: $userProfileViewModel.isConnected, 
+                    sentPendingRequest: $userProfileViewModel.sentPendingRequest,
+                    receivedPendingRequest: $userProfileViewModel.receivedPendingRequest,
+                    connectionsCount: userProfileViewModel.connections.count
                   )
                  // MessageButton(user: userProfileViewModel.user)
 
@@ -146,7 +148,10 @@ struct UserProfileView: View {
             .zIndex(1)
             
             if userProfileViewModel.showOpenPosts {
-                if !userProfileViewModel.isLoading && userProfileViewModel.openPosts.count == 0 {
+                if !userProfileViewModel.isFetchingOpenPosts,
+                  !userProfileViewModel.isFetchingClosedPosts,
+                  userProfileViewModel.openPosts.count == 0
+              {
                     if userProfileViewModel.closedPosts.count == 0 {
                         PostEmptyState(
                           title: "Hm nothing was found...",
@@ -176,7 +181,10 @@ struct UserProfileView: View {
                     }
                 }
             } else {
-                if !userProfileViewModel.isLoading && userProfileViewModel.closedPosts.count == 0 {
+                if !userProfileViewModel.isFetchingOpenPosts,
+                   !userProfileViewModel.isFetchingClosedPosts,
+                   userProfileViewModel.closedPosts.count == 0
+              {
                     PostEmptyState(
                       title: "Hm nothing was found...",
                       description: "\(userProfileViewModel.user.displayName!) has no closed posts.",
@@ -228,7 +236,11 @@ struct UserProfileView: View {
     )
     .sheet(
       isPresented: $connectionsViewModel.isConnectionsSheetOpen,
-      content: {  ConnectionsView(user: userProfileViewModel.user).environmentObject(connectionsViewModel)
+      content: {  ConnectionsView(
+        user: userProfileViewModel.user,
+        connections: $userProfileViewModel.connections,
+        isLoading: $userProfileViewModel.isFetchingConnections
+      ).environmentObject(connectionsViewModel)
       }
     )
       .sheet(
@@ -250,14 +262,14 @@ struct UserProfileView: View {
       
 
         var user: User
-        @Binding var connections_Count: Int
+        @State var connections_Count: Int
         @Binding var isConnected: Bool
         @Binding var sentPendingRequest: Bool
         @Binding var receivedPendingRequest: Bool
 
-        init(user: User, isConnected: Binding<Bool>, sentPendingRequest: Binding<Bool>, connectionsCount: Binding<Int>, receivedPendingRequest: Binding<Bool>) {
+        init(user: User, isConnected: Binding<Bool>, sentPendingRequest: Binding<Bool>, connectionsCount: Int, receivedPendingRequest: Binding<Bool>) {
             self.user = user
-            self._connections_Count = connectionsCount
+            self.connections_Count = connectionsCount
             self._isConnected = isConnected
             self._sentPendingRequest = sentPendingRequest
             self._receivedPendingRequest = receivedPendingRequest

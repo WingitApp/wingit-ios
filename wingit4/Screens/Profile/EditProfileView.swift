@@ -11,99 +11,103 @@ import FirebaseAuth
 
 struct EditProfileView: View {
   @EnvironmentObject var profileViewModel: ProfileViewModel
+  @EnvironmentObject var session: SessionStore
   
-  
-//  func areEditsMade() -> Bool {
-//    let currentUser = Auth.auth().currentUser
-//
-//  }
-  
+  func areEditsMade() -> Bool {
+    guard let currentUser = self.session.currentUser else { return false }
+    let trimmedUserBio = profileViewModel.bio.trimmingCharacters(in: .whitespacesAndNewlines)
+    
+    if trimmedUserBio != currentUser.bio {
+      return true
+    }
+    return false
+  }
   
   func editProfile() {
-//    if areEditsMade() {
+    if areEditsMade() {
       profileViewModel.editProfile() {
           let alertView = SPAlertView(title: "Profile Updated.", message: nil, preset: SPAlertIconPreset.done)
           alertView.present(duration: 1)
       }
-//    } else {
+    } else {
 //      // no edits were made
-//    }
+    }
 //
    }
+  
+  func closeEditProfileView() {
+    profileViewModel.isEditSheetOpen = false
+  }
    
   
   var body: some View {
       VStack{
-          HStack{
-              Button(action: {profileViewModel.isPresented.toggle()}){
-              Text("Cancel").foregroundColor(.black)
-          }
+        // header
+        HStack {
           Spacer()
           Text("Edit Profile").bold()
           Spacer()
-          Button(action: {
-              editProfile()
-          }){
-              Text("Done").bold()
+          Button(action: closeEditProfileView) {
+            Image(systemName: "xmark")
+                .foregroundColor(.gray)
+                .padding(10)
           }
-          }.padding(.init(top: 10, leading: 10, bottom: 0, trailing: 10))
-          Divider()
-  //            VStack(alignment: .center, spacing: 15) {
-  //
-  //                ZStack {
-  //                    UserAvatarSignup(
-  //                        image: Image("user-placeholder"),
-  //                      height: 65,
-  //                      width: 65,
-  //                      onTapGesture: {
-  //
-  //                      }
-  //                    )
-  //                    .zIndex(0)
-  //                    Image(systemName: "plus.circle")
-  //                      .font(.system(size: 12))
-  //                      .foregroundColor(.white)
-  //                      .padding(5)
-  //                      .background(
-  //                        LinearGradient(
-  //                          gradient: Gradient(
-  //                            colors: [Color("Color").lighter(by: 10), Color("Color")]),
-  //                            startPoint: .top,
-  //                            endPoint: .bottom
-  //                          )
-  //                      )
-  //                      .cornerRadius(100)
-  //                      .offset(x: 20, y: 20)
-  //                      .frame(width: 20, height: 20)
-  //                      .shadow(
-  //                        color: Color.black.opacity(0.3),
-  //                        radius: 1, x: 0, y: -1
-  //                      )
-  //                      .zIndex(1)
-  //
-  //                }
-  //            }
-          VStack(alignment: .leading, spacing: 12){
-              
-              HStack{
-              VStack{
-                  TextField("first", text: $profileViewModel.first)
-              Divider()
-                  }
-              VStack{
-                  TextField("last", text: $profileViewModel.last)
-              Divider()
-                  }
-              }
-              TextField("username", text: $profileViewModel.username)
-              Divider()
+        }
+        .padding(.init(top: 10, leading: 10, bottom: 0, trailing: 10))
+        Divider()
 
-              TextView("bio", text: $profileViewModel.bio)
-              Divider().padding(.top)
-         Spacer()
+        // user info summary
+        HStack {
+          Spacer()
+          URLImageView(urlString: session.currentUser?.profileImageUrl)
+            .frame(width: 150, height: 150)
+            .cornerRadius(100)
+            .padding(5)
+          Spacer()
+        }
+        VStack(alignment: .leading, spacing: 5) {
+          Text("Joshua Lee")
+            .font(.title).bold().foregroundColor(Color.black)
+        }
+        .padding(.bottom, 15)
+        
+        
+        HStack {
+          VStack(alignment: .leading, spacing: 0) {
+            Text("Username")
+              .bold()
+              .padding(.bottom, 10)
+            Text("@joshlee93")
+              .foregroundColor(Color.wingitBlue)
+  //            .foregroundColor(Color.black.opacity(0.7))
+              .padding(.bottom, 15)
           }
-          .padding(.horizontal,25)
-          .padding(.top,25)
+          Spacer()
+        }
+        .padding([.horizontal])
+
+//            .bold()
+//            .font(.subheadline)
+//            .foregroundColor(Color.wingitBlue)
+        VStack(alignment: .leading, spacing: 0) {
+
+          Text("Your Bio")
+            .bold()
+            .padding(.bottom, 10)
+          TextEditor(
+            text: $profileViewModel.bio
+          )
+            .padding(15)
+            .cornerRadius(8)
+            .overlay(
+              RoundedRectangle(cornerRadius: 8)
+                .stroke(Color.borderGray, lineWidth: 1)
+            )
+
+        }
+        .padding([.horizontal])
+        
+        Spacer()
 
       }
       .background(
@@ -113,8 +117,8 @@ struct EditProfileView: View {
 }
 
 
-//struct EditProfileView_Previews: PreviewProvider {
-//  static var previews: some View {
-//      EditProfileView()
-//  }
-//}
+struct EditProfileView_Previews: PreviewProvider {
+  static var previews: some View {
+      EditProfileView()
+  }
+}

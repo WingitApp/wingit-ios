@@ -11,16 +11,14 @@ struct ProfileDetail2: View {
     
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var profileViewModel: ProfileViewModel
+    @StateObject var connectionsViewModel = ConnectionsViewModel()
+
     
     func calculateHeight(minHeight: CGFloat, maxHeight: CGFloat, yOffset: CGFloat) -> CGFloat {
-      // If scrolling up, yOffset will be a negative number
       if maxHeight + yOffset < minHeight {
-        // SCROLLING UP
-        // Never go smaller than our minimum height
         return minHeight
       }
       
-      // SCROLLING DOWN
       return maxHeight + yOffset
     }
     
@@ -31,75 +29,90 @@ struct ProfileDetail2: View {
     
     var body: some View {
         ScrollView(showsIndicators: false) {
-          ZStack {
-            GeometryReader { geometry in
-              URLImageView(urlString: session.currentUser?.profileImageUrl)
-                  .frame(
-                    height: self.calculateHeight(
-                      minHeight: 0,
-                      maxHeight: 230,
-                      yOffset: geometry.frame(in: .global).origin.y
-                    )
-                  )
-                  .clipped()
-                  .offset(
-                    y: geometry.frame(in: .global).origin.y < 0
-                      ? abs(geometry.frame(in: .global).origin.y)
-                      : -geometry.frame(in: .global).origin.y
-                  )
-                  .blur(radius: 1)
-            }
-            .onTapGesture(perform: self.openUpdatePicSheet)
-            .zIndex(0)
-          
-            
+          VStack {
             VStack {
-              HStack {
+              GeometryReader { geometry in
                 URLImageView(urlString: session.currentUser?.profileImageUrl)
-                  .frame(width: 150, height: 150)
-                  .cornerRadius(100)
-                  .padding(5)
+                    .frame(
+                      height: self.calculateHeight(
+                        minHeight:0,
+                        maxHeight: 230,
+                        yOffset: geometry.frame(in: .global).origin.y
+                      )
+                    )
+                    .ignoresSafeArea()
+                    .clipped()
+                    .offset(
+                      y: geometry.frame(in: .global).origin.y < 0
+                        ? abs(geometry.frame(in: .global).origin.y)
+                        : -geometry.frame(in: .global).origin.y
+                    )
               }
-              .background(Color.white)
-              .cornerRadius(100)
-              .onTapGesture(perform: self.openUpdatePicSheet)
-              .zIndex(2)
-              .offset(y: -80)
-              
-              VStack {
-                HStack {
-                  Button(action: {Api.User.updateField(field: "firstName", user: session.currentUser) }) {
-                    Text(session.currentUser?.firstName ?? "").font(.title).bold().foregroundColor(Color.black)
-                  }
-                  
-                  Button(action: {Api.User.updateField(field: "lastName", user: session.currentUser) }) {
-                    Text(session.currentUser?.lastName ?? "").font(.title).bold().foregroundColor(Color.black)
-                  }
-                }
-                .frame(width: UIScreen.main.bounds.width)
-                .background(
-                  Color.white
-                   .cornerRadius(20, corners: [.topLeft, .topRight])
-                   .padding(.top, -105)
-                 )
-                Text("Skater").font(.caption).foregroundColor(.gray).padding(.top, 5)
-                Divider().frame(width: 75)
-              }
-              .padding(.top, -80)
-              .background(Color.white)
-              .frame(width: UIScreen.main.bounds.width)
-              
-            ProfileDetailView()
-
             }
-            .zIndex(1)
-            .padding(.top, 230)
+            .frame(minHeight: (UIScreen.main.bounds.height / 3.5))
+            .onTapGesture(perform: self.openUpdatePicSheet)
+            VStack(alignment: .leading) {
+              HStack(alignment: .bottom) {
+                HStack {
+                  URLImageView(urlString: session.currentUser?.profileImageUrl)
+                    .frame(width: 120, height: 120)
+                    .cornerRadius(100)
+                    .padding(5)
+                }
+                .background(Color.white)
+                .cornerRadius(100)
+                .onTapGesture(perform: self.openUpdatePicSheet)
+                .zIndex(2)
+                Spacer()
+                ProfileButton()
+                .offset(y: -20)
+                  
+              }
+              .offset(y: -64)
+              .padding(.bottom, -70)
+              .padding(.leading, 15)
+              .padding(.trailing, 15)
+              .frame(
+                width: UIScreen.main.bounds.width
+              )
+              
+            ProfileUserHeader()
+              .padding(.leading, 15)
+            ProfileDetailView()
+            }
+            .frame( width: UIScreen.main.bounds.width)
+            .background(
+              Color.white
+              .cornerRadius(30, corners: .topLeft)
+              .cornerRadius(30, corners: .topRight)
+            )
+            .offset(y: -30)
+            .padding(.top, -30)
             
+      
           }
+
+
         }
-        .background(
-          Color.white.ignoresSafeArea(.all, edges: .all)
+        .environmentObject(connectionsViewModel)
+        .sheet(
+          isPresented: $connectionsViewModel.isConnectionsSheetOpen,
+          content: {
+            ConnectionsView(
+              user: session.currentUser!,
+              connections: $profileViewModel.connections,
+              isLoading: $profileViewModel.isFetchingConnections
+            ).environmentObject(connectionsViewModel)
+          }
         )
+        .sheet(
+            isPresented:  $profileViewModel.isUpdatePicSheetOpen,
+            content: { UpdateProfilePhoto(user: session.currentUser) }
+          )
+      .modifier(Popup(
+        isPresented: profileViewModel.isEditSheetOpen,
+        alignment: .center,
+        direction: .bottom,
+        content: { EditProfileView().environmentObject(profileViewModel)}))
     }
 }
-

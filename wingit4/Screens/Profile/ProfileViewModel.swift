@@ -11,128 +11,120 @@ import FirebaseAuth
 import Firebase
 
 class ProfileViewModel: ObservableObject {
+    // User's Open Posts
     @Published var openPosts: [Post] = []
+    @Published var isFetchingUserOpenPosts = false
+    private var openListener: ListenerRegistration!
+    // User's Closed Posts
     @Published var closedPosts: [Post] = []
-    var user: User!
-    
-    @Published var isPresented: Bool = false
-    @Published var isLoading = false
-    @Published var userBlocked = false
-    @Published var showImagePicker: Bool = false
-    @Published var connectionsCountState = 0
-  
+    @Published var isFetchingUserClosedPosts = false
+    private var closedListener: ListenerRegistration!
+    // User's Connections
+    @Published var connections: [User] = []
+    @Published var isFetchingConnections: Bool = false
+    // User Image
     @Published var isUpdatePicSheetOpen: Bool = false
-    
-    @Published var isConnected = false
+    @Published var isEditSheetOpen: Bool = false
+    // User Posts Toggle
+    @Published var showPosts = false
     @Published var showOpenPosts = true
+    // User Link Toggle
+    @Published var showLinks = false
+    // User Metadata
+    @Published var bio: String = "Hi I love to eat, jump, laugh, play the guitar, think, talk, and do nothing. If you want to talk about these things please hit me up. :)"
+  
     
-    @Published var first: String = "" // needs to be preset
-    @Published var last: String = ""
-    @Published var username: String = ""
-    @Published var bio: String = ""
-  
-    @Published var userProfile = [
-      "firstName": String,
-      "lastName": String,
-      "username": String,
-      "bio": String
-    ]
-
-    var openListener: ListenerRegistration!
-    var closedListener: ListenerRegistration!
-  
 
     func initUserMetadata(user: User) {
-      // pass metadata to fields
-      
     }
-    
-    func updateIsConnected(userId: String) {
-        Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: Auth.auth().currentUser!.uid).document(userId).getDocument { (document, error) in
-            if let doc = document, doc.exists {
-                self.isConnected = true
-            } else {
-                self.isConnected = false
-            }
-        }
+  
+    func loadUserProfile() {
+      guard let currentUser = Auth.auth().currentUser else { return }
+      self.loadUserConnections()
+      self.loadUserOpenPosts()
+      self.loadClosedPosts()
+//      self.bio = currentUser.bio ?? ""
     }
-    
-    func loadUserPosts() {
+
+  
+    func loadUserConnections() {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        isFetchingConnections = true
+        Api.Connections.getConnections(
+            userId: userId,
+            onSuccess: { connections in
+                self.connections = connections.sorted(by: { $0.firstName! < $1.firstName!})
+                self.updateConnectionsCount(count: connections.count)
+                self.isFetchingConnections = false
+            },
+            onEmpty: { self.isFetchingConnections = false }
+        )
+    }
+  
+    func loadUserOpenPosts() {
       guard let userId = Auth.auth().currentUser?.uid else { return }
-      
       self.openPosts = []
-      isLoading = true
+      self.isFetchingUserOpenPosts = true
       
       Api.Post.loadOpenPosts(
         userId: userId,
-        onEmpty: {
-          self.isLoading = false
-        },
+        onEmpty: { self.isFetchingUserOpenPosts = false },
         onSuccess: { (posts) in
           if self.openPosts.isEmpty {
             self.openPosts = posts
-            self.isLoading = false
+            self.isFetchingUserOpenPosts = false
           }
-      }, newPost: { (post) in
+        }, newPost: { (post) in
+            if !self.openPosts.isEmpty {
+                self.openPosts.insert(post, at: 0)
+            }
+        }, modifiedPost: {(post) in
           if !self.openPosts.isEmpty {
-              self.openPosts.insert(post, at: 0)
+            if let index = self.openPosts.firstIndex(where: {$0.id == post.id}) {
+              self.openPosts[index] = post
+            }
           }
-      }, modifiedPost: {(post) in
-        if !self.openPosts.isEmpty {
-          if let index = self.openPosts.firstIndex(where: {$0.id == post.id}) {
-            self.openPosts[index] = post
-
-          }
+        },
+          deletePost: { (post) in
+            if !self.openPosts.isEmpty {
+                for (index, p) in self.openPosts.enumerated() {
+                    if p.postId == post.postId {
+                      self.openPosts.remove(at: index)
+                    }
+                }
+            }
+        }) { (listener) in
+            self.openListener = listener
         }
-      },
-        deletePost: { (post) in
-
-          if !self.openPosts.isEmpty {
-              for (index, p) in self.openPosts.enumerated() {
-                  if p.postId == post.postId {
-                    self.openPosts.remove(at: index)
-                  }
-              }
-          }
-      }) { (listener) in
-          self.openListener = listener
-      }
-      
-    // these calls should be called elsewhere
-      updateIsConnected(userId: userId)
-      updateConnectionsCount(userId: userId)
-      self.loadClosedPosts()
     }
+  
     
     func loadClosedPosts() {
-        guard let userId = Auth.auth().currentUser?.uid else { return }
-        self.isLoading = true
+      guard let userId = Auth.auth().currentUser?.uid else { return }
+      self.closedPosts = []
+      self.isFetchingUserClosedPosts = true
     
       Api.Post.loadClosedPosts(
         userId: userId,
-        onEmpty: {
-          self.isLoading = false
-        },
+        onEmpty: { self.isFetchingUserClosedPosts = false },
         onSuccess: { (posts) in
-
           if self.closedPosts.isEmpty {
               self.closedPosts = posts
-              self.isLoading = false
+              self.isFetchingUserClosedPosts = false
           }
-      }, newPost: { (post) in
+        }, newPost: { (post) in
           if !self.closedPosts.isEmpty {
             if !self.closedPosts.contains(post) {
               self.closedPosts.insert(post, at: 0)
             }
           }
-      }, modifiedPost: { (post) in
+        }, modifiedPost: { (post) in
             if !self.closedPosts.isEmpty {
               if let index = self.closedPosts.firstIndex(where: {$0.id == post.id}) {
                 self.closedPosts[index] = post
               }
             }
-      }, deletePost: { (post) in
-
+        }, deletePost: { (post) in
           if !self.closedPosts.isEmpty {
               for (index, p) in self.closedPosts.enumerated() {
                   if p.postId == post.postId {
@@ -145,24 +137,18 @@ class ProfileViewModel: ObservableObject {
       }
     }
     
-    func updateConnectionsCount(userId: String) {
-        Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
-                      
-            if let doc = snapshot?.documents {
-                setUserProperty(property: .connections, value: doc.count)
-                self.connectionsCountState = doc.count
-            }
-        }
+    func updateConnectionsCount(count: Int) {
+      setUserProperty(property: .connections, value: count)
     }
     
     func editProfile(completed: @escaping() -> Void){
-            Api.User.editProfile(
-                first: first,
-                last: last,
-                username: username,
-                bio: bio,  
-                onSuccess: completed
-            )
+//            Api.User.editProfile(
+//                first: first,
+//                last: last,
+//                username: username,
+//                bio: bio,
+//                onSuccess: completed
+//            )
 
     }
 }
