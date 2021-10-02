@@ -60,18 +60,23 @@ class ReferViewModel : ObservableObject, Identifiable {
     
     func sendReferrals(askId: String?) {
         guard let askId = askId else { return }
+        let recipientIds: [String] = selectedUsers.compactMap { user in user.id }
+        
         logToAmplitude(
           event: .wingAsk,
-          properties: [.askId: askId, .recipients: selectedUsers]
+          properties: [.askId: askId, .recipients: recipientIds]
         )
-       for recipients in selectedUsers {
+        let activity = UserActivity(activityType: .wingAsk, recipientIds: recipientIds)
+        Api.UserActivity.logActivity(activity: activity)
+        
+        for recipients in selectedUsers {
            let recipientId = recipients.id
            Api.Referrals.sendReferral(
                askId: askId,
                recipientId: recipientId,
                senderId: Auth.auth().currentUser!.uid
            )
-       }
+        }
        
 //      self.toggleSuccessAnimation()
        self.toggleReferListScreen()

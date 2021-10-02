@@ -4,6 +4,7 @@
 //
 //  Created by Joshua Lee on 8/26/21.
 //
+import FirebaseFirestore
 import SwiftUI
 import URLImage
 
@@ -38,9 +39,9 @@ struct NotificationEntry: View {
 }
 
 struct NotificationReferralEntry: View {
-  var notification: Notification
+  @Binding var notification: Notification
   @EnvironmentObject var mainViewModel: MainViewModel
-
+  @EnvironmentObject var notificationViewModel: NotificationViewModel
   
   var body: some View {
 
@@ -64,8 +65,9 @@ struct NotificationReferralEntry: View {
       .onTapGesture {
         // we want to open referral tab on tap
         mainViewModel.setTab(tabId: 1)
+        notification.openedAt = Timestamp(date: Date())
+        notificationViewModel.updateOpenedAt(notificationId: notification.activityId)
       }
-    
   }
 }
 

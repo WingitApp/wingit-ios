@@ -4,6 +4,7 @@
 //
 //  Created by YaeRim Amy Chun on 6/9/21.
 //
+import FirebaseFirestore
 import SwiftUI
 
 struct NotificationView: View {
@@ -17,9 +18,7 @@ struct NotificationView: View {
   }
     
     var body: some View {
-       
         NavigationView {
-
             if notificationViewModel.notificationsArray.isEmpty && !notificationViewModel.isLoading {
                 NotificationEmptyState(
                   title: "No notifications!",
@@ -38,31 +37,47 @@ struct NotificationView: View {
                 
               LazyVStack(alignment: .leading) {
                 if !notificationViewModel.notificationsArray.isEmpty {
-                    ForEach(self.notificationViewModel.notificationsArray, id: \.activityId) { notification in
+                    ForEach($notificationViewModel.notificationsArray, id: \.activityId) { $notification in
                       HStack(alignment: .top) {
                             if notification.type == "comment" {
-        
-                                    CommentNotification(notification: notification)
-                                    .buttonStyle(PlainButtonStyle())
+                                CommentNotification(notification: $notification)
+                                .if(notification.openedAt == nil) { view in
+                                    view.background(Color.uilightBlue)
+                                        .frame(width: UIScreen.main.bounds.width)
+                                }
+                                .buttonStyle(PlainButtonStyle())
                             }else if notification.type == "connectRequest" {
-                                    CommentNotificationRow(
-                                      notification: notification,
-                                      notificationViewModel: self.notificationViewModel
-                                    )
-
+                                ConnectRequestNotification(
+                                  notification: notification,
+                                  notificationViewModel: self.notificationViewModel
+                                )
+                                .if(notification.openedAt == nil) { view in
+                                    view.background(Color.uilightBlue)
+                                        .frame(width: UIScreen.main.bounds.width)
+                                }
                             } else if notification.type == "referred" {
                                 NotificationReferralEntry(
-                                  notification: notification
+                                  notification: $notification
                                 )
+                                .if(notification.openedAt == nil) { view in
+                                    view.background(Color.uilightBlue)
+                                        .frame(width: UIScreen.main.bounds.width)
+                                }
                             } else {
-                              NavigationLink (destination: UserProfileView(userId: notification.userId, user: nil)){
+                              NavigationLink (
+                                destination: UserProfileView(userId: notification.userId, user: nil)
+                                    .onAppear {
+                                        notification.openedAt = Timestamp(date: Date())
+                                        notificationViewModel.updateOpenedAt(notificationId: notification.activityId)
+                                    }
+                              )
+                                {
 
                                  NotificationUserAvatar(
                                   imageUrl: notification.userAvatar,
                                   type: notification.type
                                  )
                                   .padding(.trailing, 10)
-
                               VStack(alignment: .leading) {
                                 HStack(alignment: .center, spacing: 5) {
                                   Text(notification.username).bold() + Text(" ") + Text(notification.typeDescription ?? "")
@@ -73,35 +88,35 @@ struct NotificationView: View {
                                 Spacer()
                                 Text(timeAgoSinceDate(Date(timeIntervalSince1970: notification.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
                               }
-
-                            }.buttonStyle(PlainButtonStyle())
-
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            .if(notification.openedAt == nil) { view in
+                                view.background(Color.uiviolet)
+                                    .frame(width: UIScreen.main.bounds.width)
+                            }
                           }
-
-
                         }
-                        .padding(15)
                         Divider()
+                        .contentShape(Rectangle())
                     }
                 }
-                  
-           
             }
               .navigationBarTitle(Text("Notifications"), displayMode: .inline)
               .environmentObject(mainViewModel)
             }
         }
-        } .onAppear {
+        }
+        .onAppear {
             sortNotifications()
         }
     }
 }
 
-struct CommentNotificationRow: View {
+struct ConnectRequestNotification: View {
     var notification: Notification
     var notificationViewModel: NotificationViewModel
+    
     var body: some View {
-
         HStack(alignment: .top) {
           NotificationUserAvatar(
            imageUrl: notification.userAvatar,
@@ -124,7 +139,7 @@ struct CommentNotificationRow: View {
               .font(.subheadline)
               .fixedSize(horizontal: false, vertical: true)
           }
-          .frame(maxWidth: UIScreen.main.bounds.width - 40)
+          .frame(maxWidth: UIScreen.main.bounds.width)
           }
 
     }
@@ -133,12 +148,15 @@ struct CommentNotificationRow: View {
 // Move to different file
 struct RespondToConnectRequestRow: View {
     var notification: Notification
-    @EnvironmentObject var activityViewModel: NotificationViewModel
+    @EnvironmentObject var notificationViewModel: NotificationViewModel
     var body: some View {
         
         HStack {
           // Ignore Button (todo: put in own file)
-          Button( action: { activityViewModel.deleteConnectRequest(fromUserId: notification.userId) }) {
+          Button( action: {
+              notificationViewModel.deleteConnectRequest(fromUserId: notification.userId)
+              logToAmplitude(event: .declineConnectRequest, properties: [.userId: notification.userId])
+          }) {
             Text("Ignore")
                 .fontWeight(.bold).foregroundColor(Color.black)
                 .font(.system(size: 14))
@@ -149,7 +167,7 @@ struct RespondToConnectRequestRow: View {
           // Accept Button (todo: put in own file)
           Button(action: {
                     logToAmplitude(event: .acceptConnectRequest, properties: [.userId: notification.userId])
-                    activityViewModel.acceptConnectRequest(fromUserId: notification.userId) }) {
+                    notificationViewModel.acceptConnectRequest(fromUserId: notification.userId) }) {
               Text("Accept")
                   .fontWeight(.bold).foregroundColor(Color.white)
                   .font(.system(size: 14))

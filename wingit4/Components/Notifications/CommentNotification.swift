@@ -4,11 +4,13 @@
 //
 //  Created by Daniel Yee on 9/29/21.
 //
+
+import FirebaseFirestore
 import SwiftUI
 import URLImage
 
 struct CommentNotification: View {
-    @State var notification: Notification
+    @Binding var notification: Notification
     // Menu
     @StateObject var askCardViewModel = AskCardViewModel()
     @StateObject var askMenuViewModel = AskMenuViewModel()
@@ -19,14 +21,8 @@ struct CommentNotification: View {
     @StateObject var commentInputViewModel = CommentInputViewModel()
     // Like
     @StateObject var footerCellViewModel = FooterCellViewModel()
-    
     @EnvironmentObject var notificationViewModel: NotificationViewModel
-   // @State var wasOpened: Bool = false
-  
-    func TapGesture(){
-            self.notificationViewModel.updateWasOpened(notificationId: notification.activityId)
-            notification.wasOpened = true
-    }
+    
   var body: some View {
       NavigationLink(
         destination: AskDetailView(post: $notification.post)
@@ -35,10 +31,12 @@ struct CommentNotification: View {
           .environmentObject(askDoneToggleViewModel)
           .environmentObject(commentViewModel)
           .environmentObject(commentInputViewModel)
-            .environmentObject(footerCellViewModel)
-            .onAppear {
-                self.TapGesture()
-            }) {
+          .environmentObject(footerCellViewModel)
+          .onAppear {
+              notification.openedAt = Timestamp(date: Date())
+              self.notificationViewModel.updateOpenedAt(notificationId: notification.activityId)
+          })
+      {
       HStack(alignment: .top) {
           NotificationUserAvatar(
              imageUrl: notification.userAvatar,
@@ -60,11 +58,6 @@ struct CommentNotification: View {
       
          
     }
-        
     .buttonStyle(PlainButtonStyle())
-    .opacity(self.notification.wasOpened ?? false ?
-             0.6 : 1)
-      
-      
   }
 }

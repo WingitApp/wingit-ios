@@ -5,12 +5,13 @@
 //  Created by YaeRim Amy Chun on 6/11/21.
 //
 
+import FirebaseFirestore
 import Foundation
 import SwiftUI
 
 struct Notification: Codable, Equatable {
     var post: Post?
-    var wasOpened: Bool? = false
+    var openedAt: Timestamp?
     
     // legacy fields
     var activityId: String
@@ -52,11 +53,11 @@ struct Notification: Codable, Equatable {
         case comment
         case date
         case mediaUrl
+        case openedAt
         case postId
         case type
         case userAvatar
         case userId
         case username
-        case wasOpened
     }
 }
