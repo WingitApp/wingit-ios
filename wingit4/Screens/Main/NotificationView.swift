@@ -9,9 +9,17 @@ import SwiftUI
 
 struct NotificationView: View {
     
-  @EnvironmentObject var notificationViewModel: NotificationViewModel
-  @EnvironmentObject var mainViewModel: MainViewModel
-    
+    @EnvironmentObject var notificationViewModel: NotificationViewModel
+    @EnvironmentObject var mainViewModel: MainViewModel
+    @StateObject var askCardViewModel = AskCardViewModel()
+    @StateObject var askMenuViewModel = AskMenuViewModel()
+    @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
+    // Comment
+    @StateObject var commentViewModel = CommentViewModel()
+    @StateObject var referViewModel = ReferViewModel()
+    @StateObject var commentInputViewModel = CommentInputViewModel()
+    // Like
+    @StateObject var footerCellViewModel = FooterCellViewModel()
     
   func sortNotifications() -> Void {
     self.notificationViewModel.notificationsArray.sort { $0.date > $1.date }
@@ -34,16 +42,22 @@ struct NotificationView: View {
                   ReferralPlaceholder(type: "accepted")
                   ReferralPlaceholder(type: "accepted")
                 }
-                
-                  LazyVStack(alignment: .leading, spacing: 0) {
+                      LazyVStack(alignment: .leading, spacing: 0) {
                 if !notificationViewModel.notificationsArray.isEmpty {
                     ForEach($notificationViewModel.notificationsArray, id: \.activityId) { $notification in
-//                      HStack(alignment: .top) {
                             if notification.type == "comment" {
-                                CommentNotification(notification: $notification)
-                                .if(notification.openedAt == nil) { view in
-                                    view.background(Color.skyBlue)
-                                      //  .frame(width: UIScreen.main.bounds.width)
+                                NavigationLink(
+                                    destination:
+                                        AskDetailView(post: $notification.post)
+                                        .environmentObject(askCardViewModel)
+                                        .environmentObject(askMenuViewModel)
+                                        .environmentObject(askDoneToggleViewModel)
+                                        .environmentObject(commentViewModel)
+                                        .environmentObject(commentInputViewModel)
+                                        .environmentObject(footerCellViewModel),
+                                    isActive: self.$notificationViewModel.isPostLinkActive
+                                ) {
+                                    CommentNotification(notification: $notification)
                                 }
                                 .buttonStyle(PlainButtonStyle())
                             }else if notification.type == "connectRequest" {
@@ -53,7 +67,6 @@ struct NotificationView: View {
                                 )
                                 .if(notification.openedAt == nil) { view in
                                     view.background(Color.skyBlue)
-                                      //  .frame(width: UIScreen.main.bounds.width)
                                 }
                             } else if notification.type == "referred" {
                                 NotificationReferralEntry(
@@ -61,18 +74,14 @@ struct NotificationView: View {
                                 )
                                 .if(notification.openedAt == nil) { view in
                                     view.background(Color.skyBlue)
-                                      //  .frame(width: UIScreen.main.bounds.width)
                                 }
                             } else {
                               NavigationLink (
-                                destination: UserProfileView(userId: notification.userId, user: nil)
-                                    .onAppear {
-                                        notification.openedAt = Timestamp(date: Date())
-                                        notificationViewModel.updateOpenedAt(notificationId: notification.activityId)
-                                    }
+                                destination: UserProfileView(userId: notification.userId, user: nil),
+                                isActive: self.$notificationViewModel.isUserProfileLinkActive
                               )
                                 {
-                                    HStack(alignment: .top){
+                                HStack(alignment: .top) {
                                  NotificationUserAvatar(
                                   imageUrl: notification.userAvatar,
                                   type: notification.type
@@ -88,22 +97,21 @@ struct NotificationView: View {
                                 Spacer()
                                 Text(timeAgoSinceDate(Date(timeIntervalSince1970: notification.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
                               }
-                                    
                             }
-                                    Spacer()
+                            .onTapGesture {
+                                notification.openedAt = Timestamp(date: Date())
+                                notificationViewModel.updateOpenedAt(notificationId: notification.activityId)
+                                notificationViewModel.isUserProfileLinkActive = true
+                            }
+                                Spacer()
                             }
                             .padding()
                             .buttonStyle(PlainButtonStyle())
                             .if(notification.openedAt == nil) { view in
                                 view.background(Color.skyBlue)
-                                   
-                                    //.frame(width: UIScreen.main.bounds.width)
                             }
                           }
-//                        }
-//                      .padding(15)
-                  
-//                        .contentShape(Rectangle())
+                        Divider()
                     }
                 }
             }

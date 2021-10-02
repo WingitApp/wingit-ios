@@ -11,32 +11,9 @@ import URLImage
 
 struct CommentNotification: View {
     @Binding var notification: Notification
-    // Menu
-    @StateObject var askCardViewModel = AskCardViewModel()
-    @StateObject var askMenuViewModel = AskMenuViewModel()
-    @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
-    // Comment
-    @StateObject var commentViewModel = CommentViewModel()
-    @StateObject var referViewModel = ReferViewModel()
-    @StateObject var commentInputViewModel = CommentInputViewModel()
-    // Like
-    @StateObject var footerCellViewModel = FooterCellViewModel()
     @EnvironmentObject var notificationViewModel: NotificationViewModel
     
   var body: some View {
-      NavigationLink(
-        destination: AskDetailView(post: $notification.post)
-          .environmentObject(askCardViewModel)
-          .environmentObject(askMenuViewModel)
-          .environmentObject(askDoneToggleViewModel)
-          .environmentObject(commentViewModel)
-          .environmentObject(commentInputViewModel)
-          .environmentObject(footerCellViewModel)
-          .onAppear {
-              notification.openedAt = Timestamp(date: Date())
-              self.notificationViewModel.updateOpenedAt(notificationId: notification.activityId)
-          })
-      {
       HStack(alignment: .top) {
           NotificationUserAvatar(
              imageUrl: notification.userAvatar,
@@ -55,12 +32,14 @@ struct CommentNotification: View {
           }
           Spacer()
       }
-      
-         
-    }
-    .buttonStyle(PlainButtonStyle())
-    .padding()
-//    .background(Color.uilightBlue)
-//                    .ignoresSafeArea(.all, edges: .all))
+      .padding()
+      .if(notification.openedAt == nil) { view in
+          view.background(Color.skyBlue)
+      }
+      .onTapGesture {
+          notification.openedAt = Timestamp(date: Date())
+          notificationViewModel.updateOpenedAt(notificationId: notification.activityId)
+          notificationViewModel.isPostLinkActive = true
+      }
   }
 }

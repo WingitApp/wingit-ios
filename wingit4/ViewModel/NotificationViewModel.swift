@@ -18,7 +18,10 @@ class NotificationViewModel: ObservableObject {
     var listener: ListenerRegistration!
     
     @Published var isLoading = true
-//    @Published var destination: AskDetailView?
+    
+    // Programatically Navigate
+    @Published var isPostLinkActive: Bool = false
+    @Published var isUserProfileLinkActive: Bool = false
    
     func updateOpenedAt(notificationId: String){
         guard let userId = Auth.auth().currentUser?.uid else { return }
