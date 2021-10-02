@@ -28,6 +28,7 @@ struct InitialView: View {
         }
         .onAppear(perform: listen)
         .preferredColorScheme(.light)
+        
        
       //  .environment(\.colorScheme, .dark)
     }

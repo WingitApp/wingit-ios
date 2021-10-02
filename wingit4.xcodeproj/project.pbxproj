@@ -212,6 +212,7 @@
 		65F7315626F5276900A73781 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315526F5276900A73781 /* Contact.swift */; };
 		65F7315826F5295500A73781 /* ContactsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315726F5295500A73781 /* ContactsListViewModel.swift */; };
 		65FE040426E9FE3200333609 /* ComposePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE040326E9FE3200333609 /* ComposePostView.swift */; };
+		FBE3D621270814DF005091AE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE3D620270814DF005091AE /* NotificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -413,6 +414,7 @@
 		65F7315526F5276900A73781 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		65F7315726F5295500A73781 /* ContactsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewModel.swift; sourceTree = "<group>"; };
 		65FE040326E9FE3200333609 /* ComposePostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposePostView.swift; sourceTree = "<group>"; };
+		FBE3D620270814DF005091AE /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -710,6 +712,7 @@
 				151A3C8026CE134A00A39FAF /* FontStyles.swift */,
 				6531838226B238AA0006D9E2 /* Analytics.swift */,
 				3BD12F1426C9CA1500E26A87 /* AppDel.swift */,
+				FBE3D620270814DF005091AE /* NotificationManager.swift */,
 				3B86E43D26C998E300F64416 /* ActivityIndicatorView.swift */,
 				3B75E3DC26716074002F3108 /* Constants.swift */,
 				3B7AF09B2671E1DA003BCCF3 /* Selection.swift */,
@@ -1187,6 +1190,7 @@
 				15030AA826E805A50076CF14 /* Styles.swift in Sources */,
 				65A9EF9C26DF0B2500E81CBF /* ConnectionsApi.swift in Sources */,
 				151A3C8126CE134A00A39FAF /* FontStyles.swift in Sources */,
+				FBE3D621270814DF005091AE /* NotificationManager.swift in Sources */,
 				1524E10126F8136800D5BDB4 /* UserBumpCountSummary.swift in Sources */,
 				3B7AF0A02671E404003BCCF3 /* ProfileInformation.swift in Sources */,
 				65A9EFA326E0923300E81CBF /* Referral.swift in Sources */,

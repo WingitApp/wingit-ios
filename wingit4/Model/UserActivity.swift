@@ -43,4 +43,5 @@ struct UserActivity: Codable, Identifiable {
         case viewUserProfile
         case wingAsk
     }
+    
 }

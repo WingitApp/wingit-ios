@@ -43,10 +43,23 @@ class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate {
     }
     
     application.registerForRemoteNotifications()
-    
+      
+      
+//      if let option = launchOptions {
+//          let info = option[UIApplication.LaunchOptionsKey.remoteNotification]
+//        if (info != nil) {
+//          gotoAnotherVC()
+//        }
+//      }
+      
+      
     return true
   }
-  
+    
+//    func gotoAnotherVC(){
+//
+//    }
+//
   
   /// Handles silent push notifications - https://firebase.google.com/docs/cloud-messaging/ios/receive#handle_silent_push_notifications
 
@@ -126,30 +139,44 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     didReceive response: UNNotificationResponse,
     withCompletionHandler completionHandler: @escaping () -> Void
   ) {
-    let userInfo = response.notification.request.content.userInfo
+  // Do whatever you want when the user tapped on a notification
+      // If you are waiting for specific data from the notification
+      // (e.g., key: "target" and associated with "value"),
+      // you can capture it as follows then do the navigation:
 
+      // You may print `userInfo` dictionary, to see all data received with the notification.
+    let userInfo = response.notification.request.content.userInfo
+    
+        
     // ...
 
     // With swizzling disabled you must let Messaging know about the message, for Analytics
     // Messaging.messaging().appDidReceiveMessage(userInfo)
 
     // Print full message.
-    print(userInfo)
+    print("NOTIF \(userInfo)")
 
     completionHandler()
   }
-
+    
+    
 }
+
+
 
 @main
 struct WingitApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
 
     let sessionStore = SessionStore()
+  
     
   var body: some Scene {
     WindowGroup {
-      InitialView().environmentObject(sessionStore)
+      InitialView()
+            .environmentObject(sessionStore)
+          
 
     }
   }
