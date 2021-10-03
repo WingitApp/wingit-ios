@@ -29,8 +29,8 @@ class ReferralsApi {
         let referral = Referral(id: nil, createdAt: nil, askId: askId, children: nil, closedAt: nil, recipientId: recipientId, parentId: parentId, senderId: id, status: .pending, text: nil, updatedAt: nil)
         do {
             let _ = try Ref.FS_COLLECTION_REFERRALS.addDocument(from: referral)
-            let activityId = Ref.FS_COLLECTION_ACTIVITY.document(recipientId).collection("feedItems").document().documentID
-             // add rewing activity
+//            let activityId = Ref.FS_COLLECTION_ACTIVITY.document(recipientId).collection("feedItems").document().documentID
+             // add rewing UserActivity
         } catch {
             print(error)
         }
@@ -43,7 +43,7 @@ class ReferralsApi {
     /**Used to get list of users who have winged (no listener attached)*/
     func getWingersByPostId(askId: String, onSuccess: @escaping(_ wingers: [User]) -> Void) {
       Ref.FS_COLLECTION_ALL_POSTS.document(askId).collection("wingers").getDocuments { (snapshot, error) in
-        if error != nil { return print(error) }
+          if error != nil { return print(error ?? "") }
         guard let snap = snapshot else { return }
         
         let wingers = snap.documents.compactMap {

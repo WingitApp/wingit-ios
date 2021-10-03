@@ -39,7 +39,6 @@ class CommentInputViewModel: ObservableObject {
       onSuccess: {
           guard let ownerId = post.ownerId else { return }
             if currentUser.uid != ownerId {
-              // Is this async? If so, there needs to be callback
                 let activityId = Ref.FS_COLLECTION_ACTIVITY
                   .document(ownerId)
                   .collection("feedItems")
@@ -51,9 +50,9 @@ class CommentInputViewModel: ObservableObject {
                   "type": "comment",
                   "username": currentUser.displayName ?? "",
                   "userId": currentUser.uid,
-                  "userAvatar": currentUser.photoURL!.absoluteString,
-                  "postId": post.postId,
-                  "mediaUrl": post.mediaUrl,
+                  "userAvatar": currentUser.photoURL?.absoluteString ?? "",
+                  "postId": post.postId ?? "",
+                  "mediaUrl": post.mediaUrl ?? "",
                   "comment": text,
                   "date": Date().timeIntervalSince1970
                 ]

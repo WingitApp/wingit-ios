@@ -15,7 +15,7 @@ struct ReferralUserCard: View {
   
     func onTapGesture() {
       
-      if  !referViewModel.userBumps.filter { $0.id == user.id }.isEmpty {
+      if  !referViewModel.userBumps.filter({ $0.id == user.id }).isEmpty {
         // we don't need to add users who are already bumped
         return
       }
