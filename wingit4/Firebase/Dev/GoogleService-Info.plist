@@ -2,39 +2,33 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>FirebaseDynamicLinksCustomDomains</key>
-	<array>
-		<string>https://request.wingitapp.co</string>
-	</array>
 	<key>CLIENT_ID</key>
-	<string>165533978443-ee00ts0vuca6evdh4n91pjdth8ah3h6o.apps.googleusercontent.com</string>
+	<string>949852237420-3og00goro5bpv3d5clg2hr8l7sr6ho2f.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.165533978443-ee00ts0vuca6evdh4n91pjdth8ah3h6o</string>
+	<string>com.googleusercontent.apps.949852237420-3og00goro5bpv3d5clg2hr8l7sr6ho2f</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAe4FY3mu9w532N2oArohsLcrrIzMdcX1M</string>
+	<string>AIzaSyAWKb6FC3bLntEvzrCzwMo8_A5bRHfcoi8</string>
 	<key>GCM_SENDER_ID</key>
-	<string>165533978443</string>
+	<string>949852237420</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>co.wingitapp.wingit4</string>
 	<key>PROJECT_ID</key>
-	<string>wingitapp-1fe28</string>
+	<string>wingit-staging-83e2d</string>
 	<key>STORAGE_BUCKET</key>
-	<string>wingitapp-1fe28.appspot.com</string>
+	<string>wingit-staging-83e2d.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:165533978443:ios:0469148f979a36a81ae2ce</string>
-	<key>DATABASE_URL</key>
-	<string>https://wingitapp-1fe28-default-rtdb.firebaseio.com</string>
+	<string>1:949852237420:ios:98966d2272605988d2f249</string>
 </dict>
 </plist>
