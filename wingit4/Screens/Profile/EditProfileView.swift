@@ -8,10 +8,20 @@
 import SwiftUI
 import SPAlert
 import FirebaseAuth
+import Combine
 
-struct EditProfileView: View {
+
+struct EditProfileView: View, KeyboardReadable {
   @EnvironmentObject var profileViewModel: ProfileViewModel
   @EnvironmentObject var session: SessionStore
+  
+  @State private var bioText: String
+  @State private var isTextEditorOpen: Bool = false
+  let textLimit = 200
+  
+  init(bio: String) {
+    _bioText = State(initialValue: bio)
+  }
   
   func areEditsMade() -> Bool {
     guard let currentUser = self.session.currentUser else { return false }
@@ -38,12 +48,30 @@ struct EditProfileView: View {
   func closeEditProfileView() {
     profileViewModel.isEditSheetOpen = false
   }
+  
+  func updateProfilePhoto() {
+//    self.closeEditProfileView()
+    self.profileViewModel.isUpdatePicSheetOpen.toggle()
+  }
+  
+  func limitText(_ upper: Int) {
+         if bioText.count > upper {
+             bioText = String(bioText.prefix(upper))
+         }
+     }
    
   
   var body: some View {
       VStack{
         // header
         HStack {
+          Button(action: closeEditProfileView) {
+            Image(systemName: "xmark")
+                .foregroundColor(.gray)
+                .padding(10)
+          }
+          .opacity(0)
+          .zIndex(-1)
           Spacer()
           Text("Edit Profile").bold()
           Spacer()
@@ -55,48 +83,88 @@ struct EditProfileView: View {
         }
         .padding(.init(top: 10, leading: 10, bottom: 0, trailing: 10))
         Divider()
-
-        // user info summary
-        HStack {
-          Spacer()
-          URLImageView(urlString: session.currentUser?.profileImageUrl)
-            .frame(width: 150, height: 150)
-            .cornerRadius(100)
-            .padding(5)
-          Spacer()
-        }
-        VStack(alignment: .leading, spacing: 5) {
-          Text("Joshua Lee")
-            .font(.title).bold().foregroundColor(Color.black)
-        }
-        .padding(.bottom, 15)
         
         
-        HStack {
-          VStack(alignment: .leading, spacing: 0) {
-            Text("Username")
+        if !isTextEditorOpen {
+          HStack {
+            Spacer()
+            Button( action: updateProfilePhoto) {
+              ZStack {
+                URLImageView(urlString: session.currentUser?.profileImageUrl)
+                  .frame(width: 150, height: 150)
+                  .cornerRadius(100)
+                  .padding(5)
+                  .zIndex(0)
+                
+                Text(
+                  Image(systemName: "pencil")
+                )
+                  .bold()
+                  .font(.system(size: 20))
+                  .foregroundColor(.white)
+                  .frame(width: 40, height: 40)
+                  .cornerRadius(100)
+                  .background(
+                    LinearGradient(
+                      gradient: Gradient(
+                        colors: [Color.wingitBlue.lighter(by: 10), Color.wingitBlue]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                      )
+                  )
+                  .cornerRadius(100)
+                  .offset(x: 60, y: 40)
+                  .shadow(
+                    color: Color.black.opacity(0.3),
+                    radius: 1, x: 0, y: -1
+                  )
+                  .zIndex(1)
+              }
+            }
+            .buttonStyle(PlainButtonStyle())
+            Spacer()
+          }
+          VStack(alignment: .leading, spacing: 5) {
+            Text("Joshua Lee")
+              .font(.title).bold().foregroundColor(Color.black)
+          }
+          .padding(.bottom, 15)
+          
+          
+          HStack {
+            VStack(alignment: .leading, spacing: 0) {
+              Text("Username")
+                .bold()
+                .padding(.bottom, 10)
+              Text("@joshlee93")
+                .foregroundColor(Color.wingitBlue)
+    //            .foregroundColor(Color.black.opacity(0.7))
+                .padding(.bottom, 15)
+            }
+            Spacer()
+          }
+          .padding([.horizontal])
+        }
+        
+        VStack(alignment: .leading, spacing: 0) {
+          HStack {
+            Text("Your Bio")
               .bold()
               .padding(.bottom, 10)
-            Text("@joshlee93")
-              .foregroundColor(Color.wingitBlue)
-  //            .foregroundColor(Color.black.opacity(0.7))
-              .padding(.bottom, 15)
+            Spacer()
+            VStack(alignment: .trailing, spacing: 0){
+              Text(
+                "\(bioText.count) / 200 chars"
+              )
+                .font(.caption)
+            }
+            
           }
-          Spacer()
-        }
-        .padding([.horizontal])
-
-//            .bold()
-//            .font(.subheadline)
-//            .foregroundColor(Color.wingitBlue)
-        VStack(alignment: .leading, spacing: 0) {
-
-          Text("Your Bio")
-            .bold()
-            .padding(.bottom, 10)
+     
           TextEditor(
-            text: $profileViewModel.bio
+            text: $bioText
           )
+            .onReceive(Just(bioText)) { _ in limitText(textLimit) }
             .padding(15)
             .cornerRadius(8)
             .overlay(
@@ -108,17 +176,31 @@ struct EditProfileView: View {
         .padding([.horizontal])
         
         Spacer()
+        HStack {
+          Button(action: { print("called")}) {
+            Text("Save")
+              .fontWeight(.semibold)
+              .frame(
+                width: UIScreen.main.bounds.width - 30,
+                height: 50
+              )
+              .foregroundColor(Color.white)
+              .background(Color.wingitBlue)
+              .cornerRadius(5)
+          }
+        }
+        .padding(.top, 15)
+        .padding(.bottom, 15)
 
       }
       .background(
-          Color.white.ignoresSafeArea(.all, edges: .all)
-        )
-  }
-}
-
-
-struct EditProfileView_Previews: PreviewProvider {
-  static var previews: some View {
-      EditProfileView()
+        Color.white.ignoresSafeArea(.all, edges: .all)
+      )
+      .onReceive(keyboardPublisher) { isKeyboardVisible in
+        isTextEditorOpen = isKeyboardVisible
+     }
+      .onTapGesture {
+        dismissKeyboard()
+      }
   }
 }

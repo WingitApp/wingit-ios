@@ -40,6 +40,7 @@ struct ProfileButton: View {
         HStack(spacing: 10){
           Text(Image(systemName: getIconName()))
             .font(.system(size: 15))
+            .foregroundColor(Color.black)
           Text(getButtonLabel())
             .fontWeight(.semibold)
             .font(.subheadline)

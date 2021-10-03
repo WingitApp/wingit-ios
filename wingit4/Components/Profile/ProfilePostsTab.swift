@@ -37,7 +37,11 @@ struct ProfilePostsTab: View {
                    : String(userProfileViewModel.openPosts.count)
               ).bold()
               Text("Open Posts")
-                  .bold()
+//                .fontWeight(
+//                  isOwnProfile
+//                  ? (profileViewModel.showOpenPosts ? .bold : .regular)
+//                  : (userProfileViewModel.showOpenPosts ? .bold : .regular)
+//                )
             }
             .foregroundColor(
               isOwnProfile
@@ -54,7 +58,11 @@ struct ProfilePostsTab: View {
                  : String(userProfileViewModel.closedPosts.count)
             ).bold()
             Text("Closed Posts")
-              .bold()
+//              .fontWeight(
+//                isOwnProfile
+//                ? (!profileViewModel.showOpenPosts ? .bold : .regular)
+//                : (!userProfileViewModel.showOpenPosts ? .bold : .regular)
+//              )
           }
           .foregroundColor(
             isOwnProfile

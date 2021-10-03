@@ -28,6 +28,7 @@ struct ProfileDetail2: View {
     
     
     var body: some View {
+      NavigationView {
         ScrollView(showsIndicators: false) {
           VStack {
             VStack {
@@ -89,12 +90,34 @@ struct ProfileDetail2: View {
             .offset(y: -30)
             .padding(.top, -30)
             
-      
           }
-
-
         }
         .environmentObject(connectionsViewModel)
+        .navigationBarTitle(
+              Text(session.currentUser?.displayName ?? "Profile"), displayMode: .inline
+            )
+        .navigationBarItems(
+          leading: Button(action: {}) {
+            NavigationLink(destination: UsersView()) {
+              Image(systemName: "magnifyingglass")
+                .imageScale(Image.Scale.medium)
+                .foregroundColor(Color.black)
+            }
+          },
+          trailing:
+            Button(action: {
+              self.session.logout()
+  
+            }) {
+                Text("Logout")
+                  .font(.subheadline)
+                  .foregroundColor(Color.black)
+                Image(systemName: "arrow.right.circle")
+                  .imageScale(Image.Scale.medium)
+                  .foregroundColor(Color.black)
+          })
+      }
+        
         .sheet(
           isPresented: $connectionsViewModel.isConnectionsSheetOpen,
           content: {
@@ -113,6 +136,9 @@ struct ProfileDetail2: View {
         isPresented: profileViewModel.isEditSheetOpen,
         alignment: .center,
         direction: .bottom,
-        content: { EditProfileView().environmentObject(profileViewModel)}))
+        content: {
+          EditProfileView(bio: profileViewModel.bio)
+          .environmentObject(profileViewModel)
+        }))
     }
 }

@@ -18,49 +18,62 @@ struct SocialLink: View {
     }
   }
   
+  func primaryColor() -> Color {
+    switch(name) {
+      case "fb":
+        return Color.fbBlue
+      case "instagram":
+        return Color.igPurple
+      case "tiktok":
+        return Color.tiktokTeal
+      case "twitter":
+        return Color.twitterBlue
+      case "reddit":
+        return Color.redditRed
+      case "linkedin":
+        return Color.linkedinBlue
+      case "spotify":
+        return Color.spotifyGreen
+      
+      default:
+        return Color.wingitBlue.opacity(0.3)
+    }
+  }
+  
   
     var body: some View {
-      Button(action: openLink) {
-        ZStack {
-          Image(name)
-              .resizable()
-              .scaledToFit()
-              .frame(width: 15, height: 15)
-              .padding(10)
-              .clipShape(Circle())
-              .background(bgColor)
-              .cornerRadius(100)
-              .blur(radius: link == "" ? 0.2 : 0)
-          Text(
-            Image(systemName: "plus")
-          )
-            .bold()
-            .font(.system(size: 8))
-            .foregroundColor(Color.wingitBlue)
-            .padding(3)
-            .background(
-              LinearGradient(
-                gradient: Gradient(
-                  colors: [Color.lightGray.lighter(by: 3), Color.lightGray]),
-                  startPoint: .top,
-                  endPoint: .bottom
-                )
-                .overlay(
-                  RoundedRectangle(cornerRadius: 100)
-                    .stroke(Color.borderGray, lineWidth: 1)
-                )
-            )
-            .cornerRadius(100)
-            .offset(x: 13, y: -14)
-//            .shadow(
-//              color: Color.black.opacity(0.3),
-//              radius: 1, x: 0, y: -1
-//            )
-            .zIndex(1)
 
+        Button(action: openLink) {
+          ZStack {
+            Image(name)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 15, height: 15)
+                .padding(10)
+                .clipShape(Circle())
+                .background(bgColor)
+                .cornerRadius(100)
+            Text(
+              Image(systemName: "plus")
+            )
+              .font(.system(size: 8.5))
+              .fontWeight(.heavy)
+              .foregroundColor(primaryColor())
+              .padding(2.5)
+              .background(
+                LinearGradient(
+                  gradient: Gradient(
+                    colors: [bgColor, bgColor]
+                  ),
+                    startPoint: .top,
+                    endPoint: .bottom
+                  )
+              )
+              .cornerRadius(100)
+              .offset(x: 12, y: -11.5)
+          }
         }
-      }
-      .buttonStyle(PlainButtonStyle())
+        .buttonStyle(PlainButtonStyle())
 
     }
 }

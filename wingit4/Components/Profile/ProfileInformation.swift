@@ -107,36 +107,10 @@ struct UpdateProfilePhoto: View {
                 .padding(.bottom, 100)
                 .font(.title)
           HStack {
-            ZStack {
-                updatePhotoVM.image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
+              URLImageView(urlString: user!.profileImageUrl)
                     .clipShape(Circle())
                     .frame(width: 100, height: 100)
                     .onTapGesture {self.updatePhotoVM.showImagePicker = true}
-                    .zIndex(0)
-                Image(systemName: "plus.circle")
-                  .font(.system(size: 23))
-                  .foregroundColor(.white)
-                  .padding(5)
-                  .background(
-                    LinearGradient(
-                      gradient: Gradient(
-                        colors: [Color("Color").lighter(by: 10), Color("Color")]),
-                        startPoint: .top,
-                        endPoint: .bottom
-                      )
-                  )
-                  .cornerRadius(100)
-                  .offset(x: 30, y: 30)
-                  .frame(width: 20, height: 20)
-                  .shadow(
-                    color: Color.black.opacity(0.3),
-                    radius: 1, x: 0, y: -1
-                  )
-                  .zIndex(1)
-
-            }
           }
             
             

@@ -13,31 +13,41 @@ struct ProfileUserLinks: View {
   // todo: if nill, then set opacity
     var body: some View {
       VStack(alignment: .leading, spacing: 0){
+        ScrollView(.horizontal){
+          HStack(alignment: .center, spacing: 20){
+            SocialLink(
+              name: "fb",
+              bgColor: Color.fbBlueBackground
+            )
+            SocialLink(
+              name: "instagram",
+              bgColor: Color.igPurpleBackground
+            )
         
-        HStack(alignment: .center, spacing: 20){
-          SocialLink(
-            name: "fb",
-            bgColor: Color.fbBlueBackground
-          )
-          SocialLink(
-            name: "twitter",
-            bgColor: Color.twitterBlueBackground
-          )
-          SocialLink(
-            name: "reddit",
-            bgColor: Color.redditRedBackground
-          )
-          SocialLink(
-            name: "linkedin",
-            bgColor: Color.backgroundBlueGray
-          )
-          SocialLink(
-            name: "spotify",
-            bgColor: Color.spotifyGreenBackground
-          )
+            SocialLink(
+              name: "twitter",
+              bgColor: Color.twitterBlueBackground
+            )
+            SocialLink(
+              name: "linkedin",
+              bgColor: Color.backgroundBlueGray
+            )
+            SocialLink(
+              name: "reddit",
+              bgColor: Color.redditRedBackground
+            )
           
+            SocialLink(
+              name: "spotify",
+              bgColor: Color.spotifyGreenBackground
+            )
+            
+          }
+          .padding(.top, 3)
+
         }
-        .fixedSize(horizontal: true, vertical: false)
+
+        
       }
       
       .padding(.top, 20)
