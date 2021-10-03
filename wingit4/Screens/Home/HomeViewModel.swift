@@ -48,11 +48,13 @@ class HomeViewModel: ObservableObject {
           firstCall: posts.count == 0,
           onEmpty: {
             self.isLoading = false
+              print("isLoadingFalse")
           },
           onSuccess: { (posts) in
             if self.posts.count < posts.count {
               self.posts = posts
               self.isLoading = false
+                print("isLoadingFalse")
             }
         }, newPost: { (post) in
             if !self.posts.isEmpty {

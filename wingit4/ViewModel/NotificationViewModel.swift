@@ -37,6 +37,7 @@ class NotificationViewModel: ObservableObject {
         Api.Notifications.loadNotifications(
           onEmpty: {
             self.isLoading = false
+              print("notification Loading false") 
           }, newNotification: { (notification) in
             if !self.notificationsArray.contains(notification) {
               self.notificationsArray.insert(notification, at: 0)

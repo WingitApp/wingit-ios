@@ -377,10 +377,9 @@ class PostApi {
               }
               
               if snapshot.documentChanges.count == 0 {
-                return onEmpty()
+                         return onEmpty()
               }
              
-              
               
               snapshot.documentChanges.forEach { (documentChange) in
                     switch documentChange.type {
