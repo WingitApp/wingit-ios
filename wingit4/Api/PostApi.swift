@@ -362,19 +362,19 @@ class PostApi {
               guard let snapshot = querySnapshot else { return }
 
               
-              if firstCall {
-                // construct pagination start
-                guard let lastSnapshot = snapshot.documents.last else { return }
-                
-                let next = Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId)
-                  .collection("timelinePosts")
-                  .order(by: "date", descending: true)
-                  .limit(to: TIMELINE_PAGINATION_PAGE_SIZE)
-                  .start(afterDocument: lastSnapshot)
-                // construct pagination end
-                
-                nextQuery(next)
-              }
+//              if firstCall {
+//                // construct pagination start
+//                guard let lastSnapshot = snapshot.documents.last else { return }
+//                
+//                let next = Ref.FS_DOC_TIMELINE_FOR_USERID(userId: userId)
+//                  .collection("timelinePosts")
+//                  .order(by: "date", descending: true)
+//                  .limit(to: TIMELINE_PAGINATION_PAGE_SIZE)
+//                  .start(afterDocument: lastSnapshot)
+//                // construct pagination end
+//                
+//                nextQuery(next)
+//              }
               
               if snapshot.documentChanges.count == 0 {
                          return onEmpty()
