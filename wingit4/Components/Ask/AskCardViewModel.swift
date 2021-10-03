@@ -161,8 +161,8 @@ class AskCardViewModel: ObservableObject {
 //    )
   }
     func onTapBlockUser() {
-    guard let userId = Auth.auth().currentUser?.uid else { return }
-        let postOwnerId = self.post!.ownerId
+        guard let userId = Auth.auth().currentUser?.uid,
+              let postOwnerId = self.post?.ownerId else { return }
     
     Api.User.blockUser(userId: userId, postOwnerId: postOwnerId)
     
@@ -180,8 +180,8 @@ class AskCardViewModel: ObservableObject {
   
   
   func blockUser() {
-    guard let uid = Auth.auth().currentUser?.uid else { return }
-    let postOwnerId = post!.ownerId
+    guard let uid = Auth.auth().currentUser?.uid,
+          let postOwnerId = post?.ownerId else { return }
     Api.User.blockUser(userId: uid, postOwnerId: postOwnerId)
   }
   

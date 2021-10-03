@@ -15,10 +15,11 @@ class CommentApi {
     
   func postComment(
     commentDict: Dictionary<String, Any>,
-    postId: String,
+    postId: String?,
     onSuccess: @escaping() -> Void,
     onError: @escaping(_ errorMessage: String) -> Void
   ) {
+    guard let postId = postId else { return }
     var ref: DocumentReference? = nil
     ref = Ref.FS_DOC_COMMENTS_FOR_POSTID(postId: postId)
       .collection("postComments")

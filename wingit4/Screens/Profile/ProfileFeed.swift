@@ -12,11 +12,11 @@ struct ProfileFeed: View {
   /**these function are needed to keep posts sorted b/c
    posts are closed/opened at random sequences by user*/
     func sortOpenPosts() -> Void {
-      self.profileViewModel.openPosts.sort { $0.date > $1.date }
+      self.profileViewModel.openPosts.sort { $0.date ?? 0 > $1.date ?? 0 }
     }
   
     func sortClosedPosts() -> Void {
-      self.profileViewModel.closedPosts.sort { $0.date > $1.date }
+      self.profileViewModel.closedPosts.sort { $0.date ?? 0 > $1.date ?? 0 }
     }
   
 

@@ -12,7 +12,8 @@ import FirebaseStorage
 import Firebase
 
 class ReportApi {
-    func sendReport(text: String, username: String, ownerId: String, postId: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+    func sendReport(text: String, username: String, ownerId: String, postId: String?, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+        guard let postId = postId else { return }
         let report = Report(comment: text, ownerId: ownerId, postId: postId, username: username)
         guard let dict = try? report.toDictionary() else {return}
         

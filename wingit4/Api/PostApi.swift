@@ -134,13 +134,14 @@ class PostApi {
     }
   
     func getUserBumpsByPost(
-      askId: String,
+      askId: String?,
       onSuccess: @escaping(_ bumpers: [User]) -> Void,
       onAddition: @escaping(_ user: User) -> Void,
       onRemoval: @escaping(_ user: User) -> Void,
       listener: @escaping(_ listenerHandler: ListenerRegistration) -> Void
     ) {
-      guard let userId = Auth.auth().currentUser?.uid else { return }
+      guard let userId = Auth.auth().currentUser?.uid,
+            let askId = askId else { return }
 
       let listenerUserBumpers = Ref.FS_COLLECTION_USER_BUMPS_BY_POST(userId: userId, postId: askId)
         .addSnapshotListener { (snapshot, error) in

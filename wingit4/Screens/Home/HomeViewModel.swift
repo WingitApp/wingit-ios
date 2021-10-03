@@ -59,7 +59,7 @@ class HomeViewModel: ObservableObject {
                 if !self.posts.contains(post) {
                   self.posts.insert(post, at: 0)
                   self.posts.sort {
-                    $0.date > $1.date
+                      $0.date ?? 0 > $1.date ?? 0
                   }
                 }
             }

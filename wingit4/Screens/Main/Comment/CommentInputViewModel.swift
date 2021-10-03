@@ -37,10 +37,11 @@ class CommentInputViewModel: ObservableObject {
       commentDict: commentDict,
       postId: post.postId,
       onSuccess: {
-            if currentUser.uid != post.ownerId {
+          guard let ownerId = post.ownerId else { return }
+            if currentUser.uid != ownerId {
               // Is this async? If so, there needs to be callback
                 let activityId = Ref.FS_COLLECTION_ACTIVITY
-                  .document(post.ownerId)
+                  .document(ownerId)
                   .collection("feedItems")
                   .document()
                   .documentID
@@ -57,7 +58,7 @@ class CommentInputViewModel: ObservableObject {
                   "date": Date().timeIntervalSince1970
                 ]
               
-                Ref.FS_COLLECTION_ACTIVITY.document(post.ownerId)
+                Ref.FS_COLLECTION_ACTIVITY.document(ownerId)
                   .collection("feedItems")
                   .document(activityId)
                   .setData(notificationDict)
