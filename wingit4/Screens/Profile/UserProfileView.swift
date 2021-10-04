@@ -280,6 +280,7 @@ struct UserProfileView: View {
         func acceptRequest() {
             logToAmplitude(event: .acceptConnectRequest, properties: [.userId: user.id])
             connectionsViewModel.acceptConnectRequest(userId: user.id ?? "")
+            self.isConnected = true
         }
         
         var body: some View {
@@ -302,11 +303,11 @@ struct UserProfileView: View {
                      .modifier(ProfileConnectButtonModifier())
             } else if receivedPendingRequest {
                 Button(action: acceptRequest) {
-                    Image(systemName: (self.isConnected ? "person.badge.minus.fill" : "link"))
+                  Image(systemName: (self.isConnected ? "person.badge.minus.fill" : "link"))
                     Text((self.isConnected) ? "Disconnect" : "Accept Request")
-                                   .font(.callout)
-                                   .bold()
-                           }.modifier(ProfileConnectButtonModifier())
+                     .font(.callout)
+                     .bold()
+                     }.modifier(ProfileConnectButtonModifier())
             } else {
                 Button(action: buttonTapped) {
                   Image(systemName: "link")
