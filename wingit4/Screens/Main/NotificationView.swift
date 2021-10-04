@@ -122,7 +122,7 @@ struct NotificationView: View {
 struct ConnectRequestNotification: View {
     var notification: Notification
     var notificationViewModel: NotificationViewModel
-    
+
     var body: some View {
         HStack(alignment: .top) {
         

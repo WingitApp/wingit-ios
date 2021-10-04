@@ -119,7 +119,7 @@ struct UserProfileView: View {
                   ConnectButton(
                     user: userProfileViewModel.user,
                     isConnected: $userProfileViewModel.isConnected, sentPendingRequest: $userProfileViewModel.sentPendingRequest,
-                    connectionsCount: $userProfileViewModel.connectionsCountState
+                    connectionsCount: $userProfileViewModel.connectionsCountState, receivedPendingRequest: $userProfileViewModel.receivedPendingRequest
                   )
                  // MessageButton(user: userProfileViewModel.user)
 
@@ -221,6 +221,7 @@ struct UserProfileView: View {
         userId: Auth.auth().currentUser!.uid,
         postOwnerId: self.userProfileViewModel.user.id ?? self.userProfileViewModel.user.uid
       )
+        self.userProfileViewModel.updateConnections(userId: self.userProfileViewModel.user.id ?? "")
     }
     .background(
       Color.white.ignoresSafeArea(.all, edges: .all)
@@ -246,17 +247,20 @@ struct UserProfileView: View {
     struct ConnectButton: View {
 
         @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
+      
 
         var user: User
         @Binding var connections_Count: Int
         @Binding var isConnected: Bool
         @Binding var sentPendingRequest: Bool
+        @Binding var receivedPendingRequest: Bool
 
-        init(user: User, isConnected: Binding<Bool>, sentPendingRequest: Binding<Bool>, connectionsCount: Binding<Int>) {
+        init(user: User, isConnected: Binding<Bool>, sentPendingRequest: Binding<Bool>, connectionsCount: Binding<Int>, receivedPendingRequest: Binding<Bool>) {
             self.user = user
             self._connections_Count = connectionsCount
             self._isConnected = isConnected
             self._sentPendingRequest = sentPendingRequest
+            self._receivedPendingRequest = receivedPendingRequest
         }
         
         func buttonTapped() {
@@ -273,28 +277,45 @@ struct UserProfileView: View {
             }
         }
         
-        var body: some View {
-            Button(action: buttonTapped) {
-              Image(systemName: (self.isConnected ? "person.badge.minus.fill" : "link"))
-              Text((self.isConnected) ? "Disconnect" : (self.sentPendingRequest) ? "Pending" : "Connect")
-                  .font(.callout)
-                  .bold()
-            }
-            .disabled(self.sentPendingRequest)
-            .frame(
-              width: (UIScreen.main.bounds.width / 2) - 30
-            )
-            .padding(
-              .init(top: 10, leading: 0, bottom: 10, trailing: 0)
-            )
-            .background(Color.lightGray)
-            .foregroundColor(Color.black)
-            .cornerRadius(5)
-            .overlay(
-              RoundedRectangle(cornerRadius: 5).stroke(Color(.lightGray),
-              lineWidth: 1)
-            )
+        func acceptRequest() {
+            logToAmplitude(event: .acceptConnectRequest, properties: [.userId: user.id])
+            connectionsViewModel.acceptConnectRequest(userId: user.id ?? "")
+        }
         
+        var body: some View {
+            
+            if isConnected {
+                Button(action: buttonTapped) {
+                  Image(systemName: "person.badge.minus.fill")
+                    Text("Disconnect")
+                      .font(.callout)
+                      .bold()
+                    }.disabled(self.sentPendingRequest)
+                     .modifier(ProfileConnectButtonModifier())
+            } else if sentPendingRequest {
+                Button(action: buttonTapped) {
+                  Image(systemName: "link")
+                    Text("Pending")
+                      .font(.callout)
+                      .bold()
+                    }.disabled(self.sentPendingRequest)
+                     .modifier(ProfileConnectButtonModifier())
+            } else if receivedPendingRequest {
+                Button(action: acceptRequest) {
+                    Image(systemName: (self.isConnected ? "person.badge.minus.fill" : "link"))
+                    Text((self.isConnected) ? "Disconnect" : "Accept Request")
+                                   .font(.callout)
+                                   .bold()
+                           }.modifier(ProfileConnectButtonModifier())
+            } else {
+                Button(action: buttonTapped) {
+                  Image(systemName: "link")
+                    Text("Connect")
+                      .font(.callout)
+                      .bold()
+                    }.disabled(self.sentPendingRequest)
+                     .modifier(ProfileConnectButtonModifier())
+            }
         }
     }
 

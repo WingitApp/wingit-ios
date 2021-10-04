@@ -69,10 +69,13 @@ class ConnectionsViewModel : ObservableObject {
         Api.UserActivity.logActivity(activity: userActivity)
         
         let activityId = Ref.FS_COLLECTION_ACTIVITY.document(userId).collection("feedItems").document().documentID
-        let notificationObject = Notification(activityId: activityId, comment: "", date: Date().timeIntervalSince1970, mediaUrl: "", postId: "", type: "connectRequest", userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, userId: Auth.auth().currentUser!.uid, username: Auth.auth().currentUser!.displayName!)
-       guard let notificationDict = try? notificationObject.toDictionary() else { return }
-
-       Ref.FS_COLLECTION_ACTIVITY.document(userId).collection("feedItems").document(activityId).setData(notificationDict)
+        let notification = Notification(activityId: activityId, comment: "", date: Date().timeIntervalSince1970, mediaUrl: "", postId: "", type: "connectRequest", userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, userId: Auth.auth().currentUser!.uid, username: Auth.auth().currentUser!.displayName!)
+        
+        do {
+            try Ref.FS_COLLECTION_ACTIVITY.document(userId).collection("feedItems").document(activityId).setData(from: notification)
+        } catch {
+            print(error)
+        }
     }
     
     
@@ -99,6 +102,27 @@ class ConnectionsViewModel : ObservableObject {
             if let doc = snapshot?.documents {
                 setUserProperty(property: .connections, value: doc.count)
                 connectionsCount_onSuccess(doc.count)
+            }
+        }
+    }
+    
+    func acceptConnectRequest(userId: String) {
+        deleteConnectRequest(userId: userId)
+        addConnectionToUser(userId: userId)
+    }
+    
+    func addConnectionToUser(userId: String) {
+        Ref.FS_DOC_CONNECTION_BETWEEN_USERS(user1Id: Auth.auth().currentUser!.uid, user2Id: userId).setData([:])
+        Ref.FS_DOC_CONNECTION_BETWEEN_USERS(user1Id: userId, user2Id: Auth.auth().currentUser!.uid).setData([:])
+        addToUserProperty(property: .connections, value: 1)
+    }
+    
+    func deleteConnectRequest(userId: String?) {
+        guard let userId = userId else { return }
+        // Delete the request from the current user's inbox
+        Ref.FS_DOC_CONNECT_REQUEST_RECEIVED(receivedByUserId: Auth.auth().currentUser!.uid, sentFromUserId: userId).getDocument { (document, error) in
+            if let doc = document, doc.exists {
+                doc.reference.delete()
             }
         }
     }
