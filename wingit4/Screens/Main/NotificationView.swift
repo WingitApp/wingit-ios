@@ -62,14 +62,14 @@ struct NotificationView: View {
                                   notificationViewModel: self.notificationViewModel
                                 )
                                 .if(notification.openedAt == nil) { view in
-                                    view.background(Color.skyBlue)
+                                    view.background(Color.notifBlue)
                                 }
                             } else if notification.type == "referred" {
                                 NotificationReferralEntry(
                                   notification: $notification
                                 )
                                 .if(notification.openedAt == nil) { view in
-                                    view.background(Color.skyBlue)
+                                    view.background(Color.notifBlue)
                                 }
                             } else {
                                 HStack(alignment: .top) {
@@ -99,11 +99,11 @@ struct NotificationView: View {
                             .padding()
                             .buttonStyle(PlainButtonStyle())
                             .if(notification.openedAt == nil) { view in
-                                view.background(Color.skyBlue)
+                                view.background(Color.notifBlue)
                             }
                             Spacer()
                           }
-                        Divider()
+                      
                     }
                 }
             }
