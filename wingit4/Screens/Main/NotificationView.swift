@@ -35,6 +35,17 @@ struct NotificationView: View {
                 )
             } else {
               ScrollView(showsIndicators: false) {
+                  NavigationLink("",
+                      destination: NotificationViewNavigationOption(
+                          linkType: $notificationViewModel.selectedNotificationType,
+                          post: $notificationViewModel.post,
+                          userProfileId: $notificationViewModel.userProfileId)
+                             .environmentObject(askCardViewModel)
+                             .environmentObject(askMenuViewModel)
+                             .environmentObject(askDoneToggleViewModel)
+                             .environmentObject(commentViewModel)
+                             .environmentObject(commentInputViewModel),
+                      isActive: $notificationViewModel.isNavigationLinkActive)
                 if notificationViewModel.isLoading {
                   ReferralPlaceholder(type: "accepted")
                   ReferralPlaceholder(type: "accepted")
@@ -44,20 +55,8 @@ struct NotificationView: View {
                 if !notificationViewModel.notificationsArray.isEmpty {
                     ForEach($notificationViewModel.notificationsArray, id: \.activityId) { $notification in
                             if notification.type == "comment" {
-                                NavigationLink(
-                                    destination:
-                                        AskDetailView(post: $notification.post)
-                                        .environmentObject(askCardViewModel)
-                                        .environmentObject(askMenuViewModel)
-                                        .environmentObject(askDoneToggleViewModel)
-                                        .environmentObject(commentViewModel)
-                                        .environmentObject(commentInputViewModel),
-                                    isActive: self.$notificationViewModel.isPostLinkActive
-                                ) {
-                                    CommentNotification(notification: $notification)
-                                }
-                                .buttonStyle(PlainButtonStyle())
-                            }else if notification.type == "connectRequest" {
+                                CommentNotification(notification: $notification)
+                            } else if notification.type == "connectRequest" {
                                 ConnectRequestNotification(
                                   notification: notification,
                                   notificationViewModel: self.notificationViewModel
@@ -73,11 +72,6 @@ struct NotificationView: View {
                                     view.background(Color.notifBlue)
                                 }
                             } else {
-                              NavigationLink (
-                                destination: UserProfileView(userId: notification.userId, user: nil),
-                                isActive: self.$notificationViewModel.isUserProfileLinkActive
-                              )
-                                {
                                 HStack(alignment: .top) {
                                  NotificationUserAvatar(
                                   imageUrl: notification.userAvatar,
@@ -98,15 +92,16 @@ struct NotificationView: View {
                             .onTapGesture {
                                 notification.openedAt = Timestamp(date: Date())
                                 notificationViewModel.updateOpenedAt(notificationId: notification.activityId)
-                                notificationViewModel.isUserProfileLinkActive = true
-                            }
-                                Spacer()
+                                notificationViewModel.userProfileId = notification.userId
+                                notificationViewModel.selectedNotificationType = NotificationLinkType.userProfile
+                                notificationViewModel.isNavigationLinkActive = true
                             }
                             .padding()
                             .buttonStyle(PlainButtonStyle())
                             .if(notification.openedAt == nil) { view in
                                 view.background(Color.notifBlue)
                             }
+                            Spacer()
                           }
                       
                     }

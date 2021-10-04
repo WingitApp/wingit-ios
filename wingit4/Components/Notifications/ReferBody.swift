@@ -39,7 +39,6 @@ struct ReferBody: View {
               post: post,
               isProfileView: false,
               index: 1
-              
             )
           }
           .navigationBarTitle("")
