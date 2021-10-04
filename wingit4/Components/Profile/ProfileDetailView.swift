@@ -11,6 +11,8 @@ struct ProfileDetailView: View {
     @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var userProfileViewModel: UserProfileViewModel
+  
+    var isOwnProfile: Bool
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0){
@@ -23,14 +25,16 @@ struct ProfileDetailView: View {
             
           }
           .padding(.top, 5)
-          ProfileUserLinks()
-          ProfilePostsTab(isOwnProfile: true)
+          ProfileUserLinks(isOwnProfile: isOwnProfile)
+          ProfilePostsTab(isOwnProfile: isOwnProfile)
           .padding(.top, 20)
           Divider()
             .padding(.leading, -15) // needed to offset
             .padding(.trailing, -15)
           ScrollView {
-            ProfileFeed()
+            ProfileFeed(
+              isOwnProfile: isOwnProfile
+            ) // add switch
               .padding([.vertical])
               .background(Color.backgroundGray)
               

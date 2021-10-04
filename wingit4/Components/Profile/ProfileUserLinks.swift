@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileUserLinks: View {
-  
+  var isOwnProfile: Bool
   
   // todo: if nill, then set opacity
     var body: some View {
@@ -17,29 +17,35 @@ struct ProfileUserLinks: View {
           HStack(alignment: .center, spacing: 20){
             SocialLink(
               name: "fb",
-              bgColor: Color.fbBlueBackground
+              bgColor: Color.fbBlueBackground,
+              isEditable: isOwnProfile
             )
-            SocialLink(
-              name: "instagram",
-              bgColor: Color.igPurpleBackground
-            )
-        
             SocialLink(
               name: "twitter",
-              bgColor: Color.twitterBlueBackground
+              bgColor: Color.twitterBlueBackground,
+              isEditable: isOwnProfile
             )
             SocialLink(
               name: "linkedin",
-              bgColor: Color.backgroundBlueGray
+              bgColor: Color.backgroundBlueGray,
+              isEditable: isOwnProfile
             )
             SocialLink(
+              name: "instagram",
+              bgColor: Color.igPurpleBackground,
+              isEditable: isOwnProfile
+            )
+        
+            SocialLink(
               name: "reddit",
-              bgColor: Color.redditRedBackground
+              bgColor: Color.redditRedBackground,
+              isEditable: isOwnProfile
             )
           
             SocialLink(
               name: "spotify",
-              bgColor: Color.spotifyGreenBackground
+              bgColor: Color.spotifyGreenBackground,
+              isEditable: isOwnProfile
             )
             
           }

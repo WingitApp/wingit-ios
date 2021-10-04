@@ -31,7 +31,7 @@ struct ImageView: View {
 
 struct profileImageView: View {
 
-  @ObservedObject var userProfileViewModel = UserProfileViewModel()
+  @EnvironmentObject var userProfileViewModel: UserProfileViewModel
   @Environment(\.presentationMode) var presentationmode
     
     var body: some View {

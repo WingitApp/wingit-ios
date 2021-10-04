@@ -40,7 +40,20 @@ class UserProfileViewModel: ObservableObject {
     @Published var user: User = USER_PROFILE_DEFAULT_PLACEHOLDER
     @Published var showOpenPosts = true
 
+  init(userId: String?, user: User? = nil) {
+      if userId == nil, user == nil {
+        return
+      }
     
+      if user != nil {
+        self.user = user!
+        self.loadUserProfile(userId: user!.id)
+      } else {
+        self.fetchUserFromId(userId: userId!)
+        self.loadUserProfile(userId: userId!)
+      }
+    }
+  
     func loadUserProfile(userId: String?) {
       guard let userId = userId else { return }
       updateIsConnected(userId: userId)
@@ -69,13 +82,10 @@ class UserProfileViewModel: ObservableObject {
   
     func fetchUserFromId(userId: String) {
       isLoadingUser = true
-      if userId == "placeholder" {
-          self.user = USER_PROFILE_DEFAULT_PLACEHOLDER
-          return
-      }
       Api.User.loadUser(
        userId: userId,
        onSuccess: { (user) in
+         print("user", user)
         self.user = user
         self.isLoadingUser = false
        },

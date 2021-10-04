@@ -18,13 +18,13 @@ struct ReferralComment: View {
     var body: some View {
       HStack(alignment: .center) {
         NavigationLink(
-          destination: UserProfileView(userId: comment.inviterId, user: nil),
+          destination: ProfileView(userId: comment.inviterId, user: nil),
           isActive: $pushToInviter
         ) {
           EmptyView()
         }
         NavigationLink(
-          destination: UserProfileView(userId: comment.ownerId, user: nil),
+          destination: ProfileView(userId: comment.ownerId, user: nil),
           isActive: $pushToOwner
         ) {
           EmptyView()

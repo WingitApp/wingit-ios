@@ -9,16 +9,16 @@ import SwiftUI
 
 struct ProfileButton: View {
   @EnvironmentObject var profileViewModel: ProfileViewModel
+  @EnvironmentObject var userProfileViewModel: UserProfileViewModel
   
-  var isOwnProfile: Bool = true
-  var isConnected: Bool = false
+  var isOwnProfile: Bool
   
   func getIconName() -> String {
     switch isOwnProfile {
       case true:
         return "square.and.pencil"
       case false:
-        return isConnected ? "checkmark" : "plus"
+        return userProfileViewModel.isConnected ? "checkmark" : "plus"
     }
   }
   
@@ -27,7 +27,7 @@ struct ProfileButton: View {
       case true:
         return "Edit Profile"
       case false:
-        return isConnected ? "Connected" : "Add Connection"
+        return userProfileViewModel.isConnected ? "Connected" : "Add Connection"
     }
   }
   

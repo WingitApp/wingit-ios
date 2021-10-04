@@ -11,6 +11,7 @@ struct SocialLink: View {
   var name: String
   var bgColor: Color
   var link: String = ""
+  var isEditable: Bool
   
   func openLink() -> Void {
     if let url = URL(string: "https://www.hackingwithswift.com") {
@@ -53,24 +54,24 @@ struct SocialLink: View {
                 .clipShape(Circle())
                 .background(bgColor)
                 .cornerRadius(100)
-            Text(
-              Image(systemName: "plus")
-            )
-              .font(.system(size: 8.5))
-              .fontWeight(.heavy)
-              .foregroundColor(primaryColor())
-              .padding(2.5)
-              .background(
-                LinearGradient(
-                  gradient: Gradient(
-                    colors: [bgColor, bgColor]
-                  ),
-                    startPoint: .top,
-                    endPoint: .bottom
-                  )
-              )
-              .cornerRadius(100)
-              .offset(x: 12, y: -11.5)
+            if isEditable {
+              Text(Image(systemName: "plus"))
+                 .font(.system(size: 8.5))
+                 .fontWeight(.heavy)
+                 .foregroundColor(primaryColor())
+                 .padding(2.5)
+                 .background(
+                   LinearGradient(
+                     gradient: Gradient(
+                       colors: [bgColor, bgColor]
+                     ),
+                       startPoint: .top,
+                       endPoint: .bottom
+                     )
+                 )
+                 .cornerRadius(100)
+                 .offset(x: 12, y: -11.5)
+            }
           }
         }
         .buttonStyle(PlainButtonStyle())

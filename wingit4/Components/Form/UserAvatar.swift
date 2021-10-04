@@ -21,7 +21,7 @@ struct UserAvatar: View {
   
   var body: some View {
     NavigationLink(
-      destination: UserProfileView(userId: user.id, user: user),
+      destination: ProfileView(userId: user.id, user: user),
       isActive: $isTapped
     ) {
       EmptyView()

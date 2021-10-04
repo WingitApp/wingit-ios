@@ -14,7 +14,7 @@ struct ConnectionRow: View {
   
     var body: some View {
         NavigationLink(
-          destination: UserProfileView(userId: user.id, user: user)
+          destination: ProfileView(userId: user.id, user: user)
         ) {
           HStack {
             URLImageView(urlString: user.profileImageUrl)

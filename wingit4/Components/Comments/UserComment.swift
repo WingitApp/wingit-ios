@@ -27,14 +27,8 @@ struct UserComment: View {
   
     var body: some View {
       HStack(alignment: .top) {
-//        NavigationLink(
-//                  destination: UserProfileView(userId: comment.inviterId, user: nil),
-//                  isActive: $pushToInviter
-//                ) {
-//                  EmptyView()
-//                }
         NavigationLink(
-          destination: UserProfileView(userId: comment.ownerId, user: nil),
+          destination: ProfileView(userId: comment.ownerId, user: nil),
           isActive: $isNavActive
         ) {
           EmptyView()

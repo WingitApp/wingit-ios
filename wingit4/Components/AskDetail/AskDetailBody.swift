@@ -18,7 +18,7 @@ struct AskDetailBody: View {
 
         HStack(alignment: .top) {
          NavigationLink(
-            destination: UserProfileView(userId: post?.ownerId, user: nil),
+            destination: ProfileView(userId: post.ownerId, user: nil),
             label: {
                 URLImageView(urlString: post?.avatar ?? "")
                   .clipShape(Circle())
