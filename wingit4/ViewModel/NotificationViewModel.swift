@@ -19,9 +19,11 @@ class NotificationViewModel: ObservableObject {
     
     @Published var isLoading = true
     
-    // Programatically Navigate
-    @Published var isPostLinkActive: Bool = false
-    @Published var isUserProfileLinkActive: Bool = false
+    // Variables to leep track of what option has been tapped on and when to navigate to new view
+    @Published var selectedNotificationType = NotificationLinkType.userProfile
+    @Published var post: Post?
+    @Published var isNavigationLinkActive: Bool = false
+    @Published var userProfileId: String?
    
     func updateOpenedAt(notificationId: String){
         guard let userId = Auth.auth().currentUser?.uid else { return }

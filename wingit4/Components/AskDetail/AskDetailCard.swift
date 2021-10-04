@@ -12,9 +12,7 @@ struct AskDetailCard: View {
   @EnvironmentObject var askMenuViewModel: AskMenuViewModel
   @EnvironmentObject var referViewModel: ReferViewModel
   @EnvironmentObject var commentViewModel: CommentViewModel
-
-  
-
+    
   @Binding var post: Post?
   
     var body: some View {

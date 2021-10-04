@@ -39,7 +39,9 @@ struct CommentNotification: View {
       .onTapGesture {
           notification.openedAt = Timestamp(date: Date())
           notificationViewModel.updateOpenedAt(notificationId: notification.activityId)
-          notificationViewModel.isPostLinkActive = true
+          notificationViewModel.post = notification.post
+          notificationViewModel.selectedNotificationType = .askDetail
+          notificationViewModel.isNavigationLinkActive = true
       }
   }
 }

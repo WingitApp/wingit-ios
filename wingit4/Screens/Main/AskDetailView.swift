@@ -13,7 +13,6 @@ struct AskDetailView: View {
     @Binding var post: Post?
     @State private var isNavBarHidden: Bool = true
     
-  
     var body: some View {
  
         ScrollViewReader { proxy in

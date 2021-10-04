@@ -25,10 +25,10 @@ struct UserProfileView: View {
    // @State var isImageSheetOpen: Bool = false
   
   init (userId: String?, user: User? ) {
-    if user == nil {
-      userProfileViewModel.fetchUserFromId(userId: userId!)
-    } else {
-      userProfileViewModel.user = user!
+    if let user = user {
+        userProfileViewModel.user = user
+    } else if let userId = userId {
+        userProfileViewModel.fetchUserFromId(userId: userId)
     }
   }
   
