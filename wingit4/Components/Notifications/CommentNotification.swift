@@ -34,7 +34,7 @@ struct CommentNotification: View {
       }
       .padding()
       .if(notification.openedAt == nil) { view in
-          view.background(Color.skyBlue)
+          view.background(Color.notifBlue)
       }
       .onTapGesture {
           notification.openedAt = Timestamp(date: Date())
