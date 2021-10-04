@@ -28,3 +28,22 @@ struct AcceptConnectRequestButtonModifier: ViewModifier {
             .background(RoundedRectangle(cornerRadius: 5).stroke(Color.pink.opacity(0.5),lineWidth: 1.5))
     }
 }
+
+struct ProfileConnectButtonModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .frame(
+              width: (UIScreen.main.bounds.width / 2) - 30
+            )
+            .padding(
+              .init(top: 10, leading: 0, bottom: 10, trailing: 0)
+            )
+            .background(Color.lightGray)
+            .foregroundColor(Color.black)
+            .cornerRadius(5)
+            .overlay(
+              RoundedRectangle(cornerRadius: 5).stroke(Color(.lightGray),
+              lineWidth: 1)
+            )
+    }
+}

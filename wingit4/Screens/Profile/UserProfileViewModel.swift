@@ -62,6 +62,7 @@ class UserProfileViewModel: ObservableObject {
         updateIsConnected(userId: userId)
         updateSentPendingRequest(userId: userId)
         updateConnectionsCount(userId: userId)
+        updateReceivedPendingRequest(userId: userId)
     }
     
     func updateIsConnected(userId: String) {
@@ -89,13 +90,15 @@ class UserProfileViewModel: ObservableObject {
         guard let currentUserId = Auth.auth().currentUser?.uid else { return }
         Ref.FS_DOC_CONNECT_REQUEST_RECEIVED(receivedByUserId: currentUserId, sentFromUserId: userId).getDocument { (document, error) in
             if let doc = document, doc.exists {
-                self.sentPendingRequest = true
+               // self.sentPendingRequest = true
+                self.receivedPendingRequest = true
             } else {
-                self.sentPendingRequest = false
+               // self.sentPendingRequest = false
+                self.receivedPendingRequest = false
             }
         }
     }
-  
+
     func loadUserPosts(userId: String?) {
       guard let userId = userId else { return }
 

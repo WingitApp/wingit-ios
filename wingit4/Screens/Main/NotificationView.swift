@@ -42,7 +42,7 @@ struct NotificationView: View {
 //                                        EmptyView()
 //                                    }
                             } else if activity.type == "connectRequest" {
-                                    CommentActivityRow(
+                                    ConnectActivityRow(
                                       activity: activity,
                                       activityViewModel: self.activityViewModel
                                     )
@@ -94,7 +94,7 @@ struct NotificationView: View {
     }
 }
 
-struct CommentActivityRow: View {
+struct ConnectActivityRow: View {
     var activity: Activity
     var activityViewModel: ActivityViewModel
     var body: some View {
