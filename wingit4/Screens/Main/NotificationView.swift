@@ -124,13 +124,15 @@ struct ConnectRequestNotification: View {
     
     var body: some View {
         HStack(alignment: .top) {
-          NotificationUserAvatar(
-           imageUrl: notification.userAvatar,
-           type: notification.type
-          )
-           .padding(.trailing, 10)
-            .padding(.trailing, 10)
-
+        
+        NavigationLink(destination: UserProfileView(userId: notification.userId, user: nil)) {
+              NotificationUserAvatar(
+               imageUrl: notification.userAvatar,
+               type: notification.type
+              )
+               .padding(.trailing, 10)
+               .padding(.trailing, 10)
+            }
           HStack{
               VStack(alignment: .leading) {
                   Text(notification.username).bold() + Text(" ") + Text(notification.typeDescription ?? "")
@@ -179,7 +181,7 @@ struct RespondToConnectRequestRow: View {
                   .font(.system(size: 14))
           }
           .modifier(ConnectionNotifButtonStyle())
-         // .background(Color.wingitBlue)
+          .background(Color.wingitBlue)
         }
         
     }
