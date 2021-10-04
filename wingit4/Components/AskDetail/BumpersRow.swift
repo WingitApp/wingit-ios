@@ -42,7 +42,7 @@ struct BumpersRow: View {
  
     var body: some View {
       VStack(alignment: .leading) {
-          Text(title ?? "Bumpers")
+          Text(title ?? "Wingers")
             .font(.headline)
             .padding(.top, 10)
             .padding(.bottom, 10)
@@ -140,18 +140,18 @@ class BumpersTextDescription {
   ) -> Text {
     var names: [String] = []
     if bumpers.count == 0 {
-      return Text(emptyMessage ?? "Be the first to bump this request!")
+      return Text(emptyMessage ?? "Be the first to wing this request!")
     } else if bumpers.count == 1 {
       return (
         Text(bumpers[0].displayName!.capitalized).bold() +
-        Text(" has bumped this request.")
+        Text(" has winged this request.")
       )
     } else if bumpers.count == 2 {
       return (
         Text(bumpers[0].displayName!.capitalized).bold() +
         Text(" & ").bold() +
         Text(bumpers[1].displayName!.capitalized).bold() +
-        Text(" have bumped this request.")
+        Text(" have winged this request.")
       )
     } else if bumpers.count <= limit {
       
@@ -169,7 +169,7 @@ class BumpersTextDescription {
       
       return (
         Text(names.joined(separator: "")).bold() +
-        Text(" have bumped this request.")
+        Text(" have winged this request.")
       )
     } else if bumpers.count > limit {
       for index in bumpers.prefix(limit).indices {
@@ -184,7 +184,7 @@ class BumpersTextDescription {
         Text(" and ") +
         Text("\(remainder) ").bold() +
         Text("\(remainder > 1 ? "others" : "other")").bold() +
-        Text(" have bumped this request.")
+        Text(" have winged this request.")
       )
     }
     

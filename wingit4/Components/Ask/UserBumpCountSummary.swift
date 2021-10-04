@@ -24,7 +24,7 @@ struct UserBumpCountSummary: View {
     
       var body: some View {
         VStack(alignment: .leading) {
-          Text("Bumped Connections")
+          Text("Winged Connections")
             .font(.headline)
             .padding(.bottom, 10)
           HStack(alignment: .center) {
@@ -47,7 +47,7 @@ struct UserBumpCountSummary: View {
             BumpersTextDescription.getFormattedCount(
               users: users,
               limit: limit,
-              emptyMessage: "You haven't bumped this request to any friends."
+              emptyMessage: "You haven't winged this request to any friends."
             )
             .font(.caption2)
             .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.1)))

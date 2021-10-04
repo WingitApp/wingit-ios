@@ -75,7 +75,7 @@ struct WingButton: View {
                     .font(.system(size:15))
                     .foregroundColor(Color.wingitBlue)
                      
-                    Text("Bump")
+                    Text("Wing")
                       .foregroundColor(Color.wingitBlue)
                       .fontWeight(.semibold)
                 }
