@@ -88,6 +88,7 @@ struct NotificationView: View {
                                 Spacer()
                                 Text(timeAgoSinceDate(Date(timeIntervalSince1970: notification.date), currentDate: Date(), numericDates: true)).font(.caption).foregroundColor(.gray)
                               }
+                                    Spacer()
                             }
                             .onTapGesture {
                                 notification.openedAt = Timestamp(date: Date())
@@ -101,7 +102,7 @@ struct NotificationView: View {
                             .if(notification.openedAt == nil) { view in
                                 view.background(Color.notificationBackground)
                             }
-                            Spacer()
+                          
                           }
                       
                     }
