@@ -16,7 +16,7 @@ struct FooterCell: View {
     var body: some View {
       VStack(alignment: .leading) {
           HStack {
-               NavigationLink(destination: ProfileView(userId: post.ownerId, user: nil)) {
+               NavigationLink(destination: ProfileView(userId: post?.ownerId, user: nil)) {
                       HStack {
                         URLImageView(urlString: post?.avatar)
                           .clipShape(Circle())

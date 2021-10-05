@@ -21,7 +21,7 @@ struct NotificationViewNavigationOption: View {
         case .askDetail:
             AskDetailView(post: $post)
         default:
-            UserProfileView(userId: userProfileId, user: nil)
+            ProfileView(userId: userProfileId, user: nil)
         }
     }
 }

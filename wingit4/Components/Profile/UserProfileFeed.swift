@@ -11,11 +11,11 @@ struct UserProfileFeed: View {
   @EnvironmentObject var userProfileViewModel: UserProfileViewModel
   
   func sortOpenPosts() -> Void {
-    self.userProfileViewModel.openPosts.sort { $0.date > $1.date }
+    self.userProfileViewModel.openPosts.sort { $0.date ?? 0 > $1.date ?? 0 }
   }
 
   func sortClosedPosts() -> Void {
-    self.userProfileViewModel.closedPosts.sort { $0.date > $1.date }
+    self.userProfileViewModel.closedPosts.sort { $0.date ?? 0 > $1.date ?? 0 }
   }
 
   

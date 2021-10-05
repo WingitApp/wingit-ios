@@ -48,7 +48,9 @@ struct ProfileUserBio: View {
             .foregroundColor(Color.black.opacity(0.7))
             .fixedSize(horizontal: false, vertical: true)
             .onTapGesture {
-              profileViewModel.isEditSheetOpen.toggle()
+              if isOwnProfile {
+                profileViewModel.isEditSheetOpen.toggle()
+              }
             }
         }
       }

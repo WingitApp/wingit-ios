@@ -217,16 +217,16 @@ class UserProfileViewModel: ObservableObject {
     }
     
     
-    func updateConnectionsCount(userId: String?) {
-        guard let userId = userId else { return }
-        Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
-            
-            if let doc = snapshot?.documents {
-                self.connectionsCountState = doc.count
-            }
-        }
-    }
-    
+//    func updateConnectionsCount(userId: String?) {
+//        guard let userId = userId else { return }
+//        Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
+//
+//            if let doc = snapshot?.documents {
+////                self.connectionsCountState = doc.count
+//            }
+//        }
+//    }
+//
     func checkUserBlocked(userId: String, postOwnerId: String?){
         guard let postOwnerId = postOwnerId else { return }
         Ref.FS_DOC_BLOCKED_USERID(userId: userId).collection("userBlocked").document(postOwnerId).getDocument { (document, error) in

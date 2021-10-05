@@ -76,7 +76,7 @@ struct HomeView: View {
                 }
             })
       }
-      .navigationViewStyle(StackNavigationViewStyle())
+//      .navigationViewStyle(StackNavigationViewStyle())
       .environmentObject(homeViewModel)
     }
 }

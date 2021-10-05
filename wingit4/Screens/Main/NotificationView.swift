@@ -126,7 +126,7 @@ struct ConnectRequestNotification: View {
     var body: some View {
         HStack(alignment: .top) {
         
-        NavigationLink(destination: UserProfileView(userId: notification.userId, user: nil)) {
+        NavigationLink(destination: ProfileView(userId: notification.userId, user: nil)) {
               NotificationUserAvatar(
                imageUrl: notification.userAvatar,
                type: notification.type
