@@ -12,7 +12,7 @@ struct ProfileUserHeader: View {
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var userProfileViewModel: UserProfileViewModel
   
-    var user: User
+    var user: User?
     var isOwnProfile: Bool
   
     func onTapOpenConnectionSheet() -> Void {
@@ -29,12 +29,12 @@ struct ProfileUserHeader: View {
           .opacity(0.7)
 
         VStack(alignment: .leading, spacing: 0) {
-          Text(user.displayName!)
+          Text(user?.displayName ?? "")
             .font(.title).bold().foregroundColor(Color.black)
             .padding(0)
         
           HStack {
-            Text("@" + "\(user.username ?? "")")
+            Text("@" + "\(user?.username ?? "")")
               .bold()
               .font(.subheadline)
               .foregroundColor(Color.wingitBlue)

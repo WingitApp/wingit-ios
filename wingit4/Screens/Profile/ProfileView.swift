@@ -28,7 +28,7 @@ struct ProfileView: View {
         return true
       }
       
-      if user != nil && user!.id == Auth.auth().currentUser?.uid {
+      if user != nil && user?.id == Auth.auth().currentUser?.uid {
         return true
       }
       
@@ -64,7 +64,7 @@ struct ProfileView: View {
         VStack {
           VStack {
             ProfileParallax(
-              user: (isOwnProfile ? session.currentUser : userProfileViewModel.user)!
+              user: isOwnProfile ? session.currentUser : userProfileViewModel.user
             )
           }
           .frame(minHeight: (UIScreen.main.bounds.height / 3.5))
@@ -73,9 +73,9 @@ struct ProfileView: View {
             VStack(alignment: .leading) {
               HStack(alignment: .bottom) {
                 HStack {
-                  URLImageView(urlString: (isOwnProfile
+                  URLImageView(urlString: isOwnProfile
                      ? session.currentUser?.profileImageUrl
-                     : userProfileViewModel.user.profileImageUrl)!
+                     : userProfileViewModel.user.profileImageUrl
                   )
                     .frame(width: 120, height: 120)
                     .cornerRadius(100)
@@ -87,7 +87,7 @@ struct ProfileView: View {
                 .zIndex(2)
                 Spacer()
                 ProfileButton(
-                  user: isOwnProfile ? session.currentUser! : userProfileViewModel.user,
+                  user: isOwnProfile ? session.currentUser : userProfileViewModel.user,
                   isOwnProfile: isOwnProfile
                 )
                 .offset(y: -20)
@@ -102,12 +102,12 @@ struct ProfileView: View {
               )
               
             ProfileUserHeader(
-              user: isOwnProfile ? session.currentUser! : userProfileViewModel.user,
+              user: isOwnProfile ? session.currentUser : userProfileViewModel.user,
               isOwnProfile: isOwnProfile
             )
               .padding(.leading, 15)
             ProfileDetailView(
-              user: isOwnProfile ? session.currentUser! : userProfileViewModel.user,
+              user: isOwnProfile ? session.currentUser : userProfileViewModel.user,
               isOwnProfile: isOwnProfile
             )
             }
@@ -162,7 +162,7 @@ struct ProfileView: View {
         if !isOwnProfile {
           logToAmplitude(event: .viewOtherProfile)
           self.userProfileViewModel.checkUserBlocked(
-            userId: Auth.auth().currentUser!.uid,
+            userId: Auth.auth().currentUser?.uid,
             postOwnerId: self.userProfileViewModel.user.id ?? self.userProfileViewModel.user.uid
           )
         }
@@ -186,7 +186,7 @@ struct ProfileView: View {
       alignment: .center,
       direction: .bottom,
       content: {
-        EditProfileView(bio: session.currentUser!.bio ?? "")
+        EditProfileView(bio: session.currentUser?.bio ?? "")
         .environmentObject(profileViewModel)
       }))
   }

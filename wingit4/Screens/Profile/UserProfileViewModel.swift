@@ -228,8 +228,8 @@ class UserProfileViewModel: ObservableObject {
 //        }
 //    }
 //
-    func checkUserBlocked(userId: String, postOwnerId: String?){
-        guard let postOwnerId = postOwnerId else { return }
+    func checkUserBlocked(userId: String?, postOwnerId: String?){
+        guard let postOwnerId = postOwnerId, let userId = userId else { return }
         Ref.FS_DOC_BLOCKED_USERID(userId: userId).collection("userBlocked").document(postOwnerId).getDocument { (document, error) in
             if let doc = document, doc.exists {
                 return

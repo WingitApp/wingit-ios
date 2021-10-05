@@ -10,12 +10,12 @@ import SwiftUI
 struct ProfileUserBio: View {
   @EnvironmentObject var profileViewModel: ProfileViewModel
 
-  var user: User
+  var user: User?
   var isOwnProfile: Bool
   var showEmptyState: Bool
   
-  init(user: User, isOwnProfile: Bool) {
-    if user.bio!.isEmpty {
+  init(user: User?, isOwnProfile: Bool) {
+    if user != nil && user?.bio == nil {
       self.showEmptyState = true
     } else {
       self.showEmptyState = false
@@ -42,7 +42,7 @@ struct ProfileUserBio: View {
             EmptyView()
           }
         } else {
-          Text(user.bio ?? "")
+          Text(user?.bio ?? "")
             .fontWeight(.regular)
             .font(Font.footnote)
             .foregroundColor(Color.black.opacity(0.7))

@@ -78,8 +78,9 @@ class ConnectionsViewModel : ObservableObject {
         }
     }
     
-    func acceptConnectRequest(userId: String, onSuccess: @escaping () -> Void) {
-      deleteConnectRequest(userId: userId) {
+    func acceptConnectRequest(userId: String?, onSuccess: @escaping () -> Void) {
+        guard let userId = userId else { return }
+        deleteConnectRequest(userId: userId) {
         self.addConnectionToUser(userId: userId) {
           onSuccess()
         }

@@ -13,7 +13,7 @@ struct ProfileButton: View {
   @EnvironmentObject var userProfileViewModel: UserProfileViewModel
   @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
 
-  var user: User
+  var user: User?
   var isOwnProfile: Bool
   
   func getIconName() -> String {
@@ -58,9 +58,9 @@ struct ProfileButton: View {
         profileViewModel.isEditSheetOpen.toggle()
       case false:
         if !userProfileViewModel.isConnected && userProfileViewModel.receivedPendingRequest {
-          logToAmplitude(event: .acceptConnectRequest, properties: [.userId: user.id])
+          logToAmplitude(event: .acceptConnectRequest, properties: [.userId: user?.id])
 
-          connectionsViewModel.acceptConnectRequest(userId: user.id!) {
+          connectionsViewModel.acceptConnectRequest(userId: user?.id) {
             self.userProfileViewModel.isConnected = true
             self.userProfileViewModel.sentPendingRequest = false
             self.userProfileViewModel.receivedPendingRequest = false
@@ -73,8 +73,8 @@ struct ProfileButton: View {
               alertView.present(duration: 2)
           }
         } else if !userProfileViewModel.isConnected && !userProfileViewModel.sentPendingRequest {
-            logToAmplitude(event: .sendConnectRequest, properties: [.userId: user.id])
-            connectionsViewModel.sendConnectRequest(userId: user.id) {
+            logToAmplitude(event: .sendConnectRequest, properties: [.userId: user?.id])
+            connectionsViewModel.sendConnectRequest(userId: user?.id) {
               userProfileViewModel.sentPendingRequest = true
               let alertView = SPAlertView(
                 title: "",
@@ -84,8 +84,8 @@ struct ProfileButton: View {
                 alertView.present(duration: 2)
             }
         } else if userProfileViewModel.isConnected {
-            logToAmplitude(event: .disconnectFromUser, properties: [.userId: user.id])
-            connectionsViewModel.disconnect(userId: user.id, connectionsCount_onSuccess: { (connectionsCount) in
+            logToAmplitude(event: .disconnectFromUser, properties: [.userId: user?.id])
+            connectionsViewModel.disconnect(userId: user?.id, connectionsCount_onSuccess: { (connectionsCount) in
               self.userProfileViewModel.isConnected = false
               let alertView = SPAlertView(
                 title: "",

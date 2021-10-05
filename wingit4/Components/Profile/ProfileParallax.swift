@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileParallax: View {
-    var user: User
+    var user: User?
   
     func calculateHeight(minHeight: CGFloat, maxHeight: CGFloat, yOffset: CGFloat) -> CGFloat {
       return maxHeight + yOffset < minHeight
@@ -18,7 +18,7 @@ struct ProfileParallax: View {
   
     var body: some View {
       GeometryReader { geometry in
-        URLImageView(urlString: user.profileImageUrl)
+        URLImageView(urlString: user?.profileImageUrl)
             .frame(
               height: self.calculateHeight(
                 minHeight:0,

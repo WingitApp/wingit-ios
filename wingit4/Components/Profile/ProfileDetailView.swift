@@ -12,7 +12,7 @@ struct ProfileDetailView: View {
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var userProfileViewModel: UserProfileViewModel
   
-    var user: User
+    var user: User?
     var isOwnProfile: Bool
   
     var body: some View {
