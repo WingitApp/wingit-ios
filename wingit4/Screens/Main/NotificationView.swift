@@ -107,9 +107,10 @@ struct NotificationView: View {
                       
                     }
                   }
+                  .navigationBarTitle(Text("Notifications"), displayMode: .inline)
+                  .environmentObject(mainViewModel)
                 }
-              .navigationBarTitle(Text("Notifications"), displayMode: .inline)
-              .environmentObject(mainViewModel)
+
             }
         }
         }

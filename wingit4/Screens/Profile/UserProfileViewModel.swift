@@ -59,6 +59,7 @@ class UserProfileViewModel: ObservableObject {
       guard let userId = userId else { return }
       updateIsConnected(userId: userId)
       updateSentPendingRequest(userId: userId)
+      updateReceivedPendingRequest(userId: userId)
       loadOpenPosts(userId: userId)
       loadClosedPosts(userId: userId)
       loadConnections(userId: userId)
