@@ -411,7 +411,7 @@ extension Color {
   
   static let borderGray: Color = Color(red: 216 / 255, green: 216 / 255, blue: 217 / 255)
     
-    static let notifBlue: Color = Color(red: 224 / 255, green: 237 / 255, blue: 236 / 255)
+  static let notificationBackground: Color = Color(red: 224 / 255, green: 237 / 255, blue: 236 / 255)
   
   
   // TAG Color
