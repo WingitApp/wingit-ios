@@ -39,7 +39,6 @@ struct ImagePicker: UIViewControllerRepresentable {
             parentImagePicker.pickedImage = Image(uiImage: uiImage)
             if let mediaData = uiImage.jpegData(compressionQuality: 0.5) {
                 parentImagePicker.imageData = mediaData
-             //   print(parentImagePicker.imageData)
             }
             parentImagePicker.showImagePicker = false
             

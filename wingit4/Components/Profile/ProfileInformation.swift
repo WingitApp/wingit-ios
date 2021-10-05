@@ -68,10 +68,10 @@ struct UpdateProfilePhoto: View {
     
     func addAvatar() {
         updatePhotoVM.updatePhoto(imageData: updatePhotoVM.imageData, completed: { url in
+            session.currentUser?.profileImageUrl = url
             self.closeSheet()
             let alertView = SPAlertView( title: "Photo updated!", preset: SPAlertIconPreset.done);
             alertView.present(duration: 2)
-            session.currentUser?.profileImageUrl = url
             // Switch to the Main App
         }) { (errorMessage) in
             self.updatePhotoVM.showAlert = true
@@ -80,58 +80,104 @@ struct UpdateProfilePhoto: View {
         }
     }
   
+    func revertPhoto() {
+        self.updatePhotoVM.loadCurrentImage(userAvatar: user!.profileImageUrl)
+        self.clean()
+    }
+  
     func closeSheet() {
       self.profileViewModel.isUpdatePicSheetOpen.toggle()
       self.clean()
     }
     
     func clean() {
-        self.updatePhotoVM.image = Image(systemName: IMAGE_USER_PLACEHOLDER)
-        self.updatePhotoVM.imageData = Data()
+        self.updatePhotoVM.imageData = Data(count: 0)
     }
     
     var body: some View {
         
         VStack{
-          VStack(alignment: .trailing) {
-            HStack {
+          Capsule()
+           .fill(Color.gray)
+           .frame(width: 60, height: 4)
+           .padding(.top, 15)
+          
+            HStack(alignment: .center){
+              Text("Update Your Photo")
+                .font(.title3)
+                .fontWeight(.semibold)
+                .foregroundColor(Color("bw"))
               Spacer()
               CloseButton(onTap: closeSheet)
-                .padding(15)
             }
+            .padding([.horizontal])
+            .padding(.top, 5)
+
+          Spacer()
+          HStack {
+            VStack {
+              ZStack {
+                updatePhotoVM.image
+                  .resizable()
+                  .aspectRatio(contentMode: .fill)
+                  .clipShape(Circle())
+                  .frame(width: 200, height: 200)
+                if !updatePhotoVM.imageData.isEmpty {
+                  Text(
+                    Image(systemName: "xmark")
+                  )
+                    .bold()
+                    .font(.system(size: 20))
+                    .foregroundColor(.white)
+                    .frame(width: 40, height: 40)
+                    .cornerRadius(100)
+                    .background(
+                      LinearGradient(
+                        gradient: Gradient(
+                          colors: [Color.wingitBlue.lighter(by: 10), Color.wingitBlue]),
+                          startPoint: .top,
+                          endPoint: .bottom
+                        )
+                    )
+                    .cornerRadius(100)
+                    .offset(x: 80, y: -53)
+                    .shadow(
+                      color: Color.black.opacity(0.3),
+                      radius: 1, x: 0, y: -1
+                    )
+                    .zIndex(1)
+                    .onTapGesture(perform: revertPhoto)
+                }
+              }
+     
+     
+              Text("Choose from your photos")
+                .font(.body)
+                .fontWeight(.semibold)
+                .foregroundColor(Color.wingitBlue)
+                .padding(.top, 5)
+            }
+            .onTapGesture {self.updatePhotoVM.showImagePicker = true}
+          
           }
           Spacer()
-
-            Text("Change your photo")
-                .bold()
-                .foregroundColor(Color.wingitBlue)
-                .padding(.bottom, 100)
-                .font(.title)
-          HStack {
-              URLImageView(urlString: user!.profileImageUrl)
-                .clipShape(Circle())
-                .frame(width: 150, height: 150)
-                .onTapGesture {self.updatePhotoVM.showImagePicker = true}
-          }
-          HStack {
-            Text("Choose from your photos")
-              .font(.body)
-              
-          }
             
-            
-            Button(action: {addAvatar()},
-                   label: {
-                Text("Done")
+            Button(
+              action: {addAvatar()},
+              label: {
+                HStack {
+                  Text("Save")
                     .fontWeight(.bold)
                     .foregroundColor(Color.white)
-                    .padding(.vertical)
-                    .frame(width: 150, height: 50)
-                    .background(Color.wingitBlue)
-                    .cornerRadius(8)
+                }
+                .frame(width: UIScreen.main.bounds.width - 30, height: 50)
+                .background(Color.wingitBlue)
+                .cornerRadius(8)
             })
+              .opacity(updatePhotoVM.imageData.isEmpty ? 0.6 : 1)
+              .disabled(updatePhotoVM.imageData.isEmpty)
               .padding(.top, 50)
-              .padding(.horizontal)
+              
               .alert(isPresented: $updatePhotoVM.showAlert) {
                   Alert(
                     title: Text("Error"),
@@ -139,11 +185,21 @@ struct UpdateProfilePhoto: View {
                     dismissButton: .default(Text("OK"))
                   )
               }
-          Spacer()
 
-        }.sheet(isPresented: $updatePhotoVM.showImagePicker) {
+        }
+        .onAppear {
+          self.updatePhotoVM.loadCurrentImage(userAvatar: user!.profileImageUrl)
+        }
+        .onDisappear {
+          self.clean()
+        }
+        .sheet(isPresented: $updatePhotoVM.showImagePicker) {
             // ImagePickerController()
-             ImagePicker(showImagePicker: self.$updatePhotoVM.showImagePicker, pickedImage: self.$updatePhotoVM.image, imageData: self.$updatePhotoVM.imageData)
+             ImagePicker(
+                showImagePicker: self.$updatePhotoVM.showImagePicker,
+                pickedImage: self.$updatePhotoVM.image,
+                imageData: self.$updatePhotoVM.imageData
+             )
          }
         .preferredColorScheme(.light)
     }
