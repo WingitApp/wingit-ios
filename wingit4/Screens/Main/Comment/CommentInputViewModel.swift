@@ -62,9 +62,7 @@ class CommentInputViewModel: ObservableObject {
                   .document(activityId)
                   .setData(notificationDict)
               
-                // log to backend
-                logToAmplitude(event: .commentOnRec)
-              
+                logToAmplitude(event: .commentOnAsk, properties: [.postId: post.postId])
             }
             onSuccess(comment)
       
