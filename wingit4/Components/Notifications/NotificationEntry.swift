@@ -65,7 +65,7 @@ struct NotificationReferralEntry: View {
       }
       .padding()
       .if(notification.openedAt == nil) { view in
-          view.background(Color.notifBlue)
+          view.background(Color.notificationBackground)
       }
       .onTapGesture {
         // we want to open referral tab on tap
