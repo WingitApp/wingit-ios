@@ -51,8 +51,8 @@ struct NotificationView: View {
                   ReferralPlaceholder(type: "accepted")
                   ReferralPlaceholder(type: "accepted")
                 }
-                      LazyVStack(alignment: .leading, spacing: 0) {
                 if !notificationViewModel.notificationsArray.isEmpty {
+                  LazyVStack(alignment: .leading, spacing: 0) {
                     ForEach($notificationViewModel.notificationsArray, id: \.activityId) { $notification in
                             if notification.type == "comment" {
                                 CommentNotification(notification: $notification)
@@ -106,8 +106,8 @@ struct NotificationView: View {
                           }
                       
                     }
+                  }
                 }
-            }
               .navigationBarTitle(Text("Notifications"), displayMode: .inline)
               .environmentObject(mainViewModel)
             }

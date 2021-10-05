@@ -21,7 +21,17 @@ struct ProfileButton: View {
       case true:
         return "square.and.pencil"
       case false:
-        return !userProfileViewModel.isConnected ? "plus" : "checkmark"
+        if !userProfileViewModel.isConnected {
+          return "plus"
+        } else if userProfileViewModel.isConnected {
+          return "checkmark"
+        } else if userProfileViewModel.receivedPendingRequest {
+          return "hand.wave.fill"
+        } else if userProfileViewModel.sentPendingRequest {
+          return "hand.wave.fill"
+        } else {
+          return "checkmark"
+        }
     }
   }
   
@@ -32,6 +42,8 @@ struct ProfileButton: View {
       case false:
       if userProfileViewModel.isConnected {
         return "Connected"
+      } else if userProfileViewModel.receivedPendingRequest {
+        return "Accept Request"
       } else if userProfileViewModel.sentPendingRequest {
         return "Pending"
       } else {
@@ -45,15 +57,42 @@ struct ProfileButton: View {
       case true:
         profileViewModel.isEditSheetOpen.toggle()
       case false:
-        if !userProfileViewModel.isConnected && !userProfileViewModel.sentPendingRequest {
+        if !userProfileViewModel.isConnected && userProfileViewModel.receivedPendingRequest {
+          logToAmplitude(event: .acceptConnectRequest, properties: [.userId: user.id])
+
+          connectionsViewModel.acceptConnectRequest(userId: user.id!) {
+            self.userProfileViewModel.isConnected = true
+            self.userProfileViewModel.sentPendingRequest = false
+            self.userProfileViewModel.receivedPendingRequest = false
+            
+            let alertView = SPAlertView(
+              title: "",
+              message: "Connection request accepted!",
+              preset: SPAlertIconPreset.done
+            )
+              alertView.present(duration: 2)
+          }
+        } else if !userProfileViewModel.isConnected && !userProfileViewModel.sentPendingRequest {
             logToAmplitude(event: .sendConnectRequest, properties: [.userId: user.id])
             connectionsViewModel.sendConnectRequest(userId: user.id) {
               userProfileViewModel.sentPendingRequest = true
+              let alertView = SPAlertView(
+                title: "",
+                message: "Connection request sent!",
+                preset: SPAlertIconPreset.done
+              )
+                alertView.present(duration: 2)
             }
         } else if userProfileViewModel.isConnected {
             logToAmplitude(event: .disconnectFromUser, properties: [.userId: user.id])
-            connectionsViewModel.disconnect(userId: user.id,  connectionsCount_onSuccess: { (connectionsCount) in
+            connectionsViewModel.disconnect(userId: user.id, connectionsCount_onSuccess: { (connectionsCount) in
               self.userProfileViewModel.isConnected = false
+              let alertView = SPAlertView(
+                title: "",
+                message: "Successfully Disconnected",
+                preset: SPAlertIconPreset.done
+              )
+              alertView.present(duration: 2)
          })
         } else {
           let alertView = SPAlertView(
