@@ -69,47 +69,49 @@ struct ProfileView: View {
           }
           .frame(minHeight: (UIScreen.main.bounds.height / 3.5))
           .onTapGesture(perform: self.openUpdatePicSheet)
-          
-          VStack(alignment: .leading) {
-            HStack(alignment: .bottom) {
-              HStack {
-                URLImageView(urlString: (isOwnProfile
-                   ? session.currentUser?.profileImageUrl
-                   : userProfileViewModel.user.profileImageUrl)!
+          HStack(alignment: .top){
+            VStack(alignment: .leading) {
+              HStack(alignment: .bottom) {
+                HStack {
+                  URLImageView(urlString: (isOwnProfile
+                     ? session.currentUser?.profileImageUrl
+                     : userProfileViewModel.user.profileImageUrl)!
+                  )
+                    .frame(width: 120, height: 120)
+                    .cornerRadius(100)
+                    .padding(5)
+                }
+                .background(Color.white)
+                .cornerRadius(100)
+                .onTapGesture(perform: self.openUpdatePicSheet)
+                .zIndex(2)
+                Spacer()
+                ProfileButton(
+                  user: isOwnProfile ? session.currentUser! : userProfileViewModel.user,
+                  isOwnProfile: isOwnProfile
                 )
-                  .frame(width: 120, height: 120)
-                  .cornerRadius(100)
-                  .padding(5)
+                .offset(y: -20)
+                  
               }
-              .background(Color.white)
-              .cornerRadius(100)
-              .onTapGesture(perform: self.openUpdatePicSheet)
-              .zIndex(2)
-              Spacer()
-              ProfileButton(
-                user: isOwnProfile ? session.currentUser! : userProfileViewModel.user,
-                isOwnProfile: isOwnProfile
+              .offset(y: -64)
+              .padding(.bottom, -70)
+              .padding(.leading, 15)
+              .padding(.trailing, 15)
+              .frame(
+                width: UIScreen.main.bounds.width
               )
-              .offset(y: -20)
-                
-            }
-            .offset(y: -64)
-            .padding(.bottom, -70)
-            .padding(.leading, 15)
-            .padding(.trailing, 15)
-            .frame(
-              width: UIScreen.main.bounds.width
+              
+            ProfileUserHeader(
+              user: isOwnProfile ? session.currentUser! : userProfileViewModel.user,
+              isOwnProfile: isOwnProfile
             )
-            
-          ProfileUserHeader(
-            user: isOwnProfile ? session.currentUser! : userProfileViewModel.user,
-            isOwnProfile: isOwnProfile
-          )
-            .padding(.leading, 15)
-          ProfileDetailView(
-            user: isOwnProfile ? session.currentUser! : userProfileViewModel.user,
-            isOwnProfile: isOwnProfile
-          )
+              .padding(.leading, 15)
+            ProfileDetailView(
+              user: isOwnProfile ? session.currentUser! : userProfileViewModel.user,
+              isOwnProfile: isOwnProfile
+            )
+            }
+
           }
           .frame( width: UIScreen.main.bounds.width)
           .background(
