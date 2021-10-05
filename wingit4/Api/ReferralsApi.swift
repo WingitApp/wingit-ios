@@ -17,20 +17,25 @@ class ReferralsApi {
         guard let id = senderId, let recipientId = recipientId else { return }
         let referral = Referral(id: nil, createdAt: nil, askId: askId, children: nil, closedAt: nil, recipientId: recipientId, parentId: nil, senderId: id, status: .pending, text: nil, updatedAt: nil)
         do {
+            let activityId = Ref.FS_COLLECTION_ACTIVITY.document(recipientId).collection("feedItems").document().documentID
             let _ = try Ref.FS_COLLECTION_REFERRALS.addDocument(from: referral)
-            // create referConnection UserActivity
+            // TODO: create referConnection UserActivity with referralId
+            let notification = Notification(activityId: activityId, comment: "", date: Date().timeIntervalSince1970, mediaUrl: "", postId: askId, type: "referred", userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, userId: Auth.auth().currentUser!.uid, username: Auth.auth().currentUser!.displayName!)
+            try Ref.FS_COLLECTION_ACTIVITY.document(recipientId).collection("feedItems").document(activityId).setData(from: notification)
         } catch {
             print(error)
         }
     }
-    
+        
     func rewingReferral(askId: String, recipientId: String?, parentId: String?, senderId: String?) {
         guard let id = senderId, let recipientId = recipientId else { return }
         let referral = Referral(id: nil, createdAt: nil, askId: askId, children: nil, closedAt: nil, recipientId: recipientId, parentId: parentId, senderId: id, status: .pending, text: nil, updatedAt: nil)
         do {
             let _ = try Ref.FS_COLLECTION_REFERRALS.addDocument(from: referral)
-//            let activityId = Ref.FS_COLLECTION_ACTIVITY.document(recipientId).collection("feedItems").document().documentID
-             // add rewing UserActivity
+            let activityId = Ref.FS_COLLECTION_ACTIVITY.document(recipientId).collection("feedItems").document().documentID
+             // TODO: add rewing UserActivity with referralId and parentId
+            let notification = Notification(activityId: activityId, comment: "", date: Date().timeIntervalSince1970, mediaUrl: "", postId: askId, type: "referred", userAvatar: Auth.auth().currentUser!.photoURL!.absoluteString, userId: Auth.auth().currentUser!.uid, username: Auth.auth().currentUser!.displayName!)
+            try Ref.FS_COLLECTION_ACTIVITY.document(recipientId).collection("feedItems").document(activityId).setData(from: notification)
         } catch {
             print(error)
         }
