@@ -97,6 +97,7 @@ struct UpdateProfilePhoto: View {
             HStack {
               Spacer()
               CloseButton(onTap: closeSheet)
+                .padding(15)
             }
           }
           Spacer()
@@ -108,9 +109,14 @@ struct UpdateProfilePhoto: View {
                 .font(.title)
           HStack {
               URLImageView(urlString: user!.profileImageUrl)
-                    .clipShape(Circle())
-                    .frame(width: 100, height: 100)
-                    .onTapGesture {self.updatePhotoVM.showImagePicker = true}
+                .clipShape(Circle())
+                .frame(width: 150, height: 150)
+                .onTapGesture {self.updatePhotoVM.showImagePicker = true}
+          }
+          HStack {
+            Text("Choose from your photos")
+              .font(.body)
+              
           }
             
             

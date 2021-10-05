@@ -35,53 +35,38 @@ struct ProfilePostsTab: View {
     var body: some View {
       // user connections
       HStack(alignment: .center, spacing: 20){
-        Button( action: onTapShowOpenPosts ) {
-            HStack(alignment: .center, spacing: 5) {
-              Text(isOwnProfile
-                   ? String(profileViewModel.openPosts.count)
-                   : String(userProfileViewModel.openPosts.count)
-              ).bold()
-              Text("Open Posts")
-//                .fontWeight(
-//                  isOwnProfile
-//                  ? (profileViewModel.showOpenPosts ? .bold : .regular)
-//                  : (userProfileViewModel.showOpenPosts ? .bold : .regular)
-//                )
-            }
-            .foregroundColor(
-              isOwnProfile
-              ? (profileViewModel.showOpenPosts ? Color.wingitBlue : Color.black)
-              : (userProfileViewModel.showOpenPosts ? Color.wingitBlue : Color.black)
-            )
-          
-        }
-        .buttonStyle(PlainButtonStyle())
-        .redacted(reason:
-            (isOwnProfile ? profileViewModel.isFetchingUserOpenPosts : userProfileViewModel.isFetchingOpenPosts)
-              ? .placeholder
-              : []
+          HStack(alignment: .center, spacing: 5) {
+            Text(isOwnProfile
+                 ? String(profileViewModel.openPosts.count)
+                 : String(userProfileViewModel.openPosts.count)
+            ).bold()
+            Text("Open Posts")
+          }
+          .foregroundColor(
+            isOwnProfile
+            ? (profileViewModel.showOpenPosts ? Color.wingitBlue : Color.black)
+            : (userProfileViewModel.showOpenPosts ? Color.wingitBlue : Color.black)
           )
+          .onTapGesture(perform: onTapShowOpenPosts)
+          .redacted(reason:
+              (isOwnProfile ? profileViewModel.isFetchingUserOpenPosts : userProfileViewModel.isFetchingOpenPosts)
+                ? .placeholder
+                : []
+            )
         
-        Button( action: onTapShowClosedPosts) {
           HStack(alignment: .center, spacing: 5) {
             Text(isOwnProfile
                  ? String(profileViewModel.closedPosts.count)
                  : String(userProfileViewModel.closedPosts.count)
             ).bold()
             Text("Closed Posts")
-//              .fontWeight(
-//                isOwnProfile
-//                ? (!profileViewModel.showOpenPosts ? .bold : .regular)
-//                : (!userProfileViewModel.showOpenPosts ? .bold : .regular)
-//              )
           }
+          .onTapGesture(perform: onTapShowClosedPosts)
           .foregroundColor(
             isOwnProfile
             ? (!profileViewModel.showOpenPosts ? Color.wingitBlue : Color.black)
             : (!userProfileViewModel.showOpenPosts ? Color.wingitBlue : Color.black)
           )
-        }
-        .buttonStyle(PlainButtonStyle())
         .redacted(reason:
             (isOwnProfile ? profileViewModel.isFetchingUserClosedPosts : userProfileViewModel.isFetchingClosedPosts)
               ? .placeholder

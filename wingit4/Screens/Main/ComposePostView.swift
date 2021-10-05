@@ -155,11 +155,17 @@ struct ComposePostView: View, KeyboardReadable {
                 })
               .padding(.bottom, 5)
           }
-      
+            HStack {
               Text("Compose a post")
                 .font(.headline)
                 .padding(.bottom, 5)
                 .foregroundColor(.black)
+              Spacer()
+              if isTextEditorOpen {
+                CloseButton(onTap: dismissKeyboard)
+              }
+            }
+            
               TextEditor(text: $composePostViewModel.caption)
                   .padding(10)
                   .cornerRadius(5)

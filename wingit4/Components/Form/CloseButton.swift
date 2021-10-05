@@ -14,7 +14,6 @@ struct CloseButton: View {
     var body: some View {
       Image(systemName: "xmark")
         .foregroundColor(Color.gray)
-        .padding(15)
         .onTapGesture(perform: onTap)
     }
 }

@@ -16,7 +16,7 @@ struct ProfileUserHeader: View {
     var isOwnProfile: Bool
   
     func onTapOpenConnectionSheet() -> Void {
-      self.connectionsViewModel.isConnectionsSheetOpen.toggle()
+      self.connectionsViewModel.isConnectionsSheetOpen = true
     }
   
     // todo: add var user
@@ -42,7 +42,6 @@ struct ProfileUserHeader: View {
             Circle()
               .frame(width: 4, height: 4, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
               .foregroundColor(Color.wingitBlue)
-            Button(action: onTapOpenConnectionSheet) {
               Text("\(isOwnProfile ? profileViewModel.connections.count : userProfileViewModel.connections.count) Connections")
                 .bold()
                 .font(.subheadline)
@@ -52,11 +51,21 @@ struct ProfileUserHeader: View {
                       ? .placeholder
                       : []
                 )
-            }
+                .onTapGesture(perform: onTapOpenConnectionSheet)
           }
           .padding(.top, 5)
         }
 
       }
+      .sheet(
+        isPresented: $connectionsViewModel.isConnectionsSheetOpen,
+        content: {
+          ConnectionsView(
+            user: user,
+            connections: isOwnProfile ? $profileViewModel.connections : $userProfileViewModel.connections,
+            isLoading: isOwnProfile ? $profileViewModel.isFetchingConnections : $userProfileViewModel.isFetchingConnections
+          ).environmentObject(connectionsViewModel)
+        }
+      )
     }
 }

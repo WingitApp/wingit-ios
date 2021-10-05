@@ -104,6 +104,7 @@ struct ProfileView: View {
               user: isOwnProfile ? session.currentUser as! User : userProfileViewModel.user,
               isOwnProfile: isOwnProfile
             )
+            .environmentObject(connectionsViewModel)
               .padding(.leading, 15)
             ProfileDetailView(
               user: isOwnProfile ? session.currentUser : userProfileViewModel.user,
@@ -165,16 +166,7 @@ struct ProfileView: View {
           )
         }
       }
-      .sheet(
-        isPresented: $connectionsViewModel.isConnectionsSheetOpen,
-        content: {
-          ConnectionsView(
-            user: isOwnProfile ? session.currentUser! : userProfileViewModel.user,
-            connections: isOwnProfile ? $profileViewModel.connections : $userProfileViewModel.connections,
-            isLoading: isOwnProfile ? $profileViewModel.isFetchingConnections : $userProfileViewModel.isFetchingConnections
-          ).environmentObject(connectionsViewModel)
-        }
-      )
+
       .sheet(
           isPresented:  $profileViewModel.isUpdatePicSheetOpen,
           content: { UpdateProfilePhoto(user: session.currentUser) }
