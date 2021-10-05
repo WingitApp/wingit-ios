@@ -24,6 +24,7 @@ struct ProfilePostsTab: View {
     }
   
     func onTapShowClosedPosts() -> Void {
+
         if isOwnProfile {
           self.profileViewModel.showOpenPosts = false
         } else {

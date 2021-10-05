@@ -147,7 +147,6 @@ class PostApi {
         .addSnapshotListener { (snapshot, error) in
           guard let snap = snapshot else { return }
           if let error = error { return print(error) }
-          print("snap.docs", snap.documents)
           snap.documentChanges.forEach { (documentChange) in
             switch documentChange.type {
               case .added:
@@ -360,9 +359,13 @@ class PostApi {
             .limit(to: 10)
             .addSnapshotListener({ (querySnapshot, error) in
               guard let snapshot = querySnapshot else { return }
-
-        if snapshot.documentChanges.count == 0 {
-           onEmpty()
+              
+              
+              if snapshot.documentChanges.count == 0 {
+                  return onEmpty()
+              }
+             
+            
               if firstCall {
                 // construct pagination start
                 guard let lastSnapshot = snapshot.documents.last else { return }
@@ -376,9 +379,7 @@ class PostApi {
 
                 nextQuery(next)
               }
-            return
-              }
-             
+       
               
               snapshot.documentChanges.forEach { (documentChange) in
                     switch documentChange.type {
@@ -406,11 +407,16 @@ class PostApi {
     onSuccess: @escaping (_ posts: [Post], _ next: Query) -> Void,
     onEmpty: @escaping () -> Void
   ) -> Void {
-      guard let userId = Auth.auth().currentUser?.uid, let next = next else { return }
+      guard let userId = Auth.auth().currentUser?.uid,
+              
+      let next = next else {
+        return onEmpty()
+      }
+    
       next.getDocuments(completion: { (querySnapshot, error) in
           guard let snapshot = querySnapshot else {
             print("Error fetching next timeline")
-            return
+            return onEmpty()
           }
       
           if snapshot.documents.isEmpty {

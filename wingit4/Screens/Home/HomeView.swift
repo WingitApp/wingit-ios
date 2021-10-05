@@ -49,7 +49,6 @@ struct HomeView: View {
         
         .onAppear( perform: onAppear )
         .background(Color.backgroundGray.ignoresSafeArea(.all, edges: .all))
-//        .ignoresSafeArea()
         .toolbar {
           ToolbarItem(placement: .principal) {
             VStack {
@@ -76,7 +75,6 @@ struct HomeView: View {
                 }
             })
       }
-//      .navigationViewStyle(StackNavigationViewStyle())
       .environmentObject(homeViewModel)
     }
 }

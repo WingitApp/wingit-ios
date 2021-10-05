@@ -34,5 +34,6 @@ struct ProfileParallax: View {
                 : -geometry.frame(in: .global).origin.y
             )
       }
+      .frame(height: 230)
     }
 }

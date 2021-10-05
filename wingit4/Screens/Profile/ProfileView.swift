@@ -67,9 +67,8 @@ struct ProfileView: View {
               user: isOwnProfile ? session.currentUser : userProfileViewModel.user
             )
           }
-          .frame(minHeight: (UIScreen.main.bounds.height / 3.5))
+//          .frame(minHeight: (UIScreen.main.bounds.height / 3.5)) // ios 15
           .onTapGesture(perform: self.openUpdatePicSheet)
-          HStack(alignment: .top){
             VStack(alignment: .leading) {
               HStack(alignment: .bottom) {
                 HStack {
@@ -102,7 +101,7 @@ struct ProfileView: View {
               )
               
             ProfileUserHeader(
-              user: isOwnProfile ? session.currentUser : userProfileViewModel.user,
+              user: isOwnProfile ? session.currentUser as! User : userProfileViewModel.user,
               isOwnProfile: isOwnProfile
             )
               .padding(.leading, 15)
@@ -112,7 +111,6 @@ struct ProfileView: View {
             )
             }
 
-          }
           .frame( width: UIScreen.main.bounds.width)
           .background(
             Color.white

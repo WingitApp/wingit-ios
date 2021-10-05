@@ -153,6 +153,8 @@ struct EditProfileView: View, KeyboardReadable {
               )
                 .font(.caption)
             }
+            .padding(.trailing, 5)
+            
             
           }
      
