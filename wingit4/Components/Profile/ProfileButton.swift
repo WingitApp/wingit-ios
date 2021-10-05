@@ -21,13 +21,13 @@ struct ProfileButton: View {
       case true:
         return "square.and.pencil"
       case false:
-        if !userProfileViewModel.isConnected {
+        if !userProfileViewModel.isConnected && !userProfileViewModel.sentPendingRequest {
           return "plus"
         } else if userProfileViewModel.isConnected {
           return "checkmark"
-        } else if userProfileViewModel.receivedPendingRequest {
+        } else if !userProfileViewModel.isConnected && userProfileViewModel.receivedPendingRequest {
           return "hand.wave.fill"
-        } else if userProfileViewModel.sentPendingRequest {
+        } else if !userProfileViewModel.isConnected && userProfileViewModel.sentPendingRequest {
           return "hand.wave.fill"
         } else {
           return "checkmark"
