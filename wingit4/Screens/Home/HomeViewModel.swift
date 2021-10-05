@@ -94,7 +94,7 @@ class HomeViewModel: ObservableObject {
   func loadTimelineNext() {
     toggleLoadingNextState(true)
     Api.Post.loadTimelinePaginated(
-      next: self.next!,
+      next: self.next,
       onSuccess: { posts, next in
         self.posts += posts
         self.next = next

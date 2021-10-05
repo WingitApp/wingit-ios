@@ -401,12 +401,12 @@ class PostApi {
       }
   
   func loadTimelinePaginated(
-    next: Query,
+    next: Query?,
     onSuccess: @escaping (_ posts: [Post], _ next: Query) -> Void,
     onEmpty: @escaping () -> Void
   ) -> Void {
-      guard let userId = Auth.auth().currentUser?.uid else {return}
-    next.getDocuments(completion: { (querySnapshot, error) in
+      guard let userId = Auth.auth().currentUser?.uid, let next = next else { return }
+      next.getDocuments(completion: { (querySnapshot, error) in
           guard let snapshot = querySnapshot else {
             print("Error fetching next timeline")
             return
