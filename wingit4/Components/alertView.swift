@@ -7,12 +7,16 @@
 
 import SwiftUI
 
-func alertView(msg: String,completion: @escaping (String) -> ()){
+func alertView(msg: String, placeholder: String, completion: @escaping (String) -> ()){
     
-    let alert = UIAlertController(title: "Message", message: msg, preferredStyle: .alert)
+    let alert = UIAlertController(title: "", message: msg, preferredStyle: .alert)
     
     alert.addTextField { (txt) in
-        txt.placeholder = msg.contains("Verification") ? "123456" : ""
+      if placeholder.isValidURL {
+        txt.text = placeholder
+      } else {
+        txt.placeholder = "https://"
+      }
     }
     
     alert.addAction(UIAlertAction(title: "Cancel", style: .destructive))

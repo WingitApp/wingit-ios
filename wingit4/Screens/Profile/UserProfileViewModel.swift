@@ -12,66 +12,99 @@ import FirebaseAuth
 import Firebase
 
 class UserProfileViewModel: ObservableObject {
+    // User Posts
     @Published var openPosts: [Post] = []
     @Published var closedPosts: [Post] = []
-    
-    @Published var isLoading = false
+    @Published var isFetchingOpenPosts: Bool = false
+    @Published var isFetchingClosedPosts: Bool = false
+    var closedListener: ListenerRegistration!
+    var openListener: ListenerRegistration!
+
+    // Connections
+    @Published var connections: [User] = []
+    @Published var isFetchingConnections: Bool = false
+  
     @Published var isLoadingUser: Bool = false
     @Published var userBlocked = false
-    @Published var connectionsCountState = 0
+  
+    // Sheet and Modals
     @Published var showImagePicker: Bool = false
-    
     @Published var isImageModalOpen: Bool = false
 
     var splitted: [[Post]] = []
     
+    @Published var isFetchingConnectedStatus = false
     @Published var isConnected = false
     @Published var sentPendingRequest = false
     @Published var receivedPendingRequest = false
     
     @Published var user: User = USER_PROFILE_DEFAULT_PLACEHOLDER
     @Published var showOpenPosts = true
-    var closedListener: ListenerRegistration!
-    var openListener: ListenerRegistration!
-    
-    
-  
-  func fetchUserFromId(userId: String) {
-    if !isLoadingUser {
-      isLoadingUser.toggle()
-    }
-    if userId == "placeholder" {
-        self.user = USER_PROFILE_DEFAULT_PLACEHOLDER
+
+  init(userId: String?, user: User? = nil) {
+      if userId == nil, user == nil {
         return
-    }
-    Api.User.loadUser(
-     userId: userId,
-     onSuccess: { (user) in
-      self.user = user
-      if self.isLoadingUser {
-        self.isLoadingUser.toggle()
       }
-     },
-     onError: {
-         print("error")
-     }
-   )
-  }
     
-    func updateConnections(userId: String) {
-        updateIsConnected(userId: userId)
-        updateSentPendingRequest(userId: userId)
-        updateConnectionsCount(userId: userId)
-        updateReceivedPendingRequest(userId: userId)
+      if user != nil {
+        self.user = user!
+        self.loadUserProfile(userId: user!.id)
+      } else {
+        self.fetchUserFromId(userId: userId!)
+        self.loadUserProfile(userId: userId!)
+      }
+    }
+  
+    func loadUserProfile(userId: String?) {
+      guard let userId = userId else { return }
+      updateIsConnected(userId: userId)
+      updateSentPendingRequest(userId: userId)
+      updateReceivedPendingRequest(userId: userId)
+      loadOpenPosts(userId: userId)
+      loadClosedPosts(userId: userId)
+      loadConnections(userId: userId)
+    }
+  
+    func loadConnections(userId: String) {
+        isFetchingConnections = true
+      
+        Api.Connections.getConnections(
+            userId: userId,
+            onSuccess: { connections in
+                self.connections = connections.sorted(by: {
+                  $0.firstName! < $1.firstName!
+                })
+                self.isFetchingConnections = false
+            },
+            onEmpty: {
+                self.isFetchingConnections = false
+            }
+        )
+    }
+  
+    func fetchUserFromId(userId: String) {
+      isLoadingUser = true
+      Api.User.loadUser(
+       userId: userId,
+       onSuccess: { (user) in
+        self.user = user
+        self.isLoadingUser = false
+       },
+       onError: {
+           print("error")
+       }
+     )
     }
     
     func updateIsConnected(userId: String) {
+      isFetchingConnectedStatus = true
         Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: Auth.auth().currentUser!.uid).document(userId).getDocument { (document, error) in
             if let doc = document, doc.exists {
                 self.isConnected = true
             } else {
                 self.isConnected = false
             }
+          self.isFetchingConnectedStatus = false
         }
     }
     
@@ -98,22 +131,20 @@ class UserProfileViewModel: ObservableObject {
             }
         }
     }
-
-    func loadUserPosts(userId: String?) {
-      guard let userId = userId else { return }
-
+  
+    func loadOpenPosts(userId: String) {
       self.openPosts = []
-      isLoading = true
+      isFetchingOpenPosts = true
       
       Api.Post.loadOpenPosts(
         userId: userId,
         onEmpty: {
-          self.isLoading = false
+          self.isFetchingOpenPosts = false
         },
         onSuccess: { (posts) in
           if self.openPosts.isEmpty {
-              self.openPosts = posts
-            self.isLoading = false
+            self.openPosts = posts
+            self.isFetchingOpenPosts = false
           }
         },
         newPost: { (post) in
@@ -142,22 +173,20 @@ class UserProfileViewModel: ObservableObject {
         }) { (listener) in
           self.openListener = listener
         }
-        self.loadClosedPosts(userId: userId)
     }
     
-    func loadClosedPosts(userId: String?) {
-        guard let userId = userId else { return }
-        isLoading = true
+    func loadClosedPosts(userId: String) {
+        isFetchingClosedPosts = true
       
         Api.Post.loadClosedPosts(
           userId: userId,
           onEmpty: {
-            self.isLoading = false
+            self.isFetchingClosedPosts = false
           },
           onSuccess: { (posts)  in
             if self.closedPosts.isEmpty {
                 self.closedPosts = posts
-                self.isLoading = false
+                self.isFetchingClosedPosts = false
             }
           },
           newPost: { (post) in
@@ -189,18 +218,18 @@ class UserProfileViewModel: ObservableObject {
     }
     
     
-    func updateConnectionsCount(userId: String?) {
-        guard let userId = userId else { return }
-        Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
-            
-            if let doc = snapshot?.documents {
-                self.connectionsCountState = doc.count
-            }
-        }
-    }
-    
-    func checkUserBlocked(userId: String, postOwnerId: String?){
-        guard let postOwnerId = postOwnerId else { return }
+//    func updateConnectionsCount(userId: String?) {
+//        guard let userId = userId else { return }
+//        Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: userId).getDocuments { (snapshot, error) in
+//
+//            if let doc = snapshot?.documents {
+////                self.connectionsCountState = doc.count
+//            }
+//        }
+//    }
+//
+    func checkUserBlocked(userId: String?, postOwnerId: String?){
+        guard let postOwnerId = postOwnerId, let userId = userId else { return }
         Ref.FS_DOC_BLOCKED_USERID(userId: userId).collection("userBlocked").document(postOwnerId).getDocument { (document, error) in
             if let doc = document, doc.exists {
                 return
@@ -209,9 +238,8 @@ class UserProfileViewModel: ObservableObject {
                     self.userBlocked = true
                     return
                 } else {
-                self.updateConnections(userId: postOwnerId)
-                self.loadUserPosts(userId: postOwnerId)
-                self.loadClosedPosts(userId: postOwnerId)
+//                self.loadUserPosts(userId: postOwnerId)
+//                self.loadClosedPosts(userId: postOwnerId)
             }
         }
     }

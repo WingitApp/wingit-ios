@@ -19,6 +19,7 @@ struct MainView: View {
   @StateObject var notificationViewModel = NotificationViewModel()
   @StateObject var homeViewModel = HomeViewModel()
   @StateObject var referViewModel = ReferViewModel()
+
   
   @State private var home = UUID()
   @State private var referrals = UUID()
@@ -114,8 +115,7 @@ struct MainView: View {
                 self.mainViewModel.tapCount = 0
               }
           })
-        ProfileView()
-//        ProfileDetail2()
+        ProfileView(profileTab: true)
           .tabItem({
             VStack(alignment: .center ){
               Image(systemName: mainViewModel.selection == 4 ? "person.fill" : "person")
@@ -145,8 +145,8 @@ struct MainView: View {
     .environmentObject(mainViewModel)
     .onAppear{
         self.homeViewModel.loadTimeline()
-        self.profileViewModel.loadUserPosts()
         self.notificationViewModel.loadNotifications()
+        self.profileViewModel.loadUserProfile()
     }
   }
 }

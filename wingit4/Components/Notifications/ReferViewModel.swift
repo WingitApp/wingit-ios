@@ -80,8 +80,8 @@ class ReferViewModel : ObservableObject, Identifiable {
        
 //      self.toggleSuccessAnimation()
        self.toggleReferListScreen()
-       let alertView = SPAlertView( title: "Sent!", preset: SPAlertIconPreset.done);
-       alertView.present(duration: 2)
+//       let alertView = SPAlertView( title: "Sent!", preset: SPAlertIconPreset.done);
+//       alertView.present(duration: 2)
     }
     
     func rewingReferral(askId: String, parentId: String?) {

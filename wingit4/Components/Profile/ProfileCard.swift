@@ -14,10 +14,10 @@ struct ProfileCard: View {
     
     var body: some View {
         VStack{
-            ProfileInformation(user: self.session.currentUser)
+//            ProfileInformation(user: self.session.currentUser)
             Connections(
               user: self.session.currentUser,
-              connectionsCount: $profileViewModel.connectionsCountState
+              connectionsCount: profileViewModel.connections.count
             )
             PersonalProfileHeader(
               user: self.session.currentUser

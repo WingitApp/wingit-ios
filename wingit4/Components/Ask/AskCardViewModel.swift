@@ -61,7 +61,6 @@ class AskCardViewModel: ObservableObject {
     guard let postId = postId else { return }
     self.bumpers = []
     isLoadingBumpers =  true
-    
     Api.Post.loadBumpers(
       postId: postId,
       onEmpty: {

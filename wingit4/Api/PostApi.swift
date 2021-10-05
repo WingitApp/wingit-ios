@@ -147,7 +147,7 @@ class PostApi {
         .addSnapshotListener { (snapshot, error) in
           guard let snap = snapshot else { return }
           if let error = error { return print(error) }
-          
+          print("snap.docs", snap.documents)
           snap.documentChanges.forEach { (documentChange) in
             switch documentChange.type {
               case .added:
@@ -181,6 +181,7 @@ class PostApi {
           .addSnapshotListener({ (snapshot, error) in
 
           guard let snap = snapshot else { return }
+            
             
             if snap.documents.isEmpty {
               onEmpty()

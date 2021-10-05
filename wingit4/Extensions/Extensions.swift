@@ -429,6 +429,23 @@ extension Color {
   
   // complete status
   static let statusGreen: Color = Color(red: 33 / 255, green: 229 / 255, blue: 192 / 255)
+  
+  // social media icon
+  static let fbBlueBackground: Color = Color(red: 229 / 255, green: 239 / 255, blue: 254 / 255)
+  static let igPurpleBackground: Color = Color(red: 238 / 255, green: 241 / 255, blue: 250 / 255)
+  static let twitterBlueBackground: Color = Color(red: 229 / 255, green: 245 / 255, blue: 254 / 255)
+  static let redditRedBackground: Color = Color(red: 255 / 255, green: 233 / 255, blue: 226 / 255)
+  static let linkedinBlueBackground: Color = Color(red: 226 / 255, green: 242 / 255, blue: 255 / 255)
+  static let spotifyGreenBackground: Color = Color(red: 240 / 255, green: 246 / 255, blue: 231 / 255)
+  
+  static let fbBlue: Color = Color(red: 30 / 255, green: 139 / 255, blue: 241 / 255)
+  static let twitterBlue: Color = Color(red: 4 / 255, green: 159 / 255, blue: 242 / 255)
+  static let igPurple: Color = Color(red: 157 / 255, green: 56 / 255, blue: 142 / 255)
+  static let redditRed: Color = Color(red: 255 / 255, green: 60 / 255, blue: 0 / 255)
+  static let linkedinBlue: Color = Color(red: 36 / 255, green: 92 / 255, blue: 169 / 255)
+  static let spotifyGreen: Color = Color(red: 41 / 255, green: 181 / 255, blue: 79 / 255)
+  static let tiktokTeal:  Color = Color(red: 2 / 255, green: 245 / 255, blue: 237 / 255)
+  static let tiktokRed:  Color = Color(red: 255 / 255, green: 0 / 255, blue: 70 / 255)
 
 
 }
@@ -546,6 +563,14 @@ extension UINavigationController: UIGestureRecognizerDelegate {
 
 extension AnyTransition {
   
+  static var enterAndFade: AnyTransition {
+      let insertion = AnyTransition.scale
+          .combined(with: .opacity)
+      let removal = AnyTransition.scale
+          .combined(with: .opacity)
+      return .asymmetric(insertion: insertion, removal: removal)
+  }
+  
     static var enterLeftAndFade: AnyTransition {
         let insertion = AnyTransition.move(edge: .leading)
             .combined(with: .opacity)
@@ -554,8 +579,16 @@ extension AnyTransition {
         return .asymmetric(insertion: insertion, removal: removal)
     }
   
+    static var enterRightAndFade: AnyTransition {
+        let insertion = AnyTransition.move(edge: .trailing)
+            .combined(with: .opacity)
+        let removal = AnyTransition.scale
+            .combined(with: .opacity)
+        return .asymmetric(insertion: insertion, removal: removal)
+    }
+  
     static var enterTopAndFade: AnyTransition {
-        let insertion = AnyTransition.move(edge: .top)
+      let insertion = AnyTransition.move(edge: .top)
             .combined(with: .opacity)
         let removal = AnyTransition.scale
             .combined(with: .opacity)

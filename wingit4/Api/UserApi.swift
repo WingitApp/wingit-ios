@@ -63,6 +63,56 @@ class UserApi {
         StorageService.updateAvatar(userId: userId, imageData: imageData, metadata: metadata, storageAvatarRef: storageAvatarUserId, onSuccess: onSuccess, onError: onError)
     }
     
+    func editProfile(
+        bio: String,
+        onSuccess: @escaping() -> Void
+      ) {
+          guard let userId = Auth.auth().currentUser?.uid else {
+              return
+          }
+          
+        Ref.FS_DOC_USERID(userId: userId).updateData(["bio": bio]) { error in
+          
+          if error == nil {
+            onSuccess()
+          }
+        }
+          
+      }
+    
+//    func editProfile(
+//        first: String,
+//        last: String,
+//        username: String,
+//        bio: String,
+//        onSuccess: @escaping() -> Void
+//      ) {
+//          guard let userId = Auth.auth().currentUser?.uid else {
+//              return
+//          }
+//          if first != "" {
+//              Ref.FS_DOC_USERID(userId: userId).updateData([ "firstName" :  first])
+//          } else if last != "" {
+//              Ref.FS_DOC_USERID(userId: userId).updateData([ "lastName" :  last])
+//          } else if username != "" {
+//              Ref.FS_DOC_USERID(userId: userId).updateData([ "username" :  username])
+//          } else if bio != "" {
+//              Ref.FS_DOC_USERID(userId: userId).updateData([ "bio" :  first])
+//          } else {
+//              return
+//          }
+//          }
+    
+    
+  func addLink(type: String, link: String, onSuccess: @escaping (_ link: String) -> Void) {
+      guard let userId = Auth.auth().currentUser?.uid else {return}
+      Ref.FS_DOC_USERID(userId: userId).setData(["\(type)": link], merge: true) { error in
+          if error == nil {
+            onSuccess(link)
+          }
+        }
+    }
+    
     func updateField(field: String, user: User?) {
       return
         // temporarily disabled

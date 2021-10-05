@@ -14,7 +14,7 @@ struct ConnectionRow: View {
   
     var body: some View {
         NavigationLink(
-          destination: UserProfileView(userId: user.id, user: user)
+          destination: ProfileView(userId: user.id, user: user)
         ) {
           HStack {
             URLImageView(urlString: user.profileImageUrl)
@@ -44,18 +44,29 @@ struct ConnectionRow: View {
 
 struct ConnectionsView: View {
   @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
-  var user: User?
+  
+  var user: User
+  var isOwnProfile: Bool
+  @Binding var connections: [User]
+  @Binding var isLoading: Bool
+  
+  init(user: User?, connections: Binding<[User]>, isLoading: Binding<Bool>) {
+    self.user = user!
+    self.isOwnProfile = Auth.auth().currentUser?.uid == user?.id
+    self._connections = connections
+    self._isLoading = isLoading
+  }
    
   func formatTitle() -> String {
     var title = "Connection";
     
-    if Auth.auth().currentUser?.uid == user?.id {
+    if isOwnProfile {
       title = "My " + title
     } else {
-      title = (user?.firstName)! + "'s " + title
+      title = (user.firstName)! + "'s " + title
     }
     
-    if connectionsViewModel.users.count != 1 {
+    if connections.count != 1 {
       title += "s"
     }
     
@@ -64,8 +75,9 @@ struct ConnectionsView: View {
   
     var body: some View {
             NavigationView {
-                Group {
-                    if (Auth.auth().currentUser?.uid == user?.id && connectionsViewModel.users.isEmpty && !connectionsViewModel.isLoading) {
+              ScrollView {
+                VStack(alignment: .leading) {
+                  if self.isOwnProfile, connections.isEmpty, !isLoading {
                         NavigationLink(destination: UsersView()) {
                             ConnectionsEmptyState(
                               title: "No Connections!",
@@ -77,23 +89,17 @@ struct ConnectionsView: View {
                         }
                         .buttonStyle(PlainButtonStyle())
                     } else {
-                      ScrollView {
-                        VStack(alignment: .leading){
-                          ForEach(self.connectionsViewModel.users, id: \.self) { user in
-                              ConnectionRow(user: user)
-                              Divider()
-                            }
-                        }
-                        .padding(.top, 5)
+          
+                      ForEach(self.connections, id: \.self) { user in
+                        ConnectionRow(user: user)
+                        Divider()
                       }
                     }
                 }
-                .navigationBarTitle(formatTitle(), displayMode: .inline)
-            }
-            .onAppear {
-              if connectionsViewModel.users.isEmpty {
-                connectionsViewModel.loadConnections(userId: user?.id)
+                .padding(.top, 5)
               }
+              .navigationBarTitle(formatTitle(), displayMode: .inline)
+                  
             }
             .preferredColorScheme(.light)
     }

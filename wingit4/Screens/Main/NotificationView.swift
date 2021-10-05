@@ -22,6 +22,9 @@ struct NotificationView: View {
   func sortNotifications() -> Void {
     self.notificationViewModel.notificationsArray.sort { $0.date > $1.date }
   }
+    func cleanState() -> Void {
+        notificationViewModel.isNavigationLinkActive = false
+    }
     
     var body: some View {
         NavigationView {
@@ -51,8 +54,8 @@ struct NotificationView: View {
                   ReferralPlaceholder(type: "accepted")
                   ReferralPlaceholder(type: "accepted")
                 }
-                      LazyVStack(alignment: .leading, spacing: 0) {
                 if !notificationViewModel.notificationsArray.isEmpty {
+                  LazyVStack(alignment: .leading, spacing: 0) {
                     ForEach($notificationViewModel.notificationsArray, id: \.activityId) { $notification in
                             if notification.type == "comment" {
                                 CommentNotification(notification: $notification)
@@ -106,15 +109,17 @@ struct NotificationView: View {
                           }
                       
                     }
+                  }
+                  .navigationBarTitle(Text("Notifications"), displayMode: .inline)
+                  .environmentObject(mainViewModel)
                 }
-            }
-              .navigationBarTitle(Text("Notifications"), displayMode: .inline)
-              .environmentObject(mainViewModel)
+
             }
         }
         }
         .onAppear {
             sortNotifications()
+            cleanState()
         }
     }
 }
@@ -126,7 +131,7 @@ struct ConnectRequestNotification: View {
     var body: some View {
         HStack(alignment: .top) {
         
-        NavigationLink(destination: UserProfileView(userId: notification.userId, user: nil)) {
+        NavigationLink(destination: ProfileView(userId: notification.userId, user: nil)) {
               NotificationUserAvatar(
                imageUrl: notification.userAvatar,
                type: notification.type

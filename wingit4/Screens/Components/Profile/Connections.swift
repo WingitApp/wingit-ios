@@ -10,7 +10,7 @@ import SwiftUI
 struct Connections: View {
     
     var user: User?
-    @Binding var connectionsCount: Int
+    var connectionsCount: Int
     @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
     
     var body: some View {

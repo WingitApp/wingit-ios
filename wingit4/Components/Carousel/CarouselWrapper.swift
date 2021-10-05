@@ -50,7 +50,6 @@ struct CarouselWrapper<Content: View>: UIViewRepresentable{
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
       let page = Int(scrollView.contentOffset.x / UIScreen.main.bounds.width)
-      print("page", page)
       self.carousel.onSwipeEnd(page)
     }
     

@@ -12,7 +12,7 @@ struct NotificationEntry: View {
   var notification: Notification
   
   var body: some View {
-    NavigationLink (destination: UserProfileView(userId: notification.userId, user: nil)){
+    NavigationLink (destination: ProfileView(userId: notification.userId, user: nil)){
       HStack(alignment: .top) {
           NotificationUserAvatar(
              imageUrl: notification.userAvatar,
