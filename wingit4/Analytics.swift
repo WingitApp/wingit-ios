@@ -92,6 +92,7 @@ enum AmplitudeProperty: String {
     case medium = "medium"
     case name = "name"
     case platform = "platform"
+    case postId = "post id"
     case recipients = "recipients"
     case screen = "screen"
     case toUser = "to user"
