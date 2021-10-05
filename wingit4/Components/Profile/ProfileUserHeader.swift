@@ -9,7 +9,11 @@ import SwiftUI
 
 struct ProfileUserHeader: View {
     @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
+    @EnvironmentObject var profileViewModel: ProfileViewModel
+    @EnvironmentObject var userProfileViewModel: UserProfileViewModel
+  
     var user: User
+    var isOwnProfile: Bool
   
     func onTapOpenConnectionSheet() -> Void {
       self.connectionsViewModel.isConnectionsSheetOpen.toggle()
@@ -38,10 +42,15 @@ struct ProfileUserHeader: View {
               .frame(width: 4, height: 4, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
               .foregroundColor(Color.wingitBlue)
             Button(action: onTapOpenConnectionSheet) {
-              Text("5 Connections")
+              Text("\(isOwnProfile ? profileViewModel.connections.count : userProfileViewModel.connections.count) Connections")
                 .bold()
                 .font(.subheadline)
                 .foregroundColor(Color.wingitBlue)
+                .redacted(reason:
+                    (isOwnProfile ? profileViewModel.isFetchingConnections : userProfileViewModel.isFetchingConnections)
+                      ? .placeholder
+                      : []
+                )
             }
           }
           .padding(.top, 5)

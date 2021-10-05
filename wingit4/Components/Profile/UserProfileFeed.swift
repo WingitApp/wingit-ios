@@ -52,6 +52,7 @@ struct UserProfileFeed: View {
                         )
                       }
                   }
+                  .onAppear(perform: sortOpenPosts)
               }
           } else {
               if !userProfileViewModel.isFetchingOpenPosts,

@@ -14,35 +14,30 @@ import Combine
 struct EditProfileView: View, KeyboardReadable {
   @EnvironmentObject var profileViewModel: ProfileViewModel
   @EnvironmentObject var session: SessionStore
-  
+  var originalBio: String
   @State private var bioText: String
   @State private var isTextEditorOpen: Bool = false
   let textLimit = 200
   
   init(bio: String) {
+    self.originalBio = bio
     _bioText = State(initialValue: bio)
   }
   
   func areEditsMade() -> Bool {
-    guard let currentUser = self.session.currentUser else { return false }
-    let trimmedUserBio = profileViewModel.bio.trimmingCharacters(in: .whitespacesAndNewlines)
+    let prevUserBio = originalBio.trimmingCharacters(in: .whitespacesAndNewlines)
+    let newUserBio = bioText.trimmingCharacters(in: .whitespacesAndNewlines)
     
-    if trimmedUserBio != currentUser.bio {
-      return true
-    }
-    return false
+    return prevUserBio != newUserBio
   }
   
-  func editProfile() {
-    if areEditsMade() {
-      profileViewModel.editProfile() {
-          let alertView = SPAlertView(title: "Profile Updated.", message: nil, preset: SPAlertIconPreset.done)
-          alertView.present(duration: 1)
+  func onSave() {
+      profileViewModel.editProfile(bio: bioText) {
+        session.currentUser?.bio = bioText
+        let alertView = SPAlertView(title: "Bio Updated.", message: nil, preset: SPAlertIconPreset.done)
+        alertView.present(duration: 1)
+        self.closeEditProfileView()
       }
-    } else {
-//      // no edits were made
-    }
-//
    }
   
   func closeEditProfileView() {
@@ -125,7 +120,7 @@ struct EditProfileView: View, KeyboardReadable {
             Spacer()
           }
           VStack(alignment: .leading, spacing: 5) {
-            Text("Joshua Lee")
+            Text(session.currentUser?.displayName! ?? "")
               .font(.title).bold().foregroundColor(Color.black)
           }
           .padding(.bottom, 15)
@@ -136,7 +131,7 @@ struct EditProfileView: View, KeyboardReadable {
               Text("Username")
                 .bold()
                 .padding(.bottom, 10)
-              Text("@joshlee93")
+              Text(session.currentUser?.username ?? "")
                 .foregroundColor(Color.wingitBlue)
     //            .foregroundColor(Color.black.opacity(0.7))
                 .padding(.bottom, 15)
@@ -177,7 +172,7 @@ struct EditProfileView: View, KeyboardReadable {
         
         Spacer()
         HStack {
-          Button(action: { print("called")}) {
+          Button(action: onSave) {
             Text("Save")
               .fontWeight(.semibold)
               .frame(
@@ -188,6 +183,8 @@ struct EditProfileView: View, KeyboardReadable {
               .background(Color.wingitBlue)
               .cornerRadius(5)
           }
+          .disabled(!areEditsMade())
+          .opacity(areEditsMade() ? 1 : 0.6)
         }
         .padding(.top, 15)
         .padding(.bottom, 15)

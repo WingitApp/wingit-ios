@@ -10,54 +10,54 @@ import FirebaseAuth
 import URLImage
 import SPAlert
 
-struct ProfileInformation: View {
-    
-    var user: User?
-    let currentUser = Auth.auth().currentUser
-    @State var updatePic : Bool = false
-    @EnvironmentObject var session: SessionStore
-    
-    var body: some View {
-        
-        VStack{
-            if user != nil && self.user!.id == currentUser?.uid {
-                
-                Button(action: {updatePic.toggle()},
-                       label: {
-                        URLImageView(urlString: user?.profileImageUrl)
-                           .frame(width: 450, height: 330)
-                           .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
-            
-                       }).padding(.leading, -15).padding(.trailing, -15)
-                HStack {
-                    Button(action: {Api.User.updateField(field: "firstName", user: user)}) {
-                        Text(user?.firstName ?? "").font(.title).bold().foregroundColor(Color.black)
-                    }
-                    
-                    Button(action: {Api.User.updateField(field: "lastName", user: user)}) {
-                        Text(user?.lastName ?? "").font(.title).bold().foregroundColor(Color.black)
-                    }
-                }
-                             
-                Button(action: {Api.User.updateField(field: "bio", user: user)}) {
-                  
-                Text(user?.bio ?? "").font(.caption).foregroundColor(.gray)
-                    }
-            } else {
-                URLImageView(urlString: user?.profileImageUrl)
-                  .frame(width: 430, height: 330)
-                  .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
-                  
-                Text(user?.displayName ?? "").font(.title).bold().foregroundColor(Color.black)
-                Text(user?.bio ?? "").font(.caption).foregroundColor(.gray)
-            }
-            
-        }.sheet(isPresented: $updatePic, content: {
-            UpdateProfilePhoto(user: user)
-        })
-        .environmentObject(session)
-    }
-}
+//struct ProfileInformation: View {
+//
+//    var user: User?
+//    let currentUser = Auth.auth().currentUser
+//    @State var updatePic : Bool = false
+//    @EnvironmentObject var session: SessionStore
+//
+//    var body: some View {
+//
+//        VStack{
+//            if user != nil && self.user!.id == currentUser?.uid {
+//
+//                Button(action: {updatePic.toggle()},
+//                       label: {
+//                        URLImageView(urlString: user?.profileImageUrl)
+//                           .frame(width: 450, height: 330)
+//                           .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
+//
+//                       }).padding(.leading, -15).padding(.trailing, -15)
+//                HStack {
+//                    Button(action: {Api.User.updateField(field: "firstName", user: user)}) {
+//                        Text(user?.firstName ?? "").font(.title).bold().foregroundColor(Color.black)
+//                    }
+//
+//                    Button(action: {Api.User.updateField(field: "lastName", user: user)}) {
+//                        Text(user?.lastName ?? "").font(.title).bold().foregroundColor(Color.black)
+//                    }
+//                }
+//
+//                Button(action: {Api.User.updateField(field: "bio", user: user)}) {
+//
+//                Text(user?.bio ?? "").font(.caption).foregroundColor(.gray)
+//                    }
+//            } else {
+//                URLImageView(urlString: user?.profileImageUrl)
+//                  .frame(width: 430, height: 330)
+//                  .clipShape(RoundedShape(corners: [.bottomLeft,.bottomRight]))
+//
+//                Text(user?.displayName ?? "").font(.title).bold().foregroundColor(Color.black)
+//                Text(user?.bio ?? "").font(.caption).foregroundColor(.gray)
+//            }
+//
+//        }.sheet(isPresented: $updatePic, content: {
+//            UpdateProfilePhoto(user: user)
+//        })
+//        .environmentObject(session)
+//    }
+//}
 
 struct UpdateProfilePhoto: View {
     var user: User?

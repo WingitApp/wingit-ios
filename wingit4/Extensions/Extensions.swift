@@ -563,6 +563,14 @@ extension UINavigationController: UIGestureRecognizerDelegate {
 
 extension AnyTransition {
   
+  static var enterAndFade: AnyTransition {
+      let insertion = AnyTransition.scale
+          .combined(with: .opacity)
+      let removal = AnyTransition.scale
+          .combined(with: .opacity)
+      return .asymmetric(insertion: insertion, removal: removal)
+  }
+  
     static var enterLeftAndFade: AnyTransition {
         let insertion = AnyTransition.move(edge: .leading)
             .combined(with: .opacity)

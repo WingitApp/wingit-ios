@@ -33,6 +33,7 @@ class UserProfileViewModel: ObservableObject {
 
     var splitted: [[Post]] = []
     
+    @Published var isFetchingConnectedStatus = false
     @Published var isConnected = false
     @Published var sentPendingRequest = false
     @Published var receivedPendingRequest = false
@@ -85,7 +86,6 @@ class UserProfileViewModel: ObservableObject {
       Api.User.loadUser(
        userId: userId,
        onSuccess: { (user) in
-         print("user", user)
         self.user = user
         self.isLoadingUser = false
        },
@@ -96,12 +96,14 @@ class UserProfileViewModel: ObservableObject {
     }
     
     func updateIsConnected(userId: String) {
+      isFetchingConnectedStatus = true
         Ref.FS_COLLECTION_CONNECTIONS_FOR_USER(userId: Auth.auth().currentUser!.uid).document(userId).getDocument { (document, error) in
             if let doc = document, doc.exists {
                 self.isConnected = true
             } else {
                 self.isConnected = false
             }
+          self.isFetchingConnectedStatus = false
         }
     }
     

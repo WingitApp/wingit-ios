@@ -64,9 +64,6 @@ class UserApi {
     }
     
     func editProfile(
-        first: String,
-        last: String,
-        username: String,
         bio: String,
         onSuccess: @escaping() -> Void
       ) {
@@ -74,14 +71,14 @@ class UserApi {
               return
           }
           
-          Ref.FS_DOC_USERID(userId: userId).updateData([
-            "firstName" :  first,
-            "lastName"  :  last,
-            "username"  :  username,
-            "bio"       :  bio
-          ])
-        
+        Ref.FS_DOC_USERID(userId: userId).updateData(["bio": bio]) { error in
+          
+          if error == nil {
+            onSuccess()
           }
+        }
+          
+      }
     
 //    func editProfile(
 //        first: String,
@@ -107,18 +104,13 @@ class UserApi {
 //          }
     
     
-    func addLink(field: String) {
-        guard let userId = Auth.auth().currentUser?.uid else {return}
-
-            alertView(msg: "Add \(field)") { (url) in
-                if !url.isEmpty {
-                    if field == "airbnb" || field == "spotify" || field == "twitter" || field == "instagram" || field == "vsco" || field == "googleDrive" {
-
-                        Ref.FS_DOC_USERID(userId: userId).setData(["profileLinks" : [field: url]], merge: true)
-                    }
-                }
-            }
-
+  func addLink(type: String, link: String, onSuccess: @escaping (_ link: String) -> Void) {
+      guard let userId = Auth.auth().currentUser?.uid else {return}
+      Ref.FS_DOC_USERID(userId: userId).setData(["\(type)": link], merge: true) { error in
+          if error == nil {
+            onSuccess(link)
+          }
+        }
     }
     
     func updateField(field: String, user: User?) {

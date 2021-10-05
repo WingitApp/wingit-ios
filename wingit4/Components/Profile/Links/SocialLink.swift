@@ -6,22 +6,80 @@
 //
 
 import SwiftUI
+import SPAlert
 
 struct SocialLink: View {
+  @EnvironmentObject var session: SessionStore
+  
   var name: String
   var bgColor: Color
   var link: String = ""
   var isEditable: Bool
   
+  func onTap() {
+    if link.isEmpty || isEditable {
+      addLink()
+    } else if !link.isEmpty {
+      openLink()
+    } else {
+      return
+    }
+  }
+  
   func openLink() -> Void {
-    if let url = URL(string: "https://www.hackingwithswift.com") {
+    
+    if let url = URL(string: link) {
         UIApplication.shared.open(url)
+    }
+  }
+  
+  func userDidEdit(_ url: String) -> Bool {
+    return !url.isEmpty && url.trimmingCharacters(in: .whitespacesAndNewlines) != link.trimmingCharacters(in: .whitespacesAndNewlines)
+  }
+  
+  func validHttpsLink(_ url: String) -> String {
+      var comps = URLComponents(string: url)!
+      comps.scheme = "https"
+      let https = comps.string!
+      return https
+  }
+  
+  func addLink() -> Void {
+    let properName = name.capitalized
+    alertView(
+      msg: "Add \(properName) Link",
+      placeholder: link
+    ) { (url) in
+      if url.isEmpty {
+        let alertView = SPAlertView( title: "", message: "Link cannot be empty.", preset: SPAlertIconPreset.error)
+          alertView.present(duration: 2)
+          return
+      }
+      
+      if !url.contains(name) {
+        let alertView = SPAlertView( title: "", message: "Link must be from \(properName)", preset: SPAlertIconPreset.error)
+          alertView.present(duration: 2)
+          return
+      }
+      
+      
+      if userDidEdit(url) {
+        let httpsLink = validHttpsLink(url)
+        Api.User.addLink(
+          type: name,
+          link: httpsLink
+        ) { newLink in
+          session.currentUser![name] = newLink
+          let alertView = SPAlertView( title: "Success", message: "Link updated!", preset: SPAlertIconPreset.done)
+          alertView.present(duration: 2)
+        }
+      }
     }
   }
   
   func primaryColor() -> Color {
     switch(name) {
-      case "fb":
+      case "facebook":
         return Color.fbBlue
       case "instagram":
         return Color.igPurple
@@ -44,7 +102,7 @@ struct SocialLink: View {
   
     var body: some View {
 
-        Button(action: openLink) {
+        Button(action: onTap) {
           ZStack {
             Image(name)
                 .resizable()
@@ -54,7 +112,7 @@ struct SocialLink: View {
                 .clipShape(Circle())
                 .background(bgColor)
                 .cornerRadius(100)
-            if isEditable {
+            if isEditable && link.isEmpty {
               Text(Image(systemName: "plus"))
                  .font(.system(size: 8.5))
                  .fontWeight(.heavy)
@@ -75,7 +133,7 @@ struct SocialLink: View {
           }
         }
         .buttonStyle(PlainButtonStyle())
-
+        .disabled(!isEditable && link == "")
     }
 }
 

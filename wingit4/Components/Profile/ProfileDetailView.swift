@@ -12,20 +12,14 @@ struct ProfileDetailView: View {
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var userProfileViewModel: UserProfileViewModel
   
+    var user: User
     var isOwnProfile: Bool
-    
+  
     var body: some View {
         VStack(alignment: .leading, spacing: 0){
-          VStack(alignment: .center, spacing: 0){
-            Text("Hi I love to eat, jump, laugh, play the guitar, think, talk, and do nothing. If you want to talk about these things please hit me up. :)")
-              .fontWeight(.regular)
-              .font(Font.footnote)
-              .foregroundColor(Color.black.opacity(0.7))
-              .fixedSize(horizontal: false, vertical: true)
-            
-          }
-          .padding(.top, 5)
-          ProfileUserLinks(isOwnProfile: isOwnProfile)
+
+          ProfileUserBio(user: user, isOwnProfile: isOwnProfile)
+          ProfileUserLinks(user: user, isOwnProfile: isOwnProfile)
           ProfilePostsTab(isOwnProfile: isOwnProfile)
           .padding(.top, 20)
           Divider()
@@ -44,6 +38,7 @@ struct ProfileDetailView: View {
         
         }
         .padding([.horizontal])
+
     }
 }
 

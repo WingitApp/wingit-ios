@@ -14,7 +14,7 @@ struct ProfileCard: View {
     
     var body: some View {
         VStack{
-            ProfileInformation(user: self.session.currentUser)
+//            ProfileInformation(user: self.session.currentUser)
             Connections(
               user: self.session.currentUser,
               connectionsCount: profileViewModel.connections.count

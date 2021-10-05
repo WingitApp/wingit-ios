@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import SPAlert
 
 struct ProfileButton: View {
   @EnvironmentObject var profileViewModel: ProfileViewModel
   @EnvironmentObject var userProfileViewModel: UserProfileViewModel
-  
+  @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
+
+  var user: User
   var isOwnProfile: Bool
   
   func getIconName() -> String {
@@ -18,7 +21,7 @@ struct ProfileButton: View {
       case true:
         return "square.and.pencil"
       case false:
-        return userProfileViewModel.isConnected ? "checkmark" : "plus"
+        return !userProfileViewModel.isConnected ? "plus" : "checkmark"
     }
   }
   
@@ -27,12 +30,40 @@ struct ProfileButton: View {
       case true:
         return "Edit Profile"
       case false:
-        return userProfileViewModel.isConnected ? "Connected" : "Add Connection"
+      if userProfileViewModel.isConnected {
+        return "Connected"
+      } else if userProfileViewModel.sentPendingRequest {
+        return "Pending"
+      } else {
+        return "Add Connection"
+      }
     }
   }
   
   func onButtonTap() -> Void {
-    profileViewModel.isEditSheetOpen.toggle()
+    switch isOwnProfile {
+      case true:
+        profileViewModel.isEditSheetOpen.toggle()
+      case false:
+        if !userProfileViewModel.isConnected && !userProfileViewModel.sentPendingRequest {
+            logToAmplitude(event: .sendConnectRequest, properties: [.userId: user.id])
+            connectionsViewModel.sendConnectRequest(userId: user.id) {
+              userProfileViewModel.sentPendingRequest = true
+            }
+        } else if userProfileViewModel.isConnected {
+            logToAmplitude(event: .disconnectFromUser, properties: [.userId: user.id])
+            connectionsViewModel.disconnect(userId: user.id,  connectionsCount_onSuccess: { (connectionsCount) in
+              self.userProfileViewModel.isConnected = false
+         })
+        } else {
+          let alertView = SPAlertView(
+            title: "",
+            message: "Connection request already sent.",
+            preset: SPAlertIconPreset.error
+          )
+            alertView.present(duration: 2)
+        }
+    }
   }
   
     var body: some View {
@@ -40,7 +71,8 @@ struct ProfileButton: View {
         HStack(spacing: 10){
           Text(Image(systemName: getIconName()))
             .font(.system(size: 15))
-            .foregroundColor(Color.black)
+            .foregroundColor((!isOwnProfile && userProfileViewModel.isConnected) ? Color.green : Color.black)
+          
           Text(getButtonLabel())
             .fontWeight(.semibold)
             .font(.subheadline)
@@ -57,6 +89,6 @@ struct ProfileButton: View {
             .stroke(Color.borderGray)
         )
       }
-      
+      .redacted(reason: userProfileViewModel.isFetchingConnectedStatus ? .placeholder : [])
     }
 }

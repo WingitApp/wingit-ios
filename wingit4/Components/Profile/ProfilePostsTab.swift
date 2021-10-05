@@ -16,15 +16,19 @@ struct ProfilePostsTab: View {
 
 
     func onTapShowOpenPosts() -> Void {
-      withAnimation {
-        self.profileViewModel.showOpenPosts = true
-      }
+        if isOwnProfile {
+          self.profileViewModel.showOpenPosts = true
+        } else {
+          self.userProfileViewModel.showOpenPosts = true
+        }
     }
   
     func onTapShowClosedPosts() -> Void {
-      withAnimation {
-        self.profileViewModel.showOpenPosts = false
-      }
+        if isOwnProfile {
+          self.profileViewModel.showOpenPosts = false
+        } else {
+          self.userProfileViewModel.showOpenPosts = false
+        }
     }
   
     var body: some View {
@@ -49,7 +53,13 @@ struct ProfilePostsTab: View {
               : (userProfileViewModel.showOpenPosts ? Color.wingitBlue : Color.black)
             )
           
-        }.buttonStyle(PlainButtonStyle())
+        }
+        .buttonStyle(PlainButtonStyle())
+        .redacted(reason:
+            (isOwnProfile ? profileViewModel.isFetchingUserOpenPosts : userProfileViewModel.isFetchingOpenPosts)
+              ? .placeholder
+              : []
+          )
         
         Button( action: onTapShowClosedPosts) {
           HStack(alignment: .center, spacing: 5) {
@@ -69,7 +79,13 @@ struct ProfilePostsTab: View {
             ? (!profileViewModel.showOpenPosts ? Color.wingitBlue : Color.black)
             : (!userProfileViewModel.showOpenPosts ? Color.wingitBlue : Color.black)
           )
-        }.buttonStyle(PlainButtonStyle())
+        }
+        .buttonStyle(PlainButtonStyle())
+        .redacted(reason:
+            (isOwnProfile ? profileViewModel.isFetchingUserClosedPosts : userProfileViewModel.isFetchingClosedPosts)
+              ? .placeholder
+              : []
+          )
         
       }
       .font(.subheadline)

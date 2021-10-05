@@ -31,19 +31,13 @@ class ProfileViewModel: ObservableObject {
     // User Link Toggle
     @Published var showLinks = false
     // User Metadata
-    @Published var bio: String = "Hi I love to eat, jump, laugh, play the guitar, think, talk, and do nothing. If you want to talk about these things please hit me up. :)"
-  
+    @Published var bio: String = ""
     
 
-    func initUserMetadata(user: User) {
-    }
-  
     func loadUserProfile() {
-      guard let currentUser = Auth.auth().currentUser else { return }
       self.loadUserConnections()
       self.loadUserOpenPosts()
       self.loadClosedPosts()
-//      self.bio = currentUser.bio ?? ""
     }
 
   
@@ -141,14 +135,10 @@ class ProfileViewModel: ObservableObject {
       setUserProperty(property: .connections, value: count)
     }
     
-    func editProfile(completed: @escaping() -> Void){
-//            Api.User.editProfile(
-//                first: first,
-//                last: last,
-//                username: username,
-//                bio: bio,
-//                onSuccess: completed
-//            )
-
+  func editProfile(bio: String, completed: @escaping() -> Void){
+            Api.User.editProfile(
+                bio: bio,
+                onSuccess: completed
+            )
     }
 }

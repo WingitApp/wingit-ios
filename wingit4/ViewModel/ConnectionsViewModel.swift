@@ -22,7 +22,7 @@ class ConnectionsViewModel : ObservableObject {
     @Published var connectionsCountState = 0
     
     
-    func sendConnectRequest(userId: String?) {
+    func sendConnectRequest(userId: String?, onSuccess: @escaping() -> Void) {
         guard let userId = userId, let currentUserId = Auth.auth().currentUser?.uid else { return }
         
         Ref.FS_DOC_CONNECT_REQUEST_SENT(sentByUserId: currentUserId, receivedByUserId: userId).setData([:]) { (error) in
@@ -33,7 +33,7 @@ class ConnectionsViewModel : ObservableObject {
         
         Ref.FS_DOC_CONNECT_REQUEST_RECEIVED(receivedByUserId: userId, sentFromUserId: currentUserId).setData([:]) { (error) in
             if error == nil {
-                
+                onSuccess()
             }
         }
         
