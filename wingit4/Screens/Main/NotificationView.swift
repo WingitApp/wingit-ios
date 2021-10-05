@@ -22,6 +22,9 @@ struct NotificationView: View {
   func sortNotifications() -> Void {
     self.notificationViewModel.notificationsArray.sort { $0.date > $1.date }
   }
+    func cleanState() -> Void {
+        notificationViewModel.isNavigationLinkActive = false
+    }
     
     var body: some View {
         NavigationView {
@@ -116,6 +119,7 @@ struct NotificationView: View {
         }
         .onAppear {
             sortNotifications()
+            cleanState()
         }
     }
 }

@@ -26,6 +26,7 @@ struct ProfileUserHeader: View {
           .stroke(style: StrokeStyle(lineWidth: 2, dash: [6]))
           .frame(width: 1, height: 60)
           .padding(.trailing, 15)
+          .opacity(0.7)
 
         VStack(alignment: .leading, spacing: 0) {
           Text(user.displayName!)
