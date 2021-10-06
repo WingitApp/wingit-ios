@@ -72,8 +72,7 @@ struct ProfileView: View {
             )
           }
 //          .frame(minHeight: (UIScreen.main.bounds.height / 3.5)) // ios 15
-          .onTapGesture(perform: self.openUpdatePicSheet)
-          .onTapGesture(perform: self.openPicSheet)
+           .onTapGesture(perform: isOwnProfile ? self.openUpdatePicSheet : self.openPicSheet)
             VStack(alignment: .leading) {
               HStack(alignment: .bottom) {
                 HStack {
