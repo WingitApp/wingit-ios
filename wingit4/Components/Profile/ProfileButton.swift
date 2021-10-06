@@ -106,7 +106,6 @@ struct ProfileButton: View {
   }
   
     var body: some View {
-      Button(action: onButtonTap) {
         HStack(spacing: 10){
           Text(Image(systemName: getIconName()))
             .font(.system(size: 15))
@@ -127,7 +126,7 @@ struct ProfileButton: View {
           Capsule()
             .stroke(Color.borderGray)
         )
-      }
-      .redacted(reason: userProfileViewModel.isFetchingConnectedStatus ? .placeholder : [])
+        .onTapGesture(perform: onButtonTap)
+        .redacted(reason: userProfileViewModel.isFetchingConnectedStatus ? .placeholder : [])
     }
 }

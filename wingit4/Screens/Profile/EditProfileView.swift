@@ -14,9 +14,13 @@ import Combine
 struct EditProfileView: View, KeyboardReadable {
   @EnvironmentObject var profileViewModel: ProfileViewModel
   @EnvironmentObject var session: SessionStore
+  @EnvironmentObject var updatePhotoVM: UpdatePhotoVM
+
   var originalBio: String
   @State private var bioText: String
   @State private var isTextEditorOpen: Bool = false
+  @State private var isEditingImage: Bool = false
+  
   let textLimit = 200
   
   init(bio: String) {
@@ -45,8 +49,11 @@ struct EditProfileView: View, KeyboardReadable {
   }
   
   func updateProfilePhoto() {
-//    self.closeEditProfileView()
-    self.profileViewModel.isUpdatePicSheetOpen.toggle()
+//    self.profileViewModel.isUpdatePicSheetOpen = true
+    //ios14 fix
+    withAnimation {
+      isEditingImage = true
+    }
   }
   
   func limitText(_ upper: Int) {
@@ -58,140 +65,148 @@ struct EditProfileView: View, KeyboardReadable {
   
   var body: some View {
       VStack{
-        // header
-        HStack {
-          Button(action: closeEditProfileView) {
-            Image(systemName: "xmark")
-                .foregroundColor(.gray)
-                .padding(10)
-          }
-          .opacity(0)
-          .zIndex(-1)
-          Spacer()
-          Text("Edit Profile").bold()
-          Spacer()
-          Button(action: closeEditProfileView) {
-            Image(systemName: "xmark")
-                .foregroundColor(.gray)
-                .padding(10)
-          }
-        }
-        .padding(.init(top: 10, leading: 10, bottom: 0, trailing: 10))
-        Divider()
-        
-        
-        if !isTextEditorOpen {
-          HStack {
-            Spacer()
-            Button( action: updateProfilePhoto) {
-              ZStack {
-                URLImageView(urlString: session.currentUser?.profileImageUrl)
-                  .frame(width: 150, height: 150)
-                  .cornerRadius(100)
-                  .padding(5)
-                  .zIndex(0)
-                
-                Text(
-                  Image(systemName: "pencil")
-                )
-                  .bold()
-                  .font(.system(size: 20))
-                  .foregroundColor(.white)
-                  .frame(width: 40, height: 40)
-                  .cornerRadius(100)
-                  .background(
-                    LinearGradient(
-                      gradient: Gradient(
-                        colors: [Color.wingitBlue.lighter(by: 10), Color.wingitBlue]),
-                        startPoint: .top,
-                        endPoint: .bottom
-                      )
-                  )
-                  .cornerRadius(100)
-                  .offset(x: 60, y: 40)
-                  .shadow(
-                    color: Color.black.opacity(0.3),
-                    radius: 1, x: 0, y: -1
-                  )
-                  .zIndex(1)
+        if isEditingImage {
+          UpdateProfilePhoto(
+            user: session.currentUser,
+            onClose: {
+              withAnimation {
+                self.isEditingImage = false
               }
             }
-            .buttonStyle(PlainButtonStyle())
-            Spacer()
-          }
-          VStack(alignment: .leading, spacing: 5) {
-            Text(session.currentUser?.displayName! ?? "")
-              .font(.title).bold().foregroundColor(Color.black)
-          }
-          .padding(.bottom, 15)
-          
-          
+          )
+        } else {
           HStack {
-            VStack(alignment: .leading, spacing: 0) {
-              Text("Username")
+            Button(action: closeEditProfileView) {
+              Image(systemName: "xmark")
+                  .foregroundColor(.gray)
+                  .padding(10)
+            }
+            .opacity(0)
+            .zIndex(-1)
+            Spacer()
+            Text("Edit Profile").bold()
+            Spacer()
+            CloseButton(onTap: closeEditProfileView)
+              .padding(10)
+          }
+          .padding(.init(top: 10, leading: 10, bottom: 0, trailing: 10))
+          Divider()
+          
+          
+          if !isTextEditorOpen {
+            HStack {
+              Spacer()
+                ZStack {
+                  URLImageView(urlString: session.currentUser?.profileImageUrl)
+                    .frame(width: 150, height: 150)
+                    .cornerRadius(100)
+                    .padding(5)
+                    .zIndex(0)
+                    .onTapGesture(perform: updateProfilePhoto)
+                  
+                  Text(
+                    Image(systemName: "pencil")
+                  )
+                    .bold()
+                    .font(.system(size: 20))
+                    .foregroundColor(.white)
+                    .frame(width: 40, height: 40)
+                    .cornerRadius(100)
+                    .background(
+                      LinearGradient(
+                        gradient: Gradient(
+                          colors: [Color.wingitBlue.lighter(by: 10), Color.wingitBlue]),
+                          startPoint: .top,
+                          endPoint: .bottom
+                        )
+                    )
+                    .cornerRadius(100)
+                    .offset(x: 60, y: 40)
+                    .shadow(
+                      color: Color.black.opacity(0.3),
+                      radius: 1, x: 0, y: -1
+                    )
+                    .zIndex(1)
+                    .onTapGesture(perform: updateProfilePhoto)
+
+              }
+              Spacer()
+            }
+            VStack(alignment: .leading, spacing: 5) {
+              Text(session.currentUser?.displayName! ?? "")
+                .font(.title).bold().foregroundColor(Color.black)
+            }
+            .padding(.bottom, 15)
+            
+            
+            HStack {
+              VStack(alignment: .leading, spacing: 0) {
+                Text("Username")
+                  .bold()
+                  .padding(.bottom, 10)
+                Text(session.currentUser?.username ?? "")
+                  .foregroundColor(Color.wingitBlue)
+      //            .foregroundColor(Color.black.opacity(0.7))
+                  .padding(.bottom, 15)
+              }
+              Spacer()
+            }
+            .padding([.horizontal])
+          }
+          
+          VStack(alignment: .leading, spacing: 0) {
+            HStack {
+              Text("Your Bio")
                 .bold()
                 .padding(.bottom, 10)
-              Text(session.currentUser?.username ?? "")
-                .foregroundColor(Color.wingitBlue)
-    //            .foregroundColor(Color.black.opacity(0.7))
-                .padding(.bottom, 15)
+              Spacer()
+              VStack(alignment: .trailing, spacing: 0){
+                Text(
+                  "\(bioText.count) / 200 chars"
+                )
+                  .font(.caption)
+              }
+              .padding(.trailing, 5)
+              
+              
             }
-            Spacer()
+       
+            TextEditor(
+              text: $bioText
+            )
+              .onReceive(Just(bioText)) { _ in limitText(textLimit) }
+              .padding(15)
+              .cornerRadius(8)
+              .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                  .stroke(Color.borderGray, lineWidth: 1)
+              )
+
           }
           .padding([.horizontal])
-        }
-        
-        VStack(alignment: .leading, spacing: 0) {
+          
+          Spacer()
           HStack {
-            Text("Your Bio")
-              .bold()
-              .padding(.bottom, 10)
-            Spacer()
-            VStack(alignment: .trailing, spacing: 0){
-              Text(
-                "\(bioText.count) / 200 chars"
-              )
-                .font(.caption)
+            Button(action: onSave) {
+              Text("Save")
+                .fontWeight(.semibold)
+                .frame(
+                  width: UIScreen.main.bounds.width - 30,
+                  height: 50
+                )
+                .foregroundColor(Color.white)
+                .background(Color.wingitBlue)
+                .cornerRadius(5)
             }
-            .padding(.trailing, 5)
-            
-            
+            .disabled(!areEditsMade())
+            .opacity(areEditsMade() ? 1 : 0.6)
           }
-     
-          TextEditor(
-            text: $bioText
-          )
-            .onReceive(Just(bioText)) { _ in limitText(textLimit) }
-            .padding(15)
-            .cornerRadius(8)
-            .overlay(
-              RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.borderGray, lineWidth: 1)
-            )
-
+          .padding(.top, 15)
+          .padding(.bottom, 15)
         }
-        .padding([.horizontal])
-        
-        Spacer()
-        HStack {
-          Button(action: onSave) {
-            Text("Save")
-              .fontWeight(.semibold)
-              .frame(
-                width: UIScreen.main.bounds.width - 30,
-                height: 50
-              )
-              .foregroundColor(Color.white)
-              .background(Color.wingitBlue)
-              .cornerRadius(5)
-          }
-          .disabled(!areEditsMade())
-          .opacity(areEditsMade() ? 1 : 0.6)
-        }
-        .padding(.top, 15)
-        .padding(.bottom, 15)
 
       }
+      .environmentObject(updatePhotoVM)
       .background(
         Color.white.ignoresSafeArea(.all, edges: .all)
       )

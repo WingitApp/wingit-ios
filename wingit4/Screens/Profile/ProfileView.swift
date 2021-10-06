@@ -15,6 +15,8 @@ struct ProfileView: View {
   @EnvironmentObject var profileViewModel: ProfileViewModel
   @StateObject var userProfileViewModel: UserProfileViewModel
   @StateObject var connectionsViewModel = ConnectionsViewModel()
+  @StateObject var updatePhotoVM = UpdatePhotoVM()
+
   @State var isOwnProfile: Bool
   var profileTab: Bool
 
@@ -54,7 +56,9 @@ struct ProfileView: View {
 
 
     func openUpdatePicSheet() {
+      withAnimation {
         self.profileViewModel.isUpdatePicSheetOpen.toggle()
+      }
     }
     
     func openPicSheet() {
@@ -131,6 +135,7 @@ struct ProfileView: View {
       .environmentObject(profileViewModel)
       .environmentObject(userProfileViewModel)
       .environmentObject(connectionsViewModel)
+      .environmentObject(updatePhotoVM)
       .navigationBarTitle("", displayMode: .inline)
       .navigationBarHidden(!profileTab)
         .navigationBarItems(
@@ -160,32 +165,36 @@ struct ProfileView: View {
                 }
             })
       }
-      .switchStyle(if: UIDevice.current.userInterfaceIdiom == .phone)
+//      .switchStyle(if: UIDevice.current.userInterfaceIdiom == .phone)
       .edgesIgnoringSafeArea(.top)
       .onAppear {
         if !isOwnProfile {
           logToAmplitude(event: .viewOtherProfile)
           self.userProfileViewModel.checkUserBlocked(
-            userId: Auth.auth().currentUser?.uid,
+            userId: Auth.auth().currentUser?.uid ?? "",
             postOwnerId: self.userProfileViewModel.user.id ?? self.userProfileViewModel.user.uid
           )
         }
       }
       .sheet(
-          isPresented:  $profileViewModel.isUpdatePicSheetOpen,
-          content: {UpdateProfilePhoto(user: session.currentUser) }
-        )
-      .sheet(
-               isPresented: $userProfileViewModel.isImageModalOpen,
-               content: {
-                   profileImageView().environmentObject(userProfileViewModel)
-             })
-//      .sheet(
-//          isPresented:  $profileViewModel.userProfilePicSheetOpen,
-//          content: { profileImageView(user: self.userProfileViewModel.user)
-//                  .environmentObject(userProfileViewModel)
-//          }
-//        )
+           isPresented: $userProfileViewModel.isImageModalOpen,
+           content: {
+               profileImageView().environmentObject(userProfileViewModel)
+         })
+////      .sheet(
+////          isPresented:  $profileViewModel.userProfilePicSheetOpen,
+////          content: { profileImageView(user: self.userProfileViewModel.user)
+////                  .environmentObject(userProfileViewModel)
+////          }
+////        )
+      .modifier(Popup(
+        isPresented: profileViewModel.isUpdatePicSheetOpen,
+        alignment: .center,
+        direction: .bottom,
+        content: {
+          UpdateProfilePhoto(user: session.currentUser)
+            .environmentObject(updatePhotoVM)
+        }))
     .modifier(Popup(
       isPresented: profileViewModel.isEditSheetOpen,
       alignment: .center,
@@ -193,6 +202,7 @@ struct ProfileView: View {
       content: {
         EditProfileView(bio: session.currentUser?.bio ?? "")
         .environmentObject(profileViewModel)
+        .environmentObject(updatePhotoVM)
       }))
   }
 }

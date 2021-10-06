@@ -64,7 +64,9 @@ struct UpdateProfilePhoto: View {
     let uid = Auth.auth().currentUser?.uid
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var session: SessionStore
-    @ObservedObject var updatePhotoVM = UpdatePhotoVM()
+    @EnvironmentObject var updatePhotoVM: UpdatePhotoVM
+
+  var onClose: (() -> Void)? = nil
     
     func addAvatar() {
         updatePhotoVM.updatePhoto(imageData: updatePhotoVM.imageData, completed: { url in
@@ -80,14 +82,21 @@ struct UpdateProfilePhoto: View {
         }
     }
   
+    func callback() {
+      guard let closeCallback = onClose else { return }
+      closeCallback()
+    }
+  
     func revertPhoto() {
         self.updatePhotoVM.loadCurrentImage(userAvatar: user!.profileImageUrl)
         self.clean()
     }
   
     func closeSheet() {
-      self.profileViewModel.isUpdatePicSheetOpen.toggle()
+      self.callback()
+      self.profileViewModel.isUpdatePicSheetOpen = false
       self.clean()
+      
     }
     
     func clean() {
@@ -97,21 +106,23 @@ struct UpdateProfilePhoto: View {
     var body: some View {
         
         VStack{
-          Capsule()
-           .fill(Color.gray)
-           .frame(width: 60, height: 4)
-           .padding(.top, 15)
-          
-            HStack(alignment: .center){
-              Text("Update Your Photo")
-                .font(.title3)
-                .fontWeight(.semibold)
-                .foregroundColor(Color("bw"))
-              Spacer()
-              CloseButton(onTap: closeSheet)
+          HStack {
+            Button(action: callback) {
+              Image(systemName: "chevron.backward")
+                  .foregroundColor(.gray)
+                  .padding(10)
             }
-            .padding([.horizontal])
-            .padding(.top, 5)
+            .opacity(onClose == nil ? 0 : 1)
+            .zIndex(onClose == nil ? -1 : 1)
+            Spacer()
+            Text("Update Your Photo").bold()
+            Spacer()
+            CloseButton(onTap: closeSheet)
+              .padding(10)
+
+          }
+          .padding(.init(top: 10, leading: 10, bottom: 0, trailing: 10))
+          Divider()
 
           Spacer()
           HStack {
@@ -122,6 +133,7 @@ struct UpdateProfilePhoto: View {
                   .aspectRatio(contentMode: .fill)
                   .clipShape(Circle())
                   .frame(width: 200, height: 200)
+                  .zIndex(0)
                 if !updatePhotoVM.imageData.isEmpty {
                   Text(
                     Image(systemName: "xmark")
@@ -150,7 +162,6 @@ struct UpdateProfilePhoto: View {
                 }
               }
      
-     
               Text("Choose from your photos")
                 .font(.body)
                 .fontWeight(.semibold)
@@ -167,17 +178,17 @@ struct UpdateProfilePhoto: View {
               label: {
                 HStack {
                   Text("Save")
-                    .fontWeight(.bold)
+                    .fontWeight(.semibold)
                     .foregroundColor(Color.white)
                 }
                 .frame(width: UIScreen.main.bounds.width - 30, height: 50)
                 .background(Color.wingitBlue)
-                .cornerRadius(8)
+                .cornerRadius(5)
             })
               .opacity(updatePhotoVM.imageData.isEmpty ? 0.6 : 1)
               .disabled(updatePhotoVM.imageData.isEmpty)
               .padding(.top, 50)
-              
+              .padding(.bottom, 15)
               .alert(isPresented: $updatePhotoVM.showAlert) {
                   Alert(
                     title: Text("Error"),
@@ -187,6 +198,7 @@ struct UpdateProfilePhoto: View {
               }
 
         }
+        .background(Color.white)
         .onAppear {
           self.updatePhotoVM.loadCurrentImage(userAvatar: user!.profileImageUrl)
         }
