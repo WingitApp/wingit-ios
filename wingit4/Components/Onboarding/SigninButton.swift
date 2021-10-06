@@ -18,12 +18,12 @@ struct SigninButton: View {
             .foregroundColor(.white)
             .fontWeight(.bold)
             .padding(.vertical)
-            .frame(width: UIScreen.main.bounds.width - 50)
+            .frame(idealWidth: UIScreen.main.bounds.width - 50, maxWidth: 500)
             .background(
             
                Color("Color")
             )
-            .cornerRadius(8)
+            .cornerRadius(5)
         }
         
        // .modifier(SigninButtonModifier())
