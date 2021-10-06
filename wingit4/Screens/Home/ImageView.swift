@@ -30,7 +30,7 @@ struct ImageView: View {
 }
 
 struct profileImageView: View {
-
+   // var user: User
   @EnvironmentObject var userProfileViewModel: UserProfileViewModel
   @Environment(\.presentationMode) var presentationmode
     

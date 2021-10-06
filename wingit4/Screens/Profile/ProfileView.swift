@@ -52,10 +52,14 @@ struct ProfileView: View {
   }
 
 
-  
-  func openUpdatePicSheet() {
-    self.profileViewModel.isUpdatePicSheetOpen.toggle()
-  }
+
+    func openUpdatePicSheet() {
+        self.profileViewModel.isUpdatePicSheetOpen.toggle()
+    }
+    
+    func openPicSheet() {
+        self.userProfileViewModel.isImageModalOpen.toggle()
+    }
   
   
   var body: some View {
@@ -69,6 +73,7 @@ struct ProfileView: View {
           }
 //          .frame(minHeight: (UIScreen.main.bounds.height / 3.5)) // ios 15
           .onTapGesture(perform: self.openUpdatePicSheet)
+          .onTapGesture(perform: self.openPicSheet)
             VStack(alignment: .leading) {
               HStack(alignment: .bottom) {
                 HStack {
@@ -82,7 +87,7 @@ struct ProfileView: View {
                 }
                 .background(Color.white)
                 .cornerRadius(100)
-                .onTapGesture(perform: self.openUpdatePicSheet)
+                .onTapGesture(perform: isOwnProfile ? self.openUpdatePicSheet : self.openPicSheet)
                 .zIndex(2)
                 Spacer()
                 ProfileButton(
@@ -166,11 +171,21 @@ struct ProfileView: View {
           )
         }
       }
-
       .sheet(
           isPresented:  $profileViewModel.isUpdatePicSheetOpen,
-          content: { UpdateProfilePhoto(user: session.currentUser) }
+          content: {UpdateProfilePhoto(user: session.currentUser) }
         )
+      .sheet(
+               isPresented: $userProfileViewModel.isImageModalOpen,
+               content: {
+                   profileImageView().environmentObject(userProfileViewModel)
+             })
+//      .sheet(
+//          isPresented:  $profileViewModel.userProfilePicSheetOpen,
+//          content: { profileImageView(user: self.userProfileViewModel.user)
+//                  .environmentObject(userProfileViewModel)
+//          }
+//        )
     .modifier(Popup(
       isPresented: profileViewModel.isEditSheetOpen,
       alignment: .center,

@@ -52,7 +52,7 @@ struct AskCard: View {
         .padding(EdgeInsets(top: 10, leading: 15, bottom: 5, trailing: 15))
         .onTapGesture(perform: openReferConnectionsList)
         Divider()
-        HeaderCell(post: $post, index: index)
+          HeaderCell(post: $post, index: index)
         VStack {
           BodyCell(post: $post)
           FooterCell(post: $post)
