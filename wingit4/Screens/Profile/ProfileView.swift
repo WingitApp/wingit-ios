@@ -101,7 +101,7 @@ struct ProfileView: View {
               )
               
             ProfileUserHeader(
-              user: isOwnProfile ? session.currentUser as! User : userProfileViewModel.user,
+              user: isOwnProfile ? session.currentUser : userProfileViewModel.user,
               isOwnProfile: isOwnProfile
             )
             .environmentObject(connectionsViewModel)
