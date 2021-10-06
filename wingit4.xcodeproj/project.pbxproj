@@ -230,6 +230,9 @@
 		65FE040426E9FE3200333609 /* ComposePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE040326E9FE3200333609 /* ComposePostView.swift */; };
 		FB560AE727110F7400F18F73 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB560AE627110F7300F18F73 /* UserRow.swift */; };
 		FBD25F7E27043C4E0002C5B2 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD25F7D27043C4E0002C5B2 /* PopUp.swift */; };
+		FBDFDB55270E4BC400EDE22F /* BoardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDFDB54270E4BC400EDE22F /* BoardingScreen.swift */; };
+		FBDFDB57270E4BDD00EDE22F /* OnboardingV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDFDB56270E4BDD00EDE22F /* OnboardingV2.swift */; };
+		FBDFDB59270E4BF100EDE22F /* OffsetPageTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDFDB58270E4BF100EDE22F /* OffsetPageTabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -449,6 +452,9 @@
 		65FE040326E9FE3200333609 /* ComposePostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposePostView.swift; sourceTree = "<group>"; };
 		FB560AE627110F7300F18F73 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
 		FBD25F7D27043C4E0002C5B2 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
+		FBDFDB54270E4BC400EDE22F /* BoardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingScreen.swift; sourceTree = "<group>"; };
+		FBDFDB56270E4BDD00EDE22F /* OnboardingV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingV2.swift; sourceTree = "<group>"; };
+		FBDFDB58270E4BF100EDE22F /* OffsetPageTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetPageTabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -839,6 +845,9 @@
 				3B7AF053267197BA003BCCF3 /* InitialView.swift */,
 				3B7AF05726719885003BCCF3 /* MainView.swift */,
 				3B9C43BE26FB1A77008B01D2 /* OnboardingView.swift */,
+				FBDFDB54270E4BC400EDE22F /* BoardingScreen.swift */,
+				FBDFDB56270E4BDD00EDE22F /* OnboardingV2.swift */,
+				FBDFDB58270E4BF100EDE22F /* OffsetPageTabView.swift */,
 				159A3DD52703CD6F00C5573C /* New Group */,
 				3B7AF06126719E46003BCCF3 /* Home */,
 				3B7AF06B26719F24003BCCF3 /* Main */,
@@ -1193,6 +1202,7 @@
 				3B7AF04326718AF1003BCCF3 /* AuthService.swift in Sources */,
 				3B7AF0B12672AB2F003BCCF3 /* CommentViewModel.swift in Sources */,
 				3BFBE7F526F3C75100B0DFE2 /* ProfileDetailView.swift in Sources */,
+				FBDFDB59270E4BF100EDE22F /* OffsetPageTabView.swift in Sources */,
 				3B7AF08B2671CB68003BCCF3 /* UserApi.swift in Sources */,
 				3B7AF05226719610003BCCF3 /* SigninViewModel.swift in Sources */,
 				1524FCD026D753320000629C /* HeaderCellViewModel.swift in Sources */,
@@ -1238,6 +1248,7 @@
 				156E6AE626D8A13400690E47 /* UserProfileViewModel.swift in Sources */,
 				3BD12F1526C9CA1500E26A87 /* AppDel.swift in Sources */,
 				1524FCF826D812E70000629C /* CircleLoader.swift in Sources */,
+				FBDFDB55270E4BC400EDE22F /* BoardingScreen.swift in Sources */,
 				15127A5426FFC148006F975E /* ReferralPlaceholder.swift in Sources */,
 				3B75E3DF267163A1002F3108 /* OnboardingSignupForm.swift in Sources */,
 				3B96DD6E26DF4C9E00015EED /* ReferCard.swift in Sources */,
@@ -1294,6 +1305,7 @@
 				3B75E3D326715C5A002F3108 /* SigninButton.swift in Sources */,
 				65F7315826F5295500A73781 /* ContactsListViewModel.swift in Sources */,
 				15A6A43B2707B52400D65616 /* ProfileButton.swift in Sources */,
+				FBDFDB57270E4BDD00EDE22F /* OnboardingV2.swift in Sources */,
 				6522122B26F558D000A48B07 /* EditContactView.swift in Sources */,
 				65A7DC0A26ED9F2E0032C739 /* PersonalClosedPostsView.swift in Sources */,
 				1524FCD926D7545F0000629C /* (null) in Sources */,
