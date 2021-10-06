@@ -66,6 +66,7 @@ struct HomeView: View {
             }
           }
         }
+        .navigationBarHidden(false) // needed for ipad pro
         .navigationBarItems(
             leading: Button(action: {}) {
                 NavigationLink(destination: UsersView()) {
@@ -75,6 +76,7 @@ struct HomeView: View {
                 }
             })
       }
-      .environmentObject(homeViewModel)
+      .switchStyle(if: UIDevice.current.userInterfaceIdiom == .phone)
+     .environmentObject(homeViewModel)
     }
 }

@@ -160,6 +160,7 @@ struct ProfileView: View {
                 }
             })
       }
+      .switchStyle(if: UIDevice.current.userInterfaceIdiom == .phone)
       .edgesIgnoringSafeArea(.top)
       .onAppear {
         if !isOwnProfile {

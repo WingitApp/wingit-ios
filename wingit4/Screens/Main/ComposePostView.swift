@@ -198,6 +198,7 @@ struct ComposePostView: View, KeyboardReadable {
           .environmentObject(composePostViewModel)
          
         }
+        .switchStyle(if: UIDevice.current.userInterfaceIdiom == .phone)
         .onReceive(keyboardPublisher) { isKeyboardVisible in
             isTextEditorOpen = isKeyboardVisible
        }

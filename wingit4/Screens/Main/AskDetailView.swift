@@ -45,7 +45,7 @@ struct AskDetailView: View {
         }
       }
       .navigationBarTitle("")
-      .navigationBarHidden(self.isNavBarHidden)
+      .navigationBarHidden(true)
       .edgesIgnoringSafeArea(.top)
       .padding(.top, 10)
       .environmentObject(commentViewModel)

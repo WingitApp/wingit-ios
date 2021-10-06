@@ -46,6 +46,7 @@ struct ContactDetailView: View {
                 NavigationView() {
                     EditContactView(contact: .constant(self.viewModel.contact.systemContact!)) // --> here, we pass the system contact we set in the beginning!
                 }
+                .switchStyle(if: UIDevice.current.userInterfaceIdiom == .phone)
                 .onDisappear() {
                     self.viewModel.updateContact() // --> notify our view model to update the displayed contact
                 }

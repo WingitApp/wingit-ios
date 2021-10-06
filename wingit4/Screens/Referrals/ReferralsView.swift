@@ -68,7 +68,9 @@ struct ReferralsView: View {
                   }
                 }
                 .navigationBarTitle("Referrals Inbox", displayMode: .inline)
+                .navigationBarHidden(false) // needed for ipad pro
             }
+            .switchStyle(if: UIDevice.current.userInterfaceIdiom == .phone)
  
       }
 }

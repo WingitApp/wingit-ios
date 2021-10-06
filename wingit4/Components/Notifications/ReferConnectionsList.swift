@@ -161,6 +161,8 @@ struct ReferConnectionsList: View {
         .edgesIgnoringSafeArea(.top)
         }
     }
+      .switchStyle(if: UIDevice.current.userInterfaceIdiom == .phone)
+
 }
 
 }

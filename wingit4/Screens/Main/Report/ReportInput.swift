@@ -45,7 +45,6 @@ struct ReportInput: View {
     }
     
     var body: some View {
-        NavigationView{
         VStack(spacing: 0) {
           
 //                Button(action: {presentationmode.wrappedValue.dismiss()},
@@ -72,9 +71,7 @@ struct ReportInput: View {
         }
         .navigationBarTitle("Report an issue", displayMode: .inline)
         .edgesIgnoringSafeArea([.top, .bottom])
-       
-        }
-        .preferredColorScheme(.light)
+       .preferredColorScheme(.light)
     }
 }
 

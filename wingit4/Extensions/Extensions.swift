@@ -621,3 +621,15 @@ extension AnyTransition {
   
     
 }
+
+
+extension NavigationView {
+  @ViewBuilder
+  func switchStyle(if flag: Bool) -> some View {
+      if flag {
+          self.navigationViewStyle(DefaultNavigationViewStyle())
+      } else {
+          self.navigationViewStyle(StackNavigationViewStyle())
+      }
+  }
+}

@@ -111,12 +111,14 @@ struct NotificationView: View {
                     }
                   }
                   .navigationBarTitle(Text("Notifications"), displayMode: .inline)
+                  .navigationBarHidden(false) // needed for ipad pro
                   .environmentObject(mainViewModel)
                 }
 
             }
         }
         }
+        .switchStyle(if: UIDevice.current.userInterfaceIdiom == .phone)
         .onAppear {
             sortNotifications()
             cleanState()

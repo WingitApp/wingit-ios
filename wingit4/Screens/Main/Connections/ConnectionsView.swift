@@ -99,8 +99,9 @@ struct ConnectionsView: View {
                 .padding(.top, 5)
               }
               .navigationBarTitle(formatTitle(), displayMode: .inline)
-                  
+              .navigationBarHidden(false) // needed for ipad pro
             }
+            .switchStyle(if: UIDevice.current.userInterfaceIdiom == .phone)
             .preferredColorScheme(.light)
     }
 }
