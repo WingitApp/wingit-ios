@@ -11,9 +11,8 @@ struct ProfilePostsTab: View {
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var userProfileViewModel: UserProfileViewModel
     @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
-  
-    var isOwnProfile: Bool
 
+    var isOwnProfile: Bool
 
     func onTapShowOpenPosts() -> Void {
         if isOwnProfile {
@@ -26,7 +25,6 @@ struct ProfilePostsTab: View {
     }
   
     func onTapShowClosedPosts() -> Void {
-
         if isOwnProfile {
           self.profileViewModel.showOpenPosts = false
           logToAmplitude(event: .viewOwnClosedAsks)
@@ -76,10 +74,8 @@ struct ProfilePostsTab: View {
               ? .placeholder
               : []
           )
-        
       }
       .font(.subheadline)
       .padding(.bottom, 15)
     }
 }
-
