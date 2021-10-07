@@ -33,6 +33,7 @@ struct AcceptButton: View {
         Button(action: {
             Haptic.impact(type: "soft")
             referralsViewModel.acceptReferral(referral: referral, post: $post)
+          logToAmplitude(event: .acceptReferralRequest, properties: [.referralId: referral.id, .postId: referral.askId, .senderId: referral.senderId, .parentId: referral.parentId])
         },
                label: {
                 HStack(alignment: .center) {

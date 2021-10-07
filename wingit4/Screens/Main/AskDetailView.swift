@@ -53,6 +53,7 @@ struct AskDetailView: View {
         width: UIScreen.main.bounds.size.width
       )
       .onAppear {
+        logToAmplitude(event: .viewAskDetailScreen, properties: [.postId: post?.id])
         self.commentViewModel.loadComments(postId: post?.postId)
         self.isNavBarHidden = true
       }

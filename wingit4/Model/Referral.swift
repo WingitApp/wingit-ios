@@ -16,10 +16,10 @@ struct Referral: Codable, Identifiable, Equatable, Hashable {
     var askId: String //postId
     var children: [String]? // referral can be winged and create more referrals
     var closedAt: Timestamp? // when the receiver is officially done helping and has moved it into a closed state
-    var mediaUrl: String? // avatar pic? okie
+    var mediaUrl: String?
     var recipientId: String
     var parentId: String? // referral that led to this referral
-    var senderId: String // Auth.auth().currentUser?.uid
+    var senderId: String
     var status: ReferralStatus
     var text: String?
     var updatedAt: Timestamp?

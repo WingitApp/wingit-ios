@@ -10,13 +10,14 @@ import FirebaseAuth
 
 struct HomeView: View {
   @EnvironmentObject var homeViewModel: HomeViewModel
+  @EnvironmentObject var session: SessionStore
 //  @State var isAutoScrollDisabled: Bool = false
   @State var scrollProxy: ScrollViewProxy? = nil
   
   func onAppear() {
-    // should move to mainView
-    logToAmplitude(event: .viewHomeAsksFeed)
-
+    if (session.isLoggedIn) {
+      logToAmplitude(event: .viewHomeScreen)
+    }
   }
   
   func passProxyToState(proxy: ScrollViewProxy) -> CGFloat {

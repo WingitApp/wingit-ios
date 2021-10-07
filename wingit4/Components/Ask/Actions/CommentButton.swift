@@ -14,7 +14,6 @@ struct CommentButton: View {
     
   func onTapCommentIcon() {
     if !isTapDisabled {
-      logToAmplitude(event: .viewComments)
       Haptic.impact(type: "soft")
       self.commentViewModel.toggleCommentScreen()
     } else {
