@@ -12,7 +12,7 @@ import FirebaseAuth
 
 struct ProfileView: View {
   @EnvironmentObject var session: SessionStore
-  @EnvironmentObject var profileViewModel: ProfileViewModel
+  @StateObject var profileViewModel = ProfileViewModel()
   @StateObject var userProfileViewModel: UserProfileViewModel
   @StateObject var connectionsViewModel = ConnectionsViewModel()
   @StateObject var updatePhotoVM = UpdatePhotoVM()
@@ -179,6 +179,7 @@ struct ProfileView: View {
         } else {
           if session.isLoggedIn {
             logToAmplitude(event: .viewOwnProfile)
+            profileViewModel.loadUserProfile()
           }
         }
       }

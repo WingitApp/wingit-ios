@@ -15,7 +15,6 @@ struct MainView: View {
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
   @EnvironmentObject var session: SessionStore
   @StateObject var mainViewModel = MainViewModel()
-  @StateObject var profileViewModel = ProfileViewModel()
   @StateObject var notificationViewModel = NotificationViewModel()
   @StateObject var homeViewModel = HomeViewModel()
   @StateObject var referViewModel = ReferViewModel()
@@ -138,7 +137,6 @@ struct MainView: View {
      }
 
     .accentColor(.wingitBlue)
-    .environmentObject(profileViewModel)
     .environmentObject(notificationViewModel)
     .environmentObject(homeViewModel)
     .environmentObject(referViewModel)
@@ -146,7 +144,6 @@ struct MainView: View {
     .onAppear{
         self.homeViewModel.loadTimeline()
         self.notificationViewModel.loadNotifications()
-        self.profileViewModel.loadUserProfile()
     }
   }
 }
