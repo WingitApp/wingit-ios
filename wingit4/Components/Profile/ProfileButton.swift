@@ -56,6 +56,7 @@ struct ProfileButton: View {
     switch isOwnProfile {
       case true:
         profileViewModel.isEditSheetOpen.toggle()
+        logToAmplitude(event: .tapEditProfile)
       case false:
         if !userProfileViewModel.isConnected && userProfileViewModel.receivedPendingRequest {
           logToAmplitude(event: .acceptConnectRequest, properties: [.userId: user?.id])

@@ -32,7 +32,8 @@ class CommentInputViewModel: ObservableObject {
     
     guard let commentDict = try? comment.toDictionary() else {return}
     
-
+    logToAmplitude(event: .postComment, properties: [.postId: post.id, .postType: post.type])
+    
     Api.Comment.postComment(
       commentDict: commentDict,
       postId: post.postId,
@@ -61,8 +62,6 @@ class CommentInputViewModel: ObservableObject {
                   .collection("feedItems")
                   .document(activityId)
                   .setData(notificationDict)
-              
-                logToAmplitude(event: .commentOnAsk, properties: [.postId: post.postId])
             }
             onSuccess(comment)
       

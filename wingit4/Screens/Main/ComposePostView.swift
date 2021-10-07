@@ -9,7 +9,7 @@ import SPAlert
 import SwiftUI
 
 struct ComposePostView: View, KeyboardReadable {
-    
+    @EnvironmentObject var session: SessionStore
     @StateObject var composePostViewModel = ComposePostViewModel()
     @State private var isPostTypeMenuExpanded: Bool = false
     @State private var isTextEditorOpen: Bool = false
@@ -206,7 +206,9 @@ struct ComposePostView: View, KeyboardReadable {
           dismissKeyboard()
         }
         .onAppear {
+          if session.isLoggedIn {
             logToAmplitude(event: .viewComposePostScreen)
+          }
         }
        
     }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ReferralsView: View {
+    @EnvironmentObject var session: SessionStore
     @StateObject var referralsViewModel = ReferralsViewModel()
     @StateObject var askCardViewModel = AskCardViewModel()
     @StateObject var askMenuViewModel = AskMenuViewModel()
@@ -63,7 +64,9 @@ struct ReferralsView: View {
                 )
                 .environmentObject(referralsViewModel)
                 .onAppear {
-                  logToAmplitude(event: .viewReferralsScreen)
+                  if session.isLoggedIn {
+                    logToAmplitude(event: .viewReferralsScreen)
+                  }
                   if referralsViewModel.pendingListener == nil {
                     self.referralsViewModel.getReferrals()
                   }

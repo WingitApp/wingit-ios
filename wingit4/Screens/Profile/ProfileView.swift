@@ -169,13 +169,17 @@ struct ProfileView: View {
       .edgesIgnoringSafeArea(.top)
       .onAppear {
         if !isOwnProfile {
+          if session.isLoggedIn {
             logToAmplitude(event: .viewOtherProfile, properties: [.userId: userProfileViewModel.user.id])
+          }
           self.userProfileViewModel.checkUserBlocked(
             userId: Auth.auth().currentUser?.uid ?? "",
             postOwnerId: self.userProfileViewModel.user.id ?? self.userProfileViewModel.user.uid
           )
         } else {
+          if session.isLoggedIn {
             logToAmplitude(event: .viewOwnProfile)
+          }
         }
       }
       .sheet(

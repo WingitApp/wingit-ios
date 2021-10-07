@@ -8,16 +8,16 @@ import FirebaseFirestore
 import SwiftUI
 
 struct NotificationView: View {
-    
-    @EnvironmentObject var notificationViewModel: NotificationViewModel
-    @EnvironmentObject var mainViewModel: MainViewModel
-    @StateObject var askCardViewModel = AskCardViewModel()
-    @StateObject var askMenuViewModel = AskMenuViewModel()
-    @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
-    // Comment
-    @StateObject var commentViewModel = CommentViewModel()
-    @StateObject var referViewModel = ReferViewModel()
-    @StateObject var commentInputViewModel = CommentInputViewModel()
+  @EnvironmentObject var session: SessionStore
+  @EnvironmentObject var notificationViewModel: NotificationViewModel
+  @EnvironmentObject var mainViewModel: MainViewModel
+  @StateObject var askCardViewModel = AskCardViewModel()
+  @StateObject var askMenuViewModel = AskMenuViewModel()
+  @StateObject var askDoneToggleViewModel = AskDoneToggleViewModel()
+  // Comment
+  @StateObject var commentViewModel = CommentViewModel()
+  @StateObject var referViewModel = ReferViewModel()
+  @StateObject var commentInputViewModel = CommentInputViewModel()
     
   func sortNotifications() -> Void {
     self.notificationViewModel.notificationsArray.sort { $0.date > $1.date }
@@ -120,7 +120,9 @@ struct NotificationView: View {
         }
         .switchStyle(if: UIDevice.current.userInterfaceIdiom == .phone)
         .onAppear {
+          if session.isLoggedIn {
             logToAmplitude(event: .viewNotifications)
+          }
             sortNotifications()
             cleanState()
         }

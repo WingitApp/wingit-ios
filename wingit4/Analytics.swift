@@ -27,24 +27,29 @@ enum AmplitudeEvent: String {
     case viewNotifications = "View Notifications"
     case viewOwnProfile = "View Own Profile"
     case userLogout = "User Logout"
+  
+    // Profile
+    case tapEditProfile = "Tap Edit Profile"
     
     // Asks
-    case commentOnAsk = "Comment On Ask"
     case postAsk = "Post Ask"
-    case markAskAsClosed = "Mark Ask Closed"
+    case postComment = "Post Comment"
+    case markAskAsClosed = "Mark Ask As Closed"
     case reopenAsk = "Reopen Ask"
-    case viewOwnOpenAsks = "View Own Open Asks"
+    case viewAskDetailScreen = "View Ask Detail Screen"
     case viewOtherUsersClosedAsks = "View Other User's Closed Asks"
+    case viewOtherUsersOpenAsks = "View Other User's Open Asks"
     case viewOwnClosedAsks = "View Own Closed Asks"
+    case viewOwnOpenAsks = "View Own Open Asks"
     case wingAsk = "Wing Ask"
     
     // Referrals
+    case acceptReferralRequest = "Accept Referral Request"
     case ignoreReferral = "Ignore Referral"
     case tapWingReferralButton = "Tap Wing Referral Button"
     case rewingReferral = "Rewing Referral"
     
     // Recs
-    case commentOnRec = "Comment On Rec"
     case postRec = "Post Rec"
     case postRecError = "Post Rec Error"
     case viewOthersRecs = "View Others Recs"
@@ -86,15 +91,18 @@ enum AmplitudeUserProperty: String {
 enum AmplitudeProperty: String {
     case askId = "askId"
     case attachedPhoto = "attached photo"
-    case fromUser = "from user"
     case method = "method"
     case medium = "medium"
     case name = "name"
+    case parentId = "parent id"
     case platform = "platform"
     case postId = "post id"
+    case postType = "post type"
+    case recipientId = "recipient id"
     case recipients = "recipients"
+    case referralId = "referral id"
     case screen = "screen"
-    case toUser = "to user"
+    case senderId = "sender id"
     case userId = "user id"
 }
 

@@ -191,10 +191,10 @@ class AskCardViewModel: ObservableObject {
     guard let postId = post?.id else { return }
     var newStatus: PostStatus  {
       if post?.status == .closed {
-        logToAmplitude(event: .reopenAsk)
+        logToAmplitude(event: .reopenAsk, properties: [.askId: post?.id])
         return .open
       } else {
-        logToAmplitude(event: .markAskAsClosed)
+        logToAmplitude(event: .markAskAsClosed, properties: [.askId: post?.id])
         return .closed
       }
     }

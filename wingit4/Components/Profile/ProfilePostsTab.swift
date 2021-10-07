@@ -18,8 +18,10 @@ struct ProfilePostsTab: View {
     func onTapShowOpenPosts() -> Void {
         if isOwnProfile {
           self.profileViewModel.showOpenPosts = true
+          logToAmplitude(event: .viewOwnOpenAsks)
         } else {
           self.userProfileViewModel.showOpenPosts = true
+          logToAmplitude(event: .viewOtherUsersOpenAsks, properties: [.userId: userProfileViewModel.user.id])
         }
     }
   
@@ -27,8 +29,10 @@ struct ProfilePostsTab: View {
 
         if isOwnProfile {
           self.profileViewModel.showOpenPosts = false
+          logToAmplitude(event: .viewOwnClosedAsks)
         } else {
           self.userProfileViewModel.showOpenPosts = false
+          logToAmplitude(event: .viewOtherUsersClosedAsks, properties: [.userId: userProfileViewModel.user.id])
         }
     }
   
