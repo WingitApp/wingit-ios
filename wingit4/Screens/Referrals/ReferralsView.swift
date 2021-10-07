@@ -63,7 +63,8 @@ struct ReferralsView: View {
                 )
                 .environmentObject(referralsViewModel)
                 .onAppear {
-                  if  referralsViewModel.pendingListener == nil {
+                  logToAmplitude(event: .viewReferralsScreen)
+                  if referralsViewModel.pendingListener == nil {
                     self.referralsViewModel.getReferrals()
                   }
                 }

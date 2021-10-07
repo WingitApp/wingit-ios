@@ -205,7 +205,9 @@ struct ComposePostView: View, KeyboardReadable {
         .onTapGesture {
           dismissKeyboard()
         }
-        
+        .onAppear {
+            logToAmplitude(event: .viewComposePostScreen)
+        }
        
     }
 }

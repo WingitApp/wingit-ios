@@ -120,6 +120,7 @@ struct NotificationView: View {
         }
         .switchStyle(if: UIDevice.current.userInterfaceIdiom == .phone)
         .onAppear {
+            logToAmplitude(event: .viewNotifications)
             sortNotifications()
             cleanState()
         }

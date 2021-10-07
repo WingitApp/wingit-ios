@@ -33,7 +33,6 @@ enum AmplitudeEvent: String {
     case postAsk = "Post Ask"
     case markAskAsClosed = "Mark Ask Closed"
     case reopenAsk = "Reopen Ask"
-    case viewHomeAsksFeed = "View Home Asks Feed"
     case viewOwnOpenAsks = "View Own Open Asks"
     case viewOtherUsersClosedAsks = "View Other User's Closed Asks"
     case viewOwnClosedAsks = "View Own Closed Asks"

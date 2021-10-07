@@ -169,11 +169,13 @@ struct ProfileView: View {
       .edgesIgnoringSafeArea(.top)
       .onAppear {
         if !isOwnProfile {
-          logToAmplitude(event: .viewOtherProfile)
+            logToAmplitude(event: .viewOtherProfile, properties: [.userId: userProfileViewModel.user.id])
           self.userProfileViewModel.checkUserBlocked(
             userId: Auth.auth().currentUser?.uid ?? "",
             postOwnerId: self.userProfileViewModel.user.id ?? self.userProfileViewModel.user.uid
           )
+        } else {
+            logToAmplitude(event: .viewOwnProfile)
         }
       }
       .sheet(

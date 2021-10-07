@@ -13,12 +13,12 @@ struct FeedToggle: View {
   func onToggleChange(selection: Selection) -> Void {
     homeViewModel.onSelectionChange(selection: selection)
       // logs to amplitude
-    if selection == .posts {
-        logToAmplitude(event: .viewHomeRecsFeed)
-    } else {
-        logToAmplitude(event: .viewHomeAsksFeed)
-    }
-    
+//    if selection == .posts {
+//        logToAmplitude(event: .viewHomeRecsFeed)
+//    } else {
+//        logToAmplitude(event: .viewHomeAsksFeed)
+//    }
+//    
     
   }
 

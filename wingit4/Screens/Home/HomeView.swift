@@ -15,8 +15,7 @@ struct HomeView: View {
   
   func onAppear() {
     // should move to mainView
-    logToAmplitude(event: .viewHomeAsksFeed)
-
+    logToAmplitude(event: .viewHomeScreen)
   }
   
   func passProxyToState(proxy: ScrollViewProxy) -> CGFloat {
