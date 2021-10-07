@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ActivityIndicatorView<Content>: View where Content: View {
+  var message: String = "Sharing..."
   @Binding var isShowing: Bool
   var content: () -> Content
 
@@ -17,7 +18,7 @@ struct ActivityIndicatorView<Content>: View where Content: View {
         .disabled(self.isShowing)
         .blur(radius: self.isShowing ? 3 : 0)
       VStack {
-        ProgressView("Sharing...")
+        ProgressView(message)
           .progressViewStyle(CircularProgressViewStyle())
       }
       .frame(width: 150, height: 150)

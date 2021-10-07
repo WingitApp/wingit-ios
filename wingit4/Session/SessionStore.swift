@@ -14,6 +14,8 @@ import SwiftUI
 class SessionStore: ObservableObject {
     @Published var isLoggedIn = false
     @Published var currentUser: User?
+    @Published var isSessionLoading: Bool = true
+  
     @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
     var handle: AuthStateDidChangeListenerHandle?
     
@@ -27,16 +29,19 @@ class SessionStore: ObservableObject {
                         self.currentUser = decodedUser
                         Api.Device.updateDeviceInFirestore(token: "")
                         self.isLoggedIn = true
+                        self.isSessionLoading = false
                     },
                     onError: {
                         // todo: user doc DNE
                         print("error fetching user")
                         self.isLoggedIn = true
+                        self.isSessionLoading = false
 
                 })
             } else {
                 self.isLoggedIn = false
                 self.currentUser = nil
+                self.isSessionLoading = false
             }
         })
     }

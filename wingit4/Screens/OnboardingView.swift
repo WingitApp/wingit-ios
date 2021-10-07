@@ -28,21 +28,13 @@ struct OnboardingView: View {
     }
 }
 
-struct NewOnboardingUI_Previews: PreviewProvider {
-    static var previews: some View {
-//        OnboardingView()
-        SignUp1()
-    }
-}
-
-
 struct Home1 : View {
-    
+    @EnvironmentObject var session: SessionStore
     @State var index = 0
     @Namespace var name
     
     var body: some View{
-        
+      ActivityIndicatorView(message: "Loading...", isShowing: self.$session.isSessionLoading) {
         VStack{
             
             Image("logo")
@@ -137,12 +129,17 @@ struct Home1 : View {
                 SignUp1()
             }
         }
+
+      }
+
+
+        
     }
 }
 
 struct Login1 : View {
     
-    @ObservedObject var signinViewModel = SigninViewModel()
+    @StateObject var signinViewModel = SigninViewModel()
     
     var body: some View{
         
@@ -186,7 +183,9 @@ struct Login1 : View {
                      dismissButton: .default(Text("OK"))
                  )
              }
-        }.onTapGesture(perform: dismissKeyboard)
+        }
+        .environmentObject(signinViewModel)
+        .onTapGesture(perform: dismissKeyboard)
         .onAppear{
             logToAmplitude(event: .viewLoginScreen)
         }

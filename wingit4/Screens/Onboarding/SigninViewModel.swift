@@ -19,12 +19,13 @@ class SigninViewModel: ObservableObject {
   @Published var password: String = ""
   @Published var errorString: String = ""
   @Published var isAlertShown: Bool = false
+  @Published var isPending: Bool = false
     
   
   /// Signin user (Called from SignInView)
   func signin() {
     self.ampSignInAttemptEvent()
-    
+    isPending = true
     if (self.isFormComplete()) { // Auth only when fields are filled
         shouldShowOnboarding = false
         return AuthService.signInUser(
@@ -34,19 +35,22 @@ class SigninViewModel: ObservableObject {
             onError: onSignInError
         )
     }
-    
+
     self.showErrorMessage(message: "Please fill in all fields")
+    self.isPending = false
   }
   
   /// Callback on signin success
   func onSignInSuccess(user: User) -> Void {
     self.ampSignInSuccessEvent(user: user)
     self.resetFields()
+    self.isPending = false
   }
   
   /// Callback on signin error
   func onSignInError(errorMessage: String) -> Void{
     self.showErrorMessage(message: errorMessage)
+    self.isPending = false
   }
   
   /// Displays error message through alert (SignInView)
