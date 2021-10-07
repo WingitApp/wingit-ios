@@ -40,20 +40,18 @@ struct EditProfileView: View, KeyboardReadable {
         session.currentUser?.bio = bioText
         let alertView = SPAlertView(title: "Bio Updated.", message: nil, preset: SPAlertIconPreset.done)
         alertView.present(duration: 1)
-        self.closeEditProfileView()
+        self.closeSheet()
       }
    }
   
-  func closeEditProfileView() {
+  func closeSheet() {
+    Haptic.impact(type: "soft")
     profileViewModel.isEditSheetOpen = false
   }
   
-  func updateProfilePhoto() {
-//    self.profileViewModel.isUpdatePicSheetOpen = true
-    //ios14 fix
-    withAnimation {
-      isEditingImage = true
-    }
+  func showPhotoEditScreen(_ state: Bool) {
+    Haptic.impact(type: "soft")
+    isEditingImage = state
   }
   
   func limitText(_ upper: Int) {
@@ -68,15 +66,11 @@ struct EditProfileView: View, KeyboardReadable {
         if isEditingImage {
           UpdateProfilePhoto(
             user: session.currentUser,
-            onClose: {
-              withAnimation {
-                self.isEditingImage = false
-              }
-            }
+            onClose: { withAnimation{showPhotoEditScreen(false)} }
           )
         } else {
           HStack {
-            Button(action: closeEditProfileView) {
+            Button(action: closeSheet) {
               Image(systemName: "xmark")
                   .foregroundColor(.gray)
                   .padding(10)
@@ -86,7 +80,7 @@ struct EditProfileView: View, KeyboardReadable {
             Spacer()
             Text("Edit Profile").bold()
             Spacer()
-            CloseButton(onTap: closeEditProfileView)
+            CloseButton(onTap: closeSheet)
               .padding(10)
           }
           .padding(.init(top: 10, leading: 10, bottom: 0, trailing: 10))
@@ -96,13 +90,13 @@ struct EditProfileView: View, KeyboardReadable {
           if !isTextEditorOpen {
             HStack {
               Spacer()
+              Button(action: { showPhotoEditScreen(true) }) {
                 ZStack {
                   URLImageView(urlString: session.currentUser?.profileImageUrl)
                     .frame(width: 150, height: 150)
                     .cornerRadius(100)
                     .padding(5)
                     .zIndex(0)
-                    .onTapGesture(perform: updateProfilePhoto)
                   
                   Text(
                     Image(systemName: "pencil")
@@ -127,9 +121,10 @@ struct EditProfileView: View, KeyboardReadable {
                       radius: 1, x: 0, y: -1
                     )
                     .zIndex(1)
-                    .onTapGesture(perform: updateProfilePhoto)
 
               }
+              }
+   
               Spacer()
             }
             VStack(alignment: .leading, spacing: 5) {

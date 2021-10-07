@@ -56,13 +56,13 @@ struct ProfileView: View {
 
 
     func openUpdatePicSheet() {
-      withAnimation {
-        self.profileViewModel.isUpdatePicSheetOpen.toggle()
-      }
+      Haptic.impact(type: "soft")
+      self.profileViewModel.isUpdatePicSheetOpen.toggle()
     }
     
     func openPicSheet() {
-        self.userProfileViewModel.isImageModalOpen.toggle()
+      Haptic.impact(type: "soft")
+      self.userProfileViewModel.isImageModalOpen.toggle()
     }
   
   
@@ -180,6 +180,7 @@ struct ProfileView: View {
           if session.isLoggedIn {
             logToAmplitude(event: .viewOwnProfile)
             profileViewModel.loadUserProfile()
+            updatePhotoVM.loadCurrentImage(userAvatar: session.currentUser?.profileImageUrl)
           }
         }
       }
@@ -200,6 +201,7 @@ struct ProfileView: View {
         direction: .bottom,
         content: {
           UpdateProfilePhoto(user: session.currentUser)
+            .environmentObject(profileViewModel)
             .environmentObject(updatePhotoVM)
         }))
     .modifier(Popup(

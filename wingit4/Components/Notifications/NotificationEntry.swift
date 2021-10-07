@@ -43,6 +43,13 @@ struct NotificationReferralEntry: View {
   @EnvironmentObject var mainViewModel: MainViewModel
   @EnvironmentObject var notificationViewModel: NotificationViewModel
   
+  func routeToReferralView() {
+    Haptic.impact(type: "soft")
+    mainViewModel.setTab(tabId: 1)
+    notification.openedAt = Timestamp(date: Date())
+    notificationViewModel.updateOpenedAt(notificationId: notification.activityId)
+  }
+  
   var body: some View {
 
       HStack(alignment: .top) {
@@ -67,12 +74,7 @@ struct NotificationReferralEntry: View {
       .if(notification.openedAt == nil) { view in
           view.background(Color.notificationBackground)
       }
-      .onTapGesture {
-        // we want to open referral tab on tap
-        mainViewModel.setTab(tabId: 1)
-        notification.openedAt = Timestamp(date: Date())
-        notificationViewModel.updateOpenedAt(notificationId: notification.activityId)
-      }
+      .onTapGesture(perform: routeToReferralView)
   }
 }
 

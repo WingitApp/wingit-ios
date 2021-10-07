@@ -12,6 +12,14 @@ import URLImage
 struct CommentNotification: View {
     @Binding var notification: Notification
     @EnvironmentObject var notificationViewModel: NotificationViewModel
+  
+  func routeToAskDetailView() {
+    notification.openedAt = Timestamp(date: Date())
+    notificationViewModel.updateOpenedAt(notificationId: notification.activityId)
+    notificationViewModel.post = notification.post
+    notificationViewModel.selectedNotificationType = .askDetail
+    notificationViewModel.isNavigationLinkActive = true
+  }
     
   var body: some View {
       HStack(alignment: .top) {
@@ -36,12 +44,6 @@ struct CommentNotification: View {
       .if(notification.openedAt == nil) { view in
           view.background(Color.notificationBackground)
       }
-      .onTapGesture {
-          notification.openedAt = Timestamp(date: Date())
-          notificationViewModel.updateOpenedAt(notificationId: notification.activityId)
-          notificationViewModel.post = notification.post
-          notificationViewModel.selectedNotificationType = .askDetail
-          notificationViewModel.isNavigationLinkActive = true
-      }
+      .onTapGesture(perform: routeToAskDetailView)
   }
 }

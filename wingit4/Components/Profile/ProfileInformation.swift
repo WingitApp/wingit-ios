@@ -61,21 +61,26 @@ import SPAlert
 
 struct UpdateProfilePhoto: View {
     var user: User?
+    var onClose: (() -> Void)? = nil
     let uid = Auth.auth().currentUser?.uid
+    @State var isSavingPhoto: Bool = false
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var updatePhotoVM: UpdatePhotoVM
 
-  var onClose: (() -> Void)? = nil
     
     func addAvatar() {
+        Haptic.impact(type: "soft")
+        isSavingPhoto = true
         updatePhotoVM.updatePhoto(imageData: updatePhotoVM.imageData, completed: { url in
             session.currentUser?.profileImageUrl = url
+            self.isSavingPhoto = false
             self.closeSheet()
             let alertView = SPAlertView( title: "Photo updated!", preset: SPAlertIconPreset.done);
             alertView.present(duration: 2)
             // Switch to the Main App
         }) { (errorMessage) in
+          self.isSavingPhoto = false
             self.updatePhotoVM.showAlert = true
             self.updatePhotoVM.errorString = errorMessage
             self.clean()
@@ -88,11 +93,18 @@ struct UpdateProfilePhoto: View {
     }
   
     func revertPhoto() {
+        Haptic.impact(type: "soft")
         self.updatePhotoVM.loadCurrentImage(userAvatar: user!.profileImageUrl)
         self.clean()
     }
   
+    func openImagePicker() {
+      Haptic.impact(type: "soft")
+      self.updatePhotoVM.showImagePicker = true
+    }
+  
     func closeSheet() {
+      Haptic.impact(type: "soft")
       self.callback()
       self.profileViewModel.isUpdatePicSheetOpen = false
       self.clean()
@@ -134,6 +146,7 @@ struct UpdateProfilePhoto: View {
                   .clipShape(Circle())
                   .frame(width: 200, height: 200)
                   .zIndex(0)
+                  .onTapGesture(perform: openImagePicker)
                 if !updatePhotoVM.imageData.isEmpty {
                   Text(
                     Image(systemName: "xmark")
@@ -167,24 +180,31 @@ struct UpdateProfilePhoto: View {
                 .fontWeight(.semibold)
                 .foregroundColor(Color.wingitBlue)
                 .padding(.top, 5)
+                .onTapGesture(perform: openImagePicker)
             }
-            .onTapGesture {self.updatePhotoVM.showImagePicker = true}
+            .onTapGesture {}
           
           }
           Spacer()
             
             Button(
-              action: {addAvatar()},
+              action: addAvatar,
               label: {
                 HStack {
-                  Text("Save")
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color.white)
+                  if isSavingPhoto {
+                    CircleLoader(size: 20)
+                  } else {
+                    Text("Save")
+                      .fontWeight(.semibold)
+                      .foregroundColor(Color.white)
+                  }
+                 
                 }
-                .frame(width: UIScreen.main.bounds.width - 30, height: 50)
-                .background(Color.wingitBlue)
-                .cornerRadius(5)
+
             })
+              .frame(width: UIScreen.main.bounds.width - 30, height: 50)
+              .background(Color.wingitBlue)
+              .cornerRadius(5)
               .opacity(updatePhotoVM.imageData.isEmpty ? 0.6 : 1)
               .disabled(updatePhotoVM.imageData.isEmpty)
               .padding(.top, 50)
@@ -199,9 +219,7 @@ struct UpdateProfilePhoto: View {
 
         }
         .background(Color.white)
-        .onAppear {
-          self.updatePhotoVM.loadCurrentImage(userAvatar: user!.profileImageUrl)
-        }
+
         .onDisappear {
           self.clean()
         }
