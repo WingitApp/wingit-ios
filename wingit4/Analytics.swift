@@ -71,7 +71,7 @@ enum AmplitudeEvent: String {
     case tapSearchYourContacts = "Tap Search Your Contacts"
     case upvote = "Upvote"
     case viewConnectionsList = "View Connections List"
-    case viewOtherProfile = "View Other Profile"
+    case viewOtherUsersProfile = "View Other User's Profile"
     
     // Miscellaneous
     case appStart = "App Start"

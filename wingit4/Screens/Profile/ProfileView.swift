@@ -170,7 +170,7 @@ struct ProfileView: View {
       .onAppear {
         if !isOwnProfile {
           if session.isLoggedIn {
-            logToAmplitude(event: .viewOtherProfile, properties: [.userId: userProfileViewModel.user.id])
+            logToAmplitude(event: .viewOtherUsersProfile, properties: [.userId: userProfileViewModel.user.id])
           }
           self.userProfileViewModel.checkUserBlocked(
             userId: Auth.auth().currentUser?.uid ?? "",
