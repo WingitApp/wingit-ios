@@ -226,6 +226,7 @@
 		65F7315626F5276900A73781 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315526F5276900A73781 /* Contact.swift */; };
 		65F7315826F5295500A73781 /* ContactsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315726F5295500A73781 /* ContactsListViewModel.swift */; };
 		65FE040426E9FE3200333609 /* ComposePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE040326E9FE3200333609 /* ComposePostView.swift */; };
+		FB560A93270ED02D00F18F73 /* Tinder1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB560A92270ED02D00F18F73 /* Tinder1.swift */; };
 		FBD25F7E27043C4E0002C5B2 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD25F7D27043C4E0002C5B2 /* PopUp.swift */; };
 /* End PBXBuildFile section */
 
@@ -443,6 +444,7 @@
 		65F7315526F5276900A73781 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		65F7315726F5295500A73781 /* ContactsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewModel.swift; sourceTree = "<group>"; };
 		65FE040326E9FE3200333609 /* ComposePostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposePostView.swift; sourceTree = "<group>"; };
+		FB560A92270ED02D00F18F73 /* Tinder1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tinder1.swift; sourceTree = "<group>"; };
 		FBD25F7D27043C4E0002C5B2 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -612,6 +614,7 @@
 		15762C6826E170D500A8E041 /* Referrals */ = {
 			isa = PBXGroup;
 			children = (
+				FB560A92270ED02D00F18F73 /* Tinder1.swift */,
 				15762C6926E170ED00A8E041 /* ReferralsView.swift */,
 				3BFE30EB26E94437005543A0 /* AcceptedNotification.swift */,
 				15762C6B26E170FA00A8E041 /* ReferralsViewModel.swift */,
@@ -1268,6 +1271,7 @@
 				1594EE73270630F800D5C9E9 /* EditProfileView.swift in Sources */,
 				1594EE7727065D5F00D5C9E9 /* ArcShape.swift in Sources */,
 				150DB46326F301AD00373D26 /* PostEmptyState.swift in Sources */,
+				FB560A93270ED02D00F18F73 /* Tinder1.swift in Sources */,
 				151A3C7F26CE049000A39FAF /* NavigationTab.swift in Sources */,
 				3B9774252694FE0000F1EF14 /* alertView.swift in Sources */,
 				3B7AF0AB26729F81003BCCF3 /* CommentInputViewModel.swift in Sources */,
