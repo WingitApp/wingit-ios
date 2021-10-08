@@ -21,18 +21,6 @@ struct Device: Codable {
     var pushNotificationsEnabled: Bool
     var pushNotificationToken: String?
     var userId: String?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case createdAt
-        case appVersion
-        case model
-        case OSVersion
-        case platform
-        case pushNotificationsEnabled
-        case pushNotificationToken
-        case userId
-    }
 }
 
 enum Platform: String, Codable {
