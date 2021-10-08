@@ -44,12 +44,11 @@ struct profileImageView: View {
             Color.black
                 .ignoresSafeArea()
             
-            URLImage(URL(string: userProfileViewModel.user.profileImageUrl ?? "")!,
-                  content: {
-                      $0.image
+          URLImage(URL(string: userProfileViewModel.user.profileImageUrl ?? "")!) {
+                      $0
                           .resizable()
                           .aspectRatio(contentMode: .fit)
-                  })
+                  }
         }
 
     }
