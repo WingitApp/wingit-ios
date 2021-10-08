@@ -96,9 +96,7 @@ struct MainView: View {
                 self.mainViewModel.tapCount = 0
               }
           })
-        //NotificationView()
-        Tinder1()
-      //  Tinder2()
+        NotificationView()
           .tabItem({
             VStack(alignment: .center ){
               Image(systemName: mainViewModel.selection == 3 ? "bell.fill" : "bell")
