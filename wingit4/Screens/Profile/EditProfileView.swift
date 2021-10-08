@@ -12,7 +12,6 @@ import Combine
 
 
 struct EditProfileView: View, KeyboardReadable {
-  @EnvironmentObject var profileViewModel: ProfileViewModel
   @EnvironmentObject var session: SessionStore
   @EnvironmentObject var updatePhotoVM: UpdatePhotoVM
 
@@ -20,7 +19,7 @@ struct EditProfileView: View, KeyboardReadable {
   @State private var bioText: String
   @State private var isTextEditorOpen: Bool = false
   @State private var isEditingImage: Bool = false
-  
+  @State private var isSaving: Bool = false
   let textLimit = 200
   
   init(bio: String) {
@@ -36,8 +35,10 @@ struct EditProfileView: View, KeyboardReadable {
   }
   
   func onSave() {
-      profileViewModel.editProfile(bio: bioText) {
+      isSaving = true
+      session.editProfile(bio: bioText) {
         session.currentUser?.bio = bioText
+        self.isSaving = false
         let alertView = SPAlertView(title: "Bio Updated.", message: nil, preset: SPAlertIconPreset.done)
         alertView.present(duration: 1)
         self.closeSheet()
@@ -46,7 +47,8 @@ struct EditProfileView: View, KeyboardReadable {
   
   func closeSheet() {
     Haptic.impact(type: "soft")
-    profileViewModel.isEditSheetOpen = false
+    dismissKeyboard()
+    session.isEditSheetOpen = false
   }
   
   func showPhotoEditScreen(_ state: Bool) {
@@ -185,16 +187,16 @@ struct EditProfileView: View, KeyboardReadable {
             Button(action: onSave) {
               Text("Save")
                 .fontWeight(.semibold)
+                .foregroundColor(Color.white)
                 .frame(
                   width: UIScreen.main.bounds.width - 30,
                   height: 50
                 )
-                .foregroundColor(Color.white)
                 .background(Color.wingitBlue)
                 .cornerRadius(5)
             }
-            .disabled(!areEditsMade())
-            .opacity(areEditsMade() ? 1 : 0.6)
+            .disabled(!areEditsMade() || isSaving)
+            .opacity(areEditsMade() || !isSaving ? 1 : 0.6)
           }
           .padding(.top, 15)
           .padding(.bottom, 15)

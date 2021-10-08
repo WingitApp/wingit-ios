@@ -64,7 +64,6 @@ struct UpdateProfilePhoto: View {
     var onClose: (() -> Void)? = nil
     let uid = Auth.auth().currentUser?.uid
     @State var isSavingPhoto: Bool = false
-    @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var updatePhotoVM: UpdatePhotoVM
 
@@ -106,7 +105,7 @@ struct UpdateProfilePhoto: View {
     func closeSheet() {
       Haptic.impact(type: "soft")
       self.callback()
-      self.profileViewModel.isUpdatePicSheetOpen = false
+      self.session.isUpdatePicSheetOpen = false
       self.clean()
       
     }
@@ -200,13 +199,13 @@ struct UpdateProfilePhoto: View {
                   }
                  
                 }
-
+                .frame(width: UIScreen.main.bounds.width - 30, height: 50)
+                .background(Color.wingitBlue)
+                .cornerRadius(5)
             })
-              .frame(width: UIScreen.main.bounds.width - 30, height: 50)
-              .background(Color.wingitBlue)
-              .cornerRadius(5)
-              .opacity(updatePhotoVM.imageData.isEmpty ? 0.6 : 1)
-              .disabled(updatePhotoVM.imageData.isEmpty)
+            
+              .opacity((updatePhotoVM.imageData.isEmpty || isSavingPhoto) ? 0.6 : 1)
+              .disabled(updatePhotoVM.imageData.isEmpty || isSavingPhoto)
               .padding(.top, 50)
               .padding(.bottom, 15)
               .alert(isPresented: $updatePhotoVM.showAlert) {

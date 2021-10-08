@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileUserBio: View {
-  @EnvironmentObject var profileViewModel: ProfileViewModel
+  @EnvironmentObject var profileViewModel: SessionStore // moved user metadata to sessionStore
 
   var user: User?
   var isOwnProfile: Bool
