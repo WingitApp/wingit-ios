@@ -44,10 +44,9 @@ struct AskDetailView: View {
           CommentInput(post: $post, scrollProxyValue: proxy)
         }
       }
-      .navigationBarTitle("")
-      .navigationBarHidden(true)
-      .edgesIgnoringSafeArea(.top)
-      .padding(.top, 10)
+      .navigationBarTitle("", displayMode: .inline)
+      .navigationBarHidden(isNavBarHidden)
+      .navigationBarBackButtonHidden(isNavBarHidden)
       .environmentObject(commentViewModel)
       .frame(
         width: UIScreen.main.bounds.size.width
