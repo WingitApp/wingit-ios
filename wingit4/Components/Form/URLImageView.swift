@@ -10,43 +10,36 @@ import URLImage
 import SwiftUI
 
 struct URLImageView: View {
-  @ObservedObject var urlImageViewModel: URLImageViewModel
+  var url: URL
   
-  func placeholderColor() -> UIColor{
-    let randomInt = Int.random(in: 1..<6)
-    
-    switch(randomInt) {
-//      
-//      case 1:
-//        return UIColor(Color.apricotWhite)
-//      case 2:
-//        return UIColor(Color.carnationRed)
-//      case 3:
-//        return UIColor(Color.yellow)
-//      case 4:
-//        return UIColor(Color.orange)
-//      case 5:
-//        return UIColor(Color.downeyGreen)
-    default:
-      return UIColor.systemGray6
-    }
-
-  }
-  
-  func defaultImage() -> UIImage {
-    return placeholderColor().image(CGSize(width: 128, height: 128))
-  }
-
   
   init(urlString: String?) {
-    urlImageViewModel = URLImageViewModel(urlString: urlString)
+    url = URL(string: urlString ?? DEFAULT_PROFILE_AVATAR) ?? URL(string: DEFAULT_PROFILE_AVATAR)!
   }
+  
+  
     
   var body: some View {
-    Image(uiImage: urlImageViewModel.image ?? defaultImage())
-      .resizable()
-      .aspectRatio(contentMode: .fill)
-      .background(Color.gray)
+  
+    URLImage(url) {
+      EmptyView()
+    } inProgress: { progress in
+        // Display progress
+      HStack{}
+        .background(Color.gray)
+    } failure: { error, retry in
+        // Display error and retry button
+        VStack {
+            Text(error.localizedDescription)
+            Button("Retry", action: retry)
+        }
+    } content: { image in
+        // Downloaded image
+        image
+        .resizable()
+        .aspectRatio(contentMode: .fill)
+        .background(Color.gray)
+    }
   }
   
 }

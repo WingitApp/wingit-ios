@@ -11,6 +11,8 @@ import SwiftUI
 import Firebase
 import FirebaseMessaging
 import UserNotifications
+import URLImage
+import URLImageStore
 
 class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate {
   private var operationQueue = OperationQueue()
@@ -148,9 +150,15 @@ struct WingitApp: App {
     let sessionStore = SessionStore()
     
   var body: some Scene {
+    let urlImageService = URLImageService(
+      fileStore: URLImageFileStore(),
+      inMemoryStore: URLImageInMemoryStore()
+    )
+    
     WindowGroup {
-      InitialView().environmentObject(sessionStore)
-
+      InitialView()
+        .environment(\.urlImageService, urlImageService)
+        .environmentObject(sessionStore)
     }
   }
     
