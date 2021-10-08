@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ProfileUserHeader: View {
     @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
-    @EnvironmentObject var profileViewModel: ProfileViewModel
+    @EnvironmentObject var profileViewModel: SessionStore // moved user metadata to sessionStore
+
     @EnvironmentObject var userProfileViewModel: UserProfileViewModel
   
     var user: User?
@@ -56,6 +57,11 @@ struct ProfileUserHeader: View {
           .padding(.top, 5)
         }
 
+      }
+      .onAppear {
+        if isOwnProfile {
+          self.profileViewModel.loadUserConnections()
+        }
       }
       .sheet(
         isPresented: $connectionsViewModel.isConnectionsSheetOpen,

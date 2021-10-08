@@ -12,10 +12,10 @@ import FirebaseAuth
 
 struct ProfileView: View {
   @EnvironmentObject var session: SessionStore
-  @StateObject var profileViewModel = ProfileViewModel()
+  @EnvironmentObject var updatePhotoVM: UpdatePhotoVM
+
   @StateObject var userProfileViewModel: UserProfileViewModel
   @StateObject var connectionsViewModel = ConnectionsViewModel()
-  @StateObject var updatePhotoVM = UpdatePhotoVM()
 
   @State var isOwnProfile: Bool
   var profileTab: Bool
@@ -43,6 +43,7 @@ struct ProfileView: View {
         _userProfileViewModel = StateObject(
           wrappedValue: UserProfileViewModel(userId: nil, user: nil)
         )
+
       case false:
         _isOwnProfile = State(initialValue: false)
         _userProfileViewModel = StateObject(
@@ -57,7 +58,7 @@ struct ProfileView: View {
 
     func openUpdatePicSheet() {
       Haptic.impact(type: "soft")
-      self.profileViewModel.isUpdatePicSheetOpen.toggle()
+      self.session.isUpdatePicSheetOpen.toggle()
     }
     
     func openPicSheet() {
@@ -132,7 +133,6 @@ struct ProfileView: View {
         }
         
       }
-      .environmentObject(profileViewModel)
       .environmentObject(userProfileViewModel)
       .environmentObject(connectionsViewModel)
       .environmentObject(updatePhotoVM)
@@ -179,8 +179,6 @@ struct ProfileView: View {
         } else {
           if session.isLoggedIn {
             logToAmplitude(event: .viewOwnProfile)
-            profileViewModel.loadUserProfile()
-            updatePhotoVM.loadCurrentImage(userAvatar: session.currentUser?.profileImageUrl)
           }
         }
       }
@@ -189,28 +187,20 @@ struct ProfileView: View {
            content: {
                profileImageView().environmentObject(userProfileViewModel)
          })
-////      .sheet(
-////          isPresented:  $profileViewModel.userProfilePicSheetOpen,
-////          content: { profileImageView(user: self.userProfileViewModel.user)
-////                  .environmentObject(userProfileViewModel)
-////          }
-////        )
       .modifier(Popup(
-        isPresented: profileViewModel.isUpdatePicSheetOpen,
+        isPresented: session.isUpdatePicSheetOpen,
         alignment: .center,
         direction: .bottom,
         content: {
           UpdateProfilePhoto(user: session.currentUser)
-            .environmentObject(profileViewModel)
             .environmentObject(updatePhotoVM)
         }))
     .modifier(Popup(
-      isPresented: profileViewModel.isEditSheetOpen,
+      isPresented: session.isEditSheetOpen,
       alignment: .center,
       direction: .bottom,
       content: {
         EditProfileView(bio: session.currentUser?.bio ?? "")
-        .environmentObject(profileViewModel)
         .environmentObject(updatePhotoVM)
       }))
   }

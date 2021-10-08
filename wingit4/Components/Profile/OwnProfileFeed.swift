@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OwnProfileFeed: View {
-  @EnvironmentObject var profileViewModel: ProfileViewModel
+  @EnvironmentObject var profileViewModel: SessionStore
   
   func sortOpenPosts() -> Void {
     self.profileViewModel.openPosts.sort { $0.date ?? 0 > $1.date ?? 0 }

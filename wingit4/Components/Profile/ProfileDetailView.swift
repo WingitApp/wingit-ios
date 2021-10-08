@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileDetailView: View {
     @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
-    @EnvironmentObject var profileViewModel: ProfileViewModel
+    @EnvironmentObject var profileViewModel: SessionStore // moved user metadata to sessionStore
     @EnvironmentObject var userProfileViewModel: UserProfileViewModel
   
     var user: User?
@@ -26,9 +26,7 @@ struct ProfileDetailView: View {
             .padding(.leading, -15) // needed to offset
             .padding(.trailing, -15)
           ScrollView {
-            ProfileFeed(
-              isOwnProfile: isOwnProfile
-            ) // add switch
+            ProfileFeed(isOwnProfile: isOwnProfile) // add switch
               .padding([.vertical])
               .background(Color.backgroundGray)
               

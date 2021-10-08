@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfilePostsTab: View {
-    @EnvironmentObject var profileViewModel: ProfileViewModel
+    @EnvironmentObject var profileViewModel: SessionStore // moved user metadata to sessionStore
     @EnvironmentObject var userProfileViewModel: UserProfileViewModel
     @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
 

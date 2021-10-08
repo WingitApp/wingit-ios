@@ -15,6 +15,9 @@ struct MainView: View {
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
   @EnvironmentObject var session: SessionStore
   @StateObject var mainViewModel = MainViewModel()
+  @StateObject var updatePhotoVM = UpdatePhotoVM()
+
+//  @StateObject var profileViewModel = ProfileViewModel()
   @StateObject var notificationViewModel = NotificationViewModel()
   @StateObject var homeViewModel = HomeViewModel()
   @StateObject var referViewModel = ReferViewModel()
@@ -114,7 +117,9 @@ struct MainView: View {
                 self.mainViewModel.tapCount = 0
               }
           })
-        ProfileView(profileTab: true)
+        ProfileView(
+          profileTab: true
+        )
           .tabItem({
             VStack(alignment: .center ){
               Image(systemName: mainViewModel.selection == 4 ? "person.fill" : "person")
@@ -141,9 +146,12 @@ struct MainView: View {
     .environmentObject(homeViewModel)
     .environmentObject(referViewModel)
     .environmentObject(mainViewModel)
+    .environmentObject(updatePhotoVM)
     .onAppear{
         self.homeViewModel.loadTimeline()
         self.notificationViewModel.loadNotifications()
+        self.session.loadUserProfile()
+        self.updatePhotoVM.loadCurrentImage(userAvatar: session.currentUser?.profileImageUrl)
     }
   }
 }

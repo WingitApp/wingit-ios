@@ -9,7 +9,7 @@ import SwiftUI
 import SPAlert
 
 struct ProfileButton: View {
-  @EnvironmentObject var profileViewModel: ProfileViewModel
+  @EnvironmentObject var profileViewModel: SessionStore // moved user metadata to sessionStore
   @EnvironmentObject var userProfileViewModel: UserProfileViewModel
   @EnvironmentObject var connectionsViewModel: ConnectionsViewModel
 
@@ -107,6 +107,7 @@ struct ProfileButton: View {
   }
   
     var body: some View {
+      Button(action: onButtonTap) {
         HStack(spacing: 10){
           Text(Image(systemName: getIconName()))
             .font(.system(size: 15))
@@ -127,7 +128,8 @@ struct ProfileButton: View {
           Capsule()
             .stroke(Color.borderGray)
         )
-        .onTapGesture(perform: onButtonTap)
         .redacted(reason: userProfileViewModel.isFetchingConnectedStatus ? .placeholder : [])
     }
+  }
+        
 }
