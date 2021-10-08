@@ -22,7 +22,8 @@ class UpdatePhotoVM: ObservableObject {
     @Published var showImagePicker: Bool = false
   
     func loadCurrentImage(userAvatar: String?) {
-      let url = URL(string: userAvatar!)
+      guard let userAvatar = userAvatar else { return }
+      let url = URL(string: userAvatar)
       let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
       let uiImage = UIImage(data: data!)
       image = Image(uiImage: uiImage!)
