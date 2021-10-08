@@ -76,7 +76,8 @@ struct MainView: View {
                 self.mainViewModel.tapCount = 0
               }
           })
-        ComposePostView()
+        //ComposePostView()
+      Tinder2()
           .tabItem({
             VStack(alignment: .center ){
               Image(systemName: "plus.circle.fill")
@@ -97,6 +98,7 @@ struct MainView: View {
           })
         //NotificationView()
         Tinder1()
+      //  Tinder2()
           .tabItem({
             VStack(alignment: .center ){
               Image(systemName: mainViewModel.selection == 3 ? "bell.fill" : "bell")
