@@ -53,9 +53,13 @@ let POST_TYPE_OPTIONS: [String] = [
 ]
 
 class Ref {
-    // Storage
-       static var STORAGE_ROOT = Storage.storage().reference(forURL: "gs://wingitapp-1fe28.appspot.com")
-    
+       // Storage
+        #if DEBUG
+        static var STORAGE_ROOT = Storage.storage().reference(forURL: "gs://wingit-staging-83e2d.appspot.com")
+        #else
+        static var STORAGE_ROOT = Storage.storage().reference(forURL: "gs://wingitapp-1fe28.appspot.com")
+        #endif
+  
         // Storage - Ask
         static var STORAGE_ASKS = STORAGE_ROOT.child("asks")
         static func STORAGE_ASK_ID(askId: String) -> StorageReference {
