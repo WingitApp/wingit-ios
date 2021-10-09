@@ -16,22 +16,13 @@ struct ConnectionRow: View {
         NavigationLink(
           destination: ProfileView(userId: user.id, user: user)
         ) {
-          HStack {
-            URLImageView(urlString: user.profileImageUrl)
-                .clipShape(Circle())
-                .frame(width: 40, height: 40)
-                .overlay(
-                  RoundedRectangle(cornerRadius: 100)
-                    .stroke(Color.gray.opacity(0.4), lineWidth: 1)
-                )
-            VStack(alignment: .leading, spacing: 5) {
-              Text(user.displayName ?? "").font(.headline).bold()
-              Text("@\(user.username ?? "")")
-              .font(.subheadline)
-              .foregroundColor(.wingitBlue)
-            }
-            .padding(.leading, 10)
-            Spacer()
+          HStack{
+          UserRow(
+            urlString: user.profileImageUrl ?? "",
+            userDisplayName: user.displayName ?? "",
+            username: user.username ?? "")
+              .padding(.leading, 10)
+              Spacer()
           }
           .padding(
             EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15)

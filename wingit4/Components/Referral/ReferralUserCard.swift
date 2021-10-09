@@ -21,23 +21,23 @@ struct ReferralUserCard: View {
       }
       self.referViewModel.handleUserSelect(user: user)
     }
+  
+  @State var isTapped: Bool = false
+  
+  func onUserAvatarTap() {
+    Haptic.impact(type: "soft")
+    isTapped = true
+  }
     
     var body: some View {
       
         
         HStack(spacing: 0) {
-            UserAvatar(
-              user: user,
-              height: 40,
-              width: 40
-            )
-           
-          
-            VStack(alignment: .leading, spacing: 5) {
-                Text(user.displayName ?? user.username ?? "").font(.headline).bold()
-                Text("@\(user.username ?? "")").font(.subheadline)
-                  .foregroundColor(.wingitBlue)
-            }
+          UserRow(
+            urlString: user.profileImageUrl ?? "",
+            userDisplayName: user.displayName ?? user.username ?? "",
+            username: user.username ?? "")
+            .onTapGesture(perform: onUserAvatarTap)
             .padding(.leading, 15)
             Spacer()
             ZStack{

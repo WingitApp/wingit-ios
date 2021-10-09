@@ -25,23 +25,12 @@ struct UsersView: View {
 
                                 ForEach(usersViewModel.users, id: \.id) { user in
                                   NavigationLink(destination: ProfileView(userId: nil, user: user)) {
-                                        HStack {
-                                            URLImageView(urlString: user.profileImageUrl)
-                                              .clipShape(Circle())
-                                              .frame(width: 40, height: 40)
-                                              .overlay(
-                                                RoundedRectangle(cornerRadius: 100)
-                                                  .stroke(Color.gray, lineWidth: 0.5)
-                                              )
-                                            
-                                            VStack(alignment: .leading, spacing: 5) {
-                                             Text(user.displayName ?? "")
-                                              .font(.headline).bold()
-                                              Text("@\(user.username ?? "")")
-                                                .font(.subheadline)
-                                                .foregroundColor(.wingitBlue)
-                                            }
-                                        }
+                                    HStack{
+                                    UserRow(
+                                      urlString: user.profileImageUrl ?? "",
+                                      userDisplayName: user.displayName ?? "",
+                                      username: user.username ?? "")
+                                    }
                                }
                                     .padding(10)
                             }
