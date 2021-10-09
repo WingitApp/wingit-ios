@@ -22,17 +22,13 @@ struct SigninButton: View {
                 .font(.system(size: 20))
                 .foregroundColor(.white)
                 .fontWeight(.bold)
-                
+                .padding(.vertical)
+                .frame(idealWidth: UIScreen.main.bounds.width - 50, maxWidth: 500, minHeight: 55, idealHeight: 55, maxHeight: 55)
+                .background( Color("Color"))
+                .cornerRadius(5)
           }
        
         }
-        .padding(.vertical)
-        .frame(idealWidth: UIScreen.main.bounds.width - 50, maxWidth: 500, minHeight: 55, idealHeight: 55, maxHeight: 55)
-        .background(
-        
-           Color("Color")
-        )
-        .cornerRadius(5)
         .disabled(
           signinViewModel.isPending
         )
