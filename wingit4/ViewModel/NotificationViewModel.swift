@@ -13,11 +13,12 @@ import FirebaseFirestoreSwift
 
 
 class NotificationViewModel: ObservableObject {
-    
+    @AppStorage("notificationsLastSeenAt") var notificationsLastSeenAt: Double = 0
     @Published var notificationsArray: [Notification] = []
     var listener: ListenerRegistration!
     
     @Published var isLoading = true
+    @Published var hasUnreadNotifications = false
     
     // Variables to leep track of what option has been tapped on and when to navigate to new view
     @Published var selectedNotificationType = NotificationLinkType.userProfile
@@ -29,8 +30,12 @@ class NotificationViewModel: ObservableObject {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         
         Ref.FS_COLLECTION_ACTIVITY .document(userId).collection("feedItems") .document(notificationId).setData(["openedAt": FieldValue.serverTimestamp()], merge: true)
-    
     }
+  
+  func updateNotificationsLastSeenAt() {
+    hasUnreadNotifications = false
+    notificationsLastSeenAt = Date().timeIntervalSince1970
+  }
     
     func loadNotifications() {
         self.notificationsArray = []
@@ -43,6 +48,9 @@ class NotificationViewModel: ObservableObject {
             if !self.notificationsArray.contains(notification) {
               self.notificationsArray.insert(notification, at: 0)
               self.isLoading = false
+              if (notification.date > self.notificationsLastSeenAt) {
+                self.hasUnreadNotifications = true
+              }
             }
           }, deleteNotification: { (notification) in
               if !self.notificationsArray.isEmpty {

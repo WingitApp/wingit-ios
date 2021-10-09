@@ -28,6 +28,5 @@ final class MainViewModel: ObservableObject {
   func setTab(tabId: Int) -> Void {
     self.selection = tabId
   }
-  
-    
+
 }

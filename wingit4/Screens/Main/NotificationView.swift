@@ -5,6 +5,7 @@
 //  Created by YaeRim Amy Chun on 6/9/21.
 //
 import FirebaseFirestore
+import Foundation
 import SwiftUI
 
 struct NotificationView: View {
@@ -122,6 +123,7 @@ struct NotificationView: View {
         .onAppear {
           if session.isLoggedIn {
             logToAmplitude(event: .viewNotifications)
+            notificationViewModel.updateNotificationsLastSeenAt()
           }
             sortNotifications()
             cleanState()
