@@ -6,12 +6,17 @@
 //
 
 import SwiftUI
+import BottomSheet
 
 struct AskDetailView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject var commentViewModel = CommentViewModel()
+    @StateObject var commentSheetViewModel = CommentSheetViewModel()
     @Binding var post: Post?
     @State private var isNavBarHidden: Bool = true
+  
+    @State private var bottomSheetPosition: BottomSheetPosition = .hidden
+  
     
     var body: some View {
  
@@ -43,11 +48,35 @@ struct AskDetailView: View {
             }))
           CommentInput(post: $post, scrollProxyValue: proxy)
         }
+          .bottomSheet(
+            bottomSheetPosition: self.$commentSheetViewModel.bottomSheetPosition,
+            options: [.allowContentDrag, .swipeToDismiss, .tapToDissmiss, .background(AnyView(BackgroundBlurView())) ],
+            headerContent: {
+              CommentSheetHeader()
+                .environmentObject(commentSheetViewModel)
+//              VStack(spacing: 0){
+//                HStack(alignment: .center, spacing: 0) {
+//                  Text(commentSheetViewModel.comment?.comment ?? "")
+//                    .font(.caption)
+//                }
+//                .frame(width: UIScreen.main.bounds.width, height: 40)
+//                  .padding(.bottom, 15)
+//                Divider()
+//                  .padding(0)
+//              }
+//              .padding(.vertical, 10)
+//              .background(Color.white)
+            }){
+              CommentActionsList()
+//                .background(Color.white)
+                .environmentObject(commentSheetViewModel)
+          }
       }
       .navigationBarTitle("", displayMode: .inline)
       .navigationBarHidden(isNavBarHidden)
       .navigationBarBackButtonHidden(isNavBarHidden)
       .environmentObject(commentViewModel)
+      .environmentObject(commentSheetViewModel)
       .frame(
         width: UIScreen.main.bounds.size.width
       )

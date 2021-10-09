@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 let smile = Reaction(
   emoji: "😀",
   commentId: "placeholder",
@@ -20,7 +19,9 @@ let smile = Reaction(
 struct ReactionBar: View {
   
   // emoji
+
   @State var text: String = ""
+  @State var showSheet: Bool = false
   var emojiList: [Reaction] = [smile]
   
     var body: some View {
@@ -39,9 +40,6 @@ struct ReactionBar: View {
             : Color.lightGray
           )
           .cornerRadius(5)
-//          .onTapGesture {
-//
-//          }
 
         }
         
@@ -58,9 +56,3 @@ struct ReactionBar: View {
       
     }
 }
-//
-//struct ReactionBar_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ReactionBar()
-//    }
-//}

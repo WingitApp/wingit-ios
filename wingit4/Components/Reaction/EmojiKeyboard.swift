@@ -7,36 +7,33 @@
 
 import SwiftUI
 
+
+
 struct EmojiKeyboard: View {
-//  private var emoji
-  
-  private let columns = [
-          GridItem(.flexible()),
-          GridItem(.flexible()),
-          GridItem(.flexible()),
-          GridItem(.flexible()),
-          GridItem(.flexible()),
-          GridItem(.flexible())
-      ]
-  
-//  func getEmojiList() -> [Int] {
-//    var emojis: [Int] = []
-//
-//    for i in Emojis.orderedEmojiHexList {
-//          if (UnicodeScalar(i)?.properties.isEmoji)! {
-//            emojis.append(i)
-//          }
-//      }
-//
-//    return emojis
-//  }
-  
+  @EnvironmentObject var commentSheetViewModel: CommentSheetViewModel
+
+    private let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+
     var body: some View {
+      
+//      ForEach(self.words.filter({ $0.contains(self.searchText.lowercased()) || self.searchText.isEmpty}), id: \.self) { word in
+//                         Text(word)
+//                             .font(.title)
+//                             .padding([.leading, .bottom])
+//                             .frame(maxWidth: .infinity, alignment: .leading)
+//                     }
+    
       ScrollView(showsIndicators: false) {
-        LazyVGrid(columns: columns, spacing: 10) {
-          ForEach(Emojis.orderedEmojiHexList, id: \.self) { i in
+        LazyVGrid(columns: columns, spacing: 0) {
+          ForEach(Emojis.orderedEmojiHexList.filter({ UnicodeScalar($0)?.properties.name!.lowercased().contains(commentSheetViewModel.searchText.lowercased()) as! Bool || commentSheetViewModel.searchText.isEmpty }), id: \.self) { i in
             Button(action: {}) {
-//              VStack {
                 Text(String(UnicodeScalar(i)!))
                   .font(.system(size: 30))
                 
@@ -46,18 +43,11 @@ struct EmojiKeyboard: View {
             }
           }
         }
+        .animation(.default)
+
       }
-      .frame(maxHeight: 500)
       .frame(
         width: UIScreen.main.bounds.width
-//        height: UIScreen.main.bounds.height
       )
-      .background(Color.white)
-    }
-}
-
-struct EmojiKeyboard_Previews: PreviewProvider {
-    static var previews: some View {
-        EmojiKeyboard()
     }
 }

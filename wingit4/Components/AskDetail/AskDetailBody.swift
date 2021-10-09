@@ -63,7 +63,7 @@ struct AskDetailBody: View {
             }
         }, label: {
           URLImageView(urlString: post?.mediaUrl)
-            .scaledToFit()
+            .scaledToFill()
             .frame(width: UIScreen.main.bounds.width - 37, height: 275)
             .cornerRadius(8)
             .overlay(

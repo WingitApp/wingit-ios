@@ -9,13 +9,13 @@ import SwiftUI
 import FirebaseAuth
 
 struct UserComment: View {
+  @EnvironmentObject var commentSheetViewModel: CommentSheetViewModel
   var comment: Comment
   var postOwnerId: String?
   var isOPComment: Bool = false
   
-
-  
   @State var isNavActive: Bool = false
+//  @State var isActive: Bool = false
 
 
   
@@ -24,6 +24,12 @@ struct UserComment: View {
     self.postOwnerId = postOwnerId
     if comment.ownerId == postOwnerId {
       self.isOPComment = true
+    }
+  }
+  
+  func openCommentActionsSheet() {
+    commentSheetViewModel.openCommentSheet(comment: comment) {
+//      isActive = true
     }
   }
   
@@ -73,7 +79,7 @@ struct UserComment: View {
             Text(comment.comment?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
             .font(.system(size:15))
             .padding(.top, 1)
-          
+            .onTapGesture(perform: openCommentActionsSheet)
           
           // Emoji Bar
           ReactionBar()
