@@ -6,6 +6,7 @@
 //
 
 import Amplitude
+import Combine
 import Foundation
 import SwiftUI
 import Firebase
@@ -16,6 +17,7 @@ import URLImageStore
 
 class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate {
   private var operationQueue = OperationQueue()
+  weak var viewRouter: ViewRouter?
 
   var window: UIWindow?
   let gcmMessageIDKey = "gcm.message_id"
@@ -145,6 +147,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 @main
 struct WingitApp: App {
+    let viewRouter = ViewRouter()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     let sessionStore = SessionStore()
@@ -159,7 +162,13 @@ struct WingitApp: App {
       InitialView()
         .environment(\.urlImageService, urlImageService)
         .environmentObject(sessionStore)
+        .environmentObject(viewRouter)
+        .onAppear(perform:setUpAppDelegate)
     }
+  }
+  
+  func setUpAppDelegate() {
+      delegate.viewRouter = viewRouter
   }
     
 
