@@ -42,6 +42,7 @@ class SessionStore: ObservableObject {
   
   
     @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
+    @AppStorage("notificationsLastSeenAt") var notificationsLastSeenAt: Double = 1633809770
     var handle: AuthStateDidChangeListenerHandle?
     
     func listenAuthenticationState() {
@@ -52,6 +53,7 @@ class SessionStore: ObservableObject {
                     onSuccess: { (decodedUser) in
                         // user successfully found
                         self.currentUser = decodedUser
+                        self.initializeAppStorageCache(user: decodedUser)
                         Api.Device.updateDeviceInFirestore(token: "")
                         self.isLoggedIn = true
                         self.isSessionLoading = false
@@ -100,6 +102,10 @@ extension SessionStore {
     self.loadUserConnections()
     self.loadUserOpenPosts()
     self.loadClosedPosts()
+  }
+  
+  func initializeAppStorageCache (user: User) {
+    notificationsLastSeenAt = Double(user.notificationsLastSeenAt?.seconds ?? 1633809770)
   }
 
 
