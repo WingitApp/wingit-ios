@@ -10,11 +10,19 @@ import Foundation
 import Combine
 import SwiftUI
 
+enum MainTab: Hashable {
+  case home
+  case referrals
+  case composePost
+  case notifications
+  case profile
+}
+
 final class MainViewModel: ObservableObject {
     @Published var tapCount: Int = 0
-    @Published var selection: Int = 0
+    @Published var selection: MainTab = .home
   
-  var tabHandler: Binding<Int> { Binding(
+  var tabHandler: Binding<MainTab> { Binding(
     get: { self.selection },
     set: {
       if $0 == self.selection {
@@ -25,8 +33,8 @@ final class MainViewModel: ObservableObject {
     }
   )}
   
-  func setTab(tabId: Int) -> Void {
-    self.selection = tabId
+  func setTab(tab: MainTab) -> Void {
+    self.selection = tab
   }
 
 }

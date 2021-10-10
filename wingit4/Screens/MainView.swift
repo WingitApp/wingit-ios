@@ -42,13 +42,13 @@ struct MainView: View {
             HomeView()
               .tabItem({
                 VStack(alignment: .center ){
-                  Image(systemName: mainViewModel.selection == 0 ? "house.fill" : "house")
+                  Image(systemName: mainViewModel.selection == .home ? "house.fill" : "house")
                     .imageScale(.small)
                   Text("Home")
                     .font(.caption2)
                 }
               })
-              .tag(0)
+              .tag(MainTab.home)
               .id(home)
               .onChange(
                 of: mainViewModel.tapCount,
@@ -62,13 +62,13 @@ struct MainView: View {
             ReferralsView()
               .tabItem({
                 VStack(alignment: .center ){
-                  Image(systemName: mainViewModel.selection == 1 ? "paperplane.fill" : "paperplane" )
+                  Image(systemName: mainViewModel.selection == .referrals ? "paperplane.fill" : "paperplane" )
                     .imageScale(.small)
                   Text("Inbox")
                     .font(.caption2)
                 }
               })
-              .tag(1)
+              .tag(MainTab.referrals)
               .id(referrals)
               .onChange(
                 of: mainViewModel.tapCount,
@@ -87,7 +87,7 @@ struct MainView: View {
                     .font(.caption2)
                 }
               })
-              .tag(2)
+              .tag(MainTab.composePost)
               .id(composePost)
               .onChange(
                 of: mainViewModel.tapCount,
@@ -100,14 +100,14 @@ struct MainView: View {
             NotificationView()
               .tabItem({
                 VStack(alignment: .center ){
-                  Image(systemName: mainViewModel.selection == 3 ? "bell.fill" : "bell")
+                  Image(systemName: mainViewModel.selection == .notifications ? "bell.fill" : "bell")
                     .imageScale(.small)
                   Text("Notifs")
                     .font(.caption2)
                 }
                 
               })
-              .tag(3)
+              .tag(MainTab.notifications)
               .id(notification)
               .onChange(
                 of: mainViewModel.tapCount,
@@ -122,13 +122,13 @@ struct MainView: View {
             )
               .tabItem({
                 VStack(alignment: .center ){
-                  Image(systemName: mainViewModel.selection == 4 ? "person.fill" : "person")
+                  Image(systemName: mainViewModel.selection == .profile ? "person.fill" : "person")
                     .imageScale(.small)
                   Text("You")
                     .font(.caption2)
                 }
               })
-              .tag(4)
+              .tag(MainTab.profile)
               .id(profile)
               .onChange(
                 of: mainViewModel.tapCount,
