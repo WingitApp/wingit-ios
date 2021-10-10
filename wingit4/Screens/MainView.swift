@@ -149,7 +149,7 @@ struct MainView: View {
             .font(Font.system(size: 12))
         }
         .frame(width: 15, height: 15)
-        .offset(x: ( ( 2 * self.badgePosition) - 0.3 ) * ( geometry.size.width / ( 2 * self.tabsCount ) ) + 2, y: -25)
+        .offset(x: ( ( 2 * self.badgePosition) - 0.45 ) * ( geometry.size.width / ( 2 * self.tabsCount ) ) + 2, y: -30)
         .opacity(notificationViewModel.unreadNotifications == 0 ? 0 : 1.0)
       }
       .accentColor(.wingitBlue)
