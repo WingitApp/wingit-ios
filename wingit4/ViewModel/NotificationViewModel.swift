@@ -13,7 +13,7 @@ import FirebaseFirestoreSwift
 
 
 class NotificationViewModel: ObservableObject {
-    @AppStorage("notificationsLastSeenAt") var notificationsLastSeenAt: Double = 1633809770
+    @AppStorage("notificationsLastSeenAt") var notificationsLastSeenAt: Double = 1633885030
     @Published var notificationsArray: [Notification] = []
     var listener: ListenerRegistration!
     

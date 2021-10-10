@@ -36,26 +36,6 @@ struct User: Identifiable, Codable, Equatable, Hashable {
       return "\(self.firstName ?? "") \(self.lastName ?? "")".trimmingCharacters(in: .whitespacesAndNewlines).capitalized
     }
 
-    enum CodingKeys: String, CodingKey {
-        case id
-        case uid
-        case bio
-        case canonicalEmail
-        case email
-        case firstName
-        case keywords
-        case lastName
-        case profileImageUrl
-        case tags
-        case username
-        case facebook
-        case twitter
-        case linkedin
-        case instagram
-        case reddit
-        case spotify
-    }
-  
     subscript(key: String) -> String {
           get {
               switch key {

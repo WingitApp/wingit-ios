@@ -42,7 +42,7 @@ class SessionStore: ObservableObject {
   
   
     @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
-    @AppStorage("notificationsLastSeenAt") var notificationsLastSeenAt: Double = 1633809770
+    @AppStorage("notificationsLastSeenAt") var notificationsLastSeenAt: Double = 1633885030
     var handle: AuthStateDidChangeListenerHandle?
     
     func listenAuthenticationState() {
@@ -105,9 +105,8 @@ extension SessionStore {
   }
   
   func initializeAppStorageCache (user: User) {
-    notificationsLastSeenAt = Double(user.notificationsLastSeenAt?.seconds ?? 1633809770)
+    notificationsLastSeenAt = Double(user.notificationsLastSeenAt?.seconds ?? 1633885030)
   }
-
 
   func loadUserConnections() {
       guard let userId = Auth.auth().currentUser?.uid else { return }
