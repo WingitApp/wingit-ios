@@ -35,6 +35,10 @@ class NotificationViewModel: ObservableObject {
   func updateNotificationsLastSeenAt() {
     unreadNotifications = 0
     notificationsLastSeenAt = Date().timeIntervalSince1970
+    
+    guard let userId = Auth.auth().currentUser?.uid else { return }
+    
+    Ref.FS_COLLECTION_USERS.document(userId).setData(["notificationsLastSeenAt": FieldValue.serverTimestamp()], merge: true)
   }
     
     func loadNotifications() {

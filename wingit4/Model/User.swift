@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 
 struct User: Identifiable, Codable, Equatable, Hashable {
     @DocumentID var id: String?
-    @ServerTimestamp var createdAt: Timestamp?
+    var createdAt: Timestamp?
     var uid: String?
     var bio: String?
     var canonicalEmail: String?
@@ -20,6 +20,7 @@ struct User: Identifiable, Codable, Equatable, Hashable {
     var firstName: String?
     var keywords: [String]?
     var lastName: String?
+    var notificationsLastSeenAt: Timestamp?
     var profileImageUrl: String?
     var tags: [String]? //attributes of the user
     var username: String?
