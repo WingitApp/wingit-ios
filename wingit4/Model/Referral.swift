@@ -27,6 +27,10 @@ struct Referral: Codable, Identifiable, Equatable, Hashable {
     // client-side join
     var ask: Post?
     var sender: User?
+  
+//  var x: CGFloat = 0.0
+//  var y: CGFloat = 0.0
+//  var degree: Double = 0.0
 
     enum CodingKeys: String, CodingKey {
         case id

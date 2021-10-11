@@ -77,7 +77,7 @@ struct MainView: View {
               }
           })
         //ComposePostView()
-      Tinder2()
+         TinderScreen()
           .tabItem({
             VStack(alignment: .center ){
               Image(systemName: "plus.circle.fill")

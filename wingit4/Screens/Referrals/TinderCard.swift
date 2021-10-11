@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct TinderCard: View {
+  
   @State var card: Card
+
+  @State private var x: CGFloat = 0.0
+  @State private var y: CGFloat = 0.0
+  @State private var degree: Double = 0.0
+  
   let cardGradient = Gradient(colors: [Color.black.opacity(0), Color.black.opacity(0.7)])
+  
   var body: some View {
     ZStack(alignment: .topLeading){
       
@@ -66,27 +73,27 @@ struct TinderCard: View {
           .resizable()
           .aspectRatio(contentMode: .fit)
           .frame(width: 150)
-          .opacity((Double(card.x/10 - 1)))
+          .opacity((Double(x/10 - 1)))
         Spacer()
         Image("logo")
           .resizable()
           .aspectRatio(contentMode: .fit)
           .frame(width: 150)
-          .opacity(Double(card.x/10 * -1 - 1))
+          .opacity(Double(x/10 * -1 - 1))
       }
     }
-    
-    
+     
+     
     .cornerRadius(8)
-      .offset(x: card.x, y: card.y)
-      .rotationEffect(.init(degrees: card.degree))
+      .offset(x: x, y: y)
+      .rotationEffect(.init(degrees: degree))
       .gesture(
       DragGesture()
         .onChanged{ value in
           withAnimation(.default){
-            card.x = value.translation.width
-            card.y = value.translation.height
-            card.degree = 7 * (value.translation.width > 0 ? 1 : -1)
+            x = value.translation.width
+            y = value.translation.height
+            degree = 7 * (value.translation.width > 0 ? 1 : -1)
           }
           
         }
@@ -95,14 +102,14 @@ struct TinderCard: View {
                                              initialVelocity: 0)) {
             switch value.translation.width {
             case 0...100:
-              card.x = 0; card.degree = 0; card.y = 0
+              x = 0; degree = 0; y = 0
             case let x where x > 100:
-              card.x = 500; card.degree = 12
+              self.x = 500; degree = 12
             case (-100)...(-1):
-              card.x = 0; card.degree = 0; card.y = 0;
+              x = 0; degree = 0; y = 0;
             case let x where x < -100:
-              card.x = -500; card.degree = -12
-            default: card.x = 0; card.y = 0
+              self.x = -500; degree = -12
+            default: x = 0; y = 0
             }
           }
           
