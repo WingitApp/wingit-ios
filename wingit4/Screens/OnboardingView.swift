@@ -7,10 +7,14 @@
 import SwiftUI
 
 struct OnboardingView: View {
+  
+ 
     var body: some View {
         // For Smaller Size iPhones...
         
+       
         VStack{
+          
             
             if UIScreen.main.bounds.height < 750{
                 
@@ -25,6 +29,10 @@ struct OnboardingView: View {
             }
         }
         .padding(.vertical)
+        .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
+          .background(Color.white)
+          .ignoresSafeArea()
+        
     }
 }
 
@@ -32,11 +40,27 @@ struct Home1 : View {
     @EnvironmentObject var session: SessionStore
     @State var index = 0
     @Namespace var name
+  @EnvironmentObject var onboardingViewModel: OnboardingViewModel
+  
+  func closeOnboardingView() {
+    onboardingViewModel.onboardingView = false
+  }
     
     var body: some View{
       ActivityIndicatorView(message: "Loading...", isShowing: self.$session.isSessionLoading) {
         VStack{
+         
+          HStack {
+            Spacer()
+            Button(action: closeOnboardingView) {
+              Image(systemName: "xmark")
+                  .foregroundColor(.gray)
+                  .padding(10)
+            }
+          //  .opacity(0)
             
+          }
+          .padding(.init(top: 10, leading: 10, bottom: 0, trailing: 10))
             Image("logo")
                 .resizable()
                 .aspectRatio(contentMode: .fill)

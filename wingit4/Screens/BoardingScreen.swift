@@ -26,7 +26,7 @@ let description3 = "Refer friends with subject matter expertise on asks as they 
 
 let image = "logo"
 let connect = "connect"
-let help = "help"
+let help = "helpingOthers"
 
 // Since image name and BG color name are same....
 
@@ -35,7 +35,7 @@ var boardingScreens: [BoardingScreen] = [
 
     BoardingScreen(image: connect, title: title1, description: description1),
     BoardingScreen(image: help, title: title2, description: description2),
-    BoardingScreen(image: image, title: title3, description: description3), 
+    BoardingScreen(image: image, title: title3, description: description3),
 ]
 
 

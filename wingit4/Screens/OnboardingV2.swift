@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct OnboardingV2: View {
+  
     @State var offset: CGFloat = 0
+ 
+  @StateObject var onboardingViewModel = OnboardingViewModel()
+  
     var body: some View {
         
         // Custom Pager View...
@@ -48,6 +52,7 @@ struct OnboardingV2: View {
                 }
             }
         }
+      
         // Animation...
         .background(
         
@@ -76,9 +81,9 @@ struct OnboardingV2: View {
                 HStack(spacing: 25){
                     
                     Button {
-                        
+                      self.onboardingViewModel.onboardingView.toggle()
                     } label: {
-                        Text("Login")
+                        Text("Login / Sign Up")
                             .fontWeight(.semibold)
                             .foregroundColor(.black)
                             .padding(.vertical,20)
@@ -87,18 +92,18 @@ struct OnboardingV2: View {
                             .cornerRadius(12)
                     }
                     
-                    Button {
-                        
-                    } label: {
-                        Text("SignUp")
-                            .fontWeight(.semibold)
-                            .foregroundColor(.black)
-                            .offset(x: -5)
-                            .padding(.vertical,20)
-                            .frame(maxWidth: .infinity)
-                            .background(Color.white)
-                            .cornerRadius(12)
-                    }
+//                    Button {
+//
+//                    } label: {
+//                        Text("Sign Up")
+//                            .fontWeight(.semibold)
+//                            .foregroundColor(.black)
+//                            .offset(x: -5)
+//                            .padding(.vertical,20)
+//                            .frame(maxWidth: .infinity)
+//                            .background(Color.white)
+//                            .cornerRadius(12)
+//                    }
 
                 }
                 
@@ -143,6 +148,14 @@ struct OnboardingV2: View {
             
             ,alignment: .bottom
         )
+        .modifier(Popup(
+          isPresented: self.onboardingViewModel.onboardingView,
+          alignment: .center,
+          direction: .bottom,
+          content: {
+           OnboardingView()
+              .environmentObject(onboardingViewModel)
+          }))
     }
     
     // getting Rotation...
