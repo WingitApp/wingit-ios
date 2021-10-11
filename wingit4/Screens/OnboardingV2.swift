@@ -32,12 +32,12 @@ struct OnboardingV2: View {
                             
                             Text(screen.title)
                                 .font(.largeTitle.bold())
-                                .foregroundColor(.white)
+                                .foregroundColor(.black)
                                 .padding(.top,20)
                             
                             Text(screen.description)
                                 .fontWeight(.semibold)
-                                .foregroundColor(.white)
+                                .foregroundColor(.black)
                         }
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .offset(y: -70)

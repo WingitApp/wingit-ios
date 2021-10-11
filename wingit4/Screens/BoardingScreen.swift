@@ -25,14 +25,16 @@ let title3 = "Wing Posts and get the chain started!"
 let description3 = "Refer friends with subject matter expertise on asks as they also wing their circle of friends."
 
 let image = "logo"
+let connect = "connect"
+let help = "help"
 
 // Since image name and BG color name are same....
 
 // Sample Model SCreens....
 var boardingScreens: [BoardingScreen] = [
 
-    BoardingScreen(image: image, title: title1, description: description1),
-    BoardingScreen(image: image, title: title2, description: description2),
+    BoardingScreen(image: connect, title: title1, description: description1),
+    BoardingScreen(image: help, title: title2, description: description2),
     BoardingScreen(image: image, title: title3, description: description3), 
 ]
 
