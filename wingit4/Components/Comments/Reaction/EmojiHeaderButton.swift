@@ -11,8 +11,10 @@ struct EmojiHeaderButton: View {
     @EnvironmentObject var commentSheetViewModel: CommentSheetViewModel
 
     var emojiCode: Int
+  
     func onTapGesture() {
-      commentSheetViewModel.selectReaction(emojiCode: emojiCode)
+      print("emoji header button tapped")
+      commentSheetViewModel.addReaction(emojiCode: emojiCode)
     }
   
     var body: some View {

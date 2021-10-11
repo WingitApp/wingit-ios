@@ -10,15 +10,14 @@ import Firebase
 
 struct Reaction: Encodable, Decodable, Identifiable, Hashable, Equatable {
   var id = UUID()
-  var emoji:  String
-  var commentId: String
+  var emojiCode:  Int
+  var commentId: String?
   var reactorId: String
   var avatarUrl: String
   var username: String
   var createdAt: Double?
   var updatedAt: Double?
-  var removedAt: Double?
-  var score: ReactionScore
+  var score: ReactionScore?
   var isOwn: Bool? {
     // returns if reaction is own
     return reactorId == Auth.auth().currentUser?.uid

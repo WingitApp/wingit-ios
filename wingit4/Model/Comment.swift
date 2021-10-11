@@ -10,6 +10,7 @@ import FirebaseFirestoreSwift
 import Foundation
 
 struct Comment: Codable, Identifiable, Equatable {
+    @DocumentID var docId: String?
     var id = UUID()
     var comment: String?
     var avatarUrl: String?

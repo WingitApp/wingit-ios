@@ -64,4 +64,79 @@ class CommentApi {
         
          listener(listenerFirestore)
     }
+  
+    func getReactionsByComment(
+      comment: Comment,
+      onEmpty: @escaping() -> Void,
+      onSuccess: @escaping([Reaction]) -> Void,
+      newReaction: @escaping(Reaction) -> Void,
+      modifiedReaction: @escaping(Reaction) -> Void,
+      removedReaction: @escaping(Reaction) -> Void,
+      listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
+    ) {
+      guard let postId = comment.postId else { return }
+      guard let commentId = comment.docId else { return }
+      
+      let listenerReactions = Ref.FS_COLLECTION_REACTIONS_BY_COMMENT(
+        postId: postId,
+        commentId: commentId
+      ).addSnapshotListener { (querySnapshot, error) in
+        guard let snapshot = querySnapshot else { return }
+        
+        if snapshot.documentChanges.isEmpty {
+          return onEmpty()
+        }
+        
+        var reactions = [Reaction]()
+        
+        snapshot.documentChanges.forEach {
+            switch $0.type {
+            case .added:
+                guard let decodedReaction = try? $0.document.data(as: Reaction.self) else { return }
+                newReaction(decodedReaction)
+                reactions.append(decodedReaction)
+            case .modified:
+                guard let decodedReaction = try? $0.document.data(as: Reaction.self) else { return }
+                modifiedReaction(decodedReaction)
+            case .removed:
+                guard let decodedReaction = try? $0.document.data(as: Reaction.self) else { return }
+                removedReaction(decodedReaction)
+            }
+        }
+        
+        onSuccess(reactions)
+      }
+      
+      listener(listenerReactions)
+    }
+  
+  
+    func postReaction(
+      reactionDict: Dictionary<String, Any>,
+      comment: Comment,
+      onSuccess: @escaping() -> Void
+//      onError: @escaping(_ errorMessage: String) -> Void
+    ) {
+      guard let postId = comment.postId else { return }
+      guard let commentId = comment.docId else { return }
+
+      Ref.FS_COLLECTION_REACTIONS_BY_COMMENT(
+        postId: postId,
+        commentId: commentId
+      )
+      .addDocument(data: reactionDict) { error in
+        if let error = error {
+            print("error: \(error)")
+//            onError(error.localizedDescription)
+            return
+        } else {
+//            let activity = UserActivity(activityType: .postComment, commentId: ref?.documentID)
+//
+//            Api.UserActivity.logActivity(activity: activity)
+        }
+    
+        onSuccess()
+        
+      }
+  }
 }

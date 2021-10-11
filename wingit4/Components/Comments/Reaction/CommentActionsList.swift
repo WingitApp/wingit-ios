@@ -39,6 +39,14 @@ struct CommentActionsList: View {
             ScrollView {
               VStack(spacing: 0) {
                 CommentActionEntry(
+                  icon: "hand.thumbsup",
+                  label: "Mark as Best Answer",
+                  showDivider: true,
+                  onTap: {},
+                  isShown: commentSheetViewModel.isPostOwner
+                )
+                if commentSheetViewModel.isPostOwner { Divider() }
+                CommentActionEntry(
                   icon: "square.and.pencil",
                   label: "Edit Comment",
                   showDivider: true,
@@ -70,7 +78,7 @@ struct CommentActionsList: View {
                   isShown: commentSheetViewModel.isOwnComment
                 )
                 if commentSheetViewModel.isOwnComment { Divider() }
-                Spacer()
+//                Spacer()
               }
             }
             

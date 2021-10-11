@@ -169,6 +169,16 @@ class Ref {
        static func FS_DOC_COMMENTS_FOR_POSTID(postId: String) -> DocumentReference {
               return FS_COLLECTION_COMMENTS.document(postId)
         }
+  
+        
+        // REACTIONS
+        static func FS_COLLECTION_REACTIONS_BY_COMMENT(
+          postId: String,
+          commentId: String
+        ) -> CollectionReference {
+          return FS_COLLECTION_COMMENTS.document(postId).collection("postComments").document(commentId)
+            .collection("reactions")
+        }
     
         static var FS_COLLECTION_REPORTS = FS_ROOT.collection("reports")
         static func FS_DOC_REPORTS_FOR_POSTID(postId: String) -> DocumentReference {

@@ -10,6 +10,9 @@ import FirebaseAuth
 
 struct UserComment: View {
   @EnvironmentObject var commentSheetViewModel: CommentSheetViewModel
+  @EnvironmentObject var session: SessionStore
+  @StateObject var reactionBarViewModel = ReactionBarViewModel()
+
   var comment: Comment
   var postOwnerId: String?
   var isOPComment: Bool = false
@@ -22,13 +25,14 @@ struct UserComment: View {
   init(comment: Comment, postOwnerId: String?) {
     self.comment = comment
     self.postOwnerId = postOwnerId
-    if comment.ownerId == postOwnerId {
-      self.isOPComment = true
-    }
+    self.isOPComment = comment.ownerId == postOwnerId
   }
   
   func openCommentActionsSheet() {
-    commentSheetViewModel.openCommentSheet(comment: comment) {
+    guard let uid = session.currentUser?.uid else { return }
+    Haptic.impact(type: "soft")
+    dismissKeyboard()
+    commentSheetViewModel.openCommentSheet(comment: comment, isPostOwner: postOwnerId == uid) {
 //      isActive = true
     }
   }
@@ -68,33 +72,34 @@ struct UserComment: View {
             )
               .foregroundColor(.gray)
               .font(.system(size: 10))
-            Image(systemName: "rosette")
-              .foregroundColor(.wingitBlue)
-              .font(.system(size:12))
+//            Image(systemName: "rosette")
+//              .foregroundColor(.wingitBlue)
+//              .font(.system(size:12))
 
           }
           .onTapGesture(perform: { isNavActive.toggle() })
 
           
-            Text(comment.comment?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
-            .font(.system(size:15))
-            .padding(.top, 1)
-            .onTapGesture(perform: openCommentActionsSheet)
-          
+          Text(comment.comment?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
+          .font(.system(size:15))
+          .padding(.top, 1)
+          .onTapGesture(count: 2) {
+            openCommentActionsSheet()
+          }
+          .onLongPressGesture(minimumDuration: 0.1) {
+            openCommentActionsSheet()
+          }
           // Emoji Bar
-          ReactionBar()
-        
-          
-
+          ReactionBar(comment: comment)
         }
         .padding(.leading, 5)
-
-        
         
       }
       .padding(15)
+      .environmentObject(reactionBarViewModel)
       Divider()
     }
+
 }
 
 
