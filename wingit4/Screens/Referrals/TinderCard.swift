@@ -19,17 +19,17 @@ struct TinderCard: View {
  
   
   var body: some View {
-    ZStack(alignment: .topLeading){
+    ZStack(alignment: .top){
       
       VStack(spacing: 0){
-//      TinderHeader()
-        ReferHeader(referral: $referral)
+        TinderHeader(referral: $referral)
+//        ReferHeader(referral: $referral)
         TinderBody(post: $post)
       }.cornerRadius(8)
         .environmentObject(referViewModel)
       
       HStack{
-        Image("logo")
+        Image("wing.circle")
           .resizable()
           .aspectRatio(contentMode: .fit)
           .frame(width: 150)
@@ -42,8 +42,6 @@ struct TinderCard: View {
           .opacity(Double(x/10 * -1 - 1))
       }
     }
-     
-     
     .cornerRadius(8)
       .offset(x: x, y: y)
       .rotationEffect(.init(degrees: degree))
@@ -87,6 +85,7 @@ struct TinderBody: View {
     ZStack{
       URLImageView(urlString: post?.avatar)
         //.cornerRadius(8)
+        .frame(width: 375, height: 375)
        
           LinearGradient(gradient: cardGradient, startPoint: .top, endPoint: .bottom)
         

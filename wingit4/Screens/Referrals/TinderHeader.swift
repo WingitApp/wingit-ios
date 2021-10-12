@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import URLImage
+
 
 struct TinderHeader: View {
   
@@ -15,21 +17,22 @@ struct TinderHeader: View {
   var body: some View {
     
     HStack(alignment: .top) {
-      Image("user-placeholder")
-              .resizable()
-              .clipShape(Circle())
-              .frame(width: 50, height: 50)
-              .overlay(
-                RoundedRectangle(cornerRadius: 100)
-                  .stroke(Color.gray, lineWidth: 1)
-              )
-              .padding([.horizontal])
+      NotificationUserAvatar(imageUrl: referral.sender?.profileImageUrl ?? "", type: referral.status.rawValue)
+              .padding(.trailing, 10)
             
             VStack(alignment: .leading) {
               Group {
-                Text("Sender").fontWeight(.semibold) +
-                Text(" Hey I think you can help her.")
-                Text("5 min ago").font(.caption).foregroundColor(.gray)
+                Text(referral.sender?.displayName ?? "").fontWeight(.semibold) +
+                Text(" has referred you to help with ") +
+                  Text(referral.ask?.username ?? "").fontWeight(.semibold) +
+                Text("'s ask. ") +
+                Text(
+                  timeAgoSinceDate(
+                    Date(timeIntervalSince1970: Double(referral.createdAt?.seconds ?? 0)),
+                    currentDate: Date(),
+                    numericDates: true
+                  )
+                ).font(.caption).foregroundColor(.gray)
               }
               .font(.subheadline)
               .fixedSize(horizontal: false, vertical: true)
@@ -42,8 +45,9 @@ struct TinderHeader: View {
                    label: {
                     Image(systemName: "xmark").foregroundColor(.gray)
             })
-    }.padding(.vertical).padding(.trailing, 10)
+    }.padding()
       .background(Color.white)
+      .frame(width: 375)
     
   }
 }

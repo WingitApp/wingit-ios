@@ -27,6 +27,7 @@ struct TinderScreen: View {
           }
         }.zIndex(1.0)
         
+        
         //Bottom
 //        HStack{
 //
