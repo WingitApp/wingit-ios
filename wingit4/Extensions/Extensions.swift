@@ -205,21 +205,25 @@ public extension UIDevice {
 }
 
 extension View {
-    func dismissKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
+  func dismissKeyboard() {
+    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+  }
   
   func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-       clipShape( RoundedCorner(radius: radius, corners: corners) )
-   }
-    
-    @ViewBuilder func `if`<Content: View>(_ condition: @autoclosure () -> Bool, transform: (Self) -> Content) -> some View {
-            if condition() {
-                transform(self)
-            } else {
-                self
-            }
-        }
+    clipShape( RoundedCorner(radius: radius, corners: corners) )
+  }
+  
+  @ViewBuilder func `if`<Content: View>(_ condition: @autoclosure () -> Bool, transform: (Self) -> Content) -> some View {
+    if condition() {
+      transform(self)
+    } else {
+      self
+    }
+  }
+  
+  func getScreenBounds()->CGRect{
+    return UIScreen.main.bounds
+  }
 }
 
 extension Date {
