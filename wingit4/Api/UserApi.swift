@@ -49,7 +49,6 @@ class UserApi {
     }
   
     func blockUser(userId: String, postOwnerId: String) {
-        
         Ref.FS_DOC_BLOCKED_USERID(userId: userId).collection("userBlocked").document(postOwnerId).setData(["userBlocking": postOwnerId])
         Ref.FS_ROOT.collection("Blocked").document(postOwnerId).collection("userBlockedBy").document(userId).setData(["userBlocked": userId])
         

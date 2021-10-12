@@ -66,7 +66,6 @@ class SignupViewModel: ObservableObject {
     self.isAlertShown = true
   }
   
-  
   func onSignupSuccess(user: User) {
     ampSignupSuccessEvent(user: user)
   }
@@ -107,6 +106,4 @@ class SignupViewModel: ObservableObject {
       properties: [.method: "email", .platform: "ios"]
     )
   }
-  
-    
 }

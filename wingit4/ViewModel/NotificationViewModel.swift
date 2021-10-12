@@ -13,11 +13,13 @@ import FirebaseFirestoreSwift
 
 
 class NotificationViewModel: ObservableObject {
-    
+    @EnvironmentObject var mainViewModel: MainViewModel
+    @AppStorage("notificationsLastSeenAt") var notificationsLastSeenAt: Double = 1633885030
     @Published var notificationsArray: [Notification] = []
     var listener: ListenerRegistration!
     
     @Published var isLoading = true
+    @Published var unreadNotifications: Int = 0
     
     // Variables to leep track of what option has been tapped on and when to navigate to new view
     @Published var selectedNotificationType = NotificationLinkType.userProfile
@@ -25,12 +27,20 @@ class NotificationViewModel: ObservableObject {
     @Published var isNavigationLinkActive: Bool = false
     @Published var userProfileId: String?
    
-    func updateOpenedAt(notificationId: String){
-        guard let userId = Auth.auth().currentUser?.uid else { return }
+    func updateOpenedAt(notificationId: String?) {
+        guard let notificationId = notificationId, let userId = Auth.auth().currentUser?.uid else { return }
         
-        Ref.FS_COLLECTION_ACTIVITY .document(userId).collection("feedItems") .document(notificationId).setData(["openedAt": FieldValue.serverTimestamp()], merge: true)
-    
+        Ref.FS_COLLECTION_ACTIVITY.document(userId).collection("feedItems") .document(notificationId).setData(["openedAt": FieldValue.serverTimestamp()], merge: true)
     }
+  
+  func updateNotificationsLastSeenAt() {
+    unreadNotifications = 0
+    notificationsLastSeenAt = Date().timeIntervalSince1970
+    
+    guard let userId = Auth.auth().currentUser?.uid else { return }
+    
+    Ref.FS_COLLECTION_USERS.document(userId).setData(["notificationsLastSeenAt": FieldValue.serverTimestamp()], merge: true)
+  }
     
     func loadNotifications() {
         self.notificationsArray = []
@@ -43,6 +53,9 @@ class NotificationViewModel: ObservableObject {
             if !self.notificationsArray.contains(notification) {
               self.notificationsArray.insert(notification, at: 0)
               self.isLoading = false
+              if (notification.date > self.notificationsLastSeenAt) {
+                self.unreadNotifications += 1
+              }
             }
           }, deleteNotification: { (notification) in
               if !self.notificationsArray.isEmpty {
@@ -56,6 +69,32 @@ class NotificationViewModel: ObservableObject {
           }) { (listener) in
               self.listener = listener
           }
+    }
+  
+  func openNotification(notificationId: String?, correspondingUserId: String?) {
+      notificationsArray.forEach { notification in
+        if (notification.activityId == notificationId) {
+          switch(ViewRouter.shared.currentScreen) {
+            case .askDetail:
+              selectedNotificationType = NotificationLinkType.askDetail
+              post = notification.post
+              isNavigationLinkActive = true
+            case .userProfile:
+              selectedNotificationType = NotificationLinkType.userProfile
+              userProfileId = correspondingUserId
+              isNavigationLinkActive = true
+            case .referral:
+              mainViewModel.setTab(tab: .referrals)
+            default:
+              if let correspondingUserId = correspondingUserId {
+                selectedNotificationType = NotificationLinkType.userProfile
+                userProfileId = correspondingUserId
+                isNavigationLinkActive = true
+              }
+          }
+          updateOpenedAt(notificationId: notificationId)
+        }
+      }
     }
     
     func acceptConnectRequest(fromUserId: String?) {

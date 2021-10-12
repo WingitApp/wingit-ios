@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 
 struct User: Identifiable, Codable, Equatable, Hashable {
     @DocumentID var id: String?
-    @ServerTimestamp var createdAt: Timestamp?
+    var createdAt: Timestamp?
     var uid: String?
     var bio: String?
     var canonicalEmail: String?
@@ -20,6 +20,7 @@ struct User: Identifiable, Codable, Equatable, Hashable {
     var firstName: String?
     var keywords: [String]?
     var lastName: String?
+    var notificationsLastSeenAt: Timestamp?
     var profileImageUrl: String?
     var tags: [String]? //attributes of the user
     var username: String?
@@ -35,26 +36,6 @@ struct User: Identifiable, Codable, Equatable, Hashable {
       return "\(self.firstName ?? "") \(self.lastName ?? "")".trimmingCharacters(in: .whitespacesAndNewlines).capitalized
     }
 
-    enum CodingKeys: String, CodingKey {
-        case id
-        case uid
-        case bio
-        case canonicalEmail
-        case email
-        case firstName
-        case keywords
-        case lastName
-        case profileImageUrl
-        case tags
-        case username
-        case facebook
-        case twitter
-        case linkedin
-        case instagram
-        case reddit
-        case spotify
-    }
-  
     subscript(key: String) -> String {
           get {
               switch key {
