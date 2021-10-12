@@ -12,13 +12,8 @@ import Firebase
 class ReactionBarViewModel: ObservableObject {
   @Published var isFetchingReactions: Bool = false
   @Published var reactions: [Reaction] = []
-  @Published var uniqueReactions: [Reaction] = []
-//  @Published var uniqueReactions: [Reaction] = []
   @Published var listener: ListenerRegistration?
   
-  func formatDictionary() {
-    self.uniqueReactions = Array(Set(self.reactions))
-  }
   
   func fetchReactions(comment: Comment) {
     isFetchingReactions = true
@@ -31,14 +26,12 @@ class ReactionBarViewModel: ObservableObject {
       onSuccess: { reactions in
         if self.reactions.count >= reactions.count { return }
         self.reactions = reactions
-        self.formatDictionary()
         self.isFetchingReactions = false
         
       },
       newReaction: { reaction in
         if self.reactions.contains(reaction) { return }
         self.reactions.append(reaction)
-        self.formatDictionary()
       },
       modifiedReaction: { reaction in
         if self.reactions.isEmpty { return }
@@ -47,7 +40,6 @@ class ReactionBarViewModel: ObservableObject {
         ) {
           self.reactions[index] = reaction
         }
-        self.formatDictionary()
       },
       removedReaction: { reaction in
         if self.reactions.isEmpty { return }
@@ -56,7 +48,6 @@ class ReactionBarViewModel: ObservableObject {
                 self.reactions.remove(at: index)
             }
         }
-        self.formatDictionary()
 
       }
     ) { listenerHandler in
@@ -64,48 +55,125 @@ class ReactionBarViewModel: ObservableObject {
     }
   }
   
-  func removeReaction(_ reaction: Reaction, _ comment: Comment) {
-    Api.Comment.deleteReaction(reaction: reaction, comment: comment) {
-    }
-  }
   
-  func addReaction(
-    _ emojiCode: Int,
-    _ comment: Comment?
+  func createReaction(
+    _ reaction: Reaction,
+    _ comment: Comment,
+    _ currentUser: User
   ) {
-    
-    // add reaction to comment sheet
-    guard let currentUser = Auth.auth().currentUser else { return }
-    guard let comment = comment else { return }
+        
+    // create userPreview dict
+    let userPreviewDict = [
+      "id": currentUser.id as Any,
+      "uid": currentUser.uid as Any,
+      "firstName": currentUser.firstName as Any,
+      "lastName": currentUser.lastName as Any,
+      "avatar": currentUser.profileImageUrl as Any,
+      "username": currentUser.username as Any,
+      "interactedAt": Date().timeIntervalSince1970
+    ] as [String : Any]
       
+    // create reaction dict
     let reactionDict = [
-      "id": UUID().uuidString,
-      "emojiCode": emojiCode,
-      "commentId": comment.docId ?? comment.id,
-      "reactorId": currentUser.uid,
-      "avatarUrl": currentUser.photoURL!.absoluteString,
-      "username": currentUser.displayName!,
-      "createdAt": Date().timeIntervalSince1970
+      "id": String(reaction.emojiCode),
+      "emojiCode": reaction.emojiCode,
+      "commentId": comment.docId ?? comment.id as Any,
+      "createdAt": Date().timeIntervalSince1970,
+      "reactors": [currentUser.id: userPreviewDict]
     ] as [String : Any]
     
-
     Api.Comment.postReaction(
       reactionDict: reactionDict,
       comment: comment
     ) {
-      
+      // do something
     }
   }
   
-  func handleReactionTap(reaction: Reaction, comment: Comment) {
-    Haptic.impact(type: "soft")
-    guard let userId = Auth.auth().currentUser?.uid else { return }
-    var userReaction = self.reactions.filter { $0.reactorId == userId && $0.emojiCode == reaction.emojiCode }
-    if userReaction.isEmpty{
-      addReaction(reaction.emojiCode, comment)
-    } else {
-      removeReaction(reaction, comment)
+  func deleteReaction(
+    _ reaction: Reaction,
+    _ comment: Comment
+  ) {
+    Api.Comment.deleteReaction(reaction: reaction, comment: comment) {
+      // do something after reaction is removed
     }
+  }
+  
+  
+  
+  func addUserReaction(
+    _ reaction: Reaction,
+    _ comment: Comment,
+    _ currentUser: User
+  ) {
     
+    let userPreviewDict = [
+      "id": currentUser.id,
+      "uid": currentUser.uid,
+      "firstName": currentUser.firstName,
+      "lastName": currentUser.lastName,
+      "avatar": currentUser.profileImageUrl,
+      "username": currentUser.username,
+      "interactedAt": Date().timeIntervalSince1970
+    ] as [String : Any]
+    
+  
+
+    Api.Comment.addUserReaction(
+      reaction: reaction,
+      comment: comment,
+      newReactor: userPreviewDict
+    ) {
+
+    }
+  }
+  
+  func removeUserReaction(
+    _ reaction: Reaction,
+    _ comment: Comment
+  ) {
+    
+    Api.Comment.removeUserReaction(
+      reaction: reaction,
+      comment: comment
+    ) {
+
+    }
+  }
+  
+  
+  
+  func handleReactionTap(
+    reaction: Reaction,
+    comment: Comment?, // needed for post & commentId
+    currentUser: User?
+  ) {
+    Haptic.impact(type: "soft")
+    guard let currentUser = currentUser else { return }
+    guard let comment = comment else { return }
+    
+    if reactions.isEmpty {
+      createReaction(
+        reaction,
+        comment,
+        currentUser
+      )
+    } else if !reaction.hasCurrentUser {
+      addUserReaction(
+        reaction,
+        comment,
+        currentUser
+      )
+    } else if reaction.count == 1{
+      deleteReaction(
+        reaction,
+        comment
+      )
+    } else {
+      removeUserReaction(
+        reaction,
+        comment
+      )
+    }
   }
 }

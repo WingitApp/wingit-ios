@@ -13,6 +13,7 @@
 		15030AA826E805A50076CF14 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15030AA726E805A40076CF14 /* Styles.swift */; };
 		15030AAA26E807C10076CF14 /* HomeFeedHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15030AA926E807C10076CF14 /* HomeFeedHeader.swift */; };
 		150C3BFD27155D2B0029BAEA /* OnboardText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150C3BFC27155D2B0029BAEA /* OnboardText.swift */; };
+		150C3C01271610D80029BAEA /* UserPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150C3C00271610D80029BAEA /* UserPreview.swift */; };
 		150DB46326F301AD00373D26 /* PostEmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150DB46226F301AD00373D26 /* PostEmptyState.swift */; };
 		15127A5226FFC009006F975E /* PlaceholderConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15127A5126FFC008006F975E /* PlaceholderConstants.swift */; };
 		15127A5426FFC148006F975E /* ReferralPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15127A5326FFC148006F975E /* ReferralPlaceholder.swift */; };
@@ -261,6 +262,7 @@
 		15030AA726E805A40076CF14 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		15030AA926E807C10076CF14 /* HomeFeedHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedHeader.swift; sourceTree = "<group>"; };
 		150C3BFC27155D2B0029BAEA /* OnboardText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardText.swift; sourceTree = "<group>"; };
+		150C3C00271610D80029BAEA /* UserPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreview.swift; sourceTree = "<group>"; };
 		150DB46226F301AD00373D26 /* PostEmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEmptyState.swift; sourceTree = "<group>"; };
 		15127A5126FFC008006F975E /* PlaceholderConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderConstants.swift; sourceTree = "<group>"; };
 		15127A5326FFC148006F975E /* ReferralPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralPlaceholder.swift; sourceTree = "<group>"; };
@@ -933,6 +935,7 @@
 				65A9EFA226E0923300E81CBF /* Referral.swift */,
 				15DFD07526EBE438002CBE31 /* RoundedCorner.swift */,
 				3B7AF02D2671816A003BCCF3 /* User.swift */,
+				150C3C00271610D80029BAEA /* UserPreview.swift */,
 				6523D93526DDEB78007546F5 /* UserActivity.swift */,
 				15DFD07726EC39E2002CBE31 /* Button.swift */,
 				15A6A4432708F13C00D65616 /* UserSocial.swift */,
@@ -1428,6 +1431,7 @@
 				157F9976270C0273001A4031 /* ProfileUserBio.swift in Sources */,
 				65C6103926FB16FD007B87FE /* UserAvatarSignup.swift in Sources */,
 				6522122926F5584000A48B07 /* ContactDetailViewModel.swift in Sources */,
+				150C3C01271610D80029BAEA /* UserPreview.swift in Sources */,
 				3B7AF0C32673EEA0003BCCF3 /* NotificationsApi.swift in Sources */,
 				15F7E87C26E8436100E5238F /* (null) in Sources */,
 				65AD68B127057DA6008C66E9 /* CommentNotification.swift in Sources */,

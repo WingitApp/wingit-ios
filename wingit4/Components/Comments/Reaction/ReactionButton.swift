@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ReactionButton: View {
+    @EnvironmentObject var session: SessionStore
     @EnvironmentObject var reactionBarViewModel: ReactionBarViewModel
     var reaction: Reaction
     var comment: Comment
@@ -21,25 +22,33 @@ struct ReactionButton: View {
       guard let listener = self.reactionBarViewModel.listener else { return }
       listener.remove()
     }
+  
+  func onTapAction() {
+    reactionBarViewModel.handleReactionTap(
+      reaction: reaction,
+      comment: comment,
+      currentUser: session.currentUser
+    )
+  }
     
     var body: some View {
-      Button(action: { reactionBarViewModel.handleReactionTap(reaction: reaction, comment: comment)} ) {
+      Button(action: onTapAction) {
         HStack(alignment: .center, spacing: 5){
           Text(String(UnicodeScalar(reaction.emojiCode)!))
             .font(.system(size: 13))
-          Text(String(1))
+          Text(String(reaction.count))
             .font(.system(size: 12))
         }
         .padding(3)
-        .background(reaction.isOwn!
+        .background(reaction.hasCurrentUser
           ? Color.backgroundBlueGray
           : Color.lightGray
         )
         .cornerRadius(5)
         .overlay(
           RoundedRectangle(cornerRadius: 5)
-            .stroke(reaction.isOwn!
-                    ? Color.backgroundBlueGray.darker(by: 5)
+            .stroke(reaction.hasCurrentUser
+                    ? Color.twitterBlue.opacity(0.5)
                     : Color.lightGray.darker(by: 5), lineWidth: 1)
         )
 

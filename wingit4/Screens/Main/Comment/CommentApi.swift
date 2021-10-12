@@ -167,25 +167,91 @@ class CommentApi {
       }
   }
   
-  func deleteReaction(
-    reaction: Reaction,
-    comment: Comment,
-    onSuccess: @escaping() -> Void
-  ) {
-    guard let postId = comment.postId else { return }
-    guard let commentId = comment.docId else { return }
-    guard let reactionId = reaction.docId else { return }
-    
-    Ref.FS_COLLECTION_REACTIONS_BY_COMMENT(
-      postId: postId,
-      commentId: commentId
-    )
-      .document(String(reactionId)).delete() { error in
+    func addUserReaction(
+      reaction: Reaction,
+      comment: Comment,
+      newReactor: [String: Any],
+      onSuccess: @escaping() -> Void
+    ) {
+
+      guard let userId = Auth.auth().currentUser?.uid else { return }
+      guard let postId = comment.postId else { return }
+      guard let commentId = comment.docId else { return }
+      guard let reactionId = reaction.docId else { return }
+
+      Ref.FS_COLLECTION_REACTIONS_BY_COMMENT(
+        postId: postId,
+        commentId: commentId
+      )
+      .document(reactionId)
+      .setData(
+        ["reactors": [userId : newReactor]]
+        , merge: true
+      ) { error in
         if error != nil{
           print("error", error)
         } else {
           onSuccess()
         }
       }
-  }
+    }
+  
+     func removeUserReaction(
+      reaction: Reaction,
+      comment: Comment,
+      onSuccess: @escaping() -> Void
+     ) {
+       guard let userId = Auth.auth().currentUser?.uid else { return }
+       guard let postId = comment.postId else { return }
+       guard let commentId = comment.docId else { return }
+       guard let reactionId = reaction.docId else { return }
+        
+       // remove user from reactor dictionary
+       
+       var updatedReactors: [String: Any] = [:]
+       
+       for (reactorId, userPreview) in reaction.reactors {
+         if reactorId != userId {
+           guard let userPreviewDict = try? userPreview.toDictionary() else { return }
+           updatedReactors[reactorId] = userPreviewDict
+         }
+       }
+       
+       Ref.FS_COLLECTION_REACTIONS_BY_COMMENT(
+         postId: postId,
+         commentId: commentId
+       )
+       .document(reactionId)
+       .updateData(
+        ["reactors": updatedReactors]
+       ) { error in
+         if error != nil{
+           print("error", error)
+         } else {
+           onSuccess()
+         }
+       }
+     }
+  
+    func deleteReaction(
+      reaction: Reaction,
+      comment: Comment,
+      onSuccess: @escaping() -> Void
+    ) {
+      guard let postId = comment.postId else { return }
+      guard let commentId = comment.docId else { return }
+      guard let reactionId = reaction.docId else { return }
+      
+      Ref.FS_COLLECTION_REACTIONS_BY_COMMENT(
+        postId: postId,
+        commentId: commentId
+      )
+        .document(reactionId).delete() { error in
+          if error != nil{
+            print("error", error)
+          } else {
+            onSuccess()
+          }
+        }
+    }
 }

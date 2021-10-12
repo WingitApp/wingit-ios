@@ -87,60 +87,43 @@ class CommentSheetViewModel: ObservableObject {
     }
   }
   
-  
   func handleReactionTap(
-    _ emojiCode: Int
+    emojiCode: Int,
+    currentUser: User?
   ) {
     Haptic.impact(type: "soft")
-    guard let userId = Auth.auth().currentUser?.uid else { return }
+    guard let currentUser = currentUser else { return }
     guard let comment = self.comment else { return }
-    var userReaction = self.reactions.filter { $0.reactorId == userId && $0.emojiCode == emojiCode }
     
-    if userReaction.isEmpty {
-      addReaction(emojiCode)
+    let reaction = reactions.filter {
+      $0.emojiCode == emojiCode
+    }
+
+    if reaction.isEmpty {
+      createReaction(
+        emojiCode,
+        comment,
+        currentUser
+      )
+    } else if !reaction[0].hasCurrentUser {
+      addUserReaction(
+        reaction[0],
+        comment,
+        currentUser
+      )
+    } else if reaction[0].count == 1{
+      deleteReaction(
+        reaction[0],
+        comment
+      )
     } else {
-      let reaction = userReaction[0]
-      removeReaction(reaction, comment)
-    }
-    
-  }
-  
-  func removeReaction(_ reaction: Reaction, _ comment: Comment) {
-    self.bottomSheetPosition = .hidden
-    
-    Api.Comment.deleteReaction(reaction: reaction, comment: comment) {
-      self.clean()
+      removeUserReaction(
+        reaction[0],
+        comment
+      )
     }
   }
   
-  
-  func addReaction(
-    _ emojiCode: Int
-  ) {
-    
-    // add reaction to comment sheet
-    guard let currentUser = Auth.auth().currentUser else { return }
-    guard let comment = self.comment else { return }
-    
-    let reactionDict = [
-      "id": UUID().uuidString,
-      "emojiCode": emojiCode,
-      "commentId": comment.docId ?? comment.id,
-      "reactorId": currentUser.uid,
-      "avatarUrl": currentUser.photoURL!.absoluteString,
-      "username": currentUser.displayName!,
-      "createdAt": Date().timeIntervalSince1970
-    ] as [String : Any]
-    
-    self.bottomSheetPosition = .hidden
-    
-    Api.Comment.postReaction(
-      reactionDict: reactionDict,
-      comment: comment
-    ) {
-      self.clean()
-    }
-  }
   
   func markCommentAsBest(post: Post?) {
     Haptic.impact(type: "soft")
@@ -161,6 +144,92 @@ class CommentSheetViewModel: ObservableObject {
     }
   }
   
+  func createReaction(
+    _ emojiCode: Int,
+    _ comment: Comment,
+    _ currentUser: User
+  ) {
+        
+    // create userPreview dict
+    let userPreviewDict = [
+      "id": currentUser.id as Any,
+      "uid": currentUser.uid as Any,
+      "firstName": currentUser.firstName as Any,
+      "lastName": currentUser.lastName as Any,
+      "avatar": currentUser.profileImageUrl as Any,
+      "username": currentUser.username as Any,
+      "interactedAt": Date().timeIntervalSince1970
+    ] as [String : Any]
+      
+    // create reaction dict
+    let reactionDict = [
+      "id": String(emojiCode),
+      "emojiCode": emojiCode,
+      "commentId": comment.docId ?? comment.id as Any,
+      "createdAt": Date().timeIntervalSince1970,
+      "reactors": [currentUser.id: userPreviewDict]
+    ] as [String : Any]
+    
+    self.bottomSheetPosition = .hidden
+    Api.Comment.postReaction(
+      reactionDict: reactionDict,
+      comment: comment
+    ) {
+      self.clean()
+    }
+  }
+  
+  func deleteReaction(
+    _ reaction: Reaction,
+    _ comment: Comment
+  ) {
+    self.bottomSheetPosition = .hidden
+    Api.Comment.deleteReaction(reaction: reaction, comment: comment) {
+      self.clean()
+    }
+  }
+  
+  
+  
+  func addUserReaction(
+    _ reaction: Reaction,
+    _ comment: Comment,
+    _ currentUser: User
+  ) {
+    
+    let userPreviewDict = [
+      "id": currentUser.id,
+      "uid": currentUser.uid,
+      "firstName": currentUser.firstName,
+      "lastName": currentUser.lastName,
+      "avatar": currentUser.profileImageUrl,
+      "username": currentUser.username,
+      "interactedAt": Date().timeIntervalSince1970
+    ] as [String : Any]
+    
+  
+    self.bottomSheetPosition = .hidden
+    Api.Comment.addUserReaction(
+      reaction: reaction,
+      comment: comment,
+      newReactor: userPreviewDict
+    ) {
+      self.clean()
+    }
+  }
+  
+  func removeUserReaction(
+    _ reaction: Reaction,
+    _ comment: Comment
+  ) {
+    self.bottomSheetPosition = .hidden
+    Api.Comment.removeUserReaction(
+      reaction: reaction,
+      comment: comment
+    ) {
+      self.clean()
+    }
+  }
   
   
 }

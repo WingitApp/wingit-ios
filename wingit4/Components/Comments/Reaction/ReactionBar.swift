@@ -11,6 +11,8 @@ import SwiftUI
 struct ReactionBar: View {
   @EnvironmentObject var reactionBarViewModel: ReactionBarViewModel
   @EnvironmentObject var commentSheetViewModel: CommentSheetViewModel
+  @EnvironmentObject var session: SessionStore
+  
   var comment: Comment
   var isPostOwner: Bool
   var isTopComment: Bool
@@ -103,49 +105,3 @@ struct ReactionBar: View {
     }
   }
 }
-
-
-//struct ReactionBar: View {
-//  @EnvironmentObject var reactionBarViewModel: ReactionBarViewModel
-//  @EnvironmentObject var commentSheetViewModel: CommentSheetViewModel
-//  var comment: Comment
-//  var isPostOwner: Bool
-//  @State var text: String = ""
-//  @State var showSheet: Bool = false
-//
-//
-//    var body: some View {
-//      HStack {
-//        ForEach(Array(self.reactionBarViewModel.reactions.enumerated()), id: \.element) { index, reaction in
-//          ReactionButton(
-//            reaction: reaction,
-//            comment: comment
-//          )
-//        }
-//
-//        if !self.reactionBarViewModel.reactions.isEmpty {
-//          Button(action: {
-//            commentSheetViewModel.openCommentSheet(
-//              comment: comment,
-//              isPostOwner: isPostOwner,
-//              reactions: self.reactionBarViewModel.reactions,
-//              showEmojiKeyboard: true,
-//              onOpen: {}
-//            )
-//          } ) {
-//            Image(systemName: "plus")
-//              .padding(3)
-//              .background(Color.lightGray)
-//              .cornerRadius(100)
-//              .font(.system(size: 13))
-//          }
-//        }
-//
-//      }
-//      .environmentObject(reactionBarViewModel)
-//
-//
-//    }
-//}
-//
-

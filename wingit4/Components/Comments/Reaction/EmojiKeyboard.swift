@@ -11,7 +11,8 @@ import SwiftUI
 
 struct EmojiKeyboard: View {
   @EnvironmentObject var commentSheetViewModel: CommentSheetViewModel
-
+  @EnvironmentObject var session: SessionStore
+  
     private let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -33,7 +34,10 @@ struct EmojiKeyboard: View {
     }
   
   func onTapGesture(_ emojiCode: Int) {
-      commentSheetViewModel.handleReactionTap(emojiCode)
+      commentSheetViewModel.handleReactionTap(
+        emojiCode: emojiCode,
+        currentUser: session.currentUser
+      )
     }
 
     var body: some View {

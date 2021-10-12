@@ -15,16 +15,16 @@ struct Reaction: Codable, Identifiable, Hashable, Equatable {
   var id: String?
   var emojiCode:  Int
   var commentId: String?
-  var reactorId: String?
-  var avatarUrl: String?
-  var username: String?
   var createdAt: Double?
   var updatedAt: Double?
   var score: ReactionScore?
-  var isOwn: Bool? {
-    // returns if reaction is own
+  var reactors: [String: UserPreview]
+  var hasCurrentUser: Bool {
     guard let currentUser = Auth.auth().currentUser else { return false }
-    return reactorId == currentUser.uid
+    return reactors[currentUser.uid] != nil
+  }
+  var count: Int {
+    return reactors.keys.count
   }
 }
 

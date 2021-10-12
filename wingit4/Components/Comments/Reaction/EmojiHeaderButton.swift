@@ -9,11 +9,15 @@ import SwiftUI
 
 struct EmojiHeaderButton: View {
     @EnvironmentObject var commentSheetViewModel: CommentSheetViewModel
+    @EnvironmentObject var session: SessionStore
 
     var emojiCode: Int
   
     func onTapGesture() {
-      commentSheetViewModel.handleReactionTap(emojiCode)
+      commentSheetViewModel.handleReactionTap(
+        emojiCode: emojiCode,
+        currentUser: session.currentUser
+      )
     }
   
     var body: some View {
