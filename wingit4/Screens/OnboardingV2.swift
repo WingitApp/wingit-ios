@@ -12,7 +12,7 @@ struct OnboardingV2: View {
     @State var offset: CGFloat = 0
  
   @StateObject var onboardingViewModel = OnboardingViewModel()
-  var boardingScreen = BoardingScreen()
+  @State var boardingScreen = BoardingScreen(first: false, last: true)
   
     var body: some View {
         
@@ -45,6 +45,8 @@ struct OnboardingV2: View {
                                 .fontWeight(.semibold)
                                 .foregroundColor(.black)
 //                                .fixedSize()
+                          
+                                
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .offset(y: -70)
@@ -52,7 +54,8 @@ struct OnboardingV2: View {
                     .padding()
                     .frame(width: getScreenBounds().width)
                     .frame(maxHeight: .infinity)
-                  if screen.last == nil {
+                  if screen.last == true {
+                    
                     OnboardingView()
                   }
                 }
@@ -86,17 +89,18 @@ struct OnboardingV2: View {
                 // Bottom Content...
 //                HStack(spacing: 25){
 //
-//                    Button {
-//                      self.onboardingViewModel.onboardingView.toggle()
-//                    } label: {
-//                        Text("Login / Sign Up")
-//                            .fontWeight(.semibold)
-//                            .foregroundColor(.black)
-//                            .padding(.vertical,20)
-//                            .frame(maxWidth: .infinity)
-//                            .background(Color.white)
-//                            .cornerRadius(12)
-//                    }
+//              Button {
+//                offset = min(offset + getScreenBounds().width,getScreenBounds().width * 3)
+//              } label: {
+//                  Text("Get Started!")
+//                      .fontWeight(.semibold)
+//                      .foregroundColor(.black)
+//                      .padding(.vertical,20)
+//                      .frame(maxWidth: .infinity)
+//                      .background(Color.white)
+//                      .cornerRadius(12)
+//              }
+              
 //
 ////                    Button {
 ////
@@ -115,16 +119,21 @@ struct OnboardingV2: View {
                 
                 HStack{
                     
+
                     Button {
+                      if getIndex() > 0 {
                       offset = min(offset - getScreenBounds().width,getScreenBounds().width * 3)
-                     
+                      }
                     } label: {
-                        Text("Back")
+                      
+                      Text("Back")
                             .fontWeight(.semibold)
                             .foregroundColor(.white)
                     }
-                    
-                    // Indicators...
+                    .opacity(getIndex() > 0 ? 1 : 0)
+                    .allowsHitTesting(getIndex() > 0)
+                    .frame(width: UIScreen.main.bounds.width/3.5)
+                  
                     HStack(spacing: 8){
                         ForEach(boardingScreens.indices,id: \.self){index in
                             Circle()
@@ -137,15 +146,17 @@ struct OnboardingV2: View {
                     }
                     .frame(maxWidth: .infinity)
                     
+//
                     Button {
-                        // Setting Mac Offset...
-                        // max 4 screens so max will be 3*width....
+                  
                         offset = min(offset + getScreenBounds().width,getScreenBounds().width * 3)
                     } label: {
-                        Text("Next")
+                      Text(getIndex() < 2 ? "Next" : "Get Started")
                             .fontWeight(.semibold)
                             .foregroundColor(.white)
+                      
                     }
+                    .frame(width: UIScreen.main.bounds.width/3.5)
 
                 }
                 .padding(.top,30)
@@ -155,14 +166,6 @@ struct OnboardingV2: View {
             
             ,alignment: .bottom
         )
-//        .modifier(Popup(
-//          isPresented: self.onboardingViewModel.onboardingView,
-//          alignment: .center,
-//          direction: .bottom,
-//          content: {
-//           OnboardingView()
-//              .environmentObject(onboardingViewModel)
-//          }))
     }
     
     // getting Rotation...

@@ -12,7 +12,6 @@ struct BoardingScreen: Identifiable {
     var image: String?
     var title: String?
     var description: String?
-    var last: String?
 }
 
 // Same Title and desc...
@@ -31,16 +30,15 @@ let description4 = ""
 let image = "logo"
 let connect = "connect"
 let help = "helpingOthers"
-let loginSignUp = ""
 
 // Since image name and BG color name are same....
 
 // Sample Model SCreens....
 var boardingScreens: [BoardingScreen] = [
 
-  BoardingScreen(image: connect, title: title1, description: description1, last: ""),
-  BoardingScreen(image: help, title: title2, description: description2, last: ""),
-    BoardingScreen(image: image, title: title3, description: description3, last: nil),
+  BoardingScreen(image: connect, title: title1, description: description1),
+  BoardingScreen(image: help, title: title2, description: description2),
+  BoardingScreen(image: image, title: title3, description: description3),
 ]
 
 
