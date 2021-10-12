@@ -42,21 +42,21 @@ struct Home1 : View {
     @Namespace var name
   @EnvironmentObject var onboardingViewModel: OnboardingViewModel
   
-  func closeOnboardingView() {
-    onboardingViewModel.onboardingView = false
-  }
-    
+//  func closeOnboardingView() {
+//    onboardingViewModel.onboardingView = false
+//  }
+//
     var body: some View{
       ActivityIndicatorView(message: "Loading...", isShowing: self.$session.isSessionLoading) {
         VStack{
          
           HStack {
             Spacer()
-            Button(action: closeOnboardingView) {
-              Image(systemName: "xmark")
-                  .foregroundColor(.gray)
-                  .padding(10)
-            }
+//            Button(action: closeOnboardingView) {
+//              Image(systemName: "xmark")
+//                  .foregroundColor(.gray)
+//                  .padding(10)
+//            }
           //  .opacity(0)
             
           }

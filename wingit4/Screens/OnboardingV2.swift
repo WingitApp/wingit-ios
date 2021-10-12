@@ -12,6 +12,7 @@ struct OnboardingV2: View {
     @State var offset: CGFloat = 0
  
   @StateObject var onboardingViewModel = OnboardingViewModel()
+  var boardingScreen = BoardingScreen()
   
     var body: some View {
         
@@ -21,10 +22,10 @@ struct OnboardingV2: View {
             HStack(spacing: 0){
                 
                 ForEach(boardingScreens){screen in
-                    
+                
                     VStack(spacing: 15){
                         
-                        Image(screen.image)
+                      Image(screen.image ?? "")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: getScreenBounds().width - 100, height: getScreenBounds().width - 100)
@@ -34,14 +35,16 @@ struct OnboardingV2: View {
                         
                         VStack(alignment: .leading, spacing: 12) {
                             
-                            Text(screen.title)
-                                .font(.largeTitle.bold())
+                          Text(screen.title ?? "")
+                                .font(.title2).bold()
                                 .foregroundColor(.black)
                                 .padding(.top,20)
+//                                .fixedSize()
                             
-                            Text(screen.description)
+                          Text(screen.description ?? "")
                                 .fontWeight(.semibold)
                                 .foregroundColor(.black)
+//                                .fixedSize()
                         }
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .offset(y: -70)
@@ -49,6 +52,9 @@ struct OnboardingV2: View {
                     .padding()
                     .frame(width: getScreenBounds().width)
                     .frame(maxHeight: .infinity)
+                  if screen.last == nil {
+                    OnboardingView()
+                  }
                 }
             }
         }
@@ -78,44 +84,45 @@ struct OnboardingV2: View {
             VStack{
                 
                 // Bottom Content...
-                HStack(spacing: 25){
-                    
-                    Button {
-                      self.onboardingViewModel.onboardingView.toggle()
-                    } label: {
-                        Text("Login / Sign Up")
-                            .fontWeight(.semibold)
-                            .foregroundColor(.black)
-                            .padding(.vertical,20)
-                            .frame(maxWidth: .infinity)
-                            .background(Color.white)
-                            .cornerRadius(12)
-                    }
-                    
-//                    Button {
+//                HStack(spacing: 25){
 //
+//                    Button {
+//                      self.onboardingViewModel.onboardingView.toggle()
 //                    } label: {
-//                        Text("Sign Up")
+//                        Text("Login / Sign Up")
 //                            .fontWeight(.semibold)
 //                            .foregroundColor(.black)
-//                            .offset(x: -5)
 //                            .padding(.vertical,20)
 //                            .frame(maxWidth: .infinity)
 //                            .background(Color.white)
 //                            .cornerRadius(12)
 //                    }
-
-                }
+//
+////                    Button {
+////
+////                    } label: {
+////                        Text("Sign Up")
+////                            .fontWeight(.semibold)
+////                            .foregroundColor(.black)
+////                            .offset(x: -5)
+////                            .padding(.vertical,20)
+////                            .frame(maxWidth: .infinity)
+////                            .background(Color.white)
+////                            .cornerRadius(12)
+////                    }
+//
+//                }
                 
                 HStack{
                     
-//                    Button {
-//
-//                    } label: {
-//                        Text("Skip")
-//                            .fontWeight(.semibold)
-//                            .foregroundColor(.white)
-//                    }
+                    Button {
+                      offset = min(offset - getScreenBounds().width,getScreenBounds().width * 3)
+                     
+                    } label: {
+                        Text("Back")
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                    }
                     
                     // Indicators...
                     HStack(spacing: 8){
@@ -130,15 +137,15 @@ struct OnboardingV2: View {
                     }
                     .frame(maxWidth: .infinity)
                     
-//                    Button {
-//                        // Setting Mac Offset...
-//                        // max 4 screens so max will be 3*width....
-//                        offset = min(offset + getScreenBounds().width,getScreenBounds().width * 2)
-//                    } label: {
-//                        Text("Next")
-//                            .fontWeight(.semibold)
-//                            .foregroundColor(.white)
-//                    }
+                    Button {
+                        // Setting Mac Offset...
+                        // max 4 screens so max will be 3*width....
+                        offset = min(offset + getScreenBounds().width,getScreenBounds().width * 3)
+                    } label: {
+                        Text("Next")
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                    }
 
                 }
                 .padding(.top,30)
@@ -148,14 +155,14 @@ struct OnboardingV2: View {
             
             ,alignment: .bottom
         )
-        .modifier(Popup(
-          isPresented: self.onboardingViewModel.onboardingView,
-          alignment: .center,
-          direction: .bottom,
-          content: {
-           OnboardingView()
-              .environmentObject(onboardingViewModel)
-          }))
+//        .modifier(Popup(
+//          isPresented: self.onboardingViewModel.onboardingView,
+//          alignment: .center,
+//          direction: .bottom,
+//          content: {
+//           OnboardingView()
+//              .environmentObject(onboardingViewModel)
+//          }))
     }
     
     // getting Rotation...

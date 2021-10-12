@@ -9,9 +9,10 @@ import SwiftUI
 
 struct BoardingScreen: Identifiable {
     var id = UUID().uuidString
-    var image: String
-    var title: String
-    var description: String
+    var image: String?
+    var title: String?
+    var description: String?
+    var last: String?
 }
 
 // Same Title and desc...
@@ -24,18 +25,22 @@ let description2 = "Receive personalized help through your first connections and
 let title3 = "Wing Posts and get the chain started!"
 let description3 = "Refer friends with subject matter expertise on asks as they also wing their circle of friends."
 
+let title4 = ""
+let description4 = ""
+
 let image = "logo"
 let connect = "connect"
 let help = "helpingOthers"
+let loginSignUp = ""
 
 // Since image name and BG color name are same....
 
 // Sample Model SCreens....
 var boardingScreens: [BoardingScreen] = [
 
-    BoardingScreen(image: connect, title: title1, description: description1),
-    BoardingScreen(image: help, title: title2, description: description2),
-    BoardingScreen(image: image, title: title3, description: description3),
+  BoardingScreen(image: connect, title: title1, description: description1, last: ""),
+  BoardingScreen(image: help, title: title2, description: description2, last: ""),
+    BoardingScreen(image: image, title: title3, description: description3, last: nil),
 ]
 
 
