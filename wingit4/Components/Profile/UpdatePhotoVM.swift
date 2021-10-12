@@ -23,10 +23,15 @@ class UpdatePhotoVM: ObservableObject {
   
     func loadCurrentImage(userAvatar: String?) {
       guard let userAvatar = userAvatar else { return }
-      let url = URL(string: userAvatar)
-      let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-      let uiImage = UIImage(data: data!)
-      image = Image(uiImage: uiImage!)
+      if let url = URL(string: userAvatar) {
+        do {
+          let data = try Data(contentsOf: url)
+          let uiImage = UIImage(data: data)
+          image = Image(uiImage: uiImage!)
+        } catch {
+          print(error)
+        }
+      }
     }
     
     
