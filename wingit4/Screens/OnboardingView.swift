@@ -7,10 +7,14 @@
 import SwiftUI
 
 struct OnboardingView: View {
+  
+ 
     var body: some View {
         // For Smaller Size iPhones...
         
+       
         VStack{
+          
             
             if UIScreen.main.bounds.height < 750{
                 
@@ -25,116 +29,125 @@ struct OnboardingView: View {
             }
         }
         .padding(.vertical)
+        .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
+          .background(Color.white)
+          .ignoresSafeArea()
+        
     }
 }
 
 struct Home1 : View {
-    @EnvironmentObject var session: SessionStore
-    @State var index = 0
-    @Namespace var name
-    
-    var body: some View{
-      ActivityIndicatorView(message: "Loading...", isShowing: self.$session.isSessionLoading) {
-        VStack{
-            
-            Image("logo")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 40, height: 40)
-            
-            HStack(spacing: 0){
-                
-                Button(action: {
-                    
-                    withAnimation(.spring()){
-                        
-                        index = 0
-                    }
-                    
-                }) {
-                    
-                    VStack{
-                        
-                        Text("Login")
-                            .font(.system(size: 20))
-                            .fontWeight(.bold)
-                            .foregroundColor(index == 0 ? .black : .gray)
-                        
-                        ZStack{
-                            
-                            // slide animation....
-                            
-                            Capsule()
-                                .fill(Color.black.opacity(0.04))
-                                .frame( height: 4)
-                            
-                            if index == 0{
-                                
-                                Capsule()
-                                    .fill(Color("Color"))
-                                    .frame( height: 4)
-                                    .matchedGeometryEffect(id: "Tab", in: name)
-                            }
-                        }
-                    }
-                }
-                
-                Button(action: {
-                    
-                    withAnimation(.spring()){
-                        
-                        index = 1
-                    }
-                    
-                }) {
-                    
-                    VStack{
-                        
-                        Text("Sign Up")
-                            .font(.system(size: 20))
-                            .fontWeight(.bold)
-                            .foregroundColor(index == 1 ? .black : .gray)
-                        
-                        ZStack{
-                            
-                            // slide animation....
-                            
-                            Capsule()
-                                .fill(Color.black.opacity(0.04))
-                                .frame( height: 4)
-                            
-                            if index == 1{
-                                
-                                Capsule()
-                                    .fill(Color("Color"))
-                                    .frame( height: 4)
-                                    .matchedGeometryEffect(id: "Tab", in: name)
-                            }
-                        }
-                    }
-                }
-            }
-            .padding(.top,30)
-            
-            // Login View...
-            
-            // Changing Views Based On Index...
-            
-            if index == 0{
-                
-                Login1()
-            }
-            else{
-                
-                SignUp1()
-            }
-        }
+  @EnvironmentObject var session: SessionStore
+  @State var index = 0
+  @Namespace var name
+  
 
-      }
-
-
+  var body: some View{
+    ActivityIndicatorView(message: "Loading...", isShowing: self.$session.isSessionLoading) {
+      VStack{
         
+        HStack {
+          Spacer()
+        }
+        .padding(.init(top: 10, leading: 10, bottom: 0, trailing: 10))
+        Image("logo")
+          .resizable()
+          .aspectRatio(contentMode: .fill)
+          .frame(width: 40, height: 40)
+        
+        HStack(spacing: 0){
+          
+          Button(action: {
+            
+            withAnimation(.spring()){
+              
+              index = 0
+            }
+            
+          }) {
+            
+            VStack{
+              
+              Text("Login")
+                .font(.system(size: 20))
+                .fontWeight(.bold)
+                .foregroundColor(index == 0 ? .black : .gray)
+              
+              ZStack{
+                
+                // slide animation....
+                
+                Capsule()
+                  .fill(Color.black.opacity(0.04))
+                  .frame( height: 4)
+                
+                if index == 0{
+                  
+                  Capsule()
+                    .fill(Color("Color"))
+                    .frame( height: 4)
+                    .matchedGeometryEffect(id: "Tab", in: name)
+                }
+              }
+            }
+          }
+          
+          Button(action: {
+            
+            withAnimation(.spring()){
+              
+              index = 1
+            }
+            
+          }) {
+            
+            VStack{
+              
+              Text("Sign Up")
+                .font(.system(size: 20))
+                .fontWeight(.bold)
+                .foregroundColor(index == 1 ? .black : .gray)
+              
+              ZStack{
+                
+                // slide animation....
+                
+                Capsule()
+                  .fill(Color.black.opacity(0.04))
+                  .frame( height: 4)
+                
+                if index == 1{
+                  
+                  Capsule()
+                    .fill(Color("Color"))
+                    .frame( height: 4)
+                    .matchedGeometryEffect(id: "Tab", in: name)
+                }
+              }
+            }
+          }
+        }
+        .padding(.top,30)
+        
+        // Login View...
+        
+        // Changing Views Based On Index...
+        
+        if index == 0{
+          
+          Login1()
+        }
+        else{
+          
+          SignUp1()
+        }
+      }
+      
     }
+    
+    
+    
+  }
 }
 
 struct Login1 : View {
