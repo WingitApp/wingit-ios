@@ -38,11 +38,11 @@ struct MainView: View {
   var body: some View {
     GeometryReader { geometry in
       ZStack(alignment: .bottomLeading) {
-        TabView(selection: mainViewModel.tabHandler) {
+        TabView(selection: ViewRouter.shared.tabHandler) {
             HomeView()
               .tabItem({
                 VStack(alignment: .center ){
-                  Image(systemName: mainViewModel.selection == .home ? "house.fill" : "house")
+                  Image(systemName: ViewRouter.shared.tabSelection == .home ? "house.fill" : "house")
                     .imageScale(.small)
                   Text("Home")
                     .font(.caption2)
@@ -51,18 +51,18 @@ struct MainView: View {
               .tag(MainTab.home)
               .id(home)
               .onChange(
-                of: mainViewModel.tapCount,
+                of: ViewRouter.shared.tapCount,
                 perform: { tapCount in
                   if tapCount == 1 {
                     home = UUID()
-                    mainViewModel.tapCount = 0
+                    ViewRouter.shared.tapCount = 0
                   }
               })
               .transition(.slide) // 3
             ReferralsView()
               .tabItem({
                 VStack(alignment: .center ){
-                  Image(systemName: mainViewModel.selection == .referrals ? "paperplane.fill" : "paperplane" )
+                  Image(systemName: ViewRouter.shared.tabSelection == .referrals ? "paperplane.fill" : "paperplane" )
                     .imageScale(.small)
                   Text("Inbox")
                     .font(.caption2)
@@ -71,11 +71,11 @@ struct MainView: View {
               .tag(MainTab.referrals)
               .id(referrals)
               .onChange(
-                of: mainViewModel.tapCount,
+                of: ViewRouter.shared.tapCount,
                 perform: { tapCount in
                   if tapCount == 1 {
                     referrals = UUID()
-                    self.mainViewModel.tapCount = 0
+                    ViewRouter.shared.tapCount = 0
                   }
               })
             ComposePostView()
@@ -90,17 +90,17 @@ struct MainView: View {
               .tag(MainTab.composePost)
               .id(composePost)
               .onChange(
-                of: mainViewModel.tapCount,
+                of: ViewRouter.shared.tapCount,
                 perform: { tapCount in
                   if tapCount == 1 {
                     composePost = UUID()
-                    self.mainViewModel.tapCount = 0
+                    ViewRouter.shared.tapCount = 0
                   }
               })
             NotificationView()
               .tabItem({
                 VStack(alignment: .center ){
-                  Image(systemName: mainViewModel.selection == .notifications ? "bell.fill" : "bell")
+                  Image(systemName: ViewRouter.shared.tabSelection == .notifications ? "bell.fill" : "bell")
                     .imageScale(.small)
                   Text("Notifs")
                     .font(.caption2)
@@ -110,11 +110,11 @@ struct MainView: View {
               .tag(MainTab.notifications)
               .id(notification)
               .onChange(
-                of: mainViewModel.tapCount,
+                of: ViewRouter.shared.tapCount,
                 perform: { tapCount in
                   if tapCount == 1 {
                     notification = UUID()
-                    self.mainViewModel.tapCount = 0
+                    ViewRouter.shared.tapCount = 0
                   }
               })
             ProfileView(
@@ -122,7 +122,7 @@ struct MainView: View {
             )
               .tabItem({
                 VStack(alignment: .center ){
-                  Image(systemName: mainViewModel.selection == .profile ? "person.fill" : "person")
+                  Image(systemName: ViewRouter.shared.tabSelection == .profile ? "person.fill" : "person")
                     .imageScale(.small)
                   Text("You")
                     .font(.caption2)
@@ -131,11 +131,11 @@ struct MainView: View {
               .tag(MainTab.profile)
               .id(profile)
               .onChange(
-                of: mainViewModel.tapCount,
+                of: ViewRouter.shared.tapCount,
                 perform: { tapCount in
                   if tapCount == 1 {
                     profile = UUID()
-                    self.mainViewModel.tapCount = 0
+                    ViewRouter.shared.tapCount = 0
                   }
               })
          }

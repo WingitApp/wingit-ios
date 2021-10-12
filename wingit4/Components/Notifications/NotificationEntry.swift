@@ -40,12 +40,11 @@ struct NotificationEntry: View {
 
 struct NotificationReferralEntry: View {
   @Binding var notification: Notification
-  @EnvironmentObject var mainViewModel: MainViewModel
   @EnvironmentObject var notificationViewModel: NotificationViewModel
   
   func routeToReferralView() {
     Haptic.impact(type: "soft")
-    mainViewModel.setTab(tab: .referrals)
+    ViewRouter.shared.setTab(tab: .referrals)
     notification.openedAt = Timestamp(date: Date())
     notificationViewModel.updateOpenedAt(notificationId: notification.activityId)
   }

@@ -6,12 +6,35 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum Screen {
   case askDetail
+  case referral
+  case userProfile
 }
 
-final class ViewRouter: ObservableObject {
-//  @Published var currentScreen: Screen = .signup
-  @Published var tab: MainTab = .notifications
+class ViewRouter: ObservableObject {
+  static let shared = ViewRouter()
+  @Published var currentScreen: Screen?
+  @Published var activityId: String?
+  @Published var postId: String?
+  @Published var userId: String?
+  @Published var tapCount: Int = 0
+  @Published var tabSelection: MainTab = .home
+
+var tabHandler: Binding<MainTab> { Binding(
+  get: { self.tabSelection },
+  set: {
+    if $0 == self.tabSelection {
+      self.tapCount += 1
+      }
+    Haptic.impact(type: "soft")
+    self.tabSelection = $0
+  }
+)}
+
+func setTab(tab: MainTab) -> Void {
+  self.tabSelection = tab
+}
 }

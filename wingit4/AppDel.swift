@@ -17,7 +17,6 @@ import URLImageStore
 
 class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate {
   private var operationQueue = OperationQueue()
-  weak var viewRouter: ViewRouter?
 
   var window: UIWindow?
   let gcmMessageIDKey = "gcm.message_id"
@@ -53,11 +52,11 @@ class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate {
   
   
   /// Handles silent push notifications - https://firebase.google.com/docs/cloud-messaging/ios/receive#handle_silent_push_notifications
-
+  
   func application(_ application: UIApplication,
                    didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                    fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult)
-                     -> Void) {
+                   -> Void) {
     // If you are receiving a notification message while your app is in the background,
     // this callback will not be fired till the user taps on the notification launching the application.
     // TODO: Handle data of notification
@@ -105,6 +104,12 @@ class AppDelegate: NSObject, UIApplicationDelegate, MessagingDelegate {
 
 @available(iOS 10, *)
 extension AppDelegate: UNUserNotificationCenterDelegate {
+  func isEqual<T: Equatable>(type: T.Type, a: Any?, b: Any?) -> Bool {
+      guard let a = a as? T, let b = b as? T else { return false }
+
+      return a == b
+  }
+  
   // Receive displayed notifications for iOS 10 devices.
   func userNotificationCenter(
     _ center: UNUserNotificationCenter,
@@ -112,17 +117,39 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
   ) {
     let userInfo = notification.request.content.userInfo
-
+    print(userInfo)
     // With swizzling disabled you must let Messaging know about the message, for Analytics
     // Messaging.messaging().appDidReceiveMessage(userInfo)
 
-    // ...
-
-    // Print full message.
-    print(userInfo)
-
     // Change this to your preferred presentation option
     completionHandler([[.list, .banner, .sound]])
+  }
+  
+  func routePushToCorrespondingScreen(pushData: [AnyHashable: Any]) {
+    ViewRouter.shared.activityId = pushData["activityId"] as? String
+    if isEqual(type: String.self,
+               a: pushData["type"],
+               b: Notification.NotificationType.comment.rawValue) {
+                ViewRouter.shared.tabSelection = .notifications
+                ViewRouter.shared.currentScreen = .askDetail
+                ViewRouter.shared.postId = pushData["postId"] as? String
+    } else if isEqual(type: String.self,
+              a: pushData["type"],
+              b: Notification.NotificationType.connectRequest.rawValue) {
+                ViewRouter.shared.tabSelection = .notifications
+                ViewRouter.shared.currentScreen = .userProfile
+                ViewRouter.shared.userId = pushData["userId"] as? String
+    } else if isEqual(type: String.self,
+              a: pushData["type"],
+              b: Notification.NotificationType.connectRequestAccepted.rawValue) {
+                ViewRouter.shared.tabSelection = .notifications
+                ViewRouter.shared.currentScreen = .userProfile
+                ViewRouter.shared.userId = pushData["userId"] as? String
+    } else if isEqual(type: String.self,
+              a: pushData["type"],
+              b: Notification.NotificationType.referred.rawValue) {
+                ViewRouter.shared.tabSelection = .referrals
+    }
   }
 
   func userNotificationCenter(
@@ -132,13 +159,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
   ) {
     let userInfo = response.notification.request.content.userInfo
 
-    // ...
-
     // With swizzling disabled you must let Messaging know about the message, for Analytics
     // Messaging.messaging().appDidReceiveMessage(userInfo)
 
-    // Print full message.
-    print(userInfo)
+    routePushToCorrespondingScreen(pushData: userInfo)
 
     completionHandler()
   }
@@ -147,7 +171,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 @main
 struct WingitApp: App {
-    let viewRouter = ViewRouter()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     let sessionStore = SessionStore()
@@ -162,14 +185,6 @@ struct WingitApp: App {
       InitialView()
         .environment(\.urlImageService, urlImageService)
         .environmentObject(sessionStore)
-        .environmentObject(viewRouter)
-        .onAppear(perform:setUpAppDelegate)
     }
   }
-  
-  func setUpAppDelegate() {
-      delegate.viewRouter = viewRouter
-  }
-    
-
 }

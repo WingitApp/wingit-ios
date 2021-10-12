@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct NotificationView: View {
+  @ObservedObject var viewRouter = ViewRouter.shared
   @EnvironmentObject var session: SessionStore
   @EnvironmentObject var notificationViewModel: NotificationViewModel
   @EnvironmentObject var mainViewModel: MainViewModel
@@ -19,6 +20,10 @@ struct NotificationView: View {
   @StateObject var commentViewModel = CommentViewModel()
   @StateObject var referViewModel = ReferViewModel()
   @StateObject var commentInputViewModel = CommentInputViewModel()
+  
+  func openPushNotification() {
+    self.notificationViewModel.openNotification(notificationId: ViewRouter.shared.activityId, correspondingUserId: ViewRouter.shared.userId)
+  }
     
   func sortNotifications() -> Void {
     self.notificationViewModel.notificationsArray.sort { $0.date > $1.date }
@@ -50,6 +55,11 @@ struct NotificationView: View {
                              .environmentObject(commentViewModel)
                              .environmentObject(commentInputViewModel),
                       isActive: $notificationViewModel.isNavigationLinkActive)
+                  .onReceive(viewRouter.$currentScreen) { nav in
+                    if nav != nil {
+                      openPushNotification()
+                    }
+                  }
                 if notificationViewModel.isLoading {
                   ReferralPlaceholder(type: "accepted")
                   ReferralPlaceholder(type: "accepted")
