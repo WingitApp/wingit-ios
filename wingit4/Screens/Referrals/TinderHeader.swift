@@ -9,6 +9,9 @@ import SwiftUI
 
 struct TinderHeader: View {
   
+  @EnvironmentObject var referralsViewModel: ReferralsViewModel
+  @Binding var referral: Referral
+  
   var body: some View {
     
     HStack(alignment: .top) {
@@ -45,8 +48,8 @@ struct TinderHeader: View {
   }
 }
 
-struct TinderHeader_Previews: PreviewProvider {
-    static var previews: some View {
-        TinderScreen()
-    }
-}
+//struct TinderHeader_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TinderScreen()
+//    }
+//}

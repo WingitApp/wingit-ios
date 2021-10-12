@@ -76,8 +76,8 @@ struct MainView: View {
                 self.mainViewModel.tapCount = 0
               }
           })
-        //ComposePostView()
-         TinderScreen()
+        ComposePostView()
+//         TinderScreen()
           .tabItem({
             VStack(alignment: .center ){
               Image(systemName: "plus.circle.fill")

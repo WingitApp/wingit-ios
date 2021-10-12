@@ -52,8 +52,8 @@ struct ReferHeader: View {
                 Spacer()
                 Button(
                     action: {
-                        referralsViewModel.ignoreReferral(referralId: referral.id)
-                        logToAmplitude(event: .ignoreReferral)
+//                        referralsViewModel.ignoreReferral(referralId: referral.id)
+//                        logToAmplitude(event: .ignoreReferral)
                 },
                        label: {
                         Image(systemName: "xmark").foregroundColor(.gray)
@@ -63,5 +63,6 @@ struct ReferHeader: View {
 
         }
       .padding(.top, 10)
+      .background(Color.white)
     }
 }

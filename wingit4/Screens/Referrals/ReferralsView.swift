@@ -42,7 +42,8 @@ struct ReferralsView: View {
                 ).padding(.top, 285)
               } else {
               // TODO: fix this implementation (this is quick fix)
-                ReferralFeed()
+//                ReferralFeed()
+                TinderScreen()
               }
                 NavigationLink(
                     destination:
