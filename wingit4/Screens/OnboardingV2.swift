@@ -39,14 +39,14 @@ struct OnboardingV2: View {
                                 .font(.title2).bold()
                                 .foregroundColor(.black)
                                 .padding(.top,20)
-//                                .fixedSize()
+                               .fixedSize(horizontal: false, vertical: true)
                             
                           Text(screen.description ?? "")
                                 .fontWeight(.semibold)
                                 .foregroundColor(.black)
 //                                .fixedSize()
                         }
-                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         .offset(y: -70)
                     }
                     .padding()
