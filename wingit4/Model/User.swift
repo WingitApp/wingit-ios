@@ -57,7 +57,6 @@ struct User: Identifiable, Codable, Equatable, Hashable {
                   case "reddit": self.reddit = newValue
                   case "spotify": self.spotify = newValue
                   default: fatalError("Invalid key")
-
               }
           }
       }

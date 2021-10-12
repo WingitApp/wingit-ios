@@ -31,7 +31,7 @@ class SignupViewModel: ObservableObject {
         shouldShowOnboarding = false
         if checkFieldsAreValid() {
             
-           return AuthService.signupUser(
+           return AuthService.signupUser(  
               firstName: firstName.capitalized,
               lastName: lastName.capitalized,
               username: username,
