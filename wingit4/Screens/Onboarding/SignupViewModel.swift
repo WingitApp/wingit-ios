@@ -28,6 +28,7 @@ class SignupViewModel: ObservableObject {
 
     func signup(onSuccess: @escaping (_ user: User) -> Void) {
         self.ampSignupAttemptEvent()
+        shouldShowOnboarding = false
         if checkFieldsAreValid() {
             
            return AuthService.signupUser(
