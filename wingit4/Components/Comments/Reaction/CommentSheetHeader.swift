@@ -22,8 +22,13 @@ struct CommentSheetHeader: View {
           HStack(alignment: .center){
             Button(action: commentSheetViewModel.toggleEmojiKeyboard) {
               Image(systemName: "chevron.backward")
-                  .imageScale(.large)
                   .foregroundColor(.gray)
+                  .font(.system(size: 23))
+                  .clipShape(Circle())
+                  .frame(width: 35, height: 35, alignment: .center)
+                  .background(BlurView())
+                  .cornerRadius(100)
+                  .zIndex(1)
             }
             SearchBar(
               text: $commentSheetViewModel.searchText,
@@ -31,8 +36,7 @@ struct CommentSheetHeader: View {
             )
           }
           .padding(.horizontal)
-          .padding(.top, 5)
-          .padding(.bottom, 10)
+          .padding(.bottom, 5)
         } else {
           ScrollView(.horizontal, showsIndicators: false) {
             HStack(alignment: .center, spacing: (UIScreen.main.bounds.width - 240) / 6) {
@@ -60,7 +64,7 @@ struct CommentSheetHeader: View {
             }
             .padding(.horizontal)
             .padding(.top, 5)
-            .padding(.bottom, 10)
+            .padding(.bottom, 15)
           }
           .frame(width: UIScreen.main.bounds.width)
         }

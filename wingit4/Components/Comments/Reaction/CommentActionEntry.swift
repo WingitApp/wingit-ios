@@ -31,12 +31,13 @@ struct CommentActionEntry: View {
                 .fontWeight(.light)
                 .font(.system(size: 20))
                 .frame(width: 30)
+                .foregroundColor(icon == "trash" ? Color.red : Color.wingitBlue)
+
               Text(label)
                 .font(.body)
-                .fontWeight(.light)
+                .foregroundColor(icon == "trash" ? Color.red : Color.black)
               Spacer()
             }
-            .foregroundColor(icon == "trash" ? Color.red : Color.black)
             
   //          if showDivider { Divider() }
           }

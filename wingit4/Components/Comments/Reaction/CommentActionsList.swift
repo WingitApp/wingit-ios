@@ -10,23 +10,8 @@ import SwiftUI
 
 struct CommentActionsList: View {
   @EnvironmentObject var commentSheetViewModel: CommentSheetViewModel
+  var post: Post?
 
-    func editComment() {
-      print("edit comment")
-    }
-    
-    func copyText() {
-      print("copy text")
-    }
-    
-    func reactions() {
-//        isEmojiKeyboardActive = true
-    }
-  
-    func deleteMessage() {
-      print("delete message")
-    }
-  
     func clean() {
 //      isEmojiKeyboardActive = false
     }
@@ -40,17 +25,17 @@ struct CommentActionsList: View {
               VStack(spacing: 0) {
                 CommentActionEntry(
                   icon: "hand.thumbsup",
-                  label: "Mark as Best Answer",
+                  label: "\(commentSheetViewModel.isTopComment ? "Unmark Answer as Best" : "Mark as Best Answer")",
                   showDivider: true,
-                  onTap: {},
-                  isShown: commentSheetViewModel.isPostOwner
+                  onTap: { commentSheetViewModel.markCommentAsBest(post: post) },
+                  isShown: commentSheetViewModel.isPostOwner && !commentSheetViewModel.isOwnComment
                 )
                 if commentSheetViewModel.isPostOwner { Divider() }
                 CommentActionEntry(
                   icon: "square.and.pencil",
                   label: "Edit Comment",
                   showDivider: true,
-                  onTap: editComment,
+                  onTap: {},
                   isShown: commentSheetViewModel.isOwnComment
                 )
                 if commentSheetViewModel.isOwnComment { Divider() }
@@ -74,7 +59,7 @@ struct CommentActionsList: View {
                   icon: "trash",
                   label: "Delete Message",
                   showDivider: true,
-                  onTap: deleteMessage,
+                  onTap: commentSheetViewModel.deleteComment,
                   isShown: commentSheetViewModel.isOwnComment
                 )
                 if commentSheetViewModel.isOwnComment { Divider() }

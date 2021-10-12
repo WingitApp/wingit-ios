@@ -14,28 +14,48 @@ struct UserComment: View {
   @StateObject var reactionBarViewModel = ReactionBarViewModel()
 
   var comment: Comment
+  var post: Post?
   var postOwnerId: String?
   var isOPComment: Bool = false
+  var isTopComment: Bool = false
   
   @State var isNavActive: Bool = false
 //  @State var isActive: Bool = false
 
 
   
-  init(comment: Comment, postOwnerId: String?) {
+  init(comment: Comment, post: Post?, postOwnerId: String?) {
     self.comment = comment
+    self.post = post ?? nil
     self.postOwnerId = postOwnerId
     self.isOPComment = comment.ownerId == postOwnerId
+    self.isTopComment = post!.topCommentId != nil && post!.topCommentId == comment.id
   }
   
   func openCommentActionsSheet() {
     guard let uid = session.currentUser?.uid else { return }
     Haptic.impact(type: "soft")
     dismissKeyboard()
-    commentSheetViewModel.openCommentSheet(comment: comment, isPostOwner: postOwnerId == uid) {
+    commentSheetViewModel.openCommentSheet(
+      comment: comment,
+      isPostOwner: postOwnerId == uid,
+      isTopComment: isTopComment,
+      reactions: reactionBarViewModel.reactions
+    ) {
 //      isActive = true
     }
   }
+  
+  
+  func loadReactionBar() {
+   reactionBarViewModel.fetchReactions(comment: comment)
+  }
+  
+  func removeListener() {
+    guard let listener = self.reactionBarViewModel.listener else { return }
+    listener.remove()
+  }
+
   
     var body: some View {
       HStack(alignment: .top) {
@@ -60,7 +80,14 @@ struct UserComment: View {
               Text(comment.username ?? "")
               .font(.system(size:13))
               .fontWeight(.semibold)
-//            UserCommentLabel(isOPComment: isOPComment)
+            if isTopComment {
+              HStack(spacing: 3){
+                Text(Image(systemName: "star.circle.fill"))
+                Text("Best Answer")
+              }
+              .foregroundColor(Color.uiorange)
+              .font(.system(size: 10))
+            }
             Circle()
             .modifier(CircleDotStyle())
             Text(
@@ -72,10 +99,7 @@ struct UserComment: View {
             )
               .foregroundColor(.gray)
               .font(.system(size: 10))
-//            Image(systemName: "rosette")
-//              .foregroundColor(.wingitBlue)
-//              .font(.system(size:12))
-
+            
           }
           .onTapGesture(perform: { isNavActive.toggle() })
 
@@ -83,19 +107,23 @@ struct UserComment: View {
           Text(comment.comment?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
           .font(.system(size:15))
           .padding(.top, 1)
-          .onTapGesture(count: 2) {
-            openCommentActionsSheet()
-          }
           .onLongPressGesture(minimumDuration: 0.1) {
             openCommentActionsSheet()
           }
           // Emoji Bar
-          ReactionBar(comment: comment)
+          ReactionBar(comment: comment, isPostOwner: postOwnerId == session.currentUser?.uid, isTopComment: isTopComment)
         }
         .padding(.leading, 5)
         
       }
+      .onAppear(perform: loadReactionBar)
+      .onDisappear(perform: removeListener)
       .padding(15)
+      .background(
+        isTopComment
+         ? LinearGradient(gradient: Gradient(colors: [Color.uilightOrange.opacity(0.6), .white]), startPoint: .top, endPoint: .bottom)
+        : nil
+      )
       .environmentObject(reactionBarViewModel)
       Divider()
     }

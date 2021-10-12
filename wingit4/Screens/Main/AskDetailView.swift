@@ -8,7 +8,7 @@
 import SwiftUI
 import BottomSheet
 
-struct AskDetailView: View {
+struct AskDetailView: View, KeyboardReadable {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject var commentViewModel = CommentViewModel()
     @StateObject var commentSheetViewModel = CommentSheetViewModel()
@@ -54,23 +54,15 @@ struct AskDetailView: View {
             headerContent: {
               CommentSheetHeader()
                 .environmentObject(commentSheetViewModel)
-//              VStack(spacing: 0){
-//                HStack(alignment: .center, spacing: 0) {
-//                  Text(commentSheetViewModel.comment?.comment ?? "")
-//                    .font(.caption)
-//                }
-//                .frame(width: UIScreen.main.bounds.width, height: 40)
-//                  .padding(.bottom, 15)
-//                Divider()
-//                  .padding(0)
-//              }
-//              .padding(.vertical, 10)
-//              .background(Color.white)
             }){
-              CommentActionsList()
-//                .background(Color.white)
+              CommentActionsList(post: post)
                 .environmentObject(commentSheetViewModel)
           }
+          .onReceive(keyboardPublisher) { isKeyboardVisible in
+            if isKeyboardVisible, commentSheetViewModel.bottomSheetPosition != .hidden {
+              commentSheetViewModel.bottomSheetPosition = .top
+            }
+           }
       }
       .navigationBarTitle("", displayMode: .inline)
       .navigationBarHidden(isNavBarHidden)

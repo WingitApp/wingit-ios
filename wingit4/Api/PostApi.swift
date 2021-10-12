@@ -329,7 +329,7 @@ class PostApi {
           listener(listenerFirestore)
     }
     
-  func updateStatus(postId: String, newStatus: PostStatus, onSuccess: @escaping(_ newStatus: PostStatus) -> Void) {
+    func updateStatus(postId: String, newStatus: PostStatus, onSuccess: @escaping(_ newStatus: PostStatus) -> Void) {
         Ref.FS_COLLECTION_ALL_POSTS.document(postId)
           .updateData(["status": newStatus.rawValue]) { error in
             if error != nil {
@@ -339,6 +339,18 @@ class PostApi {
             }
           }
     }
+  
+  func updatePostTopComment(postId: String, commentId: String, remove: Bool, onSuccess: @escaping(_ status: String?) -> Void) {
+      let status = remove ? nil : commentId
+    
+      Ref.FS_COLLECTION_ALL_POSTS.document(postId).updateData(["topCommentId": status]) { error in
+          if error != nil {
+              return printDecodingError(error: error!)
+          } else {
+            onSuccess(status)
+          }
+        }
+  }
   
   func loadTimeline(
     firstCall: Bool,

@@ -331,21 +331,20 @@ class ReferralsViewModel: ObservableObject {
       // we return early if there is no logged in user
       guard let currentUser = Auth.auth().currentUser else { return }
         
-      let comment: Comment = Comment(
-        id: UUID(),
-        comment: text,
-        avatarUrl: currentUser.photoURL!.absoluteString,
-        inviterAvatarUrl: referral.sender?.profileImageUrl,
-        inviterDisplayName: referral.sender?.displayName,
-        inviterId: referral.sender?.id,
-        ownerId: currentUser.uid,
-        postId: referral.askId,
-        username: currentUser.displayName!,
-        date: Date().timeIntervalSince1970,
-        type: .invitedReferral
-      )
+      let commentDict = [
+        "id": UUID().uuidString,
+        "comment": text,
+        "avatarUrl": currentUser.photoURL!.absoluteString,
+        "inviterAvatarUrl": referral.sender?.profileImageUrl,
+        "inviterDisplayName": referral.sender?.displayName,
+        "inviterId": referral.sender?.id,
+        "ownerId": currentUser.uid,
+        "postId": referral.askId,
+        "username": currentUser.displayName!,
+        "date": Date().timeIntervalSince1970,
+        "type": CommentType.invitedReferral.rawValue
+      ] as [String : Any]
       
-      guard let commentDict = try? comment.toDictionary() else {return}
       Api.Comment.postComment(
         commentDict: commentDict,
         postId: referral.askId,

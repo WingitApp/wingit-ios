@@ -37,9 +37,35 @@ class CommentApi {
     onSuccess()
     }
   }
+  
+  
+  func deleteComment(
+    comment: Comment,
+    onSuccess: @escaping() -> Void
+  ) {
+    guard let postId = comment.postId else { return }
+    guard let commentId = comment.docId else { return }
+    
+    Ref.FS_DOC_COMMENTS_FOR_POSTID(postId: postId)
+     .collection("postComments")
+     .document(String(commentId)).delete() { error in
+        if error != nil{
+          print("error", error)
+        } else {
+          onSuccess()
+        }
+     }
+  }
     
     
-    func getComments(postId: String, onSuccess: @escaping([Comment]) -> Void, onError: @escaping(_ errorMessage: String) -> Void, newComment: @escaping(Comment) -> Void, listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void) {
+    func getComments(
+      postId: String,
+      onSuccess: @escaping([Comment]) -> Void,
+      onError: @escaping(_ errorMessage: String) -> Void,
+      newComment: @escaping(Comment) -> Void,
+      onRemove: @escaping(Comment) -> Void,
+      listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
+    ) {
         let listenerFirestore = Ref.FS_DOC_COMMENTS_FOR_POSTID(postId: postId).collection("postComments").order(by: "date", descending: false).addSnapshotListener { (querySnapshot, error) in
             guard let snapshot = querySnapshot else {
                 return
@@ -55,7 +81,8 @@ class CommentApi {
                 case .modified:
                     print("type: modified")
                 case .removed:
-                    print("type: removed")
+                  guard let decodedComment = try? documentChange.document.data(as: Comment.self) else { return }
+                    onRemove(decodedComment)
                 }
             }
             
@@ -137,6 +164,28 @@ class CommentApi {
     
         onSuccess()
         
+      }
+  }
+  
+  func deleteReaction(
+    reaction: Reaction,
+    comment: Comment,
+    onSuccess: @escaping() -> Void
+  ) {
+    guard let postId = comment.postId else { return }
+    guard let commentId = comment.docId else { return }
+    guard let reactionId = reaction.docId else { return }
+    
+    Ref.FS_COLLECTION_REACTIONS_BY_COMMENT(
+      postId: postId,
+      commentId: commentId
+    )
+      .document(String(reactionId)).delete() { error in
+        if error != nil{
+          print("error", error)
+        } else {
+          onSuccess()
+        }
       }
   }
 }

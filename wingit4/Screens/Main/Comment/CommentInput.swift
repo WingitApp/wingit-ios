@@ -29,7 +29,7 @@ struct CommentInput: View {
         self.commentInputViewModel.saveComment(
             text: trimmedText,
             post: post
-          ) { comment in
+          ) {
            // clean message
             self.composedMessage = ""
           

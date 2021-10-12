@@ -120,6 +120,7 @@
 		15F7E8C026E8490100E5238F /* UserComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F7E8BD26E8490100E5238F /* UserComment.swift */; };
 		15F7E8C126E8490100E5238F /* CommentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F7E8BE26E8490100E5238F /* CommentList.swift */; };
 		15FBEF352714B1CB00A9F373 /* ReactionBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FBEF342714B1CB00A9F373 /* ReactionBarViewModel.swift */; };
+		15FBEF372714DAB000A9F373 /* ReactionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FBEF362714DAB000A9F373 /* ReactionButton.swift */; };
 		3B0DFBDE26B78D86008CE0D1 /* UpdatePhotoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0DFBDD26B78D86008CE0D1 /* UpdatePhotoVM.swift */; };
 		3B3A880D26E0007A003E780F /* ReferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3A880C26E0007A003E780F /* ReferViewModel.swift */; };
 		3B5BDB51268F82790034B18C /* fetchUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5BDB50268F82790034B18C /* fetchUser.swift */; };
@@ -358,6 +359,7 @@
 		15F7E8BD26E8490100E5238F /* UserComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserComment.swift; sourceTree = "<group>"; };
 		15F7E8BE26E8490100E5238F /* CommentList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentList.swift; sourceTree = "<group>"; };
 		15FBEF342714B1CB00A9F373 /* ReactionBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionBarViewModel.swift; sourceTree = "<group>"; };
+		15FBEF362714DAB000A9F373 /* ReactionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionButton.swift; sourceTree = "<group>"; };
 		3B0DFBDD26B78D86008CE0D1 /* UpdatePhotoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePhotoVM.swift; sourceTree = "<group>"; };
 		3B3A880C26E0007A003E780F /* ReferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferViewModel.swift; sourceTree = "<group>"; };
 		3B5BDB50268F82790034B18C /* fetchUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fetchUser.swift; sourceTree = "<group>"; };
@@ -687,6 +689,7 @@
 				157F9987271239ED001A4031 /* CommentSheetHeader.swift */,
 				157F998927123B34001A4031 /* EmojiHeaderButton.swift */,
 				15FBEF342714B1CB00A9F373 /* ReactionBarViewModel.swift */,
+				15FBEF362714DAB000A9F373 /* ReactionButton.swift */,
 			);
 			path = Reaction;
 			sourceTree = "<group>";
@@ -1312,6 +1315,7 @@
 				3B74CC8126FC59BC00BB39E2 /* AddImageButton.swift in Sources */,
 				15762C6C26E170FA00A8E041 /* ReferralsViewModel.swift in Sources */,
 				156E6AD526D8A0A700690E47 /* NotificationEntry.swift in Sources */,
+				15FBEF372714DAB000A9F373 /* ReactionButton.swift in Sources */,
 				159A3DD72703CEB600C5573C /* OnboardingCarousel.swift in Sources */,
 				151A3C9826D5B9F000A39FAF /* BodyCell.swift in Sources */,
 				3B5BDB5C268F98E70034B18C /* ReportInputViewModel.swift in Sources */,

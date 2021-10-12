@@ -74,7 +74,18 @@ class CommentViewModel: ObservableObject {
             self.isLoading.toggle()
           }
 
-          }) { (listener) in
+        },
+        onRemove: { comment in
+          
+          if self.comments.isEmpty { return }
+          for (index, c) in self.comments.enumerated() {
+              if c.id == comment.id {
+                  self.comments.remove(at: index)
+              }
+          }
+        }
+      
+      ) { (listener) in
               self.listener = listener
           }
       }

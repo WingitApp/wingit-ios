@@ -7,62 +7,145 @@
 
 import SwiftUI
 
+
 struct ReactionBar: View {
   @EnvironmentObject var reactionBarViewModel: ReactionBarViewModel
-  
+  @EnvironmentObject var commentSheetViewModel: CommentSheetViewModel
   var comment: Comment
+  var isPostOwner: Bool
+  var isTopComment: Bool
+
   @State var text: String = ""
   @State var showSheet: Bool = false
-  
-  func loadReactionBar() {
-    print("load reaction called")
-    reactionBarViewModel.fetchReactions(comment: comment)
-    print("reactions:", self.reactionBarViewModel.reactions)
-  }
-  
-  func removeListener() {
-    print("disappear")
-    guard let listener = self.reactionBarViewModel.listener else { return }
-    listener.remove()
-  }
-  
-  func handleTap(reaction: Reaction) {
-    
-  }
-  
-    var body: some View {
-      HStack {
-        ForEach(Array(self.reactionBarViewModel.reactions.enumerated()), id: \.element) { index, reaction in
-          Button(action: { handleTap(reaction: reaction)} ) {
-            HStack(alignment: .center, spacing: 3){
-              Text(String(UnicodeScalar(reaction.emojiCode)!))
-                .font(.system(size: 15))
-              Text("3")
-                .font(.caption)
-                .font(.system(size: 10))
-            }
-            .padding(3)
-            .background(reaction.isOwn!
-              ? Color.backgroundBlueGray
-              : Color.lightGray
-            )
-            .cornerRadius(5)
 
+    @State private var totalHeight
+          = CGFloat.zero       // << variant for ScrollView/List
+    //    = CGFloat.infinity   // << variant for VStack
+
+    var body: some View {
+        VStack {
+            GeometryReader { geometry in
+                self.generateContent(in: geometry)
+            }
+        }
+        .frame(height: totalHeight)// << variant for ScrollView/List
+        //.frame(maxHeight: totalHeight) // << variant for VStack
+    }
+
+    private func generateContent(in g: GeometryProxy) -> some View {
+        var width = CGFloat.zero
+        var height = CGFloat.zero
+
+      return ZStack(alignment: .topLeading) {
+        ForEach(Array(self.reactionBarViewModel.reactions.enumerated()), id: \.element) { index, reaction in
+          HStack {
+            ReactionButton(
+              reaction: reaction,
+              comment: comment
+            )
+            if !self.reactionBarViewModel.reactions.isEmpty, reaction == self.reactionBarViewModel.reactions.last! {
+              Button(action: {
+                commentSheetViewModel.openCommentSheet(
+                  comment: comment,
+                  isPostOwner: isPostOwner,
+                  isTopComment: isTopComment,
+                  reactions: self.reactionBarViewModel.reactions,
+                  showEmojiKeyboard: true,
+                  onOpen: {}
+                )
+              } ) {
+                Image(systemName: "plus")
+                  .padding(3)
+                  .background(Color.lightGray)
+                  .cornerRadius(100)
+                  .font(.system(size: 10))
+              }
+            }
           }
-          .buttonStyle(PlainButtonStyle())
+          
+          .padding([.horizontal, .vertical], 4)
+          .alignmentGuide(.leading, computeValue: { d in
+            if (abs(width - d.width) > g.size.width)
+            {
+              width = 0
+              height -= d.height
+            }
+            let result = width
+            if reaction == self.reactionBarViewModel.reactions.last! {
+              width = 0 //last item
+            } else {
+              width -= d.width
+            }
+            return result
+          })
+          .alignmentGuide(.top, computeValue: {d in
+            let result = height
+            if reaction == self.reactionBarViewModel.reactions.last! {
+              height = 0 // last item
+            }
+            return result
+          })
+          
         }
         
-        if !self.reactionBarViewModel.reactions.isEmpty {
-          Image(systemName: "plus")
-            .padding(3)
-            .background(Color.lightGray)
-            .cornerRadius(100)
-            .font(.system(size: 13))
-        }
-       
       }
-      .onAppear(perform: loadReactionBar)
-      .onDisappear(perform: removeListener)
-      
+      .background(viewHeightReader($totalHeight))
+      .environmentObject(reactionBarViewModel)
     }
+  
+  private func viewHeightReader(_ binding: Binding<CGFloat>) -> some View {
+    return GeometryReader { geometry -> Color in
+      let rect = geometry.frame(in: .local)
+      DispatchQueue.main.async {
+        binding.wrappedValue = rect.size.height
+      }
+      return .clear
+    }
+  }
 }
+
+
+//struct ReactionBar: View {
+//  @EnvironmentObject var reactionBarViewModel: ReactionBarViewModel
+//  @EnvironmentObject var commentSheetViewModel: CommentSheetViewModel
+//  var comment: Comment
+//  var isPostOwner: Bool
+//  @State var text: String = ""
+//  @State var showSheet: Bool = false
+//
+//
+//    var body: some View {
+//      HStack {
+//        ForEach(Array(self.reactionBarViewModel.reactions.enumerated()), id: \.element) { index, reaction in
+//          ReactionButton(
+//            reaction: reaction,
+//            comment: comment
+//          )
+//        }
+//
+//        if !self.reactionBarViewModel.reactions.isEmpty {
+//          Button(action: {
+//            commentSheetViewModel.openCommentSheet(
+//              comment: comment,
+//              isPostOwner: isPostOwner,
+//              reactions: self.reactionBarViewModel.reactions,
+//              showEmojiKeyboard: true,
+//              onOpen: {}
+//            )
+//          } ) {
+//            Image(systemName: "plus")
+//              .padding(3)
+//              .background(Color.lightGray)
+//              .cornerRadius(100)
+//              .font(.system(size: 13))
+//          }
+//        }
+//
+//      }
+//      .environmentObject(reactionBarViewModel)
+//
+//
+//    }
+//}
+//
+

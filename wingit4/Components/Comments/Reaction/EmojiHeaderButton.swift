@@ -13,8 +13,7 @@ struct EmojiHeaderButton: View {
     var emojiCode: Int
   
     func onTapGesture() {
-      print("emoji header button tapped")
-      commentSheetViewModel.addReaction(emojiCode: emojiCode)
+      commentSheetViewModel.handleReactionTap(emojiCode)
     }
   
     var body: some View {
