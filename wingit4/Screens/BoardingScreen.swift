@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+
+
 struct BoardingScreen: Identifiable {
     var id = UUID().uuidString
     var image: String?

@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+//!shouldShowOnboarding ||
 
 struct OnboardingV2: View {
+  
+  @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
   
   @State var offset: CGFloat = 0
   @State var screenIndex: CGFloat = 0  
@@ -112,6 +115,7 @@ struct OnboardingV2: View {
           
           Button {
             offset = min(offset + getScreenBounds().width,getScreenBounds().width * 3)
+          
           } label: {
             Text(getIndex() == 2 ? "Get Started" : "Next")
               .fontWeight(.semibold)

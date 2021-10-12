@@ -40,8 +40,6 @@ class SessionStore: ObservableObject {
     // User Metadata
     @Published var bio: String = ""
   
-  
-    @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
     @AppStorage("notificationsLastSeenAt") var notificationsLastSeenAt: Double = 1633885030
     var handle: AuthStateDidChangeListenerHandle?
     
@@ -76,7 +74,6 @@ class SessionStore: ObservableObject {
     func logout() {
         do {
             try Auth.auth().signOut()
-            shouldShowOnboarding = true
             logToAmplitude(event: .userLogout, userId: self.currentUser?.id)
         } catch  {
 
