@@ -127,11 +127,13 @@ enum AmplitudeProperty: String {
   }
 
   func addToUserProperty(property: AmplitudeUserProperty, value: Any) {
-      AMPIdentify().add(property.rawValue, value: value as? NSObject)
+    guard let identify = AMPIdentify().add(property.rawValue, value: value as? NSObject) else { return }
+    Amplitude.instance().identify(identify)
   }
 
 func setUserProperty(property: AmplitudeUserProperty, value: Any) {
-    AMPIdentify().set(property.rawValue, value: value as? NSObject)
+    guard let identify = AMPIdentify().set(property.rawValue, value: value as? NSObject) else { return }
+    Amplitude.instance().identify(identify)
 }
 
 func setUserPropertiesOnAccountCreation(userId: String?, firstName: String?, lastName: String?, username: String?, email: String, signupMethod: String) {
