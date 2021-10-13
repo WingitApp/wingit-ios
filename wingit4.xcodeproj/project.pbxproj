@@ -233,6 +233,9 @@
 		FB48BEE227176A72004E33EB /* SignUp1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEE127176A72004E33EB /* SignUp1.swift */; };
 		FB48BEE427176A96004E33EB /* SignUp2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEE327176A96004E33EB /* SignUp2.swift */; };
 		FB48BEE627176ABE004E33EB /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEE527176ABE004E33EB /* PhoneNumber.swift */; };
+		FB48BEEA27178AE0004E33EB /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEE927178AE0004E33EB /* NextButton.swift */; };
+		FB48BEEC27178DDE004E33EB /* EULASignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEEB27178DDE004E33EB /* EULASignUp.swift */; };
+		FB48BEEE27178EC9004E33EB /* SignUp3.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEED27178EC9004E33EB /* SignUp3.swift */; };
 		FB560AE727110F7400F18F73 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB560AE627110F7300F18F73 /* UserRow.swift */; };
 		FBD25F7E27043C4E0002C5B2 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD25F7D27043C4E0002C5B2 /* PopUp.swift */; };
 		FBDFDB55270E4BC400EDE22F /* BoardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDFDB54270E4BC400EDE22F /* BoardingScreen.swift */; };
@@ -466,6 +469,9 @@
 		FB48BEE127176A72004E33EB /* SignUp1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp1.swift; sourceTree = "<group>"; };
 		FB48BEE327176A96004E33EB /* SignUp2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp2.swift; sourceTree = "<group>"; };
 		FB48BEE527176ABE004E33EB /* PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
+		FB48BEE927178AE0004E33EB /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
+		FB48BEEB27178DDE004E33EB /* EULASignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULASignUp.swift; sourceTree = "<group>"; };
+		FB48BEED27178EC9004E33EB /* SignUp3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp3.swift; sourceTree = "<group>"; };
 		FB560AE627110F7300F18F73 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
 		FBD25F7D27043C4E0002C5B2 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 		FBDFDB54270E4BC400EDE22F /* BoardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingScreen.swift; sourceTree = "<group>"; };
@@ -861,6 +867,7 @@
 				FBFA099427164C4B0059B2AF /* LoginAlertView.swift */,
 				FBFA099027164BF50059B2AF /* Verification.swift */,
 				FBFA099227164C090059B2AF /* CustomNumberPad.swift */,
+				FB48BEE927178AE0004E33EB /* NextButton.swift */,
 				150C3BFB27155D070029BAEA /* SignUp */,
 			);
 			name = Onboarding;
@@ -879,8 +886,10 @@
 				FB48BEDF27176A4C004E33EB /* Login1.swift */,
 				FB48BEE127176A72004E33EB /* SignUp1.swift */,
 				FB48BEE327176A96004E33EB /* SignUp2.swift */,
+				FB48BEED27178EC9004E33EB /* SignUp3.swift */,
 				FB48BEE527176ABE004E33EB /* PhoneNumber.swift */,
 				FBFA09A42716ABD50059B2AF /* SignUpTab.swift */,
+				FB48BEEB27178DDE004E33EB /* EULASignUp.swift */,
 				3B7AF06226719E74003BCCF3 /* Onboarding */,
 				3B7AF06126719E46003BCCF3 /* Home */,
 				3B7AF06B26719F24003BCCF3 /* Main */,
@@ -1220,6 +1229,7 @@
 				FBFA098A271646030059B2AF /* Countries.swift in Sources */,
 				15DFD07E26ED9B71002CBE31 /* UserProfileDefault.swift in Sources */,
 				15CD208F2702820900C7FC1A /* AskCardTag.swift in Sources */,
+				FB48BEEE27178EC9004E33EB /* SignUp3.swift in Sources */,
 				3BE61D6F26E08A0D0078C6CF /* ReferralsApi.swift in Sources */,
 				3B7AF04126718A4D003BCCF3 /* SignupViewModel.swift in Sources */,
 				3B75E3D526715CAC002F3108 /* SignupText.swift in Sources */,
@@ -1325,6 +1335,7 @@
 				156E6AE526D8A13400690E47 /* UserProfileView.swift in Sources */,
 				3B7AF0952671D5FA003BCCF3 /* PostApi.swift in Sources */,
 				3B7AF0712671A1FC003BCCF3 /* CommentInput.swift in Sources */,
+				FB48BEEC27178DDE004E33EB /* EULASignUp.swift in Sources */,
 				FBFA099527164C4B0059B2AF /* LoginAlertView.swift in Sources */,
 				15F7E8B926E848ED00E5238F /* AskDetailBody.swift in Sources */,
 				65A9EFA526E0B2EC00E81CBF /* AskApi.swift in Sources */,
@@ -1383,6 +1394,7 @@
 				15DFD07826EC39E2002CBE31 /* Button.swift in Sources */,
 				15DFD07626EBE438002CBE31 /* RoundedCorner.swift in Sources */,
 				156E6AE726D8A13400690E47 /* ProfileViewModel.swift in Sources */,
+				FB48BEEA27178AE0004E33EB /* NextButton.swift in Sources */,
 				3B75E3DD26716074002F3108 /* Constants.swift in Sources */,
 				1524FCCA26D753240000629C /* AskMenuViewModel.swift in Sources */,
 				659F907526E1732600DE758A /* DeviceApi.swift in Sources */,

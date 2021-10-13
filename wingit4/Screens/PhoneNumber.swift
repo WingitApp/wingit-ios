@@ -14,6 +14,12 @@ struct PhoneNumber : View {
   
   @State var isSmall = UIScreen.main.bounds.height < 750
     
+  func sendCode(){
+    withAnimation(.easeIn){
+      signupViewModel.index = 4}
+     
+  }
+  
     var body: some View{
         
       ZStack{
@@ -73,7 +79,7 @@ struct PhoneNumber : View {
                               .background(Color("yellow"))
                               .cornerRadius(15)
                       })
-                      .disabled(loginViewModel.phoneNo == "" ? true: false)
+                      .disabled(loginViewModel.phoneNo == "" ? true : false)
                   }
                   .padding()
                   .background(Color.white)
