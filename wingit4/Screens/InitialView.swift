@@ -12,7 +12,8 @@ import Firebase
 struct InitialView: View {
     
     @EnvironmentObject var session: SessionStore
-    
+    @AppStorage("log_Status") var status = false
+  
     func listen() {
         session.listenAuthenticationState()
     }
@@ -22,9 +23,10 @@ struct InitialView: View {
             if session.isLoggedIn {
                 MainView()
             } else {
-                OnboardingV2()
+              OnboardingView()
+//                FirstView()
+               // OnboardingV2()
             }
-
         }
         .onAppear(perform: listen)
         .preferredColorScheme(.light)

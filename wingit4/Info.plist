@@ -24,9 +24,11 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>
-			<string>None</string>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
-			<array/>
+			<array>
+				<string>com.googleusercontent.apps.165533978443-ee00ts0vuca6evdh4n91pjdth8ah3h6o</string>
+			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
@@ -36,6 +38,14 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>co.wingitapp.wingit4</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.949852237420-3og00goro5bpv3d5clg2hr8l7sr6ho2f</string>
 			</array>
 		</dict>
 	</array>

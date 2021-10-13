@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct Verification: View {
+  
     @ObservedObject var loginViewModel : LoginViewModel
     @Environment(\.presentationMode) var present
+  
     var body: some View {
         
         ZStack{

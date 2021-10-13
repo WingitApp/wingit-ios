@@ -229,26 +229,21 @@
 		65F7315626F5276900A73781 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315526F5276900A73781 /* Contact.swift */; };
 		65F7315826F5295500A73781 /* ContactsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315726F5295500A73781 /* ContactsListViewModel.swift */; };
 		65FE040426E9FE3200333609 /* ComposePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE040326E9FE3200333609 /* ComposePostView.swift */; };
+		FB48BEE027176A4C004E33EB /* Login1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEDF27176A4C004E33EB /* Login1.swift */; };
+		FB48BEE227176A72004E33EB /* SignUp1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEE127176A72004E33EB /* SignUp1.swift */; };
+		FB48BEE427176A96004E33EB /* SignUp2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEE327176A96004E33EB /* SignUp2.swift */; };
+		FB48BEE627176ABE004E33EB /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEE527176ABE004E33EB /* PhoneNumber.swift */; };
 		FB560AE727110F7400F18F73 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB560AE627110F7300F18F73 /* UserRow.swift */; };
 		FBD25F7E27043C4E0002C5B2 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD25F7D27043C4E0002C5B2 /* PopUp.swift */; };
 		FBDFDB55270E4BC400EDE22F /* BoardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDFDB54270E4BC400EDE22F /* BoardingScreen.swift */; };
 		FBDFDB57270E4BDD00EDE22F /* OnboardingV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDFDB56270E4BDD00EDE22F /* OnboardingV2.swift */; };
 		FBDFDB59270E4BF100EDE22F /* OffsetPageTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDFDB58270E4BF100EDE22F /* OffsetPageTabView.swift */; };
 		FBFA098A271646030059B2AF /* Countries.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA0989271646030059B2AF /* Countries.swift */; };
-		FBFA098D27164B770059B2AF /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA098C27164B770059B2AF /* Login.swift */; };
 		FBFA098F27164BE60059B2AF /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA098E27164BE60059B2AF /* LoginViewModel.swift */; };
 		FBFA099127164BF50059B2AF /* Verification.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA099027164BF50059B2AF /* Verification.swift */; };
 		FBFA099327164C090059B2AF /* CustomNumberPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA099227164C090059B2AF /* CustomNumberPad.swift */; };
 		FBFA099527164C4B0059B2AF /* LoginAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA099427164C4B0059B2AF /* LoginAlertView.swift */; };
-		FBFA099727164D870059B2AF /* FirstLastName.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA099627164D870059B2AF /* FirstLastName.swift */; };
-		FBFA099927164D9A0059B2AF /* Username.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA099827164D9A0059B2AF /* Username.swift */; };
-		FBFA099B27164DAE0059B2AF /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA099A27164DAE0059B2AF /* Email.swift */; };
-		FBFA099D27164DBA0059B2AF /* Password.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA099C27164DBA0059B2AF /* Password.swift */; };
-		FBFA099F27164DC90059B2AF /* Bio.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA099E27164DC90059B2AF /* Bio.swift */; };
-		FBFA09A127164DD60059B2AF /* InsertPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA09A027164DD60059B2AF /* InsertPhoto.swift */; };
-		FBFA09A327164DDE0059B2AF /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA09A227164DDE0059B2AF /* Location.swift */; };
-		FBFA09A52716ABD60059B2AF /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA09A42716ABD50059B2AF /* FirstView.swift */; };
-		FBFA09A72716AEDD0059B2AF /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA09A62716AEDD0059B2AF /* NextButton.swift */; };
+		FBFA09A52716ABD60059B2AF /* SignUpTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFA09A42716ABD50059B2AF /* SignUpTab.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -467,26 +462,21 @@
 		65F7315526F5276900A73781 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		65F7315726F5295500A73781 /* ContactsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewModel.swift; sourceTree = "<group>"; };
 		65FE040326E9FE3200333609 /* ComposePostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposePostView.swift; sourceTree = "<group>"; };
+		FB48BEDF27176A4C004E33EB /* Login1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login1.swift; sourceTree = "<group>"; };
+		FB48BEE127176A72004E33EB /* SignUp1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp1.swift; sourceTree = "<group>"; };
+		FB48BEE327176A96004E33EB /* SignUp2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp2.swift; sourceTree = "<group>"; };
+		FB48BEE527176ABE004E33EB /* PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
 		FB560AE627110F7300F18F73 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
 		FBD25F7D27043C4E0002C5B2 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 		FBDFDB54270E4BC400EDE22F /* BoardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingScreen.swift; sourceTree = "<group>"; };
 		FBDFDB56270E4BDD00EDE22F /* OnboardingV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingV2.swift; sourceTree = "<group>"; };
 		FBDFDB58270E4BF100EDE22F /* OffsetPageTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetPageTabView.swift; sourceTree = "<group>"; };
 		FBFA0989271646030059B2AF /* Countries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countries.swift; sourceTree = "<group>"; };
-		FBFA098C27164B770059B2AF /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		FBFA098E27164BE60059B2AF /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		FBFA099027164BF50059B2AF /* Verification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verification.swift; sourceTree = "<group>"; };
 		FBFA099227164C090059B2AF /* CustomNumberPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNumberPad.swift; sourceTree = "<group>"; };
 		FBFA099427164C4B0059B2AF /* LoginAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAlertView.swift; sourceTree = "<group>"; };
-		FBFA099627164D870059B2AF /* FirstLastName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLastName.swift; sourceTree = "<group>"; };
-		FBFA099827164D9A0059B2AF /* Username.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Username.swift; sourceTree = "<group>"; };
-		FBFA099A27164DAE0059B2AF /* Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
-		FBFA099C27164DBA0059B2AF /* Password.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Password.swift; sourceTree = "<group>"; };
-		FBFA099E27164DC90059B2AF /* Bio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bio.swift; sourceTree = "<group>"; };
-		FBFA09A027164DD60059B2AF /* InsertPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertPhoto.swift; sourceTree = "<group>"; };
-		FBFA09A227164DDE0059B2AF /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		FBFA09A42716ABD50059B2AF /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
-		FBFA09A62716AEDD0059B2AF /* NextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
+		FBFA09A42716ABD50059B2AF /* SignUpTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpTab.swift; path = ../Components/Onboarding/SignUpTab.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -836,7 +826,6 @@
 				1524E10526F8417300D5BDB4 /* Animation */,
 				15685B3F26F40DA800FC84D8 /* Referral */,
 				150DB46126F3018B00373D26 /* EmptyState */,
-				3B7AF06226719E74003BCCF3 /* Onboarding */,
 				151A3C8926D328F400A39FAF /* Ask */,
 				15F7E8AA26E848ED00E5238F /* AskDetail */,
 				6522121F26F54D4F00A48B07 /* Contacts */,
@@ -867,10 +856,15 @@
 		3B7AF06226719E74003BCCF3 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				150C3BFC27155D2B0029BAEA /* OnboardText.swift */,
+				FBFA098E27164BE60059B2AF /* LoginViewModel.swift */,
+				FBFA099427164C4B0059B2AF /* LoginAlertView.swift */,
+				FBFA099027164BF50059B2AF /* Verification.swift */,
+				FBFA099227164C090059B2AF /* CustomNumberPad.swift */,
 				150C3BFB27155D070029BAEA /* SignUp */,
-				FBFA098B27164B010059B2AF /* OnboardingFlow */,
 			);
-			path = Onboarding;
+			name = Onboarding;
+			path = ../Components/Onboarding;
 			sourceTree = "<group>";
 		};
 		3B7AF06326719E94003BCCF3 /* Screens */ = {
@@ -878,10 +872,16 @@
 			children = (
 				3B7AF053267197BA003BCCF3 /* InitialView.swift */,
 				3B7AF05726719885003BCCF3 /* MainView.swift */,
-				3B9C43BE26FB1A77008B01D2 /* OnboardingView.swift */,
 				FBDFDB54270E4BC400EDE22F /* BoardingScreen.swift */,
 				FBDFDB56270E4BDD00EDE22F /* OnboardingV2.swift */,
 				FBDFDB58270E4BF100EDE22F /* OffsetPageTabView.swift */,
+				3B9C43BE26FB1A77008B01D2 /* OnboardingView.swift */,
+				FB48BEDF27176A4C004E33EB /* Login1.swift */,
+				FB48BEE127176A72004E33EB /* SignUp1.swift */,
+				FB48BEE327176A96004E33EB /* SignUp2.swift */,
+				FB48BEE527176ABE004E33EB /* PhoneNumber.swift */,
+				FBFA09A42716ABD50059B2AF /* SignUpTab.swift */,
+				3B7AF06226719E74003BCCF3 /* Onboarding */,
 				3B7AF06126719E46003BCCF3 /* Home */,
 				3B7AF06B26719F24003BCCF3 /* Main */,
 				156E6ADF26D8A13400690E47 /* Profile */,
@@ -1092,28 +1092,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		FBFA098B27164B010059B2AF /* OnboardingFlow */ = {
-			isa = PBXGroup;
-			children = (
-				150C3BFC27155D2B0029BAEA /* OnboardText.swift */,
-				FBFA09A42716ABD50059B2AF /* FirstView.swift */,
-				FBFA098E27164BE60059B2AF /* LoginViewModel.swift */,
-				FBFA099427164C4B0059B2AF /* LoginAlertView.swift */,
-				FBFA098C27164B770059B2AF /* Login.swift */,
-				FBFA099027164BF50059B2AF /* Verification.swift */,
-				FBFA099227164C090059B2AF /* CustomNumberPad.swift */,
-				FBFA099627164D870059B2AF /* FirstLastName.swift */,
-				FBFA099827164D9A0059B2AF /* Username.swift */,
-				FBFA099A27164DAE0059B2AF /* Email.swift */,
-				FBFA099C27164DBA0059B2AF /* Password.swift */,
-				FBFA099E27164DC90059B2AF /* Bio.swift */,
-				FBFA09A027164DD60059B2AF /* InsertPhoto.swift */,
-				FBFA09A227164DDE0059B2AF /* Location.swift */,
-				FBFA09A62716AEDD0059B2AF /* NextButton.swift */,
-			);
-			path = OnboardingFlow;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1270,6 +1248,7 @@
 				FBFA099127164BF50059B2AF /* Verification.swift in Sources */,
 				15E2F1AE26FAA9EF00638115 /* PostTypeOption.swift in Sources */,
 				15E2F1AC26FA887500638115 /* UserCommentLabel.swift in Sources */,
+				FB48BEE627176ABE004E33EB /* PhoneNumber.swift in Sources */,
 				1524FCF326D75F1F0000629C /* ShareButtonViewModel.swift in Sources */,
 				3B7AF05026718D42003BCCF3 /* StorageService.swift in Sources */,
 				15F7E87926E8435A00E5238F /* Connections.swift in Sources */,
@@ -1279,7 +1258,7 @@
 				3B7AF0892671CB35003BCCF3 /* Api.swift in Sources */,
 				65DDC42D27039BEE002CB810 /* UserActivityApi.swift in Sources */,
 				3B7AF0A22671E416003BCCF3 /* EditProfile.swift in Sources */,
-				FBFA09A52716ABD60059B2AF /* FirstView.swift in Sources */,
+				FBFA09A52716ABD60059B2AF /* SignUpTab.swift in Sources */,
 				15F7E8B326E848ED00E5238F /* AskDetailHeader.swift in Sources */,
 				3B7AF0AF2672A053003BCCF3 /* Comment.swift in Sources */,
 				3B7AF0A72672870F003BCCF3 /* HomeViewModel.swift in Sources */,
@@ -1300,13 +1279,11 @@
 				3BE61D7626E160C60078C6CF /* ReferBody.swift in Sources */,
 				15762C6A26E170ED00A8E041 /* ReferralsView.swift in Sources */,
 				650216B526E86C2100B42BC6 /* URLImageView.swift in Sources */,
-				FBFA099927164D9A0059B2AF /* Username.swift in Sources */,
 				3B7AF0B92672C29D003BCCF3 /* InboxMessage.swift in Sources */,
 				65C6103F26FC2064007B87FE /* ConnectionsEmptyState.swift in Sources */,
 				157F9974270BA875001A4031 /* OwnProfileFeed.swift in Sources */,
 				151A3C8826D3256F00A39FAF /* HomeFeed.swift in Sources */,
 				3B7AF0872671CA69003BCCF3 /* UsersViewModel.swift in Sources */,
-				FBFA099F27164DC90059B2AF /* Bio.swift in Sources */,
 				156E6AE626D8A13400690E47 /* UserProfileViewModel.swift in Sources */,
 				3BD12F1526C9CA1500E26A87 /* AppDel.swift in Sources */,
 				1524FCF826D812E70000629C /* CircleLoader.swift in Sources */,
@@ -1316,14 +1293,13 @@
 				3B96DD6E26DF4C9E00015EED /* ReferCard.swift in Sources */,
 				3B7AF0772671B962003BCCF3 /* NotificationView.swift in Sources */,
 				151A3C8E26D41B5400A39FAF /* AskCardViewModel.swift in Sources */,
+				FB48BEE027176A4C004E33EB /* Login1.swift in Sources */,
 				3B75E3DB26715D26002F3108 /* Modifiers.swift in Sources */,
 				15E4907D26E84CF400B25B56 /* DynamicHeightTextField.swift in Sources */,
 				3B74CC8126FC59BC00BB39E2 /* AddImageButton.swift in Sources */,
 				15762C6C26E170FA00A8E041 /* ReferralsViewModel.swift in Sources */,
 				156E6AD526D8A0A700690E47 /* NotificationEntry.swift in Sources */,
-				FBFA099B27164DAE0059B2AF /* Email.swift in Sources */,
 				159A3DD72703CEB600C5573C /* OnboardingCarousel.swift in Sources */,
-				FBFA09A72716AEDD0059B2AF /* NextButton.swift in Sources */,
 				151A3C9826D5B9F000A39FAF /* BodyCell.swift in Sources */,
 				3B5BDB5C268F98E70034B18C /* ReportInputViewModel.swift in Sources */,
 				1524FCD226D753320000629C /* HeaderCell.swift in Sources */,
@@ -1339,7 +1315,6 @@
 				3B7AF0C12673EE2E003BCCF3 /* NotificationViewModel.swift in Sources */,
 				3B7AF07F2671BBA8003BCCF3 /* UsersView.swift in Sources */,
 				3B7AF0832671BC28003BCCF3 /* ChatView.swift in Sources */,
-				FBFA09A127164DD60059B2AF /* InsertPhoto.swift in Sources */,
 				1594EE7927065F9E00D5C9E9 /* VerticalLine.swift in Sources */,
 				151A3C9626D567A800A39FAF /* AskDoneToggleViewModel.swift in Sources */,
 				3B7AF054267197BA003BCCF3 /* InitialView.swift in Sources */,
@@ -1349,7 +1324,6 @@
 				65A9EF9D26DF0B2500E81CBF /* ConnectionsView.swift in Sources */,
 				156E6AE526D8A13400690E47 /* UserProfileView.swift in Sources */,
 				3B7AF0952671D5FA003BCCF3 /* PostApi.swift in Sources */,
-				FBFA098D27164B770059B2AF /* Login.swift in Sources */,
 				3B7AF0712671A1FC003BCCF3 /* CommentInput.swift in Sources */,
 				FBFA099527164C4B0059B2AF /* LoginAlertView.swift in Sources */,
 				15F7E8B926E848ED00E5238F /* AskDetailBody.swift in Sources */,
@@ -1357,7 +1331,6 @@
 				1594EE73270630F800D5C9E9 /* EditProfileView.swift in Sources */,
 				1594EE7727065D5F00D5C9E9 /* ArcShape.swift in Sources */,
 				150DB46326F301AD00373D26 /* PostEmptyState.swift in Sources */,
-				FBFA09A327164DDE0059B2AF /* Location.swift in Sources */,
 				151A3C7F26CE049000A39FAF /* NavigationTab.swift in Sources */,
 				3B9774252694FE0000F1EF14 /* alertView.swift in Sources */,
 				3B7AF0AB26729F81003BCCF3 /* CommentInputViewModel.swift in Sources */,
@@ -1365,6 +1338,7 @@
 				3B7AF0812671BBD4003BCCF3 /* MessagesView.swift in Sources */,
 				3B5BDB5A268F98AC0034B18C /* ReportInput.swift in Sources */,
 				151A3C8B26D32F4600A39FAF /* AskCard.swift in Sources */,
+				FB48BEE427176A96004E33EB /* SignUp2.swift in Sources */,
 				3BE61D7426E15E8C0078C6CF /* ReferFooter.swift in Sources */,
 				15F7E87A26E8435A00E5238F /* PersonalProfileHeader.swift in Sources */,
 				15685B4326F418C100FC84D8 /* ReferralEmptyState.swift in Sources */,
@@ -1389,20 +1363,19 @@
 				3B75E3E526716787002F3108 /* SignupButton.swift in Sources */,
 				15A6A4422708E94E00D65616 /* SocialLink.swift in Sources */,
 				3B9C43BF26FB1A77008B01D2 /* OnboardingView.swift in Sources */,
+				FB48BEE227176A72004E33EB /* SignUp1.swift in Sources */,
 				15F7E8C026E8490100E5238F /* UserComment.swift in Sources */,
 				3B7AF03026718263003BCCF3 /* Extensions.swift in Sources */,
 				15A6A43D2708E41400D65616 /* ProfileUserHeader.swift in Sources */,
 				6509E4FA26D6C214009CB74D /* Ask.swift in Sources */,
 				3B75E3C2267153BA002F3108 /* SigninView.swift in Sources */,
 				1524E0FF26F6713100D5BDB4 /* BumperCountSummary.swift in Sources */,
-				FBFA099D27164DBA0059B2AF /* Password.swift in Sources */,
 				157F9970270B8042001A4031 /* ProfileParallax.swift in Sources */,
 				15F7E8B426E848ED00E5238F /* WingersRow.swift in Sources */,
 				3B7AF0972671D98E003BCCF3 /* Post.swift in Sources */,
 				3B7AF0BB2672CACE003BCCF3 /* MessageViewModel.swift in Sources */,
 				3B7AF0B52672C15A003BCCF3 /* ChatApi.swift in Sources */,
 				1524FCD526D754500000629C /* TextCell.swift in Sources */,
-				FBFA099727164D870059B2AF /* FirstLastName.swift in Sources */,
 				3B7AF0BF2673EAFB003BCCF3 /* Notification.swift in Sources */,
 				3BE57FF726D89994005C242F /* ProfileNavigation.swift in Sources */,
 				3B9CA05026E5C98D00BB195F /* WingConnectionsList.swift in Sources */,

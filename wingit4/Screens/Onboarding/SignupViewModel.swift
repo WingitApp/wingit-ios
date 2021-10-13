@@ -23,6 +23,7 @@ class SignupViewModel: ObservableObject {
     @Published var isImagePickerShown: Bool = false
     @Published var isAlertShown: Bool = false
     @Published var showscreen: Bool = false
+    @Published var index: Int = 0
     @Environment (\.presentationMode) var presentationMode
     @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
 
