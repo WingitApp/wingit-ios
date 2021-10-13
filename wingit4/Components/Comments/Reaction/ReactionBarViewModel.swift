@@ -108,16 +108,15 @@ class ReactionBarViewModel: ObservableObject {
   ) {
     
     let userPreviewDict = [
-      "id": currentUser.id,
-      "uid": currentUser.uid,
-      "firstName": currentUser.firstName,
-      "lastName": currentUser.lastName,
-      "avatar": currentUser.profileImageUrl,
-      "username": currentUser.username,
+      "id": currentUser.id as Any,
+      "uid": currentUser.uid as Any,
+      "firstName": currentUser.firstName as Any,
+      "lastName": currentUser.lastName as Any,
+      "avatar": currentUser.profileImageUrl as Any,
+      "username": currentUser.username as Any,
       "interactedAt": Date().timeIntervalSince1970
     ] as [String : Any]
     
-  
 
     Api.Comment.addUserReaction(
       reaction: reaction,
@@ -153,23 +152,27 @@ class ReactionBarViewModel: ObservableObject {
     guard let comment = comment else { return }
     
     if reactions.isEmpty {
+      // create reaction if first
       createReaction(
         reaction,
         comment,
         currentUser
       )
     } else if !reaction.hasCurrentUser {
+      // add to reaction
       addUserReaction(
         reaction,
         comment,
         currentUser
       )
-    } else if reaction.count == 1{
+    } else if reaction.hasCurrentUser, reaction.count == 1{
+      // delete reaction if user's reaction is sole reaction
       deleteReaction(
         reaction,
         comment
       )
     } else {
+      // remove user's reaction
       removeUserReaction(
         reaction,
         comment

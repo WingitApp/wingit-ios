@@ -12,6 +12,7 @@ import SPAlert
 
 
 class CommentSheetViewModel: ObservableObject {
+  // emoji search
   @Published var searchText: String = ""
   
   @Published var bottomSheetPosition: BottomSheetPosition = .hidden
@@ -22,7 +23,21 @@ class CommentSheetViewModel: ObservableObject {
   @Published var isTopComment: Bool = false
   @Published var reactions: [Reaction] = []
   
-  func openCommentSheet(comment: Comment, isPostOwner: Bool, isTopComment: Bool, reactions: [Reaction] = [], showEmojiKeyboard: Bool? = false, onOpen: @escaping() -> Void) {
+  // Comment Deletion State
+  @Published var isConfirmationShown: Bool = false
+  
+  // Comment Editing State
+  @Published var isEditingComment: Bool = false
+  @Published var commentEditText: String = ""
+  
+  func openCommentSheet(
+    comment: Comment,
+    isPostOwner: Bool, // should get from post
+    isTopComment: Bool, // should get from post
+    reactions: [Reaction] = [],
+    showEmojiKeyboard: Bool? = false,
+    onOpen: @escaping() -> Void
+  ) {
     self.clean()
     guard let uid = Auth.auth().currentUser?.uid,
           let ownerId = comment.ownerId else { return }
@@ -31,7 +46,6 @@ class CommentSheetViewModel: ObservableObject {
     self.isPostOwner = isPostOwner
     self.isTopComment = isTopComment
     self.bottomSheetPosition = .middle
-    
     self.reactions = reactions
     self.isEmojiKeyboardActive = showEmojiKeyboard ?? false
     onOpen()
@@ -69,12 +83,58 @@ class CommentSheetViewModel: ObservableObject {
   }
   
   
-  func editComment() {
+  func toggleCommentEditState() {
+    self.commentEditText = ""
+    self.isEditingComment.toggle()
+    self.bottomSheetPosition = .hidden
+    // hacky way to force comment input to readjust height
+    DispatchQueue.main.asyncAfter(deadline:  DispatchTime.now() + 0.1) {
+      self.commentEditText = self.comment?.comment ?? ""
+    }
+  }
+  
+  func onCommentEditSubmit() {
+    guard let comment = self.comment else {return}
+
+    if comment.comment == commentEditText {
+      SPAlertView(
+        title: "",
+        message: "No changes detected",
+        preset: SPAlertIconPreset.custom(UIImage(systemName: "note.text")!)
+      ).present(duration: 1)
+      return
+    }
     
+    if commentEditText.trim().isEmpty {
+      SPAlertView(
+        title: "",
+        message: "Comment cannot be empty",
+        preset: SPAlertIconPreset.custom(UIImage(systemName: "note")!)
+      ).present(duration: 1)
+      return
+    }
+    Api.Comment.editComment(
+      updatedText: commentEditText.trim(),
+      commentId: comment.docId,
+      postId: comment.postId
+    ) {
+      self.closeCommentSheet() {
+        self.isEditingComment = false
+        SPAlertView(
+          title: "",
+          message: "Comment Edited!",
+          preset: SPAlertIconPreset.done
+        ).present(duration: 1)
+      }
+    }
+  }
+  
+  func deleteCommentConfirmation() {
+    Haptic.impact(type: "soft")
+    self.isConfirmationShown = true
   }
   
   func deleteComment() {
-    Haptic.impact(type: "soft")
     guard let comment = self.comment else {return}
     Api.Comment.deleteComment(comment: comment) {
       self.closeCommentSheet() {
@@ -87,6 +147,31 @@ class CommentSheetViewModel: ObservableObject {
     }
   }
   
+  
+  func markCommentAsBest(post: Post?) {
+    Haptic.impact(type: "soft")
+    
+    guard let post = post,
+          let comment = self.comment else {return}
+    
+    guard let postId = post.id,
+          let commentId = comment.id else {return}
+    
+    
+    Api.Post.updatePostTopComment(
+      postId: postId,
+      commentId: commentId,
+      remove: isTopComment
+    ) { state in
+      print("top comment marked")
+    }
+  }
+  
+}
+
+// Handles Reactions
+
+extension CommentSheetViewModel {
   func handleReactionTap(
     emojiCode: Int,
     currentUser: User?
@@ -121,26 +206,6 @@ class CommentSheetViewModel: ObservableObject {
         reaction[0],
         comment
       )
-    }
-  }
-  
-  
-  func markCommentAsBest(post: Post?) {
-    Haptic.impact(type: "soft")
-    
-    guard let post = post,
-          let comment = self.comment else {return}
-    
-    guard let postId = post.id,
-          let commentId = comment.id else {return}
-    
-    
-    Api.Post.updatePostTopComment(
-      postId: postId,
-      commentId: commentId,
-      remove: isTopComment
-    ) { state in
-      print("top comment marked")
     }
   }
   
@@ -198,12 +263,12 @@ class CommentSheetViewModel: ObservableObject {
   ) {
     
     let userPreviewDict = [
-      "id": currentUser.id,
-      "uid": currentUser.uid,
-      "firstName": currentUser.firstName,
-      "lastName": currentUser.lastName,
-      "avatar": currentUser.profileImageUrl,
-      "username": currentUser.username,
+      "id": currentUser.id as Any,
+      "uid": currentUser.uid as Any,
+      "firstName": currentUser.firstName as Any,
+      "lastName": currentUser.lastName as Any,
+      "avatar": currentUser.profileImageUrl as Any,
+      "username": currentUser.username as Any,
       "interactedAt": Date().timeIntervalSince1970
     ] as [String : Any]
     
@@ -230,6 +295,4 @@ class CommentSheetViewModel: ObservableObject {
       self.clean()
     }
   }
-  
-  
 }

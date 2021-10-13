@@ -59,7 +59,7 @@ class CommentViewModel: ObservableObject {
         onError: { (errorMessage) in
               // handle error
           },
-        newComment: { (comment) in
+        newComment: { comment in
           if comment.type == .invitedReferral {
             if !self.inviteHistory.contains(comment) {
               self.inviteHistory.append(comment)
@@ -74,6 +74,14 @@ class CommentViewModel: ObservableObject {
             self.isLoading.toggle()
           }
 
+        },
+        onModified: { comment in
+          if self.comments.isEmpty { return }
+          if let index = self.comments.firstIndex(
+            where: { $0.id == comment.id }
+          ) {
+            self.comments[index] = comment
+          }
         },
         onRemove: { comment in
           

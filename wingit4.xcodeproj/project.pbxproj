@@ -14,6 +14,9 @@
 		15030AAA26E807C10076CF14 /* HomeFeedHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15030AA926E807C10076CF14 /* HomeFeedHeader.swift */; };
 		150C3BFD27155D2B0029BAEA /* OnboardText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150C3BFC27155D2B0029BAEA /* OnboardText.swift */; };
 		150C3C01271610D80029BAEA /* UserPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150C3C00271610D80029BAEA /* UserPreview.swift */; };
+		150C3C03271756930029BAEA /* CommentText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150C3C02271756920029BAEA /* CommentText.swift */; };
+		150C3C05271756A10029BAEA /* CommentHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150C3C04271756A10029BAEA /* CommentHeader.swift */; };
+		150C3C0727176A0E0029BAEA /* EditTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150C3C0627176A0E0029BAEA /* EditTag.swift */; };
 		150DB46326F301AD00373D26 /* PostEmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150DB46226F301AD00373D26 /* PostEmptyState.swift */; };
 		15127A5226FFC009006F975E /* PlaceholderConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15127A5126FFC008006F975E /* PlaceholderConstants.swift */; };
 		15127A5426FFC148006F975E /* ReferralPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15127A5326FFC148006F975E /* ReferralPlaceholder.swift */; };
@@ -263,6 +266,9 @@
 		15030AA926E807C10076CF14 /* HomeFeedHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedHeader.swift; sourceTree = "<group>"; };
 		150C3BFC27155D2B0029BAEA /* OnboardText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardText.swift; sourceTree = "<group>"; };
 		150C3C00271610D80029BAEA /* UserPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreview.swift; sourceTree = "<group>"; };
+		150C3C02271756920029BAEA /* CommentText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentText.swift; sourceTree = "<group>"; };
+		150C3C04271756A10029BAEA /* CommentHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentHeader.swift; sourceTree = "<group>"; };
+		150C3C0627176A0E0029BAEA /* EditTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTag.swift; sourceTree = "<group>"; };
 		150DB46226F301AD00373D26 /* PostEmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEmptyState.swift; sourceTree = "<group>"; };
 		15127A5126FFC008006F975E /* PlaceholderConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderConstants.swift; sourceTree = "<group>"; };
 		15127A5326FFC148006F975E /* ReferralPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralPlaceholder.swift; sourceTree = "<group>"; };
@@ -767,9 +773,12 @@
 			children = (
 				1594EE6D2704EC0000D5C9E9 /* Reaction */,
 				15F7E8BC26E8490100E5238F /* ReferralComment.swift */,
-				15F7E8BD26E8490100E5238F /* UserComment.swift */,
 				15F7E8BE26E8490100E5238F /* CommentList.swift */,
+				15F7E8BD26E8490100E5238F /* UserComment.swift */,
 				15E2F1AB26FA887500638115 /* UserCommentLabel.swift */,
+				150C3C02271756920029BAEA /* CommentText.swift */,
+				150C3C04271756A10029BAEA /* CommentHeader.swift */,
+				150C3C0627176A0E0029BAEA /* EditTag.swift */,
 			);
 			path = Comments;
 			sourceTree = "<group>";
@@ -1341,6 +1350,7 @@
 				3B7AF054267197BA003BCCF3 /* InitialView.swift in Sources */,
 				157F9972270BA7A1001A4031 /* UserProfileFeed.swift in Sources */,
 				15EBCFC22700296F009F2E55 /* (null) in Sources */,
+				150C3C0727176A0E0029BAEA /* EditTag.swift in Sources */,
 				15EBCFC22700296F009F2E55 /* (null) in Sources */,
 				1594EE6C2704E7F900D5C9E9 /* Reaction.swift in Sources */,
 				1594EE6F2704EC3200D5C9E9 /* EmojiKeyboard.swift in Sources */,
@@ -1356,6 +1366,7 @@
 				1594EE7727065D5F00D5C9E9 /* ArcShape.swift in Sources */,
 				150DB46326F301AD00373D26 /* PostEmptyState.swift in Sources */,
 				151A3C7F26CE049000A39FAF /* NavigationTab.swift in Sources */,
+				150C3C03271756930029BAEA /* CommentText.swift in Sources */,
 				3B9774252694FE0000F1EF14 /* alertView.swift in Sources */,
 				3B7AF0AB26729F81003BCCF3 /* CommentInputViewModel.swift in Sources */,
 				3B96DD6626DF46A500015EED /* ReferButton.swift in Sources */,
@@ -1364,6 +1375,7 @@
 				157F997B270FACDE001A4031 /* CommentActionsList.swift in Sources */,
 				151A3C8B26D32F4600A39FAF /* AskCard.swift in Sources */,
 				3BE61D7426E15E8C0078C6CF /* ReferFooter.swift in Sources */,
+				150C3C05271756A10029BAEA /* CommentHeader.swift in Sources */,
 				15F7E87A26E8435A00E5238F /* PersonalProfileHeader.swift in Sources */,
 				15685B4326F418C100FC84D8 /* ReferralEmptyState.swift in Sources */,
 				3B7AF02E2671816A003BCCF3 /* User.swift in Sources */,

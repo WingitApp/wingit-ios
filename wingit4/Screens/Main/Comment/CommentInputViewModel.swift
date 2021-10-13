@@ -24,7 +24,7 @@ class CommentInputViewModel: ObservableObject {
       "comment": text,
       "avatarUrl": currentUser.photoURL!.absoluteString,
       "ownerId": currentUser.uid,
-      "postId": post.postId,
+      "postId": post.postId as Any,
       "username": currentUser.displayName!,
       "date": Date().timeIntervalSince1970,
       "type": CommentType.askPost.rawValue

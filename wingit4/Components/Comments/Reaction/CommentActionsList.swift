@@ -35,7 +35,7 @@ struct CommentActionsList: View {
                   icon: "square.and.pencil",
                   label: "Edit Comment",
                   showDivider: true,
-                  onTap: {},
+                  onTap: commentSheetViewModel.toggleCommentEditState,
                   isShown: commentSheetViewModel.isOwnComment
                 )
                 if commentSheetViewModel.isOwnComment { Divider() }
@@ -59,11 +59,10 @@ struct CommentActionsList: View {
                   icon: "trash",
                   label: "Delete Message",
                   showDivider: true,
-                  onTap: commentSheetViewModel.deleteComment,
+                  onTap: commentSheetViewModel.deleteCommentConfirmation,
                   isShown: commentSheetViewModel.isOwnComment
                 )
                 if commentSheetViewModel.isOwnComment { Divider() }
-//                Spacer()
               }
             }
             

@@ -38,7 +38,7 @@ struct TextView: View {
     private var foregroundColor: UIColor = .label
     private var autocapitalization: UITextAutocapitalizationType = .sentences
     private var multilineTextAlignment: NSTextAlignment = .left
-  private var font: UIFont = .preferredFont(forTextStyle: .callout)
+    private var font: UIFont = .preferredFont(forTextStyle: .callout)
     private var returnKeyType: UIReturnKeyType?
     private var clearsOnInsertion: Bool = false
     private var autocorrection: UITextAutocorrectionType = .default
@@ -57,68 +57,71 @@ struct TextView: View {
         }
     }
 
-    init(_ title: String,
-         text: Binding<String>,
-         isFocused: Binding<Bool>,
-         shouldEditInRange: ((Range<String.Index>, String) -> Bool)? = nil,
-         onEditingChanged: (() -> Void)? = nil,
-         onCommit: (() -> Void)? = nil) {
-        self.title = title
-
-        _text = text
-        _isFocused = isFocused
-        _isEmpty = State(initialValue: self.text.isEmpty)
-
-        self.onCommit = onCommit
-        self.shouldEditInRange = shouldEditInRange
-        self.onEditingChanged = onEditingChanged
+  init(
+    _ title: String,
+    text: Binding<String>,
+    isFocused: Binding<Bool>,
+    shouldEditInRange: ((Range<String.Index>, String) -> Bool)? = nil,
+    onEditingChanged: (() -> Void)? = nil,
+    onCommit: (() -> Void)? = nil) {
+      self.title = title
+      
+      _text = text
+      _isFocused = isFocused
+      _isEmpty = State(initialValue: self.text.isEmpty)
+      
+      self.onCommit = onCommit
+      self.shouldEditInRange = shouldEditInRange
+      self.onEditingChanged = onEditingChanged
     }
 
-    var body: some View {
-        SwiftUITextView(internalText,
-                        isFocused: $isFocused,
-                        foregroundColor: foregroundColor,
-                        font: font,
-                        multilineTextAlignment: multilineTextAlignment,
-                        autocapitalization: autocapitalization,
-                        returnKeyType: returnKeyType,
-                        clearsOnInsertion: clearsOnInsertion,
-                        autocorrection: autocorrection,
-                        truncationMode: truncationMode,
-                        isSecure: isSecure,
-                        isEditable: isEditable,
-                        isSelectable: isSelectable,
-                        isScrollingEnabled: isScrollingEnabled,
-                        enablesReturnKeyAutomatically: enablesReturnKeyAutomatically,
-                        autoDetectionTypes: autoDetectionTypes,
-                        calculatedHeight: $calculatedHeight,
-                        shouldEditInRange: shouldEditInRange,
-                        onEditingChanged: onEditingChanged,
-                        onCommit: onCommit)
-          .frame(
-            minHeight: isScrollingEnabled ? 0 : calculatedHeight,
-            idealHeight: calculatedHeight,
-            maxHeight: calculatedHeight
-          )
-          .padding(
-            EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0)
-          )
-          .background(placeholderView.padding(.leading, 5), alignment: .leading)
-            
+  var body: some View {
+    SwiftUITextView(
+      internalText,
+      isFocused: $isFocused,
+      foregroundColor: foregroundColor,
+      font: font,
+      multilineTextAlignment: multilineTextAlignment,
+      autocapitalization: autocapitalization,
+      returnKeyType: returnKeyType,
+      clearsOnInsertion: clearsOnInsertion,
+      autocorrection: autocorrection,
+      truncationMode: truncationMode,
+      isSecure: isSecure,
+      isEditable: isEditable,
+      isSelectable: isSelectable,
+      isScrollingEnabled: isScrollingEnabled,
+      enablesReturnKeyAutomatically: enablesReturnKeyAutomatically,
+      autoDetectionTypes: autoDetectionTypes,
+      calculatedHeight: $calculatedHeight,
+      shouldEditInRange: shouldEditInRange,
+      onEditingChanged: onEditingChanged,
+      onCommit: onCommit
+    )
+      .frame(
+        minHeight: isScrollingEnabled ? calculatedHeight : calculatedHeight,
+        idealHeight: calculatedHeight,
+        maxHeight: calculatedHeight
+      )
+      .padding(
+        EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0)
+      )
+      .background(placeholderView.padding(.leading, 5), alignment: .leading)
+    
+  }
+  
+  @ViewBuilder
+  var placeholderView: some View {
+    if isEmpty {
+      Text(title)
+        .foregroundColor(.secondary)
+        .multilineTextAlignment(placeholderAlignment)
+        .font(placeholderFont)
+      
+    } else {
+      EmptyView()
     }
-
-    @ViewBuilder
-    var placeholderView: some View {
-        if isEmpty {
-            Text(title)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(placeholderAlignment)
-                .font(placeholderFont)
-              
-        } else {
-            EmptyView()
-        }
-    }
+  }
 
 }
 

@@ -20,8 +20,6 @@ struct UserComment: View {
   var isTopComment: Bool = false
   
   @State var isNavActive: Bool = false
-//  @State var isActive: Bool = false
-
 
   
   init(comment: Comment, post: Post?, postOwnerId: String?) {
@@ -44,6 +42,11 @@ struct UserComment: View {
     ) {
 //      isActive = true
     }
+  }
+  
+  func removeComment() {
+    commentSheetViewModel.isConfirmationShown = false
+    commentSheetViewModel.deleteComment()
   }
   
   
@@ -76,57 +79,49 @@ struct UserComment: View {
           .onTapGesture(perform: { isNavActive.toggle() })
 
         VStack(alignment: .leading) {
-          HStack(alignment: .center) {
-              Text(comment.username ?? "")
-              .font(.system(size:13))
-              .fontWeight(.semibold)
-            if isTopComment {
-              HStack(spacing: 3){
-                Text(Image(systemName: "star.circle.fill"))
-                Text("Best Answer")
-              }
-              .foregroundColor(Color.uiorange)
-              .font(.system(size: 10))
-            }
-            Circle()
-            .modifier(CircleDotStyle())
-            Text(
-              timeAgoSinceDate(
-                Date(timeIntervalSince1970: comment.date ?? 0),
-                currentDate: Date(),
-                numericDates: true
-              )
-            )
-              .foregroundColor(.gray)
-              .font(.system(size: 10))
-            
-          }
-          .onTapGesture(perform: { isNavActive.toggle() })
-
-          
-          Text(comment.comment?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
-          .font(.system(size:15))
-          .padding(.top, 1)
-          .onLongPressGesture(minimumDuration: 0.1) {
-            openCommentActionsSheet()
-          }
-          // Emoji Bar
-          ReactionBar(comment: comment, isPostOwner: postOwnerId == session.currentUser?.uid, isTopComment: isTopComment)
+          CommentHeader(
+            comment: comment,
+            isTopComment: isTopComment,
+            onTap: { isNavActive.toggle() }
+          )
+          CommentText(comment: comment)
+          ReactionBar(
+            comment: comment,
+            isPostOwner: postOwnerId == session.currentUser?.uid,
+            isTopComment: isTopComment
+          )
         }
         .padding(.leading, 5)
         
+      }
+      .alert(isPresented: $commentSheetViewModel.isConfirmationShown) {
+        Alert(
+          title: Text("Delete your comment?"),
+          message: Text("This action cannot be undone."),
+          primaryButton: .destructive(Text("Delete")) {
+            removeComment()
+          },
+          secondaryButton: .cancel()
+        )
       }
       .onAppear(perform: loadReactionBar)
       .onDisappear(perform: removeListener)
       .padding(15)
       .background(
-        isTopComment
-         ? LinearGradient(gradient: Gradient(colors: [Color.uilightOrange.opacity(0.6), .white]), startPoint: .top, endPoint: .bottom)
-        : nil
+        commentSheetViewModel.isEditingComment
+        ? LinearGradient(gradient: Gradient(colors: [Color.yellow.opacity(0.1), Color.yellow.opacity(0.1)]), startPoint: .top, endPoint: .bottom)
+        : isTopComment
+          ? LinearGradient(gradient: Gradient(colors: [Color.uilightOrange.opacity(0.6), .white]), startPoint: .top, endPoint: .bottom)
+          : LinearGradient(gradient: Gradient(colors: [.white, .white]), startPoint: .top, endPoint: .bottom)
       )
+      .onLongPressGesture(minimumDuration: 0.2) {
+        openCommentActionsSheet()
+      }
       .environmentObject(reactionBarViewModel)
+      .environmentObject(commentSheetViewModel)
       Divider()
     }
+
 
 }
 

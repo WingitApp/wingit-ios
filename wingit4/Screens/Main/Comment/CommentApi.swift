@@ -38,6 +38,30 @@ class CommentApi {
     }
   }
   
+  func editComment(
+    updatedText: String,
+    commentId: String?,
+    postId: String?,
+    onSuccess: @escaping() -> Void
+  ) {
+    guard let postId = postId,
+          let commentId = commentId else {return}
+    
+    Ref.FS_DOC_COMMENTS_FOR_POSTID(postId: postId)
+      .collection("postComments")
+      .document(commentId)
+      .updateData([
+        "comment": updatedText,
+        "updatedAt": Date().timeIntervalSince1970,
+        "isEdited": true
+      ]) { error in
+        if error == nil {
+          //handle error
+        }
+        onSuccess()
+      }
+  }
+  
   
   func deleteComment(
     comment: Comment,
@@ -50,7 +74,7 @@ class CommentApi {
      .collection("postComments")
      .document(String(commentId)).delete() { error in
         if error != nil{
-          print("error", error)
+          print("error", error as Any)
         } else {
           onSuccess()
         }
@@ -63,6 +87,7 @@ class CommentApi {
       onSuccess: @escaping([Comment]) -> Void,
       onError: @escaping(_ errorMessage: String) -> Void,
       newComment: @escaping(Comment) -> Void,
+      onModified: @escaping(Comment) -> Void,
       onRemove: @escaping(Comment) -> Void,
       listener: @escaping(_ listenerHandle: ListenerRegistration) -> Void
     ) {
@@ -79,7 +104,8 @@ class CommentApi {
                     newComment(decodedComment)
                     comments.append(decodedComment)
                 case .modified:
-                    print("type: modified")
+                  guard let decodedComment = try? documentChange.document.data(as: Comment.self) else { return }
+                    onModified(decodedComment)
                 case .removed:
                   guard let decodedComment = try? documentChange.document.data(as: Comment.self) else { return }
                     onRemove(decodedComment)

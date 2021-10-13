@@ -23,10 +23,12 @@ struct Comment: Codable, Identifiable, Equatable, Hashable {
     var date: Double?
     var type: CommentType?
     var isOwn: Bool? {
-      // returns if reaction is own
       guard let currentUser = Auth.auth().currentUser else { return false }
       return self.ownerId == currentUser.uid
     }
+    // added for editing
+    var isEdited: Bool?
+    var updatedAt: Double?
 }
 
 enum CommentType: String, Codable {
