@@ -63,7 +63,7 @@ struct PhoneNumber : View {
                       
                       Spacer(minLength: 0)
                       
-                      NavigationLink(destination: Verification(loginViewModel: loginViewModel),isActive: $loginViewModel.gotoVerify) {
+                    NavigationLink(destination: Verification(loginViewModel: loginViewModel) , isActive: $loginViewModel.gotoVerify) {
                           
                           Text("")
                               .hidden()

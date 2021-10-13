@@ -22,7 +22,8 @@ struct InitialView: View {
         Group {
             if session.isLoggedIn {
                 MainView()
-            } else {
+            } 
+            else {
               OnboardingView()
 //                FirstView()
                // OnboardingV2()
