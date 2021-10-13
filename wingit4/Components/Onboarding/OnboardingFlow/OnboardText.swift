@@ -22,7 +22,6 @@ struct OnboardText: View {
       Text(screen.description ?? "")
         .fontWeight(.semibold)
         .foregroundColor(.black)
-      
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .offset(y: -70)
