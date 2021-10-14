@@ -18,7 +18,6 @@ struct UserComment: View {
   var index: Int
   var scrollProxy: ScrollViewProxy?
   
-  @State var isPressed = false
   @State var isNavActive: Bool = false
   
   
@@ -133,16 +132,13 @@ struct UserComment: View {
     .onDisappear(perform: removeListener)
     .padding(15)
     .background(getBackgroundByState())
-    .scaleEffect(isPressed ? 0.995 : 1)
     .onTapGesture(count: 2) {
       openCommentActionsSheet()
     }
     .onLongPressGesture(
       minimumDuration: 0.1,
       maximumDistance: 1,
-      pressing: { value in
-        self.isPressed = value
-      },
+      pressing: {_ in },
       perform: {
         openCommentActionsSheet()
       })
