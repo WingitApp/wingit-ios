@@ -12,7 +12,6 @@ import SPAlert
 
 
 struct UpdateProfilePhoto: View {
-    var user: User?
     var onClose: (() -> Void)? = nil
     let uid = Auth.auth().currentUser?.uid
     @State var isSavingPhoto: Bool = false
@@ -48,7 +47,7 @@ struct UpdateProfilePhoto: View {
   
     func revertPhoto() {
         Haptic.impact(type: "soft")
-        self.updatePhotoVM.loadCurrentImage(userAvatar: user!.profileImageUrl)
+      self.updatePhotoVM.loadCurrentImage(userAvatar: session.currentUser?.profileImageUrl)
         self.clean()
     }
   

@@ -108,7 +108,7 @@ struct UserComment: View {
       .onDisappear(perform: removeListener)
       .padding(15)
       .background(
-        commentSheetViewModel.isEditingComment
+        (commentSheetViewModel.isEditingComment && commentSheetViewModel.comment == comment)
         ? LinearGradient(gradient: Gradient(colors: [Color.yellow.opacity(0.1), Color.yellow.opacity(0.1)]), startPoint: .top, endPoint: .bottom)
         : isTopComment
           ? LinearGradient(gradient: Gradient(colors: [Color.uilightOrange.opacity(0.6), .white]), startPoint: .top, endPoint: .bottom)

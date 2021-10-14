@@ -67,7 +67,6 @@ struct EditProfileView: View, KeyboardReadable {
       VStack{
         if isEditingImage {
           UpdateProfilePhoto(
-            user: session.currentUser,
             onClose: { withAnimation{showPhotoEditScreen(false)} }
           )
         } else {

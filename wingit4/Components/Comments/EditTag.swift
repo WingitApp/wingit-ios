@@ -12,7 +12,7 @@ struct EditTag: View {
   var comment: Comment
 
     var body: some View {
-        if commentSheetViewModel.isEditingComment {
+      if commentSheetViewModel.isEditingComment && commentSheetViewModel.comment == comment {
           Image(systemName: "rectangle.and.pencil.and.ellipsis")
             .foregroundColor(Color.gray)
             .font(.system(size: 12))

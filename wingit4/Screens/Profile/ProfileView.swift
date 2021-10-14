@@ -192,7 +192,7 @@ struct ProfileView: View {
         alignment: .center,
         direction: .bottom,
         content: {
-          UpdateProfilePhoto(user: session.currentUser)
+          UpdateProfilePhoto()
             .environmentObject(updatePhotoVM)
         }))
     .modifier(Popup(
