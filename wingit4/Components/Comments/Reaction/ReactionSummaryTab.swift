@@ -29,11 +29,11 @@ struct ReactionSummaryTab: View {
           ZStack{
             Capsule()
               .fill(Color.black.opacity(0.04))
-              .frame( height: 4)
+              .frame( height: 2)
             if isActive {
               Capsule()
-                .fill(Color("Color"))
-                .frame( height: 4)
+                .fill(Color.wingitBlue)
+                .frame( height: 2)
 //                .matchedGeometryEffect(id: "Tab", in: namespace)
             }
           }

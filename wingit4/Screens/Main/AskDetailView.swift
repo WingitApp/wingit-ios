@@ -61,7 +61,7 @@ struct AskDetailView: View, KeyboardReadable {
       // REACTION METADATA SUMMARY
         .bottomSheet(
           bottomSheetPosition: self.$reactionSheetViewModel.bottomSheetPosition,
-          options: [.allowContentDrag, .swipeToDismiss, .tapToDissmiss, .notResizeable, .background(AnyView(BackgroundBlurView())) ],
+          options: [.allowContentDrag, .swipeToDismiss, .tapToDissmiss, .background(AnyView(BackgroundBlurView())) ],
           headerContent: {
             ReactionSummaryHeader()
               .environmentObject(reactionSheetViewModel)

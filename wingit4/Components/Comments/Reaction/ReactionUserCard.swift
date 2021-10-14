@@ -15,7 +15,7 @@ struct ReactionUserCard: View {
         HStack(alignment: .center) {
           URLImageView(urlString: reactor.avatar)
             .clipShape(Circle())
-            .frame(width: 35, height: 35, alignment: .center)
+            .frame(width: 40, height: 40, alignment: .center)
               .foregroundColor(Color.wingitBlue)
             .overlay(
               RoundedRectangle(cornerRadius: 20)
@@ -26,8 +26,9 @@ struct ReactionUserCard: View {
               .font(.body)
               .fontWeight(.semibold)
               .padding(.bottom, 5)
-            Text(reactor.username ?? "")
+            Text("@" + (reactor.username ?? ""))
               .font(.system(size:13))
+              .foregroundColor(Color.wingitBlue)
           }
           .padding(.leading, 10)
          
