@@ -15,18 +15,13 @@ struct EditProfileView: View, KeyboardReadable {
   @EnvironmentObject var session: SessionStore
   @EnvironmentObject var updatePhotoVM: UpdatePhotoVM
 
-  var originalBio: String
-  @State private var bioText: String
+  @State var originalBio: String = ""
+  @State private var bioText: String = ""
   @State private var isTextEditorOpen: Bool = false
   @State private var isEditingImage: Bool = false
   @State private var isSaving: Bool = false
   let textLimit = 200
-  
-  init(bio: String) {
-    self.originalBio = bio
-    _bioText = State(initialValue: bio)
-  }
-  
+
   func areEditsMade() -> Bool {
     let prevUserBio = originalBio.trimmingCharacters(in: .whitespacesAndNewlines)
     let newUserBio = bioText.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -201,6 +196,11 @@ struct EditProfileView: View, KeyboardReadable {
           .padding(.bottom, 15)
         }
 
+      }
+      .onAppear {
+        let bio = session.currentUser?.bio ?? ""
+        self.originalBio = bio
+        self.bioText = bio
       }
       .environmentObject(updatePhotoVM)
       .background(

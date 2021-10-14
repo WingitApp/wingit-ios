@@ -38,12 +38,13 @@ struct CommentActionEntry: View {
                 .foregroundColor(icon == "trash" ? Color.red : Color.black)
               Spacer()
             }
+            .padding(.vertical, 15)
+            .padding(.horizontal)
+            .frame(width: UIScreen.main.bounds.width)
             
   //          if showDivider { Divider() }
           }
-          .padding(.vertical, 15)
-          .padding(.horizontal)
-          .frame(width: UIScreen.main.bounds.width)
+          
         }
         .buttonStyle(PlainButtonStyle())
       }

@@ -193,6 +193,36 @@ class CommentApi {
       }
   }
   
+  func addTopCommentStatus(comment: Comment, onSuccess: @escaping() -> Void) {
+    guard let postId = comment.postId,
+          let commentId = comment.docId
+    else {return}
+      
+      Ref.FS_DOC_COMMENTS_FOR_POSTID(postId: postId)
+        .collection("postComments")
+        .document(commentId)
+        .updateData(["isTopComment": true]) { error in
+        if error != nil {
+          return printDecodingError(error: error!)
+        } else {
+          onSuccess()
+        }
+      }
+    }
+  
+  func removeTopCommentStatus(postId: String, commentId: String, onSuccess: @escaping() -> Void) {
+    Ref.FS_DOC_COMMENTS_FOR_POSTID(postId: postId)
+      .collection("postComments")
+      .document(commentId)
+      .updateData(["isTopComment": nil]) { error in
+      if error != nil {
+        return printDecodingError(error: error!)
+      } else {
+        onSuccess()
+      }
+    }
+  }
+  
     func addUserReaction(
       reaction: Reaction,
       comment: Comment,

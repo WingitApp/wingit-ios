@@ -29,7 +29,7 @@ struct AskDetailView: View, KeyboardReadable {
             AskDetailCard(post: $post)
               .background(Color.white)
             Divider()
-            CommentList(post: $post)
+            CommentList(post: $post, scrollProxyValue: proxy)
           }
         }
         .background(Color.backgroundGray)

@@ -29,6 +29,9 @@ class CommentSheetViewModel: ObservableObject {
   // Comment Editing State
   @Published var isEditingComment: Bool = false
   @Published var commentEditText: String = ""
+  var scrollToComment: (() -> Void)? = nil
+  
+  @Published var currentTopCommentId: String? = nil
   
 
   func openCommentSheet(
@@ -37,18 +40,17 @@ class CommentSheetViewModel: ObservableObject {
     isTopComment: Bool, // should get from post
     reactions: [Reaction] = [],
     showEmojiKeyboard: Bool? = false,
+    scrollToComment: (() -> Void)?,
     onOpen: @escaping() -> Void
   ) {
-    self.clean()
-    guard let uid = Auth.auth().currentUser?.uid,
-          let ownerId = comment.ownerId else { return }
     self.comment = comment
-    self.isOwnComment = uid == ownerId
+    self.isOwnComment = comment.isOwn ?? false
     self.isPostOwner = isPostOwner
     self.isTopComment = isTopComment
     self.bottomSheetPosition = .middle
     self.reactions = reactions
     self.isEmojiKeyboardActive = showEmojiKeyboard ?? false
+    self.scrollToComment = scrollToComment
     onOpen()
   }
   
@@ -60,12 +62,11 @@ class CommentSheetViewModel: ObservableObject {
   
   func clean() {
     self.isEmojiKeyboardActive = false
-    self.comment = nil
   }
   
   func copyText() {
     UIPasteboard.general.string = comment?.comment ?? ""
-    closeCommentSheet() {
+    closeCommentSheet {
       SPAlertView(
         title: "",
         message: "Text Copied!",
@@ -91,6 +92,9 @@ class CommentSheetViewModel: ObservableObject {
     // hacky way to force comment input to readjust height
     DispatchQueue.main.asyncAfter(deadline:  DispatchTime.now() + 0.1) {
       self.commentEditText = self.comment?.comment ?? ""
+      guard let scrollToComment = self.scrollToComment else { return }
+      scrollToComment()
+      Haptic.impact(type: "small")
     }
   }
   
@@ -119,7 +123,7 @@ class CommentSheetViewModel: ObservableObject {
       commentId: comment.docId,
       postId: comment.postId
     ) {
-      self.closeCommentSheet() {
+      self.closeCommentSheet {
         self.isEditingComment = false
         SPAlertView(
           title: "",
@@ -138,7 +142,7 @@ class CommentSheetViewModel: ObservableObject {
   func deleteComment() {
     guard let comment = self.comment else {return}
     Api.Comment.deleteComment(comment: comment) {
-      self.closeCommentSheet() {
+      self.closeCommentSheet {
         SPAlertView(
           title: "",
           message: "Comment Deleted!",
@@ -148,6 +152,20 @@ class CommentSheetViewModel: ObservableObject {
     }
   }
   
+  func unmarkCommentAsBest(postId: String, commentId: String) {
+    Api.Comment.removeTopCommentStatus(
+      postId: postId,
+      commentId: commentId
+    ) {
+      self.closeCommentSheet {
+        SPAlertView(
+          title: "",
+          message: "Comment unmarked",
+          preset: SPAlertIconPreset.custom(UIImage(systemName: "hand.thumbsup")!)
+        ).present(duration: 1)
+      }
+    }
+  }
   
   func markCommentAsBest(post: Post?) {
     Haptic.impact(type: "soft")
@@ -156,15 +174,43 @@ class CommentSheetViewModel: ObservableObject {
           let comment = self.comment else {return}
     
     guard let postId = post.id,
-          let commentId = comment.id else {return}
+          let commentId = comment.docId else {return}
+
     
-    
-    Api.Post.updatePostTopComment(
-      postId: postId,
-      commentId: commentId,
-      remove: isTopComment
-    ) { state in
-      print("top comment marked")
+    if currentTopCommentId == nil {
+      Api.Comment.addTopCommentStatus(
+        comment: comment
+      ) {
+        self.closeCommentSheet {
+          SPAlertView(
+            title: "",
+            message: "Comment marked as top answer!",
+            preset: SPAlertIconPreset.custom(UIImage(systemName: "hand.thumbsup")!)
+          ).present(duration: 1)
+        }
+      }
+    } else {
+      // remove the top comment status of existing comment
+      guard let currentTopCommentId = currentTopCommentId else {return}
+      if currentTopCommentId == comment.docId { return self.unmarkCommentAsBest(postId: postId, commentId: commentId) }
+      
+      Api.Comment.removeTopCommentStatus(
+        postId: postId,
+        commentId: currentTopCommentId
+      ) {
+        // add top comment status to comment
+        Api.Comment.addTopCommentStatus(
+          comment: comment
+        ) {
+          self.closeCommentSheet {
+            SPAlertView(
+              title: "",
+              message: "Comment marked as top answer!",
+              preset: SPAlertIconPreset.custom(UIImage(systemName: "hand.thumbsup")!)
+            ).present(duration: 1)
+          }
+        }
+      }
     }
   }
   

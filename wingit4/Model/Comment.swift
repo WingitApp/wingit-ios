@@ -29,6 +29,8 @@ struct Comment: Codable, Identifiable, Equatable, Hashable {
     // added for editing
     var isEdited: Bool?
     var updatedAt: Double?
+    var isTopComment: Bool?
+
 }
 
 enum CommentType: String, Codable {

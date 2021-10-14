@@ -15,40 +15,57 @@ struct UserComment: View {
 
   var comment: Comment
   var post: Post?
-  var postOwnerId: String?
+  var index: Int
+  var scrollProxy: ScrollViewProxy?
+  var isOwnPost: Bool = false
   var isOPComment: Bool = false
   var isTopComment: Bool = false
   
   @State var isNavActive: Bool = false
 
   
-  init(comment: Comment, post: Post?, postOwnerId: String?) {
+  init(comment: Comment, post: Post?, index: Int, scrollProxyValue: ScrollViewProxy?) {
     self.comment = comment
     self.post = post ?? nil
-    self.postOwnerId = postOwnerId
-    self.isOPComment = comment.ownerId == postOwnerId
-    self.isTopComment = post!.topCommentId != nil && post!.topCommentId == comment.id
+    self.index = index
+    self.scrollProxy = scrollProxyValue ?? nil
+    self.isOwnPost = post?.isOwn ?? false
+    self.isOPComment = comment.isOwn ?? false
+    self.isTopComment = comment.isTopComment ?? false
+  }
+  
+  func scrollToComment() {
+    guard let scrollProxy = self.scrollProxy else { return }
+    withAnimation {
+      scrollProxy.scrollTo(self.index)
+    }
   }
   
   func openCommentActionsSheet() {
-    guard let uid = session.currentUser?.uid else { return }
     Haptic.impact(type: "soft")
     dismissKeyboard()
     commentSheetViewModel.openCommentSheet(
       comment: comment,
-      isPostOwner: postOwnerId == uid,
+      isPostOwner: isOwnPost,
       isTopComment: isTopComment,
-      reactions: reactionBarViewModel.reactions
+      reactions: reactionBarViewModel.reactions,
+      scrollToComment: self.scrollToComment
     ) {
-//      isActive = true
+      //todo
     }
   }
   
-  func removeComment() {
+  func showCommentDeleteConfirmation() {
     commentSheetViewModel.isConfirmationShown = false
     commentSheetViewModel.deleteComment()
   }
   
+  func onAppear() {
+    if self.isTopComment {
+      self.commentSheetViewModel.currentTopCommentId = comment.docId ?? nil
+    }
+    self.loadReactionBar()
+  }
   
   func loadReactionBar() {
    reactionBarViewModel.fetchReactions(comment: comment)
@@ -87,8 +104,9 @@ struct UserComment: View {
           CommentText(comment: comment)
           ReactionBar(
             comment: comment,
-            isPostOwner: postOwnerId == session.currentUser?.uid,
-            isTopComment: isTopComment
+            isPostOwner: isOwnPost,
+            isTopComment: isTopComment,
+            scrollToComment: scrollToComment
           )
         }
         .padding(.leading, 5)
@@ -99,12 +117,12 @@ struct UserComment: View {
           title: Text("Delete your comment?"),
           message: Text("This action cannot be undone."),
           primaryButton: .destructive(Text("Delete")) {
-            removeComment()
+            showCommentDeleteConfirmation()
           },
           secondaryButton: .cancel()
         )
       }
-      .onAppear(perform: loadReactionBar)
+      .onAppear(perform: onAppear)
       .onDisappear(perform: removeListener)
       .padding(15)
       .background(

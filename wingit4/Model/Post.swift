@@ -23,14 +23,11 @@ struct Post: Codable, Identifiable, Equatable, Hashable {
     var title: String?
     var wingers: [User]?
     var type: PostType?
-
     var isOwn: Bool? {
       // returns if post is own
       guard let currentUser = Auth.auth().currentUser else { return false }
       return self.ownerId == currentUser.uid
     }
-    // allows top comments
-    var topCommentId: String?
 }
 
 enum PostType: String, Codable {

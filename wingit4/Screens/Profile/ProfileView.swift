@@ -200,7 +200,7 @@ struct ProfileView: View {
       alignment: .center,
       direction: .bottom,
       content: {
-        EditProfileView(bio: session.currentUser?.bio ?? "")
+        EditProfileView()
         .environmentObject(updatePhotoVM)
       }))
   }

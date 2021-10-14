@@ -10,6 +10,7 @@ import SwiftUI
 struct CommentList: View {
   @EnvironmentObject var commentViewModel : CommentViewModel
   @Binding var post: Post?
+  var scrollProxyValue: ScrollViewProxy?
   
   var body: some View {
     if !commentViewModel.comments.isEmpty {
@@ -18,7 +19,8 @@ struct CommentList: View {
           UserComment(
             comment: comment,
             post: post,
-            postOwnerId: post?.ownerId
+            index: index,
+            scrollProxyValue: scrollProxyValue
           )
             .id(index)
             .frame(width: UIScreen.main.bounds.width)

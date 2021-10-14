@@ -12,9 +12,9 @@ struct CommentSheetActionsList: View {
   @EnvironmentObject var commentSheetViewModel: CommentSheetViewModel
   var post: Post?
 
-    func clean() {
-//      isEmojiKeyboardActive = false
-    }
+  func markCommentAsBest() {
+    commentSheetViewModel.markCommentAsBest(post: post) 
+  }
   
     var body: some View {
         VStack(spacing: 0){
@@ -27,7 +27,7 @@ struct CommentSheetActionsList: View {
                   icon: "hand.thumbsup",
                   label: "\(commentSheetViewModel.isTopComment ? "Unmark Answer as Best" : "Mark as Best Answer")",
                   showDivider: true,
-                  onTap: { commentSheetViewModel.markCommentAsBest(post: post) },
+                  onTap: markCommentAsBest,
                   isShown: commentSheetViewModel.isPostOwner && !commentSheetViewModel.isOwnComment
                 )
                 if commentSheetViewModel.isPostOwner { Divider() }

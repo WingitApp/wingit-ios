@@ -45,6 +45,10 @@ struct CommentInput: View {
     }
   }
   
+  func toggleCommentEdit() {
+    
+  }
+  
   
   var body: some View {
     VStack() {

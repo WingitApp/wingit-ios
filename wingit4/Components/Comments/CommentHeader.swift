@@ -31,6 +31,7 @@ struct CommentHeader: View {
         }
         .foregroundColor(Color.uiorange)
         .font(.system(size: 10))
+        .allowsHitTesting(false)
       }
       Circle()
         .modifier(CircleDotStyle())

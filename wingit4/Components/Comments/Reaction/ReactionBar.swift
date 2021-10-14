@@ -18,6 +18,7 @@ struct ReactionBar: View {
   var comment: Comment
   var isPostOwner: Bool
   var isTopComment: Bool
+  var scrollToComment: (() -> Void)? = nil
   
   @State var text: String = ""
   @State var showSheet: Bool = false
@@ -66,6 +67,7 @@ struct ReactionBar: View {
                 isTopComment: isTopComment,
                 reactions: self.reactionBarViewModel.reactions,
                 showEmojiKeyboard: true,
+                scrollToComment: self.scrollToComment,
                 onOpen: {}
               )
             } ) {
