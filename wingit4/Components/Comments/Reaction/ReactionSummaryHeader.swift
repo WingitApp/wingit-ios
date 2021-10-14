@@ -14,19 +14,22 @@ struct ReactionSummaryHeader: View {
 
   
   var body: some View {
-    HStack(spacing: 0){
-      ForEach(Array(reactionSheetViewModel.reactions.enumerated()), id: \.element) { index, reaction in
-        ReactionSummaryTab(
-          index: index,
-          emojiCode: reaction.emojiCode,
-          namespace: name,
-          isActive: reactionSheetViewModel.activeIndex == index,
-          onTap: reactionSheetViewModel.onTabSelect
-        )
+    ScrollView(.horizontal, showsIndicators: true){
+      HStack(spacing: 0){
+        ForEach(Array(reactionSheetViewModel.reactions.enumerated()), id: \.element) { index, reaction in
+          ReactionSummaryTab(
+            index: index,
+            emojiCode: reaction.emojiCode,
+            namespace: name,
+            isActive: reactionSheetViewModel.activeIndex == index,
+            onTap: reactionSheetViewModel.onTabSelect
+          )
+        }
       }
+      .frame(width: UIScreen.main.bounds.width + 30)
+      .padding(.top, 10)
     }
-    .frame(width: UIScreen.main.bounds.width + 30)
-    .padding(.top, 10)
+    
     
   }
 }

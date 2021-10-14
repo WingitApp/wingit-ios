@@ -114,9 +114,13 @@ struct UserComment: View {
           ? LinearGradient(gradient: Gradient(colors: [Color.uilightOrange.opacity(0.6), .white]), startPoint: .top, endPoint: .bottom)
           : LinearGradient(gradient: Gradient(colors: [.white, .white]), startPoint: .top, endPoint: .bottom)
       )
-      .onLongPressGesture(minimumDuration: 0.2) {
+      .onTapGesture(count: 2) {
         openCommentActionsSheet()
       }
+      .onLongPressGesture(minimumDuration: 0.1, maximumDistance: 1, perform: {
+        openCommentActionsSheet()
+      })
+  
       .environmentObject(reactionBarViewModel)
       .environmentObject(commentSheetViewModel)
       Divider()
