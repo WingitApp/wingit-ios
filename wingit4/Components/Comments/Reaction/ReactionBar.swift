@@ -59,6 +59,7 @@ struct ReactionBar: View {
           )
           if !self.reactionBarViewModel.reactions.isEmpty, reaction == self.reactionBarViewModel.reactions.last! {
             Button(action: {
+              Haptic.impact(type: "small")
               commentSheetViewModel.openCommentSheet(
                 comment: comment,
                 isPostOwner: isPostOwner,
@@ -69,11 +70,13 @@ struct ReactionBar: View {
               )
             } ) {
               Image(systemName: "plus")
-                .padding(3)
+                .padding(4)
                 .background(Color.lightGray)
                 .cornerRadius(100)
                 .font(.system(size: 10))
+                
             }
+            .padding(.leading, 5)
           }
         }
         .padding([.horizontal, .vertical], 4)

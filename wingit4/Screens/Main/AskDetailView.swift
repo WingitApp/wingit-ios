@@ -37,14 +37,6 @@ struct AskDetailView: View, KeyboardReadable {
           self.commentViewModel.isTextFieldFocused = false
           dismissKeyboard()
         }
-        .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                  .onEnded({ value in
-          // onSwipeRight -> go back
-          if value.translation.width > 0 {
-            Haptic.impact(type: "soft")
-            self.presentationMode.wrappedValue.dismiss()
-          }
-        }))
         CommentInput(post: $post, scrollProxyValue: proxy)
       }
       // COMMENT ACTIONS LIST

@@ -34,6 +34,7 @@ struct ReactionButton: View {
     }
   
     func handleReactionHold() {
+      Haptic.impact(type: "small")
       reactionSheetViewModel.openReactionSummarySheet(
         reactions: reactionBarViewModel.reactions
       )
@@ -62,7 +63,7 @@ struct ReactionButton: View {
         .onTapGesture {
           handleReactionTap()
         }
-        .onLongPressGesture(minimumDuration: 0.3) {
+        .onLongPressGesture(minimumDuration: 0.2) {
           handleReactionHold()
         }
 
