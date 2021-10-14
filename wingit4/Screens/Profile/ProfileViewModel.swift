@@ -73,7 +73,6 @@ class ProfileViewModel: ObservableObject {
                 self.openPosts.insert(post, at: 0)
             }
         }, modifiedPost: {(post) in
-          print("MODIFIED OPEN POST:", post)
           if !self.openPosts.isEmpty {
             if let index = self.openPosts.firstIndex(where: {$0.id == post.id}) {
               self.openPosts[index] = post

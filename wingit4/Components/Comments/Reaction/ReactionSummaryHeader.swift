@@ -26,6 +26,7 @@ struct ReactionSummaryHeader: View {
       }
     }
     .frame(width: UIScreen.main.bounds.width + 30)
+    .padding(.top, 10)
     
   }
 }

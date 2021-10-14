@@ -362,7 +362,6 @@ extension Array {
 extension Encodable {
     func toDictionary() throws -> [String: Any] {
         let data = try JSONEncoder().encode(self)
-        print("data", data)
         guard let dictionary = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: Any] else {
             throw NSError()
         }
