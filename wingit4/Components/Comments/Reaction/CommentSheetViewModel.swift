@@ -30,6 +30,7 @@ class CommentSheetViewModel: ObservableObject {
   @Published var isEditingComment: Bool = false
   @Published var commentEditText: String = ""
   
+
   func openCommentSheet(
     comment: Comment,
     isPostOwner: Bool, // should get from post

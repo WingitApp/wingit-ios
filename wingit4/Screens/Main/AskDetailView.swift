@@ -11,11 +11,10 @@ import BottomSheet
 struct AskDetailView: View, KeyboardReadable {
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
   @StateObject var commentViewModel = CommentViewModel()
-  @StateObject var commentSheetViewModel = CommentSheetViewModel()
+  @StateObject var commentSheetViewModel = CommentSheetViewModel() // for comment actions
+  @StateObject var reactionSheetViewModel = ReactionSheetViewModel() // for reaction summary
   @Binding var post: Post?
   @State private var isNavBarHidden: Bool = true
-  
-  @State private var bottomSheetPosition: BottomSheetPosition = .hidden
   
   
   var body: some View {
@@ -56,20 +55,20 @@ struct AskDetailView: View, KeyboardReadable {
           CommentSheetHeader()
             .environmentObject(commentSheetViewModel)
         }){
-          CommentActionsList(post: post)
+          CommentSheetActionsList(post: post)
             .environmentObject(commentSheetViewModel)
         }
       // REACTION METADATA SUMMARY
-//        .bottomSheet(
-//          bottomSheetPosition: self.$commentSheetViewModel.bottomSheetPosition,
-//          options: [.allowContentDrag, .swipeToDismiss, .tapToDissmiss, .background(AnyView(BackgroundBlurView())) ],
-//          headerContent: {
-//            CommentSheetHeader()
-//              .environmentObject(commentSheetViewModel)
-//          }){
-//            CommentActionsList(post: post)
-//              .environmentObject(commentSheetViewModel)
-//          }
+        .bottomSheet(
+          bottomSheetPosition: self.$reactionSheetViewModel.bottomSheetPosition,
+          options: [.allowContentDrag, .swipeToDismiss, .tapToDissmiss, .notResizeable, .background(AnyView(BackgroundBlurView())) ],
+          headerContent: {
+            ReactionSummaryHeader()
+              .environmentObject(reactionSheetViewModel)
+          }){
+            ReactionSummarySheet()
+              .environmentObject(reactionSheetViewModel)
+          }
     }
     .onReceive(keyboardPublisher) { isKeyboardVisible in
       if isKeyboardVisible, commentSheetViewModel.bottomSheetPosition != .hidden {
@@ -81,6 +80,7 @@ struct AskDetailView: View, KeyboardReadable {
     .navigationBarBackButtonHidden(isNavBarHidden)
     .environmentObject(commentViewModel)
     .environmentObject(commentSheetViewModel)
+    .environmentObject(reactionSheetViewModel)
     .frame(
       width: UIScreen.main.bounds.size.width
     )

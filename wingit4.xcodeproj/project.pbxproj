@@ -17,6 +17,11 @@
 		150C3C03271756930029BAEA /* CommentText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150C3C02271756920029BAEA /* CommentText.swift */; };
 		150C3C05271756A10029BAEA /* CommentHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150C3C04271756A10029BAEA /* CommentHeader.swift */; };
 		150C3C0727176A0E0029BAEA /* EditTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150C3C0627176A0E0029BAEA /* EditTag.swift */; };
+		150C3C092717A3C40029BAEA /* ReactionSummarySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150C3C082717A3C40029BAEA /* ReactionSummarySheet.swift */; };
+		150C3C0B2717A5CC0029BAEA /* ReactionSummaryTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150C3C0A2717A5CC0029BAEA /* ReactionSummaryTab.swift */; };
+		150C3C0D2717ADF30029BAEA /* ReactionSummaryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150C3C0C2717ADF30029BAEA /* ReactionSummaryHeader.swift */; };
+		150C3C0F2717AFB90029BAEA /* ReactionSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150C3C0E2717AFB90029BAEA /* ReactionSheetViewModel.swift */; };
+		150C3C112717B1A10029BAEA /* ReactionUserCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150C3C102717B1A10029BAEA /* ReactionUserCard.swift */; };
 		150DB46326F301AD00373D26 /* PostEmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150DB46226F301AD00373D26 /* PostEmptyState.swift */; };
 		15127A5226FFC009006F975E /* PlaceholderConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15127A5126FFC008006F975E /* PlaceholderConstants.swift */; };
 		15127A5426FFC148006F975E /* ReferralPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15127A5326FFC148006F975E /* ReferralPlaceholder.swift */; };
@@ -63,7 +68,7 @@
 		157F997E27101F49001A4031 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 157F997D27101F49001A4031 /* URLImage */; };
 		157F998027101F49001A4031 /* URLImageStore in Frameworks */ = {isa = PBXBuildFile; productRef = 157F997F27101F49001A4031 /* URLImageStore */; };
 		157F9979270FA77C001A4031 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 157F9978270FA77C001A4031 /* BottomSheet */; };
-		157F997B270FACDE001A4031 /* CommentActionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F997A270FACDE001A4031 /* CommentActionsList.swift */; };
+		157F997B270FACDE001A4031 /* CommentSheetActionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F997A270FACDE001A4031 /* CommentSheetActionsList.swift */; };
 		157F99842710CB57001A4031 /* CommentActionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F99832710CB57001A4031 /* CommentActionEntry.swift */; };
 		157F998627122390001A4031 /* CommentSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F998527122390001A4031 /* CommentSheetViewModel.swift */; };
 		157F9988271239EE001A4031 /* CommentSheetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F9987271239ED001A4031 /* CommentSheetHeader.swift */; };
@@ -269,6 +274,11 @@
 		150C3C02271756920029BAEA /* CommentText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentText.swift; sourceTree = "<group>"; };
 		150C3C04271756A10029BAEA /* CommentHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentHeader.swift; sourceTree = "<group>"; };
 		150C3C0627176A0E0029BAEA /* EditTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTag.swift; sourceTree = "<group>"; };
+		150C3C082717A3C40029BAEA /* ReactionSummarySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionSummarySheet.swift; sourceTree = "<group>"; };
+		150C3C0A2717A5CC0029BAEA /* ReactionSummaryTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionSummaryTab.swift; sourceTree = "<group>"; };
+		150C3C0C2717ADF30029BAEA /* ReactionSummaryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionSummaryHeader.swift; sourceTree = "<group>"; };
+		150C3C0E2717AFB90029BAEA /* ReactionSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionSheetViewModel.swift; sourceTree = "<group>"; };
+		150C3C102717B1A10029BAEA /* ReactionUserCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionUserCard.swift; sourceTree = "<group>"; };
 		150DB46226F301AD00373D26 /* PostEmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEmptyState.swift; sourceTree = "<group>"; };
 		15127A5126FFC008006F975E /* PlaceholderConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderConstants.swift; sourceTree = "<group>"; };
 		15127A5326FFC148006F975E /* ReferralPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralPlaceholder.swift; sourceTree = "<group>"; };
@@ -310,7 +320,7 @@
 		157F9971270BA7A1001A4031 /* UserProfileFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileFeed.swift; sourceTree = "<group>"; };
 		157F9973270BA875001A4031 /* OwnProfileFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnProfileFeed.swift; sourceTree = "<group>"; };
 		157F9975270C0273001A4031 /* ProfileUserBio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserBio.swift; sourceTree = "<group>"; };
-		157F997A270FACDE001A4031 /* CommentActionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentActionsList.swift; sourceTree = "<group>"; };
+		157F997A270FACDE001A4031 /* CommentSheetActionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSheetActionsList.swift; sourceTree = "<group>"; };
 		157F99832710CB57001A4031 /* CommentActionEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentActionEntry.swift; sourceTree = "<group>"; };
 		157F998527122390001A4031 /* CommentSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSheetViewModel.swift; sourceTree = "<group>"; };
 		157F9987271239ED001A4031 /* CommentSheetHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSheetHeader.swift; sourceTree = "<group>"; };
@@ -691,13 +701,18 @@
 			children = (
 				1594EE632704E5DA00D5C9E9 /* ReactionBar.swift */,
 				1594EE6E2704EC3200D5C9E9 /* EmojiKeyboard.swift */,
-				157F997A270FACDE001A4031 /* CommentActionsList.swift */,
+				157F997A270FACDE001A4031 /* CommentSheetActionsList.swift */,
 				157F99832710CB57001A4031 /* CommentActionEntry.swift */,
 				157F998527122390001A4031 /* CommentSheetViewModel.swift */,
 				157F9987271239ED001A4031 /* CommentSheetHeader.swift */,
 				157F998927123B34001A4031 /* EmojiHeaderButton.swift */,
 				15FBEF342714B1CB00A9F373 /* ReactionBarViewModel.swift */,
 				15FBEF362714DAB000A9F373 /* ReactionButton.swift */,
+				150C3C082717A3C40029BAEA /* ReactionSummarySheet.swift */,
+				150C3C0A2717A5CC0029BAEA /* ReactionSummaryTab.swift */,
+				150C3C0C2717ADF30029BAEA /* ReactionSummaryHeader.swift */,
+				150C3C0E2717AFB90029BAEA /* ReactionSheetViewModel.swift */,
+				150C3C102717B1A10029BAEA /* ReactionUserCard.swift */,
 			);
 			path = Reaction;
 			sourceTree = "<group>";
@@ -1324,6 +1339,7 @@
 				151A3C8E26D41B5400A39FAF /* AskCardViewModel.swift in Sources */,
 				3B75E3DB26715D26002F3108 /* Modifiers.swift in Sources */,
 				15E4907D26E84CF400B25B56 /* DynamicHeightTextField.swift in Sources */,
+				150C3C0D2717ADF30029BAEA /* ReactionSummaryHeader.swift in Sources */,
 				3B74CC8126FC59BC00BB39E2 /* AddImageButton.swift in Sources */,
 				15762C6C26E170FA00A8E041 /* ReferralsViewModel.swift in Sources */,
 				156E6AD526D8A0A700690E47 /* NotificationEntry.swift in Sources */,
@@ -1372,7 +1388,7 @@
 				3B96DD6626DF46A500015EED /* ReferButton.swift in Sources */,
 				3B7AF0812671BBD4003BCCF3 /* MessagesView.swift in Sources */,
 				3B5BDB5A268F98AC0034B18C /* ReportInput.swift in Sources */,
-				157F997B270FACDE001A4031 /* CommentActionsList.swift in Sources */,
+				157F997B270FACDE001A4031 /* CommentSheetActionsList.swift in Sources */,
 				151A3C8B26D32F4600A39FAF /* AskCard.swift in Sources */,
 				3BE61D7426E15E8C0078C6CF /* ReferFooter.swift in Sources */,
 				150C3C05271756A10029BAEA /* CommentHeader.swift in Sources */,
@@ -1435,6 +1451,7 @@
 				15F7E8C126E8490100E5238F /* CommentList.swift in Sources */,
 				15DA39B426DC5C620080193E /* AskCardPlaceholder.swift in Sources */,
 				3B7AF0B72672C21F003BCCF3 /* Chat.swift in Sources */,
+				150C3C112717B1A10029BAEA /* ReactionUserCard.swift in Sources */,
 				65C0F9D3270BB0F500F69592 /* NotificationViewNavigationOption.swift in Sources */,
 				3B7AF056267197EC003BCCF3 /* SessionStore.swift in Sources */,
 				15F7E8BF26E8490100E5238F /* ReferralComment.swift in Sources */,
@@ -1445,9 +1462,11 @@
 				6522122926F5584000A48B07 /* ContactDetailViewModel.swift in Sources */,
 				150C3C01271610D80029BAEA /* UserPreview.swift in Sources */,
 				3B7AF0C32673EEA0003BCCF3 /* NotificationsApi.swift in Sources */,
+				150C3C0F2717AFB90029BAEA /* ReactionSheetViewModel.swift in Sources */,
 				15F7E87C26E8436100E5238F /* (null) in Sources */,
 				65AD68B127057DA6008C66E9 /* CommentNotification.swift in Sources */,
 				3B928C3B269EA383007A34B8 /* ImageView.swift in Sources */,
+				150C3C0B2717A5CC0029BAEA /* ReactionSummaryTab.swift in Sources */,
 				15DFD07A26ED2E29002CBE31 /* URLImageViewModel.swift in Sources */,
 				65F7315426F51FB400A73781 /* ContactsService.swift in Sources */,
 				65F7314F26F3C91700A73781 /* StringExtensions.swift in Sources */,
@@ -1456,6 +1475,7 @@
 				6522122726F557B400A48B07 /* ContactDetailView.swift in Sources */,
 				151A3C9426D5679800A39FAF /* AskDoneToggle.swift in Sources */,
 				3B7AF06D2671A01B003BCCF3 /* CommentRow.swift in Sources */,
+				150C3C092717A3C40029BAEA /* ReactionSummarySheet.swift in Sources */,
 				15CD208D270276CF00C7FC1A /* KeyboardReadable.swift in Sources */,
 				3B0DFBDE26B78D86008CE0D1 /* UpdatePhotoVM.swift in Sources */,
 				15A6A43F2708E4B000D65616 /* SummaryCardswift in Sources */,

@@ -10,6 +10,8 @@ import SwiftUI
 struct ReactionButton: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var reactionBarViewModel: ReactionBarViewModel
+    @EnvironmentObject var reactionSheetViewModel: ReactionSheetViewModel
+
     var reaction: Reaction
     var comment: Comment
 
@@ -22,17 +24,23 @@ struct ReactionButton: View {
       guard let listener = self.reactionBarViewModel.listener else { return }
       listener.remove()
     }
+    
+    func handleReactionTap() {
+      reactionBarViewModel.handleReactionTap(
+        reaction: reaction,
+        comment: comment,
+        currentUser: session.currentUser
+      )
+    }
   
-  func onTapAction() {
-    reactionBarViewModel.handleReactionTap(
-      reaction: reaction,
-      comment: comment,
-      currentUser: session.currentUser
-    )
-  }
+    func handleReactionHold() {
+      reactionSheetViewModel.openReactionSummarySheet(
+        reactions: reactionBarViewModel.reactions
+      )
+    }
     
     var body: some View {
-      Button(action: onTapAction) {
+      Button(action: {}) {
         HStack(alignment: .center, spacing: 5){
           Text(String(UnicodeScalar(reaction.emojiCode)!))
             .font(.system(size: 13))
@@ -51,6 +59,13 @@ struct ReactionButton: View {
                     ? Color.twitterBlue.opacity(0.5)
                     : Color.lightGray.darker(by: 5), lineWidth: 1)
         )
+        .onTapGesture {
+          handleReactionTap()
+        }
+        .onLongPressGesture(minimumDuration: 0.3) {
+          handleReactionHold()
+        }
+
 
       }
       .buttonStyle(PlainButtonStyle())

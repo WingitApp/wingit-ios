@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct CommentActionsList: View {
+struct CommentSheetActionsList: View {
   @EnvironmentObject var commentSheetViewModel: CommentSheetViewModel
   var post: Post?
 

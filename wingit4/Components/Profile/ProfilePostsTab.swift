@@ -17,9 +17,11 @@ struct ProfilePostsTab: View {
     func onTapShowOpenPosts() -> Void {
         if isOwnProfile {
           self.profileViewModel.showOpenPosts = true
+          self.profileViewModel.openPosts.sort { $0.date ?? 0 > $1.date ?? 0 }
           logToAmplitude(event: .viewOwnOpenAsks)
         } else {
           self.userProfileViewModel.showOpenPosts = true
+          self.userProfileViewModel.openPosts.sort { $0.date ?? 0 > $1.date ?? 0 }
           logToAmplitude(event: .viewOtherUsersOpenAsks, properties: [.userId: userProfileViewModel.user.id])
         }
     }
