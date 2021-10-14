@@ -16,8 +16,7 @@ struct ReactionBar: View {
   @EnvironmentObject var session: SessionStore
   
   var comment: Comment
-  var isPostOwner: Bool
-  var isTopComment: Bool
+  var isOwnPost: Bool
   var scrollToComment: (() -> Void)? = nil
   
   @State var text: String = ""
@@ -63,8 +62,7 @@ struct ReactionBar: View {
               Haptic.impact(type: "small")
               commentSheetViewModel.openCommentSheet(
                 comment: comment,
-                isPostOwner: isPostOwner,
-                isTopComment: isTopComment,
+                isOwnPost: isOwnPost,
                 reactions: self.reactionBarViewModel.reactions,
                 showEmojiKeyboard: true,
                 scrollToComment: self.scrollToComment,

@@ -24,13 +24,13 @@ struct CommentSheetActionsList: View {
             ScrollView {
               VStack(spacing: 0) {
                 CommentActionEntry(
-                  icon: "hand.thumbsup",
-                  label: "\(commentSheetViewModel.isTopComment ? "Unmark Answer as Best" : "Mark as Best Answer")",
+                  icon: commentSheetViewModel.isTopComment ? "hand.thumbsup.fill" : "hand.thumbsup",
+                  label: commentSheetViewModel.isTopComment ? "Unmark Answer as Best" : "Mark as Best Answer",
                   showDivider: true,
                   onTap: markCommentAsBest,
-                  isShown: commentSheetViewModel.isPostOwner && !commentSheetViewModel.isOwnComment
+                  isShown: commentSheetViewModel.isOwnPost && !commentSheetViewModel.isOwnComment
                 )
-                if commentSheetViewModel.isPostOwner { Divider() }
+                if commentSheetViewModel.isOwnPost { Divider() }
                 CommentActionEntry(
                   icon: "square.and.pencil",
                   label: "Edit Comment",

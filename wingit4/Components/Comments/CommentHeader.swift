@@ -26,7 +26,7 @@ struct CommentHeader: View {
         .fontWeight(.semibold)
       if isTopComment {
         HStack(spacing: 3){
-          Text(Image(systemName: "star.circle.fill"))
+          Text(Image(systemName: "hand.thumbsup.fill"))
           Text("Best Answer")
         }
         .foregroundColor(Color.uiorange)

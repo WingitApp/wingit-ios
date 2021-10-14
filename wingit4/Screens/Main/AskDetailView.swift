@@ -51,16 +51,16 @@ struct AskDetailView: View, KeyboardReadable {
             .environmentObject(commentSheetViewModel)
         }
       // REACTION METADATA SUMMARY
-        .bottomSheet(
-          bottomSheetPosition: self.$reactionSheetViewModel.bottomSheetPosition,
-          options: [.allowContentDrag, .swipeToDismiss, .tapToDissmiss, .background(AnyView(BackgroundBlurView())) ],
-          headerContent: {
-            ReactionSummaryHeader()
-              .environmentObject(reactionSheetViewModel)
-          }){
-            ReactionSummarySheet()
-              .environmentObject(reactionSheetViewModel)
-          }
+      .bottomSheet(
+        bottomSheetPosition: self.$reactionSheetViewModel.bottomSheetPosition,
+        options: [.allowContentDrag, .swipeToDismiss, .tapToDissmiss, .notResizeable, .background(AnyView(BackgroundBlurView())) ],
+        headerContent: {
+          ReactionSummaryHeader()
+            .environmentObject(reactionSheetViewModel)
+        }){
+          ReactionSummarySheet()
+            .environmentObject(reactionSheetViewModel)
+        }
     }
     .onReceive(keyboardPublisher) { isKeyboardVisible in
       if isKeyboardVisible, commentSheetViewModel.bottomSheetPosition != .hidden {

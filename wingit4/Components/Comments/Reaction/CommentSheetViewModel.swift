@@ -19,7 +19,7 @@ class CommentSheetViewModel: ObservableObject {
   @Published var isEmojiKeyboardActive: Bool = false
   @Published var comment: Comment? = nil
   @Published var isOwnComment: Bool = false
-  @Published var isPostOwner: Bool = false
+  @Published var isOwnPost: Bool = false
   @Published var isTopComment: Bool = false
   @Published var reactions: [Reaction] = []
   
@@ -36,21 +36,20 @@ class CommentSheetViewModel: ObservableObject {
 
   func openCommentSheet(
     comment: Comment,
-    isPostOwner: Bool, // should get from post
-    isTopComment: Bool, // should get from post
+    isOwnPost: Bool, // should get from post
     reactions: [Reaction] = [],
     showEmojiKeyboard: Bool? = false,
     scrollToComment: (() -> Void)?,
     onOpen: @escaping() -> Void
   ) {
     self.comment = comment
+    self.isOwnPost = isOwnPost
     self.isOwnComment = comment.isOwn ?? false
-    self.isPostOwner = isPostOwner
-    self.isTopComment = isTopComment
-    self.bottomSheetPosition = .middle
+    self.isTopComment = comment.isTopComment ?? false
     self.reactions = reactions
     self.isEmojiKeyboardActive = showEmojiKeyboard ?? false
     self.scrollToComment = scrollToComment
+    self.bottomSheetPosition = .middle
     onOpen()
   }
   
@@ -69,8 +68,8 @@ class CommentSheetViewModel: ObservableObject {
     closeCommentSheet {
       SPAlertView(
         title: "",
-        message: "Text Copied!",
-        preset: SPAlertIconPreset.done
+        message: "Text Copied",
+        preset: SPAlertIconPreset.custom(UIImage(systemName: "doc.on.doc")!)
       ).present(duration: 1)
     }
     
@@ -145,7 +144,7 @@ class CommentSheetViewModel: ObservableObject {
       self.closeCommentSheet {
         SPAlertView(
           title: "",
-          message: "Comment Deleted!",
+          message: "Comment Deleted",
           preset: SPAlertIconPreset.done
         ).present(duration: 1)
       }
@@ -157,10 +156,11 @@ class CommentSheetViewModel: ObservableObject {
       postId: postId,
       commentId: commentId
     ) {
+      self.currentTopCommentId = nil
       self.closeCommentSheet {
         SPAlertView(
           title: "",
-          message: "Comment unmarked",
+          message: "Comment Unmarked",
           preset: SPAlertIconPreset.custom(UIImage(systemName: "hand.thumbsup")!)
         ).present(duration: 1)
       }
@@ -184,8 +184,8 @@ class CommentSheetViewModel: ObservableObject {
         self.closeCommentSheet {
           SPAlertView(
             title: "",
-            message: "Comment marked as top answer!",
-            preset: SPAlertIconPreset.custom(UIImage(systemName: "hand.thumbsup")!)
+            message: "Marked as Top Answer",
+            preset: SPAlertIconPreset.custom(UIImage(systemName: "hand.thumbsup.fill")!)
           ).present(duration: 1)
         }
       }
@@ -205,8 +205,8 @@ class CommentSheetViewModel: ObservableObject {
           self.closeCommentSheet {
             SPAlertView(
               title: "",
-              message: "Comment marked as top answer!",
-              preset: SPAlertIconPreset.custom(UIImage(systemName: "hand.thumbsup")!)
+              message:  "Marked as Top Answer",
+              preset: SPAlertIconPreset.custom(UIImage(systemName: "hand.thumbsup.fill")!)
             ).present(duration: 1)
           }
         }

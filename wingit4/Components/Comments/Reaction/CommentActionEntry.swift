@@ -20,18 +20,27 @@ struct CommentActionEntry: View {
       callback()
     }
   
+  func getIconColor() -> Color {
+    switch(icon) {
+      case "trash":
+        return Color.red
+
+      default:
+        return Color.wingitBlue
+    }
+  }
+  
     var body: some View {
       if isShown {
-        Button(action: onTapGesture) {
+        Button(action: {}) {
           VStack(spacing: 0){
-  //          if showDivider { Divider() }
             HStack {
               Text(Image(systemName: icon))
                 .font(.body)
                 .fontWeight(.light)
-                .font(.system(size: 20))
+                .font(.system(size: 23))
                 .frame(width: 30)
-                .foregroundColor(icon == "trash" ? Color.red : Color.wingitBlue)
+                .foregroundColor(getIconColor())
 
               Text(label)
                 .font(.body)
@@ -40,9 +49,11 @@ struct CommentActionEntry: View {
             }
             .padding(.vertical, 15)
             .padding(.horizontal)
+            .background(BackgroundBlurView())
             .frame(width: UIScreen.main.bounds.width)
-            
-  //          if showDivider { Divider() }
+            .onTapGesture {
+              onTapGesture()
+            }
           }
           
         }

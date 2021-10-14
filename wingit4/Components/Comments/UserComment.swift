@@ -12,26 +12,21 @@ struct UserComment: View {
   @EnvironmentObject var commentSheetViewModel: CommentSheetViewModel
   @EnvironmentObject var session: SessionStore
   @StateObject var reactionBarViewModel = ReactionBarViewModel()
-
+  
   var comment: Comment
   var post: Post?
   var index: Int
   var scrollProxy: ScrollViewProxy?
-  var isOwnPost: Bool = false
-  var isOPComment: Bool = false
-  var isTopComment: Bool = false
   
+  @State var isPressed = false
   @State var isNavActive: Bool = false
-
+  
   
   init(comment: Comment, post: Post?, index: Int, scrollProxyValue: ScrollViewProxy?) {
     self.comment = comment
     self.post = post ?? nil
     self.index = index
     self.scrollProxy = scrollProxyValue ?? nil
-    self.isOwnPost = post?.isOwn ?? false
-    self.isOPComment = comment.isOwn ?? false
-    self.isTopComment = comment.isTopComment ?? false
   }
   
   func scrollToComment() {
@@ -46,8 +41,7 @@ struct UserComment: View {
     dismissKeyboard()
     commentSheetViewModel.openCommentSheet(
       comment: comment,
-      isPostOwner: isOwnPost,
-      isTopComment: isTopComment,
+      isOwnPost: post?.isOwn ?? false,
       reactions: reactionBarViewModel.reactions,
       scrollToComment: self.scrollToComment
     ) {
@@ -60,91 +54,105 @@ struct UserComment: View {
     commentSheetViewModel.deleteComment()
   }
   
+  func getBackgroundByState() -> LinearGradient {
+    
+    if commentSheetViewModel.isEditingComment && commentSheetViewModel.comment == comment {
+      return LinearGradient(gradient: Gradient(colors: [Color.yellow.opacity(0.1), Color.yellow.opacity(0.1)]), startPoint: .top, endPoint: .bottom)
+    }
+    
+    if comment.isTopComment ?? false {
+      return LinearGradient(gradient: Gradient(colors: [Color.uilightOrange.opacity(0.6), .white]), startPoint: .top, endPoint: .bottom)
+    }
+    
+    return LinearGradient(gradient: Gradient(colors: [.white, .white]), startPoint: .top, endPoint: .bottom)
+  }
+  
   func onAppear() {
-    if self.isTopComment {
+    
+    if self.comment.isTopComment ?? false {
       self.commentSheetViewModel.currentTopCommentId = comment.docId ?? nil
     }
     self.loadReactionBar()
   }
   
   func loadReactionBar() {
-   reactionBarViewModel.fetchReactions(comment: comment)
+    reactionBarViewModel.fetchReactions(comment: comment)
   }
   
   func removeListener() {
     guard let listener = self.reactionBarViewModel.listener else { return }
     listener.remove()
   }
-
   
-    var body: some View {
-      HStack(alignment: .top) {
-        NavigationLink(
-          destination: ProfileView(userId: comment.ownerId, user: nil),
-          isActive: $isNavActive
-        ) {
-          EmptyView()
-        }.hidden()
-        URLImageView(urlString: comment.avatarUrl)
-          .clipShape(Circle())
-          .frame(width: 35, height: 35, alignment: .center)
-            .foregroundColor(Color.wingitBlue)
-          .overlay(
-            RoundedRectangle(cornerRadius: 20)
-              .stroke(Color.gray, lineWidth: 0.5)
-          )
-          .onTapGesture(perform: { isNavActive.toggle() })
-
-        VStack(alignment: .leading) {
-          CommentHeader(
-            comment: comment,
-            isTopComment: isTopComment,
-            onTap: { isNavActive.toggle() }
-          )
-          CommentText(comment: comment)
-          ReactionBar(
-            comment: comment,
-            isPostOwner: isOwnPost,
-            isTopComment: isTopComment,
-            scrollToComment: scrollToComment
-          )
-        }
-        .padding(.leading, 5)
-        
-      }
-      .alert(isPresented: $commentSheetViewModel.isConfirmationShown) {
-        Alert(
-          title: Text("Delete your comment?"),
-          message: Text("This action cannot be undone."),
-          primaryButton: .destructive(Text("Delete")) {
-            showCommentDeleteConfirmation()
-          },
-          secondaryButton: .cancel()
+  
+  var body: some View {
+    HStack(alignment: .top) {
+      NavigationLink(
+        destination: ProfileView(userId: comment.ownerId, user: nil),
+        isActive: $isNavActive
+      ) {
+        EmptyView()
+      }.hidden()
+      URLImageView(urlString: comment.avatarUrl)
+        .clipShape(Circle())
+        .frame(width: 35, height: 35, alignment: .center)
+        .foregroundColor(Color.wingitBlue)
+        .overlay(
+          RoundedRectangle(cornerRadius: 20)
+            .stroke(Color.gray, lineWidth: 0.5)
+        )
+        .onTapGesture(perform: { isNavActive.toggle() })
+      
+      VStack(alignment: .leading) {
+        CommentHeader(
+          comment: comment,
+          isTopComment: comment.isTopComment ?? false,
+          onTap: { isNavActive.toggle() }
+        )
+        CommentText(comment: comment)
+        ReactionBar(
+          comment: comment,
+          isOwnPost: post?.isOwn ?? false,
+          scrollToComment: scrollToComment
         )
       }
-      .onAppear(perform: onAppear)
-      .onDisappear(perform: removeListener)
-      .padding(15)
-      .background(
-        (commentSheetViewModel.isEditingComment && commentSheetViewModel.comment == comment)
-        ? LinearGradient(gradient: Gradient(colors: [Color.yellow.opacity(0.1), Color.yellow.opacity(0.1)]), startPoint: .top, endPoint: .bottom)
-        : isTopComment
-          ? LinearGradient(gradient: Gradient(colors: [Color.uilightOrange.opacity(0.6), .white]), startPoint: .top, endPoint: .bottom)
-          : LinearGradient(gradient: Gradient(colors: [.white, .white]), startPoint: .top, endPoint: .bottom)
+      .padding(.leading, 5)
+      
+    }
+    .alert(isPresented: $commentSheetViewModel.isConfirmationShown) {
+      Alert(
+        title: Text("Delete your comment?"),
+        message: Text("This action cannot be undone."),
+        primaryButton: .destructive(Text("Delete")) {
+          showCommentDeleteConfirmation()
+        },
+        secondaryButton: .cancel()
       )
-      .onTapGesture(count: 2) {
-        openCommentActionsSheet()
-      }
-      .onLongPressGesture(minimumDuration: 0.1, maximumDistance: 1, perform: {
+    }
+    .onAppear(perform: onAppear)
+    .onDisappear(perform: removeListener)
+    .padding(15)
+    .background(getBackgroundByState())
+    .scaleEffect(isPressed ? 0.995 : 1)
+    .onTapGesture(count: 2) {
+      openCommentActionsSheet()
+    }
+    .onLongPressGesture(
+      minimumDuration: 0.1,
+      maximumDistance: 1,
+      pressing: { value in
+        self.isPressed = value
+      },
+      perform: {
         openCommentActionsSheet()
       })
+    
+    .environmentObject(reactionBarViewModel)
+    .environmentObject(commentSheetViewModel)
+    Divider()
+  }
   
-      .environmentObject(reactionBarViewModel)
-      .environmentObject(commentSheetViewModel)
-      Divider()
-    }
-
-
+  
 }
 
 
