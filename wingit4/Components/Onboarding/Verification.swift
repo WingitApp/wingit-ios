@@ -10,6 +10,7 @@ import SwiftUI
 struct Verification: View {
   
     @ObservedObject var loginViewModel : LoginViewModel
+  @EnvironmentObject var signupViewModel: SignupViewModel
     @Environment(\.presentationMode) var present
   
     var body: some View {
@@ -22,7 +23,8 @@ struct Verification: View {
                     
                     HStack{
                         
-                        Button(action: {present.wrappedValue.dismiss()}) {
+                        Button(action: {withAnimation(.easeIn){
+                          signupViewModel.index = 4}}) {
                             
                             Image(systemName: "arrow.left")
                                 .font(.title2)
@@ -86,10 +88,10 @@ struct Verification: View {
                     Button(action: loginViewModel.verifyCode) {
                         
                         Text("Verify and Create Account")
-                            .foregroundColor(.black)
+                            .foregroundColor(.white)
                             .padding(.vertical)
                             .frame(width: UIScreen.main.bounds.width - 30)
-                            .background(Color("yellow"))
+                            .background(Color.wingitBlue)
                             .cornerRadius(15)
                     }
                     .padding()

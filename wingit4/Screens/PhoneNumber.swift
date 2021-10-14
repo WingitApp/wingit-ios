@@ -16,8 +16,9 @@ struct PhoneNumber : View {
     
   func sendCode(){
     withAnimation(.easeIn){
-      signupViewModel.index = 4}
-     
+      signupViewModel.index = 5}
+    self.loginViewModel.sendCode()
+    self.loginViewModel.gotoVerify = true
   }
   
     var body: some View{
@@ -63,20 +64,21 @@ struct PhoneNumber : View {
                       
                       Spacer(minLength: 0)
                       
-                    NavigationLink(destination: Verification(loginViewModel: loginViewModel) , isActive: $loginViewModel.gotoVerify) {
-                          
-                          Text("")
-                              .hidden()
-                        
-                      }
+//                    NavigationLink(destination: Verification(loginViewModel: loginViewModel) , isActive: $loginViewModel.gotoVerify) {
+//
+//                          Text("")
+//                              .hidden()
+//
+//                      }
                       
-                      Button(action: loginViewModel.sendCode, label: {
+                      Button(action: sendCode, label: {
                           
                           Text("Continue")
-                              .foregroundColor(.black)
+                              .foregroundColor(.white)
+                              .bold()
                               .padding(.vertical,18)
                               .padding(.horizontal,38)
-                              .background(Color("yellow"))
+                              .background(Color.wingitBlue)
                               .cornerRadius(15)
                       })
                       .disabled(loginViewModel.phoneNo == "" ? true : false)

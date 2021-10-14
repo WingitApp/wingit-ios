@@ -60,6 +60,7 @@ struct FirstView : View {
                  Button(action: { withAnimation(.easeIn){
          
                    signupViewModel.index = 6
+                   
                  }}){
                    Text("Login")
                  }
@@ -107,7 +108,8 @@ struct FirstView : View {
              .environmentObject(signupViewModel)
         } else if signupViewModel.index == 5 {
           
-        //  Verification(loginViewModel: loginViewModel)
+          Verification(loginViewModel: loginViewModel)
+            .environmentObject(signupViewModel)
         }
         else if signupViewModel.index == 6 {
           
