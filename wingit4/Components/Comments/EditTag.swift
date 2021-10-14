@@ -13,6 +13,10 @@ struct EditTag: View {
 
     var body: some View {
       if commentSheetViewModel.isEditingComment && commentSheetViewModel.comment == comment {
+          Text("Editing")
+          .foregroundColor(Color.gray)
+          .font(.system(size: 10))
+          .padding(.leading, 3)
           Image(systemName: "rectangle.and.pencil.and.ellipsis")
             .foregroundColor(Color.gray)
             .font(.system(size: 12))
