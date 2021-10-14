@@ -56,7 +56,6 @@ struct OwnProfileFeed: View {
 
               }
           }
-          .onAppear(perform: sortOpenPosts)
         }
       } else {
         if !profileViewModel.isFetchingUserOpenPosts,

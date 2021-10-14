@@ -329,7 +329,7 @@ class PostApi {
           listener(listenerFirestore)
     }
     
-  func updateStatus(postId: String, newStatus: PostStatus, onSuccess: @escaping(_ newStatus: PostStatus) -> Void) {
+    func updateStatus(postId: String, newStatus: PostStatus, onSuccess: @escaping(_ newStatus: PostStatus) -> Void) {
         Ref.FS_COLLECTION_ALL_POSTS.document(postId)
           .updateData(["status": newStatus.rawValue]) { error in
             if error != nil {
@@ -339,6 +339,8 @@ class PostApi {
             }
           }
     }
+  
+
   
   func loadTimeline(
     firstCall: Bool,

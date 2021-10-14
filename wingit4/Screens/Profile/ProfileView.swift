@@ -16,10 +16,9 @@ struct ProfileView: View {
 
   @StateObject var userProfileViewModel: UserProfileViewModel
   @StateObject var connectionsViewModel = ConnectionsViewModel()
-
   @State var isOwnProfile: Bool
   var profileTab: Bool
-
+  
   init (userId: String? = nil, user: User? = nil, profileTab: Bool = false) {
     var isOwnProfile: Bool {
       if userId == nil && user == nil {
@@ -76,56 +75,56 @@ struct ProfileView: View {
               user: isOwnProfile ? session.currentUser : userProfileViewModel.user
             )
           }
-//          .frame(minHeight: (UIScreen.main.bounds.height / 3.5)) // ios 15
-           .onTapGesture(perform: isOwnProfile ? self.openUpdatePicSheet : self.openPicSheet)
-            VStack(alignment: .leading) {
-              HStack(alignment: .bottom) {
-                HStack {
-                  URLImageView(urlString: isOwnProfile
-                     ? session.currentUser?.profileImageUrl
-                     : userProfileViewModel.user.profileImageUrl
-                  )
-                    .frame(width: 120, height: 120)
-                    .cornerRadius(100)
-                    .padding(5)
-                }
-                .background(Color.white)
-                .cornerRadius(100)
-                .onTapGesture(perform: isOwnProfile ? self.openUpdatePicSheet : self.openPicSheet)
-                .zIndex(2)
-                Spacer()
-                ProfileButton(
-                  user: isOwnProfile ? session.currentUser : userProfileViewModel.user,
-                  isOwnProfile: isOwnProfile
+          //          .frame(minHeight: (UIScreen.main.bounds.height / 3.5)) // ios 15
+          .onTapGesture(perform: isOwnProfile ? self.openUpdatePicSheet : self.openPicSheet)
+          VStack(alignment: .leading) {
+            HStack(alignment: .bottom) {
+              HStack {
+                URLImageView(urlString: isOwnProfile
+                             ? session.currentUser?.profileImageUrl
+                             : userProfileViewModel.user.profileImageUrl
                 )
-                .offset(y: -20)
-                  
+                  .frame(width: 120, height: 120)
+                  .cornerRadius(100)
+                  .padding(5)
               }
-              .offset(y: -64)
-              .padding(.bottom, -70)
-              .padding(.leading, 15)
-              .padding(.trailing, 15)
-              .frame(
-                width: UIScreen.main.bounds.width
+              .background(Color.white)
+              .cornerRadius(100)
+              .onTapGesture(perform: isOwnProfile ? self.openUpdatePicSheet : self.openPicSheet)
+              .zIndex(2)
+              Spacer()
+              ProfileButton(
+                user: isOwnProfile ? session.currentUser : userProfileViewModel.user,
+                isOwnProfile: isOwnProfile
               )
+                .offset(y: -20)
               
+            }
+            .offset(y: -64)
+            .padding(.bottom, -70)
+            .padding(.leading, 15)
+            .padding(.trailing, 15)
+            .frame(
+              width: UIScreen.main.bounds.width
+            )
+            
             ProfileUserHeader(
               user: isOwnProfile ? session.currentUser : userProfileViewModel.user,
               isOwnProfile: isOwnProfile
             )
-            .environmentObject(connectionsViewModel)
+              .environmentObject(connectionsViewModel)
               .padding(.leading, 15)
             ProfileDetailView(
               user: isOwnProfile ? session.currentUser : userProfileViewModel.user,
               isOwnProfile: isOwnProfile
             )
-            }
-
+          }
+          
           .frame( width: UIScreen.main.bounds.width)
           .background(
             Color.white
-            .cornerRadius(30, corners: .topLeft)
-            .cornerRadius(30, corners: .topRight)
+              .cornerRadius(30, corners: .topLeft)
+              .cornerRadius(30, corners: .topRight)
           )
           .offset(y: -30)
           .padding(.top, -30)
@@ -136,18 +135,19 @@ struct ProfileView: View {
       .environmentObject(userProfileViewModel)
       .environmentObject(connectionsViewModel)
       .environmentObject(updatePhotoVM)
+      .background(Color.backgroundGray)
       .navigationBarTitle("", displayMode: .inline)
       .navigationBarHidden(!profileTab)
-        .navigationBarItems(
-          leading:
-              Button(action: {}) {
-                if isOwnProfile {
-                  NavigationLink(destination: UsersView()) {
-                    Image(systemName: "magnifyingglass")
-                      .imageScale(Image.Scale.medium)
-                      .foregroundColor(Color.black)
-                  }
-                }
+      .navigationBarItems(
+        leading:
+          Button(action: {}) {
+            if isOwnProfile {
+              NavigationLink(destination: UsersView()) {
+                Image(systemName: "magnifyingglass")
+                  .imageScale(Image.Scale.medium)
+                  .foregroundColor(Color.black)
+              }
+            }
           },
           trailing:
               Button(action: {
@@ -192,7 +192,7 @@ struct ProfileView: View {
         alignment: .center,
         direction: .bottom,
         content: {
-          UpdateProfilePhoto(user: session.currentUser)
+          UpdateProfilePhoto()
             .environmentObject(updatePhotoVM)
         }))
     .modifier(Popup(
@@ -200,7 +200,7 @@ struct ProfileView: View {
       alignment: .center,
       direction: .bottom,
       content: {
-        EditProfileView(bio: session.currentUser?.bio ?? "")
+        EditProfileView()
         .environmentObject(updatePhotoVM)
       }))
   }

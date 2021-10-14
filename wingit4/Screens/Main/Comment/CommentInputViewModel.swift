@@ -15,23 +15,21 @@ class CommentInputViewModel: ObservableObject {
   func saveComment(
     text: String,
     post: Post?,
-    onSuccess: @escaping(_ comment: Comment) -> Void
+    onSuccess: @escaping() -> Void
   ) {
     guard let currentUser = Auth.auth().currentUser, let post = post else { return }
-
       
-    let comment: Comment = Comment(
-      comment: text,
-      avatarUrl: currentUser.photoURL!.absoluteString,
-      ownerId: currentUser.uid,
-      postId: post.postId,
-      username: currentUser.displayName!,
-      date: Date().timeIntervalSince1970,
-      type: .askPost
-    )
-    
-    guard let commentDict = try? comment.toDictionary() else {return}
-    
+    let commentDict = [
+      "id": UUID().uuidString,
+      "comment": text,
+      "avatarUrl": currentUser.photoURL!.absoluteString,
+      "ownerId": currentUser.uid,
+      "postId": post.postId as Any,
+      "username": currentUser.displayName!,
+      "date": Date().timeIntervalSince1970,
+      "type": CommentType.askPost.rawValue
+    ] as [String : Any]
+        
     logToAmplitude(event: .postComment, properties: [.postId: post.id, .postType: post.type])
     
     Api.Comment.postComment(
@@ -63,7 +61,7 @@ class CommentInputViewModel: ObservableObject {
                   .document(activityId)
                   .setData(notificationDict)
             }
-            onSuccess(comment)
+            onSuccess()
       
         }) { (errorMessage) in
             return
