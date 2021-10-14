@@ -52,6 +52,12 @@ let POST_TYPE_OPTIONS: [String] = [
   "general"
 ]
 
+struct Constants {
+  static let HTTPS = "https"
+  static let DYNAMIC_LINKS_DOMAIN = "wingitapp.page.link"
+  static let INVITE_PATH = "/invite"
+}
+
 class Ref {
        // Storage
         #if DEBUG
