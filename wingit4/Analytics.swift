@@ -136,8 +136,8 @@ func setUserProperty(property: AmplitudeUserProperty, value: Any) {
     Amplitude.instance().identify(identify)
 }
 
-func setUserPropertiesOnAccountCreation(userId: String?, firstName: String?, lastName: String?, username: String?, email: String, signupMethod: String) {
-    guard let userId = userId, let firstName = firstName, let lastName = lastName, let username = username else { return }
+func setUserPropertiesOnAccountCreation(userId: String?, firstName: String?, lastName: String?, username: String?, email: String?, signupMethod: String) {
+    guard let userId = userId, let firstName = firstName, let email = email, let lastName = lastName, let username = username else { return }
     let amplitude = Amplitude.instance()
     amplitude.setUserId(userId)
     guard let identify = AMPIdentify()

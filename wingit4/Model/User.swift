@@ -16,7 +16,7 @@ struct User: Identifiable, Codable, Equatable, Hashable {
     var bio: String?
     var canonicalEmail: String?
     var connections: [User]?
-    var email: String
+    var email: String?
     var firstName: String?
     var keywords: [String]?
     var lastName: String?
