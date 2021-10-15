@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SignUp3: View {
+struct UploadAvatar: View {
   @EnvironmentObject var session: SessionStore
   @EnvironmentObject var signupViewModel: SignupViewModel
   

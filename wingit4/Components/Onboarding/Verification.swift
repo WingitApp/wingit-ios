@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Verification: View {
   
-    @ObservedObject var loginViewModel : LoginViewModel
+    @ObservedObject var phoneViewModel : PhoneViewModel
   @EnvironmentObject var signupViewModel: SignupViewModel
     @Environment(\.presentationMode) var present
   
@@ -24,14 +24,14 @@ struct Verification: View {
                     HStack{
                         
                         Button(action: {withAnimation(.easeIn){
-                          signupViewModel.index = 4}}) {
-                            
+                          signupViewModel.index = 3}}) {
+                            ZStack{
+                              Image(systemName: "circle").foregroundColor(.clear)
                             Image(systemName: "arrow.left")
                                 .font(.title2)
                                 .foregroundColor(.black)
+                            }
                         }
-                        
-                        Spacer()
                         
                         Text("Verify Phone")
                             .font(.title2)
@@ -40,15 +40,14 @@ struct Verification: View {
                         
                         Spacer()
                         
-                        if loginViewModel.loading{ProgressView()}
+                        if phoneViewModel.loading{ProgressView()}
                     }
                     .padding()
                     
-                    Text("Code sent to \(loginViewModel.phoneNo)")
+                    Text("Code sent to \(phoneViewModel.phoneNo)")
                         .foregroundColor(.gray)
                         .padding(.bottom)
                     
-                    Spacer(minLength: 0)
                     
                     HStack(spacing: 15){
                         
@@ -69,7 +68,7 @@ struct Verification: View {
                         Text("Didn't receive code?")
                             .foregroundColor(.gray)
                         
-                        Button(action: loginViewModel.requestCode) {
+                        Button(action: phoneViewModel.requestCode) {
                             
                             Text("Request Again")
                                 .fontWeight(.bold)
@@ -85,8 +84,10 @@ struct Verification: View {
                     }
                     .padding(.top,6)
                     
-                    Button(action: loginViewModel.verifyCode) {
-                        
+                  Button(action: {withAnimation(.easeIn){
+                    signupViewModel.index = 5}})
+                            //phoneViewModel.verifyCode)
+                  {
                         Text("Verify and Create Account")
                             .foregroundColor(.white)
                             .padding(.vertical)
@@ -100,13 +101,13 @@ struct Verification: View {
                 .background(Color.white)
                 .cornerRadius(20)
 
-                CustomNumberPad(value: $loginViewModel.code, isVerify: true)
+                CustomNumberPad(value: $phoneViewModel.code, isVerify: true)
             }
             .background(Color("bg").ignoresSafeArea(.all, edges: .bottom))
             
-            if loginViewModel.error{
+            if phoneViewModel.error{
                 
-                LoginAlertView(msg: loginViewModel.errorMsg, show: $loginViewModel.error)
+                PhoneAlertView(msg: phoneViewModel.errorMsg, show: $phoneViewModel.error)
             }
         }
         .navigationBarHidden(true)
@@ -117,13 +118,13 @@ struct Verification: View {
     
     func getCodeAtIndex(index: Int)->String{
         
-        if loginViewModel.code.count > index{
+        if phoneViewModel.code.count > index{
             
-            let start = loginViewModel.code.startIndex
+            let start = phoneViewModel.code.startIndex
             
-            let current = loginViewModel.code.index(start, offsetBy: index)
+            let current = phoneViewModel.code.index(start, offsetBy: index)
             
-            return String(loginViewModel.code[current])
+            return String(phoneViewModel.code[current])
         }
         
         return ""

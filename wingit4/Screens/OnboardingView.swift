@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct OnboardingView: View {
   
@@ -43,7 +44,7 @@ struct FirstView : View {
  // @State var index = 0
  // @Namespace var name
   @StateObject var signupViewModel = SignupViewModel()
-  @ObservedObject var loginViewModel = LoginViewModel()
+  @ObservedObject var phoneViewModel = PhoneViewModel()
 
   var body: some View{
     ActivityIndicatorView(message: "Loading...", isShowing: self.$session.isSessionLoading) {
@@ -74,47 +75,92 @@ struct FirstView : View {
         }
         
         else if signupViewModel.index == 1 {
-          ZStack{
-          Button(action: { withAnimation(.easeIn){
-            signupViewModel.index = 2} })
-          { NextButton()}
-            
-          SignUp1()
+       
+          VStack{
+            Spacer()
+         ReferralCode()
             .environmentObject(signupViewModel)
-            
+            Spacer()
+            HStack{
+              Spacer()
+            Button(action: { withAnimation(.easeIn){
+              signupViewModel.index = 2} })
+            { NextButton()}
+            }
           }
+          
         } else if signupViewModel.index == 2 {
-          ZStack{
+          
+          VStack{
+            Spacer()
+            EmailPass()
+              .environmentObject(signupViewModel)
+            Spacer()
+            HStack{
+              Spacer()
             Button(action: { withAnimation(.easeIn){
               signupViewModel.index = 3} })
             { NextButton()}
-            .disabled(signupViewModel.password == "" ? true : false)
-            
-          SignUp2()
-            .environmentObject(signupViewModel)
+            }
           }
+      
         } else if signupViewModel.index == 3 {
-          ZStack{
-            Button(action: { withAnimation(.easeIn){
-              signupViewModel.index = 4} })
-            { NextButton()}
-            SignUp3()
-              .environmentObject(signupViewModel)
-          }
+          
+         PhoneNumber()
+            .environmentObject(signupViewModel)
           
         } else if signupViewModel.index == 4 {
           
-           PhoneNumber()
+          Verification(phoneViewModel: phoneViewModel)
              .environmentObject(signupViewModel)
+          
         } else if signupViewModel.index == 5 {
           
-          Verification(loginViewModel: loginViewModel)
-            .environmentObject(signupViewModel)
+          VStack{
+            Spacer()
+            Names()
+              .environmentObject(signupViewModel)
+            Spacer()
+            HStack{
+              Spacer()
+            Button(action: { withAnimation(.easeIn){
+              signupViewModel.index = 6} })
+            { NextButton()}
+            }
+          }
         }
         else if signupViewModel.index == 6 {
-          
-          Login1()
+        
+          VStack{
+            Spacer()
+            UploadAvatar()
+              .environmentObject(signupViewModel)
+            Spacer()
+            HStack{
+              Spacer()
+            Button(action: { withAnimation(.easeIn){
+              signupViewModel.index = 7} })
+            { NextButton()}
+            }
+          }
+
+        } else if signupViewModel.index == 7 {
+          VStack{
+            Spacer()
+            Bio()
+              .environmentObject(signupViewModel)
+            Spacer()
+            HStack{
+              Spacer()
+            Button(action: { withAnimation(.easeIn){
+              signupViewModel.index = 7} })
+            { NextButton()}
+            }
+          }
+        } else if signupViewModel.index == 8 {
+           Login1()
         }
+        
       }
       
     }

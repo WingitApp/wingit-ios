@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LoginAlertView: View {
+struct PhoneAlertView: View {
     var msg: String
     @Binding var show: Bool
     var body: some View {
@@ -28,7 +28,7 @@ struct LoginAlertView: View {
                     .foregroundColor(.black)
                     .padding(.vertical)
                     .frame(width: UIScreen.main.bounds.width - 100)
-                    .background(Color("yellow"))
+                    .background(Color.wingitBlue)
                     .cornerRadius(15)
             })
             

@@ -7,6 +7,8 @@
 
 import SwiftUI
 import Firebase
+import FirebaseAuth
+import FirebaseFirestore
 
 class PhoneViewModel: ObservableObject {
 
@@ -38,13 +40,36 @@ class PhoneViewModel: ObservableObject {
         return countries[regionCode] ?? ""
     }
     
+    
     // sending Code To User....
     
     func sendCode(){
         
         // enabling testing code...
         // disable when you need to test with real device...
-        
+//      user.multiFactor.getSessionWithCompletion({ (session, error) in
+//        // ...
+//      })
+    //  user.multiF
+      Auth.auth().settings?.isAppVerificationDisabledForTesting = false
+//        let user = Auth.auth().currentUser
+//        let phoneNumber = "+\(getCountryCode())\(phoneNo)"
+//
+//      user?.multiFactor.getSessionWithCompletion({(session, error) in
+//        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil, multiFactorSession: session)
+//          { (verificationId, error) in
+//
+//          let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationId!,
+//                                                                   verificationCode: self.CODE)
+//
+//          let assertion = PhoneMultiFactorGenerator.assertion(with: credential)
+//          user?.multiFactor.enroll(with: assertion, displayName: user?.displayName) {(error) in
+//            self.errorMsg = error?.localizedDescription ?? ""
+//          }
+//
+//        }
+//      })
+      
         Auth.auth().settings?.isAppVerificationDisabledForTesting = false
         
         let number = "+\(getCountryCode())\(phoneNo)"

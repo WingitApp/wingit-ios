@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SignUp2 : View {
+struct EmailPass : View {
   
   @EnvironmentObject var session: SessionStore
   @EnvironmentObject var signupViewModel: SignupViewModel
@@ -17,7 +17,7 @@ struct SignUp2 : View {
         VStack{
             VStack(alignment: .leading, spacing: 15) {
               Text("Email & Password").bold().font(.title).padding(.bottom, 25)
-                HStack{
+                VStack{
                 EmailTextField(
                   email: $signupViewModel.email
                 )

@@ -9,16 +9,15 @@ import SwiftUI
 
 struct PhoneNumber : View {
   
-  @StateObject var loginViewModel = LoginViewModel()
+  @StateObject var phoneViewModel = PhoneViewModel()
   @EnvironmentObject var signupViewModel: SignupViewModel
   
-  @State var isSmall = UIScreen.main.bounds.height < 750
     
   func sendCode(){
     withAnimation(.easeIn){
-      signupViewModel.index = 5}
-    self.loginViewModel.sendCode()
-    self.loginViewModel.gotoVerify = true
+      signupViewModel.index = 4}
+    self.phoneViewModel.sendCode()
+    self.phoneViewModel.gotoVerify = true
   }
   
     var body: some View{
@@ -27,81 +26,38 @@ struct PhoneNumber : View {
           
           VStack{
               
-              VStack{
+            VStack(alignment: .leading){
                   
                   Text("What's your phone number?")
-                      .font(.title2)
-                      .fontWeight(.bold)
-                      .foregroundColor(.black)
-                      .padding()
+                      .bold().font(.title)
+                      .padding(.leading)
                   
-                  Image("phone")
-                      .resizable()
-                      .aspectRatio(contentMode: .fit)
-                      .padding()
                   
-                  Text("You'll receive a 4 digit code\n to verify next.")
-                      .font(isSmall ? .none : .title2)
+                  Text("You'll receive a 4 digit code to verify next.")
+                      .bold()
+                      .font(.caption2)
                       .foregroundColor(.gray)
-                      .multilineTextAlignment(.center)
                       .padding()
                   
                   // Mobile Number Field....
-                  
-                  HStack{
-                      
-                      VStack(alignment: .leading, spacing: 6) {
-                          
-                          Text("Enter Your Number")
-                              .font(.caption)
-                              .foregroundColor(.gray)
-                          
-                          Text("+ \(loginViewModel.getCountryCode())  \(loginViewModel.phoneNo)")
-                              .font(.title2)
-                              .fontWeight(.bold)
-                              .foregroundColor(.black)
-                      }
-                      
-                      Spacer(minLength: 0)
-                      
-//                    NavigationLink(destination: Verification(loginViewModel: loginViewModel) , isActive: $loginViewModel.gotoVerify) {
-//
-//                          Text("")
-//                              .hidden()
-//
-//                      }
-                      
-                      Button(action: sendCode, label: {
-                          
-                          Text("Continue")
-                              .foregroundColor(.white)
-                              .bold()
-                              .padding(.vertical,18)
-                              .padding(.horizontal,38)
-                              .background(Color.wingitBlue)
-                              .cornerRadius(15)
-                      })
-                      .disabled(loginViewModel.phoneNo == "" ? true : false)
+              AddPhoneNoBox(phoneViewModel: phoneViewModel)
+                .environmentObject(signupViewModel)
+              
                   }
-                  .padding()
+                  .frame(height: UIScreen.main.bounds.height / 1.8)
                   .background(Color.white)
                   .cornerRadius(20)
-                  .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: -5)
-              }
-              .frame(height: UIScreen.main.bounds.height / 1.8)
-              .background(Color.white)
-              .cornerRadius(20)
-
+           
               // Custom Number Pad....
               
-              CustomNumberPad(value: $loginViewModel.phoneNo, isVerify: false)
+              CustomNumberPad(value: $phoneViewModel.phoneNo, isVerify: false)
               
           }
           .background(Color("bg").ignoresSafeArea(.all, edges: .bottom))
           
-          if loginViewModel.error{
+          if phoneViewModel.error{
               
-              LoginAlertView(msg: loginViewModel.errorMsg, show: $loginViewModel.error)
+              PhoneAlertView(msg: phoneViewModel.errorMsg, show: $phoneViewModel.error)
           }
       }
     }

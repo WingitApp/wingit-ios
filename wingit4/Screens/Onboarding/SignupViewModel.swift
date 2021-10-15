@@ -18,6 +18,7 @@ class SignupViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var image: Image = Image(IMAGE_USER_PLACEHOLDER)
+    @Published var bioText: String = ""
     @Published var imageData: Data = Data()
     @Published var errorString = ""
     @Published var isImagePickerShown: Bool = false

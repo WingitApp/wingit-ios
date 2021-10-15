@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SignUp1 : View {
+struct Names : View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var signupViewModel: SignupViewModel
     

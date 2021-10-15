@@ -9,16 +9,12 @@ import SwiftUI
 
 struct NextButton: View {
     var body: some View {
-      VStack{
-        
-        Spacer()
-        HStack{
-          Spacer()
-          Image(systemName: "chevron.right.circle.fill").padding(.bottom, 100).padding(.trailing, 40)
+    
+      
+       Image(systemName: "chevron.right.circle.fill").padding()
             .font(.system(size: 45))
             .foregroundColor(.wingitBlue)
-        }
-      }
+        
     }
 }
 

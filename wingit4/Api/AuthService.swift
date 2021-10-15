@@ -55,5 +55,6 @@ class AuthService {
                     
                     StorageService.saveUser(userId: userId, firstName: firstName, lastName: lastName, username: username, email: email, normalizedEmail: normalizedEmail, imageData: imageData, metadata: metadata, storageAvatarRef: storageAvatarUserId, onSuccess: onSuccess, onError: onError)
                 }
-    }
+        }
+  
 }

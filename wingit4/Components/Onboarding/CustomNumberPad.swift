@@ -50,6 +50,7 @@ struct CustomNumberPad: View {
                 }
             }
         }
+        
         .padding()
     }
     
