@@ -108,21 +108,14 @@ struct FirstView : View {
             { NextButton()}
             }
           }
-
+          
         } else if signupViewModel.index == 7 {
           //Optional
-          VStack{
-            Spacer()
+         
             Bio()
               .environmentObject(signupViewModel)
-            Spacer()
-            HStack{
-              Spacer()
-            Button(action: { withAnimation(.easeIn){
-              signupViewModel.index = 7} })
-            { NextButton()}
-            }
-          }
+          
+          
         } else if signupViewModel.index == 8 {
            Login1()
         }

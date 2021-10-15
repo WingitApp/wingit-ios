@@ -14,7 +14,17 @@ struct UploadAvatar: View {
   func onUserAvatarTap() {
     self.signupViewModel.isImagePickerShown = true
   }
+  
+  func addAvatar() {
+    withAnimation(.easeIn){
+      signupViewModel.index = 7}
+    //if photo exists go if not still go. so no disable.
+    
+  }
+  
     var body: some View {
+      VStack{
+        Spacer()
       VStack {
         
           UserAvatarSignup(
@@ -41,6 +51,15 @@ struct UploadAvatar: View {
          imageData: self.$signupViewModel.imageData
         )
      }
+        Spacer()
+        HStack{
+          Spacer()
+        Button(action: {  })
+        { NextButton()}
+        }
     }
+   }
 }
+
+
 

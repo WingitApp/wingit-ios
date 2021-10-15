@@ -29,7 +29,14 @@ class SignupViewModel: ObservableObject {
     @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
 
   
-  func addUserNames() {
+  
+  func addBio(){
+    guard let userId = Auth.auth().currentUser?.uid else { return }
+    Ref.FS_DOC_USERID(userId: userId).setData(["bio" : bioText], merge: true)
+  }
+  
+  
+  func addUserNames(onError: @escaping(_ errorMessage: String) -> Void) {
     guard let userId = Auth.auth().currentUser?.uid else { return }
     Ref.FS_DOC_USERID(userId: userId).setData(
                                               ["firstName": firstName,
@@ -37,6 +44,15 @@ class SignupViewModel: ObservableObject {
                                                "username" : username
                                               ],
                                               merge: true)
+    if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
+        changeRequest.displayName = firstName + " " + lastName
+        changeRequest.commitChanges { (error) in
+            if error != nil {
+               onError(error!.localizedDescription)
+               return
+            }
+        }
+    }
   }
   
   func enrollEmailPass(onSuccess: @escaping (_ user: User) -> Void) {
@@ -47,6 +63,15 @@ class SignupViewModel: ObservableObject {
             onError: onSignupError
             )
   }
+  
+  func addImage(onSuccess: @escaping (_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void){
+    AuthService.addImage(
+      imageData: imageData,
+      onSuccess: onSuccess,
+      onError: onError
+    )
+  }
+  
     func signup(onSuccess: @escaping (_ user: User) -> Void) {
         self.ampSignupAttemptEvent()
         if checkFieldsAreValid() {
@@ -61,6 +86,7 @@ class SignupViewModel: ObservableObject {
               onSuccess: onSuccess,
               onError: onSignupError
             )
+          
         }
   }
     

@@ -19,10 +19,16 @@ struct Bio: View {
       signupViewModel.bioText = String(signupViewModel.bioText.prefix(upper))
          }
      }
-  
+    func nextButtonBio() {
+      withAnimation(.easeIn){
+        signupViewModel.index = 7}
+      signupViewModel.addBio()
+    }
  
   
     var body: some View {
+      VStack{
+        Spacer()
       VStack(alignment: .leading, spacing: 0) {
         Text("").padding(.bottom, 50)
         HStack {
@@ -56,6 +62,15 @@ struct Bio: View {
       }
       .padding([.horizontal])
       .padding(.vertical, 50)
+        Spacer()
+        HStack{
+          
+          Spacer()
+          
+        Button(action: { nextButtonBio() })
+        { NextButton()}
+        }
+    }
     }
 }
 

@@ -35,6 +35,17 @@ class AuthService {
            }
            
     }
+  
+  static func addImage(imageData: Data, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+            guard let userId = Auth.auth().currentUser?.uid else { return }
+    
+              let storageAvatarUserId = Ref.STORAGE_AVATAR_USERID(userId: userId)
+              let metadata = StorageMetadata()
+              metadata.contentType = "image/jpg"
+    
+    StorageService.saveImage(imageData: imageData, metadata: metadata, storageAvatarRef: storageAvatarUserId, onSuccess: onSuccess, onError: onError)
+    
+  }
     
     static func signupUser(firstName: String, lastName: String, username: String, email: String, password: String, imageData: Data, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
             let normalizedEmail = email.normalizeEmail()
@@ -56,6 +67,7 @@ class AuthService {
                     StorageService.saveUser(userId: userId, firstName: firstName, lastName: lastName, username: username, email: email, normalizedEmail: normalizedEmail, imageData: imageData, metadata: metadata, storageAvatarRef: storageAvatarUserId, onSuccess: onSuccess, onError: onError)
                 }
         }
+  
   
   static func firstVerification(email: String, password: String, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
           let normalizedEmail = email.normalizeEmail()

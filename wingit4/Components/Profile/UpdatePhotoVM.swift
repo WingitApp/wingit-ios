@@ -41,7 +41,7 @@ class UpdatePhotoVM: ObservableObject {
         }
     }
   
-  func savePhoto(onSuccess: @escaping(_ url: String) -> Void, onError: @escaping(_ url: String) -> Void) {
-    
-  }
+//  func savePhoto(onSuccess: @escaping(_ url: String) -> Void, onError: @escaping(_ url: String) -> Void) {
+//
+//  }
 }

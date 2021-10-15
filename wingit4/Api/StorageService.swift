@@ -88,6 +88,32 @@ class StorageService {
     
     }
     
+  static func saveImage( imageData: Data, metadata: StorageMetadata, storageAvatarRef: StorageReference, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+    guard let userId = Auth.auth().currentUser?.uid else { return }
+    
+    storageAvatarRef.putData(imageData, metadata: metadata) { (storageMetadata, error) in
+         if error != nil {
+             onError(error!.localizedDescription)
+             return
+         }
+    storageAvatarRef.downloadURL { (url, error) in
+        if let metaImageUrl = url?.absoluteString {
+            if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
+                changeRequest.photoURL = url
+                changeRequest.commitChanges { (error) in
+                    if error != nil {
+                       onError(error!.localizedDescription)
+                       return
+                    }
+                }
+            }
+          let profileImageUrl = imageData.count == 0 ? DEFAULT_PROFILE_AVATAR : metaImageUrl
+          Ref.FS_DOC_USERID(userId: userId).setData(["profileImageUrl" : profileImageUrl], merge: true)
+        }
+     }
+   }
+}
+  
   
     static func saveUser(userId: String, firstName: String, lastName: String, username: String, email: String, normalizedEmail: String, imageData: Data, metadata: StorageMetadata, storageAvatarRef: StorageReference, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
            storageAvatarRef.putData(imageData, metadata: metadata) { (storageMetadata, error) in
@@ -95,6 +121,7 @@ class StorageService {
                     onError(error!.localizedDescription)
                     return
                 }
+             
             guard let userId = Auth.auth().currentUser?.uid else { return }
                 
                 storageAvatarRef.downloadURL { (url, error) in
