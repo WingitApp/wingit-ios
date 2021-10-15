@@ -36,22 +36,16 @@ class SignupViewModel: ObservableObject {
   }
   
   
-  func addUserNames(onError: @escaping(_ errorMessage: String) -> Void) {
-    guard let userId = Auth.auth().currentUser?.uid else { return }
-    Ref.FS_DOC_USERID(userId: userId).setData(
-                                              ["firstName": firstName,
-                                               "lastName" : lastName,
-                                               "username" : username
-                                              ],
-                                              merge: true)
-    if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
-        changeRequest.displayName = firstName + " " + lastName
-        changeRequest.commitChanges { (error) in
-            if error != nil {
-               onError(error!.localizedDescription)
-               return
-            }
-        }
+  func addUserNames(onSuccess: @escaping (_ user: User) -> Void) {
+   
+    if checkFieldsAreValid() {
+      AuthService.addNames(
+        firstName: firstName,
+        lastName: lastName,
+        username: username,
+        onSuccess: onSuccess,
+        onError: onSignupError
+      )
     }
   }
   
@@ -89,7 +83,7 @@ class SignupViewModel: ObservableObject {
           
         }
   }
-    
+ 
     func checkFieldsAreValid() -> Bool {
         if (!isFormComplete()) {
             self.showErrorMessage(message: "Please fill in all fields")

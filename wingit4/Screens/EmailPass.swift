@@ -19,6 +19,7 @@ struct EmailPass: View {
         self.session.currentUser = user
     }
   }
+  
   var body: some View {
     VStack{
       Spacer()

@@ -107,7 +107,7 @@ class PhoneViewModel: ObservableObject {
             
             // else user logged in Successfully ....
             
-            withAnimation{self.status = true}
+            withAnimation{self.status = true} 
         }
     }
     

@@ -14,8 +14,12 @@ struct Names : View {
   func addUserNames() {
     withAnimation(.easeIn){
       signupViewModel.index = 6}
-    signupViewModel.addUserNames()
+    signupViewModel.addUserNames() { user in
+      signupViewModel.onSignupSuccess(user: user)
+      self.session.currentUser = user
+    }
   }
+  
     var body: some View{
         
       VStack{
@@ -27,6 +31,15 @@ struct Names : View {
           Spacer()
           Button(action: { addUserNames() })
         { NextButton()}
+        .alert(
+          isPresented: $signupViewModel.isAlertShown
+        ) {
+            Alert(
+              title: Text("Error"),
+              message: Text(self.signupViewModel.errorString),
+              dismissButton: .default(Text("OK"))
+            )
+          }
         }
       }
     }

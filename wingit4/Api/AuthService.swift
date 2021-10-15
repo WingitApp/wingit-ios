@@ -46,6 +46,27 @@ class AuthService {
     StorageService.saveImage(imageData: imageData, metadata: metadata, storageAvatarRef: storageAvatarUserId, onSuccess: onSuccess, onError: onError)
     
   }
+  
+  static func addNames(firstName: String, lastName: String, username: String, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void){
+    guard let userId = Auth.auth().currentUser?.uid else { return }
+    Ref.FS_DOC_USERID(userId: userId).setData(
+                                              ["firstName": firstName,
+                                               "lastName" : lastName,
+                                               "username" : username
+                                              ],
+                                              merge: true)
+                              
+    if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
+        changeRequest.displayName = firstName + " " + lastName
+        changeRequest.commitChanges { (error) in
+            if error != nil {
+               onError(error!.localizedDescription)
+               return
+            }
+        }
+    }
+
+  }
     
     static func signupUser(firstName: String, lastName: String, username: String, email: String, password: String, imageData: Data, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
             let normalizedEmail = email.normalizeEmail()

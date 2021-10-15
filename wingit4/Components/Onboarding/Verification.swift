@@ -10,8 +10,14 @@ import SwiftUI
 struct Verification: View {
   
     @ObservedObject var phoneViewModel : PhoneViewModel
-  @EnvironmentObject var signupViewModel: SignupViewModel
+    @EnvironmentObject var signupViewModel: SignupViewModel
     @Environment(\.presentationMode) var present
+  
+  func verify(){
+    withAnimation(.easeIn){
+      signupViewModel.index = 5}
+    phoneViewModel.verifyCode()
+  }
   
     var body: some View {
         
@@ -85,9 +91,8 @@ struct Verification: View {
                     }
                     .padding(.top,6)
                     
-                  Button(action: {withAnimation(.easeIn){
-                    signupViewModel.index = 5}})
-                            //phoneViewModel.verifyCode)
+                  Button(action: {verify()})
+                            
                   {
                         Text("Verify and Create Account")
                             .foregroundColor(.white)
