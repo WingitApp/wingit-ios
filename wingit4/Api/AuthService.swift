@@ -29,8 +29,8 @@ class AuthService {
                     Api.User.loadUser(userId: userId) { (decodedUser) in
                       onSuccess(decodedUser)
                     } onError: {
-                        //todo
-                        print("error")
+                      //todo
+                      print("sign in user cannot be found")
                     }
            }
            

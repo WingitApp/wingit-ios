@@ -116,11 +116,13 @@ class ReferralsApi {
                       Api.Post.loadPost(postId: referral.askId) { (post) in
                           referral.ask = post
                           Api.User.loadUser(userId: referral.senderId) { (user) in
-                              referral.sender = user
-                              result.append(referral)
-                              dispatchGroup.leave()
+                            referral.sender = user
+                            result.append(referral)
+                            dispatchGroup.leave()
                           } onError: {
-                            print("load user error")
+                            referral.sender = DELETED_USER
+                            result.append(referral)
+                            dispatchGroup.leave()
                           }
                       }
                 }
@@ -134,10 +136,11 @@ class ReferralsApi {
                     Api.Post.loadPost(postId: referral.askId) { (post) in
                         referral.ask = post
                         Api.User.loadUser(userId: referral.senderId) { (user) in
-                            referral.sender = user
-                            dispatchGroup.leave()
+                          referral.sender = user
+                          dispatchGroup.leave()
                         } onError: {
-                          print("load user error")
+                          referral.sender = DELETED_USER
+                          dispatchGroup.leave()
                         }
                     }
                     dispatchGroup.notify(queue: .main) {
@@ -150,10 +153,11 @@ class ReferralsApi {
                       Api.Post.loadPost(postId: referral.askId) { (post) in
                           referral.ask = post
                           Api.User.loadUser(userId: referral.senderId) { (user) in
-                              referral.sender = user
-                              dispatchGroup.leave()
+                            referral.sender = user
+                            dispatchGroup.leave()
                           } onError: {
-                            print("load user error")
+                            referral.sender = DELETED_USER
+                            dispatchGroup.leave()
                           }
                       }
                       dispatchGroup.notify(queue: .main) {
@@ -202,11 +206,13 @@ class ReferralsApi {
                       Api.Post.loadPost(postId: referral.askId) { (post) in
                           referral.ask = post
                           Api.User.loadUser(userId: referral.senderId) { (user) in
-                              referral.sender = user
-                              result.append(referral)
-                              dispatchGroup.leave()
+                            referral.sender = user
+                            result.append(referral)
+                            dispatchGroup.leave()
                           } onError: {
-                            print("load user error")
+                            referral.sender = DELETED_USER
+                            result.append(referral)
+                            dispatchGroup.leave()
                           }
                       }
                 }
@@ -218,13 +224,14 @@ class ReferralsApi {
                     let dispatchGroup = DispatchGroup()
                     dispatchGroup.enter()
                     Api.Post.loadPost(postId: referral.askId) { (post) in
-                        referral.ask = post
-                        Api.User.loadUser(userId: referral.senderId) { (user) in
-                            referral.sender = user
-                            dispatchGroup.leave()
-                        } onError: {
-                          print("load user error")
-                        }
+                      referral.ask = post
+                      Api.User.loadUser(userId: referral.senderId) { (user) in
+                        referral.sender = user
+                        dispatchGroup.leave()
+                      } onError: {
+                        referral.sender = DELETED_USER
+                        dispatchGroup.leave()
+                      }
                     }
                     dispatchGroup.notify(queue: .main) {
                         modifiedReferral(referral)
@@ -234,16 +241,17 @@ class ReferralsApi {
                       let dispatchGroup = DispatchGroup()
                       dispatchGroup.enter()
                       Api.Post.loadPost(postId: referral.askId) { (post) in
-                          referral.ask = post
-                          Api.User.loadUser(userId: referral.senderId) { (user) in
-                              referral.sender = user
-                              dispatchGroup.leave()
-                          } onError: {
-                            print("load user error")
-                          }
+                        referral.ask = post
+                        Api.User.loadUser(userId: referral.senderId) { (user) in
+                          referral.sender = user
+                          dispatchGroup.leave()
+                        } onError: {
+                          referral.sender = DELETED_USER
+                          dispatchGroup.leave()
+                        }
                       }
                       dispatchGroup.notify(queue: .main) {
-                          deleteReferral(referral)
+                        deleteReferral(referral)
                       }
                 }
             }
@@ -288,11 +296,13 @@ class ReferralsApi {
                       Api.Post.loadPost(postId: referral.askId) { (post) in
                           referral.ask = post
                           Api.User.loadUser(userId: referral.senderId) { (user) in
-                              referral.sender = user
-                              result.append(referral)
-                              dispatchGroup.leave()
+                            referral.sender = user
+                            result.append(referral)
+                            dispatchGroup.leave()
                           } onError: {
-                            print("load user error")
+                            referral.sender = DELETED_USER
+                            result.append(referral)
+                            dispatchGroup.leave()
                           }
                       }
                 }
@@ -304,13 +314,14 @@ class ReferralsApi {
                     let dispatchGroup = DispatchGroup()
                     dispatchGroup.enter()
                     Api.Post.loadPost(postId: referral.askId) { (post) in
-                        referral.ask = post
-                        Api.User.loadUser(userId: referral.senderId) { (user) in
-                            referral.sender = user
-                            dispatchGroup.leave()
-                        } onError: {
-                          print("load user error")
-                        }
+                      referral.ask = post
+                      Api.User.loadUser(userId: referral.senderId) { (user) in
+                        referral.sender = user
+                        dispatchGroup.leave()
+                      } onError: {
+                        referral.sender = DELETED_USER
+                        dispatchGroup.leave()
+                      }
                     }
                     dispatchGroup.notify(queue: .main) {
                         modifiedReferral(referral)
@@ -322,10 +333,11 @@ class ReferralsApi {
                       Api.Post.loadPost(postId: referral.askId) { (post) in
                           referral.ask = post
                           Api.User.loadUser(userId: referral.senderId) { (user) in
-                              referral.sender = user
-                              dispatchGroup.leave()
+                            referral.sender = user
+                            dispatchGroup.leave()
                           } onError: {
-                            print("load user error")
+                            referral.sender = DELETED_USER
+                            dispatchGroup.leave()
                           }
                       }
                       dispatchGroup.notify(queue: .main) {
@@ -374,11 +386,13 @@ class ReferralsApi {
                       Api.Post.loadPost(postId: referral.askId) { (post) in
                           referral.ask = post
                           Api.User.loadUser(userId: referral.senderId) { (user) in
-                              referral.sender = user
-                              result.append(referral)
-                              dispatchGroup.leave()
+                            referral.sender = user
+                            result.append(referral)
+                            dispatchGroup.leave()
                           } onError: {
-                            print("load user error")
+                            referral.sender = DELETED_USER
+                            result.append(referral)
+                            dispatchGroup.leave()
                           }
                       }
                 }
@@ -392,10 +406,11 @@ class ReferralsApi {
                     Api.Post.loadPost(postId: referral.askId) { (post) in
                         referral.ask = post
                         Api.User.loadUser(userId: referral.senderId) { (user) in
-                            referral.sender = user
-                            dispatchGroup.leave()
+                          referral.sender = user
+                          dispatchGroup.leave()
                         } onError: {
-                          print("load user error")
+                          referral.sender = DELETED_USER
+                          dispatchGroup.leave()
                         }
                     }
                     dispatchGroup.notify(queue: .main) {
@@ -406,16 +421,17 @@ class ReferralsApi {
                       let dispatchGroup = DispatchGroup()
                       dispatchGroup.enter()
                       Api.Post.loadPost(postId: referral.askId) { (post) in
-                          referral.ask = post
-                          Api.User.loadUser(userId: referral.senderId) { (user) in
-                              referral.sender = user
-                              dispatchGroup.leave()
-                          } onError: {
-                            print("load user error")
-                          }
+                        referral.ask = post
+                        Api.User.loadUser(userId: referral.senderId) { (user) in
+                          referral.sender = user
+                          dispatchGroup.leave()
+                        } onError: {
+                          referral.sender = DELETED_USER
+                          dispatchGroup.leave()
+                        }
                       }
                       dispatchGroup.notify(queue: .main) {
-                          deleteReferral(referral)
+                        deleteReferral(referral)
                       }
                 }
             }
