@@ -112,7 +112,7 @@ class ReferViewModel : ObservableObject, Identifiable {
             if user.id == post.ownerId { return nil }
             return user
           }.sorted(by: {
-            $0.firstName! < $1.firstName!
+            $0.firstName ?? $0.lastName ?? "" < $1.firstName ?? $1.lastName ?? ""
           })
           
           self.loadUserBumpers(post: post)

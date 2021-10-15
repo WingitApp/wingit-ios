@@ -71,13 +71,13 @@ class UserProfileViewModel: ObservableObject {
         Api.Connections.getConnections(
             userId: userId,
             onSuccess: { connections in
-                self.connections = connections.sorted(by: {
-                  $0.firstName! < $1.firstName!
-                })
-                self.isFetchingConnections = false
+              self.connections = connections.sorted(by: {
+                $0.firstName ?? $0.lastName ?? "" < $1.firstName ?? $1.lastName ?? ""
+              })
+              self.isFetchingConnections = false
             },
             onEmpty: {
-                self.isFetchingConnections = false
+              self.isFetchingConnections = false
             }
         )
     }

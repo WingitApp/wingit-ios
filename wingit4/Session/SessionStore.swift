@@ -114,7 +114,9 @@ extension SessionStore {
     Api.Connections.getConnections(
       userId: userId,
       onSuccess: { connections in
-        self.connections = connections.sorted(by: { $0.firstName ?? "" < $1.firstName ?? ""})
+        self.connections = connections.sorted(by: {
+          $0.firstName ?? $0.lastName ?? "" < $1.firstName ?? $1.lastName ?? ""
+        })
         self.updateConnectionsCount(count: connections.count)
         self.isFetchingConnections = false
       },
