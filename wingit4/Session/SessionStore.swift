@@ -109,17 +109,17 @@ extension SessionStore {
   }
 
   func loadUserConnections() {
-      guard let userId = Auth.auth().currentUser?.uid else { return }
-      isFetchingConnections = true
-      Api.Connections.getConnections(
-          userId: userId,
-          onSuccess: { connections in
-              self.connections = connections.sorted(by: { $0.firstName! < $1.firstName!})
-              self.updateConnectionsCount(count: connections.count)
-              self.isFetchingConnections = false
-          },
-          onEmpty: { self.isFetchingConnections = false }
-      )
+    guard let userId = Auth.auth().currentUser?.uid else { return }
+    isFetchingConnections = true
+    Api.Connections.getConnections(
+      userId: userId,
+      onSuccess: { connections in
+        self.connections = connections.sorted(by: { $0.firstName ?? "" < $1.firstName ?? ""})
+        self.updateConnectionsCount(count: connections.count)
+        self.isFetchingConnections = false
+      },
+      onEmpty: { self.isFetchingConnections = false }
+    )
   }
 
   func loadUserOpenPosts() {
