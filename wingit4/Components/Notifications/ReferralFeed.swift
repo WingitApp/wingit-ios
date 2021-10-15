@@ -24,13 +24,13 @@ struct ReferralFeed: View {
         id: \.element
       ) { index, referral in
         if referral.status == .accepted {
-          AcceptCard(referral: referral, post: referral.ask!)
+          AcceptCard(referral: referral, post: referral.ask)
         } else if referral.status == .closed {
-          ClosedCard(referral: referral, post: referral.ask!)
+          ClosedCard(referral: referral, post: referral.ask)
         } else if referral.status == .pending {
-          ReferCard(referral: referral, post: referral.ask!)
+          ReferCard(referral: referral, post: referral.ask)
         } else if referral.status == .winged {
-          WingCard(referral: referral, post: referral.ask!)
+          WingCard(referral: referral, post: referral.ask)
         }
         
       }
