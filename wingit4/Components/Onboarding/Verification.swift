@@ -25,13 +25,13 @@ struct Verification: View {
                         
                         Button(action: {withAnimation(.easeIn){
                           signupViewModel.index = 3}}) {
-                            ZStack{
-                              Image(systemName: "circle").foregroundColor(.clear)
+                            
                             Image(systemName: "arrow.left")
                                 .font(.title2)
                                 .foregroundColor(.black)
-                            }
                         }
+                        
+                        Spacer()
                         
                         Text("Verify Phone")
                             .font(.title2)
@@ -48,6 +48,7 @@ struct Verification: View {
                         .foregroundColor(.gray)
                         .padding(.bottom)
                     
+                    Spacer(minLength: 0)
                     
                     HStack(spacing: 15){
                         

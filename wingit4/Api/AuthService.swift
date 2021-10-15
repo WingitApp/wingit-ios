@@ -57,4 +57,32 @@ class AuthService {
                 }
         }
   
+  static func firstVerification(email: String, password: String, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+          let normalizedEmail = email.normalizeEmail()
+          Auth.auth().createUser(withEmail: normalizedEmail, password: password) { (authData, error) in
+                  if error != nil {
+                      // TODO: Show toast
+                      //    print(error!.localizedDescription)
+                      onError(error!.localizedDescription)
+                      return
+                  }
+                  
+                  guard let userId = authData?.user.uid else { return }
+                  
+            let firestoreUserDoc = Ref.FS_DOC_USERID(userId: userId)
+           
+            let user = User.init(id: userId, uid: userId, bio: nil, canonicalEmail: normalizedEmail, email: email, firstName: nil, keywords: nil, lastName: nil, profileImageUrl: nil, username: "")
+
+            do {
+                try firestoreUserDoc.setData(from: user) { _ in
+                    // todo: handle error if throws
+                    onSuccess(user)
+                }
+            } catch {
+                print(error)
+            }
+              
+          }
+      }
+  
 }

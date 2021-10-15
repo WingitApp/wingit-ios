@@ -33,7 +33,7 @@ class PhoneViewModel: ObservableObject {
     // Loading View....
     @Published var loading = false
     
-    func getCountryCode()->String{
+    func getCountryCode()->String {
         
         let regionCode = Locale.current.regionCode ?? ""
         
@@ -42,49 +42,51 @@ class PhoneViewModel: ObservableObject {
     
     
     // sending Code To User....
-    
+  
     func sendCode(){
-        
-        // enabling testing code...
-        // disable when you need to test with real device...
-//      user.multiFactor.getSessionWithCompletion({ (session, error) in
-//        // ...
-//      })
-    //  user.multiF
-      Auth.auth().settings?.isAppVerificationDisabledForTesting = false
-//        let user = Auth.auth().currentUser
-//        let phoneNumber = "+\(getCountryCode())\(phoneNo)"
-//
-//      user?.multiFactor.getSessionWithCompletion({(session, error) in
-//        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil, multiFactorSession: session)
-//          { (verificationId, error) in
-//
-//          let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationId!,
-//                                                                   verificationCode: self.CODE)
-//
-//          let assertion = PhoneMultiFactorGenerator.assertion(with: credential)
-//          user?.multiFactor.enroll(with: assertion, displayName: user?.displayName) {(error) in
-//            self.errorMsg = error?.localizedDescription ?? ""
-//          }
-//
-//        }
-//      })
-      
-        Auth.auth().settings?.isAppVerificationDisabledForTesting = false
-        
-        let number = "+\(getCountryCode())\(phoneNo)"
-        PhoneAuthProvider.provider().verifyPhoneNumber(number, uiDelegate: nil) { (CODE, err) in
+        /*
+         How to get country Code (to track which country one is from)
+         */
+        /* enabling testing code...
+         disable when you need to test with real device... */
+
+      Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+        let user = Auth.auth().currentUser
+        let phoneNumber = "+\(getCountryCode())\(phoneNo)"
+
+      user?.multiFactor.getSessionWithCompletion({(session, error) in
+        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil, multiFactorSession: session)
+          { (verificationId, error) in
+
+          let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationId!, verificationCode: self.CODE)
+
+          let assertion = PhoneMultiFactorGenerator.assertion(with: credential)
+          user?.multiFactor.enroll(with: assertion, displayName: user?.displayName) {(error) in
+            self.errorMsg = error?.localizedDescription ?? ""
             
-            if let error = err{
-                
-                self.errorMsg = error.localizedDescription
-                withAnimation{ self.error.toggle()}
-                return
-            }
-            
-            self.CODE = CODE ?? ""
-            self.gotoVerify = true
+          }
+            guard let userId = Auth.auth().currentUser?.uid else { return }
+            Ref.FS_DOC_USERID(userId: userId).setData(["phoneNumber": self.phoneNo], merge: true)
+    
         }
+        
+      })
+      
+//        Auth.auth().settings?.isAppVerificationDisabledForTesting = false
+//
+//        let number = "+\(getCountryCode())\(phoneNo)"
+//        PhoneAuthProvider.provider().verifyPhoneNumber(number, uiDelegate: nil) { (CODE, err) in
+//
+//            if let error = err{
+//
+//                self.errorMsg = error.localizedDescription
+//                withAnimation{ self.error.toggle()}
+//                return
+//            }
+//
+//            self.CODE = CODE ?? ""
+//            self.gotoVerify = true
+//        }
     }
     
     func verifyCode(){

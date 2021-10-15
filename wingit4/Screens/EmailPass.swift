@@ -7,7 +7,44 @@
 
 import SwiftUI
 
-struct EmailPass : View {
+struct EmailPass: View {
+  @EnvironmentObject var session: SessionStore
+  @EnvironmentObject var signupViewModel: SignupViewModel
+  
+  func firstVerification() {
+    withAnimation(.easeIn){
+      signupViewModel.index = 3}
+    signupViewModel.signup() { user in
+        signupViewModel.onSignupSuccess(user: user)
+        self.session.currentUser = user
+    }
+  }
+  var body: some View {
+    VStack{
+      Spacer()
+      EmailPassTextField()
+        .environmentObject(signupViewModel)
+      Spacer()
+      HStack{
+        Spacer()
+      Button(action: { firstVerification() })
+      { NextButton()}
+      .alert(
+        isPresented: $signupViewModel.isAlertShown
+      ) {
+          Alert(
+            title: Text("Error"),
+            message: Text(self.signupViewModel.errorString),
+            dismissButton: .default(Text("OK"))
+          )
+        }
+      }
+    }
+  }
+}
+
+
+struct EmailPassTextField : View {
   
   @EnvironmentObject var session: SessionStore
   @EnvironmentObject var signupViewModel: SignupViewModel
@@ -25,27 +62,8 @@ struct EmailPass : View {
                   password: $signupViewModel.password
                 )
             }
+              
         
-//            SignupButton(
-//                action: {
-//                    signupViewModel.signup() { user in
-//                        signupViewModel.onSignupSuccess(user: user)
-//                        self.session.currentUser = user
-//                    }
-//                },
-//              label: TEXT_SIGN_UP
-//            )
-//            .padding(.horizontal,25)
-//            .padding(.top,25)
-//            .alert(
-//              isPresented: $signupViewModel.isAlertShown
-//            ) {
-//                Alert(
-//                  title: Text("Error"),
-//                  message: Text(self.signupViewModel.errorString),
-//                  dismissButton: .default(Text("OK"))
-//                )
-//            }
           
           }
             .padding(.top,25)
@@ -55,3 +73,6 @@ struct EmailPass : View {
         .onAppear{ logToAmplitude(event: .viewSignupScreen) }
     }
 }
+
+
+

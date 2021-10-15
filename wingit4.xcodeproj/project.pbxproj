@@ -240,6 +240,7 @@
 		FB6E690B2718DCF2002ABB41 /* ReferralCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E690A2718DCF2002ABB41 /* ReferralCode.swift */; };
 		FB6E690D2718E38D002ABB41 /* Bio.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E690C2718E38D002ABB41 /* Bio.swift */; };
 		FB6E690F27192640002ABB41 /* AddPhoneNoBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E690E27192640002ABB41 /* AddPhoneNoBox.swift */; };
+		FB6E691127192E2A002ABB41 /* LoginSignup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E691027192E2A002ABB41 /* LoginSignup.swift */; };
 		FBD25F7E27043C4E0002C5B2 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD25F7D27043C4E0002C5B2 /* PopUp.swift */; };
 		FBDFDB55270E4BC400EDE22F /* BoardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDFDB54270E4BC400EDE22F /* BoardingScreen.swift */; };
 		FBDFDB57270E4BDD00EDE22F /* OnboardingV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDFDB56270E4BDD00EDE22F /* OnboardingV2.swift */; };
@@ -479,6 +480,7 @@
 		FB6E690A2718DCF2002ABB41 /* ReferralCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralCode.swift; sourceTree = "<group>"; };
 		FB6E690C2718E38D002ABB41 /* Bio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bio.swift; sourceTree = "<group>"; };
 		FB6E690E27192640002ABB41 /* AddPhoneNoBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhoneNoBox.swift; sourceTree = "<group>"; };
+		FB6E691027192E2A002ABB41 /* LoginSignup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignup.swift; sourceTree = "<group>"; };
 		FBD25F7D27043C4E0002C5B2 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 		FBDFDB54270E4BC400EDE22F /* BoardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingScreen.swift; sourceTree = "<group>"; };
 		FBDFDB56270E4BDD00EDE22F /* OnboardingV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingV2.swift; sourceTree = "<group>"; };
@@ -889,6 +891,7 @@
 				FBDFDB56270E4BDD00EDE22F /* OnboardingV2.swift */,
 				FBDFDB58270E4BF100EDE22F /* OffsetPageTabView.swift */,
 				3B9C43BE26FB1A77008B01D2 /* OnboardingView.swift */,
+				FB6E691027192E2A002ABB41 /* LoginSignup.swift */,
 				FB48BEDF27176A4C004E33EB /* Login1.swift */,
 				FB48BEE127176A72004E33EB /* Names.swift */,
 				FB48BEE327176A96004E33EB /* EmailPass.swift */,
@@ -1352,6 +1355,7 @@
 				65A9EFA526E0B2EC00E81CBF /* AskApi.swift in Sources */,
 				1594EE73270630F800D5C9E9 /* EditProfileView.swift in Sources */,
 				1594EE7727065D5F00D5C9E9 /* ArcShape.swift in Sources */,
+				FB6E691127192E2A002ABB41 /* LoginSignup.swift in Sources */,
 				150DB46326F301AD00373D26 /* PostEmptyState.swift in Sources */,
 				151A3C7F26CE049000A39FAF /* NavigationTab.swift in Sources */,
 				3B9774252694FE0000F1EF14 /* alertView.swift in Sources */,

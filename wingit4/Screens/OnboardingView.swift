@@ -52,33 +52,16 @@ struct FirstView : View {
         
         if signupViewModel.index == 0{
 
-          VStack{
-            Image("logo")
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-              .frame(width: 40, height: 40)
-            
-                 Button(action: { withAnimation(.easeIn){
-         
-                   signupViewModel.index = 6
-                   
-                 }}){
-                   Text("Login")
-                 }
-                 Button(action: { withAnimation(.easeIn){
-         
-                   signupViewModel.index = 1 }  })
-            {
-                   Text("Sign Up")
-                 }
-               }
+         LoginSignup()
+            .environmentObject(signupViewModel)
+          
         }
         
         else if signupViewModel.index == 1 {
        
           VStack{
             Spacer()
-         ReferralCode()
+            ReferralCode()
             .environmentObject(signupViewModel)
             Spacer()
             HStack{
@@ -91,19 +74,10 @@ struct FirstView : View {
           
         } else if signupViewModel.index == 2 {
           
-          VStack{
-            Spacer()
+         
             EmailPass()
               .environmentObject(signupViewModel)
-            Spacer()
-            HStack{
-              Spacer()
-            Button(action: { withAnimation(.easeIn){
-              signupViewModel.index = 3} })
-            { NextButton()}
-            }
-          }
-      
+          
         } else if signupViewModel.index == 3 {
           
          PhoneNumber()
@@ -115,22 +89,13 @@ struct FirstView : View {
              .environmentObject(signupViewModel)
           
         } else if signupViewModel.index == 5 {
-          
-          VStack{
-            Spacer()
+         
             Names()
               .environmentObject(signupViewModel)
-            Spacer()
-            HStack{
-              Spacer()
-            Button(action: { withAnimation(.easeIn){
-              signupViewModel.index = 6} })
-            { NextButton()}
-            }
-          }
+           
         }
         else if signupViewModel.index == 6 {
-        
+        //Optional
           VStack{
             Spacer()
             UploadAvatar()
@@ -145,6 +110,7 @@ struct FirstView : View {
           }
 
         } else if signupViewModel.index == 7 {
+          //Optional
           VStack{
             Spacer()
             Bio()

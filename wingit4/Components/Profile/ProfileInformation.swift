@@ -130,7 +130,6 @@ struct UpdateProfilePhoto: View {
             Spacer()
             CloseButton(onTap: closeSheet)
               .padding(10)
-
           }
           .padding(.init(top: 10, leading: 10, bottom: 0, trailing: 10))
           Divider()

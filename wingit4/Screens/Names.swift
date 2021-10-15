@@ -11,6 +11,31 @@ struct Names : View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var signupViewModel: SignupViewModel
     
+  func addUserNames() {
+    withAnimation(.easeIn){
+      signupViewModel.index = 6}
+    signupViewModel.addUserNames()
+  }
+    var body: some View{
+        
+      VStack{
+        Spacer()
+        NameTextField()
+          .environmentObject(signupViewModel)
+        Spacer()
+        HStack{
+          Spacer()
+          Button(action: { addUserNames() })
+        { NextButton()}
+        }
+      }
+    }
+}
+
+struct NameTextField : View {
+    @EnvironmentObject var session: SessionStore
+    @EnvironmentObject var signupViewModel: SignupViewModel
+    
     var body: some View{
         
         VStack{
@@ -18,7 +43,7 @@ struct Names : View {
             
             VStack(alignment: .leading, spacing: 15) {
                 
-              Text("Names").bold().font(.title).padding(.bottom, 25) 
+              Text("Names").bold().font(.title).padding(.bottom, 25)
               
                 HStack{
                 FirstNameTextField(
@@ -37,6 +62,17 @@ struct Names : View {
             .padding(.top,25)
             
             
+
+        }
+        .onTapGesture { dismissKeyboard() }
+        .onAppear{ logToAmplitude(event: .viewSignupScreen) }
+      
+    }
+}
+
+
+
+
 //            SignupButton(
 //                action: {
 //                    signupViewModel.signup() { user in
@@ -61,10 +97,3 @@ struct Names : View {
 //            Text("By signing up, you agree to the").padding(.top, 10)
 //              .modifier(CaptionStyle())
 //            EULA()
-        }
-        .onTapGesture { dismissKeyboard() }
-        .onAppear{ logToAmplitude(event: .viewSignupScreen) }
-      
-    }
-}
-

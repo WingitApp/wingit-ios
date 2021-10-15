@@ -28,6 +28,25 @@ class SignupViewModel: ObservableObject {
     @Environment (\.presentationMode) var presentationMode
     @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
 
+  
+  func addUserNames() {
+    guard let userId = Auth.auth().currentUser?.uid else { return }
+    Ref.FS_DOC_USERID(userId: userId).setData(
+                                              ["firstName": firstName,
+                                               "lastName" : lastName,
+                                               "username" : username
+                                              ],
+                                              merge: true)
+  }
+  
+  func enrollEmailPass(onSuccess: @escaping (_ user: User) -> Void) {
+          AuthService.firstVerification(
+            email: email,
+            password: password,
+            onSuccess: onSuccess,
+            onError: onSignupError
+            )
+  }
     func signup(onSuccess: @escaping (_ user: User) -> Void) {
         self.ampSignupAttemptEvent()
         if checkFieldsAreValid() {

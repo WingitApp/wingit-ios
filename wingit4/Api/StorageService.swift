@@ -88,6 +88,7 @@ class StorageService {
     
     }
     
+  
     static func saveUser(userId: String, firstName: String, lastName: String, username: String, email: String, normalizedEmail: String, imageData: Data, metadata: StorageMetadata, storageAvatarRef: StorageReference, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
            storageAvatarRef.putData(imageData, metadata: metadata) { (storageMetadata, error) in
                 if error != nil {

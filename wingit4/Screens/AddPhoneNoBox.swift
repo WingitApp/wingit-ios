@@ -43,7 +43,7 @@ struct AddPhoneNoBox: View {
           signupViewModel.index = 4}},
                   //sendCode,
                  label: {
-                NextButton()
+             NextButton().padding(.top, 50)
           })
           .disabled(phoneViewModel.phoneNo == "" ? true : false)
         }.padding(.vertical)
