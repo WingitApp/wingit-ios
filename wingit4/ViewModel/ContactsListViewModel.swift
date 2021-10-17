@@ -43,42 +43,11 @@ class ContactsListViewModel: ObservableObject {
       return contact.fullName().localizedCaseInsensitiveContains(self.searchText)
   }
   
-  func sendMessage(numberToMessage: String) {
-    guard let userIdPrefix = Auth.auth().currentUser?.uid.prefix(6) else { return }
-    let referralCode = String(userIdPrefix)
-    let inviteCodeQueryItem = URLQueryItem(name: "referralCode", value: referralCode)
-    var components = URLComponents()
-    components.scheme = Constants.HTTPS
-    components.host = Constants.DYNAMIC_LINKS_DOMAIN
-    components.path = Constants.INVITE_PATH
-    components.queryItems = [inviteCodeQueryItem]
-    
-    guard let linkParameter = components.url else { return }
-    
-    let linkBuilder = DynamicLinkComponents(link: linkParameter, domainURIPrefix: "\(Constants.HTTPS)://\(Constants.DYNAMIC_LINKS_DOMAIN)")
-    if let wingitBundleId = Bundle.main.bundleIdentifier {
-      linkBuilder?.iOSParameters = DynamicLinkIOSParameters(bundleID: wingitBundleId)
-    }
-    linkBuilder?.iOSParameters?.appStoreID = APPSTOREID
-    linkBuilder?.socialMetaTagParameters?.title = "Exclusive Invite Link"
-    linkBuilder?.socialMetaTagParameters?.imageURL = URL(string: LOGO_URL)
-    guard let longDynamicLink = linkBuilder?.url else { return }
-    linkBuilder?.shorten { [weak self] url, warnings, error in
-      if let error = error {
-        print("DynamicLink shortening error: \(error)")
-        return
-      }
-      if let warnings = warnings {
-        for warning in warnings {
-          print("Dynamic Link warning: \(warning)")
-          print(longDynamicLink)
-        }
-        print("I have a short URL to share! \(String(describing: url?.absoluteString))")
-      }
-      guard let url = url else { return }
-      let message = "I am inviting you to an exclusive new app called Wingit! Follow my referral link to join: \(url.absoluteString)"
+  func sendMessage(numberToMessage: String, currentUser: User?) {
+    guard let currentUser = currentUser else { return }
+    generateInviteLink(currentUser: currentUser) { [weak self] url in
+      let message = "I am inviting you to an exclusive new app called Wingit! Follow my referral link to join: \(url)"
       self?.shareSMS(numberToMessage: numberToMessage, message: message)
-      print("I have a short dynamic link URL to share!  \(url.absoluteString)")
     }
   }
   
@@ -86,5 +55,41 @@ class ContactsListViewModel: ObservableObject {
     let sms: String = "sms:\(numberToMessage)&body=\(message)"
     let strURL: String = sms.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
     UIApplication.shared.open(URL.init(string: strURL)!, options: [:], completionHandler: nil)
+  }
+  
+  func generateInviteLink(currentUser: User?, onComplete: @escaping(_ url: String) -> Void) {
+    var components = URLComponents()
+    components.scheme = Constants.HTTPS
+    components.host = Constants.DYNAMIC_LINKS_DOMAIN
+    components.path = Constants.INVITE_PATH
+    
+    if let referralCode = currentUser?.id?.prefix(6) {
+      let inviteCodeQueryItem = URLQueryItem(name: "referralCode", value: String(referralCode))
+      components.queryItems = [inviteCodeQueryItem]
+    }
+    
+    guard let linkParameter = components.url else { return onComplete(APP_STORE_LINK) }
+    
+    let linkBuilder = DynamicLinkComponents(link: linkParameter, domainURIPrefix: "\(Constants.HTTPS)://\(Constants.DYNAMIC_LINKS_DOMAIN)")
+    if let wingitBundleId = Bundle.main.bundleIdentifier {
+      linkBuilder?.iOSParameters = DynamicLinkIOSParameters(bundleID: wingitBundleId)
+    }
+    linkBuilder?.iOSParameters?.appStoreID = APPSTOREID
+    linkBuilder?.socialMetaTagParameters = DynamicLinkSocialMetaTagParameters()
+    linkBuilder?.socialMetaTagParameters?.title = "\(currentUser?.displayName ?? "Your friend") invited you to Wingit!"
+    linkBuilder?.socialMetaTagParameters?.imageURL = URL(string: currentUser?.profileImageUrl ?? LOGO_URL)
+    linkBuilder?.shorten { url, warnings, error in
+      if let error = error {
+        print("DynamicLink shortening error: \(error)")
+        onComplete(linkBuilder?.url?.absoluteString ?? APP_STORE_LINK)
+        return
+      }
+      if let warnings = warnings {
+        for warning in warnings {
+          print("Dynamic Link warning: \(warning)")
+        }
+      }
+      onComplete(url?.absoluteString ?? APP_STORE_LINK)
+    }
   }
 }

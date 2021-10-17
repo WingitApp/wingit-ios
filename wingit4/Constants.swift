@@ -41,10 +41,11 @@ let IMAGE_PHOTO = "camera.viewfinder"
 
 //DeepLinks
 let APPSTOREID = "1572569005"
+let APP_STORE_LINK = "https://apps.apple.com/us/app/winging/id1572569005"
 let LOGO_URL = """
                   https://firebasestorage.googleapis.com/v0/b/wingitapp-1fe28.appspot.com/o/Frame%203.png?alt=media&token=a4d069bd-3163-42d9-8981-c1cf046eacf3
                   """
-let TEXT_SHARE_WINGIT = "Hey, I think you would be interested in this new app called Wingit! You can download it here: https://apps.apple.com/us/app/winging/id1572569005"
+let TEXT_SHARE_WINGIT = "Hey, I think you would be interested in this new app called Wingit! You can download it here: \(APP_STORE_LINK)"
 let POST_TYPE_OPTIONS: [String] = [
   "recommendations",
   "advice",
