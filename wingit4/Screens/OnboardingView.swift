@@ -48,6 +48,7 @@ struct FirstView : View {
 
   var body: some View{
     ActivityIndicatorView(message: "Loading...", isShowing: self.$session.isSessionLoading) {
+      
       VStack{
         
         if signupViewModel.index == 0{
@@ -74,13 +75,17 @@ struct FirstView : View {
           
         } else if signupViewModel.index == 2 {
           
-         
+          
+          ZStack{
+            SignUpTitles(title: "Add you Email and Password",
+                         subtitle: nil)
             EmailPass()
               .environmentObject(signupViewModel)
-          
+          }
         } else if signupViewModel.index == 3 {
           
-         PhoneNumber()
+         
+          PhoneNumber()
             .environmentObject(signupViewModel)
           
         } else if signupViewModel.index == 4 {
@@ -89,32 +94,30 @@ struct FirstView : View {
              .environmentObject(signupViewModel)
           
         } else if signupViewModel.index == 5 {
-         
+          ZStack{
+          SignUpTitles(title: "Names",
+                       subtitle: nil)
             Names()
               .environmentObject(signupViewModel)
-           
+          }
         }
         else if signupViewModel.index == 6 {
         //Optional
-          VStack{
-            Spacer()
+          ZStack{
+          SignUpTitles(title: "Add a profile photo",
+                       subtitle: "A profile photo will help your friends identify you.")
             UploadAvatar()
               .environmentObject(signupViewModel)
-            Spacer()
-            HStack{
-              Spacer()
-            Button(action: { withAnimation(.easeIn){
-              signupViewModel.index = 7} })
-            { NextButton()}
-            }
           }
           
         } else if signupViewModel.index == 7 {
           //Optional
-         
+          ZStack{
+          SignUpTitles(title: "Include a short bio",
+                       subtitle: nil)
             Bio()
               .environmentObject(signupViewModel)
-          
+          }
           
         } else if signupViewModel.index == 8 {
            Login1()

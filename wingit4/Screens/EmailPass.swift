@@ -54,18 +54,18 @@ struct EmailPassTextField : View {
         
         VStack{
             VStack(alignment: .leading, spacing: 15) {
-              Text("Email & Password").bold().font(.title).padding(.bottom, 25)
-                VStack{
+           
+       
+          
                 EmailTextField(
                   email: $signupViewModel.email
                 )
                 PasswordTextField(
                   password: $signupViewModel.password
                 )
-            }
               
         
-          
+              
           }
             .padding(.top,25)
             .padding(.horizontal,25)

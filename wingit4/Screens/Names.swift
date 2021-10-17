@@ -56,8 +56,6 @@ struct NameTextField : View {
             
             VStack(alignment: .leading, spacing: 15) {
                 
-              Text("Names").bold().font(.title).padding(.bottom, 25)
-              
                 HStack{
                 FirstNameTextField(
                   firstName: $signupViewModel.firstName
@@ -73,8 +71,6 @@ struct NameTextField : View {
             }
             .padding(.horizontal,25)
             .padding(.top,25)
-            
-            
 
         }
         .onTapGesture { dismissKeyboard() }

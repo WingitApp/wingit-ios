@@ -24,9 +24,8 @@ struct UploadAvatar: View {
   
     var body: some View {
       VStack{
-        Spacer()
       VStack {
-        
+        Spacer()
           UserAvatarSignup(
             image: signupViewModel.image,
             height: 200,
@@ -51,10 +50,10 @@ struct UploadAvatar: View {
          imageData: self.$signupViewModel.imageData
         )
      }
-        Spacer()
+     Spacer()
         HStack{
           Spacer()
-        Button(action: {  })
+        Button(action: { addAvatar() })
         { NextButton()}
         }
     }

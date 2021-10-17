@@ -7,12 +7,20 @@
 
 import SwiftUI
 
-struct AddPhoneNoBox: View {
+struct InsertPhoneNoBox: View {
   
   @StateObject var phoneViewModel = PhoneViewModel()
   @EnvironmentObject var signupViewModel: SignupViewModel
   
     var body: some View {
+      ZStack{
+        
+          VStack(alignment: .leading, spacing: 15){
+          Text("Provide a phone number").bold().font(.title2)
+          Text("You’ll receive a login code for better security.").font(.caption).foregroundColor(.gray)
+          Spacer()
+          }.padding(.top, 50)
+
       VStack{
       HStack{
           
@@ -30,6 +38,10 @@ struct AddPhoneNoBox: View {
           
           Spacer(minLength: 0)
           
+        Button(action: { withAnimation(.easeIn){
+          signupViewModel.index = 4}}){
+            Text("Send").padding(.horizontal)
+        }.disabled(phoneViewModel.phoneNo == "" ? true : false)
       }
       .frame(width: 350, height: 75)
       .background(Color.white)
@@ -37,17 +49,8 @@ struct AddPhoneNoBox: View {
       .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0)
       .padding()
         
-        HStack{
-          Spacer()
-        Button(action: {  withAnimation(.easeIn){
-          signupViewModel.index = 4}},
-                  //sendCode,
-                 label: {
-             NextButton().padding(.top, 50)
-          })
-          .disabled(phoneViewModel.phoneNo == "" ? true : false)
-        }.padding(.vertical)
       }
+    }
     }
 }
 

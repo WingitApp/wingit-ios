@@ -28,32 +28,23 @@ struct Verification: View {
                 VStack{
                     
                     HStack{
-                        
-                        Button(action: {withAnimation(.easeIn){
-                          signupViewModel.index = 3}}) {
-                            
-                            Image(systemName: "arrow.left")
-                                .font(.title2)
-                                .foregroundColor(.black)
-                        }
-                        
-                        Spacer()
-                        
-                        Text("Verify Phone")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundColor(.black)
-                        
-                        Spacer()
-                        
-                        if phoneViewModel.loading{ProgressView()}
+                      Button(action: {withAnimation(.easeIn){
+                        signupViewModel.index = 3}}) {
+                          
+                          Image(systemName: "arrow.left")
+                              .font(.title3)
+                              .foregroundColor(.black)
+                      }
+                      Spacer()
+                      VStack(alignment: .center, spacing: 15){
+                    Text("Verify Phone #").bold().font(.title2)
+                  Text("Code sent to \(phoneViewModel.phoneNo)").font(.caption).foregroundColor(.gray)
                     }
-                    .padding()
-                    
-                    Text("Code sent to \(phoneViewModel.phoneNo)")
-                        .foregroundColor(.gray)
-                        .padding(.bottom)
-                    
+                      Spacer()
+                      if phoneViewModel.loading{ProgressView()}
+                    }.padding(.top, 50).padding(.horizontal)
+                  Spacer()
+                  
                     Spacer(minLength: 0)
                     
                     HStack(spacing: 15){
@@ -109,7 +100,7 @@ struct Verification: View {
 
                 CustomNumberPad(value: $phoneViewModel.code, isVerify: true)
             }
-            .background(Color("bg").ignoresSafeArea(.all, edges: .bottom))
+            .background(Color("lightGray").ignoresSafeArea(.all, edges: .bottom))
             
             if phoneViewModel.error{
                 

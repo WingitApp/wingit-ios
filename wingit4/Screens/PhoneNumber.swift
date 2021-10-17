@@ -21,39 +21,30 @@ struct PhoneNumber : View {
   }
   
     var body: some View{
-        
+//      SignUpTitles(title: "Provide a phone number",
+//                   subtitle: "You’ll receive a login code for better security.")
       ZStack{
           
           VStack{
+       
               
             VStack(alignment: .leading){
-                  
-                  Text("What's your phone number?")
-                      .bold().font(.title)
-                      .padding(.leading)
-                  
-                  
-                  Text("You'll receive a 4 digit code to verify next.")
-                      .bold()
-                      .font(.caption2)
-                      .foregroundColor(.gray)
-                      .padding()
-                  
+            
                   // Mobile Number Field....
-              AddPhoneNoBox(phoneViewModel: phoneViewModel)
+              InsertPhoneNoBox(phoneViewModel: phoneViewModel)
                 .environmentObject(signupViewModel)
               
-                  }
-                  .frame(height: UIScreen.main.bounds.height / 1.8)
-                  .background(Color.white)
-                  .cornerRadius(20)
-           
+                }
+                .frame(height: UIScreen.main.bounds.height / 1.8)
+                      .background(Color.white)
+                      .cornerRadius(20)
+            
               // Custom Number Pad....
               
               CustomNumberPad(value: $phoneViewModel.phoneNo, isVerify: false)
               
           }
-          .background(Color("bg").ignoresSafeArea(.all, edges: .bottom))
+          .background(Color("lightGray").ignoresSafeArea(.all, edges: .bottom))
           
           if phoneViewModel.error{
               
