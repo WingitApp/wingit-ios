@@ -12,6 +12,7 @@ import FirebaseStorage
 import SwiftUI
 
 class SignupViewModel: ObservableObject {
+  
     @Published var referralCode: String = ""
     @Published var firstName: String = ""
     @Published var lastName: String = ""
@@ -69,7 +70,7 @@ class SignupViewModel: ObservableObject {
   
     func signup(onSuccess: @escaping (_ user: User) -> Void) {
         self.ampSignupAttemptEvent()
-        if checkFieldsAreValid() {
+        if checkFirstVerification() {
             
            return AuthService.signupUser(
               firstName: firstName.capitalized,
@@ -83,6 +84,18 @@ class SignupViewModel: ObservableObject {
             )
           
         }
+  }
+  
+  func checkFirstVerification() -> Bool {
+    if (!isEmailComplete()) {
+        self.showErrorMessage(message: "Please fill in all fields")
+        return false
+    }
+    if !String.isValidEmailAddress(emailAddress: email) {
+        onSignupError(errorMessage: "Email input is not a valid email address.")
+        return false
+    }
+     return true
   }
  
     func checkFieldsAreValid() -> Bool {
@@ -119,6 +132,10 @@ class SignupViewModel: ObservableObject {
   
   func isFormComplete() -> Bool {
     return !firstName.isEmpty && !lastName.isEmpty && !username.isEmpty && !email.isEmpty && !password.isEmpty
+  }
+  
+  func isEmailComplete() -> Bool {
+    return !email.isEmpty && !password.isEmpty
   }
   
   func clean() {

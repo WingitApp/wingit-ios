@@ -14,9 +14,9 @@ struct Verification: View {
     @Environment(\.presentationMode) var present
   
   func verify(){
+    phoneViewModel.verifyCode()
     withAnimation(.easeIn){
       signupViewModel.index = 5}
-    phoneViewModel.verifyCode()
   }
   
     var body: some View {
@@ -74,13 +74,13 @@ struct Verification: View {
                         }
                     }
                     
-                    Button(action: {}) {
-                        
-                        Text("Get via call")
-                            .fontWeight(.bold)
-                            .foregroundColor(.black)
-                    }
-                    .padding(.top,6)
+//                    Button(action: {}) {
+//
+//                        Text("Get via call")
+//                            .fontWeight(.bold)
+//                            .foregroundColor(.black)
+//                    }
+//                    .padding(.top,6)
                     
                   Button(action: {verify()})
                             

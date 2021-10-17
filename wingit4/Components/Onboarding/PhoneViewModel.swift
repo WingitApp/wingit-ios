@@ -50,55 +50,78 @@ class PhoneViewModel: ObservableObject {
         /* enabling testing code...
          disable when you need to test with real device... */
 
-      Auth.auth().settings?.isAppVerificationDisabledForTesting = true
-        let user = Auth.auth().currentUser
-        let phoneNumber = "+\(getCountryCode())\(phoneNo)"
-
-      user?.multiFactor.getSessionWithCompletion({(session, error) in
-        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil, multiFactorSession: session)
-          { (verificationId, error) in
-
-          let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationId!, verificationCode: self.CODE)
-
-          let assertion = PhoneMultiFactorGenerator.assertion(with: credential)
-          user?.multiFactor.enroll(with: assertion, displayName: user?.displayName) {(error) in
-            self.errorMsg = error?.localizedDescription ?? ""
-            
-          }
-            guard let userId = Auth.auth().currentUser?.uid else { return }
-            Ref.FS_DOC_USERID(userId: userId).setData(["phoneNumber": self.phoneNo], merge: true)
-    
-        }
-        
-      })
-      
-//        Auth.auth().settings?.isAppVerificationDisabledForTesting = false
+//      Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+//        let user = Auth.auth().currentUser
+//        let phoneNumber = "+\(getCountryCode())\(phoneNo)"
 //
-//        let number = "+\(getCountryCode())\(phoneNo)"
-//        PhoneAuthProvider.provider().verifyPhoneNumber(number, uiDelegate: nil) { (CODE, err) in
+//      user?.multiFactor.getSessionWithCompletion({(session, error) in
+//        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil, multiFactorSession: session)
+//          { (verificationId, error) in
 //
-//            if let error = err{
+//          let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationId!, verificationCode: self.CODE)
 //
-//                self.errorMsg = error.localizedDescription
-//                withAnimation{ self.error.toggle()}
-//                return
-//            }
+//          let assertion = PhoneMultiFactorGenerator.assertion(with: credential)
+//          user?.multiFactor.enroll(with: assertion, displayName: user?.displayName) {(error) in
+//            self.errorMsg = error?.localizedDescription ?? ""
 //
-//            self.CODE = CODE ?? ""
-//            self.gotoVerify = true
+//          }
+//            guard let userId = Auth.auth().currentUser?.uid else { return }
+//            Ref.FS_DOC_USERID(userId: userId).setData(["phoneNumber": self.phoneNo], merge: true)
+//
 //        }
+//
+//      })
+      
+        Auth.auth().settings?.isAppVerificationDisabledForTesting = false
+
+        let number = "+\(getCountryCode())\(phoneNo)"
+        PhoneAuthProvider.provider().verifyPhoneNumber(number, uiDelegate: nil) { (CODE, err) in
+
+            if let error = err{
+
+                self.errorMsg = error.localizedDescription
+                withAnimation{ self.error.toggle()}
+                return
+            }
+
+            self.CODE = CODE ?? ""
+            self.gotoVerify = true
+        }
     }
     
     func verifyCode(){
+     
+//        let user = Auth.auth().currentUser
+//        let phoneNumber = "+\(getCountryCode())\(phoneNo)"
+//        loading = true
+      
+//      user?.multiFactor.getSessionWithCompletion({(session, error) in
+//        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil, multiFactorSession: session)
+//          { (verificationId, error) in
+//
+//            self.loading = false
+//
+//            let credential = PhoneAuthProvider.provider().credential(withVerificationID: self.CODE, verificationCode: self.code)
+//
+//          let assertion = PhoneMultiFactorGenerator.assertion(with: credential)
+//          user?.multiFactor.enroll(with: assertion, displayName: user?.displayName) {(error) in
+//            self.errorMsg = error?.localizedDescription ?? ""
+//
+//          }
+//            guard let userId = Auth.auth().currentUser?.uid else { return }
+//            Ref.FS_DOC_USERID(userId: userId).setData(["phoneNumber": self.phoneNo], merge: true)
+//        }
+//
+//      })
         
         let credential = PhoneAuthProvider.provider().credential(withVerificationID: self.CODE, verificationCode: code)
-        
+
         loading = true
-        
+
         Auth.auth().signIn(with: credential) { (result, err) in
-            
+
             self.loading = false
-            
+
             if let error = err{
                 self.errorMsg = error.localizedDescription
                 withAnimation{ self.error.toggle()}

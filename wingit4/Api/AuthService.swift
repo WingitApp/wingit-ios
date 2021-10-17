@@ -68,6 +68,7 @@ class AuthService {
 
   }
     
+
     static func signupUser(firstName: String, lastName: String, username: String, email: String, password: String, imageData: Data, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
             let normalizedEmail = email.normalizeEmail()
             Auth.auth().createUser(withEmail: normalizedEmail, password: password) { (authData, error) in
@@ -90,7 +91,7 @@ class AuthService {
         }
   
   
-  static func firstVerification(email: String, password: String, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+      static func firstVerification(email: String, password: String, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
           let normalizedEmail = email.normalizeEmail()
           Auth.auth().createUser(withEmail: normalizedEmail, password: password) { (authData, error) in
                   if error != nil {

@@ -12,11 +12,12 @@ struct EmailPass: View {
   @EnvironmentObject var signupViewModel: SignupViewModel
   
   func firstVerification() {
-    withAnimation(.easeIn){
-      signupViewModel.index = 3}
     signupViewModel.signup() { user in
         signupViewModel.onSignupSuccess(user: user)
         self.session.currentUser = user
+    withAnimation(.easeIn){
+      signupViewModel.index = 3}
+   
     }
   }
   
