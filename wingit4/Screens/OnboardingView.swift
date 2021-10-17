@@ -60,17 +60,11 @@ struct FirstView : View {
         
         else if signupViewModel.index == 1 {
        
-          VStack{
-            Spacer()
+          ZStack{
+            SignUpTitles(title: "Enter your Referral code",
+                         subtitle: nil)
             ReferralCode()
-            .environmentObject(signupViewModel)
-            Spacer()
-            HStack{
-              Spacer()
-            Button(action: { withAnimation(.easeIn){
-              signupViewModel.index = 2} })
-            { NextButton()}
-            }
+              .environmentObject(signupViewModel)
           }
           
         } else if signupViewModel.index == 2 {

@@ -19,5 +19,15 @@ struct PasswordTextField: View {
     }
 }
 
-
-
+struct ReferralCodeTextField: View {
+  
+  @Binding var referralCode: String
+  
+  var body: some View {
+    
+    TextField("referral code", text: $referralCode)
+     .modifier(TextFieldModifier())
+     .disableAutocorrection(true)
+    
+  }
+}

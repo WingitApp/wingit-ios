@@ -8,13 +8,20 @@
 import SwiftUI
 
 struct ReferralCode: View {
+  @EnvironmentObject var signupViewModel: SignupViewModel
     var body: some View {
-        Text("Referral Code Screen")
+      VStack{
+        Spacer()
+      ReferralCodeTextField(referralCode: $signupViewModel.referralCode)
+          .padding(.horizontal,25)
+        Spacer()
+        HStack{
+          Spacer()
+        Button(action: { withAnimation(.easeIn){
+          signupViewModel.index = 2} })
+        { NextButton()}
+        }
+      }
     }
 }
 
-struct ReferralCode_Previews: PreviewProvider {
-    static var previews: some View {
-        ReferralCode()
-    }
-}

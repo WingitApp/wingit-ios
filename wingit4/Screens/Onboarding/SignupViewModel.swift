@@ -12,6 +12,7 @@ import FirebaseStorage
 import SwiftUI
 
 class SignupViewModel: ObservableObject {
+    @Published var referralCode: String = ""
     @Published var firstName: String = ""
     @Published var lastName: String = ""
     @Published var username: String = ""
