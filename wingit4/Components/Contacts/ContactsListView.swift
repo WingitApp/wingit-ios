@@ -74,10 +74,9 @@ struct ContactsListView: View {
        .onAppear {
           contactsListViewModel.fetch()
        }
-       .navigationBarTitle("")
-       .navigationBarHidden(true)
-      
-
+      .navigationBarTitle("")
+      .navigationBarHidden(true)
+      .edgesIgnoringSafeArea(.top)
   }
   
   func sendMessage(numberToMessage: String) {
