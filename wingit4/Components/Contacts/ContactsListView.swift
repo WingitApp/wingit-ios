@@ -12,7 +12,6 @@ import SwiftUI
 struct ContactsListView: View {
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
   @EnvironmentObject var session: SessionStore
-  @State private var isShowingMessages = false
   @State private var numberToText: String = ""
   @ObservedObject var contactsListViewModel = ContactsListViewModel()
 
@@ -81,18 +80,5 @@ struct ContactsListView: View {
   
   func sendMessage(numberToMessage: String) {
     contactsListViewModel.sendMessage(numberToMessage: numberToMessage, currentUser: session.currentUser)
-  }
-  
-  func handleCompletion(_ result: MessageComposeResult) {
-      switch result {
-      case .cancelled:
-          self.isShowingMessages = false
-      case .sent:
-          self.isShowingMessages = false
-      case .failed:
-          self.isShowingMessages = false
-      @unknown default:
-          self.isShowingMessages = false
-      }
   }
 }
