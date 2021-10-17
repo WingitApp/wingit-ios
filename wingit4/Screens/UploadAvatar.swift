@@ -24,8 +24,9 @@ struct UploadAvatar: View {
   
     var body: some View {
       VStack{
-      VStack {
         Spacer()
+      VStack {
+        
           UserAvatarSignup(
             image: signupViewModel.image,
             height: 200,
@@ -43,20 +44,19 @@ struct UploadAvatar: View {
           .onTapGesture(perform: onUserAvatarTap)
 
       }
-      .sheet(isPresented: $signupViewModel.isImagePickerShown) {
-        ImagePicker(
-         showImagePicker: self.$signupViewModel.isImagePickerShown,
-         pickedImage: self.$signupViewModel.image,
-         imageData: self.$signupViewModel.imageData
-        )
-     }
      Spacer()
         HStack{
           Spacer()
         Button(action: { addAvatar() })
         { NextButton()}
         }
-    }
+    } .sheet(isPresented: $signupViewModel.isImagePickerShown) {
+      ImagePicker(
+       showImagePicker: self.$signupViewModel.isImagePickerShown,
+       pickedImage: self.$signupViewModel.image,
+       imageData: self.$signupViewModel.imageData
+      )
+   }
    }
 }
 
