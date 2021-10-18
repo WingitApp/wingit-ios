@@ -31,7 +31,7 @@ struct PhoneNumber : View {
             VStack(alignment: .leading){
             
                   // Mobile Number Field....
-              InsertPhoneNoBox(phoneViewModel: phoneViewModel)
+              InsertPhoneNoBox()
                 .environmentObject(signupViewModel)
               
                 }

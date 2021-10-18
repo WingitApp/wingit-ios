@@ -46,7 +46,7 @@ class ContactsListViewModel: ObservableObject {
   func sendMessage(numberToMessage: String, currentUser: User?) {
     guard let currentUser = currentUser else { return }
     generateInviteLink(currentUser: currentUser) { [weak self] url in
-      let message = "I am inviting you to an exclusive new app called Wingit! Follow my referral link to join: \(url)"
+      let message = "I am inviting you to an exclusive new app called Wingit! Follow my personal referral link to join: \(url)"
       self?.shareSMS(numberToMessage: numberToMessage, message: message)
     }
   }
@@ -63,8 +63,8 @@ class ContactsListViewModel: ObservableObject {
     components.host = Constants.DYNAMIC_LINKS_DOMAIN
     components.path = Constants.INVITE_PATH
     
-    if let referralCode = currentUser?.id?.prefix(6) {
-      let inviteCodeQueryItem = URLQueryItem(name: "referralCode", value: String(referralCode))
+    if let inviteCode = currentUser?.id?.prefix(6) {
+      let inviteCodeQueryItem = URLQueryItem(name: "inviteCode", value: String(inviteCode))
       components.queryItems = [inviteCodeQueryItem]
     }
     

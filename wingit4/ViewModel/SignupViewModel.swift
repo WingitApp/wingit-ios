@@ -12,8 +12,9 @@ import FirebaseStorage
 import SwiftUI
 
 class SignupViewModel: ObservableObject {
-  
-    @Published var referralCode: String = ""
+    @Published var inviter: User?
+    @Published var inviteCode: String = ""
+    @Published var inviterSheetOpen: Bool = false
     @Published var firstName: String = ""
     @Published var lastName: String = ""
     @Published var username: String = ""
@@ -144,6 +145,14 @@ class SignupViewModel: ObservableObject {
     username = ""
     email = ""
     password = ""
+  }
+  
+  func fetchInviter() {
+    return
+  }
+  
+  func acceptInvitation() {
+    return
   }
   
   /// Sends Amplitude event on signup attempt

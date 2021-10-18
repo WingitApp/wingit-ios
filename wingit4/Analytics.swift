@@ -10,6 +10,7 @@ import Foundation
 
 enum AmplitudeEvent: String {
     // Onboarding
+    case acceptInvitation = "Accept Invitation"
     case viewLoginScreen = "View Login Screen"
     case loginAttempt = "Login Attempt"
     case userLogin = "User Login"

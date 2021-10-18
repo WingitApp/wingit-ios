@@ -33,7 +33,7 @@ struct LoginSignup: View {
         
           Button(action: { withAnimation(.easeIn){
 
-            signupViewModel.index = 6
+            signupViewModel.index = 8
             
           }}){
             Text("Login")

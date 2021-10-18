@@ -5,8 +5,9 @@
 //  Created by YaeRim Amy Chun on 9/9/21.
 //
 
-import SwiftUI
+import Firebase
 import FirebaseAuth
+import SwiftUI
 
 struct OnboardingView: View {
   
@@ -61,9 +62,9 @@ struct FirstView : View {
         else if signupViewModel.index == 1 {
        
           ZStack{
-            SignUpTitles(title: "Enter your Referral code",
-                         subtitle: nil)
-            ReferralCode()
+            SignUpTitles(title: "Enter your invite code",
+                         subtitle: "An invite code from a current user is required to signup for Wingit")
+            InviteCode()
               .environmentObject(signupViewModel)
           }
           
@@ -118,7 +119,32 @@ struct FirstView : View {
         }
         
       }
-      
+      .sheet(
+        isPresented: $signupViewModel.inviterSheetOpen,
+        content: {
+          Invitation(inviter: signupViewModel.inviter)
+      })
+      .onOpenURL { url in
+        print("Incoming URL parameter is: \(url)")
+          // 2
+          let linkHandled = DynamicLinks.dynamicLinks()
+            .handleUniversalLink(url) { dynamicLink, error in
+            guard error == nil else {
+              fatalError("Error handling the incoming dynamic link.")
+            }
+            // 3
+            if let dynamicLink = dynamicLink {
+              // Handle Dynamic Link
+//              handleDynamicLink(dynamicLink)
+            }
+          }
+          // 4
+          if linkHandled {
+            print("Link Handled")
+          } else {
+            print("No Link Handled")
+          }
+      }
     }
     
     

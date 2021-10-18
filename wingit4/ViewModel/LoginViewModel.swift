@@ -8,7 +8,7 @@
 import SwiftUI
 import Firebase
 
-class PhoneViewModel: ObservableObject {
+class LoginViewModel: ObservableObject {
 
     @Published var phoneNo = ""
     
