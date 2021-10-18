@@ -71,7 +71,7 @@ struct FirstView : View {
           
           
           ZStack{
-            SignUpTitles(title: "Add you Email and Password",
+            SignUpTitles(title: "Email and Password",
                          subtitle: nil)
             EmailPass()
               .environmentObject(signupViewModel)
