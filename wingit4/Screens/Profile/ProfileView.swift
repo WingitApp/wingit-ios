@@ -150,20 +150,29 @@ struct ProfileView: View {
                 }
           },
           trailing:
-              Button(action: {
-                if isOwnProfile {
-                  self.session.logout()
-                }
-              }) {
-                if isOwnProfile {
-                  Text("Logout")
-                    .font(.subheadline)
-                    .foregroundColor(Color.black)
-                  Image(systemName: "arrow.right.circle")
+            Button(action: {}) {
+              if isOwnProfile {
+                NavigationLink(destination: SettingsView().environmentObject(session)) {
+                  Image(systemName: "gearshape.fill")
                     .imageScale(Image.Scale.medium)
                     .foregroundColor(Color.black)
                 }
-            })
+              }
+        })
+//              Button(action: {
+//                if isOwnProfile {
+//                  self.session.logout()
+//                }
+//              }) {
+//                if isOwnProfile {
+//                  Text("Logout")
+//                    .font(.subheadline)
+//                    .foregroundColor(Color.black)
+//                  Image(systemName: "arrow.right.circle")
+//                    .imageScale(Image.Scale.medium)
+//                    .foregroundColor(Color.black)
+//                }
+//            })
       }
       .switchStyle(if: UIDevice.current.userInterfaceIdiom == .phone)
       .edgesIgnoringSafeArea(.top)

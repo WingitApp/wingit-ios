@@ -50,7 +50,7 @@ struct InsertPhoneNoBox: View {
             Text("Send").padding(.horizontal)
         }.disabled(phoneViewModel.phoneNo == "" ? true : false)
       }
-      .frame(width: 350, height: 75)
+      .frame(width: 380, height: 75)
       .background(Color.white)
       .cornerRadius(20)
       .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0)

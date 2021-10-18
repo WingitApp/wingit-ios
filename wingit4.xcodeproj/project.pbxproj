@@ -252,6 +252,7 @@
 		FB6E690F27192640002ABB41 /* InsertPhoneNoBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E690E27192640002ABB41 /* InsertPhoneNoBox.swift */; };
 		FB6E691127192E2A002ABB41 /* LoginSignup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E691027192E2A002ABB41 /* LoginSignup.swift */; };
 		FBAA5F1F271B9B0300CF61BD /* SignUpTitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAA5F1E271B9B0300CF61BD /* SignUpTitles.swift */; };
+		FBAA5F21271E0FD600CF61BD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAA5F20271E0FD600CF61BD /* SettingsView.swift */; };
 		FBD25F7E27043C4E0002C5B2 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD25F7D27043C4E0002C5B2 /* PopUp.swift */; };
 		FBDFDB55270E4BC400EDE22F /* BoardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDFDB54270E4BC400EDE22F /* BoardingScreen.swift */; };
 		FBDFDB57270E4BDD00EDE22F /* OnboardingV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDFDB56270E4BDD00EDE22F /* OnboardingV2.swift */; };
@@ -497,6 +498,7 @@
 		FB6E690E27192640002ABB41 /* InsertPhoneNoBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertPhoneNoBox.swift; sourceTree = "<group>"; };
 		FB6E691027192E2A002ABB41 /* LoginSignup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignup.swift; sourceTree = "<group>"; };
 		FBAA5F1E271B9B0300CF61BD /* SignUpTitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTitles.swift; sourceTree = "<group>"; };
+		FBAA5F20271E0FD600CF61BD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		FBD25F7D27043C4E0002C5B2 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 		FBDFDB54270E4BC400EDE22F /* BoardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingScreen.swift; sourceTree = "<group>"; };
 		FBDFDB56270E4BDD00EDE22F /* OnboardingV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingV2.swift; sourceTree = "<group>"; };
@@ -664,6 +666,7 @@
 				15F7E87826E8435A00E5238F /* PersonalProfileHeader.swift */,
 				1500983426EFE45B00D31B8C /* ProfileFeed.swift */,
 				1594EE72270630F800D5C9E9 /* EditProfileView.swift */,
+				FBAA5F20271E0FD600CF61BD /* SettingsView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1277,6 +1280,7 @@
 				15A1BC7726FC4DCE00A1AF27 /* ReferralFeed.swift in Sources */,
 				65EC9D8C271D5E8600B9231A /* CustomNumberPad.swift in Sources */,
 				654334DD27134652004D0171 /* ViewRouter.swift in Sources */,
+				FBAA5F21271E0FD600CF61BD /* SettingsView.swift in Sources */,
 				151A3C8326D1B0D200A39FAF /* UserAvatar.swift in Sources */,
 				3BE57FF926D95A34005C242F /* ProfileCard.swift in Sources */,
 				1594EE75270658F500D5C9E9 /* BackgroundBlurView.swift in Sources */,
