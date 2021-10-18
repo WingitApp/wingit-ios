@@ -84,16 +84,15 @@ struct Verification: View {
                     
                   Button(action: { withAnimation(.easeIn){
                     signupViewModel.index = 5}})
-                            
                   {
-                        Text("Verify and Create Account")
-                            .foregroundColor(.white)
-                            .padding(.vertical)
-                            .frame(width: UIScreen.main.bounds.width - 30)
-                            .background(Color.wingitBlue)
-                            .cornerRadius(15)
-                    }
-                    .padding()
+                    Text("Verify and Create Account")
+                      .foregroundColor(.white)
+                      .padding(.vertical)
+                      .frame(width: UIScreen.main.bounds.width - 30)
+                      .background(Color.wingitBlue)
+                      .cornerRadius(15)
+                  }
+                  .padding()
                 }
                 .frame(height: UIScreen.main.bounds.height / 1.8)
                 .background(Color.white)
