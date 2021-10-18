@@ -32,9 +32,6 @@ struct Bio: View {
       VStack(alignment: .leading, spacing: 0) {
         Text("").padding(.bottom, 50)
         HStack {
-          Text("Include a short Bio")
-            .bold()
-            .padding(.bottom, 10)
           Spacer()
           VStack(alignment: .trailing, spacing: 0){
             Text(

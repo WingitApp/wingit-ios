@@ -82,7 +82,8 @@ struct Verification: View {
 //                    }
 //                    .padding(.top,6)
                     
-                  Button(action: {verify()})
+                  Button(action: { withAnimation(.easeIn){
+                    signupViewModel.index = 5}})
                             
                   {
                         Text("Verify and Create Account")

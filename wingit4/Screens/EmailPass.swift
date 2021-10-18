@@ -29,7 +29,8 @@ struct EmailPass: View {
       Spacer()
       HStack{
         Spacer()
-      Button(action: { firstVerification() })
+      Button(action: { withAnimation(.easeIn){
+        signupViewModel.index = 3} })
       { NextButton()}
       .alert(
         isPresented: $signupViewModel.isAlertShown

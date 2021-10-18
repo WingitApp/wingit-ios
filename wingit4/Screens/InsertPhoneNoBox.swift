@@ -13,10 +13,12 @@ struct InsertPhoneNoBox: View {
   @EnvironmentObject var signupViewModel: SignupViewModel
   
   func sendCode(){
-      phoneViewModel.sendCode()
-      withAnimation(.easeIn){
-        signupViewModel.index = 4}
-    }
+    self.phoneViewModel.sendCode()
+    self.phoneViewModel.gotoVerify = true
+    withAnimation(.easeIn){
+      signupViewModel.index = 4}
+  }
+  
   
     var body: some View {
       ZStack{
@@ -44,7 +46,7 @@ struct InsertPhoneNoBox: View {
           
           Spacer(minLength: 0)
           
-        Button(action: { sendCode()}){
+        Button(action: { }){
             Text("Send").padding(.horizontal)
         }.disabled(phoneViewModel.phoneNo == "" ? true : false)
       }
