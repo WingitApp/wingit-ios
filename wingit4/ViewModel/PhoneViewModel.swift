@@ -22,9 +22,6 @@ class PhoneViewModel: ObservableObject {
     @Published var errorMsg = ""
     @Published var error = false
     
-    // storing CODE for verification...
-    @Published var CODE = ""
-    
     @Published var gotoVerify = false
     
     // User Logged Status
@@ -60,7 +57,7 @@ class PhoneViewModel: ObservableObject {
     
     func verifyCode(onSuccess: @escaping() -> Void) {
       let user = Auth.auth().currentUser
-      let credential = PhoneAuthProvider.provider().credential(withVerificationID: self.authVerificationId!, verificationCode: self.CODE)
+      let credential = PhoneAuthProvider.provider().credential(withVerificationID: self.authVerificationId!, verificationCode: self.code)
       let assertion = PhoneMultiFactorGenerator.assertion(with: credential)
       user?.multiFactor.enroll(with: assertion, displayName: user?.displayName) { (error) in
         if let error = error {
