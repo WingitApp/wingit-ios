@@ -40,10 +40,10 @@ class PhoneViewModel: ObservableObject {
     
     func sendCode(onSuccess: @escaping() -> Void) {
 //        Auth.auth().settings?.isAppVerificationDisabledForTesting = true
-        let user = Auth.auth().currentUser
-        let number = "+\(getCountryCode())\(phoneNo)"
+      let user = Auth.auth().currentUser
+      let number = "+\(getCountryCode())\(phoneNo)"
       user?.multiFactor.getSessionWithCompletion({ (session, error) in
-        PhoneAuthProvider.provider().verifyPhoneNumber(number, uiDelegate: nil) { (verificationId, err) in
+        PhoneAuthProvider.provider().verifyPhoneNumber(number, uiDelegate: nil, multiFactorSession: session) { (verificationId, err) in
           self.authVerificationId = verificationId
           if let error = err {
             self.errorMsg = error.localizedDescription
