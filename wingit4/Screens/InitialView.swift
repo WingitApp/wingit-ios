@@ -24,20 +24,20 @@ struct InitialView: View {
         session.listenAuthenticationState()
     }
     
-    var body: some View {
-        Group {
-            if session.isLoggedIn {
-                MainView()
-            } 
-            else {
-              OnboardingView()
-//                FirstView()
-               // OnboardingV2()
-            }
-        }
-        .onAppear(perform: listen)
-        .preferredColorScheme(.light)
-       
-      //  .environment(\.colorScheme, .dark)
+  var body: some View {
+    Group {
+      if session.isLoggedIn && status {
+        MainView()
+      }
+      else {
+        OnboardingView()
+        //                FirstView()
+        // OnboardingV2()
+      }
     }
+    .onAppear(perform: listen)
+    .preferredColorScheme(.light)
+    
+    //  .environment(\.colorScheme, .dark)
+  }
 }

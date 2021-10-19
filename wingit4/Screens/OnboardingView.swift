@@ -45,7 +45,7 @@ struct FirstView : View {
  // @State var index = 0
  // @Namespace var name
   @StateObject var signupViewModel = SignupViewModel()
-  @ObservedObject var phoneViewModel = PhoneViewModel()
+  @StateObject var phoneViewModel = PhoneViewModel()
 
   var body: some View{
     ActivityIndicatorView(message: "Loading...", isShowing: self.$session.isSessionLoading) {
@@ -82,11 +82,11 @@ struct FirstView : View {
          
           PhoneNumber()
             .environmentObject(signupViewModel)
-          
+            .environmentObject(phoneViewModel)
         } else if signupViewModel.index == 4 {
-          
-          Verification(phoneViewModel: phoneViewModel)
+          Verification()
              .environmentObject(signupViewModel)
+             .environmentObject(phoneViewModel)
           
         } else if signupViewModel.index == 5 {
           ZStack{

@@ -15,7 +15,7 @@ struct EmailPass: View {
     signupViewModel.signup() { user in
         signupViewModel.onSignupSuccess(user: user)
         self.session.currentUser = user
-    withAnimation(.easeIn){
+    withAnimation(.easeIn) {
       signupViewModel.index = 3}
    
     }
@@ -29,8 +29,7 @@ struct EmailPass: View {
       Spacer()
       HStack{
         Spacer()
-      Button(action: { withAnimation(.easeIn){
-        signupViewModel.index = 3} })
+      Button(action: firstVerification)
       { NextButton()}
       .alert(
         isPresented: $signupViewModel.isAlertShown

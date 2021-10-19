@@ -10,6 +10,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
+@MainActor
 class PhoneViewModel: ObservableObject {
 
     @Published var phoneNo = ""
@@ -29,119 +30,55 @@ class PhoneViewModel: ObservableObject {
     
     // User Logged Status
     @AppStorage("log_Status") var status = false
-    
+    @AppStorage("authVerificationID") var authVerificationId: String?
     // Loading View....
     @Published var loading = false
     
-    func getCountryCode()->String {
-        
-        let regionCode = Locale.current.regionCode ?? ""
-        
-        return countries[regionCode] ?? ""
+    func getCountryCode() -> String {
+      let regionCode = Locale.current.regionCode ?? ""
+      return countries[regionCode] ?? ""
     }
     
-    
-    // sending Code To User....
-  
-    func sendCode(){
-        /*
-         How to get country Code (to track which country one is from)
-         */
-        /* enabling testing code...
-         disable when you need to test with real device... */
-
-//      Auth.auth().settings?.isAppVerificationDisabledForTesting = true
-//        let user = Auth.auth().currentUser
-//        let phoneNumber = "+\(getCountryCode())\(phoneNo)"
-//
-//      user?.multiFactor.getSessionWithCompletion({(session, error) in
-//        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil, multiFactorSession: session)
-//          { (verificationId, error) in
-//
-//          let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationId!, verificationCode: self.CODE)
-//
-//          let assertion = PhoneMultiFactorGenerator.assertion(with: credential)
-//          user?.multiFactor.enroll(with: assertion, displayName: user?.displayName) {(error) in
-//            self.errorMsg = error?.localizedDescription ?? ""
-//
-//          }
-//            guard let userId = Auth.auth().currentUser?.uid else { return }
-//            Ref.FS_DOC_USERID(userId: userId).setData(["phoneNumber": self.phoneNo], merge: true)
-//
-//        }
-//
-//      })
-      
-        Auth.auth().settings?.isAppVerificationDisabledForTesting = false
-
+    func sendCode(onSuccess: @escaping() -> Void) {
+//        Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+        let user = Auth.auth().currentUser
         let number = "+\(getCountryCode())\(phoneNo)"
-        PhoneAuthProvider.provider().verifyPhoneNumber(number, uiDelegate: nil) { (CODE, err) in
-
-            if let error = err{
-
-                self.errorMsg = error.localizedDescription
-                withAnimation{ self.error.toggle()}
-                return
-            }
-
-            self.CODE = CODE ?? ""
-            self.gotoVerify = true
+      user?.multiFactor.getSessionWithCompletion({ (session, error) in
+        PhoneAuthProvider.provider().verifyPhoneNumber(number, uiDelegate: nil) { (verificationId, err) in
+          self.authVerificationId = verificationId
+          if let error = err {
+            self.errorMsg = error.localizedDescription
+            withAnimation{ self.error.toggle() }
+            return
+          } else {
+            onSuccess()
+          }
         }
+      })
     }
     
-    func verifyCode(){
-     
-//        let user = Auth.auth().currentUser
-//        let phoneNumber = "+\(getCountryCode())\(phoneNo)"
-//        loading = true
-      
-//      user?.multiFactor.getSessionWithCompletion({(session, error) in
-//        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil, multiFactorSession: session)
-//          { (verificationId, error) in
-//
-//            self.loading = false
-//
-//            let credential = PhoneAuthProvider.provider().credential(withVerificationID: self.CODE, verificationCode: self.code)
-//
-//          let assertion = PhoneMultiFactorGenerator.assertion(with: credential)
-//          user?.multiFactor.enroll(with: assertion, displayName: user?.displayName) {(error) in
-//            self.errorMsg = error?.localizedDescription ?? ""
-//
-//          }
-//            guard let userId = Auth.auth().currentUser?.uid else { return }
-//            Ref.FS_DOC_USERID(userId: userId).setData(["phoneNumber": self.phoneNo], merge: true)
-//        }
-//
-//      })
-        
-        let credential = PhoneAuthProvider.provider().credential(withVerificationID: self.CODE, verificationCode: code)
-
-        loading = true
-
-        Auth.auth().signIn(with: credential) { (result, err) in
-
-            self.loading = false
-
-            if let error = err{
-                self.errorMsg = error.localizedDescription
-                withAnimation{ self.error.toggle()}
-                return
-            }
-            
-            // else user logged in Successfully ....
-            
-            withAnimation{self.status = true} 
+    func verifyCode(onSuccess: @escaping() -> Void) {
+      let user = Auth.auth().currentUser
+      let credential = PhoneAuthProvider.provider().credential(withVerificationID: self.authVerificationId!, verificationCode: self.CODE)
+      let assertion = PhoneMultiFactorGenerator.assertion(with: credential)
+      user?.multiFactor.enroll(with: assertion, displayName: user?.displayName) { (error) in
+        if let error = error {
+          self.errorMsg = error.localizedDescription
+          withAnimation{ self.error.toggle() }
+          return
+        } else {
+          onSuccess()
         }
+      }
     }
     
-    func requestCode(){
-        
-        sendCode()
-        withAnimation{
-            
-            self.errorMsg = "Code Sent Successfully !!!"
-            self.error.toggle()
-        }
+  func requestCode() {
+    sendCode() {
+      withAnimation {
+        self.errorMsg = "Code Sent Successfully"
+        self.error.toggle()
+      }
     }
+  }
 }
 

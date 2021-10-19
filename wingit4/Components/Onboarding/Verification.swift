@@ -7,16 +7,18 @@
 
 import SwiftUI
 
+@MainActor
 struct Verification: View {
-  
-    @ObservedObject var phoneViewModel : PhoneViewModel
+    @EnvironmentObject var phoneViewModel : PhoneViewModel
     @EnvironmentObject var signupViewModel: SignupViewModel
     @Environment(\.presentationMode) var present
   
-  func verify(){
-    phoneViewModel.verifyCode()
-    withAnimation(.easeIn){
-      signupViewModel.index = 5}
+  func verify() {
+    phoneViewModel.verifyCode() {
+      withAnimation(.easeIn) {
+        signupViewModel.index = 5
+      }
+    }
   }
   
     var body: some View {
@@ -66,7 +68,7 @@ struct Verification: View {
                         Text("Didn't receive code?")
                             .foregroundColor(.gray)
                         
-                        Button(action: phoneViewModel.requestCode) {
+                        Button(action: phoneViewModel.requestCode ) {
                             
                             Text("Request Again")
                                 .fontWeight(.bold)
@@ -82,8 +84,7 @@ struct Verification: View {
 //                    }
 //                    .padding(.top,6)
                     
-                  Button(action: { withAnimation(.easeIn){
-                    signupViewModel.index = 5}})
+                  Button(action: verify)
                   {
                     Text("Verify and Create Account")
                       .foregroundColor(.white)
@@ -102,8 +103,7 @@ struct Verification: View {
             }
             .background(Color("lightGray").ignoresSafeArea(.all, edges: .bottom))
             
-            if phoneViewModel.error{
-                
+            if phoneViewModel.error {
                 PhoneAlertView(msg: phoneViewModel.errorMsg, show: $phoneViewModel.error)
             }
         }

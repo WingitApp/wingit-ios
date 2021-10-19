@@ -22,7 +22,7 @@ struct PhoneAlertView: View {
             
             Button(action: {
                 // closing popup...
-                show.toggle()
+                show = false
             }, label: {
                 Text("Close")
                     .foregroundColor(.black)

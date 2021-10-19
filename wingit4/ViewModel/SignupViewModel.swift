@@ -74,8 +74,8 @@ class SignupViewModel: ObservableObject {
         if checkFirstVerification() {
             
            return AuthService.signupUser(
-              firstName: firstName.capitalized,
-              lastName: lastName.capitalized,
+              firstName: firstName,
+              lastName: lastName,
               username: username,
               email: email,
               password: password,

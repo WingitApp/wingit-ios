@@ -22,6 +22,7 @@ struct InviteCode: View {
         { NextButton()}
         }
       }
+      .onTapGesture(perform: dismissKeyboard)
     }
 }
 

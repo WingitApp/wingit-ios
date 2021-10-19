@@ -9,16 +9,8 @@ import SwiftUI
 
 struct PhoneNumber : View {
   
-  @StateObject var phoneViewModel = PhoneViewModel()
+  @EnvironmentObject var phoneViewModel: PhoneViewModel
   @EnvironmentObject var signupViewModel: SignupViewModel
-  
-    
-  func sendCode(){
-    withAnimation(.easeIn){
-      signupViewModel.index = 4}
-    self.phoneViewModel.sendCode()
-    self.phoneViewModel.gotoVerify = true
-  }
   
     var body: some View{
 //      SignUpTitles(title: "Provide a phone number",
@@ -33,7 +25,7 @@ struct PhoneNumber : View {
                   // Mobile Number Field....
               InsertPhoneNoBox()
                 .environmentObject(signupViewModel)
-              
+                .environmentObject(phoneViewModel)
                 }
                 .frame(height: UIScreen.main.bounds.height / 1.8)
                       .background(Color.white)
@@ -46,8 +38,7 @@ struct PhoneNumber : View {
           }
           .background(Color("lightGray").ignoresSafeArea(.all, edges: .bottom))
           
-          if phoneViewModel.error{
-              
+          if phoneViewModel.error {
               PhoneAlertView(msg: phoneViewModel.errorMsg, show: $phoneViewModel.error)
           }
       }
