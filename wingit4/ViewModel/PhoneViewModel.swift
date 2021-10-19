@@ -10,7 +10,6 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
-@MainActor
 class PhoneViewModel: ObservableObject {
 
     @Published var phoneNo = ""
@@ -64,7 +63,9 @@ class PhoneViewModel: ObservableObject {
       user?.multiFactor.enroll(with: assertion, displayName: user?.displayName) { (error) in
         if let error = error {
           self.errorMsg = error.localizedDescription
-          withAnimation{ self.error.toggle() }
+          DispatchQueue.main.async {
+            withAnimation{ self.error.toggle() }
+          }
           return
         } else {
           onSuccess()

@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-@MainActor
 struct Verification: View {
     @EnvironmentObject var phoneViewModel : PhoneViewModel
     @EnvironmentObject var signupViewModel: SignupViewModel
