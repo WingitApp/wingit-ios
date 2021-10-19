@@ -63,9 +63,9 @@ class ContactsListViewModel: ObservableObject {
     components.host = Constants.DYNAMIC_LINKS_DOMAIN
     components.path = Constants.INVITE_PATH
     
-    if let inviteCode = currentUser?.id?.prefix(6) {
-      let inviteCodeQueryItem = URLQueryItem(name: "inviteCode", value: String(inviteCode))
-      components.queryItems = [inviteCodeQueryItem]
+    if let inviterId = currentUser?.id {
+      let inviterQueryItem = URLQueryItem(name: "inviterId", value: inviterId)
+      components.queryItems = [inviterQueryItem]
     }
     
     guard let linkParameter = components.url else { return onComplete(APP_STORE_LINK) }
