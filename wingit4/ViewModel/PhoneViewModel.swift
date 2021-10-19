@@ -46,8 +46,10 @@ class PhoneViewModel: ObservableObject {
         PhoneAuthProvider.provider().verifyPhoneNumber(number, uiDelegate: nil, multiFactorSession: session) { (verificationId, err) in
           self.authVerificationId = verificationId
           if let error = err {
-            self.errorMsg = error.localizedDescription
-            withAnimation{ self.error.toggle() }
+            DispatchQueue.main.async {
+              self.errorMsg = error.localizedDescription
+              withAnimation{ self.error.toggle() }
+            }
             return
           } else {
             onSuccess()
@@ -62,8 +64,8 @@ class PhoneViewModel: ObservableObject {
       let assertion = PhoneMultiFactorGenerator.assertion(with: credential)
       user?.multiFactor.enroll(with: assertion, displayName: user?.displayName) { (error) in
         if let error = error {
-          self.errorMsg = error.localizedDescription
           DispatchQueue.main.async {
+            self.errorMsg = error.localizedDescription
             withAnimation{ self.error.toggle() }
           }
           return
@@ -75,9 +77,11 @@ class PhoneViewModel: ObservableObject {
     
   func requestCode() {
     sendCode() {
-      withAnimation {
-        self.errorMsg = "Code Sent Successfully"
-        self.error.toggle()
+      DispatchQueue.main.async {
+        withAnimation {
+          self.errorMsg = "Code Sent Successfully"
+          self.error.toggle()
+        }
       }
     }
   }
