@@ -200,7 +200,7 @@ struct ProfileView: View {
       alignment: .center,
       direction: .bottom,
       content: {
-        EditProfileView()
+        EditProfileView() 
         .environmentObject(updatePhotoVM)
       }))
   }

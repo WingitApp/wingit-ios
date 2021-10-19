@@ -68,8 +68,8 @@ struct ProfilePostsTab: View {
           .onTapGesture(perform: onTapShowClosedPosts)
           .foregroundColor(
             isOwnProfile
-            ? (!profileViewModel.showOpenPosts ? Color.wingitBlue : Color.black)
-            : (!userProfileViewModel.showOpenPosts ? Color.wingitBlue : Color.black)
+            ? (!profileViewModel.showOpenPosts ? Color.wingitBlue : Color.gray)
+            : (!userProfileViewModel.showOpenPosts ? Color.wingitBlue : Color.gray)
           )
         .redacted(reason:
             (isOwnProfile ? profileViewModel.isFetchingUserClosedPosts : userProfileViewModel.isFetchingClosedPosts)
