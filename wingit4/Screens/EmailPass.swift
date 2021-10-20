@@ -24,6 +24,11 @@ struct EmailPass: View {
   var body: some View {
     VStack{
       Spacer()
+      Image("logo")
+        .resizable()
+        .aspectRatio(contentMode: .fill)
+        .frame(width: 75, height: 75)
+        .padding(.bottom, 50)
       EmailPassTextField()
         .environmentObject(signupViewModel)
       Spacer()

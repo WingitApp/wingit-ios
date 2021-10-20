@@ -62,8 +62,8 @@ struct FirstView : View {
         else if signupViewModel.index == 1 {
        
           ZStack{
-            SignUpTitles(title: "Enter your invite code",
-                         subtitle: "An invite code from a current user is required to signup for Wingit").padding()
+            SignUpTitles(title: "Hi! Enter your invite code",
+                         subtitle: "An invite code from a current user is required to signup for Wingit.").padding()
             InviteCode()
               .environmentObject(signupViewModel)
           }
@@ -99,8 +99,8 @@ struct FirstView : View {
         else if signupViewModel.index == 6 {
         //Optional
           ZStack{
-          SignUpTitles(title: "Add a profile photo",
-                       subtitle: "A profile photo will help your friends identify you.")
+          SignUpTitles(title: "Add a photo and bio",
+                       subtitle: "Help your friends identify you better.")
             AvatarBio()
               .environmentObject(signupViewModel)
           }

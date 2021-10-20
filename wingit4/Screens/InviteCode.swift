@@ -14,6 +14,11 @@ struct InviteCode: View {
         Spacer()
       InviteCodeInputField(inviteCode: $signupViewModel.inviteCode)
           .padding(.horizontal,25)
+        Image("gift")
+          .resizable()
+          .aspectRatio(contentMode: .fill)
+          .frame(width: 75, height: 75)
+          .padding(.top, 50)
         Spacer()
         HStack{
           Spacer()
