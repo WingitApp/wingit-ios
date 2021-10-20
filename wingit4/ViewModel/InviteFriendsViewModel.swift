@@ -12,8 +12,6 @@ import Foundation
 import SwiftUI
 
 class InviteFriendsViewModel: ObservableObject {
-  @State var activityIndicator = false
-  @Published var isShareSheetShown = false
   @Published var newContact = CNContact()
   @Published var contacts: [Contact] = []
   @Published var showNewContact = false // --> This is for the modal
@@ -47,12 +45,9 @@ class InviteFriendsViewModel: ObservableObject {
   func shareLink(currentUser: User?) {
     guard let currentUser = currentUser else { return }
     generateInviteLink(currentUser: currentUser) { url in
-      let message = "I am inviting you to an exclusive new app called Wingit! Follow my personal referral link to join: \(url)"
-
-      self.activityIndicator = false
-      self.isShareSheetShown.toggle()
+      let message = "I am inviting you to an exclusive app called Wingit! Follow this personal referral link to join:"
       
-      let activityView = UIActivityViewController(activityItems: [message, url], applicationActivities: nil)
+      let activityView = UIActivityViewController(activityItems: [message, URL(string: url)!], applicationActivities: nil)
       UIApplication.shared.windows.first?.rootViewController?.present(activityView, animated: true, completion: nil)
     }
   }

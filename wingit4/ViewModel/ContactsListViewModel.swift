@@ -46,7 +46,7 @@ class ContactsListViewModel: ObservableObject {
   func sendMessage(numberToMessage: String, currentUser: User?) {
     guard let currentUser = currentUser else { return }
     generateInviteLink(currentUser: currentUser) { [weak self] url in
-      let message = "I am inviting you to an exclusive new app called Wingit! Follow my personal referral link to join: \(url)"
+      let message = "I am inviting you to an exclusive app called Wingit! Follow this personal referral link to join:\n\(url)"
       self?.shareSMS(numberToMessage: numberToMessage, message: message)
     }
   }
