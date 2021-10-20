@@ -31,10 +31,13 @@ struct SettingsView: View {
 //              Label("Invite Friends", systemImage: "person")
 //            }
 //          }
+          Section(header: Text("Sign Out")){
           Button(action: {self.session.logout()}) {
           Label("Sign Out of Wingit", systemImage: "hand.wave.fill")
           }
+          }
         }
+          
         .listStyle(GroupedListStyle())
         .environment(\.horizontalSizeClass, .regular)
         
