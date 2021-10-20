@@ -14,7 +14,7 @@ struct InviteFriendsView: View {
   @ObservedObject var inviteFriendsViewModel = InviteFriendsViewModel()
   
   var body: some View {
-    Text("Referral Code")
+    VStack{
     HStack {
       Text(inviteCode)
         .fontWeight(.heavy)
@@ -34,6 +34,7 @@ struct InviteFriendsView: View {
       Button(action: { inviteFriendsViewModel.shareLink(currentUser: session.currentUser) }) {
       Image(systemName: "square.and.arrow.up.fill")
       }
-    }
+    }.padding()
+    }.navigationTitle("Referral Code")
   }
 }

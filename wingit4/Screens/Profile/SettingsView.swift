@@ -8,17 +8,31 @@
 import SwiftUI
 
 struct SettingsView: View {
+  
   @EnvironmentObject var session: SessionStore
-    var body: some View {
-      NavigationView{
+  @ObservedObject var inviteFriendsViewModel = InviteFriendsViewModel()
+  
+ 
+  var inviteCode: String
+  
+  
+  
+  var body: some View {
+      VStack{
         Form{
-          Section(header: Text("Invite")){
-            NavigationLink (destination: InviteFriendsView(inviteCode: String(session.currentUser?.id?.prefix(6) ?? ""))) {
+          Section(header: Text("Invite"),
+                  footer: Text("Referral Code: \(inviteCode)")) {
+            Button(action: { inviteFriendsViewModel.shareLink(currentUser: session.currentUser) }) {
               Label("Invite Friends", systemImage: "person")
             }
           }
-          Button(action: {self.session.logout()}){
-          Label("Sign Out of Wingit", systemImage: "rectangle.portrait.and.arrow.right")
+//          Section(header: Text("Invite")){
+//            NavigationLink (destination: InviteFriendsView(inviteCode: String(session.currentUser?.id?.prefix(6) ?? ""))) {
+//              Label("Invite Friends", systemImage: "person")
+//            }
+//          }
+          Button(action: {self.session.logout()}) {
+          Label("Sign Out of Wingit", systemImage: "hand.wave.fill")
           }
         }
         .listStyle(GroupedListStyle())
@@ -34,5 +48,13 @@ struct SettingsView: View {
       .navigationTitle("Settings")
      // .background(Color("background").edgesIgnoringSafeArea(.all))
     }
+ 
 }
 
+//  Section(header: Text("Invite"),
+//          footer: Text("Referral Code \(session.currentUser?.id?.prefix(6))")
+//  {
+//    Button(action: { inviteFriendsViewModel.shareLink(currentUser: session.currentUser) }){
+//      Label("Invite Friends", systemImage: "person")
+//    }
+//  }

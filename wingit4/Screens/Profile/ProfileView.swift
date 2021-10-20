@@ -152,10 +152,10 @@ struct ProfileView: View {
           trailing:
             Button(action: {}) {
               if isOwnProfile {
-                NavigationLink(destination: SettingsView().environmentObject(session)) {
+                NavigationLink(destination: SettingsView(inviteCode: String(session.currentUser?.id?.prefix(6) ?? "")).environmentObject(session)) {
                   Image(systemName: "gearshape.fill")
                     .imageScale(Image.Scale.medium)
-                    .foregroundColor(Color.black)
+                    .foregroundColor(Color.gray)
                 }
               }
         })
