@@ -54,7 +54,7 @@ struct VerifyPhoneNumber: View {
                             
                             // displaying code....
                             
-                            CodeView(code: getCodeAtIndex(index: index))
+                            CodeView()
                         }
                     }
                     .padding()
@@ -128,16 +128,13 @@ struct VerifyPhoneNumber: View {
 }
 
 struct CodeView: View {
-    
-    var code: String
-    
+    @EnvironmentObject var phoneViewModel : PhoneViewModel
     var body: some View{
         
         VStack(spacing: 10){
             
-            Text(code)
+          TextField("_", text: $phoneViewModel.code)
                 .foregroundColor(.black)
-                .fontWeight(.bold)
                 .font(.title2)
             // default frame...
                 .frame(height: 45)
