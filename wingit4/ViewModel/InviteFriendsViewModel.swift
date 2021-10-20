@@ -45,7 +45,7 @@ class InviteFriendsViewModel: ObservableObject {
   func shareLink(currentUser: User?) {
     guard let currentUser = currentUser else { return }
     generateInviteLink(currentUser: currentUser) { url in
-      let message = "I am inviting you to an exclusive app called Wingit! Follow this personal referral link to join:"
+      let message = "I am inviting you to join an exclusive app called Wingit! Use my personal invite link to join:"
       
       let activityView = UIActivityViewController(activityItems: [message, URL(string: url)!], applicationActivities: nil)
       UIApplication.shared.windows.first?.rootViewController?.present(activityView, animated: true, completion: nil)
