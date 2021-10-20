@@ -13,11 +13,11 @@ struct VerifyPhoneNumber: View {
     @Environment(\.presentationMode) var present
   
   func verify() {
-    phoneViewModel.verifyCode() {
+//    phoneViewModel.verifyCode() {
       withAnimation(.easeIn) {
         signupViewModel.index = 5
       }
-    }
+//    }
   }
   
     var body: some View {
@@ -69,7 +69,7 @@ struct VerifyPhoneNumber: View {
                         
                         Button(action: phoneViewModel.requestCode ) {
                             
-                            Text("Request Again")
+                            Text("Request again")
                                 .fontWeight(.bold)
                                 .foregroundColor(.black)
                         }
@@ -85,25 +85,27 @@ struct VerifyPhoneNumber: View {
                     
                   Button(action: verify)
                   {
-                    Text("Verify and Create Account")
+                    Text("Verify and create account")
                       .foregroundColor(.white)
                       .padding(.vertical)
                       .frame(width: UIScreen.main.bounds.width - 30)
                       .background(Color.wingitBlue)
-                      .cornerRadius(15)
+                      .cornerRadius(5)
                   }
                   .padding()
                 }
                 .frame(height: UIScreen.main.bounds.height / 1.8)
                 .background(Color.white)
-                .cornerRadius(20)
+                .cornerRadius(5)
 
                 CustomNumberPad(value: $phoneViewModel.code, isVerify: true)
             }
             .background(Color("lightGray").ignoresSafeArea(.all, edges: .bottom))
-            
-            if phoneViewModel.error {
-                PhoneAlertView(msg: phoneViewModel.errorMsg, show: $phoneViewModel.error)
+            .alert(isPresented: $phoneViewModel.error){
+              Alert(title: Text("Error"),
+                    message: Text(self.phoneViewModel.errorMsg),
+                    dismissButton: .default(Text("OK"))
+              )
             }
         }
         .navigationBarHidden(true)

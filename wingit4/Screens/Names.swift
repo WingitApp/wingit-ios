@@ -14,10 +14,10 @@ struct Names : View {
   func addUserNames() {
     withAnimation(.easeIn){
       signupViewModel.index = 6}
-    signupViewModel.addUserNames() { user in
-      signupViewModel.onSignupSuccess(user: user)
-      self.session.currentUser = user
-    }
+//    signupViewModel.addUserNames() { user in
+//      signupViewModel.onSignupSuccess(user: user)
+//      self.session.currentUser = user
+//    }
   }
   
     var body: some View{

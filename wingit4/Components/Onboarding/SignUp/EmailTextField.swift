@@ -13,7 +13,7 @@ struct EmailTextField: View {
     
     var body: some View {
        
-        TextField("email", text: $email)
+        TextField("Email", text: $email)
         .modifier(TextFieldModifier())
         .disableAutocorrection(true)
     }

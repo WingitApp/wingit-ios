@@ -14,7 +14,7 @@ struct InviteCodeInputField: View {
     
     var body: some View {
        
-    TextField("invite code", text: $inviteCode)
+    TextField("Invite code", text: $inviteCode)
         .modifier(TextFieldModifier())
     }
 }

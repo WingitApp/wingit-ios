@@ -29,7 +29,7 @@ struct PhoneNumber : View {
                 }
                 .frame(height: UIScreen.main.bounds.height / 1.8)
                       .background(Color.white)
-                      .cornerRadius(20)
+                      .cornerRadius(5)
             
               // Custom Number Pad....
               
@@ -37,9 +37,11 @@ struct PhoneNumber : View {
               
           }
           .background(Color("lightGray").ignoresSafeArea(.all, edges: .bottom))
-          
-          if phoneViewModel.error {
-              PhoneAlertView(msg: phoneViewModel.errorMsg, show: $phoneViewModel.error)
+          .alert(isPresented: $phoneViewModel.error){
+            Alert(title: Text("Error"),
+                  message: Text(self.phoneViewModel.errorMsg),
+                  dismissButton: .default(Text("OK"))
+            )
           }
       }
     }

@@ -63,7 +63,7 @@ struct FirstView : View {
        
           ZStack{
             SignUpTitles(title: "Enter your invite code",
-                         subtitle: "An invite code from a current user is required to signup for Wingit")
+                         subtitle: "An invite code from a current user is required to signup for Wingit").padding()
             InviteCode()
               .environmentObject(signupViewModel)
           }
@@ -72,17 +72,17 @@ struct FirstView : View {
           
           
           ZStack{
-            SignUpTitles(title: "Email and Password",
-                         subtitle: nil)
+            SignUpTitles(title: "Welcome!",
+                         subtitle: "Let’s create an account to get started.")
             EmailPass()
               .environmentObject(signupViewModel)
           }
         } else if signupViewModel.index == 3 {
-          
          
           PhoneNumber()
             .environmentObject(signupViewModel)
             .environmentObject(phoneViewModel)
+          
         } else if signupViewModel.index == 4 {
           VerifyPhoneNumber()
              .environmentObject(signupViewModel)
@@ -101,21 +101,14 @@ struct FirstView : View {
           ZStack{
           SignUpTitles(title: "Add a profile photo",
                        subtitle: "A profile photo will help your friends identify you.")
-            UploadAvatar()
+            AvatarBio()
               .environmentObject(signupViewModel)
           }
           
         } else if signupViewModel.index == 7 {
           //Optional
-          ZStack{
-          SignUpTitles(title: "Include a short bio",
-                       subtitle: nil)
-            Bio()
-              .environmentObject(signupViewModel)
-          }
+         Login1()
           
-        } else if signupViewModel.index == 8 {
-           Login1()
         }
         
       }

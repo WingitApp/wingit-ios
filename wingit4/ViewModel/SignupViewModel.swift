@@ -167,11 +167,11 @@ class SignupViewModel: ObservableObject {
   
   func ampSignupSuccessEvent(user: User) -> Void {
     setUserPropertiesOnAccountCreation(
-        userId: user.id,
+      userId: user.id,
       firstName: user.firstName,
-        lastName: user.lastName,
-        username: user.username,
-      email: user.email,
+      lastName: user.lastName,
+      username: user.username,
+      email: user.email ?? "",
       signupMethod: "email"
     )
     logToAmplitude(

@@ -14,7 +14,7 @@ struct PasswordTextField: View {
     
     var body: some View {
        
-    SecureField("password", text: $password)
+    SecureField("Password", text: $password)
         .modifier(TextFieldModifier())
     }
 }

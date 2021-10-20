@@ -19,10 +19,11 @@ struct Bio: View {
       signupViewModel.bioText = String(signupViewModel.bioText.prefix(upper))
          }
      }
+  
     func nextButtonBio() {
+//      signupViewModel.addBio()
       withAnimation(.easeIn){
         signupViewModel.index = 7}
-      signupViewModel.addBio()
     }
  
   

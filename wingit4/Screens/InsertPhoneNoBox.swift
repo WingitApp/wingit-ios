@@ -13,11 +13,11 @@ struct InsertPhoneNoBox: View {
   @EnvironmentObject var signupViewModel: SignupViewModel
   
   func sendCode() {
-    self.phoneViewModel.sendCode() {
+//    self.phoneViewModel.sendCode() {
       withAnimation(.easeIn) {
         signupViewModel.index = 4
       }
-    }
+//    }
   }
   
     var body: some View {
@@ -34,7 +34,7 @@ struct InsertPhoneNoBox: View {
           
           VStack(alignment: .leading, spacing: 6) {
               
-              Text("Enter Your Number")
+              Text("Enter your number")
                   .font(.caption)
                   .foregroundColor(.gray)
               
@@ -42,22 +42,36 @@ struct InsertPhoneNoBox: View {
                   .font(.title2)
                   .fontWeight(.bold)
                   .foregroundColor(.black)
-          }  .padding(.leading)
+          }.padding(.leading)
           
           Spacer(minLength: 0)
           
         Button(action: sendCode) {
             Text("Send").padding(.horizontal)
         }.disabled(phoneViewModel.phoneNo == "" ? true : false)
-      }
-      .frame(width: 380, height: 75)
-      .background(Color.white)
-      .cornerRadius(20)
-      .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0)
-      .padding()
         
       }
+      .padding(10)
+      .background(Color.white)
+      .cornerRadius(5)
+      .overlay(
+        RoundedRectangle(cornerRadius: 5)
+          .stroke(Color.borderGray, lineWidth: 1)
+      )
+//      .frame(width: 380, height: 75)
+  
+      }
+      .padding(.horizontal,25)
     }
     }
 }
 
+
+
+//  .padding()
+//  .background(Color.white)
+//  .cornerRadius(5)
+//  .overlay(
+//    RoundedRectangle(cornerRadius: 5)
+//      .stroke(Color.borderGray, lineWidth: 1)
+//  )

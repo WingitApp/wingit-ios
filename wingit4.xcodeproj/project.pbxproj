@@ -246,7 +246,7 @@
 		FB48BEE427176A96004E33EB /* EmailPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEE327176A96004E33EB /* EmailPass.swift */; };
 		FB48BEE627176ABE004E33EB /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEE527176ABE004E33EB /* PhoneNumber.swift */; };
 		FB48BEEC27178DDE004E33EB /* EULASignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEEB27178DDE004E33EB /* EULASignUp.swift */; };
-		FB48BEEE27178EC9004E33EB /* UploadAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEED27178EC9004E33EB /* UploadAvatar.swift */; };
+		FB48BEEE27178EC9004E33EB /* AvatarBio.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEED27178EC9004E33EB /* AvatarBio.swift */; };
 		FB560AE727110F7400F18F73 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB560AE627110F7300F18F73 /* UserRow.swift */; };
 		FB6E690B2718DCF2002ABB41 /* InviteCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E690A2718DCF2002ABB41 /* InviteCode.swift */; };
 		FB6E690D2718E38D002ABB41 /* Bio.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E690C2718E38D002ABB41 /* Bio.swift */; };
@@ -493,7 +493,7 @@
 		FB48BEE327176A96004E33EB /* EmailPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPass.swift; sourceTree = "<group>"; };
 		FB48BEE527176ABE004E33EB /* PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
 		FB48BEEB27178DDE004E33EB /* EULASignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULASignUp.swift; sourceTree = "<group>"; };
-		FB48BEED27178EC9004E33EB /* UploadAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAvatar.swift; sourceTree = "<group>"; };
+		FB48BEED27178EC9004E33EB /* AvatarBio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarBio.swift; sourceTree = "<group>"; };
 		FB560AE627110F7300F18F73 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
 		FB6E690A2718DCF2002ABB41 /* InviteCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteCode.swift; sourceTree = "<group>"; };
 		FB6E690C2718E38D002ABB41 /* Bio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bio.swift; sourceTree = "<group>"; };
@@ -883,7 +883,7 @@
 				FB48BEDF27176A4C004E33EB /* Login1.swift */,
 				FB48BEE127176A72004E33EB /* Names.swift */,
 				FB48BEE327176A96004E33EB /* EmailPass.swift */,
-				FB48BEED27178EC9004E33EB /* UploadAvatar.swift */,
+				FB48BEED27178EC9004E33EB /* AvatarBio.swift */,
 				FB48BEE527176ABE004E33EB /* PhoneNumber.swift */,
 				FB6E690E27192640002ABB41 /* InsertPhoneNoBox.swift */,
 				65EC9D9E271F688700B9231A /* InviteFriendsView.swift */,
@@ -1271,7 +1271,7 @@
 				FBFA098A271646030059B2AF /* Countries.swift in Sources */,
 				15DFD07E26ED9B71002CBE31 /* UserProfileDefault.swift in Sources */,
 				15CD208F2702820900C7FC1A /* AskCardTag.swift in Sources */,
-				FB48BEEE27178EC9004E33EB /* UploadAvatar.swift in Sources */,
+				FB48BEEE27178EC9004E33EB /* AvatarBio.swift in Sources */,
 				3BE61D6F26E08A0D0078C6CF /* ReferralsApi.swift in Sources */,
 				3B7AF04126718A4D003BCCF3 /* (null) in Sources */,
 				65A9EF9B26DF0B2500E81CBF /* ConnectionsViewModel.swift in Sources */,
