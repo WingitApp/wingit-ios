@@ -20,8 +20,12 @@ struct SettingsView: View {
   var body: some View {
       VStack{
         Form{
-          Section(header: Text("Invite"),
-                  footer: Text("Referral Code: \(inviteCode)")) {
+          Section(
+                  header: Text("Invite"),
+                  footer: HStack{ Spacer()
+                                  Text("Referral Code: \(inviteCode)") }
+                  )
+          {
             Button(action: { inviteFriendsViewModel.shareLink(currentUser: session.currentUser) }) {
               Label("Invite Friends", systemImage: "figure.wave")
             }
