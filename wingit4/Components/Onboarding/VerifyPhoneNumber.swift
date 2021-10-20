@@ -134,10 +134,11 @@ struct CodeView: View {
         VStack(spacing: 10){
             
           TextField("_", text: $phoneViewModel.code)
-                .foregroundColor(.black)
-                .font(.title2)
-            // default frame...
-                .frame(height: 45)
+            .textContentType(.oneTimeCode)
+            .foregroundColor(.black)
+            .font(.title2)
+          // default frame...
+            .frame(height: 45)
             
             Capsule()
                 .fill(Color.gray.opacity(0.5))
