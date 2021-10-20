@@ -23,7 +23,7 @@ struct SettingsView: View {
           Section(header: Text("Invite"),
                   footer: Text("Referral Code: \(inviteCode)")) {
             Button(action: { inviteFriendsViewModel.shareLink(currentUser: session.currentUser) }) {
-              Label("Invite Friends", systemImage: "person")
+              Label("Invite Friends", systemImage: "figure.wave")
             }
           }
 //          Section(header: Text("Invite")){
