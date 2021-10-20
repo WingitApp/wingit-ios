@@ -51,8 +51,9 @@ class ContactsService {
                         return nil
                     })
                             .sorted(by: { getName($0) < getName($1) }) // --> order by First Name then Last Name
-
-                        completionHandler(formatted, nil)
+                  DispatchQueue.main.async {
+                    completionHandler(formatted, nil)
+                  }
                 } catch {
                     print("Failed to fetch contact, error: \(error)")
                     completionHandler([], NSError()) // --> as a fallback, we return an empty array but we should capture the error elsewhere
