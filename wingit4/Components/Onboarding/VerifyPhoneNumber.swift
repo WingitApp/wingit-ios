@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Verification: View {
+struct VerifyPhoneNumber: View {
     @EnvironmentObject var phoneViewModel : PhoneViewModel
     @EnvironmentObject var signupViewModel: SignupViewModel
     @Environment(\.presentationMode) var present

@@ -226,7 +226,7 @@
 		65EC9D8A271D5E8600B9231A /* InviteCodeInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9D7B271D5E8600B9231A /* InviteCodeInputField.swift */; };
 		65EC9D8C271D5E8600B9231A /* CustomNumberPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9D7D271D5E8600B9231A /* CustomNumberPad.swift */; };
 		65EC9D8D271D5E8600B9231A /* PhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9D7E271D5E8600B9231A /* PhoneViewModel.swift */; };
-		65EC9D8E271D5E8600B9231A /* Verification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9D7F271D5E8600B9231A /* Verification.swift */; };
+		65EC9D8E271D5E8600B9231A /* VerifyPhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9D7F271D5E8600B9231A /* VerifyPhoneNumber.swift */; };
 		65EC9D8F271D5E8600B9231A /* OnboardText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9D80271D5E8600B9231A /* OnboardText.swift */; };
 		65EC9D92271D600600B9231A /* SignUpTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9D91271D600600B9231A /* SignUpTab.swift */; };
 		65EC9D96271D602F00B9231A /* SigninButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9D94271D602F00B9231A /* SigninButton.swift */; };
@@ -473,7 +473,7 @@
 		65EC9D7B271D5E8600B9231A /* InviteCodeInputField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteCodeInputField.swift; sourceTree = "<group>"; };
 		65EC9D7D271D5E8600B9231A /* CustomNumberPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNumberPad.swift; sourceTree = "<group>"; };
 		65EC9D7E271D5E8600B9231A /* PhoneViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneViewModel.swift; sourceTree = "<group>"; };
-		65EC9D7F271D5E8600B9231A /* Verification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Verification.swift; sourceTree = "<group>"; };
+		65EC9D7F271D5E8600B9231A /* VerifyPhoneNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumber.swift; sourceTree = "<group>"; };
 		65EC9D80271D5E8600B9231A /* OnboardText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardText.swift; sourceTree = "<group>"; };
 		65EC9D91271D600600B9231A /* SignUpTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpTab.swift; sourceTree = "<group>"; };
 		65EC9D94271D602F00B9231A /* SigninButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninButton.swift; sourceTree = "<group>"; };
@@ -1101,7 +1101,7 @@
 				65EC9D93271D602F00B9231A /* Login */,
 				65EC9D74271D5E8600B9231A /* SignUp */,
 				65EC9D7D271D5E8600B9231A /* CustomNumberPad.swift */,
-				65EC9D7F271D5E8600B9231A /* Verification.swift */,
+				65EC9D7F271D5E8600B9231A /* VerifyPhoneNumber.swift */,
 				65EC9D80271D5E8600B9231A /* OnboardText.swift */,
 			);
 			name = Onboarding;
@@ -1429,7 +1429,7 @@
 				6509E4FA26D6C214009CB74D /* Ask.swift in Sources */,
 				3B75E3C2267153BA002F3108 /* SigninView.swift in Sources */,
 				1524E0FF26F6713100D5BDB4 /* BumperCountSummary.swift in Sources */,
-				65EC9D8E271D5E8600B9231A /* Verification.swift in Sources */,
+				65EC9D8E271D5E8600B9231A /* VerifyPhoneNumber.swift in Sources */,
 				157F9970270B8042001A4031 /* ProfileParallax.swift in Sources */,
 				15F7E8B426E848ED00E5238F /* WingersRow.swift in Sources */,
 				3B7AF0972671D98E003BCCF3 /* Post.swift in Sources */,

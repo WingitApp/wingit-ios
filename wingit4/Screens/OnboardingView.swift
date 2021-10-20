@@ -84,7 +84,7 @@ struct FirstView : View {
             .environmentObject(signupViewModel)
             .environmentObject(phoneViewModel)
         } else if signupViewModel.index == 4 {
-          Verification()
+          VerifyPhoneNumber()
              .environmentObject(signupViewModel)
              .environmentObject(phoneViewModel)
           
