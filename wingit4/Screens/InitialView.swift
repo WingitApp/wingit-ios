@@ -26,7 +26,7 @@ struct InitialView: View {
     
   var body: some View {
     Group {
-      if session.isLoggedIn && status {
+      if session.isLoggedIn {
         MainView()
       }
       else {

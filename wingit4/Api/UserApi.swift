@@ -21,6 +21,10 @@ class UserApi {
             }
         }
     }
+  
+  func findUser(inviteCode: String, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping() -> Void) {
+    
+  }
     
     func loadUser(
         userId: String,

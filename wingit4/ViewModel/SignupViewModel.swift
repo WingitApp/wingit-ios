@@ -147,8 +147,13 @@ class SignupViewModel: ObservableObject {
     password = ""
   }
   
-  func fetchInviter() {
-    return
+  func fetchInviter(inviterId: String?) {
+    guard let inviterId = inviterId else { return }
+    Api.User.loadUser(userId: inviterId) { (user) in
+      self.inviter = user
+    } onError: {
+      print("fetch inviter error")
+    }
   }
   
   func acceptInvitation() {

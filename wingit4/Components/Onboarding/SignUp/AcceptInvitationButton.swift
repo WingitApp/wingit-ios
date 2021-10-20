@@ -22,7 +22,7 @@ struct AcceptInvitationButton: View {
               HStack(alignment: .center) {
                 Image(systemName: "checkmark.circle")
                   .foregroundColor(.white)
-                Text("Accept Invitation")
+                Text("Accept")
                   .fontWeight(.semibold)
               }
               .foregroundColor(.white)

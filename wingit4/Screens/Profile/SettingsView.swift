@@ -13,7 +13,9 @@ struct SettingsView: View {
       NavigationView{
         Form{
           Section(header: Text("Invite")){
-            Label("Invite Friends", systemImage: "person")
+            NavigationLink (destination: InviteFriendsView(inviteCode: String(session.currentUser?.id?.prefix(6) ?? ""))) {
+              Label("Invite Friends", systemImage: "person")
+            }
           }
           Button(action: {self.session.logout()}){
           Label("Sign Out of Wingit", systemImage: "rectangle.portrait.and.arrow.right")
