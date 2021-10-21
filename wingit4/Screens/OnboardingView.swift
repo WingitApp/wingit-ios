@@ -51,7 +51,7 @@ struct FirstView : View {
   var body: some View{
     ActivityIndicatorView(message: "Loading...", isShowing: self.$session.isSessionLoading) {
       
-      VStack{
+      VStack {
         
         if signupViewModel.index == 0 {
           
@@ -62,7 +62,8 @@ struct FirstView : View {
         
         else if signupViewModel.index == 1 {
         
-          ZStack{
+          ZStack {
+            
             SignUpTitles(title: "Hi! Enter your invite code",
                          subtitle: "An invite code from a current user is required to signup for Wingit.").padding()
             InviteCode()
@@ -83,7 +84,7 @@ struct FirstView : View {
           
         } else if signupViewModel.index == 4 {
        
-          ZStack{
+          ZStack {
             SignUpTitles(title: "Welcome!",
                          subtitle: "Let’s create an account to get started.")
             EmailPass()
@@ -91,16 +92,18 @@ struct FirstView : View {
           }
           
         } else if signupViewModel.index == 5 {
-          ZStack{
+          
+          ZStack {
             SignUpTitles(title: "Names",
                          subtitle: nil)
             Names()
               .environmentObject(signupViewModel)
           }
+          
         }
         else if signupViewModel.index == 6 {
           //Optional
-          ZStack{
+          ZStack {
           SignUpTitles(title: "Add a photo and bio",
                        subtitle: "Help your friends identify you better.")
             AvatarBio()
