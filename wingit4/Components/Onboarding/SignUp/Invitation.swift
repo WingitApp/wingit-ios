@@ -12,9 +12,9 @@ struct Invitation: View {
   var inviter: User?
   
     var body: some View {
+      Text("Pending invite from \(inviter?.displayName ?? "your friend") to join Wingit")
       URLImageView(urlString: inviter?.profileImageUrl)
-        .frame(width: 120, height: 120)
-        .cornerRadius(100)
+        .frame(width: 160, height: 200)
         .padding(5)
       HStack(spacing: 10) {
         AcceptInvitationButton(inviter: inviter ?? USER_PROFILE_DEFAULT_PLACEHOLDER)
