@@ -82,6 +82,7 @@ enum AmplitudeUserProperty: String {
     case email = "Email"
     case connections = "Connections"
     case firstName = "First name"
+    case inviter = "Inviter"
     case lastName = "Last name"
     case signupDate = "Signup date"
     case signupMethod = "Signup method"
@@ -92,6 +93,7 @@ enum AmplitudeUserProperty: String {
 enum AmplitudeProperty: String {
     case askId = "askId"
     case attachedPhoto = "attached photo"
+    case inviter = "inviter"
     case method = "method"
     case medium = "medium"
     case name = "name"
@@ -137,18 +139,21 @@ func setUserProperty(property: AmplitudeUserProperty, value: Any) {
     Amplitude.instance().identify(identify)
 }
 
-func setUserPropertiesOnAccountCreation(userId: String?, firstName: String?, lastName: String?, username: String?, email: String, signupMethod: String) {
-    guard let userId = userId, let firstName = firstName, let lastName = lastName, let username = username else { return }
-    let amplitude = Amplitude.instance()
-    amplitude.setUserId(userId)
-    guard let identify = AMPIdentify()
-            .setOnce(AmplitudeUserProperty.signupDate.rawValue, value: NSString(string: Date.iso8601ShortDateString(date: Date())))
-            .setOnce(AmplitudeUserProperty.email.rawValue, value: NSString(string: email))
-            .setOnce(AmplitudeUserProperty.firstName.rawValue, value: NSString(string: firstName))
-            .setOnce(AmplitudeUserProperty.lastName.rawValue, value: NSString(string: lastName))
-            .setOnce(AmplitudeUserProperty.username.rawValue, value: NSString(string: username))
-            .setOnce(AmplitudeUserProperty.signupMethod.rawValue, value: NSString(string: signupMethod))
-            .set(AmplitudeUserProperty.connections.rawValue, value: NSNumber(value: 0)) else { return }
-    amplitude.identify(identify)
+func setUserPropertiesOnAccountCreation(userId: String?, firstName: String?, lastName: String?, username: String?, email: String, signupMethod: String, inviterId: String?) {
+  guard let userId = userId, let firstName = firstName, let lastName = lastName, let username = username else { return }
+  let amplitude = Amplitude.instance()
+  amplitude.setUserId(userId)
+  guard let identify = AMPIdentify()
+          .setOnce(AmplitudeUserProperty.signupDate.rawValue, value: NSString(string: Date.iso8601ShortDateString(date: Date())))
+          .setOnce(AmplitudeUserProperty.email.rawValue, value: NSString(string: email))
+          .setOnce(AmplitudeUserProperty.firstName.rawValue, value: NSString(string: firstName))
+          .setOnce(AmplitudeUserProperty.lastName.rawValue, value: NSString(string: lastName))
+          .setOnce(AmplitudeUserProperty.username.rawValue, value: NSString(string: username))
+          .setOnce(AmplitudeUserProperty.signupMethod.rawValue, value: NSString(string: signupMethod))
+          .set(AmplitudeUserProperty.connections.rawValue, value: NSNumber(value: 0)) else { return }
+  if let inviterId = inviterId {
+    identify.setOnce(AmplitudeUserProperty.inviter.rawValue, value: NSString(string: inviterId))
+  }
+  amplitude.identify(identify)
 }
 

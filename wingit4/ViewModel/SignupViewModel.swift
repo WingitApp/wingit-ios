@@ -175,11 +175,12 @@ class SignupViewModel: ObservableObject {
       lastName: user.lastName,
       username: user.username,
       email: user.email ?? "",
-      signupMethod: "email"
+      signupMethod: "email",
+      inviterId: user.id
     )
     logToAmplitude(
       event: .userSignup,
-      properties: [.method: "email", .platform: "ios"]
+      properties: [.method: "email", .inviter: user.id, .platform: "ios"]
     )
   }
 }
