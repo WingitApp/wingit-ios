@@ -83,7 +83,7 @@ struct CustomNumberPad: View {
         if value != "delete.left"{
             
             if isVerify{
-                
+                // verification code should stop at 6 digits
                 if self.value.count < 6{
                     self.value.append(value)
                 }

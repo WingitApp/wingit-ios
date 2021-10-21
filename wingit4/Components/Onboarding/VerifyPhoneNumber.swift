@@ -13,11 +13,11 @@ struct VerifyPhoneNumber: View {
     @Environment(\.presentationMode) var present
   
   func verify() {
-//    phoneViewModel.verifyCode() {
+    phoneViewModel.verifyCode() {
       withAnimation(.easeIn) {
         signupViewModel.index = 4
       }
-//    }
+    }
   }
   
     var body: some View {
@@ -50,11 +50,11 @@ struct VerifyPhoneNumber: View {
                     
                     HStack(spacing: 15){
                         
-                        ForEach(0..<6,id: \.self){index in
+                        ForEach(0..<6,id: \.self){ index in
                             
                             // displaying code....
                             
-                            CodeView()
+                            DigitInputView(digit: getDigitAtIndex(index: index))
                         }
                     }
                     .padding()
@@ -112,11 +112,11 @@ struct VerifyPhoneNumber: View {
         .navigationBarBackButtonHidden(true)
     }
     
-    // getting Code At Each Index....
+    // get a digit at each index
     
-    func getCodeAtIndex(index: Int)->String{
+    func getDigitAtIndex(index: Int)->String{
         
-        if phoneViewModel.code.count > index{
+        if phoneViewModel.code.count > index {
             
             let start = phoneViewModel.code.startIndex
             
@@ -129,22 +129,23 @@ struct VerifyPhoneNumber: View {
     }
 }
 
-struct CodeView: View {
-    @EnvironmentObject var phoneViewModel : PhoneViewModel
-    var body: some View{
-        
-        VStack(spacing: 10){
-            
-          TextField("_", text: $phoneViewModel.code)
-            .textContentType(.oneTimeCode)
-            .foregroundColor(.black)
-            .font(.title2)
-          // default frame...
-            .frame(height: 45)
-            
-            Capsule()
-                .fill(Color.gray.opacity(0.5))
-                .frame(height: 4)
-        }
+struct DigitInputView: View {
+  var digit = ""
+  @EnvironmentObject var phoneViewModel : PhoneViewModel
+  var body: some View{
+    
+    VStack(spacing: 10){
+      
+      Text(digit)
+        .textContentType(.oneTimeCode)
+        .foregroundColor(.black)
+        .font(.title2)
+      // default frame...
+        .frame(height: 45)
+      
+      Capsule()
+        .fill(Color.gray.opacity(0.5))
+        .frame(height: 4)
     }
+  }
 }
