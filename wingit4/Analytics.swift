@@ -153,6 +153,7 @@ func setUserPropertiesOnAccountCreation(userId: String?, firstName: String?, las
           .set(AmplitudeUserProperty.connections.rawValue, value: NSNumber(value: 0)) else { return }
   if let inviterId = inviterId {
     identify.setOnce(AmplitudeUserProperty.inviter.rawValue, value: NSString(string: inviterId))
+    identify.set(AmplitudeUserProperty.connections.rawValue, value: NSNumber(value: 1))
   }
   amplitude.identify(identify)
 }

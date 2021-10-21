@@ -53,4 +53,9 @@ class ConnectionsApi {
             }
         }
     }
+  
+  func addConnection(user1Id: String?, user2Id: String?) {
+    guard let user1Id = user1Id, let user2Id = user2Id else { return }
+    Ref.FS_DOC_CONNECTION_BETWEEN_USERS(user1Id: user1Id, user2Id: user2Id).setData([:])
+  }
 }
