@@ -56,6 +56,7 @@ class SignupViewModel: ObservableObject {
     AuthService.emailSignup(
       email: email,
       password: password,
+      inviterId: inviter?.id,
       onSuccess: onSuccess,
       onError: onSignupError
     )
