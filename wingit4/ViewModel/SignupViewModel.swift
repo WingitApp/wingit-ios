@@ -53,12 +53,12 @@ class SignupViewModel: ObservableObject {
   }
   
   func enrollEmailPass(onSuccess: @escaping (_ user: User) -> Void) {
-          AuthService.firstVerification(
-            email: email,
-            password: password,
-            onSuccess: onSuccess,
-            onError: onSignupError
-            )
+    AuthService.emailSignup(
+      email: email,
+      password: password,
+      onSuccess: onSuccess,
+      onError: onSignupError
+    )
   }
   
   func addImage(onSuccess: @escaping (_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void){
@@ -71,7 +71,7 @@ class SignupViewModel: ObservableObject {
   
     func signup(onSuccess: @escaping (_ user: User) -> Void) {
         self.ampSignupAttemptEvent()
-        if checkFirstVerification() {
+      if isValidEmailField(email: email) {
             
            return AuthService.signupUser(
               firstName: firstName,
@@ -87,7 +87,7 @@ class SignupViewModel: ObservableObject {
         }
   }
   
-  func checkFirstVerification() -> Bool {
+  func isValidEmailField(email: String) -> Bool {
     if (!isEmailComplete()) {
         self.showErrorMessage(message: "Please fill in all fields")
         return false

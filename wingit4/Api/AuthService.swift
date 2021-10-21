@@ -51,17 +51,17 @@ class AuthService {
     let firstName = firstName.capitalized
     let lastName = lastName.capitalized
     Ref.FS_DOC_USERID(userId: userId).setData(
-                                              ["firstName": firstName,
-                                               "lastName" : lastName,
-                                               "username" : username
-                                              ],
-                                              merge: true)
-                              
+      ["firstName": firstName,
+       "lastName" : lastName,
+       "username" : username
+      ],
+      merge: true)
+    
     if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
-        changeRequest.displayName = firstName + " " + lastName
-        changeRequest.commitChanges { (error) in
-            if error != nil {
-               onError(error!.localizedDescription)
+      changeRequest.displayName = firstName + " " + lastName
+      changeRequest.commitChanges { (error) in
+        if error != nil {
+          onError(error!.localizedDescription)
                return
             }
         }
@@ -94,7 +94,7 @@ class AuthService {
     }
   
   
-      static func firstVerification(email: String, password: String, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+      static func emailSignup(email: String, password: String, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
           let normalizedEmail = email.normalizeEmail()
           Auth.auth().createUser(withEmail: normalizedEmail, password: password) { (authData, error) in
                   if error != nil {
