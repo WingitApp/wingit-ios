@@ -11,8 +11,8 @@ struct EmailPass: View {
   @EnvironmentObject var session: SessionStore
   @EnvironmentObject var signupViewModel: SignupViewModel
   
-  func firstVerification() {
-    signupViewModel.signup() { user in
+  func emailSignup() {
+    signupViewModel.enrollEmailPass() { user in
         signupViewModel.onSignupSuccess(user: user)
         self.session.currentUser = user
     withAnimation(.easeIn) {
@@ -34,7 +34,7 @@ struct EmailPass: View {
       Spacer()
       HStack{
         Spacer()
-      Button(action: firstVerification)
+      Button(action: emailSignup)
       { NextButton()}
       .alert(
         isPresented: $signupViewModel.isAlertShown
