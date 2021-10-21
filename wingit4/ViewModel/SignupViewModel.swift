@@ -150,7 +150,10 @@ class SignupViewModel: ObservableObject {
   func fetchInviter(inviterId: String?) {
     guard let inviterId = inviterId else { return }
     Api.User.loadUser(userId: inviterId) { (user) in
-      self.inviter = user
+      DispatchQueue.main.async {
+        self.inviter = user
+        self.inviterSheetOpen.toggle()
+      }
     } onError: {
       print("fetch inviter error")
     }

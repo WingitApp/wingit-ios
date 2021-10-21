@@ -171,10 +171,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 @main
 struct WingitApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-
-    let sessionStore = SessionStore()
-    
+  @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+  @State var deepLink: ViewRouter.DeepLink?
+  
+  let sessionStore = SessionStore()
+  
   var body: some Scene {
     let urlImageService = URLImageService(
       fileStore: URLImageFileStore(),
@@ -185,6 +186,50 @@ struct WingitApp: App {
       InitialView()
         .environment(\.urlImageService, urlImageService)
         .environmentObject(sessionStore)
+        .onOpenURL { url in
+          print("Incoming URL parameter is: \(url)")
+          let linkHandled = DynamicLinks.dynamicLinks()
+            .handleUniversalLink(url) { dynamicLink, error in
+              guard error == nil else {
+                fatalError("Error handling the incoming dynamic link.")
+              }
+              if let dynamicLink = dynamicLink {
+                // Handle Dynamic Link
+                self.handleDynamicLink(dynamicLink)
+              }
+            }
+          if linkHandled {
+            print("Link Handled")
+          } else {
+            print("No Link Handled")
+          }
+        }
+        // Add environment modifier
+        .environment(\.deepLink, deepLink)
+    }
+  }
+  
+  // MARK: - Functions
+  // Handle incoming dynamic link
+  func handleDynamicLink(_ dynamicLink: DynamicLink) {
+    guard let url = dynamicLink.url else { return }
+
+    print("Your incoming link parameter is \(url.absoluteString)")
+    // 1
+    guard
+      dynamicLink.matchType == .unique ||
+      dynamicLink.matchType == .default
+    else {
+      return
+    }
+    guard let deepLink = ViewRouter.shared.parseComponents(from: url) else {
+      return
+    }
+    self.deepLink = deepLink
+    print("Deep link: \(deepLink)")
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+      self.deepLink = nil
     }
   }
 }

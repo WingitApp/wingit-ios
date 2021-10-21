@@ -76,7 +76,7 @@ class ContactsListViewModel: ObservableObject {
     }
     linkBuilder?.iOSParameters?.appStoreID = APPSTOREID
     linkBuilder?.socialMetaTagParameters = DynamicLinkSocialMetaTagParameters()
-    linkBuilder?.socialMetaTagParameters?.title = "\(currentUser?.displayName ?? "Your friend") invited you to Wingit!"
+    linkBuilder?.socialMetaTagParameters?.title = "\(currentUser?.displayName ?? "Your friend") wants you to Wingit!"
     linkBuilder?.socialMetaTagParameters?.imageURL = URL(string: currentUser?.profileImageUrl ?? LOGO_URL)
     linkBuilder?.shorten { url, warnings, error in
       if let error = error {

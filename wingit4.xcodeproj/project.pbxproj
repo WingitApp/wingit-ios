@@ -200,6 +200,7 @@
 		6531838326B238AA0006D9E2 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6531838226B238AA0006D9E2 /* Analytics.swift */; };
 		654334DD27134652004D0171 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654334DC27134651004D0171 /* ViewRouter.swift */; };
 		654DA41926BC7BD3002864B8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654DA41826BC7BD2002864B8 /* MainViewModel.swift */; };
+		6550E6BB27201ED800E61277 /* DeepLinkKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6550E6BA27201ED800E61277 /* DeepLinkKey.swift */; };
 		65739ECB26F71D4400A0A8B9 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65739ECA26F71D4400A0A8B9 /* ProfileView.swift */; };
 		657F35D626DE1D8D0092A1B2 /* Comment_v2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F35D526DE1D8D0092A1B2 /* Comment_v2.swift */; };
 		657F35DB26DEA0C00092A1B2 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F35DA26DEA0C00092A1B2 /* Device.swift */; };
@@ -236,6 +237,7 @@
 		65EC9D9D271DCCFD00B9231A /* AcceptInvitationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9D9C271DCCFD00B9231A /* AcceptInvitationButton.swift */; };
 		65EC9D9F271F688700B9231A /* InviteFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9D9E271F688700B9231A /* InviteFriendsView.swift */; };
 		65EC9DA1271F6CBB00B9231A /* InviteFriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9DA0271F6CBB00B9231A /* InviteFriendsViewModel.swift */; };
+		65EC9DA427200DD800B9231A /* DeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9DA327200DD800B9231A /* DeepLinkHandler.swift */; };
 		65F7314F26F3C91700A73781 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7314E26F3C91700A73781 /* StringExtensions.swift */; };
 		65F7315426F51FB400A73781 /* ContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315326F51FB400A73781 /* ContactsService.swift */; };
 		65F7315626F5276900A73781 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315526F5276900A73781 /* Contact.swift */; };
@@ -446,6 +448,7 @@
 		6531838226B238AA0006D9E2 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		654334DC27134651004D0171 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 		654DA41826BC7BD2002864B8 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		6550E6BA27201ED800E61277 /* DeepLinkKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkKey.swift; sourceTree = "<group>"; };
 		65739ECA26F71D4400A0A8B9 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		657F35D526DE1D8D0092A1B2 /* Comment_v2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment_v2.swift; sourceTree = "<group>"; };
 		657F35DA26DEA0C00092A1B2 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
@@ -483,6 +486,7 @@
 		65EC9D9C271DCCFD00B9231A /* AcceptInvitationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptInvitationButton.swift; sourceTree = "<group>"; };
 		65EC9D9E271F688700B9231A /* InviteFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsView.swift; sourceTree = "<group>"; };
 		65EC9DA0271F6CBB00B9231A /* InviteFriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsViewModel.swift; sourceTree = "<group>"; };
+		65EC9DA327200DD800B9231A /* DeepLinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkHandler.swift; sourceTree = "<group>"; };
 		65F7314E26F3C91700A73781 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		65F7315326F51FB400A73781 /* ContactsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsService.swift; sourceTree = "<group>"; };
 		65F7315526F5276900A73781 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
@@ -816,6 +820,7 @@
 				3B7AF06626719EC2003BCCF3 /* Api */,
 				3B7AF06526719EB7003BCCF3 /* Model */,
 				3B7AF06926719EF1003BCCF3 /* UIKit */,
+				65EC9DA227200DB000B9231A /* Helpers */,
 				3B7AF06826719EE7003BCCF3 /* Modifiers */,
 				3B7AF06426719EA8003BCCF3 /* ViewModel */,
 				3B75E3C3267153BB002F3108 /* Assets.xcassets */,
@@ -1133,6 +1138,15 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		65EC9DA227200DB000B9231A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				65EC9DA327200DD800B9231A /* DeepLinkHandler.swift */,
+				6550E6BA27201ED800E61277 /* DeepLinkKey.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		65F7314D26F3C8E400A73781 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1309,6 +1323,7 @@
 				3B7AF0892671CB35003BCCF3 /* Api.swift in Sources */,
 				65DDC42D27039BEE002CB810 /* UserActivityApi.swift in Sources */,
 				3B7AF0A22671E416003BCCF3 /* EditProfile.swift in Sources */,
+				6550E6BB27201ED800E61277 /* DeepLinkKey.swift in Sources */,
 				15F7E8B326E848ED00E5238F /* AskDetailHeader.swift in Sources */,
 				3B7AF0AF2672A053003BCCF3 /* Comment.swift in Sources */,
 				3B7AF0A72672870F003BCCF3 /* HomeViewModel.swift in Sources */,
@@ -1323,6 +1338,7 @@
 				15030AA626E6805D0076CF14 /* AskDetailDemo.swift in Sources */,
 				15A6A4392707B0BA00D65616 /* ProfileAchievements.swift in Sources */,
 				65A7DC0C26EDA9430032C739 /* UserProfileHeader.swift in Sources */,
+				65EC9DA427200DD800B9231A /* DeepLinkHandler.swift in Sources */,
 				3B5BDB51268F82790034B18C /* fetchUser.swift in Sources */,
 				3B5BDB58268F94E00034B18C /* ReportModel.swift in Sources */,
 				650216B726E966A000B42BC6 /* FooterCell.swift in Sources */,
