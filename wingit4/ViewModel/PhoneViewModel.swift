@@ -22,8 +22,6 @@ class PhoneViewModel: ObservableObject {
     @Published var errorMsg = ""
     @Published var error = false
     
-    @Published var gotoVerify = false
-    
     // User Logged Status
     @AppStorage("log_Status") var status = false
     @AppStorage("authVerificationID") var authVerificationId: String?
@@ -40,18 +38,19 @@ class PhoneViewModel: ObservableObject {
       
       let number = "+\(getCountryCode())\(phoneNo)"
       PhoneAuthProvider.provider().verifyPhoneNumber(number, uiDelegate: nil) { (authVerificationId, err) in
-          
-          if let error = err{
-              
-              self.errorMsg = error.localizedDescription
-              withAnimation{ self.error.toggle()}
-              return
-          }
         
+        if let error = err {
+          print(error)
+          DispatchQueue.main.async {
+            self.errorMsg = error.localizedDescription
+            withAnimation{ self.error.toggle() }
+          }
+          return
+        } else {
           UserDefaults.standard.set(authVerificationId, forKey: "authVerificationID")
-//          let authVerificationId = UserDefaults.standard.string(forKey: "authVerificationID")
           self.authVerificationId = authVerificationId ?? ""
-          self.gotoVerify = true
+          onSuccess()
+        }
       }
     }
     

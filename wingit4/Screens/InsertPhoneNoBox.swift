@@ -13,12 +13,11 @@ struct InsertPhoneNoBox: View {
   @EnvironmentObject var signupViewModel: SignupViewModel
   
   func sendCode() {
-    self.phoneViewModel.sendCode{
-      return
-    }
-    if phoneViewModel.gotoVerify {
-      withAnimation(.easeIn) {
-        signupViewModel.index = 3
+    self.phoneViewModel.sendCode {
+      DispatchQueue.main.async {
+        withAnimation(.easeIn) {
+          signupViewModel.index = 3
+        }
       }
     }
   }
