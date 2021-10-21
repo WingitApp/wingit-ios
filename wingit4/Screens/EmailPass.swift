@@ -12,13 +12,13 @@ struct EmailPass: View {
   @EnvironmentObject var signupViewModel: SignupViewModel
   
   func firstVerification() {
-//    signupViewModel.signup() { user in
-//        signupViewModel.onSignupSuccess(user: user)
-//        self.session.currentUser = user
+    signupViewModel.signup() { user in
+        signupViewModel.onSignupSuccess(user: user)
+        self.session.currentUser = user
     withAnimation(.easeIn) {
-      signupViewModel.index = 3}
+      signupViewModel.index = 5}
    
-//    }
+    }
   }
   
   var body: some View {

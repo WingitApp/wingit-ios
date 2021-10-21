@@ -15,7 +15,7 @@ struct VerifyPhoneNumber: View {
   func verify() {
 //    phoneViewModel.verifyCode() {
       withAnimation(.easeIn) {
-        signupViewModel.index = 5
+        signupViewModel.index = 4
       }
 //    }
   }

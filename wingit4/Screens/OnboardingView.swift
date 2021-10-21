@@ -61,7 +61,7 @@ struct FirstView : View {
         }
         
         else if signupViewModel.index == 1 {
-          
+        
           ZStack{
             SignUpTitles(title: "Hi! Enter your invite code",
                          subtitle: "An invite code from a current user is required to signup for Wingit.").padding()
@@ -71,23 +71,24 @@ struct FirstView : View {
           
         } else if signupViewModel.index == 2 {
           
+          PhoneNumber()
+            .environmentObject(signupViewModel)
+            .environmentObject(phoneViewModel)
           
+        } else if signupViewModel.index == 3 {
+          
+          VerifyPhoneNumber()
+            .environmentObject(signupViewModel)
+            .environmentObject(phoneViewModel)
+          
+        } else if signupViewModel.index == 4 {
+       
           ZStack{
             SignUpTitles(title: "Welcome!",
                          subtitle: "Let’s create an account to get started.")
             EmailPass()
               .environmentObject(signupViewModel)
           }
-        } else if signupViewModel.index == 3 {
-         
-          PhoneNumber()
-            .environmentObject(signupViewModel)
-            .environmentObject(phoneViewModel)
-          
-        } else if signupViewModel.index == 4 {
-          VerifyPhoneNumber()
-            .environmentObject(signupViewModel)
-            .environmentObject(phoneViewModel)
           
         } else if signupViewModel.index == 5 {
           ZStack{

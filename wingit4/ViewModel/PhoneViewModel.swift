@@ -36,39 +36,44 @@ class PhoneViewModel: ObservableObject {
     }
     
     func sendCode(onSuccess: @escaping() -> Void) {
-//        Auth.auth().settings?.isAppVerificationDisabledForTesting = true
-      let user = Auth.auth().currentUser
+      Auth.auth().settings?.isAppVerificationDisabledForTesting = false
+      
       let number = "+\(getCountryCode())\(phoneNo)"
-      user?.multiFactor.getSessionWithCompletion({ (session, error) in
-        PhoneAuthProvider.provider().verifyPhoneNumber(number, uiDelegate: nil, multiFactorSession: session) { (verificationId, err) in
-          self.authVerificationId = verificationId
-          if let error = err {
-            DispatchQueue.main.async {
+      PhoneAuthProvider.provider().verifyPhoneNumber(number, uiDelegate: nil) { (authVerificationId, err) in
+          
+          if let error = err{
+              
               self.errorMsg = error.localizedDescription
-              withAnimation{ self.error.toggle() }
-            }
-            return
-          } else {
-            onSuccess()
+              withAnimation{ self.error.toggle()}
+              return
           }
-        }
-      })
+        
+          UserDefaults.standard.set(authVerificationId, forKey: "authVerificationID")
+//          let authVerificationId = UserDefaults.standard.string(forKey: "authVerificationID")
+          self.authVerificationId = authVerificationId ?? ""
+          self.gotoVerify = true
+      }
     }
     
     func verifyCode(onSuccess: @escaping() -> Void) {
-      let user = Auth.auth().currentUser
-      let credential = PhoneAuthProvider.provider().credential(withVerificationID: self.authVerificationId!, verificationCode: self.code)
-      let assertion = PhoneMultiFactorGenerator.assertion(with: credential)
-      user?.multiFactor.enroll(with: assertion, displayName: user?.displayName) { (error) in
-        if let error = error {
-          DispatchQueue.main.async {
-            self.errorMsg = error.localizedDescription
-            withAnimation{ self.error.toggle() }
+      
+      let credential = PhoneAuthProvider.provider().credential(withVerificationID: self.authVerificationId ?? "", verificationCode: code)
+      
+      loading = true
+      
+      Auth.auth().signIn(with: credential) { (result, err) in
+          
+          self.loading = false
+          
+          if let error = err{
+              self.errorMsg = error.localizedDescription
+              withAnimation{ self.error.toggle()}
+              return
           }
-          return
-        } else {
-          onSuccess()
-        }
+          
+          // else user logged in Successfully ....
+          
+          withAnimation{self.status = true}
       }
     }
     

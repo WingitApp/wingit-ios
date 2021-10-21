@@ -13,15 +13,19 @@ struct InsertPhoneNoBox: View {
   @EnvironmentObject var signupViewModel: SignupViewModel
   
   func sendCode() {
-//    self.phoneViewModel.sendCode() {
+    self.phoneViewModel.sendCode{
+      return
+    }
+    if phoneViewModel.gotoVerify {
       withAnimation(.easeIn) {
-        signupViewModel.index = 4
+        signupViewModel.index = 3
       }
-//    }
+    }
   }
   
     var body: some View {
-      ZStack{
+      
+      ZStack {
         
           VStack(alignment: .leading, spacing: 15){
           Text("Provide a phone number").bold().font(.title2)
