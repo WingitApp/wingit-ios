@@ -62,7 +62,7 @@ struct FirstView : View {
         
         else if signupViewModel.index == 1 {
           
-            SignUpTitles(title: "Welcome! Enter your invite code",
+            SignUpTitles(title: "Welcome! Enter invite code",
                          subtitle: "You need an invite code from a Wingit user to join!").padding(.bottom, 30)
             InviteCode()
               .environmentObject(signupViewModel)

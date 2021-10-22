@@ -31,7 +31,7 @@ struct InviteCode: View {
             .padding(20)
         }
         InviteCodeInputField(inviteCode: $signupViewModel.inviteCode)
-          .padding(.horizontal,25)
+          .padding(.horizontal, 25)
         Image("gift")
           .resizable()
           .aspectRatio(contentMode: .fill)
