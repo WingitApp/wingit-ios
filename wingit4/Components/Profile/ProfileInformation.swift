@@ -216,7 +216,9 @@ struct UpdateProfilePhoto: View {
               }
 
         }
-        .background(Color.white)
+        .background(
+          Color.white.ignoresSafeArea(.all, edges: .all)
+        )
 
         .onDisappear {
           self.clean()
