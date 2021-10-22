@@ -11,7 +11,14 @@ struct InviteCode: View {
   @EnvironmentObject var signupViewModel: SignupViewModel
     var body: some View {
       VStack{
-        Spacer()
+        if (signupViewModel.inviter != nil) {
+          Text("\(signupViewModel.inviter?.displayName ?? "Your friend") invited you to Wingit")
+            .font(.caption)
+          URLImageView(urlString: signupViewModel.inviter?.profileImageUrl)
+            .frame(width: 150, height: 150)
+            .clipShape(Circle())
+            .padding(20)
+        }
       InviteCodeInputField(inviteCode: $signupViewModel.inviteCode)
           .padding(.horizontal,25)
         Image("gift")
@@ -28,6 +35,11 @@ struct InviteCode: View {
         }
       }
       .onTapGesture(perform: dismissKeyboard)
+      .onAppear {
+        if (signupViewModel.inviter == nil) {
+          signupViewModel.fetchInviter(inviterId: signupViewModel.inviterId)
+        }
+      }
     }
 }
 

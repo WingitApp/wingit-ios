@@ -61,14 +61,10 @@ struct FirstView : View {
         }
         
         else if signupViewModel.index == 1 {
-        
-          ZStack {
-            
-            SignUpTitles(title: "Hi! Enter your invite code",
-                         subtitle: "An invite code from a current user is required to signup for Wingit.").padding()
+            SignUpTitles(title: "Enter your invite code",
+                         subtitle: "An invite code from a Wingit user is required to signup for Wingit.").padding(.bottom, 30)
             InviteCode()
               .environmentObject(signupViewModel)
-          }
           
         } else if signupViewModel.index == 2 {
           
@@ -131,11 +127,6 @@ struct FirstView : View {
           break
         }
       }
-      .sheet(
-        isPresented: $signupViewModel.inviterSheetOpen,
-        content: {
-          Invitation(inviter: signupViewModel.inviter)
-        })
     }
   }
 }

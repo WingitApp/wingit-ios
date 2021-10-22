@@ -12,7 +12,7 @@ struct EmailPass: View {
   @EnvironmentObject var signupViewModel: SignupViewModel
   
   func emailSignup() {
-    signupViewModel.enrollEmailPass() { user in
+    signupViewModel.emailSignup() { user in
         signupViewModel.onSignupSuccess(user: user)
         self.session.currentUser = user
     withAnimation(.easeIn) {

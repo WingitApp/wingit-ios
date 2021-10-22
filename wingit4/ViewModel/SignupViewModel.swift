@@ -52,7 +52,7 @@ class SignupViewModel: ObservableObject {
     }
   }
   
-  func enrollEmailPass(onSuccess: @escaping (_ user: User) -> Void) {
+  func emailSignup(onSuccess: @escaping (_ user: User) -> Void) {
     AuthService.emailSignup(
       email: email,
       password: password,
@@ -150,6 +150,7 @@ class SignupViewModel: ObservableObject {
   
   func fetchInviter(inviterId: String?) {
     guard let inviterId = inviterId else { return }
+    self.inviteCode = String(inviterId.prefix(6))
     Api.User.loadUser(userId: inviterId) { (user) in
       DispatchQueue.main.async {
         self.inviter = user
@@ -158,10 +159,6 @@ class SignupViewModel: ObservableObject {
     } onError: {
       print("fetch inviter error")
     }
-  }
-  
-  func acceptInvitation() {
-    return
   }
   
   /// Sends Amplitude event on signup attempt

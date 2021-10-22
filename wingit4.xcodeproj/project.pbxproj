@@ -233,8 +233,6 @@
 		65EC9D96271D602F00B9231A /* SigninButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9D94271D602F00B9231A /* SigninButton.swift */; };
 		65EC9D97271D602F00B9231A /* LoginAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9D95271D602F00B9231A /* LoginAlertView.swift */; };
 		65EC9D99271D650900B9231A /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9D98271D650900B9231A /* SignupViewModel.swift */; };
-		65EC9D9B271DCC9400B9231A /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9D9A271DCC9400B9231A /* Invitation.swift */; };
-		65EC9D9D271DCCFD00B9231A /* AcceptInvitationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9D9C271DCCFD00B9231A /* AcceptInvitationButton.swift */; };
 		65EC9D9F271F688700B9231A /* InviteFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9D9E271F688700B9231A /* InviteFriendsView.swift */; };
 		65EC9DA1271F6CBB00B9231A /* InviteFriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9DA0271F6CBB00B9231A /* InviteFriendsViewModel.swift */; };
 		65EC9DA427200DD800B9231A /* DeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9DA327200DD800B9231A /* DeepLinkHandler.swift */; };
@@ -483,8 +481,6 @@
 		65EC9D94271D602F00B9231A /* SigninButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninButton.swift; sourceTree = "<group>"; };
 		65EC9D95271D602F00B9231A /* LoginAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAlertView.swift; sourceTree = "<group>"; };
 		65EC9D98271D650900B9231A /* SignupViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
-		65EC9D9A271DCC9400B9231A /* Invitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invitation.swift; sourceTree = "<group>"; };
-		65EC9D9C271DCCFD00B9231A /* AcceptInvitationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptInvitationButton.swift; sourceTree = "<group>"; };
 		65EC9D9E271F688700B9231A /* InviteFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsView.swift; sourceTree = "<group>"; };
 		65EC9DA0271F6CBB00B9231A /* InviteFriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsViewModel.swift; sourceTree = "<group>"; };
 		65EC9DA327200DD800B9231A /* DeepLinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkHandler.swift; sourceTree = "<group>"; };
@@ -1126,8 +1122,6 @@
 				65EC9D79271D5E8600B9231A /* NamesTextField.swift */,
 				65EC9D7A271D5E8600B9231A /* EmailTextField.swift */,
 				65EC9D7B271D5E8600B9231A /* InviteCodeInputField.swift */,
-				65EC9D9A271DCC9400B9231A /* Invitation.swift */,
-				65EC9D9C271DCCFD00B9231A /* AcceptInvitationButton.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -1320,7 +1314,6 @@
 				1524FCF326D75F1F0000629C /* ShareButtonViewModel.swift in Sources */,
 				3B7AF05026718D42003BCCF3 /* StorageService.swift in Sources */,
 				15F7E87926E8435A00E5238F /* Connections.swift in Sources */,
-				65EC9D9B271DCC9400B9231A /* Invitation.swift in Sources */,
 				3B7AF0B32672C04A003BCCF3 /* ChatViewModel.swift in Sources */,
 				3B75E3F426716E41002F3108 /* ImagePicker.swift in Sources */,
 				3B7AF0892671CB35003BCCF3 /* Api.swift in Sources */,
@@ -1461,7 +1454,6 @@
 				FBAA5F262722931300CF61BD /* LoginScreen.swift in Sources */,
 				3B7AF05826719885003BCCF3 /* MainView.swift in Sources */,
 				15DFD07826EC39E2002CBE31 /* Button.swift in Sources */,
-				65EC9D9D271DCCFD00B9231A /* AcceptInvitationButton.swift in Sources */,
 				15DFD07626EBE438002CBE31 /* RoundedCorner.swift in Sources */,
 				156E6AE726D8A13400690E47 /* ProfileViewModel.swift in Sources */,
 				3B75E3DD26716074002F3108 /* Constants.swift in Sources */,
