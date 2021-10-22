@@ -44,6 +44,12 @@ struct InviteCode: View {
           { NextButton()}
         }
       }
+      .alert(isPresented: $signupViewModel.isAlertShown) {
+        Alert(title: Text("Error"),
+              message: Text(self.signupViewModel.errorString),
+              dismissButton: .default(Text("OK"))
+        )
+      }
       .sheet(
         isPresented: $signupViewModel.inviterSheetOpen,
         content: {

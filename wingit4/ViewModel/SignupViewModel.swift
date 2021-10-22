@@ -119,7 +119,7 @@ class SignupViewModel: ObservableObject {
   func showErrorMessage(message: String) -> Void {
     DispatchQueue.main.async {
       self.errorString = message
-      self.isAlertShown = true
+      self.isAlertShown.toggle()
     }
   }
   
