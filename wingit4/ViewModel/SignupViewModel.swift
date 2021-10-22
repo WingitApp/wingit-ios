@@ -37,7 +37,6 @@ class SignupViewModel: ObservableObject {
     Ref.FS_DOC_USERID(userId: userId).setData(["bio" : bioText], merge: true)
   }
   
-  
   func addUserNames(onSuccess: @escaping (_ user: User) -> Void) {
     
     if checkFieldsAreValid() {
@@ -118,8 +117,10 @@ class SignupViewModel: ObservableObject {
   /// Displays error message through alert (SignInView)
   /// - Parameter message: string of message
   func showErrorMessage(message: String) -> Void {
-    self.errorString = message
-    self.isAlertShown = true
+    DispatchQueue.main.async {
+      self.errorString = message
+      self.isAlertShown = true
+    }
   }
   
   func onSignupSuccess(user: User) {
@@ -147,6 +148,20 @@ class SignupViewModel: ObservableObject {
     password = ""
   }
   
+  func verifyCode() {
+    if inviteCode.count != 6 {
+      showErrorMessage(message: "Invite code must be 6 characters")
+    } else {
+      Api.User.findUser(
+        inviteCode: inviteCode,
+        onSuccess: { user in self.inviter = user; self.inviterSheetOpen.toggle() },
+        onEmpty: {
+          self.showErrorMessage(message: "Code is invalid")
+        },
+        onError: { errorMessage in self.showErrorMessage(message: errorMessage) })
+    }
+  }
+  
   func fetchInviter(inviterId: String?) {
     guard let inviterId = inviterId else { return }
     self.inviterId = inviterId
@@ -154,7 +169,6 @@ class SignupViewModel: ObservableObject {
     Api.User.loadUser(userId: inviterId) { (user) in
       DispatchQueue.main.async {
         self.inviter = user
-        self.inviterSheetOpen.toggle()
       }
     } onError: {
       print("fetch inviter error")
