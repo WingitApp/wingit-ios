@@ -18,7 +18,7 @@ struct ActivityIndicatorView<Content>: View where Content: View {
         .disabled(self.isShowing)
         .blur(radius: self.isShowing ? 3 : 0)
       VStack {
-        ProgressView(message)
+        ProgressView(message) 
           .progressViewStyle(CircularProgressViewStyle())
       }
       .frame(width: 150, height: 150)

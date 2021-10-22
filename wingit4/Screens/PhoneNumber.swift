@@ -15,7 +15,7 @@ struct PhoneNumber : View {
     var body: some View{
 //      SignUpTitles(title: "Provide a phone number",
 //                   subtitle: "You’ll receive a login code for better security.")
-      ZStack{
+  
           
           VStack{
        
@@ -43,6 +43,6 @@ struct PhoneNumber : View {
                   dismissButton: .default(Text("OK"))
             )
           }
-      }
+      
     }
 }
