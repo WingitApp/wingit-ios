@@ -30,7 +30,7 @@ struct LoginScreen: View {
               .cornerRadius(5)
               .foregroundColor(.black)
         }
-      }
+      }.padding()
        
     }
 }
