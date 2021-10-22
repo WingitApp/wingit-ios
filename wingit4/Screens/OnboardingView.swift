@@ -112,9 +112,12 @@ struct FirstView : View {
           
         } else if signupViewModel.index == 7 {
           //Optional
-         Login1()
+         LoginScreen()
+            .environmentObject(signupViewModel)
           
-        }
+        } else if signupViewModel.index == 8 {
+          EmailLogin()
+        } 
         
       }
       // Define navigation

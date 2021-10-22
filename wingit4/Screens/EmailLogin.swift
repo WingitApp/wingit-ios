@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Login1 : View {
+struct EmailLogin : View {
     
     @StateObject var signinViewModel = SigninViewModel()
     

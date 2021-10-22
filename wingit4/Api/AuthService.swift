@@ -18,6 +18,7 @@ class AuthService {
         onError("Email input is not a valid email address.")
         return
       }
+      
       Auth.auth().signIn(withEmail: email.normalizeEmail(), password: password) { (authData, error) in
         if error != nil {
           print(error!.localizedDescription)

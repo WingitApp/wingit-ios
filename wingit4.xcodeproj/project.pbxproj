@@ -243,7 +243,7 @@
 		65F7315626F5276900A73781 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315526F5276900A73781 /* Contact.swift */; };
 		65F7315826F5295500A73781 /* ContactsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315726F5295500A73781 /* ContactsListViewModel.swift */; };
 		65FE040426E9FE3200333609 /* ComposePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE040326E9FE3200333609 /* ComposePostView.swift */; };
-		FB48BEE027176A4C004E33EB /* Login1.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEDF27176A4C004E33EB /* Login1.swift */; };
+		FB48BEE027176A4C004E33EB /* EmailLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEDF27176A4C004E33EB /* EmailLogin.swift */; };
 		FB48BEE227176A72004E33EB /* Names.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEE127176A72004E33EB /* Names.swift */; };
 		FB48BEE427176A96004E33EB /* EmailPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEE327176A96004E33EB /* EmailPass.swift */; };
 		FB48BEE627176ABE004E33EB /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEE527176ABE004E33EB /* PhoneNumber.swift */; };
@@ -256,6 +256,7 @@
 		FB6E691127192E2A002ABB41 /* LoginSignup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E691027192E2A002ABB41 /* LoginSignup.swift */; };
 		FBAA5F1F271B9B0300CF61BD /* SignUpTitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAA5F1E271B9B0300CF61BD /* SignUpTitles.swift */; };
 		FBAA5F21271E0FD600CF61BD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAA5F20271E0FD600CF61BD /* SettingsView.swift */; };
+		FBAA5F262722931300CF61BD /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAA5F252722931300CF61BD /* LoginScreen.swift */; };
 		FBD25F7E27043C4E0002C5B2 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD25F7D27043C4E0002C5B2 /* PopUp.swift */; };
 		FBDFDB55270E4BC400EDE22F /* BoardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDFDB54270E4BC400EDE22F /* BoardingScreen.swift */; };
 		FBDFDB57270E4BDD00EDE22F /* OnboardingV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDFDB56270E4BDD00EDE22F /* OnboardingV2.swift */; };
@@ -492,7 +493,7 @@
 		65F7315526F5276900A73781 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		65F7315726F5295500A73781 /* ContactsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewModel.swift; sourceTree = "<group>"; };
 		65FE040326E9FE3200333609 /* ComposePostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposePostView.swift; sourceTree = "<group>"; };
-		FB48BEDF27176A4C004E33EB /* Login1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login1.swift; sourceTree = "<group>"; };
+		FB48BEDF27176A4C004E33EB /* EmailLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLogin.swift; sourceTree = "<group>"; };
 		FB48BEE127176A72004E33EB /* Names.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Names.swift; sourceTree = "<group>"; };
 		FB48BEE327176A96004E33EB /* EmailPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPass.swift; sourceTree = "<group>"; };
 		FB48BEE527176ABE004E33EB /* PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
@@ -505,6 +506,7 @@
 		FB6E691027192E2A002ABB41 /* LoginSignup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignup.swift; sourceTree = "<group>"; };
 		FBAA5F1E271B9B0300CF61BD /* SignUpTitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTitles.swift; sourceTree = "<group>"; };
 		FBAA5F20271E0FD600CF61BD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		FBAA5F252722931300CF61BD /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		FBD25F7D27043C4E0002C5B2 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 		FBDFDB54270E4BC400EDE22F /* BoardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingScreen.swift; sourceTree = "<group>"; };
 		FBDFDB56270E4BDD00EDE22F /* OnboardingV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingV2.swift; sourceTree = "<group>"; };
@@ -885,9 +887,10 @@
 				FBDFDB58270E4BF100EDE22F /* OffsetPageTabView.swift */,
 				3B9C43BE26FB1A77008B01D2 /* OnboardingView.swift */,
 				FB6E691027192E2A002ABB41 /* LoginSignup.swift */,
-				FB48BEDF27176A4C004E33EB /* Login1.swift */,
+				FB48BEDF27176A4C004E33EB /* EmailLogin.swift */,
 				FB48BEE127176A72004E33EB /* Names.swift */,
 				FB48BEE327176A96004E33EB /* EmailPass.swift */,
+				FBAA5F252722931300CF61BD /* LoginScreen.swift */,
 				FB48BEED27178EC9004E33EB /* AvatarBio.swift */,
 				FB48BEE527176ABE004E33EB /* PhoneNumber.swift */,
 				FB6E690E27192640002ABB41 /* InsertPhoneNoBox.swift */,
@@ -1364,7 +1367,7 @@
 				3B7AF0772671B962003BCCF3 /* NotificationView.swift in Sources */,
 				FB6E690D2718E38D002ABB41 /* Bio.swift in Sources */,
 				151A3C8E26D41B5400A39FAF /* AskCardViewModel.swift in Sources */,
-				FB48BEE027176A4C004E33EB /* Login1.swift in Sources */,
+				FB48BEE027176A4C004E33EB /* EmailLogin.swift in Sources */,
 				3B75E3DB26715D26002F3108 /* Modifiers.swift in Sources */,
 				15E4907D26E84CF400B25B56 /* DynamicHeightTextField.swift in Sources */,
 				3B74CC8126FC59BC00BB39E2 /* AddImageButton.swift in Sources */,
@@ -1455,6 +1458,7 @@
 				3B7AF0BF2673EAFB003BCCF3 /* Notification.swift in Sources */,
 				3BE57FF726D89994005C242F /* ProfileNavigation.swift in Sources */,
 				3B9CA05026E5C98D00BB195F /* WingConnectionsList.swift in Sources */,
+				FBAA5F262722931300CF61BD /* LoginScreen.swift in Sources */,
 				3B7AF05826719885003BCCF3 /* MainView.swift in Sources */,
 				15DFD07826EC39E2002CBE31 /* Button.swift in Sources */,
 				65EC9D9D271DCCFD00B9231A /* AcceptInvitationButton.swift in Sources */,

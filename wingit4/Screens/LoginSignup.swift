@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+//import FirebaseUI/Auth
 
 struct LoginSignup: View {
   
   @EnvironmentObject var signupViewModel: SignupViewModel
   
     var body: some View {
+      
       VStack(spacing: 10){
         Image("logo")
           .resizable()
@@ -33,7 +35,7 @@ struct LoginSignup: View {
         
           Button(action: { withAnimation(.easeIn){
 
-            signupViewModel.index = 8
+            signupViewModel.index = 7
             
           }}){
             Text("Login")

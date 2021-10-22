@@ -32,7 +32,7 @@ struct InitialView: View {
       else {
         OnboardingView()
         //                FirstView()
-        // OnboardingV2()
+//         OnboardingV2()
       }
     }
     .onAppear(perform: listen)
