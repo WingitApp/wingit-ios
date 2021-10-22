@@ -116,8 +116,12 @@ struct FirstView : View {
         } 
         
       }
-      // Define navigation
-      // 1
+      .onAppear {
+        if (signupViewModel.inviter == nil && !signupViewModel.inviterId.isEmpty) {
+          signupViewModel.fetchInviter(inviterId: signupViewModel.inviterId)
+          signupViewModel.inviteCode = String(signupViewModel.inviterId.prefix(6))
+        }
+      }
       .onChange(of: deepLink) { deepLink in
         guard let deepLink = deepLink else { return }
         switch deepLink {
