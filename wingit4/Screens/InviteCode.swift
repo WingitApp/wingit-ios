@@ -36,8 +36,9 @@ struct InviteCode: View {
       }
       .onTapGesture(perform: dismissKeyboard)
       .onAppear {
-        if (signupViewModel.inviter == nil) {
+        if (signupViewModel.inviter == nil && !signupViewModel.inviterId.isEmpty) {
           signupViewModel.fetchInviter(inviterId: signupViewModel.inviterId)
+          signupViewModel.inviteCode = String(signupViewModel.inviterId.prefix(6))
         }
       }
     }

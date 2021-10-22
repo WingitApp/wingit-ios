@@ -12,26 +12,25 @@ import FirebaseStorage
 import SwiftUI
 
 class SignupViewModel: ObservableObject {
-    @Published var inviter: User?
-    @Published var inviteCode: String = ""
-    @Published var inviterSheetOpen: Bool = false
-    @Published var firstName: String = ""
-    @Published var lastName: String = ""
-    @Published var username: String = ""
-    @Published var email: String = ""
-    @Published var password: String = ""
-    @Published var image: Image = Image(IMAGE_USER_PLACEHOLDER)
-    @Published var bioText: String = ""
-    @Published var imageData: Data = Data()
-    @Published var errorString = ""
-    @Published var isImagePickerShown: Bool = false
-    @Published var isAlertShown: Bool = false
-    @Published var showscreen: Bool = false
-    @Published var index: Int = 0
-    @Environment (\.presentationMode) var presentationMode
-    @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
-
-  
+  @AppStorage("inviterId") var inviterId = ""
+  @Published var inviter: User?
+  @Published var inviteCode: String = ""
+  @Published var inviterSheetOpen: Bool = false
+  @Published var firstName: String = ""
+  @Published var lastName: String = ""
+  @Published var username: String = ""
+  @Published var email: String = ""
+  @Published var password: String = ""
+  @Published var image: Image = Image(IMAGE_USER_PLACEHOLDER)
+  @Published var bioText: String = ""
+  @Published var imageData: Data = Data()
+  @Published var errorString = ""
+  @Published var isImagePickerShown: Bool = false
+  @Published var isAlertShown: Bool = false
+  @Published var showscreen: Bool = false
+  @Published var index: Int = 0
+  @Environment (\.presentationMode) var presentationMode
+  @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
   
   func addBio(){
     guard let userId = Auth.auth().currentUser?.uid else { return }
@@ -40,7 +39,7 @@ class SignupViewModel: ObservableObject {
   
   
   func addUserNames(onSuccess: @escaping (_ user: User) -> Void) {
-   
+    
     if checkFieldsAreValid() {
       AuthService.addNames(
         firstName: firstName,
@@ -150,6 +149,7 @@ class SignupViewModel: ObservableObject {
   
   func fetchInviter(inviterId: String?) {
     guard let inviterId = inviterId else { return }
+    self.inviterId = inviterId
     self.inviteCode = String(inviterId.prefix(6))
     Api.User.loadUser(userId: inviterId) { (user) in
       DispatchQueue.main.async {
