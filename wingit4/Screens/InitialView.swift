@@ -12,7 +12,9 @@ import Firebase
 struct InitialView: View {
     
     @EnvironmentObject var session: SessionStore
-    @AppStorage("log_Status") var status = false
+//    @AppStorage("log_Status") var status = false
+    @State var hasSeenOnboarding: Bool = false
+    
   
   /*
    if log status is true then Names.
@@ -21,8 +23,22 @@ struct InitialView: View {
    */
   
     func listen() {
-        session.listenAuthenticationState()
+      let localStorage = UserDefaults.standard
+      if let hasSeenOnboarding = localStorage.string(forKey: localStorageKeys.onboarding) {
+        if hasSeenOnboarding == "true" {
+          self.hasSeenOnboarding = true
+        }
+      }
+      session.listenAuthenticationState()
     }
+  
+  func showLoginSignUpScreen() {
+    let localStorage = UserDefaults.standard
+    localStorage.set("true", forKey: localStorageKeys.onboarding)
+    withAnimation {
+      self.hasSeenOnboarding = true
+    }
+  }
     
   var body: some View {
     Group {
@@ -30,9 +46,13 @@ struct InitialView: View {
         MainView()
       }
       else {
-        OnboardingView()
-        //                FirstView()
-//         OnboardingV2()
+        if hasSeenOnboarding {
+          OnboardingView()
+        } else {
+          OnboardingCarousel(
+            onEnd: showLoginSignUpScreen
+          )
+        }
       }
     }
     .onAppear(perform: listen)

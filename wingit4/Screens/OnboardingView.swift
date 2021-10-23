@@ -54,7 +54,6 @@ struct FirstView : View {
       VStack {
         
         if signupViewModel.index == 0 {
-          
           LoginSignup()
             .environmentObject(signupViewModel)
           

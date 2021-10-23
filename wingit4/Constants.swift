@@ -253,5 +253,9 @@ class Haptic {
     impact.impactOccurred()
   }
 
+}
 
+
+class localStorageKeys {
+    static let onboarding = "hasSeenOnboardingScreen"
 }

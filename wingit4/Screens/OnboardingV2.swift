@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct OnboardingV2: View {
+struct OnboardingCarousel: View {
   
   @State var offset: CGFloat = 0
-  @State var screenIndex: CGFloat = 0  
+  @State var screenIndex: CGFloat = 0
+  var onEnd: () -> Void
   
   // getting Rotation...
   func getRotation()->Double{
@@ -26,8 +27,8 @@ struct OnboardingV2: View {
   // Changing BG Color based on offset...
   func getIndex()->Int{
     let progress = (offset / getScreenBounds().width).rounded()
-    
-    return Int(progress)
+    let index = Int(progress)
+    return index
   }
   
   var body: some View {
@@ -54,9 +55,7 @@ struct OnboardingV2: View {
           .frame(width: getScreenBounds().width)
           .frame(maxHeight: .infinity)
           
-          if index == boardingScreens.count - 1 {
-            OnboardingView()
-          }
+          
         }
       }
     }
@@ -111,7 +110,11 @@ struct OnboardingV2: View {
           .frame(maxWidth: .infinity)
           
           Button {
-            offset = min(offset + getScreenBounds().width,getScreenBounds().width * 3)
+            if getIndex() == 2 {
+              onEnd()
+            } else {
+              offset = min(offset + getScreenBounds().width,getScreenBounds().width * 3)
+            }
           } label: {
             Text(getIndex() == 2 ? "Get Started" : "Next")
               .fontWeight(.semibold)
