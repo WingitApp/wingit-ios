@@ -153,7 +153,11 @@ class SignupViewModel: ObservableObject {
   func verifyCode() {
     let trimmedCode = inviteCode.trimmingCharacters(in: .whitespacesAndNewlines)
     if trimmedCode.count != INVITE_CODE_LENGTH {
-      showErrorMessage(message: "Invite code must be 6 characters")
+      if trimmedCode.count == 0 {
+        showErrorMessage(message: "Please enter an invite code")
+      } else {
+        showErrorMessage(message: "Invite code must be \(INVITE_CODE_LENGTH) characters")
+      }
     } else {
       Api.User.findUser(
         inviteCode: trimmedCode,
