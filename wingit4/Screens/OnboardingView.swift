@@ -69,13 +69,14 @@ struct FirstView : View {
           
         } else if signupViewModel.index == 2 {
             
+          ZStack{
+         
           PhoneNumber()
             .environmentObject(signupViewModel)
             .environmentObject(phoneViewModel)
-          
+          }
           
         } else if signupViewModel.index == 3 {
-          
         
           VerifyPhoneNumber()
             .environmentObject(signupViewModel)
@@ -92,8 +93,8 @@ struct FirstView : View {
             
 //            .environmentObject(signupViewModel)
             
-            SignUpTitles(title: "Welcome!",
-                         subtitle: "Let’s create an account to get started.")
+            SignUpTitles(title: "Hang it there.",
+                         subtitle: "Enter your email and Password")
             EmailPass()
               .environmentObject(signupViewModel)
           }

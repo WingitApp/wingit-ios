@@ -14,11 +14,13 @@ struct SignUpTitles: View {
   
     var body: some View {
   
-        VStack(alignment: .center, spacing: 15){
+        VStack(alignment: .leading, spacing: 15){
         Text(title).bold().font(.title2)
         Text(subtitle ?? "").font(.caption).foregroundColor(.gray)
         Spacer()
-        }.padding(.top, 75)
+          
+        }.padding(.top, 100)
+        .padding(.leading, 25)
       
     }
 }

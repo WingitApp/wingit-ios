@@ -26,15 +26,19 @@ struct InsertPhoneNoBox: View {
       
       ZStack {
         
+        ProgressBar(percent: 0)
         ProgressNumberView()
           .environmentObject(signupViewModel)
         
+        SignUpTitles(title: "Let's create an account",
+                     subtitle: "Provide a phone number")
+
           VStack(alignment: .leading, spacing: 15){
             
 //            Tab(width: 75, index: 2, title: "Phone")
 //            Tab()
             
-            ProgressBar(percent: 0)
+        
           
 //            .environmentObject(signupViewModel)
             
@@ -46,6 +50,7 @@ struct InsertPhoneNoBox: View {
           }
 
       VStack{
+   
       HStack{
           
           VStack(alignment: .leading, spacing: 6) {
@@ -64,6 +69,7 @@ struct InsertPhoneNoBox: View {
           
         Button(action: sendCode) {
             Text("Send").padding(.horizontal)
+            .foregroundColor(Color.wingitBlue)
         }.disabled(phoneViewModel.phoneNo == "" ? true : false)
         
       }
