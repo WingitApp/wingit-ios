@@ -18,7 +18,7 @@ struct SignUpTitles: View {
         Text(title).bold().font(.title2)
         Text(subtitle ?? "").font(.caption).foregroundColor(.gray)
         Spacer()
-        }.padding(.top, 50)
+        }.padding(.top, 75)
       
     }
 }

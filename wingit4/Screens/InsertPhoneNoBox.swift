@@ -13,24 +13,37 @@ struct InsertPhoneNoBox: View {
   @EnvironmentObject var signupViewModel: SignupViewModel
   
   func sendCode() {
-    self.phoneViewModel.sendCode {
-      DispatchQueue.main.async {
+//    self.phoneViewModel.sendCode {
+//      DispatchQueue.main.async {
         withAnimation(.easeIn) {
           signupViewModel.index = 3
         }
-      }
-    }
+//      }
+//    }
   }
   
     var body: some View {
       
       ZStack {
         
+        ProgressNumberView()
+          .environmentObject(signupViewModel)
+        
           VStack(alignment: .leading, spacing: 15){
-          Text("Provide a phone number").bold().font(.title2)
-          Text("You’ll receive a login code for better security.").font(.caption).foregroundColor(.gray)
+            
+//            Tab(width: 75, index: 2, title: "Phone")
+//            Tab()
+            
+            ProgressBar(percent: 0)
+          
+//            .environmentObject(signupViewModel)
+            
+//          Text("Provide a phone number").bold().font(.title2)
+//          Text("You’ll receive a login code for better security.").font(.caption).foregroundColor(.gray)
+//              .padding(.top, 25)
           Spacer()
-          }.padding(.top, 50)
+            
+          }
 
       VStack{
       HStack{

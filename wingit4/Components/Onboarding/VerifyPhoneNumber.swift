@@ -13,11 +13,11 @@ struct VerifyPhoneNumber: View {
     @Environment(\.presentationMode) var present
   
   func verify() {
-    phoneViewModel.verifyCode() {
+//    phoneViewModel.verifyCode() {
       withAnimation(.easeIn) {
         signupViewModel.index = 4
       }
-    }
+//    }
   }
   
     var body: some View {

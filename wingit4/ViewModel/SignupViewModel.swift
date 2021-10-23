@@ -29,6 +29,8 @@ class SignupViewModel: ObservableObject {
   @Published var isAlertShown: Bool = false
   @Published var showscreen: Bool = false
   @Published var index: Int = 0
+  @Published var percent: CGFloat = 0
+
   @Environment (\.presentationMode) var presentationMode
   @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
   

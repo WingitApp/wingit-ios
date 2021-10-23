@@ -11,6 +11,7 @@ import Combine
 struct AvatarBio: View {
   @EnvironmentObject var session: SessionStore
   @EnvironmentObject var signupViewModel: SignupViewModel
+  @State var percent: CGFloat = 0
   
   func onUserAvatarTap() {
     self.signupViewModel.isImagePickerShown = true
@@ -34,6 +35,7 @@ struct AvatarBio: View {
 //      signupViewModel.addBio()
     withAnimation(.easeIn){
       signupViewModel.index = 7}
+ 
   }
 
   

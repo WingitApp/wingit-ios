@@ -252,6 +252,9 @@
 		FB6E690D2718E38D002ABB41 /* Bio.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E690C2718E38D002ABB41 /* Bio.swift */; };
 		FB6E690F27192640002ABB41 /* InsertPhoneNoBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E690E27192640002ABB41 /* InsertPhoneNoBox.swift */; };
 		FB6E691127192E2A002ABB41 /* LoginSignup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6E691027192E2A002ABB41 /* LoginSignup.swift */; };
+		FB72685A272396C3005F33A8 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB726859272396C3005F33A8 /* ProgressBar.swift */; };
+		FB72685C2723AF87005F33A8 /* ProgressNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB72685B2723AF87005F33A8 /* ProgressNumberView.swift */; };
+		FB72685E2723B248005F33A8 /* ProgressNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB72685D2723B247005F33A8 /* ProgressNumber.swift */; };
 		FBAA5F1F271B9B0300CF61BD /* SignUpTitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAA5F1E271B9B0300CF61BD /* SignUpTitles.swift */; };
 		FBAA5F21271E0FD600CF61BD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAA5F20271E0FD600CF61BD /* SettingsView.swift */; };
 		FBAA5F262722931300CF61BD /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAA5F252722931300CF61BD /* LoginScreen.swift */; };
@@ -500,6 +503,9 @@
 		FB6E690C2718E38D002ABB41 /* Bio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bio.swift; sourceTree = "<group>"; };
 		FB6E690E27192640002ABB41 /* InsertPhoneNoBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertPhoneNoBox.swift; sourceTree = "<group>"; };
 		FB6E691027192E2A002ABB41 /* LoginSignup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignup.swift; sourceTree = "<group>"; };
+		FB726859272396C3005F33A8 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		FB72685B2723AF87005F33A8 /* ProgressNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressNumberView.swift; sourceTree = "<group>"; };
+		FB72685D2723B247005F33A8 /* ProgressNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressNumber.swift; sourceTree = "<group>"; };
 		FBAA5F1E271B9B0300CF61BD /* SignUpTitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTitles.swift; sourceTree = "<group>"; };
 		FBAA5F20271E0FD600CF61BD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		FBAA5F252722931300CF61BD /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
@@ -882,6 +888,9 @@
 				FBDFDB56270E4BDD00EDE22F /* OnboardingV2.swift */,
 				FBDFDB58270E4BF100EDE22F /* OffsetPageTabView.swift */,
 				3B9C43BE26FB1A77008B01D2 /* OnboardingView.swift */,
+				FB726859272396C3005F33A8 /* ProgressBar.swift */,
+				FB72685D2723B247005F33A8 /* ProgressNumber.swift */,
+				FB72685B2723AF87005F33A8 /* ProgressNumberView.swift */,
 				FB6E691027192E2A002ABB41 /* LoginSignup.swift */,
 				FB48BEDF27176A4C004E33EB /* EmailLogin.swift */,
 				FB48BEE127176A72004E33EB /* Names.swift */,
@@ -1310,6 +1319,7 @@
 				3B7AF06F2671A03A003BCCF3 /* CommentView.swift in Sources */,
 				15E2F1AE26FAA9EF00638115 /* PostTypeOption.swift in Sources */,
 				15E2F1AC26FA887500638115 /* UserCommentLabel.swift in Sources */,
+				FB72685C2723AF87005F33A8 /* ProgressNumberView.swift in Sources */,
 				FB48BEE627176ABE004E33EB /* PhoneNumber.swift in Sources */,
 				1524FCF326D75F1F0000629C /* ShareButtonViewModel.swift in Sources */,
 				3B7AF05026718D42003BCCF3 /* StorageService.swift in Sources */,
@@ -1351,6 +1361,7 @@
 				3B7AF0872671CA69003BCCF3 /* UsersViewModel.swift in Sources */,
 				156E6AE626D8A13400690E47 /* UserProfileViewModel.swift in Sources */,
 				65EC9D87271D5E8600B9231A /* SignupButton.swift in Sources */,
+				FB72685E2723B248005F33A8 /* ProgressNumber.swift in Sources */,
 				3BD12F1526C9CA1500E26A87 /* AppDel.swift in Sources */,
 				1524FCF826D812E70000629C /* CircleLoader.swift in Sources */,
 				FBDFDB55270E4BC400EDE22F /* BoardingScreen.swift in Sources */,
@@ -1439,6 +1450,7 @@
 				3B7AF03026718263003BCCF3 /* Extensions.swift in Sources */,
 				15A6A43D2708E41400D65616 /* ProfileUserHeader.swift in Sources */,
 				6509E4FA26D6C214009CB74D /* Ask.swift in Sources */,
+				FB72685A272396C3005F33A8 /* ProgressBar.swift in Sources */,
 				3B75E3C2267153BA002F3108 /* SigninView.swift in Sources */,
 				1524E0FF26F6713100D5BDB4 /* BumperCountSummary.swift in Sources */,
 				65EC9D8E271D5E8600B9231A /* VerifyPhoneNumber.swift in Sources */,
