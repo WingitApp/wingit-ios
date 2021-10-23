@@ -22,8 +22,35 @@ class UserApi {
         }
     }
   
-  func findUser(inviteCode: String, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping() -> Void) {
-    
+  func findUser(inviteCode: String, onSuccess: @escaping(_ user: User) -> Void, onEmpty: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+    // Firestore does not have .where(startsWith: String)
+    let codeLastChar = inviteCode.last
+    if let upperBoundLastChar = Helper.incrementScalarValue(codeLastChar?.unicodeScalars.map { $0.value }.reduce(0, +)) {
+      let inviteCodeUpperBound = inviteCode.prefix(5) + upperBoundLastChar
+      Ref.FS_COLLECTION_USERS
+        .whereField(FirebaseFirestore.FieldPath.documentID(), isGreaterThanOrEqualTo: inviteCode)
+        .whereField(FirebaseFirestore.FieldPath.documentID(), isLessThan: inviteCodeUpperBound)
+        .getDocuments { (snapshot, error) in
+          if let error = error {
+            onError(error.localizedDescription)
+          } else if let snapshot = snapshot {
+            let result = Result { try snapshot.documents.first?.data(as: User.self) }
+            switch result {
+            case .success(let user):
+              if let user = user {
+                onSuccess(user)
+              } else {
+                print("User document doesn't exist.")
+                onEmpty()
+              }
+            case .failure(let error):
+              // A User could not be initialized from the DocumentSnapshot.
+              onEmpty()
+              printDecodingError(error: error)
+            }
+          }
+        }
+    }
   }
     
     func loadUser(

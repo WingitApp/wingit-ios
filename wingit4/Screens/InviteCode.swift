@@ -9,6 +9,17 @@ import SwiftUI
 
 struct InviteCode: View {
   @EnvironmentObject var signupViewModel: SignupViewModel
+  
+  func submitCode() {
+    if signupViewModel.inviter == nil {
+      signupViewModel.verifyCode()
+    } else {
+      withAnimation(.easeIn) {
+        signupViewModel.index = 2
+      }
+    }
+  }
+  
     var body: some View {
       VStack{
         if (signupViewModel.inviter != nil) {
@@ -19,8 +30,8 @@ struct InviteCode: View {
             .clipShape(Circle())
             .padding(20)
         }
-      InviteCodeInputField(inviteCode: $signupViewModel.inviteCode)
-          .padding(.horizontal,25)
+        InviteCodeInputField(inviteCode: $signupViewModel.inviteCode)
+          .padding(.horizontal, 25)
         Image("gift")
           .resizable()
           .aspectRatio(contentMode: .fill)
@@ -29,12 +40,22 @@ struct InviteCode: View {
         Spacer()
         HStack{
           Spacer()
-        Button(action: { withAnimation(.easeIn){
-          signupViewModel.index = 2} })
-        { NextButton()}
+          Button(action: submitCode)
+          { NextButton()}
         }
       }
+      .alert(isPresented: $signupViewModel.isAlertShown) {
+        Alert(title: Text("Error"),
+              message: Text(self.signupViewModel.errorString),
+              dismissButton: .default(Text("OK"))
+        )
+      }
+      .sheet(
+        isPresented: $signupViewModel.inviterSheetOpen,
+        content: {
+          Invitation(inviter: signupViewModel.inviter)
+        })
       .onTapGesture(perform: dismissKeyboard)
     }
-}
-
+  }
+  
