@@ -139,53 +139,10 @@ struct ProfileView: View {
       .environmentObject(connectionsViewModel)
       .environmentObject(updatePhotoVM)
       .navigationBarTitle("", displayMode: .inline)
+      
       //      .navigationBarHidden(!profileTab)
       .navigationBarHidden(true)
-      .navigationBarItems(
-        leading:
-          Button(action: {}) {
-            if isOwnProfile {
-              NavigationLink(destination: UsersView()) {
-                Image(systemName: "magnifyingglass")
-                  .imageScale(Image.Scale.medium)
-                  .foregroundColor(Color.black)
-                //                      .padding(10)
-                //                      .clipShape(Circle())
-                //                      .background(Color.white)
-                //                      .cornerRadius(100)
-                //                      .overlay(
-                //                        Capsule()
-                //                          .stroke(Color.borderGray)
-                //                      )
-                //                      .shadow(color: Color.black.opacity(0.5), radius: 3, x: 0)
-              }
-            }
-          },
-        trailing:
-          Button(action: {}) {
-            if isOwnProfile {
-              NavigationLink(
-                destination:
-                  SettingsView(
-                    inviteCode: String(session.currentUser?.id?.prefix(6) ?? ""))
-              ) {
-                
-                Image(systemName: "gearshape.fill")
-                  .imageScale(Image.Scale.medium)
-                  .foregroundColor(Color.gray)
-                  .padding(10)
-                  .clipShape(Circle())
-                  .background(Color.white)
-                  .cornerRadius(100)
-                  .overlay(
-                    RoundedRectangle(cornerRadius: 100)
-                      .stroke(Color.borderGray)
-                  )
-                  .shadow(color: Color.black.opacity(0.5), radius: 3, x: 0)
-                
-              }
-            }
-          })
+      .background(Color.backgroundGray)
       //              Button(action: {
       //                if isOwnProfile {
       //                  self.session.logout()

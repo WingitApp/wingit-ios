@@ -28,13 +28,14 @@ struct ProfileDetailView: View {
           ScrollView {
             ProfileFeed(isOwnProfile: isOwnProfile) // add switch
               .padding([.vertical])
-              .background(Color.backgroundGray)
               
           }
+          .background(Color.backgroundGray)
           .padding(.leading, -15) // needed to offset
           .padding(.trailing, -15)
         
         }
+      
         .padding([.horizontal])
 
 
