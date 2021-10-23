@@ -5,10 +5,11 @@
 //  Created by YaeRim Amy Chun on 6/9/21.
 //
 
-import FirebaseFirestoreSwift
-import Foundation
 import Firebase
 import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+import Foundation
 
 class UserApi {
     func searchUsers(text: String, onSuccess: @escaping(_ users: [User]) -> Void) {
@@ -24,33 +25,46 @@ class UserApi {
   
   func findUser(inviteCode: String, onSuccess: @escaping(_ user: User) -> Void, onEmpty: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
     // Firestore does not have .where(startsWith: String)
-    let codeLastChar = inviteCode.last
-    if let upperBoundLastChar = Helper.incrementScalarValue(codeLastChar?.unicodeScalars.map { $0.value }.reduce(0, +)) {
-      let inviteCodeUpperBound = inviteCode.prefix(5) + upperBoundLastChar
-      Ref.FS_COLLECTION_USERS
-        .whereField(FirebaseFirestore.FieldPath.documentID(), isGreaterThanOrEqualTo: inviteCode)
-        .whereField(FirebaseFirestore.FieldPath.documentID(), isLessThan: inviteCodeUpperBound)
-        .getDocuments { (snapshot, error) in
-          if let error = error {
-            onError(error.localizedDescription)
-          } else if let snapshot = snapshot {
-            let result = Result { try snapshot.documents.first?.data(as: User.self) }
-            switch result {
-            case .success(let user):
-              if let user = user {
-                onSuccess(user)
-              } else {
-                print("User document doesn't exist.")
-                onEmpty()
+    guard let inviteCodeFirstChar = inviteCode.first else { return }
+    if let lowercasedUpperBound = Helper.incrementScalarValue(inviteCodeFirstChar.lowercased().unicodeScalars.map { $0.value }.reduce(0, +)) {
+      searchForUserByIdPrefix(inviteCode: inviteCode, lowerBound: String(inviteCodeFirstChar.lowercased()), upperBound: lowercasedUpperBound, onSuccess: onSuccess,
+          onEmpty: {
+            let inviteCodeFirstCharUppercased = inviteCodeFirstChar.convertToUpperCase()
+            if !inviteCodeFirstCharUppercased.isNumber {
+              if let uppercasedUpperBound = Helper.incrementScalarValue(inviteCodeFirstCharUppercased.unicodeScalars.map { $0.value }.reduce(0, +)) {
+                self.searchForUserByIdPrefix(inviteCode: inviteCode, lowerBound: String(inviteCodeFirstCharUppercased), upperBound: uppercasedUpperBound, onSuccess: onSuccess, onEmpty: onEmpty, onError: onError)
               }
-            case .failure(let error):
-              // A User could not be initialized from the DocumentSnapshot.
-              onEmpty()
-              printDecodingError(error: error)
+            }
+          }, onError: onError)
+    }
+  }
+  
+  func searchForUserByIdPrefix(inviteCode: String, lowerBound: String, upperBound: String, onSuccess: @escaping(_ user: User) -> Void, onEmpty: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+    Ref.FS_COLLECTION_USERS
+      .whereField(FirebaseFirestore.FieldPath.documentID(), isGreaterThanOrEqualTo: lowerBound)
+      .whereField(FirebaseFirestore.FieldPath.documentID(), isLessThan: upperBound)
+      .getDocuments { (snapshot, error) in
+        if let error = error {
+          onError(error.localizedDescription)
+        } else if let snapshot = snapshot {
+          for user in snapshot.documents {
+            if user.documentID.prefix(INVITE_CODE_LENGTH).lowercased() == inviteCode.lowercased() {
+              let result = Result { try user.data(as: User.self) }
+              switch result {
+              case .success(let user):
+                if let user = user {
+                  return onSuccess(user)
+                } else {
+                  return onEmpty()
+                }
+              case .failure(let error):
+                printDecodingError(error: error)
+              }
             }
           }
+          onEmpty()
         }
-    }
+      }
   }
     
     func loadUser(

@@ -103,3 +103,14 @@ extension String {
     }
 }
 
+extension Character {
+    
+    //converts a character to uppercase
+    func convertToUpperCase() -> Character {
+        if(self.isUppercase){
+            return self
+        }
+        return Character(self.uppercased())
+    }
+}
+

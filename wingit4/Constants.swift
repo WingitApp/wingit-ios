@@ -17,6 +17,7 @@ let DEFAULT_PROFILE_AVATAR = """
                   https://firebasestorage.googleapis.com/v0/b/wingitapp-1fe28.appspot.com/o/avatar%2Fdefault%2Fuser-placeholder-copy.jpg?alt=media&token=a8b07293-d9db-466c-97f6-8a5e6b42adb0
                   """
 let CARD_CORNER_RADIUS = 8
+let INVITE_CODE_LENGTH = 6
 
 // Sign in and Sign up pages
 let TEXT_NEED_AN_ACCOUNT = "Don't have an account?"
