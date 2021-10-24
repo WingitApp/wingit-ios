@@ -692,7 +692,6 @@
 				15F7E87826E8435A00E5238F /* PersonalProfileHeader.swift */,
 				1500983426EFE45B00D31B8C /* ProfileFeed.swift */,
 				1594EE72270630F800D5C9E9 /* EditProfileView.swift */,
-				FBAA5F20271E0FD600CF61BD /* SettingsView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -897,10 +896,10 @@
 		3B7AF06326719E94003BCCF3 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				656D5AA827250903000689A8 /* Settings */,
 				656D5A9727250054000689A8 /* Onboarding */,
 				FBDFDB58270E4BF100EDE22F /* OffsetPageTabView.swift */,
 				FB6E690E27192640002ABB41 /* InsertPhoneNoBox.swift */,
-				65EC9D9E271F688700B9231A /* InviteFriendsView.swift */,
 				3B7AF06126719E46003BCCF3 /* Home */,
 				3B7AF06B26719F24003BCCF3 /* Main */,
 				156E6ADF26D8A13400690E47 /* Profile */,
@@ -1133,6 +1132,15 @@
 				FBAA5F1E271B9B0300CF61BD /* SignUpTitles.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		656D5AA827250903000689A8 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				65EC9D9E271F688700B9231A /* InviteFriendsView.swift */,
+				FBAA5F20271E0FD600CF61BD /* SettingsView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		65EC9D71271D5E8600B9231A /* Onboarding */ = {

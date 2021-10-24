@@ -8,14 +8,9 @@
 import SwiftUI
 
 struct SettingsView: View {
-  
   @EnvironmentObject var session: SessionStore
   @ObservedObject var inviteFriendsViewModel = InviteFriendsViewModel()
-  
-  
   var inviteCode: String
-  
-  
   
   var body: some View {
     VStack{
