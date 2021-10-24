@@ -10,9 +10,7 @@ import SwiftUI
 import Firebase
 
 struct InitialView: View {
-    
     @EnvironmentObject var session: SessionStore
-//    @AppStorage("log_Status") var status = false
     @State var hasSeenOnboarding: Bool = false
     
   

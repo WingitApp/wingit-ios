@@ -42,7 +42,6 @@ class SessionStore: ObservableObject {
   
   
     @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
-    @AppStorage("log_Status") var status = false
     @AppStorage("notificationsLastSeenAt") var notificationsLastSeenAt: Double = 1633885030
     var handle: AuthStateDidChangeListenerHandle?
     

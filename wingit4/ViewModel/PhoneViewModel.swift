@@ -21,9 +21,6 @@ class PhoneViewModel: ObservableObject {
     // DataModel For Error View...
     @Published var errorMsg = ""
     @Published var error = false
-    
-    // User Logged Status
-    @AppStorage("log_Status") var status = false
     @AppStorage("authVerificationID") var authVerificationId: String?
     // Loading View....
     @Published var loading = false
@@ -61,18 +58,12 @@ class PhoneViewModel: ObservableObject {
       loading = true
       
       Auth.auth().signIn(with: credential) { (result, err) in
-          
           self.loading = false
-          
-          if let error = err{
+          if let error = err {
               self.errorMsg = error.localizedDescription
               withAnimation{ self.error.toggle()}
               return
           }
-          
-          // else user logged in Successfully ....
-          
-          withAnimation{self.status = true}
       }
     }
     
