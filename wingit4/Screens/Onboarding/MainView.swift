@@ -10,7 +10,6 @@ import Foundation
 import SwiftUI
 import Combine   // << needed for Just publisher below
 
-
 struct MainView: View {
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
   @EnvironmentObject var session: SessionStore

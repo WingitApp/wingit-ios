@@ -39,42 +39,42 @@ struct OnboardingScreens : View {
   var body: some View{
     ActivityIndicatorView(message: "Loading...", isShowing: self.$session.isSessionLoading) {
       VStack {
-        if signupViewModel.index == 0 {
-          LoginSignup()
-        } else if signupViewModel.index == 1 {
+        if signupViewModel.index == .signupOrLogin {
+          SignupOrLogin()
+        } else if signupViewModel.index == .inviteCode {
           SignUpTitles(title: "Welcome! Enter invite code",
                        subtitle: "You need an invite code from a Wingit user to join!").padding(.bottom, 30)
           InviteCode()
-        } else if signupViewModel.index == 2 {
+        } else if signupViewModel.index == .emailSignup {
           ZStack {
             ProgressBar(percent: 35)
             ProgressNumberView()
-            SignUpTitles(title: "Hang it there.", subtitle: "Enter your email and Password")
+            SignUpTitles(title: "Let's make an account!", subtitle: "Enter your email and Password")
             EmailPass()
           }
-        } else if signupViewModel.index == 3 {
+        } else if signupViewModel.index == .phoneNumber {
           ZStack{
             PhoneNumber().environmentObject(phoneViewModel)
           }
-        } else if signupViewModel.index == 4 {
+        } else if signupViewModel.index == .phoneVerify {
           VerifyPhoneNumber().environmentObject(phoneViewModel)
-        } else if signupViewModel.index == 5 {
+        } else if signupViewModel.index == .names {
           ZStack {
             ProgressBar(percent: 70)
             ProgressNumberView()
             SignUpTitles(title: "Names", subtitle: nil)
             Names()
           }
-        } else if signupViewModel.index == 6 {
+        } else if signupViewModel.index == .bio {
           ZStack{
             ProgressBar(percent: 100)
             ProgressNumberView()
-            SignUpTitles(title: "Add a photo and bio", subtitle: "Help your friends identify you better.")
+            SignUpTitles(title: "Add a photo and bio", subtitle: "Help your friends to identify you.")
             AvatarBio()
           }
-        } else if signupViewModel.index == 7 {
-          LoginScreen()
-        } else if signupViewModel.index == 8 {
+        } else if signupViewModel.index == .loginMethod {
+          LoginMethod()
+        } else if signupViewModel.index == .loginWithEmail {
           EmailLogin()
         }
       }
@@ -96,4 +96,16 @@ struct OnboardingScreens : View {
       }
     }
   }
+}
+
+enum OnboardingScreen: String {
+  case signupOrLogin = "Signup Or Login"
+  case inviteCode = "Invite Code"
+  case emailSignup = "Email Signup"
+  case phoneNumber = "Phone Number"
+  case phoneVerify = "Phone Verify"
+  case names = "Names"
+  case bio = "Bio"
+  case loginMethod = "Login Method"
+  case loginWithEmail = "Login with Email"
 }

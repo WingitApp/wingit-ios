@@ -28,13 +28,14 @@ class SignupViewModel: ObservableObject {
   @Published var isImagePickerShown: Bool = false
   @Published var isAlertShown: Bool = false
   @Published var showscreen: Bool = false
-  @Published var index: Int = 0
+  @Published var index: OnboardingScreen = .signupOrLogin
   @Published var percent: CGFloat = 0
 
   @Environment (\.presentationMode) var presentationMode
   @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
+  @AppStorage("onboardingInProgress") var onboardingInProgress: Bool = false
   
-  func addBio(){
+  func addBio() {
     guard let userId = Auth.auth().currentUser?.uid else { return }
     Ref.FS_DOC_USERID(userId: userId).setData(["bio" : bioText], merge: true)
   }

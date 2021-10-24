@@ -13,17 +13,8 @@ struct PhoneNumber : View {
   @EnvironmentObject var signupViewModel: SignupViewModel
   
     var body: some View{
-//      SignUpTitles(title: "Provide a phone number",
-//                   subtitle: "You’ll receive a login code for better security.")
-  
-          
           VStack{
-       
-              
             VStack(alignment: .leading){
-              
-                  // Mobile Number Field....
-              
               InsertPhoneNoBox()
                 .environmentObject(signupViewModel)
                 .environmentObject(phoneViewModel)
@@ -31,9 +22,6 @@ struct PhoneNumber : View {
                 .frame(height: UIScreen.main.bounds.height / 1.8)
                       .background(Color.white)
                       .cornerRadius(5)
-            
-              // Custom Number Pad....
-              
               CustomNumberPad(value: $phoneViewModel.phoneNo, isVerify: false)
               
           }

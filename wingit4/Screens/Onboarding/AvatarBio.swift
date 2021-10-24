@@ -17,11 +17,10 @@ struct AvatarBio: View {
     self.signupViewModel.isImagePickerShown = true
   }
   
-  func addAvatar() {
-    withAnimation(.easeIn){
-      signupViewModel.index = 7}
-    //if photo exists go if not still go. so no disable.
-    
+  func onboardingComplete() {
+    withAnimation(.easeIn) {
+      signupViewModel.onboardingInProgress = false
+    }
   }
   
   let textLimit = 200
@@ -30,14 +29,6 @@ struct AvatarBio: View {
       signupViewModel.bioText = String(signupViewModel.bioText.prefix(upper))
          }
      }
-  
-  func nextButtonBio() {
-//      signupViewModel.addBio()
-    withAnimation(.easeIn){
-      signupViewModel.index = 7}
- 
-  }
-
   
     var body: some View {
       VStack {
@@ -97,7 +88,7 @@ struct AvatarBio: View {
         Spacer()
         HStack{
           Spacer()
-        Button(action: { addAvatar() })
+        Button(action: { onboardingComplete() })
         { NextButton()}
         }
      

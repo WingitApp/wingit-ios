@@ -8,7 +8,7 @@
 import SwiftUI
 //import FirebaseUI/Auth
 
-struct LoginSignup: View {
+struct SignupOrLogin: View {
   
   @EnvironmentObject var signupViewModel: SignupViewModel
   
@@ -22,8 +22,7 @@ struct LoginSignup: View {
           .padding(.bottom, 50)
         
              Button(action: { withAnimation(.easeIn){
-     
-               signupViewModel.index = 1 }  })
+               signupViewModel.index = .inviteCode }  })
         {
                Text("Sign Up")
             .foregroundColor(.white)
@@ -34,9 +33,7 @@ struct LoginSignup: View {
         
         
           Button(action: { withAnimation(.easeIn){
-
-            signupViewModel.index = 7
-            
+            signupViewModel.index = .loginMethod
           }}){
             Text("Login")
               .bold()
@@ -50,6 +47,6 @@ struct LoginSignup: View {
 
 struct LoginSignup_Previews: PreviewProvider {
     static var previews: some View {
-        LoginSignup()
+        SignupOrLogin()
     }
 }

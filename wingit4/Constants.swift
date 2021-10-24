@@ -22,8 +22,10 @@ let INVITE_CODE_LENGTH = 6
 // Sign in and Sign up pages
 let TEXT_NEED_AN_ACCOUNT = "Don't have an account?"
 let TEXT_SIGN_UP = "Sign up"
-let TEXT_SIGN_IN = "Login"
+let TEXT_LOGIN = "Login"
 let TEXT_EMAIL = "Email"
+let TEXT_PHONE = "Phone"
+let TEXT_NAME = "Name"
 let TEXT_FIRST_NAME = "First Name"
 let TEXT_LAST_NAME = "Last Name"
 let TEXT_USERNAME = "Username"
@@ -257,6 +259,7 @@ class Haptic {
 }
 
 
-class localStorageKeys {
-    static let onboarding = "hasSeenOnboardingScreen"
+class LocalStorageKeys {
+  static let onboarding = "hasSeenOnboardingScreen"
+  static let onboardingInProgress = "onboardingInProgress"
 }

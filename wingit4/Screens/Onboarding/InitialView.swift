@@ -10,9 +10,9 @@ import SwiftUI
 import Firebase
 
 struct InitialView: View {
-    @EnvironmentObject var session: SessionStore
-    @State var hasSeenOnboarding: Bool = false
-    
+  @EnvironmentObject var session: SessionStore
+  @State var hasSeenOnboarding: Bool = false
+  @State var onboardingInProgress: Bool = false
   
   /*
    if log status is true then Names.
@@ -22,17 +22,18 @@ struct InitialView: View {
   
     func listen() {
       let localStorage = UserDefaults.standard
-      if let hasSeenOnboarding = localStorage.string(forKey: localStorageKeys.onboarding) {
+      if let hasSeenOnboarding = localStorage.string(forKey: LocalStorageKeys.onboarding) {
         if hasSeenOnboarding == "true" {
           self.hasSeenOnboarding = true
         }
       }
+      self.onboardingInProgress = localStorage.bool(forKey: LocalStorageKeys.onboardingInProgress)
       session.listenAuthenticationState()
     }
   
   func showLoginSignUpScreen() {
     let localStorage = UserDefaults.standard
-    localStorage.set("true", forKey: localStorageKeys.onboarding)
+    localStorage.set("true", forKey: LocalStorageKeys.onboarding)
     withAnimation {
       self.hasSeenOnboarding = true
     }
@@ -40,7 +41,7 @@ struct InitialView: View {
     
   var body: some View {
     Group {
-      if session.isLoggedIn {
+      if session.isLoggedIn && !onboardingInProgress {
         MainView()
       }
       else {

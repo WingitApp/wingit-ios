@@ -14,7 +14,7 @@ struct AcceptInvitationButton: View {
   var body: some View {
       Button(action: {
         Haptic.impact(type: "soft")
-        signupViewModel.index = 2
+        signupViewModel.index = .emailSignup
         logToAmplitude(event: .acceptInvitation, properties: [.senderId: inviter.id])
       },
              label: {

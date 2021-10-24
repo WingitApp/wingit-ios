@@ -42,7 +42,7 @@ struct EmailLogin : View {
             
             SigninButton(
              action: signinViewModel.signin,
-             label: TEXT_SIGN_IN
+             label: TEXT_LOGIN
             )
             .padding(.horizontal,25)
             .padding(.top,25)
@@ -57,7 +57,7 @@ struct EmailLogin : View {
         .environmentObject(signinViewModel)
         .onTapGesture(perform: dismissKeyboard)
         .onAppear{
-            logToAmplitude(event: .viewLoginScreen)
+          logToAmplitude(event: .viewLoginScreen)
         }
     }
 }

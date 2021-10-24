@@ -13,52 +13,27 @@ struct InsertPhoneNoBox: View {
   @EnvironmentObject var signupViewModel: SignupViewModel
   
   func sendCode() {
-//    self.phoneViewModel.sendCode {
-//      DispatchQueue.main.async {
-        withAnimation(.easeIn) {
-          signupViewModel.index = 3
-        }
-//      }
-//    }
+    withAnimation(.easeIn) {
+      signupViewModel.index = .phoneVerify
+    }
   }
   
     var body: some View {
       
       ZStack {
-        
         ProgressBar(percent: 0)
         ProgressNumberView()
           .environmentObject(signupViewModel)
-        
-        SignUpTitles(title: "Let's create an account",
-                     subtitle: "Provide a phone number")
-
+        SignUpTitles(title: "Provide a phone number",
+                     subtitle: "Enter a phone number for better security")
           VStack(alignment: .leading, spacing: 15){
-            
-//            Tab(width: 75, index: 2, title: "Phone")
-//            Tab()
-            
-        
-          
-//            .environmentObject(signupViewModel)
-            
-//          Text("Provide a phone number").bold().font(.title2)
-//          Text("You’ll receive a login code for better security.").font(.caption).foregroundColor(.gray)
-//              .padding(.top, 25)
           Spacer()
-            
           }
 
       VStack{
    
       HStack{
-          
           VStack(alignment: .leading, spacing: 6) {
-              
-              Text("Enter your number")
-                  .font(.caption)
-                  .foregroundColor(.gray)
-              
               Text("+ \(phoneViewModel.getCountryCode())  \(phoneViewModel.phoneNo)")
                   .font(.title2)
                   .fontWeight(.bold)

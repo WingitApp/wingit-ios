@@ -15,7 +15,7 @@ struct InviteCode: View {
       signupViewModel.verifyCode()
     } else {
       withAnimation(.easeIn) {
-        signupViewModel.index = 2
+        signupViewModel.index = .emailSignup
       }
     }
   }

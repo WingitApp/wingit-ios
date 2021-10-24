@@ -15,7 +15,7 @@ struct VerifyPhoneNumber: View {
   func verify() {
 //    phoneViewModel.verifyCode() {
       withAnimation(.easeIn) {
-        signupViewModel.index = 4
+        signupViewModel.index = .names
       }
 //    }
   }
@@ -30,7 +30,7 @@ struct VerifyPhoneNumber: View {
                     
                     HStack{
                       Button(action: {withAnimation(.easeIn){
-                        signupViewModel.index = 3}}) {
+                        signupViewModel.index = .phoneNumber}}) {
                           
                           Image(systemName: "arrow.left")
                               .font(.title3)

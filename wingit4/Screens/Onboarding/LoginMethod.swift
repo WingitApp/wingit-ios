@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-struct LoginScreen: View {
+struct LoginMethod: View {
   
   @EnvironmentObject var signupViewModel: SignupViewModel
   
     var body: some View {
       VStack(alignment: .center, spacing: 20) {
         Button(action: { withAnimation(.easeIn) {
-          signupViewModel.index = 8}}) {
-        Label("Sign in with email", systemImage: "envelope.fill")
+          signupViewModel.index = .loginWithEmail}}) {
+        Label("Log in with email", systemImage: "envelope.fill")
               .frame(idealWidth: UIScreen.main.bounds.width - 50, maxWidth: 500, minHeight: 55, idealHeight: 55, maxHeight: 55)
               .background( Color.wingitBlue)
               .cornerRadius(5)
@@ -23,15 +23,17 @@ struct LoginScreen: View {
         }
         
         Button(action: { withAnimation(.easeIn) {
-          signupViewModel.index = 2}}) {
-        Label("Sign in with phone", systemImage: "phone.fill")
+          signupViewModel.index = .phoneNumber}}) {
+        Label("Log in with phone", systemImage: "phone.fill")
               .frame(idealWidth: UIScreen.main.bounds.width - 50, maxWidth: 500, minHeight: 55, idealHeight: 55, maxHeight: 55)
               .background( Color.uilightGreen)
               .cornerRadius(5)
               .foregroundColor(.black)
         }
       }.padding()
-       
+        .onAppear() {
+          
+        }
     }
 }
 

@@ -16,7 +16,8 @@ struct EmailPass: View {
 //        signupViewModel.onSignupSuccess(user: user)
 //        self.session.currentUser = user
     withAnimation(.easeIn) {
-      signupViewModel.index = 5}
+      signupViewModel.index = .phoneNumber
+    }
    
 //    }
   }

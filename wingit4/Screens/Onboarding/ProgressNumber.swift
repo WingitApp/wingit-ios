@@ -10,7 +10,7 @@ import SwiftUI
 struct ProgressNumber: View {
   
   @EnvironmentObject var signupViewModel: SignupViewModel
-  var index: Int = 0
+  var index: OnboardingScreen = .phoneNumber
   var page: String = ""
   var title: String = ""
   
