@@ -145,7 +145,7 @@ struct FirstView : View {
       .onAppear {
         if (signupViewModel.inviter == nil && !signupViewModel.inviterId.isEmpty) {
           signupViewModel.fetchInviter(inviterId: signupViewModel.inviterId)
-          signupViewModel.inviteCode = String(signupViewModel.inviterId.prefix(6))
+          signupViewModel.inviteCode = String(signupViewModel.inviterId.prefix(INVITE_CODE_LENGTH))
         }
       }
       .onChange(of: deepLink) { deepLink in

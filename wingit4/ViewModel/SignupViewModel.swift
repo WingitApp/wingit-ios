@@ -172,7 +172,7 @@ class SignupViewModel: ObservableObject {
   func fetchInviter(inviterId: String?) {
     guard let inviterId = inviterId else { return }
     self.inviterId = inviterId
-    self.inviteCode = String(inviterId.prefix(6))
+    self.inviteCode = String(inviterId.prefix(INVITE_CODE_LENGTH))
     Api.User.loadUser(userId: inviterId) { (user) in
       DispatchQueue.main.async {
         self.inviter = user

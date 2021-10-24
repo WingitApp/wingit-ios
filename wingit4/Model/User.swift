@@ -35,6 +35,10 @@ struct User: Identifiable, Codable, Equatable, Hashable {
     var displayName: String? {
       return "\(self.firstName ?? "") \(self.lastName ?? "")".trimmingCharacters(in: .whitespacesAndNewlines).capitalized
     }
+  
+    var inviteCode: String {
+      return String(self.id?.prefix(INVITE_CODE_LENGTH) ?? "")
+    }
 
     subscript(key: String) -> String {
           get {

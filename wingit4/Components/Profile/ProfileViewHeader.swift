@@ -38,9 +38,8 @@ struct ProfileViewHeader: View {
             NavigationLink(
               destination:
                 SettingsView(
-                  inviteCode: String(session.currentUser?.id?.prefix(6) ?? ""))
+                  inviteCode: String(session.currentUser?.inviteCode ?? ""))
             ) {
-              
               Image(systemName: "gearshape.fill")
                 .imageScale(Image.Scale.medium)
                 .foregroundColor(Color.gray)
@@ -52,7 +51,6 @@ struct ProfileViewHeader: View {
                     .stroke(Color.borderGray)
                 )
                 .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0)
-              
             }
           }
         }
