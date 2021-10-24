@@ -10,35 +10,25 @@ import FirebaseAuth
 import SwiftUI
 
 struct OnboardingView: View {
-  
-  
-    var body: some View {
-        // For Smaller Size iPhones...
-        
-       
-        VStack{
-          
-            if UIScreen.main.bounds.height < 750{
-                
-                ScrollView(.vertical, showsIndicators: false) {
-                    
-                    FirstView()
-                }
-            }
-            else{
-                
-                   FirstView()
-            }
+  var body: some View {
+    // For Smaller Size iPhones...
+    VStack{
+      if UIScreen.main.bounds.height < 750 {
+        ScrollView(.vertical, showsIndicators: false) {
+          OnboardingScreens()
         }
-        .padding(.vertical)
-        .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
-          .background(Color.white)
-          .ignoresSafeArea()
-        
+      } else{
+        OnboardingScreens()
+      }
     }
+    .padding(.vertical)
+    .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
+    .background(Color.white)
+    .ignoresSafeArea()
+  }
 }
 
-struct FirstView : View {
+struct OnboardingScreens : View {
   // deepLink to listen to
   @Environment(\.deepLink) var deepLink
   @EnvironmentObject var session: SessionStore
@@ -50,8 +40,8 @@ struct FirstView : View {
   
   var body: some View{
     ActivityIndicatorView(message: "Loading...", isShowing: self.$session.isSessionLoading) {
-     
-        
+      
+      
       VStack {
         
         if signupViewModel.index == 0 {
@@ -62,22 +52,22 @@ struct FirstView : View {
         
         else if signupViewModel.index == 1 {
           
-            SignUpTitles(title: "Welcome! Enter invite code",
-                         subtitle: "You need an invite code from a Wingit user to join!").padding(.bottom, 30)
-            InviteCode()
-              .environmentObject(signupViewModel)
+          SignUpTitles(title: "Welcome! Enter invite code",
+                       subtitle: "You need an invite code from a Wingit user to join!").padding(.bottom, 30)
+          InviteCode()
+            .environmentObject(signupViewModel)
           
         } else if signupViewModel.index == 2 {
-            
+          
           ZStack{
-         
-          PhoneNumber()
-            .environmentObject(signupViewModel)
-            .environmentObject(phoneViewModel)
+            
+            PhoneNumber()
+              .environmentObject(signupViewModel)
+              .environmentObject(phoneViewModel)
           }
           
         } else if signupViewModel.index == 3 {
-        
+          
           VerifyPhoneNumber()
             .environmentObject(signupViewModel)
             .environmentObject(phoneViewModel)
@@ -85,13 +75,13 @@ struct FirstView : View {
         } else if signupViewModel.index == 4 {
           
           ZStack{
-//            Tab(width: 150, index: 4, title: "Email/Pass")
-          
+            //            Tab(width: 150, index: 4, title: "Email/Pass")
+            
             ProgressBar(percent: 35)
             ProgressNumberView()
-                .environmentObject(signupViewModel)
+              .environmentObject(signupViewModel)
             
-//            .environmentObject(signupViewModel)
+            //            .environmentObject(signupViewModel)
             
             SignUpTitles(title: "Hang it there.",
                          subtitle: "Enter your email and Password")
@@ -102,14 +92,14 @@ struct FirstView : View {
         } else if signupViewModel.index == 5 {
           
           ZStack{
-//            Tab(width: 225, index: 5, title: "Names")
-//            Tab()
+            //            Tab(width: 225, index: 5, title: "Names")
+            //            Tab()
             
             ProgressBar(percent: 70)
             ProgressNumberView()
-                .environmentObject(signupViewModel)
+              .environmentObject(signupViewModel)
             
-//            .environmentObject(signupViewModel)
+            //            .environmentObject(signupViewModel)
             SignUpTitles(title: "Names",
                          subtitle: nil)
             Names()
@@ -120,26 +110,26 @@ struct FirstView : View {
         else if signupViewModel.index == 6 {
           //Optional
           ZStack{
-//            Tab(width: 300, index: 6, title: "Photo/Bio")
-           
+            //            Tab(width: 300, index: 6, title: "Photo/Bio")
+            
             ProgressBar(percent: 100)
             ProgressNumberView()
-            .environmentObject(signupViewModel)
+              .environmentObject(signupViewModel)
             
-          SignUpTitles(title: "Add a photo and bio",
-                       subtitle: "Help your friends identify you better.")
+            SignUpTitles(title: "Add a photo and bio",
+                         subtitle: "Help your friends identify you better.")
             AvatarBio()
               .environmentObject(signupViewModel)
           }
           
         } else if signupViewModel.index == 7 {
           //Optional
-         LoginScreen()
+          LoginScreen()
             .environmentObject(signupViewModel)
           
         } else if signupViewModel.index == 8 {
           EmailLogin()
-        } 
+        }
         
       }
       .onAppear {
@@ -160,5 +150,3 @@ struct FirstView : View {
     }
   }
 }
-
-
