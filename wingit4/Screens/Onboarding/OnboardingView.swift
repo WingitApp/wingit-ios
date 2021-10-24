@@ -32,106 +32,53 @@ struct OnboardingScreens : View {
   // deepLink to listen to
   @Environment(\.deepLink) var deepLink
   @EnvironmentObject var session: SessionStore
-  // @State var index = 0
-  // @Namespace var name
   @StateObject var signupViewModel = SignupViewModel()
   @StateObject var phoneViewModel = PhoneViewModel()
   @State var percent: CGFloat = 0
   
   var body: some View{
     ActivityIndicatorView(message: "Loading...", isShowing: self.$session.isSessionLoading) {
-      
-      
       VStack {
-        
         if signupViewModel.index == 0 {
           LoginSignup()
-            .environmentObject(signupViewModel)
-          
-        }
-        
-        else if signupViewModel.index == 1 {
-          
+        } else if signupViewModel.index == 1 {
           SignUpTitles(title: "Welcome! Enter invite code",
                        subtitle: "You need an invite code from a Wingit user to join!").padding(.bottom, 30)
           InviteCode()
-            .environmentObject(signupViewModel)
-          
         } else if signupViewModel.index == 2 {
-          
-          ZStack{
-            
-            PhoneNumber()
-              .environmentObject(signupViewModel)
-              .environmentObject(phoneViewModel)
-          }
-          
-        } else if signupViewModel.index == 3 {
-          
-          VerifyPhoneNumber()
-            .environmentObject(signupViewModel)
-            .environmentObject(phoneViewModel)
-          
-        } else if signupViewModel.index == 4 {
-          
-          ZStack{
-            //            Tab(width: 150, index: 4, title: "Email/Pass")
-            
+          ZStack {
             ProgressBar(percent: 35)
             ProgressNumberView()
-              .environmentObject(signupViewModel)
-            
-            //            .environmentObject(signupViewModel)
-            
-            SignUpTitles(title: "Hang it there.",
-                         subtitle: "Enter your email and Password")
+            SignUpTitles(title: "Hang it there.", subtitle: "Enter your email and Password")
             EmailPass()
-              .environmentObject(signupViewModel)
           }
-          
-        } else if signupViewModel.index == 5 {
-          
+        } else if signupViewModel.index == 3 {
           ZStack{
-            //            Tab(width: 225, index: 5, title: "Names")
-            //            Tab()
-            
+            PhoneNumber().environmentObject(phoneViewModel)
+          }
+        } else if signupViewModel.index == 4 {
+          VerifyPhoneNumber().environmentObject(phoneViewModel)
+        } else if signupViewModel.index == 5 {
+          ZStack {
             ProgressBar(percent: 70)
             ProgressNumberView()
-              .environmentObject(signupViewModel)
-            
-            //            .environmentObject(signupViewModel)
-            SignUpTitles(title: "Names",
-                         subtitle: nil)
+            SignUpTitles(title: "Names", subtitle: nil)
             Names()
-              .environmentObject(signupViewModel)
           }
-          
-        }
-        else if signupViewModel.index == 6 {
-          //Optional
+        } else if signupViewModel.index == 6 {
           ZStack{
-            //            Tab(width: 300, index: 6, title: "Photo/Bio")
-            
             ProgressBar(percent: 100)
             ProgressNumberView()
-              .environmentObject(signupViewModel)
-            
-            SignUpTitles(title: "Add a photo and bio",
-                         subtitle: "Help your friends identify you better.")
+            SignUpTitles(title: "Add a photo and bio", subtitle: "Help your friends identify you better.")
             AvatarBio()
-              .environmentObject(signupViewModel)
           }
-          
         } else if signupViewModel.index == 7 {
-          //Optional
           LoginScreen()
-            .environmentObject(signupViewModel)
-          
         } else if signupViewModel.index == 8 {
           EmailLogin()
         }
-        
       }
+      .environmentObject(signupViewModel)
       .onAppear {
         if (signupViewModel.inviter == nil && !signupViewModel.inviterId.isEmpty) {
           signupViewModel.fetchInviter(inviterId: signupViewModel.inviterId)
