@@ -81,8 +81,9 @@ class PhoneViewModel: ObservableObject {
       Auth.auth().signIn(with: credential) { (result, err) in
         self.loading = false
         if let error = err {
+          print(error)
           self.alertError = true
-          self.alertMessage = error.localizedDescription
+          self.alertMessage = "Invalid code for user"
           withAnimation{ self.alertShown.toggle()}
           return
         }
