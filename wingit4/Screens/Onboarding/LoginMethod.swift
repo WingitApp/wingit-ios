@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginMethod: View {
-  
+  @Binding var signupInProgress: Bool
   @EnvironmentObject var signupViewModel: SignupViewModel
   
     var body: some View {
@@ -32,7 +32,7 @@ struct LoginMethod: View {
         }
       }.padding()
         .onAppear() {
-          
+          signupInProgress = false
         }
     }
 }

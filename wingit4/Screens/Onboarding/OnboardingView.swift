@@ -10,15 +10,16 @@ import FirebaseAuth
 import SwiftUI
 
 struct OnboardingView: View {
+  @Binding var signupInProgress: Bool
   var body: some View {
     // For Smaller Size iPhones...
     VStack{
       if UIScreen.main.bounds.height < 750 {
         ScrollView(.vertical, showsIndicators: false) {
-          OnboardingScreens()
+          OnboardingScreens(signupInProgress: $signupInProgress)
         }
       } else{
-        OnboardingScreens()
+        OnboardingScreens(signupInProgress: $signupInProgress)
       }
     }
     .padding(.vertical)
@@ -30,6 +31,7 @@ struct OnboardingView: View {
 
 struct OnboardingScreens : View {
   // deepLink to listen to
+  @Binding var signupInProgress: Bool
   @Environment(\.deepLink) var deepLink
   @EnvironmentObject var session: SessionStore
   @StateObject var signupViewModel = SignupViewModel()
@@ -40,7 +42,7 @@ struct OnboardingScreens : View {
     ActivityIndicatorView(message: "Loading...", isShowing: self.$session.isSessionLoading) {
       VStack {
         if signupViewModel.index == .signupOrLogin {
-          SignupOrLogin()
+          SignupOrLogin(signupInProgress: $signupInProgress)
         } else if signupViewModel.index == .inviteCode {
           SignUpTitles(title: "Welcome! Enter invite code",
                        subtitle: "You need an invite code from a Wingit user to join!").padding(.bottom, 30)
@@ -70,10 +72,10 @@ struct OnboardingScreens : View {
             ProgressBar(percent: 100)
             ProgressNumberView()
             SignUpTitles(title: "Add a photo and bio", subtitle: "Help your friends to identify you.")
-            AvatarBio()
+            AvatarBio(signupInProgress: $signupInProgress)
           }
         } else if signupViewModel.index == .loginMethod {
-          LoginMethod()
+          LoginMethod(signupInProgress: $signupInProgress)
         } else if signupViewModel.index == .loginWithEmail {
           EmailLogin()
         }

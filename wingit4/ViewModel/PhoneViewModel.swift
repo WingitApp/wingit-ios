@@ -55,7 +55,7 @@ class PhoneViewModel: ObservableObject {
   
   func verifyCode(user: User?, isLoggedIn: Bool, onSuccess: @escaping() -> Void) {
     let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
-
+    
     let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID ?? self.authVerificationId, verificationCode: code)
     
     loading = true
@@ -67,14 +67,9 @@ class PhoneViewModel: ObservableObject {
           self.alertMessage = error?.localizedDescription ?? "Phone number already in use"
           withAnimation{ self.alertShown.toggle()}
         } else {
-          Auth.auth().signIn(with: credential) { (authResult, error) in
-            if let error = error {
-              print(error.localizedDescription)
-            } else {
-              Api.Phone.addPhoneNumber(userId: authResult?.user.uid, phoneNumber: self.phoneNumber)
-              print(authResult?.user.uid ?? "phone verification success")
-            }
-          }
+          onSuccess()
+          Api.Phone.addPhoneNumber(userId: authResult?.user.uid, phoneNumber: self.phoneNumber)
+          print(authResult?.user.uid ?? "phone verification success")
         }
       }
     } else {

@@ -12,6 +12,7 @@ struct AvatarBio: View {
   @EnvironmentObject var session: SessionStore
   @EnvironmentObject var signupViewModel: SignupViewModel
   @State var percent: CGFloat = 0
+  @Binding var signupInProgress: Bool
   
   func onUserAvatarTap() {
     self.signupViewModel.isImagePickerShown = true
@@ -19,7 +20,7 @@ struct AvatarBio: View {
   
   func onboardingComplete() {
     withAnimation(.easeIn) {
-      signupViewModel.onboardingInProgress = false
+      signupInProgress = false
     }
   }
   

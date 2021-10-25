@@ -86,7 +86,7 @@ struct VerifyPhoneNumber: View {
           
           Button(action: verifyCode)
           {
-            Text("Verify Phone")
+            Text("Submit Code")
               .foregroundColor(.white)
               .padding(.vertical)
               .frame(width: UIScreen.main.bounds.width - 30)

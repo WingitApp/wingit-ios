@@ -12,7 +12,7 @@ import Firebase
 struct InitialView: View {
   @EnvironmentObject var session: SessionStore
   @State var hasSeenOnboarding: Bool = false
-  @State var onboardingInProgress: Bool = false
+  @State var signupInProgress: Bool = false
   
   /*
    if log status is true then Names.
@@ -27,7 +27,6 @@ struct InitialView: View {
           self.hasSeenOnboarding = true
         }
       }
-      self.onboardingInProgress = localStorage.bool(forKey: LocalStorageKeys.onboardingInProgress)
       session.listenAuthenticationState()
     }
   
@@ -41,12 +40,12 @@ struct InitialView: View {
     
   var body: some View {
     Group {
-      if session.isLoggedIn && !onboardingInProgress {
+      if session.isLoggedIn && !signupInProgress {
         MainView()
       }
       else {
         if hasSeenOnboarding {
-          OnboardingView()
+          OnboardingView(signupInProgress: $signupInProgress)
         } else {
           OnboardingCarousel(
             onEnd: showLoginSignUpScreen

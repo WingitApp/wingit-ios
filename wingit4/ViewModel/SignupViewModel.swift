@@ -33,7 +33,6 @@ class SignupViewModel: ObservableObject {
 
   @Environment (\.presentationMode) var presentationMode
   @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
-  @AppStorage("onboardingInProgress") var onboardingInProgress: Bool = false
   
   func addBio() {
     guard let userId = Auth.auth().currentUser?.uid else { return }

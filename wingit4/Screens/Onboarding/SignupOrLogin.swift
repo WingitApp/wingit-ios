@@ -9,9 +9,8 @@ import SwiftUI
 //import FirebaseUI/Auth
 
 struct SignupOrLogin: View {
-  
   @EnvironmentObject var signupViewModel: SignupViewModel
-  
+  @Binding var signupInProgress: Bool
     var body: some View {
       
       VStack(spacing: 10){
@@ -42,11 +41,8 @@ struct SignupOrLogin: View {
               }
         
            }
-    }
-}
-
-struct LoginSignup_Previews: PreviewProvider {
-    static var previews: some View {
-        SignupOrLogin()
+      .onAppear {
+        signupInProgress = true
+      }
     }
 }
