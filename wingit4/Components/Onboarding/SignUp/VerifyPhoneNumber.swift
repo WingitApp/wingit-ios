@@ -138,6 +138,7 @@ struct DigitInputView: View {
     VStack(spacing: 10){
       
       Text(digit)
+        .bold()
         .textContentType(.oneTimeCode)
         .foregroundColor(.black)
         .font(.title2)
