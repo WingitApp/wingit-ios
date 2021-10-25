@@ -20,6 +20,8 @@ let CARD_CORNER_RADIUS = 8
 let INVITE_CODE_LENGTH = 6
 
 // Sign in and Sign up pages
+let TEXT_SUCCESS = "Success"
+let TEXT_ERROR = "Error"
 let TEXT_NEED_AN_ACCOUNT = "Don't have an account?"
 let TEXT_SIGN_UP = "Sign up"
 let TEXT_LOGIN = "Login"

@@ -151,7 +151,7 @@ class SignupViewModel: ObservableObject {
     password = ""
   }
   
-  func verifyCode() {
+  func verifyInviteCode() {
     let trimmedCode = inviteCode.trimmingCharacters(in: .whitespacesAndNewlines)
     if trimmedCode.count != INVITE_CODE_LENGTH {
       if trimmedCode.count == 0 {

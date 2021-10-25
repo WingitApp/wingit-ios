@@ -22,13 +22,13 @@ struct PhoneNumber : View {
                 .frame(height: UIScreen.main.bounds.height / 1.8)
                       .background(Color.white)
                       .cornerRadius(5)
-              CustomNumberPad(value: $phoneViewModel.phoneNo, isVerify: false)
+              CustomNumberPad(value: $phoneViewModel.phoneNumber, isVerify: false)
               
           }
           .background(Color("lightGray").ignoresSafeArea(.all, edges: .bottom))
-          .alert(isPresented: $phoneViewModel.error){
-            Alert(title: Text("Error"),
-                  message: Text(self.phoneViewModel.errorMsg),
+          .alert(isPresented: $phoneViewModel.alertShown) {
+            Alert(title: Text(phoneViewModel.alertError ? TEXT_ERROR : TEXT_SUCCESS),
+                  message: Text(phoneViewModel.alertMessage),
                   dismissButton: .default(Text("OK"))
             )
           }

@@ -12,12 +12,11 @@ struct InsertPhoneNoBox: View {
   @EnvironmentObject var phoneViewModel: PhoneViewModel
   @EnvironmentObject var signupViewModel: SignupViewModel
   
-  func sendCode() {
-    withAnimation(.easeIn) {
+  func requestCode() {
+    phoneViewModel.requestCode {
       signupViewModel.index = .phoneVerify
     }
   }
-  
     var body: some View {
       
       ZStack {
@@ -34,7 +33,7 @@ struct InsertPhoneNoBox: View {
    
       HStack{
           VStack(alignment: .leading, spacing: 6) {
-              Text("+ \(phoneViewModel.getCountryCode())  \(phoneViewModel.phoneNo)")
+              Text("+ \(phoneViewModel.getCountryCode())  \(phoneViewModel.phoneNumber)")
                   .font(.title2)
                   .fontWeight(.bold)
                   .foregroundColor(.black)
@@ -42,10 +41,10 @@ struct InsertPhoneNoBox: View {
           
           Spacer(minLength: 0)
           
-        Button(action: sendCode) {
+        Button(action: requestCode) {
             Text("Send").padding(.horizontal)
             .foregroundColor(Color.wingitBlue)
-        }.disabled(phoneViewModel.phoneNo == "" ? true : false)
+        }.disabled(phoneViewModel.phoneNumber == "" ? true : false)
         
       }
       .padding(10)

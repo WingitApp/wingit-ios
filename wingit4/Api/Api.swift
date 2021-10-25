@@ -15,6 +15,7 @@ class Api {
     static var Contacts = ContactsService()
     static var Device = DeviceApi()
     static var Notifications = NotificationsApi()
+    static var Phone = PhoneService()
     static var Post = PostApi()
     static var Referrals = ReferralsApi()
     static var Report = ReportApi()

@@ -12,7 +12,7 @@ struct InviteCode: View {
   
   func submitCode() {
     if signupViewModel.inviter == nil {
-      signupViewModel.verifyCode()
+      signupViewModel.verifyInviteCode()
     } else {
       withAnimation(.easeIn) {
         signupViewModel.index = .emailSignup
