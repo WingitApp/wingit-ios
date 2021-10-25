@@ -1,5 +1,5 @@
 //
-//  SignUp3.swift
+//  PhoneOnboarding.swift
 //  wingit4
 //
 //  Created by Amy Chun on 10/13/21.
@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-struct PhoneNumber : View {
-  
+struct PhoneOnboarding : View {
+  @Binding var signupInProgress: Bool
   @EnvironmentObject var phoneViewModel: PhoneViewModel
   @EnvironmentObject var signupViewModel: SignupViewModel
   
     var body: some View{
           VStack{
             VStack(alignment: .leading){
-              InsertPhoneNoBox()
+              InsertPhoneNoBox(signupInProgress: $signupInProgress)
                 .environmentObject(signupViewModel)
                 .environmentObject(phoneViewModel)
                 }

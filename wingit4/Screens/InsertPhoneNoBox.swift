@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct InsertPhoneNoBox: View {
-  
+  @Binding var signupInProgress: Bool
   @EnvironmentObject var phoneViewModel: PhoneViewModel
   @EnvironmentObject var signupViewModel: SignupViewModel
   
@@ -20,11 +20,13 @@ struct InsertPhoneNoBox: View {
     var body: some View {
       
       ZStack {
-        ProgressBar(percent: 0)
-        ProgressNumberView()
-          .environmentObject(signupViewModel)
+        if signupInProgress {
+          ProgressBar(percent: 0)
+          ProgressNumberView()
+            .environmentObject(signupViewModel)
+        }
         SignUpTitles(title: "Provide a phone number",
-                     subtitle: "Enter a phone number for better security")
+                     subtitle: "Enter a phone number for phone login")
           VStack(alignment: .leading, spacing: 15){
           Spacer()
           }

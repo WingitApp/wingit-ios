@@ -250,7 +250,7 @@
 		FB48BEE027176A4C004E33EB /* EmailLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEDF27176A4C004E33EB /* EmailLogin.swift */; };
 		FB48BEE227176A72004E33EB /* Names.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEE127176A72004E33EB /* Names.swift */; };
 		FB48BEE427176A96004E33EB /* EmailPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEE327176A96004E33EB /* EmailPass.swift */; };
-		FB48BEE627176ABE004E33EB /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEE527176ABE004E33EB /* PhoneNumber.swift */; };
+		FB48BEE627176ABE004E33EB /* PhoneOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEE527176ABE004E33EB /* PhoneOnboarding.swift */; };
 		FB48BEEC27178DDE004E33EB /* EULASignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEEB27178DDE004E33EB /* EULASignUp.swift */; };
 		FB48BEEE27178EC9004E33EB /* AvatarBio.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BEED27178EC9004E33EB /* AvatarBio.swift */; };
 		FB560AE727110F7400F18F73 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB560AE627110F7300F18F73 /* UserRow.swift */; };
@@ -506,7 +506,7 @@
 		FB48BEDF27176A4C004E33EB /* EmailLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLogin.swift; sourceTree = "<group>"; };
 		FB48BEE127176A72004E33EB /* Names.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Names.swift; sourceTree = "<group>"; };
 		FB48BEE327176A96004E33EB /* EmailPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailPass.swift; sourceTree = "<group>"; };
-		FB48BEE527176ABE004E33EB /* PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
+		FB48BEE527176ABE004E33EB /* PhoneOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneOnboarding.swift; sourceTree = "<group>"; };
 		FB48BEEB27178DDE004E33EB /* EULASignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULASignUp.swift; sourceTree = "<group>"; };
 		FB48BEED27178EC9004E33EB /* AvatarBio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarBio.swift; sourceTree = "<group>"; };
 		FB560AE627110F7300F18F73 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
@@ -1114,7 +1114,7 @@
 				FB48BEDF27176A4C004E33EB /* EmailLogin.swift */,
 				FB48BEED27178EC9004E33EB /* AvatarBio.swift */,
 				FB48BEE327176A96004E33EB /* EmailPass.swift */,
-				FB48BEE527176ABE004E33EB /* PhoneNumber.swift */,
+				FB48BEE527176ABE004E33EB /* PhoneOnboarding.swift */,
 				FB48BEE127176A72004E33EB /* Names.swift */,
 				FB6E691027192E2A002ABB41 /* SignupOrLogin.swift */,
 				3B9C43BE26FB1A77008B01D2 /* OnboardingView.swift */,
@@ -1353,7 +1353,7 @@
 				15E2F1AE26FAA9EF00638115 /* PostTypeOption.swift in Sources */,
 				15E2F1AC26FA887500638115 /* UserCommentLabel.swift in Sources */,
 				FB72685C2723AF87005F33A8 /* ProgressNumberView.swift in Sources */,
-				FB48BEE627176ABE004E33EB /* PhoneNumber.swift in Sources */,
+				FB48BEE627176ABE004E33EB /* PhoneOnboarding.swift in Sources */,
 				1524FCF326D75F1F0000629C /* ShareButtonViewModel.swift in Sources */,
 				3B7AF05026718D42003BCCF3 /* StorageService.swift in Sources */,
 				15F7E87926E8435A00E5238F /* Connections.swift in Sources */,

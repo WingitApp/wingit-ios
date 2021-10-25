@@ -56,7 +56,7 @@ struct OnboardingScreens : View {
           }
         } else if signupViewModel.index == .phoneNumber {
           ZStack{
-            PhoneNumber().environmentObject(phoneViewModel)
+            PhoneOnboarding(signupInProgress: $signupInProgress).environmentObject(phoneViewModel)
           }
         } else if signupViewModel.index == .phoneVerify {
           VerifyPhoneNumber().environmentObject(phoneViewModel)
