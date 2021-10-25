@@ -16,4 +16,16 @@ class Helper {
 
       return String(Character(incrementedValue))
   }
+  
+  static func FSDocumentExists(collection: String?, docId: String?, onExists: @escaping() -> Void, onAbsent: @escaping() -> Void) {
+    guard let collection = collection, let docId = docId else { return onAbsent() }
+    let docRef = Ref.FS_ROOT.collection(collection).document(docId)
+    docRef.getDocument { (document, error) in
+      if let document = document, document.exists {
+        onExists()
+      } else {
+        onAbsent()
+      }
+    }
+  }
 }

@@ -39,10 +39,10 @@ class SignupViewModel: ObservableObject {
     Ref.FS_DOC_USERID(userId: userId).setData(["bio" : bioText], merge: true)
   }
   
-  func addUserNames(onSuccess: @escaping (_ user: User) -> Void) {
+  func addUsersNames(onSuccess: @escaping () -> Void) {
     
-    if checkFieldsAreValid() {
-      AuthService.addNames(
+    if nameFieldsAreValid() {
+      Api.User.addNames(
         firstName: firstName,
         lastName: lastName,
         username: username,
@@ -53,13 +53,15 @@ class SignupViewModel: ObservableObject {
   }
   
   func emailSignup(onSuccess: @escaping (_ user: User) -> Void) {
-    AuthService.emailSignup(
-      email: email,
-      password: password,
-      inviterId: inviter?.id,
-      onSuccess: onSuccess,
-      onError: onSignupError
-    )
+    if emailPassFieldsValid() {
+      AuthService.emailSignup(
+        email: email,
+        password: password,
+        inviterId: inviter?.id,
+        onSuccess: onSuccess,
+        onError: onSignupError
+      )
+    }
   }
   
   func addImage() {
@@ -68,34 +70,32 @@ class SignupViewModel: ObservableObject {
     }
   }
   
-  func isValidEmailField(email: String) -> Bool {
-    if (!isEmailComplete()) {
-        self.showErrorMessage(message: "Please fill in all fields")
-        return false
-    }
-    if !String.isValidEmailAddress(emailAddress: email) {
-        onSignupError(errorMessage: "Email input is not a valid email address.")
-        return false
-    }
-     return true
-  }
- 
-    func checkFieldsAreValid() -> Bool {
-        if (!isFormComplete()) {
-            self.showErrorMessage(message: "Please fill in all fields")
+    func emailPassFieldsValid() -> Bool {
+        if (!emailPassFieldsComplete()) {
+            self.showErrorMessage(message: "Fields cannot be empty")
             return false
         }
         if !String.isValidEmailAddress(emailAddress: email) {
             onSignupError(errorMessage: "Email input is not a valid email address.")
             return false
         }
-        if !String.isValidUsername(username: username) {
-            onSignupError(errorMessage: "Username must be alphanumeric or underscores with no whitespaces.")
-            return false
-        }
+
         return true
     }
   
+  func nameFieldsAreValid() -> Bool {
+      if (!nameFieldsComplete()) {
+          self.showErrorMessage(message: "Fields cannot be empty")
+          return false
+      }
+
+      if !String.isValidUsername(username: username) {
+          onSignupError(errorMessage: "Username must be alphanumeric or underscores with no whitespaces.")
+          return false
+      }
+      return true
+  }
+
   /// Displays error message through alert (SignInView)
   /// - Parameter message: string of message
   func showErrorMessage(message: String) -> Void {
@@ -114,20 +114,12 @@ class SignupViewModel: ObservableObject {
     errorString = errorMessage
   }
   
-  func isFormComplete() -> Bool {
-    return !firstName.isEmpty && !lastName.isEmpty && !username.isEmpty && !email.isEmpty && !password.isEmpty
+  func nameFieldsComplete() -> Bool {
+    return !firstName.isEmpty && !lastName.isEmpty && !username.isEmpty
   }
   
-  func isEmailComplete() -> Bool {
+  func emailPassFieldsComplete() -> Bool {
     return !email.isEmpty && !password.isEmpty
-  }
-  
-  func clean() {
-    firstName = ""
-    lastName = ""
-    username = ""
-    email = ""
-    password = ""
   }
   
   func verifyInviteCode() {

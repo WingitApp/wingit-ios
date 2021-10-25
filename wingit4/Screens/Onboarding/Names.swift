@@ -12,13 +12,11 @@ struct Names : View {
     @EnvironmentObject var signupViewModel: SignupViewModel
     
   func addUserNames() {
-    withAnimation(.easeIn) {
-      signupViewModel.index = .bio
+    signupViewModel.addUsersNames() {
+      withAnimation(.easeIn) {
+        signupViewModel.index = .bio
+      }
     }
-//    signupViewModel.addUserNames() { user in
-//      signupViewModel.onSignupSuccess(user: user)
-//      self.session.currentUser = user
-//    }
   }
   
     var body: some View{
