@@ -36,17 +36,6 @@ class AuthService {
       }
     }
   
-  static func addImage(imageData: Data, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-            guard let userId = Auth.auth().currentUser?.uid else { return }
-    
-              let storageAvatarUserId = Ref.STORAGE_AVATAR_USERID(userId: userId)
-              let metadata = StorageMetadata()
-              metadata.contentType = "image/jpg"
-    
-    StorageService.saveImage(imageData: imageData, metadata: metadata, storageAvatarRef: storageAvatarUserId, onSuccess: onSuccess, onError: onError)
-    
-  }
-  
   static func addNames(firstName: String, lastName: String, username: String, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void){
     guard let userId = Auth.auth().currentUser?.uid else { return }
     let firstName = firstName.capitalized

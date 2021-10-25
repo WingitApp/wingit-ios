@@ -19,6 +19,8 @@ struct AvatarBio: View {
   }
   
   func onboardingComplete() {
+    signupViewModel.addImage()
+    signupViewModel.addBio()
     withAnimation(.easeIn) {
       signupInProgress = false
     }
@@ -95,6 +97,9 @@ struct AvatarBio: View {
      
         
     }
+      .onTapGesture{
+        dismissKeyboard()
+      }
       .sheet(isPresented: $signupViewModel.isImagePickerShown) {
       ImagePicker(
        showImagePicker: self.$signupViewModel.isImagePickerShown,

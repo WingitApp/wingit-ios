@@ -62,30 +62,10 @@ class SignupViewModel: ObservableObject {
     )
   }
   
-  func addImage(onSuccess: @escaping (_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void){
-    AuthService.addImage(
-      imageData: imageData,
-      onSuccess: onSuccess,
-      onError: onError
-    )
-  }
-  
-    func signup(onSuccess: @escaping (_ user: User) -> Void) {
-        self.ampSignupAttemptEvent()
-      if isValidEmailField(email: email) {
-            
-           return AuthService.signupUser(
-              firstName: firstName,
-              lastName: lastName,
-              username: username,
-              email: email,
-              password: password,
-              imageData: imageData,
-              onSuccess: onSuccess,
-              onError: onSignupError
-            )
-          
-        }
+  func addImage() {
+    if imageData.count != 0 {
+      Api.User.updateImage(imageData: imageData, onSuccess: {_ in }, onError: {_ in })
+    }
   }
   
   func isValidEmailField(email: String) -> Bool {
