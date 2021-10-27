@@ -156,6 +156,43 @@ class UserApi {
           }
         }
     }
+  
+  func addNames(firstName: String, lastName: String, username: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void){
+    guard let userId = Auth.auth().currentUser?.uid else { return }
+    let firstName = firstName.capitalized
+    let lastName = lastName.capitalized
+    Ref.FS_DOC_USERID(userId: userId).setData(
+      ["firstName": firstName,
+       "lastName" : lastName,
+       "username" : username
+      ],
+      merge: true)
+    
+    Api.User.updateKeywords(firstName: firstName, lastName: lastName, username: username)
+    
+    if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
+      changeRequest.displayName = firstName + " " + lastName
+      changeRequest.commitChanges { (error) in
+        if error != nil {
+          onError(error!.localizedDescription)
+               return
+            }
+        }
+    }
+    
+    onSuccess()
+  }
+  
+  func updateKeywords(firstName: String, lastName: String, username: String) {
+    guard let userId = Auth.auth().currentUser?.uid else { return }
+    var keywords = (firstName + lastName).splitStringToArray()
+    keywords += username.splitStringToArray()
+    print(keywords)
+    
+    Ref.FS_DOC_USERID(userId: userId).setData(
+      ["keywords": keywords],
+      merge: true)
+  }
     
     func updateField(field: String, user: User?) {
       return

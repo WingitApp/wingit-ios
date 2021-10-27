@@ -36,54 +36,6 @@ class AuthService {
       }
     }
   
-  static func addNames(firstName: String, lastName: String, username: String, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void){
-    guard let userId = Auth.auth().currentUser?.uid else { return }
-    let firstName = firstName.capitalized
-    let lastName = lastName.capitalized
-    Ref.FS_DOC_USERID(userId: userId).setData(
-      ["firstName": firstName,
-       "lastName" : lastName,
-       "username" : username
-      ],
-      merge: true)
-    
-    if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
-      changeRequest.displayName = firstName + " " + lastName
-      changeRequest.commitChanges { (error) in
-        if error != nil {
-          onError(error!.localizedDescription)
-               return
-            }
-        }
-    }
-
-  }
-    
-
-    static func signupUser(firstName: String, lastName: String, username: String, email: String, password: String, imageData: Data, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
-      let firstName = firstName.capitalized
-      let lastName = lastName.capitalized
-      let normalizedEmail = email.normalizeEmail()
-      Auth.auth().createUser(withEmail: normalizedEmail, password: password) { (authData, error) in
-        if error != nil {
-          // TODO: Show toast
-          //    print(error!.localizedDescription)
-          onError(error!.localizedDescription)
-          return
-        }
-        
-        guard let userId = authData?.user.uid else { return }
-        
-        
-        let storageAvatarUserId = Ref.STORAGE_AVATAR_USERID(userId: userId)
-        let metadata = StorageMetadata()
-        metadata.contentType = "image/jpg"
-        
-        StorageService.saveUser(userId: userId, firstName: firstName, lastName: lastName, username: username, email: email, normalizedEmail: normalizedEmail, imageData: imageData, metadata: metadata, storageAvatarRef: storageAvatarUserId, onSuccess: onSuccess, onError: onError)
-      }
-    }
-  
-  
   static func emailSignup(email: String, password: String, inviterId: String?, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
     
     let normalizedEmail = email.normalizeEmail()

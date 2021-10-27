@@ -64,7 +64,7 @@ struct OnboardingScreens : View {
           ZStack {
             ProgressBar(percent: 70)
             ProgressNumberView()
-            SignUpTitles(title: "Names", subtitle: nil)
+            SignUpTitles(title: TEXT_NAME, subtitle: nil)
             Names()
           }
         } else if signupViewModel.index == .bio {
