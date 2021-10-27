@@ -13,6 +13,10 @@ struct SettingsView: View {
   @ObservedObject var emailVerificationViewModel = EmailVerificationViewModel()
   var inviteCode: String
   
+  func onTap(){
+    emailVerificationViewModel.sendEmailVerification()
+    emailVerificationViewModel.verifyEmail = true
+  }
   
   var body: some View {
     VStack{
@@ -20,9 +24,9 @@ struct SettingsView: View {
         
         if !emailVerificationViewModel.emailIsVerified {
         Section(header: Text("Email Verification")) {
-          Button(action: {emailVerificationViewModel.sendEmailVerification()} )
+          Button(action: onTap )
           {
-            Label("Tap to resend email verification", systemImage: "envelope.fill")
+            Label(emailVerificationViewModel.verifyEmail ? "Email verification sent" : "Tap to resend email verification", systemImage: "envelope.fill")
           }
         }
         }
