@@ -42,8 +42,6 @@ class SignupViewModel: ObservableObject {
     guard let userId = Auth.auth().currentUser?.uid else { return }
     Ref.FS_DOC_USERID(userId: userId).setData(["bio" : bioText], merge: true)
   }
-  
-<<<<<<< HEAD
 
   
   func checkIfEmailIsVerified() {
@@ -58,10 +56,7 @@ class SignupViewModel: ObservableObject {
     })
   }
   
-  func addUserNames(onSuccess: @escaping (_ user: User) -> Void) {
-=======
   func addUsersNames(onSuccess: @escaping () -> Void) {
->>>>>>> e114855f72d172a07e344a8a0ca379949eebdb90
     
     if nameFieldsAreValid() {
       Api.User.addNames(
@@ -91,29 +86,11 @@ class SignupViewModel: ObservableObject {
       Api.User.updateImage(imageData: imageData, onSuccess: {_ in }, onError: {_ in })
     }
   }
+
   
-<<<<<<< HEAD
-  func isValidEmailField(email: String) -> Bool {
-    if (!isEmailComplete()) {
-        self.showErrorMessage(message: "Please fill in all fields")
-        return false
-    }
-    
-    if !String.isValidEmailAddress(emailAddress: email) {
-        onSignupError(errorMessage: "Email input is not a valid email address.")
-        return false
-    }
-     return true
-  }
- 
-    func checkFieldsAreValid() -> Bool {
-        if (!isFormComplete()) {
-            self.showErrorMessage(message: "Please fill in all fields")
-=======
     func emailPassFieldsValid() -> Bool {
         if (!emailPassFieldsComplete()) {
             self.showErrorMessage(message: "Fields cannot be empty")
->>>>>>> e114855f72d172a07e344a8a0ca379949eebdb90
             return false
         }
         if !String.isValidEmailAddress(emailAddress: email) {
