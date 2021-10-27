@@ -38,7 +38,7 @@ struct EmailLogin : View {
             .padding(.horizontal,25)
             .padding(.top,25)
             
-            // Login Button....
+            // Login Button
             
             SigninButton(
              action: signinViewModel.signin,

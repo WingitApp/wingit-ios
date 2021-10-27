@@ -10,11 +10,23 @@ import SwiftUI
 struct SettingsView: View {
   @EnvironmentObject var session: SessionStore
   @ObservedObject var inviteFriendsViewModel = InviteFriendsViewModel()
+  @ObservedObject var emailVerificationViewModel = EmailVerificationViewModel()
   var inviteCode: String
+  
   
   var body: some View {
     VStack{
-      Form{
+      Form {
+        
+        if !emailVerificationViewModel.emailIsVerified {
+        Section(header: Text("Email Verification")) {
+          Button(action: {emailVerificationViewModel.sendEmailVerification()} )
+          {
+            Label("Tap to resend email verification", systemImage: "envelope.fill")
+          }
+        }
+        }
+        
         Section(
           header: Text("Invite"),
           footer: HStack{
@@ -32,6 +44,7 @@ struct SettingsView: View {
             Label("Invite Friends", systemImage: "figure.wave")
           }
         }
+        
         Section(header: Text("Sign Out")){
           Button(action: {self.session.logout()}) {
             Label("Sign Out of Wingit", systemImage: "hand.wave.fill")
@@ -45,6 +58,7 @@ struct SettingsView: View {
       .navigationTitle("Settings")
       // .background(Color("background").edgesIgnoringSafeArea(.all))
     }
+    .onAppear{emailVerificationViewModel.checkIfEmailIsVerified()}
     
   }
 }

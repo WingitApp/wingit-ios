@@ -18,7 +18,7 @@ struct OnboardingView: View {
         ScrollView(.vertical, showsIndicators: false) {
           OnboardingScreens(signupInProgress: $signupInProgress)
         }
-      } else{
+      } else {
         OnboardingScreens(signupInProgress: $signupInProgress)
       }
     }

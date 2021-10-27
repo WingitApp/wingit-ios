@@ -30,13 +30,31 @@ class SignupViewModel: ObservableObject {
   @Published var showscreen: Bool = false
   @Published var index: OnboardingScreen = .signupOrLogin
   @Published var percent: CGFloat = 0
+  
+  @Published var verifyEmail: Bool = false
+  @Published var emailIsVerified: Bool = false
 
   @Environment (\.presentationMode) var presentationMode
   @AppStorage("shouldShowOnboarding") var shouldShowOnboarding: Bool = true
   
+  
   func addBio() {
     guard let userId = Auth.auth().currentUser?.uid else { return }
     Ref.FS_DOC_USERID(userId: userId).setData(["bio" : bioText], merge: true)
+  }
+  
+
+  
+  func checkIfEmailIsVerified() {
+    Auth.auth().currentUser?.reload(completion: { error in
+      if error == nil {
+        if Auth.auth().currentUser!.isEmailVerified {
+          withAnimation(.easeIn) {
+            self.index = .phoneNumber
+          }
+      }
+      }
+    })
   }
   
   func addUserNames(onSuccess: @escaping (_ user: User) -> Void) {
@@ -73,6 +91,7 @@ class SignupViewModel: ObservableObject {
         self.showErrorMessage(message: "Please fill in all fields")
         return false
     }
+    
     if !String.isValidEmailAddress(emailAddress: email) {
         onSignupError(errorMessage: "Email input is not a valid email address.")
         return false

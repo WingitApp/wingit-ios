@@ -12,13 +12,17 @@ struct EmailPass: View {
   @EnvironmentObject var signupViewModel: SignupViewModel
   
   func emailSignup() {
+   
     signupViewModel.emailSignup() { user in
       signupViewModel.onSignupSuccess(user: user)
       self.session.currentUser = user
+//      signupViewModel.verifyEmail.toggle()
+//      signupViewModel.emailIsVerified.toggle()
       withAnimation(.easeIn) {
         signupViewModel.index = .phoneNumber
       }
     }
+//    signupViewModel.checkIfEmailIsVerified()
   }
   
   var body: some View {
@@ -34,6 +38,7 @@ struct EmailPass: View {
       Spacer()
       HStack{
         Spacer()
+     
       Button(action: emailSignup)
       { NextButton()}
       .alert(
@@ -46,6 +51,15 @@ struct EmailPass: View {
           )
         }
       }
+    }
+    .alert(isPresented: $signupViewModel.verifyEmail){
+      Alert(title: Text("Verify your email."),
+            message: Text("An email has been sent for verification."),
+            dismissButton: .default(Text("OK"))
+      )
+    }
+    .onAppear {
+      signupViewModel.checkIfEmailIsVerified()
     }
   }
 }

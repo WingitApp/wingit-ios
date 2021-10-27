@@ -85,7 +85,9 @@ class AuthService {
   
   
   static func emailSignup(email: String, password: String, inviterId: String?, onSuccess: @escaping(_ user: User) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
+    
     let normalizedEmail = email.normalizeEmail()
+    
     Auth.auth().createUser(withEmail: normalizedEmail, password: password) { (authData, error) in
       if error != nil {
         // TODO: Show toast
@@ -93,22 +95,37 @@ class AuthService {
         return
       }
       
+      Auth.auth().currentUser?.sendEmailVerification { (error) in
+              if error != nil {
+                onError(error!.localizedDescription)
+                return
+              }
+          return
+//        print("user email verification sent.")
+        
+      }
+      
+   
       guard let userId = authData?.user.uid else { return }
       Api.Connections.addConnection(user1Id: userId, user2Id: inviterId)
       let firestoreUserDoc = Ref.FS_DOC_USERID(userId: userId)
       
       let user = User.init(id: userId, uid: userId, bio: nil, canonicalEmail: normalizedEmail, email: email, firstName: nil, keywords: nil, lastName: nil, profileImageUrl: nil, username: "")
       
+//      if Auth.auth().currentUser?.isEmailVerified == true {
       do {
         try firestoreUserDoc.setData(from: user) { _ in
           // todo: handle error if throws
+          
           onSuccess(user)
         }
       } catch {
         print(error)
       }
+//     }
       
     }
-  }
+   }
   
 }
+//  2RJzdK

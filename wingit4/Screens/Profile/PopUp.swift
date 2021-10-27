@@ -113,6 +113,7 @@ extension Popup {
             case .bottom:
                 let belowScreenEdge = UIScreen.main.bounds.height - popupFrame.minY
                 return belowScreenEdge
+            
             }
         }
     }
