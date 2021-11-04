@@ -256,6 +256,7 @@
 		65F7315626F5276900A73781 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315526F5276900A73781 /* Contact.swift */; };
 		65F7315826F5295500A73781 /* ContactsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315726F5295500A73781 /* ContactsListViewModel.swift */; };
 		65FE040426E9FE3200333609 /* ComposePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE040326E9FE3200333609 /* ComposePostView.swift */; };
+		FB1F827B27344D8700DA9028 /* DateComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1F827A27344D8700DA9028 /* DateComponent.swift */; };
 		FB560AE727110F7400F18F73 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB560AE627110F7300F18F73 /* UserRow.swift */; };
 		FBD25F7E27043C4E0002C5B2 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD25F7D27043C4E0002C5B2 /* PopUp.swift */; };
 		FBDBF214273441BE00FB423E /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDBF20B273441BE00FB423E /* Title.swift */; };
@@ -265,7 +266,6 @@
 		FBDBF218273441BE00FB423E /* PageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDBF20F273441BE00FB423E /* PageCard.swift */; };
 		FBDBF219273441BE00FB423E /* ArcScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDBF210273441BE00FB423E /* ArcScroll.swift */; };
 		FBDBF21A273441BE00FB423E /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDBF211273441BE00FB423E /* Feed.swift */; };
-		FBDBF21B273441BE00FB423E /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDBF212273441BE00FB423E /* Date.swift */; };
 		FBDBF21C273441BE00FB423E /* PageScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDBF213273441BE00FB423E /* PageScroll.swift */; };
 		FBDFDB55270E4BC400EDE22F /* BoardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDFDB54270E4BC400EDE22F /* BoardingScreen.swift */; };
 		FBDFDB57270E4BDD00EDE22F /* OnboardingV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDFDB56270E4BDD00EDE22F /* OnboardingV2.swift */; };
@@ -509,6 +509,7 @@
 		65F7315526F5276900A73781 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		65F7315726F5295500A73781 /* ContactsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewModel.swift; sourceTree = "<group>"; };
 		65FE040326E9FE3200333609 /* ComposePostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposePostView.swift; sourceTree = "<group>"; };
+		FB1F827A27344D8700DA9028 /* DateComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateComponent.swift; sourceTree = "<group>"; };
 		FB560AE627110F7300F18F73 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
 		FBD25F7D27043C4E0002C5B2 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 		FBDBF20B273441BE00FB423E /* Title.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Title.swift; path = ../../../Wingit2.0/Wingit2.0/Feed/Title.swift; sourceTree = "<group>"; };
@@ -518,7 +519,6 @@
 		FBDBF20F273441BE00FB423E /* PageCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PageCard.swift; path = ../../../Wingit2.0/Wingit2.0/Feed/PageCard.swift; sourceTree = "<group>"; };
 		FBDBF210273441BE00FB423E /* ArcScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArcScroll.swift; path = ../../../Wingit2.0/Wingit2.0/Feed/ArcScroll.swift; sourceTree = "<group>"; };
 		FBDBF211273441BE00FB423E /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Feed.swift; path = ../../../Wingit2.0/Wingit2.0/Feed/Feed.swift; sourceTree = "<group>"; };
-		FBDBF212273441BE00FB423E /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Date.swift; path = ../../../Wingit2.0/Wingit2.0/Feed/Date.swift; sourceTree = "<group>"; };
 		FBDBF213273441BE00FB423E /* PageScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PageScroll.swift; path = ../../../Wingit2.0/Wingit2.0/Feed/PageScroll.swift; sourceTree = "<group>"; };
 		FBDFDB54270E4BC400EDE22F /* BoardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingScreen.swift; sourceTree = "<group>"; };
 		FBDFDB56270E4BDD00EDE22F /* OnboardingV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingV2.swift; sourceTree = "<group>"; };
@@ -1173,11 +1173,11 @@
 				FBDBF20C273441BE00FB423E /* ArcProgressTitle.swift */,
 				FBDBF210273441BE00FB423E /* ArcScroll.swift */,
 				FBDBF20D273441BE00FB423E /* AvatarPicName.swift */,
-				FBDBF212273441BE00FB423E /* Date.swift */,
 				FBDBF211273441BE00FB423E /* Feed.swift */,
 				FBDBF20F273441BE00FB423E /* PageCard.swift */,
 				FBDBF213273441BE00FB423E /* PageScroll.swift */,
 				FBDBF20B273441BE00FB423E /* Title.swift */,
+				FB1F827A27344D8700DA9028 /* DateComponent.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -1524,10 +1524,10 @@
 				3B5BDB5E268FA1980034B18C /* ReportApi.swift in Sources */,
 				3B7AF0AD26729FCC003BCCF3 /* CommentApi.swift in Sources */,
 				15A6A4442708F13C00D65616 /* UserSocial.swift in Sources */,
+				FB1F827B27344D8700DA9028 /* DateComponent.swift in Sources */,
 				65FE040426E9FE3200333609 /* ComposePostView.swift in Sources */,
 				3B86E43E26C998E300F64416 /* ActivityIndicatorView.swift in Sources */,
 				3B7AF05A26719AB2003BCCF3 /* HomeView.swift in Sources */,
-				FBDBF21B273441BE00FB423E /* Date.swift in Sources */,
 				15127A5226FFC009006F975E /* PlaceholderConstants.swift in Sources */,
 				1524E10726F8418D00D5BDB4 /* LottieView.swift in Sources */,
 				1500983526EFE45B00D31B8C /* ProfileFeed.swift in Sources */,
