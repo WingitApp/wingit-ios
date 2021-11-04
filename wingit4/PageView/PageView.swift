@@ -41,7 +41,7 @@ struct PageView: View {
               .foregroundColor(.white)
               .bold()
             Spacer()
-          }
+          }.padding(.horizontal)
           Spacer()
           HStack{
             Spacer()
@@ -53,15 +53,15 @@ struct PageView: View {
             PageViewButton(icon: "message.fill",
                            function: nil)
           }
-          }
+          }.padding()
           Button(action: toggle){
             Image(systemName: self.showText ? "chevron.down" : "chevron.up").foregroundColor(.white)
           }
           if showText {
-            TimelineProfileScroll()
+            PageScroll()
           }
         }
-        .padding()
+//        .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
        
       }
