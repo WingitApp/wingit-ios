@@ -56,9 +56,6 @@ struct HomeView: View {
               Image(IMAGE_LOGO).resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 35)
-              Text("Wingit")
-                .bold()
-                .padding(.top, -5)
             }
             .onTapGesture {
               if self.scrollProxy != nil {

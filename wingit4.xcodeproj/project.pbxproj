@@ -258,6 +258,13 @@
 		65FE040426E9FE3200333609 /* ComposePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE040326E9FE3200333609 /* ComposePostView.swift */; };
 		FB1F827B27344D8700DA9028 /* DateComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1F827A27344D8700DA9028 /* DateComponent.swift */; };
 		FB560AE727110F7400F18F73 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB560AE627110F7300F18F73 /* UserRow.swift */; };
+		FB9DE35E2738933B009ECE1B /* ArcSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DE35D2738933B009ECE1B /* ArcSummaryView.swift */; };
+		FB9DE36027389362009ECE1B /* CheckmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DE35F27389362009ECE1B /* CheckmarkButton.swift */; };
+		FB9DE36427389392009ECE1B /* NeedsText.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DE36327389392009ECE1B /* NeedsText.swift */; };
+		FB9DE366273893A2009ECE1B /* ArcDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DE365273893A2009ECE1B /* ArcDescription.swift */; };
+		FB9DE368273893B8009ECE1B /* ListOfNeeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DE367273893B8009ECE1B /* ListOfNeeds.swift */; };
+		FB9DE36D27389A97009ECE1B /* ArcPageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DE36C27389A97009ECE1B /* ArcPageCard.swift */; };
+		FB9DE36F27389ABB009ECE1B /* ArcPageScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DE36E27389ABB009ECE1B /* ArcPageScroll.swift */; };
 		FBD25F7E27043C4E0002C5B2 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD25F7D27043C4E0002C5B2 /* PopUp.swift */; };
 		FBDBF214273441BE00FB423E /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDBF20B273441BE00FB423E /* Title.swift */; };
 		FBDBF215273441BE00FB423E /* ArcProgressTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDBF20C273441BE00FB423E /* ArcProgressTitle.swift */; };
@@ -511,6 +518,13 @@
 		65FE040326E9FE3200333609 /* ComposePostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposePostView.swift; sourceTree = "<group>"; };
 		FB1F827A27344D8700DA9028 /* DateComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateComponent.swift; sourceTree = "<group>"; };
 		FB560AE627110F7300F18F73 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
+		FB9DE35D2738933B009ECE1B /* ArcSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcSummaryView.swift; sourceTree = "<group>"; };
+		FB9DE35F27389362009ECE1B /* CheckmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkButton.swift; sourceTree = "<group>"; };
+		FB9DE36327389392009ECE1B /* NeedsText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedsText.swift; sourceTree = "<group>"; };
+		FB9DE365273893A2009ECE1B /* ArcDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcDescription.swift; sourceTree = "<group>"; };
+		FB9DE367273893B8009ECE1B /* ListOfNeeds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfNeeds.swift; sourceTree = "<group>"; };
+		FB9DE36C27389A97009ECE1B /* ArcPageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcPageCard.swift; sourceTree = "<group>"; };
+		FB9DE36E27389ABB009ECE1B /* ArcPageScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcPageScroll.swift; sourceTree = "<group>"; };
 		FBD25F7D27043C4E0002C5B2 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 		FBDBF20B273441BE00FB423E /* Title.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Title.swift; path = ../../../Wingit2.0/Wingit2.0/Feed/Title.swift; sourceTree = "<group>"; };
 		FBDBF20C273441BE00FB423E /* ArcProgressTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArcProgressTitle.swift; path = ../../../Wingit2.0/Wingit2.0/Feed/ArcProgressTitle.swift; sourceTree = "<group>"; };
@@ -872,6 +886,7 @@
 				3B75E3DC26716074002F3108 /* Constants.swift */,
 				3B7AF09B2671E1DA003BCCF3 /* Selection.swift */,
 				654334DC27134651004D0171 /* ViewRouter.swift */,
+				FB9DE36B273897ED009ECE1B /* Arc */,
 				FBE36151273308050071C4DB /* PageView */,
 				FBE3613D273307C20071C4DB /* ProfileTimeline */,
 				FB4020A02730A77600B62927 /* Feed */,
@@ -1182,6 +1197,20 @@
 			path = Feed;
 			sourceTree = "<group>";
 		};
+		FB9DE36B273897ED009ECE1B /* Arc */ = {
+			isa = PBXGroup;
+			children = (
+				FB9DE35D2738933B009ECE1B /* ArcSummaryView.swift */,
+				FB9DE35F27389362009ECE1B /* CheckmarkButton.swift */,
+				FB9DE36327389392009ECE1B /* NeedsText.swift */,
+				FB9DE365273893A2009ECE1B /* ArcDescription.swift */,
+				FB9DE367273893B8009ECE1B /* ListOfNeeds.swift */,
+				FB9DE36C27389A97009ECE1B /* ArcPageCard.swift */,
+				FB9DE36E27389ABB009ECE1B /* ArcPageScroll.swift */,
+			);
+			path = Arc;
+			sourceTree = "<group>";
+		};
 		FBE3613D273307C20071C4DB /* ProfileTimeline */ = {
 			isa = PBXGroup;
 			children = (
@@ -1337,6 +1366,7 @@
 				159A3DD42703CACB00C5573C /* (null) in Sources */,
 				15E4907426E84A1700B25B56 /* AskDetailView.swift in Sources */,
 				6531838326B238AA0006D9E2 /* Analytics.swift in Sources */,
+				FB9DE366273893A2009ECE1B /* ArcDescription.swift in Sources */,
 				15DFD07E26ED9B71002CBE31 /* UserProfileDefault.swift in Sources */,
 				15CD208F2702820900C7FC1A /* AskCardTag.swift in Sources */,
 				3BE61D6F26E08A0D0078C6CF /* ReferralsApi.swift in Sources */,
@@ -1393,6 +1423,7 @@
 				15A6A4392707B0BA00D65616 /* ProfileAchievements.swift in Sources */,
 				65A7DC0C26EDA9430032C739 /* UserProfileHeader.swift in Sources */,
 				3B5BDB51268F82790034B18C /* fetchUser.swift in Sources */,
+				FB9DE36427389392009ECE1B /* NeedsText.swift in Sources */,
 				3B5BDB58268F94E00034B18C /* ReportModel.swift in Sources */,
 				650216B726E966A000B42BC6 /* FooterCell.swift in Sources */,
 				650216B926E9689300B42BC6 /* RollingNumberView.swift in Sources */,
@@ -1453,6 +1484,7 @@
 				654DA41926BC7BD3002864B8 /* MainViewModel.swift in Sources */,
 				3BFE30EC26E94437005543A0 /* AcceptedNotification.swift in Sources */,
 				65A9EF9D26DF0B2500E81CBF /* ConnectionsView.swift in Sources */,
+				FB9DE368273893B8009ECE1B /* ListOfNeeds.swift in Sources */,
 				156E6AE526D8A13400690E47 /* UserProfileView.swift in Sources */,
 				3B7AF0952671D5FA003BCCF3 /* PostApi.swift in Sources */,
 				3B7AF0712671A1FC003BCCF3 /* CommentInput.swift in Sources */,
@@ -1512,6 +1544,8 @@
 				3B7AF0B52672C15A003BCCF3 /* ChatApi.swift in Sources */,
 				1524FCD526D754500000629C /* TextCell.swift in Sources */,
 				3B7AF0BF2673EAFB003BCCF3 /* Notification.swift in Sources */,
+				FB9DE36F27389ABB009ECE1B /* ArcPageScroll.swift in Sources */,
+				FB9DE36D27389A97009ECE1B /* ArcPageCard.swift in Sources */,
 				3BE57FF726D89994005C242F /* ProfileNavigation.swift in Sources */,
 				3B9CA05026E5C98D00BB195F /* WingConnectionsList.swift in Sources */,
 				3B7AF05826719885003BCCF3 /* MainView.swift in Sources */,
@@ -1525,6 +1559,7 @@
 				3B7AF0AD26729FCC003BCCF3 /* CommentApi.swift in Sources */,
 				15A6A4442708F13C00D65616 /* UserSocial.swift in Sources */,
 				FB1F827B27344D8700DA9028 /* DateComponent.swift in Sources */,
+				FB9DE35E2738933B009ECE1B /* ArcSummaryView.swift in Sources */,
 				65FE040426E9FE3200333609 /* ComposePostView.swift in Sources */,
 				3B86E43E26C998E300F64416 /* ActivityIndicatorView.swift in Sources */,
 				3B7AF05A26719AB2003BCCF3 /* HomeView.swift in Sources */,
@@ -1536,6 +1571,7 @@
 				15DA39B426DC5C620080193E /* AskCardPlaceholder.swift in Sources */,
 				3B7AF0B72672C21F003BCCF3 /* Chat.swift in Sources */,
 				150C3C112717B1A10029BAEA /* ReactionUserCard.swift in Sources */,
+				FB9DE36027389362009ECE1B /* CheckmarkButton.swift in Sources */,
 				65C0F9D3270BB0F500F69592 /* NotificationViewNavigationOption.swift in Sources */,
 				3B7AF056267197EC003BCCF3 /* SessionStore.swift in Sources */,
 				15F7E8BF26E8490100E5238F /* ReferralComment.swift in Sources */,
