@@ -14,8 +14,6 @@ struct DateComponent: View {
       Text(date)
         .font(.caption)
         .bold()
-        .padding(.leading, 5)
+       
     }
 }
-
-

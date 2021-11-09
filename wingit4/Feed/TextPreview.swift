@@ -7,7 +7,11 @@
 
 import SwiftUI
 
-struct TextPreview: View {
+struct TextView: View {
+  
+  var width: CGFloat = 160
+  var height: CGFloat = 125
+  
     var body: some View {
       
       VStack {
@@ -18,19 +22,19 @@ struct TextPreview: View {
           .padding(.vertical, 3)
           Spacer()
         }
-        Text("Blah blah blah. Preview of the text for updates. Please please help? this is my update. etc. etc.fdjkaslf;djksal;fjdkl;asjfkdl;sajjfkdls;ajfdkls;ajfkdl;sa")
+        Text("Blah blah blah. Preview of the text for updates. Please please help? this is my update. etc. etc.fdjkaslf;djksal;fjdkl;asjfkdl;sajjfkdls;ajfdkls;ajfkdl;safjdkla;fjkdl;sajfkdl;sjakfld;saf fal lalalallalal")
           .font(.caption)
       }
-      .frame(width: 160, height: 125)
-      .padding(10)
+      .frame(width: width, height: height)
       .background(Color.white)
-      .cornerRadius(10)
+    
       
     }
 }
 
-struct TextPrview_Previews: PreviewProvider {
+
+struct TextView_Previews: PreviewProvider {
     static var previews: some View {
-        TextPreviewCard()
+        TextView()
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ArcDescription: View {
   
-  var description: String = "Description of the Project. blah blah blah blah I love the Lord God Almighty maker of heaven and earth. Today is the day you have made I will rejoice and be glad in it."
+  var description: String = "Description of the Project. blah blah blah blah Today is amazing. live laugh love. what is the meaning of life? 4d, 3d, 5d? 11d? "
   
     var body: some View {
         Text(description)
