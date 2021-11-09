@@ -257,6 +257,9 @@
 		65F7315826F5295500A73781 /* ContactsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7315726F5295500A73781 /* ContactsListViewModel.swift */; };
 		65FE040426E9FE3200333609 /* ComposePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE040326E9FE3200333609 /* ComposePostView.swift */; };
 		FB1F827B27344D8700DA9028 /* DateComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1F827A27344D8700DA9028 /* DateComponent.swift */; };
+		FB25943A273A1B45004EA3FD /* BlurredRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB259439273A1B45004EA3FD /* BlurredRectangle.swift */; };
+		FB25943C273A1BFB004EA3FD /* TextPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB25943B273A1BFB004EA3FD /* TextPreview.swift */; };
+		FB25943E273A1C08004EA3FD /* TextPreviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB25943D273A1C08004EA3FD /* TextPreviewCard.swift */; };
 		FB560AE727110F7400F18F73 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB560AE627110F7300F18F73 /* UserRow.swift */; };
 		FB9DE35E2738933B009ECE1B /* ArcSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DE35D2738933B009ECE1B /* ArcSummaryView.swift */; };
 		FB9DE36027389362009ECE1B /* CheckmarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DE35F27389362009ECE1B /* CheckmarkButton.swift */; };
@@ -517,6 +520,9 @@
 		65F7315726F5295500A73781 /* ContactsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewModel.swift; sourceTree = "<group>"; };
 		65FE040326E9FE3200333609 /* ComposePostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposePostView.swift; sourceTree = "<group>"; };
 		FB1F827A27344D8700DA9028 /* DateComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateComponent.swift; sourceTree = "<group>"; };
+		FB259439273A1B45004EA3FD /* BlurredRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredRectangle.swift; sourceTree = "<group>"; };
+		FB25943B273A1BFB004EA3FD /* TextPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPreview.swift; sourceTree = "<group>"; };
+		FB25943D273A1C08004EA3FD /* TextPreviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPreviewCard.swift; sourceTree = "<group>"; };
 		FB560AE627110F7300F18F73 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
 		FB9DE35D2738933B009ECE1B /* ArcSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcSummaryView.swift; sourceTree = "<group>"; };
 		FB9DE35F27389362009ECE1B /* CheckmarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkButton.swift; sourceTree = "<group>"; };
@@ -1186,6 +1192,7 @@
 			children = (
 				FBDBF20E273441BE00FB423E /* ArcCard.swift */,
 				FBDBF20C273441BE00FB423E /* ArcProgressTitle.swift */,
+				FB259439273A1B45004EA3FD /* BlurredRectangle.swift */,
 				FBDBF210273441BE00FB423E /* ArcScroll.swift */,
 				FBDBF20D273441BE00FB423E /* AvatarPicName.swift */,
 				FBDBF211273441BE00FB423E /* Feed.swift */,
@@ -1193,6 +1200,8 @@
 				FBDBF213273441BE00FB423E /* PageScroll.swift */,
 				FBDBF20B273441BE00FB423E /* Title.swift */,
 				FB1F827A27344D8700DA9028 /* DateComponent.swift */,
+				FB25943B273A1BFB004EA3FD /* TextPreview.swift */,
+				FB25943D273A1C08004EA3FD /* TextPreviewCard.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -1463,6 +1472,7 @@
 				FBD25F7E27043C4E0002C5B2 /* PopUp.swift in Sources */,
 				150C3BFD27155D2B0029BAEA /* OnboardText.swift in Sources */,
 				151A3C8126CE134A00A39FAF /* FontStyles.swift in Sources */,
+				FB25943C273A1BFB004EA3FD /* TextPreview.swift in Sources */,
 				1524E10126F8136800D5BDB4 /* UserBumpCountSummary.swift in Sources */,
 				3B7AF0A02671E404003BCCF3 /* ProfileInformation.swift in Sources */,
 				65A9EFA326E0923300E81CBF /* Referral.swift in Sources */,
@@ -1572,6 +1582,7 @@
 				3B7AF0B72672C21F003BCCF3 /* Chat.swift in Sources */,
 				150C3C112717B1A10029BAEA /* ReactionUserCard.swift in Sources */,
 				FB9DE36027389362009ECE1B /* CheckmarkButton.swift in Sources */,
+				FB25943E273A1C08004EA3FD /* TextPreviewCard.swift in Sources */,
 				65C0F9D3270BB0F500F69592 /* NotificationViewNavigationOption.swift in Sources */,
 				3B7AF056267197EC003BCCF3 /* SessionStore.swift in Sources */,
 				15F7E8BF26E8490100E5238F /* ReferralComment.swift in Sources */,
@@ -1604,6 +1615,7 @@
 				FBDBF21A273441BE00FB423E /* Feed.swift in Sources */,
 				151A3C9B26D5BEF000A39FAF /* TimeAgoStamp.swift in Sources */,
 				15F7E8B826E848ED00E5238F /* AskDetailFooter.swift in Sources */,
+				FB25943A273A1B45004EA3FD /* BlurredRectangle.swift in Sources */,
 				15EBCFC02700215F009F2E55 /* (null) in Sources */,
 				15F7E8B626E848ED00E5238F /* AskDetailCard.swift in Sources */,
 				1524E0FD26F66FD600D5BDB4 /* BumpersRow.swift in Sources */,
