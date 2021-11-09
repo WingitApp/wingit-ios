@@ -16,7 +16,7 @@ struct TextPage: View {
         Image(systemName: "star")
             .foregroundColor(.gray)
         }
-        TextView(width: 345, height: .infinity) 
+        TextUpdateView(width: 345, height: .infinity)
       }
       .padding()
       .background(Color.white)

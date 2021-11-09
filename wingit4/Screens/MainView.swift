@@ -39,7 +39,7 @@ struct MainView: View {
     GeometryReader { geometry in
       ZStack(alignment: .bottomLeading) {
         TabView(selection: ViewRouter.shared.tabHandler) {
-            HomeView()
+            Feed()
               .tabItem({
                 VStack(alignment: .center ){
                   Image(systemName: ViewRouter.shared.tabSelection == .home ? "house.fill" : "house")

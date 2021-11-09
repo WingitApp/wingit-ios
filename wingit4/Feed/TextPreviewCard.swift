@@ -20,7 +20,7 @@ struct TextPreviewCard: View {
           Spacer()
         HStack {
           Spacer()
-        TextView() 
+        TextUpdateView()
           .lineLimit(7)
          
         }

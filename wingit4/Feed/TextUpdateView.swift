@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TextView: View {
+struct TextUpdateView: View {
   
   var width: CGFloat = 160
   var height: CGFloat = 125
@@ -33,8 +33,3 @@ struct TextView: View {
 }
 
 
-struct TextView_Previews: PreviewProvider {
-    static var previews: some View {
-        TextView()
-    }
-}
