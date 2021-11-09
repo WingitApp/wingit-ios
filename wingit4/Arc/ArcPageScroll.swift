@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct ArcPageScroll: View {
+  
     var body: some View {
-      ScrollView(.horizontal){
+      ScrollView(.horizontal, showsIndicators: false) {
         HStack {
           ForEach(0..<20) { index in
-            ArcPageCard()
-           }
+            PageCard(width: 250, height: 350)
+            TextPreviewCard(width: 200, height: 200, picHeight: 90)
+           }.padding(.leading, 5)
         }
       }
     }

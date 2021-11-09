@@ -261,6 +261,7 @@
 		FB25943C273A1BFB004EA3FD /* TextUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB25943B273A1BFB004EA3FD /* TextUpdateView.swift */; };
 		FB25943E273A1C08004EA3FD /* TextPreviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB25943D273A1C08004EA3FD /* TextPreviewCard.swift */; };
 		FB560AE727110F7400F18F73 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB560AE627110F7300F18F73 /* UserRow.swift */; };
+		FB66F678273B22E3003AC0F0 /* IconBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB66F677273B22E3003AC0F0 /* IconBar.swift */; };
 		FB8D81E5273A350B00CF2F95 /* TextPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8D81E4273A350B00CF2F95 /* TextPage.swift */; };
 		FB8D81E7273A351800CF2F95 /* TextPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8D81E6273A351800CF2F95 /* TextPageView.swift */; };
 		FB9DE35E2738933B009ECE1B /* ArcSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DE35D2738933B009ECE1B /* ArcSummaryView.swift */; };
@@ -268,7 +269,6 @@
 		FB9DE36427389392009ECE1B /* NeedsText.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DE36327389392009ECE1B /* NeedsText.swift */; };
 		FB9DE366273893A2009ECE1B /* ArcDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DE365273893A2009ECE1B /* ArcDescription.swift */; };
 		FB9DE368273893B8009ECE1B /* ListOfNeeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DE367273893B8009ECE1B /* ListOfNeeds.swift */; };
-		FB9DE36D27389A97009ECE1B /* ArcPageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DE36C27389A97009ECE1B /* ArcPageCard.swift */; };
 		FB9DE36F27389ABB009ECE1B /* ArcPageScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DE36E27389ABB009ECE1B /* ArcPageScroll.swift */; };
 		FBD25F7E27043C4E0002C5B2 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD25F7D27043C4E0002C5B2 /* PopUp.swift */; };
 		FBDBF214273441BE00FB423E /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDBF20B273441BE00FB423E /* Title.swift */; };
@@ -526,6 +526,7 @@
 		FB25943B273A1BFB004EA3FD /* TextUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextUpdateView.swift; sourceTree = "<group>"; };
 		FB25943D273A1C08004EA3FD /* TextPreviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPreviewCard.swift; sourceTree = "<group>"; };
 		FB560AE627110F7300F18F73 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
+		FB66F677273B22E3003AC0F0 /* IconBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconBar.swift; sourceTree = "<group>"; };
 		FB8D81E4273A350B00CF2F95 /* TextPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPage.swift; sourceTree = "<group>"; };
 		FB8D81E6273A351800CF2F95 /* TextPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPageView.swift; sourceTree = "<group>"; };
 		FB9DE35D2738933B009ECE1B /* ArcSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcSummaryView.swift; sourceTree = "<group>"; };
@@ -533,7 +534,6 @@
 		FB9DE36327389392009ECE1B /* NeedsText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedsText.swift; sourceTree = "<group>"; };
 		FB9DE365273893A2009ECE1B /* ArcDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcDescription.swift; sourceTree = "<group>"; };
 		FB9DE367273893B8009ECE1B /* ListOfNeeds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfNeeds.swift; sourceTree = "<group>"; };
-		FB9DE36C27389A97009ECE1B /* ArcPageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcPageCard.swift; sourceTree = "<group>"; };
 		FB9DE36E27389ABB009ECE1B /* ArcPageScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcPageScroll.swift; sourceTree = "<group>"; };
 		FBD25F7D27043C4E0002C5B2 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 		FBDBF20B273441BE00FB423E /* Title.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Title.swift; path = ../../../Wingit2.0/Wingit2.0/Feed/Title.swift; sourceTree = "<group>"; };
@@ -1217,8 +1217,8 @@
 				FB9DE35F27389362009ECE1B /* CheckmarkButton.swift */,
 				FB9DE36327389392009ECE1B /* NeedsText.swift */,
 				FB9DE365273893A2009ECE1B /* ArcDescription.swift */,
+				FB66F677273B22E3003AC0F0 /* IconBar.swift */,
 				FB9DE367273893B8009ECE1B /* ListOfNeeds.swift */,
-				FB9DE36C27389A97009ECE1B /* ArcPageCard.swift */,
 				FB9DE36E27389ABB009ECE1B /* ArcPageScroll.swift */,
 			);
 			path = Arc;
@@ -1498,6 +1498,7 @@
 				15EBCFC22700296F009F2E55 /* (null) in Sources */,
 				1594EE6C2704E7F900D5C9E9 /* Reaction.swift in Sources */,
 				1594EE6F2704EC3200D5C9E9 /* EmojiKeyboard.swift in Sources */,
+				FB66F678273B22E3003AC0F0 /* IconBar.swift in Sources */,
 				654DA41926BC7BD3002864B8 /* MainViewModel.swift in Sources */,
 				3BFE30EC26E94437005543A0 /* AcceptedNotification.swift in Sources */,
 				65A9EF9D26DF0B2500E81CBF /* ConnectionsView.swift in Sources */,
@@ -1563,7 +1564,6 @@
 				1524FCD526D754500000629C /* TextCell.swift in Sources */,
 				3B7AF0BF2673EAFB003BCCF3 /* Notification.swift in Sources */,
 				FB9DE36F27389ABB009ECE1B /* ArcPageScroll.swift in Sources */,
-				FB9DE36D27389A97009ECE1B /* ArcPageCard.swift in Sources */,
 				3BE57FF726D89994005C242F /* ProfileNavigation.swift in Sources */,
 				3B9CA05026E5C98D00BB195F /* WingConnectionsList.swift in Sources */,
 				3B7AF05826719885003BCCF3 /* MainView.swift in Sources */,

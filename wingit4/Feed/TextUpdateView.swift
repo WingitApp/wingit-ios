@@ -39,4 +39,3 @@ struct TextView_Previews: PreviewProvider {
         TextPreviewCard()
     }
 }
-

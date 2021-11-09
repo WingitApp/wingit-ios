@@ -47,16 +47,11 @@ struct ArcSummaryView: View {
         ListOfNeeds()
         ArcPageScroll()
         ArcDescription()
+          .padding(10)
           .foregroundColor(.white)
-        
-        HStack {
-          Spacer()
-          Image(systemName: "bookmark.fill")
-          Image(systemName: "heart")
-          Image(systemName: "flag")
-        }
-        .foregroundColor(.white)
-        .padding(.horizontal, 25)
+          
+        IconBar()
+          .padding(.horizontal, 25)
       }
     }
     }
@@ -65,6 +60,8 @@ struct ArcSummaryView: View {
 struct ArcSummaryView_Previews: PreviewProvider {
     static var previews: some View {
         ArcSummaryView()
+        PageCard()
     }
 }
+
 

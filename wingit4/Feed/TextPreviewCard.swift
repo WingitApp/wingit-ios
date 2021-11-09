@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct TextPreviewCard: View {
+  
+  var width: CGFloat = 200
+  var height: CGFloat = 200
+  var picHeight: CGFloat = 90
+  
     var body: some View {
       ZStack {
         VStack {
         Image("Pic3")
         .resizable()
-        .frame(width: 200, height: 90)
+        .frame(width: 200, height: picHeight)
           Spacer()
         }
         VStack {
@@ -28,7 +33,7 @@ struct TextPreviewCard: View {
         }
       }
       .cornerRadius(10)
-      .frame(width: 200, height: 200)
+      .frame(width: width, height: height)
     }
 }
 
