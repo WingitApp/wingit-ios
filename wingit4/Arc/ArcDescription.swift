@@ -13,9 +13,7 @@ struct ArcDescription: View {
   
     var body: some View {
         Text(description)
-        .fontWeight(.medium)
-        .padding(.horizontal, 25)
-        .padding(.vertical, 10)
+      
     }
 }
 

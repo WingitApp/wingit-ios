@@ -25,6 +25,7 @@ struct TextUpdateView: View {
         Text("Blah blah blah. Preview of the text for updates. Please please help? this is my update. etc. etc.fdjkaslf;djksal;fjdkl;asjfkdl;sajjfkdls;ajfdkls;ajfkdl;safjdkla;fjkdl;sajfkdl;sjakfld;saf fal lalalallalal")
           .font(.caption)
       }
+      .padding(.leading, 5)
       .frame(width: width, height: height)
       .background(Color.white)
     
@@ -32,4 +33,10 @@ struct TextUpdateView: View {
     }
 }
 
+
+struct TextView_Previews: PreviewProvider {
+    static var previews: some View {
+        TextPreviewCard()
+    }
+}
 

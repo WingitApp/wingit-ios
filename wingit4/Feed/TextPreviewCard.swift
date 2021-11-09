@@ -20,9 +20,10 @@ struct TextPreviewCard: View {
           Spacer()
         HStack {
           Spacer()
-        TextUpdateView()
+          TextUpdateView(width: 170, height: 140)
+//          .padding(10)
+          .cornerRadius(5)
           .lineLimit(7)
-         
         }
         }
       }
