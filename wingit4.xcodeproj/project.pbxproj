@@ -262,6 +262,7 @@
 		FB25943E273A1C08004EA3FD /* TextPreviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB25943D273A1C08004EA3FD /* TextPreviewCard.swift */; };
 		FB560AE727110F7400F18F73 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB560AE627110F7300F18F73 /* UserRow.swift */; };
 		FB66F678273B22E3003AC0F0 /* IconBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB66F677273B22E3003AC0F0 /* IconBar.swift */; };
+		FB66F67E273C480A003AC0F0 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB66F67D273C4809003AC0F0 /* RecordButton.swift */; };
 		FB8D81E5273A350B00CF2F95 /* TextPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8D81E4273A350B00CF2F95 /* TextPage.swift */; };
 		FB8D81E7273A351800CF2F95 /* TextPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8D81E6273A351800CF2F95 /* TextPageView.swift */; };
 		FB9DE35E2738933B009ECE1B /* ArcSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DE35D2738933B009ECE1B /* ArcSummaryView.swift */; };
@@ -270,6 +271,11 @@
 		FB9DE366273893A2009ECE1B /* ArcDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DE365273893A2009ECE1B /* ArcDescription.swift */; };
 		FB9DE368273893B8009ECE1B /* ListOfNeeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DE367273893B8009ECE1B /* ListOfNeeds.swift */; };
 		FB9DE36F27389ABB009ECE1B /* ArcPageScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9DE36E27389ABB009ECE1B /* ArcPageScroll.swift */; };
+		FBB1AF07273C6C3900B148A4 /* PostOrDraftButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB1AF06273C6C3900B148A4 /* PostOrDraftButton.swift */; };
+		FBB1AF09273C6C5200B148A4 /* CaptionVidPic.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB1AF08273C6C5200B148A4 /* CaptionVidPic.swift */; };
+		FBB1AF0B273C6C5E00B148A4 /* CamVidImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB1AF0A273C6C5E00B148A4 /* CamVidImage.swift */; };
+		FBB1AF0D273C6C6B00B148A4 /* PostTypeSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB1AF0C273C6C6B00B148A4 /* PostTypeSelection.swift */; };
+		FBB1AF0F273C6C7A00B148A4 /* CamVidView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB1AF0E273C6C7A00B148A4 /* CamVidView.swift */; };
 		FBD25F7E27043C4E0002C5B2 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD25F7D27043C4E0002C5B2 /* PopUp.swift */; };
 		FBDBF214273441BE00FB423E /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDBF20B273441BE00FB423E /* Title.swift */; };
 		FBDBF215273441BE00FB423E /* ArcProgressTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDBF20C273441BE00FB423E /* ArcProgressTitle.swift */; };
@@ -527,6 +533,7 @@
 		FB25943D273A1C08004EA3FD /* TextPreviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPreviewCard.swift; sourceTree = "<group>"; };
 		FB560AE627110F7300F18F73 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
 		FB66F677273B22E3003AC0F0 /* IconBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconBar.swift; sourceTree = "<group>"; };
+		FB66F67D273C4809003AC0F0 /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		FB8D81E4273A350B00CF2F95 /* TextPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPage.swift; sourceTree = "<group>"; };
 		FB8D81E6273A351800CF2F95 /* TextPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPageView.swift; sourceTree = "<group>"; };
 		FB9DE35D2738933B009ECE1B /* ArcSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcSummaryView.swift; sourceTree = "<group>"; };
@@ -535,6 +542,11 @@
 		FB9DE365273893A2009ECE1B /* ArcDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcDescription.swift; sourceTree = "<group>"; };
 		FB9DE367273893B8009ECE1B /* ListOfNeeds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfNeeds.swift; sourceTree = "<group>"; };
 		FB9DE36E27389ABB009ECE1B /* ArcPageScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcPageScroll.swift; sourceTree = "<group>"; };
+		FBB1AF06273C6C3900B148A4 /* PostOrDraftButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostOrDraftButton.swift; sourceTree = "<group>"; };
+		FBB1AF08273C6C5200B148A4 /* CaptionVidPic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionVidPic.swift; sourceTree = "<group>"; };
+		FBB1AF0A273C6C5E00B148A4 /* CamVidImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamVidImage.swift; sourceTree = "<group>"; };
+		FBB1AF0C273C6C6B00B148A4 /* PostTypeSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTypeSelection.swift; sourceTree = "<group>"; };
+		FBB1AF0E273C6C7A00B148A4 /* CamVidView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamVidView.swift; sourceTree = "<group>"; };
 		FBD25F7D27043C4E0002C5B2 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 		FBDBF20B273441BE00FB423E /* Title.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Title.swift; path = ../../../Wingit2.0/Wingit2.0/Feed/Title.swift; sourceTree = "<group>"; };
 		FBDBF20C273441BE00FB423E /* ArcProgressTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArcProgressTitle.swift; path = ../../../Wingit2.0/Wingit2.0/Feed/ArcProgressTitle.swift; sourceTree = "<group>"; };
@@ -896,6 +908,7 @@
 				3B75E3DC26716074002F3108 /* Constants.swift */,
 				3B7AF09B2671E1DA003BCCF3 /* Selection.swift */,
 				654334DC27134651004D0171 /* ViewRouter.swift */,
+				FBB1AF10273C6C8C00B148A4 /* ComposePostView */,
 				FB9DE36B273897ED009ECE1B /* Arc */,
 				FBE36151273308050071C4DB /* PageView */,
 				FBE3613D273307C20071C4DB /* ProfileTimeline */,
@@ -1224,6 +1237,19 @@
 			path = Arc;
 			sourceTree = "<group>";
 		};
+		FBB1AF10273C6C8C00B148A4 /* ComposePostView */ = {
+			isa = PBXGroup;
+			children = (
+				FB66F67D273C4809003AC0F0 /* RecordButton.swift */,
+				FBB1AF08273C6C5200B148A4 /* CaptionVidPic.swift */,
+				FBB1AF0A273C6C5E00B148A4 /* CamVidImage.swift */,
+				FBB1AF0C273C6C6B00B148A4 /* PostTypeSelection.swift */,
+				FBB1AF0E273C6C7A00B148A4 /* CamVidView.swift */,
+				FBB1AF06273C6C3900B148A4 /* PostOrDraftButton.swift */,
+			);
+			path = ComposePostView;
+			sourceTree = "<group>";
+		};
 		FBE3613D273307C20071C4DB /* ProfileTimeline */ = {
 			isa = PBXGroup;
 			children = (
@@ -1447,6 +1473,7 @@
 				FBDBF217273441BE00FB423E /* ArcCard.swift in Sources */,
 				15762C6A26E170ED00A8E041 /* ReferralsView.swift in Sources */,
 				650216B526E86C2100B42BC6 /* URLImageView.swift in Sources */,
+				FB66F67E273C480A003AC0F0 /* RecordButton.swift in Sources */,
 				3B7AF0B92672C29D003BCCF3 /* InboxMessage.swift in Sources */,
 				157F9988271239EE001A4031 /* CommentSheetHeader.swift in Sources */,
 				65C6103F26FC2064007B87FE /* ConnectionsEmptyState.swift in Sources */,
@@ -1485,6 +1512,7 @@
 				65A9EFA326E0923300E81CBF /* Referral.swift in Sources */,
 				15DFD07426EAE005002CBE31 /* ParallaxImage.swift in Sources */,
 				3B7AF0C12673EE2E003BCCF3 /* NotificationViewModel.swift in Sources */,
+				FBB1AF07273C6C3900B148A4 /* PostOrDraftButton.swift in Sources */,
 				3B7AF07F2671BBA8003BCCF3 /* UsersView.swift in Sources */,
 				3B7AF0832671BC28003BCCF3 /* ChatView.swift in Sources */,
 				157F99842710CB57001A4031 /* CommentActionEntry.swift in Sources */,
@@ -1553,9 +1581,11 @@
 				15A6A43D2708E41400D65616 /* ProfileUserHeader.swift in Sources */,
 				6509E4FA26D6C214009CB74D /* Ask.swift in Sources */,
 				3B75E3C2267153BA002F3108 /* SigninView.swift in Sources */,
+				FBB1AF0B273C6C5E00B148A4 /* CamVidImage.swift in Sources */,
 				1524E0FF26F6713100D5BDB4 /* BumperCountSummary.swift in Sources */,
 				FB8D81E5273A350B00CF2F95 /* TextPage.swift in Sources */,
 				157F9970270B8042001A4031 /* ProfileParallax.swift in Sources */,
+				FBB1AF0D273C6C6B00B148A4 /* PostTypeSelection.swift in Sources */,
 				FBDBF218273441BE00FB423E /* PageCard.swift in Sources */,
 				15F7E8B426E848ED00E5238F /* WingersRow.swift in Sources */,
 				3B7AF0972671D98E003BCCF3 /* Post.swift in Sources */,
@@ -1592,6 +1622,7 @@
 				FB9DE36027389362009ECE1B /* CheckmarkButton.swift in Sources */,
 				FB25943E273A1C08004EA3FD /* TextPreviewCard.swift in Sources */,
 				65C0F9D3270BB0F500F69592 /* NotificationViewNavigationOption.swift in Sources */,
+				FBB1AF09273C6C5200B148A4 /* CaptionVidPic.swift in Sources */,
 				3B7AF056267197EC003BCCF3 /* SessionStore.swift in Sources */,
 				15F7E8BF26E8490100E5238F /* ReferralComment.swift in Sources */,
 				1524FCC826D753170000629C /* AskMenu.swift in Sources */,
@@ -1617,6 +1648,7 @@
 				150C3C092717A3C40029BAEA /* ReactionSummarySheet.swift in Sources */,
 				15CD208D270276CF00C7FC1A /* KeyboardReadable.swift in Sources */,
 				3B0DFBDE26B78D86008CE0D1 /* UpdatePhotoVM.swift in Sources */,
+				FBB1AF0F273C6C7A00B148A4 /* CamVidView.swift in Sources */,
 				15A6A43F2708E4B000D65616 /* SummaryCardswift in Sources */,
 				FBDBF215273441BE00FB423E /* ArcProgressTitle.swift in Sources */,
 				3B75E3E32671657F002F3108 /* NamesTextField.swift in Sources */,

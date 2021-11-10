@@ -10,6 +10,7 @@ import SwiftUI
 
 
 struct ReferralComment: View {
+  
     var comment: Comment
   
     @State var pushToInviter: Bool = false
