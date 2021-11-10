@@ -78,7 +78,7 @@ struct MainView: View {
                     ViewRouter.shared.tapCount = 0
                   }
               })
-            ComposePostView()
+            CamVidView()
               .tabItem({
                 VStack(alignment: .center ){
                   Image(systemName: "plus.circle.fill")
