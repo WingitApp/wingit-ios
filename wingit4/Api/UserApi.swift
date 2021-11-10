@@ -22,6 +22,24 @@ class UserApi {
         }
     }
   
+  func fetchUsers(onSuccess: @escaping(_ users: [User]) -> Void) {
+    var request = URLRequest(url: URL(string: "https://wingitapp-1fe28.wl.r.appspot.com/user/list")!)
+    
+    request.addValue("token", forHTTPHeaderField: "X-API-TOKEN")
+    
+//    isFetching = true
+    
+    URLSession.shared.dataTask(with: request) { data, response, error in
+        DispatchQueue.main.async {
+          if error != nil || (response as? HTTPURLResponse)?.statusCode != 200 {
+            print("Unable to fetch users")
+          } else if let data = data, let users = try? JSONDecoder().decode([User].self, from: data) {
+             onSuccess(users)
+          }
+        }
+    }.resume()
+  }
+  
     func loadUser(
         userId: String,
         onSuccess: @escaping(_ user: User) -> Void,
